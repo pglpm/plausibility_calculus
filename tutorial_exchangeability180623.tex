@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2018-06-23T13:54:28+0200
-%% Last-Updated: 2018-09-03T15:06:12+0200
+%% Last-Updated: 2018-12-10T14:39:44+0100
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Report-no: ***
 \newif\ifarxiv
@@ -170,7 +170,7 @@ british%
 \def\prod{\DOTSI\prodop\slimits@}
 \def\coprod{\DOTSI\coprodop\slimits@}
 \makeatother
-\ifarxiv\else\input{../undefinegreek.tex}\fi% make sure no CMF greek letters sneak in
+\ifarxiv\else\input{undefinegreek.tex}\fi% make sure no CMF greek letters sneak in
 % Greek letters not usually given in LaTeX. Comment the unneeded ones
 % \DeclareMathSymbol{\varpartial}{\mathalpha}{egreeki}{"40}
  \DeclareMathSymbol{\partialup}{\mathalpha}{egreekr}{"40}
@@ -524,7 +524,7 @@ urlcolor=mygreen,breaklinks=true,pdftitle={\pdftitle},pdfauthor={\pdfauthor}}
 \posttitle{\bigskip\end{center}}
 
 \makeatletter\newcommand*{\atf}{\includegraphics[%trim=1pt 1pt 0pt 0pt,
-totalheight=\heightof{@}]{../atblack.png}}\makeatother
+totalheight=\heightof{@}]{atblack.png}}\makeatother
 \providecommand{\affiliation}[1]{\textsl{\textsf{\footnotesize #1}}}
 \providecommand{\epost}[1]{\texttt{\footnotesize\textless#1\textgreater}}
 \providecommand{\email}[2]{\href{mailto:#1ZZ@#2 ((remove ZZ))}{#1\protect\atf#2}}

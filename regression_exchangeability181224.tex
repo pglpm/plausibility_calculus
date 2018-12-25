@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2015-05-01T20:53:34+0200
-%% Last-Updated: 2018-12-24T19:09:35+0100
+%% Last-Updated: 2018-12-25T22:50:17+0100
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Report-no: ***
 \newif\ifarxiv
@@ -740,6 +740,7 @@ Luca\\{\footnotesize\epost{\email{piero.mana}{ntnu.no}}%
 %@@@@ Custom macros for this file @@@@
 %\DeclareMathOperator*{\argsup}{arg\,sup}
 \newcommand*{\yI}{\varIota}
+\newcommand*{\yf}{\bm{f}}
 %@@@@@@@@@@ new macros end @@@@@@@@@@
 
 \firmlists
@@ -795,25 +796,96 @@ be different.
 
 In this note I use \enquote{regression} in a restricted sense: two or more
 observations with the same value of $t$ have also the same value of $x$. So
-the second quantity is given by a function of the first. This is the case
-in many classification problems and similar inferences. The focus in this
-kind of problems is to infer $x$ in an observation with a new value of $t$,
-given observations of the pair of quantities for different values of $t$.
+the second quantity is given as a function of the first. This is the case
+in many classification problems. This function or map $m\colon t \mapsto x$
+is unknown, however; we are therefore uncertain about $x$ in every
+observation with a new value of $t$. Our goal is to infer the unknown
+function $m$, given observations of the pair of quantities for different
+values of $t$.
 
 If we assume for the moment that $t$ and $x$ assume finite sets of values,
-then also the set of functions between them is finite. Regression in the
-restricted sense above is then equivalent to inferring a function
-$f\colon t \mapsto x$:
+then also the set of functions between them is finite. Hence the
+plausibility of observing $x$ given $t$, if the function is unknown, is
 \begin{equation}
   \label{eq:x_from_t_marginal_f}
-  \pf(x \|t, \yI) = \int\di f\; \pf(x \| t, f, \yI)\;\pf(f \| \yI),
+  \pf(x \|t, \yI) = \sum_m \pf(x \| t, m, \yI)\;\pf(m \| \yI),
 \end{equation}
 with
 \begin{equation}
   \label{eq:x_from_t_given_f_deterministic}
-  \pf(x \| t, f, \yI) = \delt[x - f(t)].
+  \pf(x \| t, m, \yI) = \delt[x - m(t)],
+\end{equation}
+which expresses the certain relation between $t$ and $x$ if the function
+relating them is known.
+
+\section{Exchangeability from regression}
+\label{sec:exch_from_regr}
+
+Consider a sequence of observations of the quantity $x$. We can use
+$t=1,\dotsc,T$ to simply label these observations. In this case, each
+function $m\colon t \mapsto x$ simply corresponds to a specific sequence of
+values of $x$, and vice versa.
+
+Denote by $\yf \defd (f_{x})$ the relative frequencies with which the
+values of $x$ appear in a particular sequence $m$. These frequencies are
+determined by the function: by counting,
+\begin{equation}
+  \label{eq:freqs_from_function}
+  f_{x} = \frac{1}{T}\sum_t \delt[x-m(t)]
+  \qquad\text{for each $x$}.
 \end{equation}
 
+
+The assumption of \emph{exchangeability} is the judgement that sequences
+that differ by a permutation of their order are equally plausible. This
+means that sequences in which the values of $x$ appear with the same
+frequencies are equally plausible. Now consider all functions $t\mapsto x$
+yielding the same relative frequencies $\yf$; there are $\binom{T}{T\yf}$
+such functions. Let's judge them to be equally plausible. Then we can write
+\begin{equation}
+  \label{eq:m_determines_f}
+  \begin{split}
+  \pf(m \| \yf, \yI) &=
+  \begin{cases}
+    \binom{T}{T\yf}^{-1} & \text{if $f_{x}= \frac{1}{T}\sum_t \delt[x-m(t)]$ for each $x$,}\\
+    0 &\text{otherwise,}
+  \end{cases}
+  \\
+  &=\binom{T}{T\yf}^{-1}\;  
+\prod_{x} \delt\Bigl\{ Tf_{x} - \sum_{t} \delt[x-m(t)]\Bigr\}.
+\end{split}
+\end{equation}
+
+Now use the law of total probability:
+\begin{equation}
+  \label{eq:total_prob_of_m}
+  \pf(m \| \yI) = \sum_{\yf} \pf(m \| \yf, \yI)\; \pf(\yf \| \yI),
+\end{equation}
+in $\pf(x \|t,\yI)$, given by \eqn~\eqref{eq:x_from_t_marginal_f}:
+\begin{equation}
+  \label{eq:expand_pxt_with_freqs}
+  \begin{split}
+  \pf(x \|t, \yI) &= \sum_m \pf(x \| t, m, \yI)\;
+  \sum_{\yf} \pf(m \| \yf, \yI)\; \pf(\yf \| \yI),
+  \\
+  &= \sum_{\yf} \sum_m
+\binom{T}{T\yf}^{-1}\;  \delt[x - m(t)]
+\;\prod_{x'} \delt\Bigl\{ Tf_{x'}- \sum_{t'} \delt[x'-m(t')]\Bigr\}
+\;\pf(\yf \| \yI),
+\\
+&= \sum_{\yf}
+\binom{T}{T\yf}^{-1}\;
+\binom{T-1}{T\yf}\;
+\frac{(Tf_{x})!}{(Tf_{x}-1)!}\;
+\pf(\yf \| \yI),
+\\
+&= \sum_{\yf}
+f_{x}\;\pf(\yf \| \yI).
+\end{split}
+\end{equation}
+We have recovered the formula for an exchangeable plausibility. Note in
+particular that the label of the observation, $t$, becomes irrelevant, as
+it should be by symmetry.
 
 
 

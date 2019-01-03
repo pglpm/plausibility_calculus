@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2015-05-01T20:53:34+0200
-%% Last-Updated: 2018-12-25T22:50:17+0100
+%% Last-Updated: 2018-12-26T14:11:00+0100
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Report-no: ***
 \newif\ifarxiv
@@ -740,6 +740,9 @@ Luca\\{\footnotesize\epost{\email{piero.mana}{ntnu.no}}%
 %@@@@ Custom macros for this file @@@@
 %\DeclareMathOperator*{\argsup}{arg\,sup}
 \newcommand*{\yI}{\varIota}
+\newcommand*{\yx}{\bm{x}}
+\newcommand*{\yt}{\bm{t}}
+\newcommand*{\yF}{\bm{F}}
 \newcommand*{\yf}{\bm{f}}
 %@@@@@@@@@@ new macros end @@@@@@@@@@
 
@@ -782,38 +785,39 @@ Luca\\{\footnotesize\epost{\email{piero.mana}{ntnu.no}}%
 % \epigraph{\emph{text}}{source}
 
 \noindent\emph{\footnotesize Note: Dear Reader \amp\ Peer, this manuscript is
-  being peer-reviewed by \emph{you}. Thank you.}
+  being peer-reviewed by you. Thank you.}
 
 
 \section{Regression}
 \label{sec:regression}
 
-\enquote{Regression}, as usually intended, is the problem of inferring the
-value of a quantity $x$ given that of another quantity $t$; the two
-quantities having values in two specific sets. It is also assumed that in
-two or more observations with the same value of $t$ the values of $x$ may
-be different.
+\enquote{Regression} or its discrete case, \enquote{classification}, is the
+problem of inferring the value of a quantity $x$ given that of another
+quantity $t$; the two quantities having values in two specific sets. It is
+also assumed that in two or more observations with the same value of $t$
+the values of $x$ may be different.
 
 In this note I use \enquote{regression} in a restricted sense: two or more
 observations with the same value of $t$ have also the same value of $x$. So
 the second quantity is given as a function of the first. This is the case
-in many classification problems. This function or map $m\colon t \mapsto x$
+in many classification problems. This function or map $S\colon t \mapsto x$
 is unknown, however; we are therefore uncertain about $x$ in every
 observation with a new value of $t$. Our goal is to infer the unknown
-function $m$, given observations of the pair of quantities for different
+function $S$, given observations of the pair of quantities for different
 values of $t$.
 
 If we assume for the moment that $t$ and $x$ assume finite sets of values,
 then also the set of functions between them is finite. Hence the
-plausibility of observing $x$ given $t$, if the function is unknown, is
+plausibility of observing a sequence $\yx\defd (x_1,\dotsc)$ given the
+sequence $\yt \defd (t_1,\dotsc)$, if the function is unknown, is
 \begin{equation}
   \label{eq:x_from_t_marginal_f}
-  \pf(x \|t, \yI) = \sum_m \pf(x \| t, m, \yI)\;\pf(m \| \yI),
+  \pf(\yx \|\yt, \yI) = \sum_S \pf(S \|\yI)\;\prod_i\pf(x_i \| t_i, S, \yI),
 \end{equation}
 with
 \begin{equation}
   \label{eq:x_from_t_given_f_deterministic}
-  \pf(x \| t, m, \yI) = \delt[x - m(t)],
+  \pf(x_i \| t_i, S, \yI) = \delt[x_i - S(t_i)],
 \end{equation}
 which expresses the certain relation between $t$ and $x$ if the function
 relating them is known.
@@ -821,71 +825,100 @@ relating them is known.
 \section{Exchangeability from regression}
 \label{sec:exch_from_regr}
 
-Consider a sequence of observations of the quantity $x$. We can use
-$t=1,\dotsc,T$ to simply label these observations. In this case, each
-function $m\colon t \mapsto x$ simply corresponds to a specific sequence of
-values of $x$, and vice versa.
+Consider the special case where $\yt \defd(t_1,\dotsc,t_{M})$ simply label
+the $M$ observations $\yx$. In this case, each function
+$S\colon t \mapsto x$ simply corresponds to a specific sequence of values
+of $x$, and vice versa.
 
-Denote by $\yf \defd (f_{x})$ the relative frequencies with which the
-values of $x$ appear in a particular sequence $m$. These frequencies are
-determined by the function: by counting,
+Denote by $\yF \defd (F_{x})$ the relative frequencies with which the
+values of $x$ appear in a particular sequence $S$ of length $M$. The
+sequence determines the frequencies: by counting,
 \begin{equation}
   \label{eq:freqs_from_function}
-  f_{x} = \frac{1}{T}\sum_t \delt[x-m(t)]
+ M F_{x} = \sum_t \delt[x-S(t)]
   \qquad\text{for each $x$}.
 \end{equation}
 
-
-The assumption of \emph{exchangeability} is the judgement that sequences
-that differ by a permutation of their order are equally plausible. This
-means that sequences in which the values of $x$ appear with the same
-frequencies are equally plausible. Now consider all functions $t\mapsto x$
-yielding the same relative frequencies $\yf$; there are $\binom{T}{T\yf}$
-such functions. Let's judge them to be equally plausible. Then we can write
+The assumption of \emph{exchangeability} says that the particular order of
+any subset of observations $(x_1,\dotsc,x_{m})$ is irrelevant for their
+prediction. This is equivalent to saying that only the frequencies of the
+values of $x$ matter for our inferences, and that sequences that differ by
+a permutation of their orders are equally plausible. Consider all functions
+$t\mapsto x$ yielding the same relative frequencies $\yF$; there are
+$\binom{M}{M\yF}$ such functions. If we judge them to be equally plausible
+we can write
 \begin{equation}
   \label{eq:m_determines_f}
   \begin{split}
-  \pf(m \| \yf, \yI) &=
+  \pf(S \| \yF, \yI) &=
   \begin{cases}
-    \binom{T}{T\yf}^{-1} & \text{if $f_{x}= \frac{1}{T}\sum_t \delt[x-m(t)]$ for each $x$,}\\
+    \binom{M}{M\yF}^{-1} & \text{if $M F_{x}= \sum_t \delt[x-S(t)]$ for each $x$,}\\
     0 &\text{otherwise,}
   \end{cases}
   \\
-  &=\binom{T}{T\yf}^{-1}\;  
-\prod_{x} \delt\Bigl\{ Tf_{x} - \sum_{t} \delt[x-m(t)]\Bigr\}.
+  &=\binom{M}{M\yF}^{-1}\;  
+\prod_{x} \delt\Bigl\{M F_{x} - \sum_{t} \delt[x-S(t)]\Bigr\},
 \end{split}
 \end{equation}
-
-Now use the law of total probability:
+which can be used together with the law of total plausibility,
 \begin{equation}
-  \label{eq:total_prob_of_m}
-  \pf(m \| \yI) = \sum_{\yf} \pf(m \| \yf, \yI)\; \pf(\yf \| \yI),
+  \label{eq:total_prob_of_m_with_freqs}
+  \pf(S \| \yI) = \sum_{\yF} \pf(S \| \yF, \yI)\; \pf(\yF \| \yI).
 \end{equation}
-in $\pf(x \|t,\yI)$, given by \eqn~\eqref{eq:x_from_t_marginal_f}:
+
+Let's see how the particular initial
+plausibility~\eqref{eq:total_prob_of_m_with_freqs} for the function $S$
+leads to the usual formulae for exchangeability.
+
+Consider sequences $\yt\defd (t_1,\dotsc,t_{m})$ and
+$\yx\defd (x_1,\dotsc,x_{m})$ and suppose that in the latter the values of
+$x$ appear with relative frequencies $\yf\defd (f_{x})$. Using the initial
+plausibility~\eqref{eq:total_prob_of_m_with_freqs} in the formula for
+$\pf(\yx \|\yt,\yI)$, \eqn~\eqref{eq:x_from_t_marginal_f}, we find
 \begin{equation}
   \label{eq:expand_pxt_with_freqs}
   \begin{split}
-  \pf(x \|t, \yI) &= \sum_m \pf(x \| t, m, \yI)\;
-  \sum_{\yf} \pf(m \| \yf, \yI)\; \pf(\yf \| \yI),
+  \pf(\yx \|\yt, \yI) &= \sum_S \pf(\yx \| \yt, S, \yI)\;
+  \sum_{\yF} \pf(S \| \yF, \yI)\; \pf(\yF \| \yI),
   \\
-  &= \sum_{\yf} \sum_m
-\binom{T}{T\yf}^{-1}\;  \delt[x - m(t)]
-\;\prod_{x'} \delt\Bigl\{ Tf_{x'}- \sum_{t'} \delt[x'-m(t')]\Bigr\}
-\;\pf(\yf \| \yI),
+&\!\begin{multlined}[t][0.85\linewidth]
+= \sum_{\yF} \pf(\yF \| \yI)\;\sum_S
+\binom{M}{M\yF}^{-1}\times{}\\
+\biggl\{\prod_i\delt[x_i - S(t_i)]\biggr\}
+\;\prod_{x'} \delt\Bigl\{ Tf_{x'}- \sum_{t'} \delt[x'-S(t')]\Bigr\}
+\end{multlined}
 \\
-&= \sum_{\yf}
-\binom{T}{T\yf}^{-1}\;
-\binom{T-1}{T\yf}\;
-\frac{(Tf_{x})!}{(Tf_{x}-1)!}\;
-\pf(\yf \| \yI),
+&= \sum_{\yF}
+\binom{M}{M\yF}^{-1}\;
+\binom{M-m}{M\yF-m\yf}\;
+\pf(\yF \| \yI),
 \\
-&= \sum_{\yf}
-f_{x}\;\pf(\yf \| \yI).
+&= \sum_{\yF}
+\Biggr[\prod_x\binom{M F_{x}}{m f_{x}}\Biggl]\;\pf(\yF \| \yI).
 \end{split}
 \end{equation}
-We have recovered the formula for an exchangeable plausibility. Note in
-particular that the label of the observation, $t$, becomes irrelevant, as
-it should be by symmetry.
+In passing from the first to the second equality we have exchanged the
+sums, replaced \eqns~\eqref{eq:x_from_t_given_f_deterministic} and
+\eqref{eq:m_determines_f}, and rearranged the terms. To pass from the
+second to the third equality, consider the sum over $S$ for fixed $\yF$:
+the second product of deltas restricts the sum to functions $S$ yielding
+frequencies $M \yF$; the first product of deltas further restricts the sum
+to functions having frequencies $m \yf$ in a subsequence of length $m$.
+There are as many such functions as the number of ways to order the
+remaining $M-m$ observations of $x$, its values appearing $M\yF - m\yf$
+times. This is just the multinomial coefficient $\binom{M-m}{M\yF-m\yf}$.
+Thus in the third line we find a combination of hypergeometric
+distributions, which is the formula for finite exchangeability and, as $M$
+increases indefinitely, for infinite exchangeability,
+\begin{equation}
+  \label{eq:infinite_exch}
+  \begin{split}
+  \pf(\yx \|\yt, \yI) \to \int\di\yF\;
+\biggl(\prod_{x} {F_{x}}^{m f_{x}}\biggr)  \;\pf(\yF \| \yI).
+\end{split}
+\end{equation}
+Note in particular that the label of the observation $t$ becomes
+irrelevant, as it should be by symmetry.
 
 
 

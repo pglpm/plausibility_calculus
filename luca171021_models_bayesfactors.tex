@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2017-10-21T20:53:34+0200
-%% Last-Updated: 2019-01-04T01:10:00+0100
+%% Last-Updated: 2019-01-05T00:28:51+0100
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Report-no: ***
 \newif\ifarxiv
@@ -217,7 +217,7 @@ british%
  \DeclareMathSymbol{\varDelta}{\mathalpha}{egreeki}{"01}
  \DeclareMathSymbol{\varEpsilon}{\mathalpha}{egreeki}{"45}
 % \DeclareMathSymbol{\varZeta}{\mathalpha}{egreeki}{"5A}
-% \DeclareMathSymbol{\varEta}{\mathalpha}{egreeki}{"48}
+ \DeclareMathSymbol{\varEta}{\mathalpha}{egreeki}{"48}
 % \DeclareMathSymbol{\varTheta}{\mathalpha}{egreeki}{"02}
  \DeclareMathSymbol{\varIota}{\mathalpha}{egreeki}{"49}
 % \DeclareMathSymbol{\varKappa}{\mathalpha}{egreeki}{"4B}
@@ -740,7 +740,7 @@ Luca\\{\footnotesize\epost{\email{piero.mana}{ntnu.no}}%
 % \newcommand{\explanation}[4][t]{%\setlength{\tabcolsep}{-1ex}
 % %\smash{
 % \begin{tabular}[#1]{c}#2\\[0.5\jot]\rule{1pt}{#3}\\#4\end{tabular}}%}
-% \newcommand*{\ptext}[1]{\text{\small #1}}
+ \newcommand*{\ptext}[1]{\text{\small #1}}
 %@@@@ Custom macros for this file @@@@
 %\DeclareMathOperator*{\argsup}{arg\,sup}
 
@@ -750,7 +750,10 @@ Luca\\{\footnotesize\epost{\email{piero.mana}{ntnu.no}}%
 
 \newcommand*{\yX}{X}
 \newcommand*{\yY}{Y}
+\newcommand*{\yx}{\bm{x}}
+\newcommand*{\yy}{\bm{y}}
 \newcommand*{\yI}{\varIota}
+\newcommand*{\yHm}{\varEta}
 % @@@@@@@@@@ new macros end @@@@@@@@@@
 
 \firmlists
@@ -805,6 +808,44 @@ Luca\\{\footnotesize\epost{\email{piero.mana}{ntnu.no}}%
 \noindent\emph{\footnotesize Note: Dear Reader \amp\ Peer, this manuscript is
   being peer-reviewed by you. Thank you.}
 
+\section{Motivation}
+\label{sec:motivation}
+
+The Bayesian literature on probabilistic modelling, including model
+comparison, hypothesis testing, and parameter estimation, often consider
+probability \enquote{models} of this parametric form:
+\begin{equation}
+  \label{eq:example_model_literature}
+  \pf(\ptext{data} \| \yHm) =
+  \int \pf(\ptext{data} \| \ptext{parameters},\yHm)\;
+  \pf(\ptext{parameters} \| \yHm)\;\di\ptext{parameters},
+\end{equation}
+where $\yHm$ represents the model. This is a particular case of an
+exchangeable model \citep[\chap~4]{bernardoetal1994_r2000}. Often discussed
+in this literature are Bayes factors and \enquote{evidence}
+\citep{good1985,mackay1992,kass1993,kassetal1995}, and model averaging
+\citep{draper1993_r2005,chatfield1995,draper1995,hoetingetal1999}. In
+particular, sometimes there are difficulties in comparing the relative
+plausibilities of models or calculating their Bayes factors
+\citep{kassetal1995,ohagan1995,bergeretal1996,desantisetal1997,bergeretal1998}.
+Intuitively, if we have several models $\yHm_1$, $\yHm_2$, \dots\ the
+plausibility of each given some data is
+\begin{equation}
+  \label{eq:plaus_model}
+  \pf(\yHm_j \| \ptext{data}, \yI) =
+  \frac{
+  \pf(\ptext{data} \| \yHm_j, \yI)\; \pf(\yHm_j \| \yI)
+  }{
+  \sum_j\pf(\ptext{data} \| \yHm_j, \yI)\; \pf(\yHm_j \| \yI)
+  },
+\end{equation}
+which involves the \emph{evidence} $\pf(\ptext{data} \| \yHm, \yI)$,
+\eqn~\eqref{eq:example_model_literature}. The Bayes factor between two
+models is just the ratio of their evidences. To calculate the evidence we
+solve the integral in \eqn~\eqref{eq:example_model_literature}, and this
+requires specifying a distribution for the parameters, $\pf(\ptext{parameters} \| \yHm)$.
+
+
 \section{A tentative definition}
 \label{sec:tentative_def}
 
@@ -836,28 +877,26 @@ We can make an important distinction between two kinds of model:
 \emph{learning} models and \emph{non-learning} models, which can also be
 called \emph{extremal} for reasons explained later.
 
-A learning model $\yM$is one that yields different plausibilities about some
-data $(y_1, y_2, \dotsc)$ conditional on $(x_1, x_2, \dotsc)$ if we add
-knowledge about other data $(y_1', y_2', \dotsc)$, $(x_1', x_2', \dotsc)$:
-\begin{multline}
+A learning model $\yM$ is one that yields different plausibilities about
+some data $(y_1, y_2, \dotsc) \defs \yy$ conditional on
+$(x_1, x_2, \dotsc) \defs \yx$ if we condition on knowledge about other
+data $(y_1', y_2', \dotsc) \defs \yy'$, $(x_1', x_2', \dotsc) \defs \yx'$:
+\begin{equation}
   \label{eq:learning_def}
-  \pf(y_1, y_2, \dotsc \| x_1, x_2,\dotsc,\, y_1', y_2', \dotsc,
-  \, x_1', x_2',\dotsc,\, \yM) \ne{}\\
-  \pf(y_1, y_2, \dotsc \| x_1, x_2,\dotsc,\, \yM)
-\end{multline}
+  \pf(\yy  \| \yx,\, \yy', \yx',\, \yM) \ne
+  \pf(\yy  \| \yx,\, \yM).
+\end{equation}
 
 A non-learning model is one for which these plausibilities are not affected:
-\begin{multline}
+\begin{equation}
   \label{eq:non-learning_def}
-  \pf(y_1, y_2, \dotsc \| x_1, x_2,\dotsc,\, y_1', y_2', \dotsc,
-  \, x_1', x_2',\dotsc,\, \yM) ={}\\
-  \pf(y_1, y_2, \dotsc \| x_1, x_2,\dotsc,\, \yM).
-\end{multline}
+  \pf(\yy  \| \yx,\, \yy', \yx',\, \yM) =
+  \pf(\yy  \| \yx,\, \yM).
+\end{equation}
 This means that 
 \begin{equation}
   \label{eq:non-learning_indep}
-  \pf(y_1, y_2, \dotsc \| x_1, x_2,\dotsc,\, \yM) =
-  \prod_i  \pf(y_i \| x_i,\, \yM).
+  \pf(\yy  \| \yx,\, \yM) = \prod_i  \pf(y_i \| x_i,\, \yM).
 \end{equation}
 
 It is \emph{non-learning} models that people usually, ultimately seek. For

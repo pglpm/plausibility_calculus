@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2017-10-21T20:53:34+0200
-%% Last-Updated: 2019-01-04T00:41:45+0100
+%% Last-Updated: 2019-01-04T01:10:00+0100
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Report-no: ***
 \newif\ifarxiv
@@ -22,7 +22,7 @@ british%
 \newcommand*{\updated}{\today}
 \newcommand*{\firstdraft}{21 October 2017}
 \newcommand*{\firstpublished}{***}
-\newcommand*{\propertitle}{What is probability model?}
+\newcommand*{\propertitle}{What is a probability model?}
 \newcommand*{\pdftitle}{\propertitle}
 \newcommand*{\headtitle}{\propertitle}
 \newcommand*{\pdfauthor}{P.G.L.  Porta Mana}
@@ -836,21 +836,35 @@ We can make an important distinction between two kinds of model:
 \emph{learning} models and \emph{non-learning} models, which can also be
 called \emph{extremal} for reasons explained later.
 
-A learning model is one that yields different plausibilities about some
+A learning model $\yM$is one that yields different plausibilities about some
 data $(y_1, y_2, \dotsc)$ conditional on $(x_1, x_2, \dotsc)$ if we add
-knowledge about other data $(y_1', y_2', \dotsc)$, $(x_'1, x_2', \dotsc)$:
-\begin{equation}
+knowledge about other data $(y_1', y_2', \dotsc)$, $(x_1', x_2', \dotsc)$:
+\begin{multline}
   \label{eq:learning_def}
-  
+  \pf(y_1, y_2, \dotsc \| x_1, x_2,\dotsc,\, y_1', y_2', \dotsc,
+  \, x_1', x_2',\dotsc,\, \yM) \ne{}\\
+  \pf(y_1, y_2, \dotsc \| x_1, x_2,\dotsc,\, \yM)
+\end{multline}
+
+A non-learning model is one for which these plausibilities are not affected:
+\begin{multline}
+  \label{eq:non-learning_def}
+  \pf(y_1, y_2, \dotsc \| x_1, x_2,\dotsc,\, y_1', y_2', \dotsc,
+  \, x_1', x_2',\dotsc,\, \yM) ={}\\
+  \pf(y_1, y_2, \dotsc \| x_1, x_2,\dotsc,\, \yM).
+\end{multline}
+This means that 
+\begin{equation}
+  \label{eq:non-learning_indep}
+  \pf(y_1, y_2, \dotsc \| x_1, x_2,\dotsc,\, \yM) =
+  \prod_i  \pf(y_i \| x_i,\, \yM).
 \end{equation}
-$$\mathrm{p}(d \mid c, d', c', M) \ne \mathrm{p}(d \mid c, M).$$
 
-A non-learning model is one for which our plausibilities about some data $d$ conditional on $c$ are not affected by knowledge about other data $d'$, $c'$:
-$$\mathrm{p}(d \mid c, d', c', M) = \mathrm{p}(d \mid c, M).$$
-This means that if we have several data $(d_1, d_2, \dotsc)$, $(c_1, c_2, \dotsc)$ then
-$$\mathrm{p}(d_1, d_2, \dotsc \mid c_1, c_2, \dotsc, M) = \prod_i \mathrm{p}(d_i \mid c_i, M).$$
-
-It is \emph{non-learning} models that people usually, ultimately seek. For example, a trained and ready-to-use neural net is a non-learning model. Parametric models are non-learning models; in fact, each value of the (possibly multi-dimensional) parameter defines a specific non-learning model.
+It is \emph{non-learning} models that people usually, ultimately seek. For
+example, a trained and ready-to-use neural net is a non-learning model.
+Parametric models are non-learning models; in fact, each value of the
+(possibly multi-dimensional) parameter defines a specific non-learning
+model.
 
 
 

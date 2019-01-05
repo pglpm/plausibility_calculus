@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2017-10-21T20:53:34+0200
-%% Last-Updated: 2019-01-05T00:28:51+0100
+%% Last-Updated: 2019-01-05T15:09:03+0100
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Report-no: ***
 \newif\ifarxiv
@@ -743,6 +743,8 @@ Luca\\{\footnotesize\epost{\email{piero.mana}{ntnu.no}}%
  \newcommand*{\ptext}[1]{\text{\small #1}}
 %@@@@ Custom macros for this file @@@@
 %\DeclareMathOperator*{\argsup}{arg\,sup}
+\newcommand*{\dob}{degree of belief}
+\newcommand*{\dobs}{degrees of belief}
 
 \newcommand*{\yO}[2]{O^{(#1)}_{#2}}
 \newcommand*{\yM}{\varMu}
@@ -753,6 +755,7 @@ Luca\\{\footnotesize\epost{\email{piero.mana}{ntnu.no}}%
 \newcommand*{\yx}{\bm{x}}
 \newcommand*{\yy}{\bm{y}}
 \newcommand*{\yI}{\varIota}
+\newcommand*{\yD}{D}
 \newcommand*{\yHm}{\varEta}
 % @@@@@@@@@@ new macros end @@@@@@@@@@
 
@@ -771,7 +774,10 @@ Luca\\{\footnotesize\epost{\email{piero.mana}{ntnu.no}}%
 \setlength{\absrightindent}{0pt}
 \setlength{\abstitleskip}{-\absparindent}
 \begin{abstract}\labelsep 0pt%
-  \noindent ***
+  \noindent Some notes or model comparison and selection, parameter
+  estimation, Bayes factors, and so on.
+  \\\noindent\emph{\footnotesize Dear Reader \amp\ Peer, this manuscript is
+  being peer-reviewed by you. Thank you.}
 % \par%\\[\jot]
 % \noindent
 % {\footnotesize PACS: ***}\qquad%
@@ -801,49 +807,179 @@ Luca\\{\footnotesize\epost{\email{piero.mana}{ntnu.no}}%
  \setlength{\epigraphrule}{0pt}
  %\setlength{\beforeepigraphskip}{0pt}
  %\setlength{\afterepigraphskip}{0pt}
- \epigraph{Where do probability models come from? To judge by the resounding
+ \epigraph{Where do probability models come from?\\ To judge by the resounding
   silence over this question on the part of most statisticians,\\ it seems
-  highly embarrassing}{A. P. Dawid~\citey[p.~220]{dawid1982}}
+  highly embarrassing.}{\citep[p.~220]{dawid1982}}
 
-\noindent\emph{\footnotesize Note: Dear Reader \amp\ Peer, this manuscript is
-  being peer-reviewed by you. Thank you.}
 
 \section{Motivation}
 \label{sec:motivation}
 
 The Bayesian literature on probabilistic modelling, including model
 comparison, hypothesis testing, and parameter estimation, often consider
-probability \enquote{models} of this parametric form:
+models for our \dobs\ having this parametric form:
 \begin{equation}
   \label{eq:example_model_literature}
-  \pf(\ptext{data} \| \yHm) =
-  \int \pf(\ptext{data} \| \ptext{parameters},\yHm)\;
-  \pf(\ptext{parameters} \| \yHm)\;\di\ptext{parameters},
+  \pf(\yD \| \yHm, \yI) =
+  \int\!\di\theta\; \pf(\yD \| \theta,\yHm,\yI)\;
+  \pf(\theta \| \yHm, \yI),
 \end{equation}
-where $\yHm$ represents the model. This is a particular case of an
-exchangeable model \citep[\chap~4]{bernardoetal1994_r2000}. Often discussed
-in this literature are Bayes factors and \enquote{evidence}
-\citep{good1985,mackay1992,kass1993,kassetal1995}, and model averaging
-\citep{draper1993_r2005,chatfield1995,draper1995,hoetingetal1999}. In
-particular, sometimes there are difficulties in comparing the relative
-plausibilities of models or calculating their Bayes factors
-\citep{kassetal1995,ohagan1995,bergeretal1996,desantisetal1997,bergeretal1998}.
-Intuitively, if we have several models $\yHm_1$, $\yHm_2$, \dots\ the
-plausibility of each given some data is
+where $\yHm$ represents the model, $\yI$ other background information and
+assumptions, $\yD$ data, and $\theta$ a parameter with values in some
+manifold. This is a particular case of an exchangeable model
+\citep[\chap~4]{bernardoetal1994_r2000}. \emph{Bayes factors} and
+\emph{evidence} \citep{good1985,mackay1992,kass1993,kassetal1995}, and
+model averaging
+\citep{draper1993_r2005,chatfield1995,draper1995,hoetingetal1999} are often
+discussed in this literature. If we have several mutually exclusive and
+exhaustive models $\yHm_1$, $\yHm_2$, \dots\ our \dob\ about each given
+some data is
 \begin{equation}
   \label{eq:plaus_model}
-  \pf(\yHm_j \| \ptext{data}, \yI) =
+  \pf(\yHm_j \| \yD, \yI) =
   \frac{
-  \pf(\ptext{data} \| \yHm_j, \yI)\; \pf(\yHm_j \| \yI)
+  \pf(\yD \| \yHm_j, \yI)\; \pf(\yHm_j \| \yI)
   }{
-  \sum_j\pf(\ptext{data} \| \yHm_j, \yI)\; \pf(\yHm_j \| \yI)
-  },
+  \sum_k \pf(\yD \| \yHm_k, \yI)\; \pf(\yHm_k \| \yI)
+  };
 \end{equation}
-which involves the \emph{evidence} $\pf(\ptext{data} \| \yHm, \yI)$,
-\eqn~\eqref{eq:example_model_literature}. The Bayes factor between two
-models is just the ratio of their evidences. To calculate the evidence we
-solve the integral in \eqn~\eqref{eq:example_model_literature}, and this
-requires specifying a distribution for the parameters, $\pf(\ptext{parameters} \| \yHm)$.
+this \dob\ involves the \emph{evidence}, which is just
+$\pf(\yD \| \yHm_j, \yI)$, \eqn~\eqref{eq:example_model_literature}. The
+Bayes factor between two models is just the ratio of their evidences.
+
+The literature reports several open issues in \enquote{model comparison}
+and the evaluation of evidences and Bayes factors. For example, to
+calculate a model's evidence we must solve the integral in
+\eqn~\eqref{eq:example_model_literature}, and this requires specifying a
+distribution for the parameters $\pf(\theta \| \yHm, \yI)$. When this
+distribution is improper the evidence vanishes, so the ratio of two
+evidences becomes undetermined. Several ways of fixing this issue have been
+proposed in the literature
+\citep{kassetal1995,ohagan1995,bergeretal1996,desantisetal1997,bergeretal1998}.
+It has also been pointed out if we choose just one out of several possible
+models, basing our choice on their evidence, and then we this model to make
+inferences, we can end up misrepresenting our \dob\
+\citep{draper1993_r2005,chatfield1995,draper1995,hoetingetal1999}. Our
+\dob\ is in fact the weighted average of those given by each model. Yet, in
+some concrete applications -- think about the use of a neural net -- we
+have to choose only one model. \mynote{some reference justly stated that
+  this is the domain of decision theory; can't find it}
+
+These issues suggest that we should re-examine what we're actually doing in
+\enquote{model comparison} or \enquote{model selection}. This is the
+purpose of the present note.
+
+
+\bigskip
+
+From a Bayesian point of view model comparison doesn't really exist or is
+superfluous, because if we are unsure about several models $\yHm_j$, then
+our \dob, by the theorem of total probability, is just
+\begin{equation}
+  \label{eq:combined_dob}
+  \pf(\yD \| \yI) =
+  \sum_j \pf(\yD \| \yHm_j,\yI)\; \pf(\yHm_j \| \yI).
+\end{equation}
+As we gather new data $\yD'$ our \dob\ is updated to
+\begin{equation}
+  \label{eq:combined_dob_update}
+  \pf(\yD \|\yD', \yI) =
+  \frac{\pf(\yD, \yD'\| \yI)}{\pf(\yD' \| \yI)} \equiv
+  \frac{\sum_j \pf(\yD, \yD' \| \yHm_j,\yI)\; \pf(\yHm_j \| \yI)}{
+    \sum_k \pf(\yD' \| \yHm_k,\yI)\; \pf(\yHm_k \| \yI)},
+\end{equation}
+which can be suggestively \emph{rearranged} as follows, multiplying and
+dividing by $\pf(\yD' \| \yHm_j, \yI)$:
+\begin{equation}
+  \label{eq:combined_dob_update_suggestive}
+  \pf(\yD \|\yD', \yI) =
+  \sum_j
+  \underbrace{\frac{\pf(\yD, \yD' \| \yHm_j,\yI)}{\pf(\yD' \| \yHm_j,\yI)}}_{{}\defs\pf(\yD \| \yD', \yHm_j,\yI)}\;
+  \underbrace{\frac{
+  \pf(\yD' \| \yHm_j, \yI)\; \pf(\yHm_j \| \yI)
+  }{
+  \sum_k \pf(\yD' \| \yHm_k, \yI)\; \pf(\yHm_k \| \yI)
+  }}_{{}\defs\pf(\yHm_j \| \yD', \yI)}.
+\end{equation}
+This is a weighted sum of our \dobs\ conditional on each model, the weights
+being our updated \dobs\ about the model themselves. The models which have
+very low updated \dobs\ effectively drop out of the sum, so the probability
+calculus is automatically doing \enquote{model selection} for us. From this
+point of view, the practice of model selection can be viewed as an
+approximation of the formula above. The problem with improper distributions
+for the parameters still remains, though: models involving such
+distributions assign a vanishing \dob\ to the data and therefore disappear
+from \eqns~\eqref{eq:combined_dob_update} and
+\eqref{eq:combined_dob_update_suggestive}. We'll discuss this issue later.
+
+If we compare the model-averaging formula~\eqref{eq:combined_dob} with the
+parametric formula~\eqref{eq:example_model_literature} for a specific
+model, we see that the two have the same structure. The second is just the
+continuum limit of the first. In fact many of the issues about model
+comparison just discussed appear also when we consider just one model of
+parametric form~\eqref{eq:example_model_literature}. Given new gathered
+data $\yD'$, our \dob\ is updated to
+\begin{equation}
+  \label{eq:param_combined_dob_update}
+  \pf(\yD \|\yD', \yHm, \yI) =
+  \frac{\pf(\yD, \yD'\| \yHm, \yI)}{\pf(\yD' \| \yHm, \yI)} \equiv
+  \frac{\int\!\di\theta\; \pf(\yD, \yD' \| \theta, \yHm,\yI)\;
+    \pf(\theta \| \yHm, \yI)
+  }{
+    \int\!\di\theta'\; \pf(\yD' \| \theta',\yHm,\yI)\; \pf(\theta' \|\yHm, \yI)},
+\end{equation}
+which can be suggestively \emph{rearranged} as follows, multiplying and
+dividing by $\pf(\yD' \|\theta, \yHm, \yI)$:
+\begin{multline}
+  \label{eq:param_combined_dob_update_suggestive}
+  \pf(\yD \|\yD', \yHm, \yI) ={}\\
+  \int\!\di\theta\;
+  \underbrace{\frac{\pf(\yD, \yD' \|\theta, \yHm,\yI)
+    }{
+      \pf(\yD' \| \theta, \yHm,\yI)}}_{{}\defs\pf(\yD \| \yD',\theta, \yHm,\yI)}\;
+  \underbrace{\frac{
+  \pf(\yD' \| \theta, \yHm, \yI)\; \pf(\theta \|\yHm, \yI)
+  }{
+  \int\!\di\theta'\; \pf(\yD' \| \theta', \yHm, \yI)\; \pf(\theta' \|\yHm, \yI)
+  }}_{{}\defs\pf(\theta\|\yD', \yHm, \yI)}.
+\end{multline}
+This is again equivalent to the model-average
+case~\eqref{eq:combined_dob_update_suggestive} but for one important
+difference: in the first fraction in the product above, the dependence on
+data $\yD'$ disappear:
+\begin{equation}
+  \label{eq:disappearance_data_given_param}
+  \pf(\yD \| \yD',\theta, \yHm,\yI) =
+  \pf(\yD \| \theta, \yHm,\yI).
+\end{equation}
+This is a typical property of parametric models: the presence of the
+parameters in the conditional makes all other new data in the conditional
+\emph{irrelevant}. Use of an improper distribution
+$\pf(\theta \|\yHm, \yI)$ for the parameter usually doesn't lead to
+problems in this case if correctly used -- that is, taking the limit only
+at the very end of all calculations \citep[\chap~15]{jaynes1994_r2003}.
+Analogously to the model-average case, parameters with low updated density
+$\pf(\theta \|\yD', \yHm, \yI)$ give a vanishing contribution to the
+continuum average~\eqref{eq:param_combined_dob_update_suggestive}, so the
+probability calculus is automatically doing a \enquote{parameter selection}
+for us. From this point of view, the practice of selecting just one
+parameter can be viewed as an approximation of the formula above (though
+such approximation can be bad if the density for $\theta$ has many modes).
+
+\medskip
+
+In some situations, however, we can't or don't want to consider all models
+in the model-average case~\eqref{eq:combined_dob_update_suggestive}, even
+when no model dominates our updated \dob\ over the others. We want just one
+model. Similarly, in some situations we can't or don't want to consider all
+parameters in the single-model
+case~\eqref{eq:param_combined_dob_update_suggestive}, even when the updated
+density for the parameter has no dominating peaks. We want just one
+parameter. These analogous situations involve \emph{decision theory}, and
+therefore require us to assign gain/loss functions. But what is our
+decision actually about? is it really about a model or a parameter? or
+rather about possible data outcomes? Let's examine this question after
+making an important distinction between two kinds of model.
 
 
 \section{A tentative definition}
@@ -869,11 +1005,10 @@ include functions or maps $f \colon \yX \to \yY$ as special cases, when the
 plausibility is unity for a particular $y$ only, dependent on $x$:
 $\pf(y \| x, \yM) = \delt[y, f(x)]$.
 
-I'll use this definition to do some explorations in model comparison and
-parameter estimation, and especially in the notion of \enquote{weight of
-  evidence}.
+Let's use this definition to explore the issues in model comparison and
+parameter estimation previously discussed.
 
-We can make an important distinction between two kinds of model:
+An important distinction can be made between two kinds of model:
 \emph{learning} models and \emph{non-learning} models, which can also be
 called \emph{extremal} for reasons explained later.
 
@@ -899,12 +1034,21 @@ This means that
   \pf(\yy  \| \yx,\, \yM) = \prod_i  \pf(y_i \| x_i,\, \yM).
 \end{equation}
 
-It is \emph{non-learning} models that people usually, ultimately seek. For
-example, a trained and ready-to-use neural net is a non-learning model.
-Parametric models are non-learning models; in fact, each value of the
-(possibly multi-dimensional) parameter defines a specific non-learning
-model.
 
+\medskip
+
+If we look at \eqn~\eqref{eq:disappearance_data_given_param} we see that
+the conjunction $(\theta,\yHm)$ is defining a non-learning model. So a
+model like $\yHm$, \eqn~\eqref{eq:example_model_literature}, which is
+clearly a learning model, is given as a continuous weighted mixture of
+non-learning models. This is a property of most parametric models typically
+considered in the literature, and is a corollary of de~Finetti's theorem
+for partially exchangeable models
+\citep{definetti1938}[\sect~4.6]{bernardoetal1994_r2000}.
+
+
+In concrete applications we usually seek \emph{non-learning} models. For
+example, a trained and ready-to-use neural net is a non-learning model.
 
 
 

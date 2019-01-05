@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2017-10-21T20:53:34+0200
-%% Last-Updated: 2019-01-05T15:20:53+0100
+%% Last-Updated: 2019-01-05T20:43:38+0100
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Report-no: ***
 \newif\ifarxiv
@@ -742,7 +742,7 @@ Luca\\{\footnotesize\epost{\email{piero.mana}{ntnu.no}}%
 % \begin{tabular}[#1]{c}#2\\[0.5\jot]\rule{1pt}{#3}\\#4\end{tabular}}%}
  \newcommand*{\ptext}[1]{\text{\small #1}}
 %@@@@ Custom macros for this file @@@@
-%\DeclareMathOperator*{\argsup}{arg\,sup}
+\DeclareMathOperator*{\argsup}{arg\,sup}
 \newcommand*{\dob}{degree of belief}
 \newcommand*{\dobs}{degrees of belief}
 
@@ -750,13 +750,15 @@ Luca\\{\footnotesize\epost{\email{piero.mana}{ntnu.no}}%
 \newcommand*{\yM}{\varMu}
 \newcommand*{\ytheta}{\theta^*}
 
+\newcommand*{\yA}{A}
 \newcommand*{\yX}{X}
 \newcommand*{\yY}{Y}
 \newcommand*{\yx}{\bm{x}}
 \newcommand*{\yy}{\bm{y}}
 \newcommand*{\yI}{\varIota}
 \newcommand*{\yD}{D}
-\newcommand*{\yHm}{\varEta}
+\newcommand*{\yg}{G}
+\newcommand*{\yHm}{\yM}
 % @@@@@@@@@@ new macros end @@@@@@@@@@
 
 \firmlists
@@ -990,7 +992,7 @@ given a set $\yY$ of possible data, and possibly a set $\yX$ of conditional
 data, a \emph{probability model} is a conjunction $\yM$ of assumptions or
 hypotheses that allows us to assign a definite, numerical plausibility
 \begin{equation}
-  \pf(y_1, y_2,\dotsc \| x_1, x_2, \dotsc, \yM)
+  \pf(y_1, y_2,\dotsc \| x_1, x_2, \dotsc, \yM, \yI)
   \label{eq:plaus}
 \end{equation}
 for every meaningful combination of $y_i \in \yY$ and $x_i \in \yX$. For
@@ -1003,7 +1005,7 @@ the exchangeable categories; and to models used in machine learning and
 neural nets. Possibly it also applies to time series. This definition also
 include functions or maps $f \colon \yX \to \yY$ as special cases, when the
 plausibility is unity for a particular $y$ only, dependent on $x$:
-$\pf(y \| x, \yM) = \delt[y, f(x)]$.
+$\pf(y \| x, \yM, \yI) = \delt[y, f(x)]$.
 
 Let's use this definition to explore the issues in model comparison and
 parameter estimation previously discussed.
@@ -1018,20 +1020,20 @@ $(x_1, x_2, \dotsc) \defs \yx$ if we condition on knowledge about other
 data $(y_1', y_2', \dotsc) \defs \yy'$, $(x_1', x_2', \dotsc) \defs \yx'$:
 \begin{equation}
   \label{eq:learning_def}
-  \pf(\yy  \| \yx,\, \yy', \yx',\, \yM) \ne
-  \pf(\yy  \| \yx,\, \yM).
+  \pf(\yy  \| \yx,\, \yy', \yx',\, \yM, \yI) \ne
+  \pf(\yy  \| \yx,\, \yM, \yI).
 \end{equation}
 
 A non-learning model is one for which these plausibilities are not affected:
 \begin{equation}
   \label{eq:non-learning_def}
-  \pf(\yy  \| \yx,\, \yy', \yx',\, \yM) =
-  \pf(\yy  \| \yx,\, \yM).
+  \pf(\yy  \| \yx,\, \yy', \yx',\, \yM, \yI) =
+  \pf(\yy  \| \yx,\, \yM, \yI).
 \end{equation}
 This means that 
 \begin{equation}
   \label{eq:non-learning_indep}
-  \pf(\yy  \| \yx,\, \yM) = \prod_i  \pf(y_i \| x_i,\, \yM).
+  \pf(\yy  \| \yx,\, \yM, \yI) = \prod_i  \pf(y_i \| x_i,\, \yM, \yI).
 \end{equation}
 
 
@@ -1046,10 +1048,38 @@ considered in the literature, and is a corollary of de~Finetti's theorem
 for partially exchangeable models
 \citep{definetti1938}[\sect~4.6]{bernardoetal1994_r2000}.
 
+In the rest of this note I intend \enquote{model} in the sense above,
+including as special cases parametric models with a specific choice of
+parameter. 
 
-In concrete applications we usually seek \emph{non-learning} models. For
-example, a trained and ready-to-use neural net is a non-learning model.
+\section{Decision-theoretic point of view}
+\label{sec:decision_theory_view}
 
+Let's consider the case when we want to choose one model (that is, one full
+parametric model like~\eqref{eq:example_model_literature} or one specific
+parameter). This brings decision theory
+\citep{raiffaetal1961_r2000,berger1980_r1985}[\chaps~13--14]{jaynes1994_r2003}
+into the picture.
+
+Decision theory concerns the choice of an action $a$, from a set of
+possible actions $\yA$, whose success depends on a state of affairs we're
+uncertain about. The gain in choosing action $a$ if the state of affairs is
+$y$ is given by a gain function $\yg(a \| y)$. In our case the state of
+affairs is the value $y \in \yY$ of some quantity, and our \dob\ about it
+is $\pf(y \| x,\, \yy',\yx',\, \yM, \yI)$, as in the previous section.
+Decision theory says that we should choose the action that minimizes the
+expected gain:
+\begin{equation}
+  \label{eq:decision_theory_choice}
+  \text{choose} \quad
+  \argsup_{a \in \yA}
+  \int\!\di y\; \yg(a \| y)\; \pf(y \| x,\, \yy',\yx',\, \yM, \yI).
+\end{equation}
+It's important to stress that we're choosing an \emph{action} $a \in \yA$,
+which needs not be a quantity like $y$ or a parameter like $\theta$.
+
+In fact, our first question is: what are we actually choosing in a
+model-selection problem?
 
 
 

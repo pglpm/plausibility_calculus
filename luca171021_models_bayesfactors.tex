@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2017-10-21T20:53:34+0200
-%% Last-Updated: 2019-01-09T20:12:46+0100
+%% Last-Updated: 2019-01-09T23:59:17+0100
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Report-no: ***
 \newif\ifarxiv
@@ -760,6 +760,7 @@ Luca\\{\footnotesize\epost{\email{piero.mana}{ntnu.no}}%
 \newcommand*{\yg}{G}
 \newcommand*{\yHm}{\yM}
 \newcommand*{\ym}{\varEta}
+\newcommand*{\snp}{\textsc{snp}}
 % @@@@@@@@@@ new macros end @@@@@@@@@@
 
 \firmlists
@@ -815,7 +816,9 @@ Luca\\{\footnotesize\epost{\email{piero.mana}{ntnu.no}}%
   highly embarrassing.}{\citep[p.~220]{dawid1982}}
 
 
-Summary: Problems in the literature about Bayes factors and model
+Summary:
+
+Problems are reported in the literature about Bayes factors and model
 averaging. The discussions suggest that we ask:
 \begin{enumerate*}[(\arabic*)]
 \item Is this an inference problem -- that is, quantification of
@@ -857,6 +860,31 @@ better viewed as a continuum of cases. And questions like \enquote{is this
   probability model true?} baffle comprehension if we sit down and try to
 explain -- without circularly using technical jargon -- what they're
 actually asking.
+
+The bottom problem is, in my opinion, that even though formal Bayesian
+methods are becoming more common, the way of thinking about and formulating
+inference and decision problems is still antiquated. In particular the
+\enquote{null hypothesis} or \enquote{what is the true model} ways of
+thinking.
+
+Here's an example. In genome-wide association studies we observe that some
+health conditions or diseases are more frequent among individuals that have
+particular variants of pieces of \textsc{dna}
+(\textsc{s}ingle-\textsc{n}ucleotide \textsc{p}olymorphisms). This means
+that we could use this genetic information to make better guesses on
+whether a person has or will develop a particular disease. Our uncertainty
+come from the small size of our samples: we'd like to guess what are the
+conditional frequencies of the disease given the \snp\ variants in the full
+population. Many studies face this kind of association in a dichotomous
+way: \enquote{is this particular \snp\ associated with that disease? yes or
+  no?} But the association isn't dichotomous: there is a continuum of
+differences between the conditional frequencies of the disease conditional
+on the \snp\ variants. The question is: how do we want to use this
+association? what choices do we need to make? If the idea is to take a
+genetic sample for diagnostics, the issue could be that the cost and time
+involved allow us to check, say, only five \snp s in an individual. Then
+our decision problem is to choose five \snp s to be used in the automated
+diagnostics.
 
 Many inference problems boil down to guessing what the next outcome in a
 possibly unlimited sequence of observations will be, given the outcomes of

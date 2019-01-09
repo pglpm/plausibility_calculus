@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2017-10-21T20:53:34+0200
-%% Last-Updated: 2019-01-09T17:22:10+0100
+%% Last-Updated: 2019-01-09T20:12:46+0100
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Report-no: ***
 \newif\ifarxiv
@@ -858,7 +858,36 @@ better viewed as a continuum of cases. And questions like \enquote{is this
 explain -- without circularly using technical jargon -- what they're
 actually asking.
 
-
+Many inference problems boil down to guessing what the next outcome in a
+possibly unlimited sequence of observations will be, given the outcomes of
+some of the observations in this sequence. If we believe that the precise
+order of these outcomes is irrelevant for our guesses (an exchangeability
+assumption), then we can break our guess as follows:
+\begin{enumerate*}[(\alph*)]
+\item\label{item:guess_given_freqs}what would our guess be if we knew the
+  relative frequencies of the outcomes in the whole (observed an
+  unobserved) sequence?
+\item\label{item:guess_freqs}what is our guess about such relative frequencies?
+\end{enumerate*}
+If the number of observations is very large, by symmetry our
+\dob~\ref{item:guess_given_freqs} about the next outcome would be its known
+relative frequency. So what remains is guess~\ref{item:guess_freqs}. Most
+inferences about \enquote{true models} can be interpreted as inferences
+about the unknown final relative frequencies. This point of view calls for
+a leap of imagination about future observations. But the combined lifespan
+of the humans involved in our original inference problem is surely finite,
+so the number of observations is finite although large. The problem thus
+becomes analogous to drawing from a finite urn without replacement, with
+the complication that the number of balls in the urn is unknown: a mixture
+of generalized hypergeometric distributions. It would be interesting to
+prove that the resulting \dob~\ref{item:guess_given_freqs} from such a
+mixture can be well approximated by a final relative frequencies, if our
+\dob\ about the number of balls is peaked at large values. I like this
+pragmatic point of view because it gives concrete sense of statements about
+\enquote{true models} and it doesn't call for more metaphysics than
+planning what to do in case of sunshine or of rain tomorrow. And it doesn't
+bring \enquote{propensities} or other doubtful physical notions into the
+picture.
 
 
 

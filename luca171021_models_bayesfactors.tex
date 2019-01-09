@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2017-10-21T20:53:34+0200
-%% Last-Updated: 2019-01-08T18:04:05+0100
+%% Last-Updated: 2019-01-09T16:45:55+0100
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Report-no: ***
 \newif\ifarxiv
@@ -813,6 +813,42 @@ Luca\\{\footnotesize\epost{\email{piero.mana}{ntnu.no}}%
  \epigraph{Where do probability models come from?\\ To judge by the resounding
   silence over this question on the part of most statisticians,\\ it seems
   highly embarrassing.}{\citep[p.~220]{dawid1982}}
+
+
+Summary: Problems in the literature about Bayes factors and model
+averaging. The discussions suggest that we ask:
+\begin{enumerate*}[(\arabic*)]
+\item Is this an inference problem -- that is, quantification of
+  uncertainty -- or a decision problem?
+\item What is our uncertainty, ultimately, about?
+\item What must we decide about?
+\end{enumerate*}
+
+When the problem is purely inferential, the focus is usually on some kind
+of parameters. But is our uncertainty about the parameters what we really
+care about? It seems to me that what we want to quantify is, in the end,
+our uncertainty about some concrete situation, for example whether an
+individual has a particular disease, or the amount of a particular resource
+in a particular place. Parameters may enter the mathematical formulation of
+our uncertainty, but they aren't the end goal.
+
+Focus on the parameters may be important in particular kinds of decision
+problems. For example, a software engineer must choose the specific form of
+a function that will be used in some application -- say, to convert
+handwriting to character codes -- or the specific form of a plausibility
+model to be used in some automated inferential task. In such situations the
+engineer has to choose from a manifold of possible functions or models, and
+the parameters are just coordinates on that manifold. Choosing a parameter
+corresponds to choosing a function or model. This choice requires a
+quantified uncertainty about some \enquote{true} model (a notion to be
+thoroughly discussed) but also a quantified gain or loss function for the
+choice. In this kind of problems a lot of attention is usually given to the
+quantification of uncertainty -- choosing priors, likelihoods, and so on --
+but very little to a reasonable quantification of the gain function. Thus
+the final quality of the solution, which involves both, is poor.
+
+
+
 
 
 \section{Motivation}

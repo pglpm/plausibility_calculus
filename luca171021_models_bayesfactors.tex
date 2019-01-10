@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2017-10-21T20:53:34+0200
-%% Last-Updated: 2019-01-09T23:59:17+0100
+%% Last-Updated: 2019-01-10T14:25:21+0100
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Report-no: ***
 \newif\ifarxiv
@@ -634,7 +634,7 @@ Luca\\{\footnotesize\epost{\email{piero.mana}{ntnu.no}}%
 %\DeclareMathOperator{\ent}{ent}%integer less or equal to
 %\DeclareMathOperator{\Ord}{O}%same order as
 %\DeclareMathOperator{\ord}{o}%lower order than
-%\newcommand*{\incr}{\triangle}%finite increment
+\newcommand*{\incr}{\triangle}%finite increment
 \newcommand*{\defd}{\coloneqq}
 \newcommand*{\defs}{\eqqcolon}
 %\newcommand*{\Land}{\bigwedge}
@@ -667,7 +667,7 @@ Luca\\{\footnotesize\epost{\email{piero.mana}{ntnu.no}}%
 \DeclarePairedDelimiter\clop{[}{[}
 %\DeclarePairedDelimiter\opcl{]}{]}
 %\DeclarePairedDelimiter\opop{]}{[}
-%\DeclarePairedDelimiter\abs{\lvert}{\rvert}
+\DeclarePairedDelimiter\abs{\lvert}{\rvert}
 %\DeclarePairedDelimiter\norm{\lVert}{\rVert}
 \DeclarePairedDelimiter\set{\{}{\}}
 %\DeclareMathOperator{\pr}{P}%probability
@@ -675,8 +675,8 @@ Luca\\{\footnotesize\epost{\email{piero.mana}{ntnu.no}}%
 \newcommand*{\p}{\mathrm{P}}%probability
 %\newcommand*{\tf}{\mathrm{T}}%probability
 \renewcommand*{\|}{\mathpunct{|}}
-%\newcommand*{\lcond}{\mathpunct{|\ }}%conditional sign (in probabilities)
-\newcommand*{\bigcond}{\mathpunct{\big|\ }}%conditional sign (in probabilities)
+\newcommand*{\lcond}[1][]{\mathpunct{#1|\ }}%conditional sign (in probabilities)
+%\newcommand*{\bigcond}{\mathpunct{\big|\ }}%conditional sign (in probabilities)
 %\newcommand*{\lbigcond}{\mathpunct{\big|\ }}%conditional sign (in probabilities)
 %\newcommand*{\+}{\lor}
 %\renewcommand{\*}{\land}
@@ -723,9 +723,9 @@ Luca\\{\footnotesize\epost{\email{piero.mana}{ntnu.no}}%
 %\newcommand*{\sland}{\mathop{\textstyle\bigwedge}}
 %\newcommand*{\slor}{\mathop{\textstyle\bigvee}}
 %\newcommand*{\T}{^\intercal}%transpose
-%\newcommand*{\E}{\mathrm{E}}
-%\DeclarePairedDelimiter\expp{(}{)}
-%\newcommand*{\expe}{\E\expp}%round
+\newcommand*{\E}{\mathrm{E}}
+\DeclarePairedDelimiter\expp{(}{)}
+\newcommand*{\expe}{\E\expp}%round
 %\newcommand*{\expeb}{\E\clcl}%square
 %%\newcommand*{\QEM}%{\textnormal{$\Box$}}%{\ding{167}}
 %\newcommand*{\qem}{\leavevmode\unskip\penalty9999 \hbox{}\nobreak\hfill
@@ -868,23 +868,34 @@ inference and decision problems is still antiquated. In particular the
 thinking.
 
 Here's an example. In genome-wide association studies we observe that some
-health conditions or diseases are more frequent among individuals that have
-particular variants of pieces of \textsc{dna}
-(\textsc{s}ingle-\textsc{n}ucleotide \textsc{p}olymorphisms). This means
-that we could use this genetic information to make better guesses on
-whether a person has or will develop a particular disease. Our uncertainty
-come from the small size of our samples: we'd like to guess what are the
-conditional frequencies of the disease given the \snp\ variants in the full
-population. Many studies face this kind of association in a dichotomous
-way: \enquote{is this particular \snp\ associated with that disease? yes or
-  no?} But the association isn't dichotomous: there is a continuum of
-differences between the conditional frequencies of the disease conditional
-on the \snp\ variants. The question is: how do we want to use this
-association? what choices do we need to make? If the idea is to take a
-genetic sample for diagnostics, the issue could be that the cost and time
-involved allow us to check, say, only five \snp s in an individual. Then
-our decision problem is to choose five \snp s to be used in the automated
-diagnostics.
+diseases are more frequent among individuals that have particular variants
+of pieces of \textsc{dna}, called \textsc{s}ingle-\textsc{n}ucleotide
+\textsc{p}olymorphisms. This means that we could examine a person's \snp s
+to make better guesses on whether the person has or will develop a
+particular disease. Our uncertainty come from the small size of our
+samples: we'd like to guess the conditional frequencies of the disease
+given the \snp\ variants in the full population. Many studies face this
+kind of association in a dichotomous way: \enquote{is this particular \snp\
+  associated with that disease? yes or no?} But the association isn't
+dichotomous: there is a continuum of differences between the frequencies of
+the disease conditional on the \snp\ variants. The question is: how do we
+want to use this association? what choices do we need to make? Suppose that
+the idea is to examine a person's \snp s to diagnose the disease. The issue
+could be that the cost and time involved allow us to check, say, only one
+\snp. Then our decision problem is to choose the \snp\ to be used in an
+automated diagnostics. For simplicity assume that the candidate \snp s have
+only two variants each. The gain in examining a \snp\ for diagnostics is
+proportional to the absolute difference $\abs{\incr f}$ between the
+frequencies, in the full population, of the disease conditional on the two
+variants. Let's say that a good gain function is $\abs{\incr f}^2$, and our
+\dob\ about $\abs{\incr f}$ given some sample study with data $\yD$ and
+background information $\yI$ is
+$\pf\bigl(\abs{\incr f} \lcond[\big] \yD, \yI\bigr)$. Then according to
+decision theory we should choose the \snp\ with highest expectation
+$\expe[\big]{\abs{\incr f}^2 \lcond[\big] \yD, \yI}$. This simple example
+shows that no \enquote{null hypothesis} or dichotomous questions where
+necessary for our inference and decision. I believe that this is the case
+for many problems that are today stated in \enquote{null hypothesis} terms.
 
 Many inference problems boil down to guessing what the next outcome in a
 possibly unlimited sequence of observations will be, given the outcomes of
@@ -1352,7 +1363,7 @@ A statistical model is a set of assumptions $\yM$ that jointly allow us to
 consistently assign numerical values to the probabilities
 \begin{equation}
   \label{eq:def_statmod}
-  \p\bigl(\yO{a_{n+1}}{i_{n+1}} \bigcond
+  \p\bigl(\yO{a_{n+1}}{i_{n+1}} \lcond[\big]
   \yO{a_{1}}{i_{1}} \land \dotsb \land \yO{a_{n}}{i_{n}} \land \yM \bigr),
 \end{equation}
 for any legitimate $n$ and any sets of observations
@@ -1392,10 +1403,10 @@ are characterized by $\pf(\theta \|\yM) = \delt(\theta-\ytheta)$, so that
 the probability for an outcome does not depend on knowledge of other outcomes:
 \begin{equation}
   \label{eq:extreme_exchang}
-  \p\bigl(\yO{a_{n+1}}{i_{n+1}} \bigcond
+  \p\bigl(\yO{a_{n+1}}{i_{n+1}} \lcond[\big]
   \yO{a_{1}}{i_{1}} \land \dotsb \land \yO{a_{n}}{i_{n}} \land \yM \bigr)
   =
-  \p\bigl(\yO{a_{n+1}}{i_{n+1}} \bigcond \yM \bigr)
+  \p\bigl(\yO{a_{n+1}}{i_{n+1}} \lcond[\big] \yM \bigr)
   \equiv \pf(i_{n+1} \| \ytheta,\yM).
 \end{equation}
 Such a model doesn't \enquote{learn} because it makes all knowledge about

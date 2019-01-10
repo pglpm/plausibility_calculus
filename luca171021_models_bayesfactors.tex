@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2017-10-21T20:53:34+0200
-%% Last-Updated: 2019-01-10T14:25:21+0100
+%% Last-Updated: 2019-01-10T15:07:09+0100
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Report-no: ***
 \newif\ifarxiv
@@ -663,7 +663,7 @@ Luca\\{\footnotesize\epost{\email{piero.mana}{ntnu.no}}%
 %\providecommand{\varparallel}{\ensuremath{\mathbin{/\mkern-7mu/}}}%parallel (tentative symbol)
 \renewcommand{\le}{\leqslant}%less or equal
 \renewcommand{\ge}{\geqslant}%greater or equal
-%\DeclarePairedDelimiter\clcl{[}{]}
+\DeclarePairedDelimiter\clcl{[}{]}
 \DeclarePairedDelimiter\clop{[}{[}
 %\DeclarePairedDelimiter\opcl{]}{]}
 %\DeclarePairedDelimiter\opop{]}{[}
@@ -872,30 +872,35 @@ diseases are more frequent among individuals that have particular variants
 of pieces of \textsc{dna}, called \textsc{s}ingle-\textsc{n}ucleotide
 \textsc{p}olymorphisms. This means that we could examine a person's \snp s
 to make better guesses on whether the person has or will develop a
-particular disease. Our uncertainty come from the small size of our
+particular disease. Our uncertainty comes from the small size of our
 samples: we'd like to guess the conditional frequencies of the disease
 given the \snp\ variants in the full population. Many studies face this
 kind of association in a dichotomous way: \enquote{is this particular \snp\
   associated with that disease? yes or no?} But the association isn't
 dichotomous: there is a continuum of differences between the frequencies of
-the disease conditional on the \snp\ variants. The question is: how do we
-want to use this association? what choices do we need to make? Suppose that
-the idea is to examine a person's \snp s to diagnose the disease. The issue
-could be that the cost and time involved allow us to check, say, only one
-\snp. Then our decision problem is to choose the \snp\ to be used in an
-automated diagnostics. For simplicity assume that the candidate \snp s have
-only two variants each. The gain in examining a \snp\ for diagnostics is
-proportional to the absolute difference $\abs{\incr f}$ between the
-frequencies, in the full population, of the disease conditional on the two
-variants. Let's say that a good gain function is $\abs{\incr f}^2$, and our
-\dob\ about $\abs{\incr f}$ given some sample study with data $\yD$ and
-background information $\yI$ is
-$\pf\bigl(\abs{\incr f} \lcond[\big] \yD, \yI\bigr)$. Then according to
-decision theory we should choose the \snp\ with highest expectation
-$\expe[\big]{\abs{\incr f}^2 \lcond[\big] \yD, \yI}$. This simple example
-shows that no \enquote{null hypothesis} or dichotomous questions where
-necessary for our inference and decision. I believe that this is the case
-for many problems that are today stated in \enquote{null hypothesis} terms.
+the disease conditional on the \snp\ variants. The questions we need to
+answer are: how do we want to use this association? what choices do we need
+to make? Suppose that the idea is to examine a person's \snp s to diagnose
+the disease, in an automated way. However, the cost and time involved allow
+us to check, say, only one \snp. Our decision problem is to choose the
+\snp\ to be used in the automated diagnostics. For simplicity assume that
+the candidate \snp s have only two variants each. The gain in using a
+particular \snp\ for diagnostics is proportional to the absolute difference
+$\abs{\incr f} \in \clcl{0,1}$ between the frequencies, in the full
+population, of the disease conditional on the two variants. If
+$\abs{\incr f} = 0$ the \snp\ doesn't give any information about the
+presence of the disease; if $\abs{\incr f} = 1$ it is a perfect,
+deterministic predictor. Let's say that a good gain function is
+$\abs{\incr f}^2$, and that our \dob\ about $\abs{\incr f}$ given some
+sample study with data $\yD$ and background information $\yI$ is
+$\pf\bigl(\abs{\incr f} \lcond[\big] \yD, \yI\bigr)$. Then, according to
+decision theory, we should choose the \snp\ with highest expectation
+$\expe[\big]{\abs{\incr f}^2 \lcond[\big] \yD, \yI}$.
+
+No \enquote{null hypotheses} or dichotomous questions were necessary for
+our inference and decision in the simple example above. I believe that this
+is the case for many, more complex problems that are today stated in
+\enquote{null hypothesis} terms. They only require a change in perspective.
 
 Many inference problems boil down to guessing what the next outcome in a
 possibly unlimited sequence of observations will be, given the outcomes of

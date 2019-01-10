@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2017-10-21T20:53:34+0200
-%% Last-Updated: 2019-01-10T15:07:09+0100
+%% Last-Updated: 2019-01-10T15:37:52+0100
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Report-no: ***
 \newif\ifarxiv
@@ -869,23 +869,23 @@ thinking.
 
 Here's an example. In genome-wide association studies we observe that some
 diseases are more frequent among individuals that have particular variants
-of pieces of \textsc{dna}, called \textsc{s}ingle-\textsc{n}ucleotide
-\textsc{p}olymorphisms. This means that we could examine a person's \snp s
-to make better guesses on whether the person has or will develop a
-particular disease. Our uncertainty comes from the small size of our
-samples: we'd like to guess the conditional frequencies of the disease
-given the \snp\ variants in the full population. Many studies face this
-kind of association in a dichotomous way: \enquote{is this particular \snp\
-  associated with that disease? yes or no?} But the association isn't
-dichotomous: there is a continuum of differences between the frequencies of
-the disease conditional on the \snp\ variants. The questions we need to
-answer are: how do we want to use this association? what choices do we need
-to make? Suppose that the idea is to examine a person's \snp s to diagnose
-the disease, in an automated way. However, the cost and time involved allow
-us to check, say, only one \snp. Our decision problem is to choose the
-\snp\ to be used in the automated diagnostics. For simplicity assume that
-the candidate \snp s have only two variants each. The gain in using a
-particular \snp\ for diagnostics is proportional to the absolute difference
+of pieces of \textsc{dna}, called Single-Nucleotide Polymorphisms. This
+means that we could examine a person's \snp s to make better guesses on
+whether the person has or will develop a particular disease. Our
+uncertainty comes from the small size of our samples: we'd like to guess
+the conditional frequencies of the disease given the \snp\ variants in the
+full population. Many studies face this kind of association in a
+dichotomous way: \enquote{is this particular \snp\ associated with that
+  disease? yes or no?} But the association isn't dichotomous: there is a
+continuum of differences between the frequencies of the disease conditional
+on the variants of all \snp s. The questions we need to answer are: how do
+we want to use this association? what choices do we need to make? Suppose
+that the idea is to examine a person's \snp s to diagnose the disease, in
+an automated way. However, the cost and time involved allow us to check,
+say, only one \snp. Our decision problem is to choose the \snp\ to be used
+in the automated diagnostics. For simplicity assume that the candidate \snp
+s have only two variants each. The gain in using a particular \snp\ for
+diagnostics is proportional to the absolute difference
 $\abs{\incr f} \in \clcl{0,1}$ between the frequencies, in the full
 population, of the disease conditional on the two variants. If
 $\abs{\incr f} = 0$ the \snp\ doesn't give any information about the

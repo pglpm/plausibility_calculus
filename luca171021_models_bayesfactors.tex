@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2017-10-21T20:53:34+0200
-%% Last-Updated: 2019-01-10T15:37:52+0100
+%% Last-Updated: 2019-01-11T22:49:46+0100
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Report-no: ***
 \newif\ifarxiv
@@ -12,7 +12,7 @@
 \newif\iftypodisclaim % typographical disclaim on the side
 \typodisclaimtrue
 \newif\ifpublic
-\publictrue % true = for publication, false = personal notes
+\publicfalse % true = for publication, false = personal notes
 \newcommand*{\memfontfamily}{zplx}
 \newcommand*{\memfontpack}{newpxtext}
 \documentclass[\ifafour a4paper,12pt,\else a5paper,10pt,\fi%extrafontsizes,%
@@ -22,7 +22,7 @@ british%
 \newcommand*{\updated}{\today}
 \newcommand*{\firstdraft}{21 October 2017}
 \newcommand*{\firstpublished}{***}
-\newcommand*{\propertitle}{What is a probability model?}
+\newcommand*{\propertitle}{What and wherefore is a probability model?}
 \newcommand*{\pdftitle}{\propertitle}
 \newcommand*{\headtitle}{\propertitle}
 \newcommand*{\pdfauthor}{P.G.L.  Porta Mana}
@@ -584,16 +584,17 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 %  {\large A geometric commentary on maximum-entropy proofs}% ***
 }
 \author{%
-\ifpublic%
 \hspace*{\stretch{1}}%
+%% uncomment if additional authors present
+% \parbox{0.5\linewidth}%\makebox[0pt][c]%
+% {\protect\centering ***\\%
+% \footnotesize\epost{\email{***}{***}}}%
+% \hspace*{\stretch{1}}%
 \parbox{0.5\linewidth}%\makebox[0pt][c]%
-{\protect\centering Luca\\%
+{\protect\centering\ifpublic P.G.L.  Porta Mana\\\else Luca  \fi%
 \footnotesize\epost{\email{piero.mana}{ntnu.no}}}%
 \hspace*{\stretch{1}}%
-\else%
-Luca\\{\footnotesize\epost{\email{piero.mana}{ntnu.no}}%
 %\quad\href{https://orcid.org/0000-0002-6070-0784}{\protect\includegraphics[scale=0.16]{orcid_32x32.png}\textsc{orcid}:0000-0002-6070-0784}%
-}\fi%
 }
 
 \date{Draft of \today\ (first drafted \firstdraft)}
@@ -770,7 +771,6 @@ Luca\\{\footnotesize\epost{\email{piero.mana}{ntnu.no}}%
 
 %%% Title and abstract %%%
 \maketitle
-\ifpublic
 \abstractrunin
 \abslabeldelim{}
 \renewcommand*{\abstractname}{}
@@ -778,16 +778,17 @@ Luca\\{\footnotesize\epost{\email{piero.mana}{ntnu.no}}%
 \setlength{\absrightindent}{0pt}
 \setlength{\abstitleskip}{-\absparindent}
 \begin{abstract}\labelsep 0pt%
-  \noindent Some notes or model comparison and selection, hypothesis
-  testing, parameter estimation, Bayes factors, and so on.
-  \\\noindent\emph{\footnotesize Dear Reader \amp\ Peer, this manuscript is
-    being peer-reviewed by you. Thank you.}
+  \noindent Some notes on model comparison and selection, hypothesis
+  testing, parameter estimation, Bayes factors, null hypotheses, and
+  related topics.
+  \ifpublic\\\noindent\emph{\footnotesize Note: Dear Reader \amp\ Peer, this
+    manuscript is being peer-reviewed by you. Thank you.}\fi
 % \par%\\[\jot]
 % \noindent
 % {\footnotesize PACS: ***}\qquad%
 % {\footnotesize MSC: ***}%
 %\qquad{\footnotesize Keywords: ***}
-\end{abstract}\fi
+\end{abstract}
 
 \selectlanguage{british}\frenchspacing
 % \asudedication{\small ***}
@@ -816,10 +817,14 @@ Luca\\{\footnotesize\epost{\email{piero.mana}{ntnu.no}}%
   highly embarrassing.}{\citep[p.~220]{dawid1982}}
 
 
-Summary:
+\section{Summary}
+\label{sec:summary}
 
-Problems are reported in the literature about Bayes factors and model
-averaging. The discussions suggest that we ask:
+The literature on statistical modelling reports several issues with Bayes
+factors, improper and Jeffreys priors, model averaging, hypothesis testing,
+and similar topics, as discussed in the next section. These issues suggest
+that, whenever we face a problem involving \enquote{statistical models}, we
+should ask:
 \begin{enumerate*}[(\arabic*)]
 \item Is this an inference problem -- that is, quantification of
   uncertainty -- or a decision problem?
@@ -827,64 +832,74 @@ averaging. The discussions suggest that we ask:
 \item What must we decide about?
 \end{enumerate*}
 
-When the problem is purely inferential, the focus is usually on some kind
-of parameters. But is our uncertainty about the parameters what we really
-care about? It seems to me that what we want to quantify is, in the end,
-our uncertainty about some concrete situation, for example whether an
-individual has a particular disease, or the amount of a particular resource
-in a particular place. Parameters may enter the mathematical formulation of
-our uncertainty, but they aren't the end goal.
+When the problem is purely inferential, the focus in the current literature
+is usually on some kind of parameters. But is parameter uncertainty what we
+ultimately care about? It seems to me that in the majority of problems what
+we want to quantify is our uncertainty about some concrete situation, for
+example whether an individual has a particular disease, or the amount of a
+particular natural resource in a particular geographic location. Parameters
+may enter the mathematical formulation of our uncertainty such situations,
+but they aren't the end goal.
 
-Focus on the parameters may be important in particular kinds of decision
-problems. For example, a software engineer must choose the specific form of
-a function that will be used in some application -- say, to convert
-handwriting to character codes -- or the specific form of a plausibility
-model to be used in some automated inferential task; or a physicists wants
-to choose a particular theory \citep[a problem especially considered
-by][]{jeffreys1931_r1973,jeffreys1939_r1983}. In such situations the
-engineer or physicist has to choose from a manifold of possible functions
-or models, and the parameters are just coordinates on that manifold.
-Choosing a parameter corresponds to choosing a function or model. This
-choice requires a quantified uncertainty about some \enquote{true} model (a
-notion to be thoroughly discussed) but also a quantified gain or loss
-function for the choice. In this kind of problems a lot of attention is
-usually given to the quantification of uncertainty -- choosing priors,
-likelihoods, and so on -- but very little to a reasonable quantification of
-the gain function. Thus the final quality of the solution, which involves
-both, is poor.
+Focus on the parameters, on the other hand, may be important in particular
+kinds of decision problems. For example, a software engineer must choose
+the specific form of a function that will be used in some application, say,
+to convert handwriting to character codes; or the specific form of a
+plausibility model to be used in an automated inferential task. Or a
+physicists must choose a particular physical theory \citep[a problem
+especially considered by][]{jeffreys1931_r1973,jeffreys1939_r1983} among
+competing candidates. In such situations the engineer or physicist has to
+choose from a manifold of possible functions or models, and the parameters
+are just coordinates on that manifold. Choosing a parameter corresponds to
+choosing a function or a model. This kind of problems requires not only a
+quantified uncertainty about some \enquote{true} model (a notion to be
+thoroughly discussed) but also a quantified gain or loss function for the
+final choice. A lot of attention is usually given to the quantification of
+uncertainty -- choosing priors, likelihoods, and so on -- but very little
+to a reasonable quantification of the gain function. Thus the final quality
+of the solution, which involves the product of the two, is poor.
 
-Sometimes there is a more general problem upstream: the initial inferential
-or decision problem is poorly formulated. For example, many \enquote{null
-  hypothesis} questions force an unnatural dichotomous view on situations
-better viewed as a continuum of cases. And questions like \enquote{is this
-  probability model true?} baffle comprehension if we sit down and try to
-explain -- without circularly using technical jargon -- what they're
-actually asking.
+In either case there seems to be a more general problem upstream: the
+initial inferential or decision problem is poorly formulated. For example,
+many \enquote{null hypothesis} questions force an unnatural dichotomous
+view on situations better viewed as a continuum of cases. And many concrete
+problems are transformed into metaphysical questions like \enquote{is this
+  statistical model true?}. This metaphysics is often hidden behind
+technical terms, but metaphysics it remains nonetheless.
+% baffle comprehension if we
+% sit down and try to explain -- without circularly using technical jargon --
+% what they're actually asking.
 
 The bottom problem is, in my opinion, that even though formal Bayesian
-methods are becoming more common, the way of thinking about and formulating
-inference and decision problems is still antiquated. In particular the
-\enquote{null hypothesis} or \enquote{what is the true model} ways of
-thinking.
+methods are becoming more common, our way of thinking about and formulating
+inference and decision problems is still centred on old recipes. This is
+particularly true of the \enquote{null hypothesis}, the \enquote{what is
+  the true model}, and the \enquote{what is the true parameter value} ways of
+thinking. This kind of initial mismatch between a young method and old
+formulations is common in the history of science
+\citep{truesdell1968,kline1985,brush1976c_r1986,brush1976d_r1999,whittaker1910_r1951,whittaker1953}.
 
-Here's an example. In genome-wide association studies we observe that some
-diseases are more frequent among individuals that have particular variants
-of pieces of \textsc{dna}, called Single-Nucleotide Polymorphisms. This
-means that we could examine a person's \snp s to make better guesses on
-whether the person has or will develop a particular disease. Our
-uncertainty comes from the small size of our samples: we'd like to guess
-the conditional frequencies of the disease given the \snp\ variants in the
-full population. Many studies face this kind of association in a
-dichotomous way: \enquote{is this particular \snp\ associated with that
-  disease? yes or no?} But the association isn't dichotomous: there is a
-continuum of differences between the frequencies of the disease conditional
-on the variants of all \snp s. The questions we need to answer are: how do
-we want to use this association? what choices do we need to make? Suppose
-that the idea is to examine a person's \snp s to diagnose the disease, in
-an automated way. However, the cost and time involved allow us to check,
-say, only one \snp. Our decision problem is to choose the \snp\ to be used
-in the automated diagnostics. For simplicity assume that the candidate \snp
-s have only two variants each. The gain in using a particular \snp\ for
+Here's a simple example. In genome-wide association studies we observe that
+some diseases are more frequent among individuals that carry particular
+variants of pieces of \textsc{dna}, called Single-Nucleotide Polymorphisms.
+This means that we could examine a person's \snp s to make better guesses
+on whether that person has or will develop a particular disease. Our
+uncertainty stems from the small size of our samples: we'd like to guess
+what the frequencies of the disease conditional the \snp\ variants are in
+the full population. Many studies face this kind question in a dichotomous
+way: \enquote{Is this particular \snp\ associated with that disease? yes or
+  no?}. A first problem with this question is the vague term
+\enquote{association}; this vagueness doesn't disappear just because we use
+technical terms like \enquote{linkage}. But, whatever we might mean, the
+problem is not dichotomous: there is a continuum of differences between the
+frequencies of the disease conditional on the variants of all \snp s. The
+questions we need to answer are: how do we want to use these conditional
+frequencies? what choices do we need to make? Suppose that the idea is to
+examine a person's \snp s in order to diagnose the disease, in an automated
+way. However, the cost and time involved allow us to check, say, only one
+\snp. Our decision problem is to choose the \snp\ to be used in the
+automated diagnostics. Assume for simplicity that the candidate \snp s have
+only two variants each. The gain in using a particular \snp\ for
 diagnostics is proportional to the absolute difference
 $\abs{\incr f} \in \clcl{0,1}$ between the frequencies, in the full
 population, of the disease conditional on the two variants. If
@@ -900,7 +915,12 @@ $\expe[\big]{\abs{\incr f}^2 \lcond[\big] \yD, \yI}$.
 No \enquote{null hypotheses} or dichotomous questions were necessary for
 our inference and decision in the simple example above. I believe that this
 is the case for many, more complex problems that are today stated in
-\enquote{null hypothesis} terms. They only require a change in perspective.
+\enquote{null hypothesis} terms; see for example those examined by Kass
+\amp\ Raftery \citey[\sect~2]{kassetal1995}. They only require a change in
+perspective.
+
+\mynote{Discussion on whether \enquote{hypotheses} in statistical modelling
+are really such, au pair with physical hypotheses}
 
 Many inference problems boil down to guessing what the next outcome in a
 possibly unlimited sequence of observations will be, given the outcomes of

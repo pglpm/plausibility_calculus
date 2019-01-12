@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2017-10-21T20:53:34+0200
-%% Last-Updated: 2019-01-11T23:27:31+0100
+%% Last-Updated: 2019-01-12T13:27:51+0100
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Report-no: ***
 \newif\ifarxiv
@@ -879,38 +879,42 @@ thinking. This kind of initial mismatch between a young method and old
 formulations is common in the history of science
 \citep{truesdell1968,kline1980_r1982,brush1976c_r1986,brush1976d_r1999,whittaker1910_r1951,whittaker1953}.
 
-Here's a simple example. In genome-wide association studies we observe that
-some diseases are more frequent among individuals that carry particular
-variants of pieces of \textsc{dna}, called Single-Nucleotide Polymorphisms.
-This means that we could examine a person's \snp s to make better guesses
-on whether that person has or will develop a particular disease. Our
+Here's a simple example. In genome association studies we observe that some
+diseases are more frequent among individuals that carry particular variants
+of pieces of \textsc{dna}, called Single-Nucleotide Polymorphisms. This
+means that we could examine a person's \snp s to make better guesses on
+whether that person has or will develop a particular disease. Our
 uncertainty stems from the small size of our samples: we'd like to guess
 what the frequencies of the disease conditional the \snp\ variants are in
 the full population. Many studies face this kind of question in a
 dichotomous way: \enquote{Is this particular \snp\ associated with that
-  disease? yes or no?}. A first problem with this question is the vague
-term \enquote{association}; this vagueness doesn't disappear just because
-we use technical terms like \enquote{linkage}. But, whatever we might mean,
-the problem is clearly not dichotomous: there is a continuum of differences
-between the frequencies of the disease conditional on the variants of all
-\snp s. The questions we need to answer are: what do we want to use this
-statistical knowledge ultimately for? what choices do we need to make?
-Suppose that the idea is to build an automated procedure to examine a
-person's \snp s in order to diagnose the disease. However, the cost and
-time involved would allow us to check, say, only one \snp\ per individual.
-Our decision problem is to choose the \snp\ to be used in this automated
-diagnostics. Assume for simplicity that the candidate \snp s have only two
-variants each. The gain in using a particular \snp\ for diagnostics is
-proportional to the absolute difference $\abs{\incr f} \in \clcl{0,1}$
-between the frequencies, in the full population, of the disease conditional
-on the two variants of that \snp. If $\abs{\incr f} = 0$ the \snp\ doesn't
-give any information about the presence of the disease; if
-$\abs{\incr f} = 1$ it is a perfect, deterministic predictor. Let's say
-that a good gain function is $\abs{\incr f}^2$, and that our \dob\ about
-$\abs{\incr f}$ given some sample study with data $\yD$ and background
-information $\yI$ is $\pf\bigl(\abs{\incr f} \lcond[\big] \yD, \yI\bigr)$.
-Then, according to decision theory, we should choose the \snp\ for which the
-expectation $\expe[\big]{\abs{\incr f}^2 \lcond[\big] \yD, \yI}$ is highest.
+  disease? yes or no?}. % A first problem with this question is the vague
+% term \enquote{association} (this vagueness doesn't disappear just because
+% we use technical terms like \enquote{linkage}). But, whatever we might
+% mean,
+But the problem is clearly not dichotomous: there is a continuum of
+differences between the frequencies of the disease conditional on the
+variants of all \snp s. If we approach the problem more concretely we may
+ask: what do we want to use this statistical knowledge for? what choices do
+we need to make for that purpose? Suppose that the idea is to build an
+automated procedure to examine a person's \snp s in order to diagnose the
+disease. However, the cost and time involved allows for the automated check
+of, say, only one \snp\ per individual. Our decision problem is to choose
+the \snp\ to be used in this automated diagnostics. Assume for simplicity
+that the candidate \snp s have only two variants each. The gain in using a
+particular \snp\ for diagnostics is proportional to the absolute difference
+$\abs{\incr f} \in \clcl{0,1}$ between the frequencies, in the full
+population, of the disease conditional on the two variants of that \snp. If
+$\abs{\incr f} = 0$ the \snp\ doesn't give any information about the
+presence of the disease; if $\abs{\incr f} = 1$ it is a perfect,
+deterministic predictor. Let's say that a good gain function is
+$\abs{\incr f}^2$. From a sample study with with data $\yD$ and background
+information $\yI$, our \dob\ about the differences $\abs{\incr f_i}$ of
+some candidates \snp s is
+$\pf\bigl(\abs{\incr f_1}, \abs{\incr f_2}, \dotsc \lcond[\big] \yD,
+\yI\bigr)$. Then, according to decision theory, we should choose that \snp\
+$i$ for which the expectation
+$\expe[\big]{\abs{\incr f_i}^2 \lcond[\big] \yD, \yI}$ is highest.
 
 No \enquote{null hypotheses} or dichotomous questions were necessary for
 our inference and decision in the simple example above. I believe that this
@@ -918,6 +922,42 @@ is the case for many, more complex problems that are today stated in
 \enquote{null hypothesis} terms; see for example those examined by Kass
 \amp\ Raftery \citey[\sect~2]{kassetal1995}. They only require a change in
 perspective.
+
+\bigskip
+
+When a statistical problem is approached from a more concrete and
+decisional perspective, our final inferences concern concrete quantities,
+and only one probabilistic model is present: the one representing our
+uncertainty about those quantities. The model $\yM$ may assume a hierarchic form
+with a combination of discrete and continuum parts, for example
+\begin{equation}
+  \label{eq:example_model_mixed}
+  \pf(\yD \| \yM) =
+ \sum_i \int\!\di\theta_i\; \pf(\yD \| i, \theta_i,\yM)\;
+  \pf(i, \theta_i \| \yM),
+\end{equation}
+where the continuum parameters $\set{\theta_i}$ may have differing
+dimensions. From this point of view model comparison doesn't formally
+arise, although the usual and necessary problem of specifying a sensible
+prior $\pf(\yD \| i, \theta_i,\yM)$ of course remains. The parameter
+posterior given data $\yD$ is
+\begin{equation}
+  \label{eq:param_posterior_model_mixed}
+  \pf(i, \theta_i \| \yD, \yM) =
+  \frac{\pf(\yD \| i, \theta_i,\yM)\;  \pf(i, \theta_i \| \yM)
+  }{
+ \sum_j \int\!\di\theta_j\; \pf(\yD \| j, \theta_j,\yM)\;
+  \pf(j, \theta_j \| \yM)
+  }.
+\end{equation}
+If for a specific $k$ we have that
+$\int\!\di\theta_k\; \pf(\yD \| k, \theta_k,\yM)\; \pf(k, \theta_k \| \yM)
+\to 0$, as it happens for improper priors, then the $(k,\theta_k)$ part
+simply disappears in the two equations above; this simply indicates that we
+have used a silly prior $\pf(\yD \| i, \theta_i,\yM)$.
+
+
+
 
 \mynote{Discussion on whether \enquote{hypotheses} in statistical modelling
 are really such, au pair with physical hypotheses}
@@ -935,7 +975,7 @@ assumption), then we can break our guess as follows:
 \end{enumerate*}
 If the number of observations is very large, by symmetry our
 \dob~\ref{item:guess_given_freqs} about the next outcome would be its known
-relative frequency. So what remains is to guess~\ref{item:guess_freqs}.
+relative frequency. So the remaining guess is~\ref{item:guess_freqs}.
 Most inferences about \enquote{true models} can be interpreted as
 inferences about the unknown final relative frequencies. This point of view
 calls for a leap of imagination about future observations. But the combined

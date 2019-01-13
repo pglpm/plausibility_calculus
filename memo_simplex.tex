@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2015-05-01T20:53:34+0200
-%% Last-Updated: 2019-01-11T20:07:11+0100
+%% Last-Updated: 2019-01-14T00:19:33+0100
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Report-no: ***
 \newif\ifarxiv
@@ -745,6 +745,12 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 
 %@@@@ Custom macros for this file @@@@
 %\DeclareMathOperator*{\argsup}{arg\,sup}
+\newcommand*{\dob}{degree of belief}
+\newcommand*{\yq}{\bm{q}}
+\newcommand*{\yx}{\bm{x}}
+\newcommand*{\HS}{\mathrm{H}}
+\newcommand*{\ysim}{\varDelta}
+\newcommand*{\ysum}{\mathop{\textstyle\sum}}
 %@@@@@@@@@@ new macros end @@@@@@@@@@
 
 \firmlists
@@ -786,9 +792,62 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 % \epigraph{\emph{text}}{source}
 
 
+Consider $N+1$ mutually exclusive and exhaustive propositions. The belief
+distributions and the relative-frequency distributions for them form an
+$N$-dimensional simplex. Label the propositions $\set{0,\dotsc,N}$, denote
+a distribution by $(q_0, \dotsc, q_N) \defs \yq$. In the rest of this memo
+it's always implicitly assumed that $q_i\ge 0$, also in the integration
+domains. Denote
+\begin{equation}
+  \label{eq:def_orthant}
+  \ysim_N \defd \set{(x_1,\dotsc,x_N) \suchthat x_i\ge 0, \tsum_i x_i \le 1},
+\end{equation}
+which is the $(N+1)$-simplex asymmetrically embedded in $\RR^{N+1}$. As
+basic volume element we can take either
+\begin{gather}
+  \label{eq:vol_element_1N}
+  \di q_1 \dotsm \di q_N,
+  \qquad (q_1,\dotsc,q_N) \in \ysim_N,
+\\\shortintertext{or}
+  \label{eq:vol_element_0N}
+  \di q_0 \dotsm \di q_N\;\delt(1-\ysum\yq),
+  \qquad (q_0,\dotsc,q_N) \in \clop{0,+\infty}^{N+1}.
+\end{gather}
+The latter leads to more symmetric formulae. The two volume elements are
+equivalent, and their integration gives $1/N!$, as can be proven
+inductively ($\ysim_k$ is the base of $\ysim_{k+1}$: multiply its
+$k$-volume by a unit height and divide by $k+1$) or as shown in
+\textcite[\sect~18.10]{jaynes1994_r2003}. Let's denote either measure by
+$\di\yq$. In integrations, when~\eqref{eq:vol_element_1N} is intended, any
+$q_0$ that appears in the integral must be understood as
+$1-\sum_{i=1}^N q_i$.
 
-\section{***}
-\label{sec:***}
+The $N$-simplex has a natural convex structure. Thus the ratio of two
+$N$-volumes is well-defined. There's only one measure that gives
+\begin{enumerate*}[label=(\alph*)]
+\item the same \dob\ to any two $N$-volumes having unit ratio,
+\item unit \dob\ to the full simplex:
+\end{enumerate*}
+\begin{equation}
+  \label{eq:canonical_unif_density}
+  % \frac{\sqrt{2}^N\,N!}{\sqrt{N+1}}\;
+  N!   \;\di\yq.
+\end{equation}
+
+% This density can be found as follows. $\ysim_N$ has $(N+1)$-volume
+% $1/(N+1)!$, as can be easily proven inductively. This volume can be obtained
+% as $1/(N+1)$ times the product of the $N$-volume, $\sqrt{2}^N\,V$ of the
+% $N$-simplex with edge-length $\sqrt{2}$ symmetrically embedded as
+% $\set{\yx \suchthat \yx\ge 0, \ysum\yx =1}$ and the height, the distance to
+% the origin, which is the $(N+1)$-vector
+% $\bigl(1/(N+1), \dotsc, 1/(N+1)\bigr)$ of length $1/\sqrt{N+1}$:
+% \begin{equation}
+%   \label{eq:volume_Np1_from_N}
+%   \frac{1}{(N+1)!} = \frac{1}{N+1}\;\sqrt{2}^N\,V\;\frac{1}{\sqrt{N+1}},
+% \end{equation}
+% from which we obtain $V = \frac{\sqrt{N+1}}{\sqrt{2}^N\,N!}$. Thus $1/V$ is
+% the normalization of the density uniform in $(q_1, \dotsc, q_N)$.
+
 
 \textcolor{white}{If you find this you can claim a postcard from me.}
 

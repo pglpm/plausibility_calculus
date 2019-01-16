@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2015-05-01T20:53:34+0200
-%% Last-Updated: 2019-01-14T00:19:33+0100
+%% Last-Updated: 2019-01-15T21:55:02+0100
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Report-no: ***
 \newif\ifarxiv
@@ -22,7 +22,7 @@ british%
 \newcommand*{\updated}{\today}
 \newcommand*{\firstdraft}{11 January 2019}
 \newcommand*{\firstpublished}{***}
-\newcommand*{\propertitle}{Memos on measures and metrics on simplices}
+\newcommand*{\propertitle}{Memos on densities and metrics on simplices}
 \newcommand*{\pdftitle}{\propertitle}
 \newcommand*{\headtitle}{Memos on simplices}
 \newcommand*{\pdfauthor}{P.G.L.  Porta Mana}
@@ -242,7 +242,7 @@ british%
 % \DeclareMathSymbol{\Delta}{\mathalpha}{egreekr}{"01}
 % \DeclareMathSymbol{\Epsilon}{\mathalpha}{egreekr}{"45}
 % \DeclareMathSymbol{\Zeta}{\mathalpha}{egreekr}{"5A}
-% \DeclareMathSymbol{\Eta}{\mathalpha}{egreekr}{"48}
+ \DeclareMathSymbol{\Eta}{\mathalpha}{egreekr}{"48}
 % \DeclareMathSymbol{\Theta}{\mathalpha}{egreekr}{"02}
 % \DeclareMathSymbol{\Iota}{\mathalpha}{egreekr}{"49}
 % \DeclareMathSymbol{\Kappa}{\mathalpha}{egreekr}{"4B}
@@ -723,7 +723,7 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 %\newcommand*{\sint}{\begingroup\textstyle\int\endgroup}
 %\newcommand*{\sland}{\mathop{\textstyle\bigwedge}}
 %\newcommand*{\slor}{\mathop{\textstyle\bigvee}}
-%\newcommand*{\T}{^\intercal}%transpose
+\newcommand*{\T}{^\intercal}%transpose
 %\newcommand*{\E}{\mathrm{E}}
 %\DeclarePairedDelimiter\expp{(}{)}
 %\newcommand*{\expe}{\E\expp}%round
@@ -748,7 +748,10 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 \newcommand*{\dob}{degree of belief}
 \newcommand*{\yq}{\bm{q}}
 \newcommand*{\yx}{\bm{x}}
+\newcommand*{\yu}{\bm{u}}
 \newcommand*{\HS}{\mathrm{H}}
+\newcommand*{\sh}{\Eta}
+\newcommand*{\yid}{I}
 \newcommand*{\ysim}{\varDelta}
 \newcommand*{\ysum}{\mathop{\textstyle\sum}}
 %@@@@@@@@@@ new macros end @@@@@@@@@@
@@ -767,7 +770,7 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 \setlength{\absrightindent}{0pt}
 \setlength{\abstitleskip}{-\absparindent}
 \begin{abstract}\labelsep 0pt%
-  \noindent Some memos on measures and metrics on simplices.
+  \noindent Some memos on densities and metrics on simplices.
   \ifpublic\\\noindent\emph{\footnotesize Note: Dear Reader \amp\ Peer, this
     manuscript is being peer-reviewed by you. Thank you.}\fi
 % \par%\\[\jot]
@@ -791,19 +794,21 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 % %\setlength{\afterepigraphskip}{0pt}
 % \epigraph{\emph{text}}{source}
 
+\section{Setup and base density}
+\label{sec:base}
 
-Consider $N+1$ mutually exclusive and exhaustive propositions. The belief
-distributions and the relative-frequency distributions for them form an
-$N$-dimensional simplex. Label the propositions $\set{0,\dotsc,N}$, denote
-a distribution by $(q_0, \dotsc, q_N) \defs \yq$. In the rest of this memo
-it's always implicitly assumed that $q_i\ge 0$, also in the integration
-domains. Denote
+Consider $N+1$ mutually exclusive and exhaustive propositions. The
+distributions of their relative frequencies form an $N$-dimensional
+simplex. Label the propositions $\set{0,\dotsc,N}$, denote a
+relative-frequency distribution by $(q_0, \dotsc, q_N) \defs \yq$. In the
+rest of this memo it's always implicitly assumed that $q_i\ge 0$, also in
+the integration domains. Denote
 \begin{equation}
   \label{eq:def_orthant}
   \ysim_N \defd \set{(x_1,\dotsc,x_N) \suchthat x_i\ge 0, \tsum_i x_i \le 1},
 \end{equation}
 which is the $(N+1)$-simplex asymmetrically embedded in $\RR^{N+1}$. As
-basic volume element we can take either
+basic density (that is, volume element) we can take either
 \begin{gather}
   \label{eq:vol_element_1N}
   \di q_1 \dotsm \di q_N,
@@ -811,28 +816,60 @@ basic volume element we can take either
 \\\shortintertext{or}
   \label{eq:vol_element_0N}
   \di q_0 \dotsm \di q_N\;\delt(1-\ysum\yq),
-  \qquad (q_0,\dotsc,q_N) \in \clop{0,+\infty}^{N+1}.
+  \qquad (q_0,\dotsc,q_N) \in \clop{0,+\infty}^{N+1},
 \end{gather}
-The latter leads to more symmetric formulae. The two volume elements are
+which is borrowed from a Euclidean volume element of the embedding space.
+The latter leads to more symmetric formulae. The two densities are
 equivalent, and their integration gives $1/N!$, as can be proven
 inductively ($\ysim_k$ is the base of $\ysim_{k+1}$: multiply its
 $k$-volume by a unit height and divide by $k+1$) or as shown in
-\textcite[\sect~18.10]{jaynes1994_r2003}. Let's denote either measure by
-$\di\yq$. In integrations, when~\eqref{eq:vol_element_1N} is intended, any
-$q_0$ that appears in the integral must be understood as
-$1-\sum_{i=1}^N q_i$.
+\textcite[\sect~18.10]{jaynes1994_r2003}. Let's denote either density by
+$\di\yq$. When~\eqref{eq:vol_element_1N} is intended, any $q_0$ that
+appears in the integral must be understood as $q_0 \equiv 1-\sum_{i=1}^N q_i$.
+
+\section{Flat prior}
+\label{sec:flat}
+
 
 The $N$-simplex has a natural convex structure. Thus the ratio of two
-$N$-volumes is well-defined. There's only one measure that gives
-\begin{enumerate*}[label=(\alph*)]
-\item the same \dob\ to any two $N$-volumes having unit ratio,
-\item unit \dob\ to the full simplex:
-\end{enumerate*}
+$N$-volumes is well-defined. There's only one normalized density that assigns
+the same \dob\ to any two $N$-volumes having unit ratio:
 \begin{equation}
   \label{eq:canonical_unif_density}
   % \frac{\sqrt{2}^N\,N!}{\sqrt{N+1}}\;
-  N!   \;\di\yq.
+  N! \;\di\yq,
 \end{equation}
+called the flat prior.
+
+\section{Jeffreys prior}
+\label{sec:jeffreys}
+
+It is also possible to embed the $N$-simplex into a hyperspherical surface
+in $\clop{0,+\infty}^{N+1}$ via
+\begin{equation}
+  \label{eq:sphere_embedding}
+  (q_1, \dotsc, q_N) \mapsto (x_0, x_1,\dotsc, x_N) =
+  \bigl( \sqrt{1-q_1 -\dotsb -q_N}, \sqrt{q_1}, \dotsc, \sqrt{q_N} \bigr).
+\end{equation}
+The density induced by the Euclidean one is in this case given by
+
+
+The relative-frequency distribution $\yq$ in $m$ observations can be
+obtained in $\binom{m}{m\yq}$ ways, where
+\begin{equation}
+  \label{eq:multin_coeff}
+  \binom{m}{m\yq} \defd
+  \frac{m!}{(m q_0)! \dotsm (m q_N)!}
+  \approx \exp[m \sh(\yq)]
+\end{equation}
+is the multinomial coefficient. If we have equal beliefs in the occurrence
+of these ways and $m$ is very large, our belief about the relative
+frequency $\yq$ can be approximated by the density
+\begin{equation}
+  \label{eq:entropy_prior}
+  \frac{\exp[m \sh(\yq)]}{\int\!\di\yq\; \exp[m \sh(\yq)]}\;\di\yq,
+\end{equation}
+called the entropy prior.
 
 % This density can be found as follows. $\ysim_N$ has $(N+1)$-volume
 % $1/(N+1)!$, as can be easily proven inductively. This volume can be obtained
@@ -850,6 +887,59 @@ $N$-volumes is well-defined. There's only one measure that gives
 
 
 \textcolor{white}{If you find this you can claim a postcard from me.}
+
+\section{Metric}
+\label{sec:metric}
+
+A density on the simplex doesn't induce any canonical density on a
+lower-dimensional subset. One way to induce a density on every
+lower-dimensional subset is to equip the simplex with a metric. Let's
+consider the flat metric. We find its expression in the coordinates $(q_1,
+\dotsc, q_N)$ by symmetrically embedding the simplex in
+$\clop{0,+\infty}^{N+1}$ as a flat hypersurface and pulling back the
+Euclidean metric onto it. We use the embedding
+\begin{equation}
+  \label{eq:embedding}
+  (q_1, \dotsc, q_N) \mapsto (x_0, x_1,\dotsc, x_N) =
+  ( 1-q_1 -\dotsb -q_N, q_1, \dotsc, q_N),
+\end{equation}
+which has tangent map
+\begin{gather}
+  \label{eq:tangent_map_canonical}
+  \begin{pmatrix}
+-\yu \\ \yid_N    
+\end{pmatrix}
+\\\shortintertext{with}
+\label{eq:def_u}
+\yu \defd
+\underbrace{\begin{pmatrix}
+  1 &\dotso &1
+\end{pmatrix}}_{N}
+\end{gather}
+and $\yid$ is the identity matrix.
+
+In coordinates $\yx$ the metric is represented by the identity matrix
+$\yid_{N+1}$. The representation of its pull-back is therefore
+\begin{equation}
+  \label{eq:metric_pullback}
+  \begin{pmatrix}
+-\yu\T & \yid_N    
+\end{pmatrix}
+\;
+\yid_{N+1}
+\;
+  \begin{pmatrix}
+-\yu\T \\ \yid_N    
+\end{pmatrix}
+= \yid_N + \yu\T\yu.
+\end{equation}
+This is a matrix with all unit elements outside the diagonal and $2$ on the
+diagonal. Its determinant can be found with Sylvester's theorem \citep{sylvester1851,akritasetal1996}:
+\begin{equation}
+  \label{eq:sylvester}
+  \det(\yid_N + \yu\T\yu) = \det(\yid_1 + \yu\yu\T) = 1 + N.
+\end{equation}
+
 
 
 

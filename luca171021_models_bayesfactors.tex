@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2017-10-21T20:53:34+0200
-%% Last-Updated: 2019-01-12T13:31:35+0100
+%% Last-Updated: 2019-01-20T13:08:10+0100
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Report-no: ***
 \newif\ifarxiv
@@ -11,8 +11,6 @@
 \afourfalse % true = A4, false = A5
 \newif\iftypodisclaim % typographical disclaim on the side
 \typodisclaimtrue
-\newif\ifpublic
-\publicfalse % true = for publication, false = personal notes
 \newcommand*{\memfontfamily}{zplx}
 \newcommand*{\memfontpack}{newpxtext}
 \documentclass[\ifafour a4paper,12pt,\else a5paper,10pt,\fi%extrafontsizes,%
@@ -26,8 +24,7 @@ british%
 \newcommand*{\pdftitle}{\propertitle}
 \newcommand*{\headtitle}{\propertitle}
 \newcommand*{\pdfauthor}{P.G.L.  Porta Mana}
-\newcommand*{\headauthor}{\ifpublic Porta Mana%
-\else Luca\fi}
+\newcommand*{\headauthor}{Luca}
 \newcommand*{\reporthead}{}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -591,7 +588,7 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 % \footnotesize\epost{\email{***}{***}}}%
 % \hspace*{\stretch{1}}%
 \parbox{0.5\linewidth}%\makebox[0pt][c]%
-{\protect\centering\ifpublic P.G.L.  Porta Mana\\\else Luca  \fi%
+{\protect\centering P.G.L.  Porta Mana\\%
 \footnotesize\epost{\email{piero.mana}{ntnu.no}}}%
 \hspace*{\stretch{1}}%
 %\quad\href{https://orcid.org/0000-0002-6070-0784}{\protect\includegraphics[scale=0.16]{orcid_32x32.png}\textsc{orcid}:0000-0002-6070-0784}%
@@ -646,10 +643,6 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 %\newcommand*{\limplies}{\mathbin{\Rightarrow}}%implies
 \newcommand*{\mimplies}{\Rightarrow}%implies
 %\newcommand*{\liff}{\mathbin{\Leftrightarrow}}%if and only if
-%\newcommand*{\cond}{\mathpunct{|}}%conditional sign (in probabilities)
-%\newcommand*{\lcond}{\mathpunct{|\ }}%conditional sign (in probabilities)
-%\newcommand*{\bigcond}{\mathpunct{\big|}}%conditional sign (in probabilities)
-%\newcommand*{\lbigcond}{\mathpunct{\big|\ }}%conditional sign (in probabilities)
 \newcommand*{\suchthat}{\mid}%{\mathpunct{|}}%such that (eg in sets)
 %\newcommand*{\bigst}{\mathpunct{\big|}}%such that (eg in sets)
 %\newcommand*{\with}{\colon}%with (list of indices)
@@ -674,11 +667,12 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 %\DeclareMathOperator{\pr}{P}%probability
 \newcommand*{\pf}{\mathrm{p}}%probability
 \newcommand*{\p}{\mathrm{P}}%probability
+\renewcommand*{\|}{\nonscript\,\vert\nonscript\;\mathopen{}}
+\DeclarePairedDelimiterX{\cond}[2]{(}{)}{#1\nonscript\,\delimsize\vert\nonscript\;\mathopen{}#2}
+\DeclarePairedDelimiterX{\condt}[2]{[}{]}{#1\nonscript\,\delimsize\vert\nonscript\;\mathopen{}#2}
+\DeclarePairedDelimiterX{\conds}[2]{\{}{\}}{#1\nonscript\,\delimsize\vert\nonscript\;\mathopen{}#2}
 %\newcommand*{\tf}{\mathrm{T}}%probability
-\renewcommand*{\|}{\mathpunct{|}}
-\newcommand*{\lcond}[1][]{\mathpunct{#1|\ }}%conditional sign (in probabilities)
-%\newcommand*{\bigcond}{\mathpunct{\big|\ }}%conditional sign (in probabilities)
-%\newcommand*{\lbigcond}{\mathpunct{\big|\ }}%conditional sign (in probabilities)
+\newcommand*{\E}{\mathrm{E}}
 %\newcommand*{\+}{\lor}
 %\renewcommand{\*}{\land}
 \newcommand*{\sect}{\S}% Sect.~
@@ -724,10 +718,6 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 %\newcommand*{\sland}{\mathop{\textstyle\bigwedge}}
 %\newcommand*{\slor}{\mathop{\textstyle\bigvee}}
 %\newcommand*{\T}{^\intercal}%transpose
-\newcommand*{\E}{\mathrm{E}}
-\DeclarePairedDelimiter\expp{(}{)}
-\newcommand*{\expe}{\E\expp}%round
-%\newcommand*{\expeb}{\E\clcl}%square
 %%\newcommand*{\QEM}%{\textnormal{$\Box$}}%{\ding{167}}
 %\newcommand*{\qem}{\leavevmode\unskip\penalty9999 \hbox{}\nobreak\hfill
 %\quad\hbox{\QEM}}
@@ -781,8 +771,8 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
   \noindent Some notes on model comparison and selection, hypothesis
   testing, parameter estimation, Bayes factors, null hypotheses, and
   related topics.
-  \ifpublic\\\noindent\emph{\footnotesize Note: Dear Reader \amp\ Peer, this
-    manuscript is being peer-reviewed by you. Thank you.}\fi
+  \\\noindent\emph{\footnotesize Note: Dear Reader \amp\ Peer, this
+    manuscript is being peer-reviewed by you. Thank you.}
 % \par%\\[\jot]
 % \noindent
 % {\footnotesize PACS: ***}\qquad%
@@ -911,10 +901,10 @@ deterministic predictor. Let's say that a good gain function is
 $\abs{\incr f}^2$. From a sample study with with data $\yD$ and background
 information $\yI$, our \dob\ about the differences $\abs{\incr f_i}$ of
 some candidates \snp s is
-$\pf\bigl(\abs{\incr f_1}, \abs{\incr f_2}, \dotsc \lcond[\big] \yD,
-\yI\bigr)$. Then, according to decision theory, we should choose that \snp\
-$i$ for which the expectation
-$\expe[\big]{\abs{\incr f_i}^2 \lcond[\big] \yD, \yI}$ is highest.
+$\pf\cond[\big]{\abs{\incr f_1}, \abs{\incr f_2}, \dotsc}{\yD, \yI}$. Then,
+according to decision theory, we should choose that \snp\ $i$ for which the
+expectation $\E\cond[\big]{\abs{\incr f_i}^2}{\yD, \yI}$ is highest.
+
 
 No \enquote{null hypotheses} or dichotomous questions were necessary for
 our inference and decision in the simple example above. I believe that this
@@ -1428,8 +1418,8 @@ A statistical model is a set of assumptions $\yM$ that jointly allow us to
 consistently assign numerical values to the probabilities
 \begin{equation}
   \label{eq:def_statmod}
-  \p\bigl(\yO{a_{n+1}}{i_{n+1}} \lcond[\big]
-  \yO{a_{1}}{i_{1}} \land \dotsb \land \yO{a_{n}}{i_{n}} \land \yM \bigr),
+  \p\cond[\big]{\yO{a_{n+1}}{i_{n+1}}}{
+  \yO{a_{1}}{i_{1}} \land \dotsb \land \yO{a_{n}}{i_{n}} \land \yM},
 \end{equation}
 for any legitimate $n$ and any sets of observations
 $\set{a_{1}, \dotsc, a_{n+1}}$ and outcomes $\set{i_{1}, \dotsc, i_{n+1}}$;
@@ -1468,10 +1458,10 @@ are characterized by $\pf(\theta \|\yM) = \delt(\theta-\ytheta)$, so that
 the probability for an outcome does not depend on knowledge of other outcomes:
 \begin{equation}
   \label{eq:extreme_exchang}
-  \p\bigl(\yO{a_{n+1}}{i_{n+1}} \lcond[\big]
-  \yO{a_{1}}{i_{1}} \land \dotsb \land \yO{a_{n}}{i_{n}} \land \yM \bigr)
+  \p\cond[\big]{\yO{a_{n+1}}{i_{n+1}}}{
+  \yO{a_{1}}{i_{1}} \land \dotsb \land \yO{a_{n}}{i_{n}} \land \yM }
   =
-  \p\bigl(\yO{a_{n+1}}{i_{n+1}} \lcond[\big] \yM \bigr)
+  \p\cond[\big]{\yO{a_{n+1}}{i_{n+1}} }{ \yM}
   \equiv \pf(i_{n+1} \| \ytheta,\yM).
 \end{equation}
 Such a model doesn't \enquote{learn} because it makes all knowledge about
@@ -1496,7 +1486,7 @@ happen.
 %\end{figure}% exp_family_maxent.nb
 
 
-\ifpublic
+\iffalse
 \begin{acknowledgements}
   \ldots to Mari \amp\ Miri for continuous encouragement and affection, and
   to Buster Keaton and Saitama for filling life with awe and inspiration.

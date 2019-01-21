@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2017-10-21T20:53:34+0200
-%% Last-Updated: 2019-01-20T13:08:10+0100
+%% Last-Updated: 2019-01-21T15:38:30+0100
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Report-no: ***
 \newif\ifarxiv
@@ -667,12 +667,12 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 %\DeclareMathOperator{\pr}{P}%probability
 \newcommand*{\pf}{\mathrm{p}}%probability
 \newcommand*{\p}{\mathrm{P}}%probability
+\newcommand*{\E}{\mathrm{E}}
 \renewcommand*{\|}{\nonscript\,\vert\nonscript\;\mathopen{}}
 \DeclarePairedDelimiterX{\cond}[2]{(}{)}{#1\nonscript\,\delimsize\vert\nonscript\;\mathopen{}#2}
 \DeclarePairedDelimiterX{\condt}[2]{[}{]}{#1\nonscript\,\delimsize\vert\nonscript\;\mathopen{}#2}
-\DeclarePairedDelimiterX{\conds}[2]{\{}{\}}{#1\nonscript\,\delimsize\vert\nonscript\;\mathopen{}#2}
+%\DeclarePairedDelimiterX{\conds}[2]{\{}{\}}{#1\nonscript\,\delimsize\vert\nonscript\;\mathopen{}#2}
 %\newcommand*{\tf}{\mathrm{T}}%probability
-\newcommand*{\E}{\mathrm{E}}
 %\newcommand*{\+}{\lor}
 %\renewcommand{\*}{\land}
 \newcommand*{\sect}{\S}% Sect.~
@@ -751,7 +751,9 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 \newcommand*{\yg}{G}
 \newcommand*{\yHm}{\yM}
 \newcommand*{\ym}{\varEta}
+\newcommand*{\yE}{E}
 \newcommand*{\snp}{\textsc{snp}}
+\newcommand*{\yq}{\bm{q}}
 % @@@@@@@@@@ new macros end @@@@@@@@@@
 
 \firmlists
@@ -984,6 +986,86 @@ rain tomorrow. And it doesn't bring \enquote{propensities} or other
 doubtful physical notions into the picture.
 
 
+\section{Philosophical points and choices}
+\label{sec:philosophy}
+
+It isn't possible to clarify probabilistic modelling without taking a
+philosophical stance about matters like reality and uncertainty,
+propensity, and similar. Any practitioner is implicitly or explicitly
+taking a particular stance.
+
+People believing in propensities think of a probabilistic model as
+describing a physical property of the objects observed. This stance has
+several problems; most important the fact that as our information about the
+objects observed change, so changes the \enquote{propensity}, which
+therefore doesn't appear to be a physical property after all. The only
+exception are \enquote{delta} (or deterministic or singular) belief
+distributions, which cannot change with conditionalization on further
+information.
+
+This difference is in fact reflected in the update process. Imagine we have
+$N$ observations (or measurements), each with $M$ possible outcomes. We
+have $M^N$ possible sequences or \enquote{states of affairs}. Let the
+proposition $S_m$ denote that the $m$th sequence occurs (they may be
+labelled in $M$-ary notation). Let the proposition $\yO{n}{i}$ denote that
+the $i$th outcome occurs at the $n$th observation. We can call each
+sequence a \enquote{word}, and an observation a \enquote{letter}. If we
+know which word $S_m$ is the case, then the letter at position $n$ is given
+by a function $r(n,m)$. Our \dob\ is zero or one:
+\begin{equation}
+  \label{eq:letter_from_word}
+  \pf(\yO{n}{i} \| S_m, \yI) = \delt[i - r(n,m)].
+\end{equation}
+
+In a general situation of uncertainty $\yM$ we have a \dob\ about all
+possible words, $\pf(S_m \| \yM, \yI)$. Our uncertainty about the outcome
+of a measurement is therefore
+\begin{equation}
+  \label{eq:uncertainty_meas_from_seq}
+  \pf(\yO{n}{i} \| \yM, \yI) =
+  \sum_m \pf(S_m \| \yM, \yI)\; \pf(\yO{n}{i} \| S_m, \yI)
+\end{equation}
+Given data $\yD \defd \set{\yO{n_k}{i_k}}$, our \dob\ about the words
+updates to
+\begin{equation}
+  \label{eq:update_dob_words}
+  \pf(S_m \| \yD, \yM, \yI) \propto
+  \pf(S_m \| \yM, \yI)\;
+  \prod_k \pf(\yO{n_k}{i_k} \| S_m, \yI).
+\end{equation}
+The effect of this update is to confine our belief distribution about $S_m$
+to increasingly lower-dimensional faces of the simplex $\set{S_m}$. The
+Shannon entropy of our distributions is decreasing. In the end we arrive at
+a delta distribution centred on a specific $S_m$.
+
+This \enquote{update motion} toward belief distributions with lower entropy
+affects also the belief distributions that had an initial support smaller
+than $\set{S_m}$.
+
+In the context just presented we may call \enquote{model} any assumption
+$\yM$ that yields a specific belief distribution $\pf(S_m) \|\yM, \yI$ for
+the possible words.
+
+An exchangeable model $\yE$ is a special case where we assign equal beliefs
+to all words having the same relative frequencies $\yq \defd (q_i)$ of
+occurrence of the letters $\set{i}$. Let's denote \enquote{$m \in \yq$} the
+fact that the $m$th word has frequencies $\yq$. Then
+\begin{equation}
+  \label{eq:freq_words_exchang}
+  \pf(S_m \| \yE, \yI) =
+  \sum_{\yq}\delt(m \in \yq)\; \binom{N!}{(N\yq)!}^{-1}\; \pf(\yq \| \yE, \yI),
+\end{equation}
+where $\binom{N!}{(N\yq)!}$ is the multinomial coefficient. The fact that
+updates move our belief about $\set{S_m}$ towards increasingly
+lower-dimensional faces of the simplex is reflected in the fact that our
+\dob\ $\pf(\yq \| \yE, \yI)$ about the frequencies gets more and more
+concentrated on a specific set of frequencies $\yq$. (If the length $N$ of
+the sequences is vastly larger than any about of data we consider, then
+oscillating behaviours may occur, of course.)
+
+If $\pf(\yq \| \yE, \yI)$ has support on a lower-dimensional subset of
+$\set{\yq}$, the update motion toward the vertices of $\set{S_m}$ is
+reflected in the fact that ***\mynote{recheck this argument}
 
 \section{Motivation}
 \label{sec:motivation}

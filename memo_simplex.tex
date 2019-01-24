@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2015-05-01T20:53:34+0200
-%% Last-Updated: 2019-01-15T21:55:02+0100
+%% Last-Updated: 2019-01-24T10:39:40+0100
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Report-no: ***
 \newif\ifarxiv
@@ -238,7 +238,7 @@ british%
 % %
 % \DeclareMathSymbol{\Alpha}{\mathalpha}{egreekr}{"41}
 % \DeclareMathSymbol{\Beta}{\mathalpha}{egreekr}{"42}
-% \DeclareMathSymbol{\Gamma}{\mathalpha}{egreekr}{"00}
+ \DeclareMathSymbol{\Gamma}{\mathalpha}{egreekr}{"00}
 % \DeclareMathSymbol{\Delta}{\mathalpha}{egreekr}{"01}
 % \DeclareMathSymbol{\Epsilon}{\mathalpha}{egreekr}{"45}
 % \DeclareMathSymbol{\Zeta}{\mathalpha}{egreekr}{"5A}
@@ -851,8 +851,15 @@ in $\clop{0,+\infty}^{N+1}$ via
   (q_1, \dotsc, q_N) \mapsto (x_0, x_1,\dotsc, x_N) =
   \bigl( \sqrt{1-q_1 -\dotsb -q_N}, \sqrt{q_1}, \dotsc, \sqrt{q_N} \bigr).
 \end{equation}
-The density induced by the Euclidean one is in this case given by
+The normalized density induced by the Euclidean one is in this case
+\begin{equation}
+  \label{eq:jeffreys_prior}
+  \Gamma\biggl( \frac{N+1}{2} \biggr)\;
+  \frac{\di\yq}{\prod_{i=0}^{N}\sqrt{\pu q_i}}
+\end{equation}
 
+\section{Entropic prior}
+\label{sec:entropic}
 
 The relative-frequency distribution $\yq$ in $m$ observations can be
 obtained in $\binom{m}{m\yq}$ ways, where
@@ -869,7 +876,7 @@ frequency $\yq$ can be approximated by the density
   \label{eq:entropy_prior}
   \frac{\exp[m \sh(\yq)]}{\int\!\di\yq\; \exp[m \sh(\yq)]}\;\di\yq,
 \end{equation}
-called the entropy prior.
+called the entropic prior.
 
 % This density can be found as follows. $\ysim_N$ has $(N+1)$-volume
 % $1/(N+1)!$, as can be easily proven inductively. This volume can be obtained
@@ -888,22 +895,34 @@ called the entropy prior.
 
 \textcolor{white}{If you find this you can claim a postcard from me.}
 
-\section{Metric}
-\label{sec:metric}
+\section{Metrics}
+\label{sec:metrics}
 
 A density on the simplex doesn't induce any canonical density on a
 lower-dimensional subset. One way to induce a density on every
-lower-dimensional subset is to equip the simplex with a metric. Let's
-consider the flat metric. We find its expression in the coordinates $(q_1,
-\dotsc, q_N)$ by symmetrically embedding the simplex in
-$\clop{0,+\infty}^{N+1}$ as a flat hypersurface and pulling back the
-Euclidean metric onto it. We use the embedding
+lower-dimensional subset is to equip the simplex with a metric
+\citep[\chap~V]{choquetbruhatetal1977_r1996}[\chap~4]{bossavit1991}. We can
+define a metric either in terms of intrinsic properties of the simplex or by embedding the simplex in a metric space.
+
+\subsection{Flat metric}
+\label{sec:flat_metric}
+
+The flat metric is the one that respects the convex structure of the
+simplex, in the sense that every two parallel $d$-dimensional subsets whose
+$d$-volumes are in a ratio of one-to-one -- this can be calculated using
+only the convex structure \citep{portamana2011} -- are given equal
+$d$-volumes by the metric. The metric also allows the comparison of
+non-parallel $d$-volumes, something that can't be done with the convex
+structure alone. This metric can also be obtained by embedding the
+$N$-simplex into the Euclidean space $\clop{0,+\infty}^{N+1}$ via
 \begin{equation}
-  \label{eq:embedding}
+  \label{eq:flat_embedding}
   (q_1, \dotsc, q_N) \mapsto (x_0, x_1,\dotsc, x_N) =
-  ( 1-q_1 -\dotsb -q_N, q_1, \dotsc, q_N),
+  \bigl( 1-q_1 -\dotsb -q_N, q_1, \dotsc, q_N \bigr)
 \end{equation}
-which has tangent map
+and pulling-back the metric.
+
+The embedding above has tangent map
 \begin{gather}
   \label{eq:tangent_map_canonical}
   \begin{pmatrix}
@@ -914,9 +933,10 @@ which has tangent map
 \yu \defd
 \underbrace{\begin{pmatrix}
   1 &\dotso &1
-\end{pmatrix}}_{N}
+\end{pmatrix}}_{N},
+\qquad
+\yid_{N} \defd \text{identity $N$-matrix}.
 \end{gather}
-and $\yid$ is the identity matrix.
 
 In coordinates $\yx$ the metric is represented by the identity matrix
 $\yid_{N+1}$. The representation of its pull-back is therefore
@@ -934,11 +954,17 @@ $\yid_{N+1}$. The representation of its pull-back is therefore
 = \yid_N + \yu\T\yu.
 \end{equation}
 This is a matrix with all unit elements outside the diagonal and $2$ on the
-diagonal. Its determinant can be found with Sylvester's theorem \citep{sylvester1851,akritasetal1996}:
+diagonal. Its determinant can be found with Sylvester's theorem
+\citep{sylvester1851,akritasetal1996}:
 \begin{equation}
   \label{eq:sylvester}
   \det(\yid_N + \yu\T\yu) = \det(\yid_1 + \yu\yu\T) = 1 + N.
 \end{equation}
+This peculiar expression for the metric comes from the fact that $q_0$ is
+a function of the other $q_i$. If we use $(q_0, q_1, \dotsc, q_N)$
+as fictitious coordinates, multiplying by a delta for normalization
+(\sect~\ref{sec:base}), then the metric is simply expressed by the identity
+matrix $\yid_{N+1}$.
 
 
 

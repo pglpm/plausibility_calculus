@@ -1,8 +1,1054 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2018-06-23T13:54:28+0200
-%% Last-Updated: 2018-12-10T14:39:44+0100
+%% Last-Updated: 2019-02-26T00:32:55+0100
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newif\ifarxiv
+\arxivfalse
+\ifarxiv\pdfmapfile{+classico.map}\fi
+\newif\ifafour
+\afourfalse% true = A4, false = A5
+\newif\iftypodisclaim % typographical disclaim on the side
+\typodisclaimtrue
+\newcommand*{\memfontfamily}{zplx}
+\newcommand*{\memfontpack}{newpxtext}
+\documentclass[\ifafour a4paper,12pt,\else a5paper,10pt,\fi%extrafontsizes,%
+onecolumn,oneside,article,%french,italian,german,swedish,latin,
+british%
+]{memoir}
+\newcommand*{\updated}{\today}
+\newcommand*{\firstdraft}{23 June 2018}
+\newcommand*{\firstpublished}{***}
+\newcommand*{\propertitle}{A geometric tutorial on exchangeability\\and related topics%\\{\large ***}%
+}
+\newcommand*{\pdftitle}{A geometric tutorial on exchangeability and related topics}
+\newcommand*{\headtitle}{Geometry of exchangeability}
+\newcommand*{\pdfauthor}{P.G.L.  Porta Mana}
+\newcommand*{\headauthor}{Porta Mana}
+\newcommand*{\reporthead}{}% Report number
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Calls to packages (uncomment as needed)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%\usepackage{pifont}
+
+%\usepackage{fontawesome}
+
+\usepackage[T1]{fontenc} 
+\input{glyphtounicode} \pdfgentounicode=1
+
+\usepackage[utf8]{inputenx}
+
+%\usepackage{newunicodechar}
+% \newunicodechar{Ĕ}{\u{E}}
+% \newunicodechar{ĕ}{\u{e}}
+% \newunicodechar{Ĭ}{\u{I}}
+% \newunicodechar{ĭ}{\u{\i}}
+% \newunicodechar{Ŏ}{\u{O}}
+% \newunicodechar{ŏ}{\u{o}}
+% \newunicodechar{Ŭ}{\u{U}}
+% \newunicodechar{ŭ}{\u{u}}
+% \newunicodechar{Ā}{\=A}
+% \newunicodechar{ā}{\=a}
+% \newunicodechar{Ē}{\=E}
+% \newunicodechar{ē}{\=e}
+% \newunicodechar{Ī}{\=I}
+% \newunicodechar{ī}{\={\i}}
+% \newunicodechar{Ō}{\=O}
+% \newunicodechar{ō}{\=o}
+% \newunicodechar{Ū}{\=U}
+% \newunicodechar{ū}{\=u}
+% \newunicodechar{Ȳ}{\=Y}
+% \newunicodechar{ȳ}{\=y}
+
+\newcommand*{\bmmax}{0} % reduce number of bold fonts, before font packages
+\newcommand*{\hmmax}{0} % reduce number of heavy fonts, before font packages
+
+\usepackage{textcomp}
+
+%\usepackage[normalem]{ulem}% package for underlining
+% \makeatletter
+% \def\ssout{\bgroup \ULdepth=-.35ex%\UL@setULdepth
+%  \markoverwith{\lower\ULdepth\hbox
+%    {\kern-.03em\vbox{\hrule width.2em\kern1.2\p@\hrule}\kern-.03em}}%
+%  \ULon}
+% \makeatother
+
+\usepackage{amsmath}
+
+\usepackage{mathtools}
+\addtolength{\jot}{\jot} % increase spacing in multiline formulae
+\setlength{\multlinegap}{0pt}
+
+%\usepackage{empheq}% automatically calls amsmath and mathtools
+\newcommand*{\widefbox}[1]{\fbox{\hspace{1em}#1\hspace{1em}}}
+
+%\usepackage{fancybox}
+
+%\usepackage{framed}
+
+% \usepackage[misc]{ifsym} % for dice
+% \newcommand*{\diceone}{{\scriptsize\Cube{1}}}
+
+\usepackage{amssymb}
+
+\usepackage{amsxtra}
+
+\usepackage[main=british,french,italian,german,swedish,latin,esperanto]{babel}\selectlanguage{british}
+\newcommand*{\langfrench}{\foreignlanguage{french}}
+\newcommand*{\langgerman}{\foreignlanguage{german}}
+\newcommand*{\langitalian}{\foreignlanguage{italian}}
+\newcommand*{\langswedish}{\foreignlanguage{swedish}}
+\newcommand*{\langlatin}{\foreignlanguage{latin}}
+\newcommand*{\langnohyph}{\foreignlanguage{nohyphenation}}
+
+\usepackage[autostyle=false,autopunct=false,english=british]{csquotes}
+\setquotestyle{british}
+
+\usepackage{amsthm}
+\newcommand*{\QED}{\textsc{q.e.d.}}
+\renewcommand*{\qedsymbol}{\QED}
+\theoremstyle{remark}
+\newtheorem{note}{Note}
+\newtheorem*{remark}{Note}
+\newtheoremstyle{innote}{\parsep}{\parsep}{\footnotesize}{}{}{}{0pt}{}
+\theoremstyle{innote}
+\newtheorem*{innote}{}
+
+\usepackage[shortlabels,inline]{enumitem}
+\SetEnumitemKey{para}{itemindent=\parindent,leftmargin=0pt,listparindent=\parindent,parsep=0pt,itemsep=\topsep}
+% \begin{asparaenum} = \begin{enumerate}[para]
+% \begin{inparaenum} = \begin{enumerate*}
+\setlist[enumerate,2]{label=\alph*.}
+\setlist[enumerate]{label=\arabic*.,leftmargin=1.5\parindent}
+\setlist[itemize]{leftmargin=1.5\parindent}
+\setlist[description]{leftmargin=1.5\parindent}
+% old alternative:
+% \setlist[enumerate,2]{label=\alph*.}
+% \setlist[enumerate]{leftmargin=\parindent}
+% \setlist[itemize]{leftmargin=\parindent}
+% \setlist[description]{leftmargin=\parindent}
+
+\usepackage[babel,theoremfont,largesc]{newpxtext}
+
+\usepackage[bigdelims,nosymbolsc%,smallerops % probably arXiv doesn't have it
+]{newpxmath}
+\useosf\linespread{1.083}
+%% smaller operators for old version of newpxmath
+\makeatletter
+\def\re@DeclareMathSymbol#1#2#3#4{%
+    \let#1=\undefined
+    \DeclareMathSymbol{#1}{#2}{#3}{#4}}
+%\re@DeclareMathSymbol{\bigsqcupop}{\mathop}{largesymbols}{"46}
+%\re@DeclareMathSymbol{\bigodotop}{\mathop}{largesymbols}{"4A}
+\re@DeclareMathSymbol{\bigoplusop}{\mathop}{largesymbols}{"4C}
+\re@DeclareMathSymbol{\bigotimesop}{\mathop}{largesymbols}{"4E}
+\re@DeclareMathSymbol{\sumop}{\mathop}{largesymbols}{"50}
+\re@DeclareMathSymbol{\prodop}{\mathop}{largesymbols}{"51}
+\re@DeclareMathSymbol{\bigcupop}{\mathop}{largesymbols}{"53}
+\re@DeclareMathSymbol{\bigcapop}{\mathop}{largesymbols}{"54}
+%\re@DeclareMathSymbol{\biguplusop}{\mathop}{largesymbols}{"55}
+\re@DeclareMathSymbol{\bigwedgeop}{\mathop}{largesymbols}{"56}
+\re@DeclareMathSymbol{\bigveeop}{\mathop}{largesymbols}{"57}
+%\re@DeclareMathSymbol{\bigcupdotop}{\mathop}{largesymbols}{"DF}
+%\re@DeclareMathSymbol{\bigcapplusop}{\mathop}{largesymbolsPXA}{"00}
+%\re@DeclareMathSymbol{\bigsqcupplusop}{\mathop}{largesymbolsPXA}{"02}
+%\re@DeclareMathSymbol{\bigsqcapplusop}{\mathop}{largesymbolsPXA}{"04}
+%\re@DeclareMathSymbol{\bigsqcapop}{\mathop}{largesymbolsPXA}{"06}
+\re@DeclareMathSymbol{\bigtimesop}{\mathop}{largesymbolsPXA}{"10}
+%\re@DeclareMathSymbol{\coprodop}{\mathop}{largesymbols}{"60}
+%\re@DeclareMathSymbol{\varprod}{\mathop}{largesymbolsPXA}{16}
+\makeatother
+%%
+%% With euler font cursive for Greek letters - the [1] means 100% scaling
+\DeclareFontFamily{U}{egreek}{\skewchar\font'177}%
+\DeclareFontShape{U}{egreek}{m}{n}{<-6>s*[1]eurm5 <6-8>s*[1]eurm7 <8->s*[1]eurm10}{}%
+\DeclareFontShape{U}{egreek}{m}{it}{<->s*[1]eurmo10}{}%
+\DeclareFontShape{U}{egreek}{b}{n}{<-6>s*[1]eurb5 <6-8>s*[1]eurb7 <8->s*[1]eurb10}{}%
+\DeclareFontShape{U}{egreek}{b}{it}{<->s*[1]eurbo10}{}%
+\DeclareSymbolFont{egreeki}{U}{egreek}{m}{it}%
+\SetSymbolFont{egreeki}{bold}{U}{egreek}{b}{it}% from the amsfonts package
+\DeclareSymbolFont{egreekr}{U}{egreek}{m}{n}%
+\SetSymbolFont{egreekr}{bold}{U}{egreek}{b}{n}% from the amsfonts package
+% Take also \sum, \prod, \coprod symbols from Euler fonts
+\DeclareFontFamily{U}{egreekx}{\skewchar\font'177}
+\DeclareFontShape{U}{egreekx}{m}{n}{%
+       <-7.5>s*[0.9]euex7%
+    <7.5-8.5>s*[0.9]euex8%
+    <8.5-9.5>s*[0.9]euex9%
+    <9.5->s*[0.9]euex10%
+}{}
+\DeclareSymbolFont{egreekx}{U}{egreekx}{m}{n}
+\DeclareMathSymbol{\sumop}{\mathop}{egreekx}{"50}
+\DeclareMathSymbol{\prodop}{\mathop}{egreekx}{"51}
+\DeclareMathSymbol{\coprodop}{\mathop}{egreekx}{"60}
+\makeatletter
+\def\sum{\DOTSI\sumop\slimits@}
+\def\prod{\DOTSI\prodop\slimits@}
+\def\coprod{\DOTSI\coprodop\slimits@}
+\makeatother
+\input{definegreek.tex}% Greek letters not usually given in LaTeX.
+
+%\usepackage%[scaled=0.9]%
+%{classico}%  Optima as sans-serif font
+\renewcommand\sfdefault{uop}
+\DeclareMathAlphabet{\mathsf}  {T1}{\sfdefault}{m}{sl}
+\SetMathAlphabet{\mathsf}{bold}{T1}{\sfdefault}{b}{sl}
+%\newcommand*{\mathte}[1]{\textbf{\textit{\textsf{#1}}}}
+% Upright sans-serif math alphabet
+% \DeclareMathAlphabet{\mathsu}  {T1}{\sfdefault}{m}{n}
+% \SetMathAlphabet{\mathsu}{bold}{T1}{\sfdefault}{b}{n}
+
+% DejaVu Mono as typewriter text
+\usepackage[scaled=0.84]{DejaVuSansMono}
+
+\usepackage{mathdots}
+
+\usepackage[usenames]{xcolor}
+% Tol (2012) colour-blind-, print-, screen-friendly colours, alternative scheme; Munsell terminology
+\definecolor{mypurpleblue}{RGB}{68,119,170}
+\definecolor{myblue}{RGB}{102,204,238}
+\definecolor{mygreen}{RGB}{34,136,51}
+\definecolor{myyellow}{RGB}{204,187,68}
+\definecolor{myred}{RGB}{238,102,119}
+\definecolor{myredpurple}{RGB}{170,51,119}
+\definecolor{mygrey}{RGB}{187,187,187}
+% Tol (2012) colour-blind-, print-, screen-friendly colours; Munsell terminology
+% \definecolor{lbpurple}{RGB}{51,34,136}
+% \definecolor{lblue}{RGB}{136,204,238}
+% \definecolor{lbgreen}{RGB}{68,170,153}
+% \definecolor{lgreen}{RGB}{17,119,51}
+% \definecolor{lgyellow}{RGB}{153,153,51}
+% \definecolor{lyellow}{RGB}{221,204,119}
+% \definecolor{lred}{RGB}{204,102,119}
+% \definecolor{lpred}{RGB}{136,34,85}
+% \definecolor{lrpurple}{RGB}{170,68,153}
+\definecolor{lgrey}{RGB}{221,221,221}
+%\newcommand*\mycolourbox[1]{%
+%\colorbox{mygrey}{\hspace{1em}#1\hspace{1em}}}
+\colorlet{shadecolor}{lgrey}
+
+\usepackage{bm}
+
+\usepackage{microtype}
+
+\usepackage[backend=biber,mcite,%subentry,
+citestyle=authoryear-comp,bibstyle=pglpm-authoryear,autopunct=false,sorting=ny,sortcites=false,natbib=false,maxcitenames=1,maxbibnames=8,minbibnames=8,giveninits=true,uniquename=false,uniquelist=false,maxalphanames=1,block=space,hyperref=true,defernumbers=false,useprefix=true,sortupper=false,language=british,parentracker=false]{biblatex}
+\DeclareSortingScheme{ny}{\sort{\field{sortname}\field{author}\field{editor}}\sort{\field{year}}}
+\iffalse\makeatletter%%% replace parenthesis with brackets
+\newrobustcmd*{\parentexttrack}[1]{%
+  \begingroup
+  \blx@blxinit
+  \blx@setsfcodes
+  \blx@bibopenparen#1\blx@bibcloseparen
+  \endgroup}
+\AtEveryCite{%
+  \let\parentext=\parentexttrack%
+  \let\bibopenparen=\bibopenbracket%
+  \let\bibcloseparen=\bibclosebracket}
+\makeatother\fi
+\DefineBibliographyExtras{british}{\def\finalandcomma{\addcomma}}
+\renewcommand*{\finalnamedelim}{\addcomma\space}
+\setcounter{biburlnumpenalty}{1}
+\setcounter{biburlucpenalty}{0}
+\setcounter{biburllcpenalty}{1}
+\DeclareDelimFormat{multicitedelim}{\addsemicolon\space}
+\DeclareDelimFormat{compcitedelim}{\addsemicolon\space}
+\DeclareDelimFormat{postnotedelim}{\space}
+\ifarxiv\else\addbibresource{portamanabib.bib}\fi
+\renewcommand{\bibfont}{\footnotesize}
+%\appto{\citesetup}{\footnotesize}% smaller font for citations
+\defbibheading{bibliography}[\bibname]{\section*{#1}\addcontentsline{toc}{section}{#1}%\markboth{#1}{#1}
+}
+\newcommand*{\citep}{\parencites}
+\newcommand*{\citey}{\parencites*}
+%\renewcommand*{\cite}{\parencite}
+\renewcommand*{\cites}{\parencites}
+\providecommand{\href}[2]{#2}
+\providecommand{\eprint}[2]{\texttt{\href{#1}{#2}}}
+\newcommand*{\amp}{\&}
+% \newcommand*{\citein}[2][]{\textnormal{\textcite[#1]{#2}}%\addtocategory{extras}{#2}
+% }
+\newcommand*{\citein}[2][]{\textnormal{\textcite[#1]{#2}}%\addtocategory{extras}{#2}
+}
+\newcommand*{\citebi}[2][]{\textcite[#1]{#2}%\addtocategory{extras}{#2}
+}
+\newcommand*{\subtitleproc}[1]{}
+\newcommand*{\chapb}{ch.}
+%
+% \def\arxivp{}
+% \def\mparcp{}
+% \def\philscip{}
+% \def\biorxivp{}
+% \newcommand*{\arxivsi}{\texttt{arXiv} eprints available at \url{http://arxiv.org/}.\\}
+% \newcommand*{\mparcsi}{\texttt{mp\_arc} eprints available at \url{http://www.ma.utexas.edu/mp_arc/}.\\}
+% \newcommand*{\philscisi}{\texttt{philsci} eprints available at \url{http://philsci-archive.pitt.edu/}.\\}
+% \newcommand*{\biorxivsi}{\texttt{bioRxiv} eprints available at \url{http://biorxiv.org/}.\\}
+\newcommand*{\arxiveprint}[1]{%\global\def\arxivp{\arxivsi}%\citeauthor{0arxivcite}\addtocategory{ifarchcit}{0arxivcite}%eprint
+\texttt{\urlalt{https://arxiv.org/abs/#1}{arXiv:\hspace{0pt}#1}}%
+%\texttt{\href{http://arxiv.org/abs/#1}{\protect\url{arXiv:#1}}}%
+%\renewcommand{\arxivnote}{\texttt{arXiv} eprints available at \url{http://arxiv.org/}.}
+}
+\newcommand*{\mparceprint}[1]{%\global\def\mparcp{\mparcsi}%\citeauthor{0mparccite}\addtocategory{ifarchcit}{0mparccite}%eprint
+\texttt{\urlalt{http://www.ma.utexas.edu/mp_arc-bin/mpa?yn=#1}{mp\_arc:\hspace{0pt}#1}}%
+%\texttt{\href{http://www.ma.utexas.edu/mp_arc-bin/mpa?yn=#1}{\protect\url{mp_arc:#1}}}%
+%\providecommand{\mparcnote}{\texttt{mp_arc} eprints available at \url{http://www.ma.utexas.edu/mp_arc/}.}
+}
+\newcommand*{\philscieprint}[1]{%\global\def\philscip{\philscisi}%\citeauthor{0philscicite}\addtocategory{ifarchcit}{0philscicite}%eprint
+\texttt{\urlalt{http://philsci-archive.pitt.edu/archive/#1}{PhilSci:\hspace{0pt}#1}}%
+%\texttt{\href{http://philsci-archive.pitt.edu/archive/#1}{\protect\url{PhilSci:#1}}}%
+%\providecommand{\mparcnote}{\texttt{philsci} eprints available at \url{http://philsci-archive.pitt.edu/}.}
+}
+\newcommand*{\biorxiveprint}[1]{%\global\def\biorxivp{\biorxivsi}%\citeauthor{0arxivcite}\addtocategory{ifarchcit}{0arxivcite}%eprint
+\texttt{\urlalt{https://doi.org/10.1101/#1}{bioRxiv doi:\hspace{0pt}10.1101/#1}}%
+%\texttt{\href{http://arxiv.org/abs/#1}{\protect\url{arXiv:#1}}}%
+%\renewcommand{\arxivnote}{\texttt{arXiv} eprints available at \url{http://arxiv.org/}.}
+}
+\newcommand*{\osfeprint}[1]{%
+\texttt{\urlalt{https://doi.org/10.17605/osf.io/#1}{Open Science Framework doi:10.17605/osf.io/#1}}%
+}
+
+\usepackage{graphicx}
+
+%\usepackage{wrapfig}
+
+%\usepackage{tikz-cd}
+
+\PassOptionsToPackage{hyphens}{url}\usepackage[hypertexnames=false]{hyperref}
+
+\usepackage[depth=4]{bookmark}
+\hypersetup{colorlinks=true,bookmarksnumbered,pdfborder={0 0 0.25},citebordercolor={0.2667 0.4667 0.6667},citecolor=mypurpleblue,linkbordercolor={0.6667 0.2 0.4667},linkcolor=myredpurple,urlbordercolor={0.1333 0.5333 0.2},urlcolor=mygreen,breaklinks=true,pdftitle={\pdftitle},pdfauthor={\pdfauthor}}
+% \usepackage[vertfit=local]{breakurl}% only for arXiv
+\providecommand*{\urlalt}{\href}
+
+\usepackage[british]{datetime2}
+\DTMnewdatestyle{mydate}%
+{% definitions
+\renewcommand*{\DTMdisplaydate}[4]{%
+\number##3\ \DTMenglishmonthname{##2} ##1}%
+\renewcommand*{\DTMDisplaydate}{\DTMdisplaydate}%
+}
+\DTMsetdatestyle{mydate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Layout. I do not know on which kind of paper the reader will print the
+%%% paper on (A4? letter? one-sided? double-sided?). So I choose A5, which
+%%% provides a good layout for reading on screen and save paper if printed
+%%% two pages per sheet. Average length line is 66 characters and page
+%%% numbers are centred.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\ifafour\setstocksize{297mm}{210mm}%{*}% A4
+\else\setstocksize{210mm}{5.5in}%{*}% 210x139.7
+\fi
+\settrimmedsize{\stockheight}{\stockwidth}{*}
+\setlxvchars[\normalfont] %313.3632pt for a 66-characters line
+\setxlvchars[\normalfont]
+\setlength{\trimtop}{0pt}
+\setlength{\trimedge}{\stockwidth}
+\addtolength{\trimedge}{-\paperwidth}
+% The length of the normalsize alphabet is 133.05988pt - 10 pt = 26.1408pc
+% The length of the normalsize alphabet is 159.6719pt - 12pt = 30.3586pc
+% Bringhurst gives 32pc as boundary optimal with 69 ch per line
+% The length of the normalsize alphabet is 191.60612pt - 14pt = 35.8634pc
+\ifafour\settypeblocksize{*}{32pc}{1.618} % A4
+%\setulmargins{*}{*}{1.667}%gives 5/3 margins % 2 or 1.667
+\else\settypeblocksize{*}{26pc}{1.618}% nearer to a 66-line newpx and preserves GR
+\fi
+\setulmargins{*}{*}{1}%gives equal margins
+\setlrmargins{*}{*}{*}
+\setheadfoot{\onelineskip}{2.5\onelineskip}
+\setheaderspaces{*}{2\onelineskip}{*}
+\setmarginnotes{2ex}{10mm}{0pt}
+\checkandfixthelayout[nearest]
+\fixpdflayout
+%%% End layout
+%% this fixes missing white spaces
+\pdfmapline{+dummy-space <dummy-space.pfb}\pdfinterwordspaceon%
+
+%%% Sectioning
+\newcommand*{\asudedication}[1]{%
+{\par\centering\textit{#1}\par}}
+\newenvironment{acknowledgements}{\section*{Thanks}\addcontentsline{toc}{section}{Thanks}}{\par}
+\makeatletter\renewcommand{\appendix}{\par
+  \bigskip{\centering
+   \interlinepenalty \@M
+   \normalfont
+   \printchaptertitle{\sffamily\appendixpagename}\par}
+  \setcounter{section}{0}%
+  \gdef\@chapapp{\appendixname}%
+  \gdef\thesection{\@Alph\c@section}%
+  \anappendixtrue}\makeatother
+\counterwithout{section}{chapter}
+\setsecnumformat{\upshape\csname the#1\endcsname\quad}
+\setsecheadstyle{\large\bfseries\sffamily%
+\centering}
+\setsubsecheadstyle{\bfseries\sffamily%
+\raggedright}
+%\setbeforesecskip{-1.5ex plus 1ex minus .2ex}% plus 1ex minus .2ex}
+%\setaftersecskip{1.3ex plus .2ex }% plus 1ex minus .2ex}
+%\setsubsubsecheadstyle{\bfseries\sffamily\slshape\raggedright}
+%\setbeforesubsecskip{1.25ex plus 1ex minus .2ex }% plus 1ex minus .2ex}
+%\setaftersubsecskip{-1em}%{-0.5ex plus .2ex}% plus 1ex minus .2ex}
+\setsubsecindent{0pt}%0ex plus 1ex minus .2ex}
+\setparaheadstyle{\bfseries\sffamily%
+\raggedright}
+\setcounter{secnumdepth}{2}
+\setlength{\headwidth}{\textwidth}
+\newcommand{\addchap}[1]{\chapter*[#1]{#1}\addcontentsline{toc}{chapter}{#1}}
+\newcommand{\addsec}[1]{\section*{#1}\addcontentsline{toc}{section}{#1}}
+\newcommand{\addsubsec}[1]{\subsection*{#1}\addcontentsline{toc}{subsection}{#1}}
+\newcommand{\addpara}[1]{\paragraph*{#1.}\addcontentsline{toc}{subsubsection}{#1}}
+\newcommand{\addparap}[1]{\paragraph*{#1}\addcontentsline{toc}{subsubsection}{#1}}
+
+%%% Headers, footers, pagestyle
+\copypagestyle{manaart}{plain}
+\makeheadrule{manaart}{\headwidth}{0.5\normalrulethickness}
+\makeoddhead{manaart}{%
+{\footnotesize%\sffamily%
+\scshape\headauthor}}{}{{\footnotesize\sffamily%
+\headtitle}}
+\makeoddfoot{manaart}{}{\thepage}{}
+\newcommand*\autanet{\includegraphics[height=\heightof{M}]{autanet.pdf}}
+\definecolor{mygray}{gray}{0.333}
+\iftypodisclaim%
+\ifafour\newcommand\addprintnote{\begin{picture}(0,0)%
+\put(245,149){\makebox(0,0){\rotatebox{90}{\tiny\color{mygray}\textsf{This
+            document is designed for screen reading and
+            two-up printing on A4 or Letter paper}}}}%
+\end{picture}}% A4
+\else\newcommand\addprintnote{\begin{picture}(0,0)%
+\put(176,112){\makebox(0,0){\rotatebox{90}{\tiny\color{mygray}\textsf{This
+            document is designed for screen reading and
+            two-up printing on A4 or Letter paper}}}}%
+\end{picture}}\fi%afourtrue
+\makeoddfoot{plain}{}{\makebox[0pt]{\thepage}\addprintnote}{}
+\else
+\makeoddfoot{plain}{}{\makebox[0pt]{\thepage}}{}
+\fi%typodisclaimtrue
+\makeoddhead{plain}{}{}{\footnotesize\reporthead}
+% \copypagestyle{manainitial}{plain}
+% \makeheadrule{manainitial}{\headwidth}{0.5\normalrulethickness}
+% \makeoddhead{manainitial}{%
+% \footnotesize\sffamily%
+% \scshape\headauthor}{}{\footnotesize\sffamily%
+% \headtitle}
+% \makeoddfoot{manaart}{}{\thepage}{}
+
+\pagestyle{manaart}
+
+\setlength{\droptitle}{-3.9\onelineskip}
+\pretitle{\begin{center}\Large\sffamily%
+\bfseries}
+\posttitle{\bigskip\end{center}}
+
+\makeatletter\newcommand*{\atf}{\includegraphics[%trim=1pt 1pt 0pt 0pt,
+totalheight=\heightof{@}]{atblack.png}}\makeatother
+\providecommand{\affiliation}[1]{\textsl{\textsf{\footnotesize #1}}}
+\providecommand{\epost}[1]{\texttt{\footnotesize\textless#1\textgreater}}
+\providecommand{\email}[2]{\href{mailto:#1ZZ@#2 ((remove ZZ))}{#1\protect\atf#2}}
+
+\preauthor{\vspace{-0.5\baselineskip}\begin{center}
+\normalsize\sffamily%
+\lineskip  0.5em}
+\postauthor{\par\end{center}}
+\predate{\DTMsetdatestyle{mydate}\begin{center}\footnotesize}
+\postdate{\end{center}\vspace{-\medskipamount}}
+
+\setfloatadjustment{figure}{\footnotesize}
+\captiondelim{\quad}
+\captionnamefont{\footnotesize\sffamily%
+}
+\captiontitlefont{\footnotesize}
+\firmlists*
+\midsloppy
+% handling orphan/widow lines, memman.pdf
+% \clubpenalty=10000
+% \widowpenalty=10000
+% \raggedbottom
+% Downes, memman.pdf
+\clubpenalty=9996
+\widowpenalty=9999
+\brokenpenalty=4991
+\predisplaypenalty=10000
+\postdisplaypenalty=1549
+\displaywidowpenalty=1602
+\selectlanguage{british}\frenchspacing
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Paper's details
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\title{\propertitle}
+\author{%
+\hspace*{\stretch{1}}%
+%% uncomment if additional authors present
+% \parbox{0.5\linewidth}%\makebox[0pt][c]%
+% {\protect\centering ***\\%
+% \footnotesize\epost{\email{***}{***}}}%
+% \hspace*{\stretch{1}}%
+\parbox{0.5\linewidth}%\makebox[0pt][c]%
+{\protect\centering P.G.L.  Porta Mana\\%
+\footnotesize\epost{\email{piero.mana}{ntnu.no}}}%
+\hspace*{\stretch{1}}%
+%\quad\href{https://orcid.org/0000-0002-6070-0784}{\protect\includegraphics[scale=0.16]{orcid_32x32.png}\textsc{orcid}:0000-0002-6070-0784}%
+}
+
+\date{Draft of \today\ (first drafted \firstdraft)}
+%\date{\firstpublished; updated \updated}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Macros @@@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Common ones - uncomment as needed
+%\providecommand{\nequiv}{\not\equiv}
+%\providecommand{\coloneqq}{\mathrel{\mathop:}=}
+%\providecommand{\eqqcolon}{=\mathrel{\mathop:}}
+%\providecommand{\varprod}{\prod}
+\newcommand*{\de}{\partialup}%partial diff
+\newcommand*{\pu}{\piup}%constant pi
+\newcommand*{\delt}{\deltaup}%Kronecker, Dirac
+%\newcommand*{\eps}{\varepsilonup}%Levi-Civita, Heaviside
+%\newcommand*{\riem}{\zetaup}%Riemann zeta
+%\providecommand{\degree}{\textdegree}% degree
+%\newcommand*{\celsius}{\textcelsius}% degree Celsius
+%\newcommand*{\micro}{\textmu}% degree Celsius
+\newcommand*{\I}{\mathrm{i}}%imaginary unit
+\newcommand*{\e}{\mathrm{e}}%Neper
+\newcommand*{\di}{\mathrm{d}}%differential
+%\newcommand*{\Di}{\mathrm{D}}%capital differential
+%\newcommand*{\planckc}{\hslash}
+%\newcommand*{\avogn}{N_{\textrm{A}}}
+%\newcommand*{\NN}{\bm{\mathrm{N}}}
+%\newcommand*{\ZZ}{\bm{\mathrm{Z}}}
+%\newcommand*{\QQ}{\bm{\mathrm{Q}}}
+\newcommand*{\RR}{\bm{\mathrm{R}}}
+%\newcommand*{\CC}{\bm{\mathrm{C}}}
+%\newcommand*{\nabl}{\bm{\nabla}}%nabla
+%\DeclareMathOperator{\lb}{lb}%base 2 log
+%\DeclareMathOperator{\tr}{tr}%trace
+%\DeclareMathOperator{\card}{card}%cardinality
+%\DeclareMathOperator{\im}{Im}%im part
+%\DeclareMathOperator{\re}{Re}%re part
+%\DeclareMathOperator{\sgn}{sgn}%signum
+%\DeclareMathOperator{\ent}{ent}%integer less or equal to
+%\DeclareMathOperator{\Ord}{O}%same order as
+%\DeclareMathOperator{\ord}{o}%lower order than
+%\newcommand*{\incr}{\triangle}%finite increment
+\newcommand*{\defd}{\coloneqq}
+\newcommand*{\defs}{\eqqcolon}
+%\newcommand*{\Land}{\bigwedge}
+%\newcommand*{\Lor}{\bigvee}
+%\newcommand*{\lland}{\DOTSB\;\land\;}
+%\newcommand*{\llor}{\DOTSB\;\lor\;}
+%\newcommand*{\limplies}{\mathbin{\Rightarrow}}%implies
+%\newcommand*{\suchthat}{\mid}%{\mathpunct{|}}%such that (eg in sets)
+%\newcommand*{\with}{\colon}%with (list of indices)
+%\newcommand*{\mul}{\times}%multiplication
+%\newcommand*{\inn}{\cdot}%inner product
+%\newcommand*{\dotv}{\mathord{\,\cdot\,}}%variable place
+%\newcommand*{\comp}{\circ}%composition of functions
+%\newcommand*{\con}{\mathbin{:}}%scal prod of tensors
+%\newcommand*{\equi}{\sim}%equivalent to 
+\renewcommand*{\asymp}{\simeq}%equivalent to 
+%\newcommand*{\corr}{\mathrel{\hat{=}}}%corresponds to
+%\providecommand{\varparallel}{\ensuremath{\mathbin{/\mkern-7mu/}}}%parallel (tentative symbol)
+\renewcommand*{\le}{\leqslant}%less or equal
+\renewcommand*{\ge}{\geqslant}%greater or equal
+%\DeclarePairedDelimiter\clcl{[}{]}
+%\DeclarePairedDelimiter\clop{[}{[}
+%\DeclarePairedDelimiter\opcl{]}{]}
+%\DeclarePairedDelimiter\opop{]}{[}
+\DeclarePairedDelimiter\abs{\lvert}{\rvert}
+%\DeclarePairedDelimiter\norm{\lVert}{\rVert}
+\DeclarePairedDelimiter\set{\{}{\}}
+%\DeclareMathOperator{\pr}{P}%probability
+\newcommand*{\pf}{\mathrm{p}}%probability
+\newcommand*{\p}{\mathrm{P}}%probability
+%\newcommand*{\E}{\mathrm{E}}
+\renewcommand*{\|}{\nonscript\,\vert\nonscript\;\mathopen{}}
+%\DeclarePairedDelimiterX{\cond}[2]{(}{)}{#1\nonscript\,\delimsize\vert\nonscript\;\mathopen{}#2}
+%\DeclarePairedDelimiterX{\condt}[2]{[}{]}{#1\nonscript\,\delimsize\vert\nonscript\;\mathopen{}#2}
+%\DeclarePairedDelimiterX{\conds}[2]{\{}{\}}{#1\nonscript\,\delimsize\vert\nonscript\;\mathopen{}#2}
+%\newcommand*{\+}{\lor}
+%\renewcommand{\*}{\land}
+\newcommand*{\sect}{\S}% Sect.~
+\newcommand*{\sects}{\S\S}% Sect.~
+\newcommand*{\chap}{ch.}%
+\newcommand*{\chaps}{chs}%
+\newcommand*{\bref}{ref.}%
+\newcommand*{\brefs}{refs}%
+%\newcommand*{\fn}{fn}%
+\newcommand*{\eqn}{eq.}%
+\newcommand*{\eqns}{eqs}%
+\newcommand*{\fig}{fig.}%
+\newcommand*{\figs}{figs}%
+\newcommand*{\vs}{{vs}}
+%\newcommand*{\etc}{{etc.}}
+%\newcommand*{\ie}{{i.e.}}
+%\newcommand*{\ca}{{c.}}
+%\newcommand*{\eg}{{e.g.}}
+\newcommand*{\foll}{{ff.}}
+%\newcommand*{\viz}{{viz}}
+\newcommand*{\cf}{{cf.}}
+%\newcommand*{\Cf}{{Cf.}}
+%\newcommand*{\vd}{{v.}}
+\newcommand*{\etal}{{et al.}}
+%\newcommand*{\etsim}{{et sim.}}
+%\newcommand*{\ibid}{{ibid.}}
+%\newcommand*{\sic}{{sic}}
+%\newcommand*{\id}{\mathte{I}}%id matrix
+%\newcommand*{\nbd}{\nobreakdash}%
+%\newcommand*{\bd}{\hspace{0pt}}%
+%\def\hy{-\penalty0\hskip0pt\relax}
+%\newcommand*{\labelbis}[1]{\tag*{(\ref{#1})$_\text{r}$}}
+%\newcommand*{\mathbox}[2][.8]{\parbox[t]{#1\columnwidth}{#2}}
+%\newcommand*{\zerob}[1]{\makebox[0pt][l]{#1}}
+\newcommand*{\tprod}{\mathop{\textstyle\prod}\nolimits}
+\newcommand*{\tsum}{\mathop{\textstyle\sum}\nolimits}
+%\newcommand*{\tint}{\begingroup\textstyle\int\endgroup\nolimits}
+%\newcommand*{\tland}{\mathop{\textstyle\bigwedge}\nolimits}
+%\newcommand*{\tlor}{\mathop{\textstyle\bigvee}\nolimits}
+%\newcommand*{\sprod}{\mathop{\textstyle\prod}}
+%\newcommand*{\ssum}{\mathop{\textstyle\sum}}
+%\newcommand*{\sint}{\begingroup\textstyle\int\endgroup}
+%\newcommand*{\sland}{\mathop{\textstyle\bigwedge}}
+%\newcommand*{\slor}{\mathop{\textstyle\bigvee}}
+%\newcommand*{\T}{^\intercal}%transpose
+%%\newcommand*{\QEM}%{\textnormal{$\Box$}}%{\ding{167}}
+%\newcommand*{\qem}{\leavevmode\unskip\penalty9999 \hbox{}\nobreak\hfill
+%\quad\hbox{\QEM}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Custom macros for this file @@@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ \definecolor{notecolour}{RGB}{68,170,153}
+\newcommand*{\puzzle}{{\fontencoding{U}\fontfamily{fontawesometwo}\selectfont\symbol{225}}}
+%\newcommand*{\puzzle}{\maltese}
+\newcommand{\mynote}[1]{ {\color{notecolour}\puzzle\ #1}}
+\newcommand*{\widebar}[1]{{\mkern1.5mu\skew{2}\overline{\mkern-1.5mu#1\mkern-1.5mu}\mkern 1.5mu}}
+
+% \newcommand{\explanation}[4][t]{%\setlength{\tabcolsep}{-1ex}
+% %\smash{
+% \begin{tabular}[#1]{c}#2\\[0.5\jot]\rule{1pt}{#3}\\#4\end{tabular}}%}
+% \newcommand*{\ptext}[1]{\text{\small #1}}
+%\DeclareMathOperator*{\argsup}{arg\,sup}
+\newcommand*{\dob}{degree of belief}
+\newcommand*{\dobs}{degrees of belief}
+\newcommand*{\yO}[2]{\varOmicron^{(#1)}_{#2}}
+\newcommand*{\yI}{\varIota}
+\newcommand*{\ys}{\bm{s}}
+\newcommand*{\yt}{\bm{t}}
+\newcommand*{\yth}{\bm{\theta}}
+\newcommand*{\yso}[1]{\ys^{(#1)}}
+\newcommand*{\yk}{\bm{k}}
+\newcommand*{\yH}{\varEta}
+\newcommand*{\yD}{D}
+%%% Custom macros end @@@
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Beginning of document
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\firmlists
+\begin{document}
+\captiondelim{\quad}\captionnamefont{\footnotesize}\captiontitlefont{\footnotesize}
+\selectlanguage{british}\frenchspacing
+\maketitle
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Abstract
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\abstractrunin
+\abslabeldelim{}
+\renewcommand*{\abstractname}{}
+\setlength{\absleftindent}{0pt}
+\setlength{\absrightindent}{0pt}
+\setlength{\abstitleskip}{-\absparindent}
+\begin{abstract}\labelsep 0pt%
+  \noindent A geometric tutorial on exchangeability
+\\\noindent\emph{\footnotesize Note: Dear Reader
+    \amp\ Peer, this manuscript is being peer-reviewed by you. Thank you.}
+% \par%\\[\jot]
+% \noindent
+% {\footnotesize PACS: ***}\qquad%
+% {\footnotesize MSC: ***}%
+%\qquad{\footnotesize Keywords: ***}
+\end{abstract}
+\selectlanguage{british}\frenchspacing
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Epigraph
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \asudedication{\small ***}
+% \vspace{\bigskipamount}
+\setlength{\epigraphwidth}{.63\columnwidth}
+% %\epigraphposition{flushright}
+\epigraphtextposition{flushleft}
+% %\epigraphsourceposition{flushright}
+\epigraphfontsize{\footnotesize}
+\setlength{\epigraphrule}{0pt}
+% %\setlength{\beforeepigraphskip}{0pt}
+\setlength{\afterepigraphskip}{0pt} \epigraph{% Most books on scientific
+  % method contain at least a chapter on probability theory.
+  Most books on modern physics assume a knowledge of probability theory and
+  claim to derive probability distributions. A casual observer might be led
+  into supposing that the authors would be reasonably up to date in the
+  subject. In fact, however, they seldom show any knowledge of it that is
+  less than fifty years
+  old%\textelp{}. % It is still widely believed that probability
+% is an easy subject, and this is far from being the case.
+}{\textsc{H. Jeffreys} \citey[p.~275]{jeffreys1955}}
+\vspace{-1em}
+\epigraph{I believe that the
+  greatest unsolved problem in statistics is communicating the subject to
+  others.}{\textsc{N. Davies} \citep[in][p.~445]{copasetal1995}}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% BEGINNING OF MAIN TEXT
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Introduction}
+\label{sec:intro}
+
+\emph{Exchangeable models} are a family of statistical models that appear
+over and over in all sciences. Many scientists probably use them routinely
+without knowing the technical name \enquote{exchangeable model}, used
+mainly in the statistics literature -- and possibly also without knowing of
+some important properties of these statistical models. This ignorance is
+mainly caused by a language barrier: most literature that discusses
+exchangeable models uses a very specialized technical language strongly
+connected with topology, measure theory, differential geometry, and other
+subjects that are usually only superficially touched in the teaching of
+other sciences.
+
+Such subjects are of course necessary for a precise foundation of
+exchangeable models and other statistical notions. So I don't think that
+scientists are justified in shying away from them. But I don't think that
+statisticians are justified in adopting an over-technical jargon either,
+wherever a simpler one can suffice. They often seem to willingly insulate
+themselves within linguistic walls, instead of building bridges that could
+make their beautiful work more accessible to other sciences. Most technical
+concepts underlying statistics have, in fact, a very intuitive and even
+visual meaning at bottom.
+%
+\textcolor{white}{If you find this you can claim a postcard from me.}
+
+The present note tries to build a bridge, explaining the essentials of
+exchangeable models and some related topics in an intuitive and geometric
+way, hoping to make the main concepts more accessible to scientists in
+other disciplines. I'm not a statistician or a specialized scientist, so my
+attempt will likely leave all parties unsatisfied. I hope it will at least
+give a hunch that a bridge is worthwhile constructing.
+
+The other topics discussed in this note include:
+\begin{itemize}
+\item the choice of so-called \enquote{parameter priors}
+\item so-called \enquote{non-parametric models}
+\item model comparison
+\item sufficiency and its relation to some toy physical models, like Ising
+  models
+\item partial exchangeability and its relation to machine learning and
+  neural networks
+\item the phenomenon of \enquote{overtraining}
+\end{itemize}
+
+
+The mathematics I'll use is very simple: functional analysis and
+combinatorics. The geometry will rely on convex spaces. These spaces appear
+in all of statistics. Their basics are very intuitive, and their
+visualization often allows us to guess mathematical properties or solutions
+to problems that are harder to guess algebraically. For this reason this
+note starts with a summary about them.
+
+\section{Exchangeability}
+\label{sec:exchangeability}
+
+There's a deep reason why exchangeable models appear in all sciences: they
+are connected with \emph{reproducibility}, and therefore also with
+\emph{induction}.
+
+Reproducibility and circularity.
+
+Exchangeability expresses the way we do induction (doesn't justify it).
+
+Example with pattern: we discard exchangeability (dead hypothesis
+resurrection) -- just as we do with reproducibility.
+
+\section{Convex spaces}
+\label{sec:convex_spaces}
+
+\section{Finitely exchangeable models}
+\label{sec:finitely_exchangeable}
+
+\section{Exchangeable models and their update}
+\label{sec:exchangeable_update}
+
+maximum-entropy appearance.
+
+\section{Probability distributions for the limit frequencies}
+\label{sec:priors}
+
+\section{Model comparison}
+\label{sec:model_comparison}
+
+\section{Models with sufficient statistics}
+\label{sec:sufficiency}
+
+\section{Partially exchangeable models}
+\label{sec:partially_exch}
+
+
+
+
+
+
+
+\mynote{to be continued}
+
+
+
+
+
+\iffalse
+\section{Sufficient statistics and the Koopman-Pitman theorem}
+\label{sec:koopmanpitman}
+
+Suppose we have a sequence, possibly infinite, of observations with
+outcomes $\ys$ in a set $S$. The outcomes can be tuples. We represent the
+proposition \enquote{The $i$th observation yields outcome $\ys$} by
+$\yO{i}{\ys}$, with $\ys\in S$.
+
+A typical inference problem is to forecast the outcomes of the $(m+1)$th up
+to the $(m+n)$th observations given that we know the outcomes of the $1$st
+up to the $m$th observations and given some additional knowledge or
+assumptions denoted by $\yI$. Note that we aren't assuming that these
+$\set{1,\dotsc,m+n}$ observations are in temporal order: our problem could be to
+infer past, unknown observation from present, known ones. Our forecast is
+expressed by the probabilities
+\begin{equation}
+  \label{eq:general_forecast}
+  \p\Bigl(\yO{m+n}{\yso{m+n}}, \dotsc, \yO{m+1}{\yso{m+1}}
+  \| \yO{m}{\yso{m}}, \dotsc, \yO{1}{\yso{1}}, \yI\Bigr),
+\end{equation}
+where the comma represents the conjunction (\enquote{$\land$}) of the
+propositions. When unambiguous we use the simplified notation
+\begin{equation}\labelbis{eq:general_forecast}
+\pf\bigl(\yso{m+n}, \dotsc, \yso{m+1} \| \yso{m}, \dotsc, \yso{1}, \yI\bigr).
+\end{equation}
+
+In general, the full set of observed data
+$\bigl(\yso{1}, \dotsc, \yso{m}\bigr)$ is important for this inference. But
+in particular situations it may happen that only specific properties of the
+data are \emph{sufficient} to our inference, the remaining details being
+\emph{irrelevant}. By \enquote{irrelevant} we mean that our inferences
+aren't changed if we forget about those details or if we don't know them in
+the first place. Let's represent the relevant properties by a map
+$\yt\bigl(\yso{1},\dotsc,\yso{m}\bigr)$, called a \emph{sufficient
+  statistic}, with values in a space $T$. The relevance and irrelevance
+are expressed by the equalities
+\begin{multline}
+  \label{eq:predictive_sufficiency}
+  \pf\bigl(\yso{m+n}, \dotsc, \yso{m+1}
+  \| \yso{m}, \dotsc, \yso{1}, \yI\bigr)
+  ={}\\
+  \pf\bigl[\yso{m+n}, \dotsc, \yso{m+1}
+  \| \yt\bigl(\yso{1}, \dotsc, \yso{m}\bigr), \yI\bigr]
+  \\
+  \text{for all $m$, $n$, and $\bigl(\yso{i}\bigr)$.}
+\end{multline}
+
+Typical examples of sufficient statistics are the number of known
+observations $m$ together with their mean:
+$\bigl(\yso{1} + \dotsb + \yso{m}\bigr)/m$, or second moments:
+$\bigl(\yso{1}{\yso{1}}\T + \dotsb + \yso{m}{\yso{m}}\T\bigl)/m$, or range:
+$\max_i\bigl(\yso{i}\bigr)-\min_i\bigl(\yso{i}\bigr)$, or combination of
+these. In this study we will focus on first and second moments:
+\begin{equation}
+  \label{eq:example_mean_suffstat}
+  \yt(\yso{1}, \dotsc, \yso{m}) \defd
+  \Bigl( m,\; \tfrac{1}{m}\tsum_i \yso{i}, \;
+\tfrac{1}{m}\tsum_i\yso{i}{\yso{i}}\T
+  \Bigr).
+\end{equation}
+The number $m$ is usually implied and left out of the definition.
+
+There may be physical or biological reasons why only some statistics of
+past data are sufficient for our inference. This sufficiency may also be
+only approximate. We can hypothesize that one or another statistics are
+sufficient -- call these hypotheses $\yH_1, \yH_2,\dotsc$ -- and, given
+some data $\yD$, the probability calculus tells us which hypotheses among
+these are more probable:
+\begin{equation}
+  \label{eq:example_mean_suffstat}
+  \p(\yH_i \| \yD, \yI) =
+  \frac{\p(\yD \| \yH_i, \yI)\, \p(\yH_i\|\yI)}{
+    \sum_i\p(\yD \| \yH_i, \yI)\, \p(\yH_i\|\yI)
+  }.
+\end{equation}
+To calculate these probabilities we need to assign numerical values to the
+probabilities of the data given the hypotheses, $\p(\yD \| \yH_i, \yI)$.
+
+There is a series of mathematical results by Neyman, Koopman, Pitman,
+Lauritzen and several others
+\citep{neyman1935,koopman1936,pitman1936,darmois1935,lauritzen1982_r1988,kuechleretal1989}[see
+also later
+analyses:][]{hipp1974,andersen1970,denny1967,fraser1963,barankinetal1963}\mynote{add
+  refs to Lauritzen and comments about these references and about the
+  discrete-variable case}, which restrict the functional form of the
+probability distributions $\p(\yD \| \yH, \yI)$ when some hypothesis $\yH$
+about sufficient statistics holds. In the case of statistics constructed as
+averages, like~\eqref{eq:example_mean_suffstat}, the distribution must
+assume this form, for every $N$:
+\begin{multline}
+  \label{eq:predictive_KP}
+\begin{aligned}
+    \pf(\yso{1}, \dotsc, \yso{N} \|\yH_i, \yI )
+  &=\int
+\Biggl[  \prod_{k=1}^{N}
+  g\bigl(\yso{i}\bigr)\,
+  \frac{  \exp\bigl[
+    \yth\T \yt\bigl( \yso{k} \bigr)
+    \bigr] }{Z(\yth)}
+  \Biggr]\,
+  \pf(\di\yth \| \yH_i, \yI) 
+\\
+  &=\int
+  \bigl[\tprod_{k=1}^{N}g\bigl(\yso{k}\bigr) \bigr]\,
+  \frac{  \exp\bigl[
+    N \, \yth\T\sum_{k=1}^{N}\yt\bigl( \yso{k} \bigr)
+    \bigr]}{Z(\yth)^N}\,
+  \pf(\di\yth \| \yI)
+\end{aligned}
+\\
+  \text{with}\quad
+  Z(\yth) \defd \sum_{\ys\in S} g(\ys)\, \exp[\yth\T \yt(\ys)].
+\end{multline}
+The parameters $\yth$ are a tuple with as many elements as the statistics.
+For the statistics~\eqref{eq:example_mean_suffstat}, each parameter ranges
+in $\RR$. The distribution $g(\ys)$ and the density $\pf(\di\yth \| \yI)$
+in the formula above are not determined by the theorem: they need to be
+determined by additional assumptions. The distribution $g$ is often
+determined by symmetry or combinatorial properties of the problem.
+% for example, if each unit actually represents the total activity of a
+% population of sub-units.
+From now on we assume it to be unity: $g(\ys)=1$. The density
+$\pf(\di\yth \|\yI)$ is called \emph{prior parameter density}.
+
+Let's summarize in words the content
+of the theorem:
+\begin{enumerate}[label=(\textit{\alph*})]
+\item our joint probability for the observations $\yso{1}, \dotsc,\yso{N}$
+  is given by a convex combination of joint probabilities:
+  \begin{equation}
+    \label{eq:component_combination}
+  \pf(\yso{1}, \dotsc, \yso{N} \|\yth, \yI )
+  =
+  \prod_{i=1}^{N}
+%  g\bigl(\yso{i}\bigr)\,
+  \frac{  \exp\bigl(
+    \mu_1 \ysso{i}_1 + \mu_2 \ysso{i}_2 + \la \ysso{i}_1 \ysso{i}_2
+    \bigr) }{Z(\yth)};
+  \end{equation}
+
+\item each joint probability in this convex combination factorizes into $N$
+  independent probabilities for the $N$ observations, as is clear from the
+  formula above;
+\item\label{item:submanifold}each joint probability in the convex
+  combination is identified by a triplet of parameters $\yth$; it therefore
+  belongs to a three-dimensional submanifold of joint probabilities. Note
+  that the full manifold of joint probabilities is $(2^N-1)$-dimensional;
+\item\label{item:weights}the weight assigned to the probability labelled by
+  $\yth$ is $\pf(\yth \|\yI)\,\di\yth$.
+\end{enumerate}
+
+Point~\ref{item:submanifold} shows that the Pitman-Koopman-Lauritzen
+theorem greatly reduces our freedom in specifying the joint probability.
+This is the effect of assuming that the statistics~\eqref{eq:mean_2ndmom}
+are sufficient; it's a very strong assumption.
+
+Points~\ref{item:submanifold} and~\ref{item:weights} show that the theorem
+selects a particular three-dimensional submanifold within each of the
+$(2^N-1)$-dimensional manifolds of probability distributions for $N$
+observations, for all $N$. But the theorem doesn't select any particular
+coordinate system within the submanifold: the parameters $\yth$ are just
+coordinates, and there is nothing special about them, besides
+the fact that they appear as coefficients of the linear combination of
+statistics in the exponential~\eqref{eq:predictive_KP}. We could choose
+different coordinates $\yt$, with one-one coordinate transformations
+$\yt=\yt(\yth)$, $\yth=\yth(\yt)$. In these new coordinates the mixed joint
+probabilities are
+\begin{equation}
+  \label{eq:extreme_probs_newcoords}
+  \pf(\yso{1}, \dotsc, \yso{N} \|\yt, \yI ) =
+    \prod_{i=1}^{N}
+%  g\bigl(\yso{i}\bigr)\,
+  \frac{  \exp\bigl[
+    \mu_1(\yt)\, \ysso{i}_1 + \mu_2(\yt)\, \ysso{i}_2 +
+    \la(\yt)\, \ysso{i}_1 \ysso{i}_2
+    \bigr] }{Z[\yth(\yt)]};
+  % \frac{\exp\{N \, [
+  %   \mu_1(\yt)\, \yavv_1 + \mu_2(\yt)\, \yavv_2 + \la(\yt)\, \ycv]\}
+  % }{Z[\yth(\yt)]^N},
+\end{equation}
+and the weights of the convex combination are given by
+$\pf(\yt \|\yI) \, \di\yt$, the densities for $\yth$ and for $\yt$ being
+related by a Jacobian determinant:
+\begin{equation}
+  \label{eq:jacobian}
+  \pf(\yth \|\yI) = \pf[\yt(\yth) \| \yI]\,
+  \det\biggl( \frac{\de\yt}{\de\yth}\biggr).
+\end{equation}
+\fi
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Acknowledgements
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+\iffalse
+\begin{acknowledgements}
+  \ldots to Mari \amp\ Miri for continuous encouragement and affection, and
+  to Buster Keaton and Saitama for filling life with awe and inspiration.
+  To the developers and maintainers of \LaTeX, Emacs, AUC\TeX, Open Science
+  Framework, Python, Inkscape, Sci-Hub for making a free and unfiltered
+  scientific exchange possible.
+%\rotatebox{15}{P}\rotatebox{5}{I}\rotatebox{-10}{P}\rotatebox{10}{\reflectbox{P}}\rotatebox{-5}{O}.
+\sourceatright{\autanet}
+\end{acknowledgements}
+\fi
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Appendices
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+\newpage
+% %\renewcommand*{\appendixpagename}{Appendix}
+% %\renewcommand*{\appendixname}{Appendix}
+% %\appendixpage
+% \appendix
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Bibliography
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+\defbibnote{prenote}{{\footnotesize (\enquote{de $X$} is listed under D,
+    \enquote{van $X$} under V, and so on, regardless of national
+    conventions.)\par}}
+% \defbibnote{postnote}{\par\medskip\noindent{\footnotesize% Note:
+%     \arxivp \mparcp \philscip \biorxivp}}
+
+\printbibliography[prenote=prenote%,postnote=postnote
+]
+
+\end{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Cut text (won't be compiled)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+
+
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+
 % Report-no: ***
 \newif\ifarxiv
 \arxivfalse

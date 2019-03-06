@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2019-02-16T18:38:32+0100
-%% Last-Updated: 2019-03-06T16:45:00+0100
+%% Last-Updated: 2019-03-07T00:01:59+0100
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newif\ifarxiv
 \arxivfalse
@@ -690,8 +690,61 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 
 \bigskip
 
-\begin{quotation}When the working members of Section F get hold of a Report
-  of the Census, or any other document containing the numerical data of
+I must confess to a sin: I've always used \enquote{statistical} and
+\enquote{probabilistic} as interchangeable terms in most contexts. I know
+of the technical difference between \enquote{statistical model} and
+\enquote{probabilistic model} made by some statisticians
+\citep{mccullagh2002}; from a Bayesian point of view it's an artificial
+distinction, but more importantly it doesn't do justice to the original
+useful distinction between \enquote{statistical} and
+\enquote{probabilistic} which we're now going to explore.
+
+If we read Maxwell's paper \emph{On the dynamical evidence of the
+  molecular constitution of bodies} \citey{maxwell1875} we find this
+passage on page~374:
+\begin{quotation}\small
+  By distributing the molecules into groups according to their velocities,
+  we may substitute for the impossible task of following every individual
+  molecule through all its encounters, that of registering the increase or
+  decrease of the number of molecules in the different groups.
+
+  By following this method, which is the only one available either
+  experimentally or mathematically, we pass from the methods of strict
+  dynamics \emph{to those of statistics and probability}.
+\end{quotation}
+The final emphasis is mine, and stresses the most interesting part of this
+passage for our present discussion. Maxwell was very scrupulous and precise
+in his choice of words. Here he doesn't say \enquote{to those of
+  statistics} (full stop), nor does he say \enquote{to those of
+  probability}. He says \enquote{to those of statistics \emph{and}
+  probability}. The two terms must therefore denote for him two distinct
+notions.
+
+Maxwell conceived probability as a calculus of uncertainty that generalizes
+logic -- quite a modern view \citep[\cf][]{hailperin1996,hailperin2011}. His
+view can be glimpsed in this letter of his to L. Campbell \citep[June?
+1850:][\chap~V, p.~143]{campbelletal1882}:
+\begin{quote}\small
+  They say that Understanding ought to work by the rules of right reason.
+  These rules are, or ought to be, contained in Logic; but the actual
+  science of Logic is conversant at present only with things either
+  certain, impossible, or \emph{entirely} doubtful, none of which
+  (fortunately) we have to reason on. Therefore the true Logic for this
+  world is the Calculus of Probabilities, which takes account of the
+  magnitude of the probability (which is, or which ought to be in a
+  reasonable man's mind).
+  % This branch of Math., which is generally thought to favour gambling,
+  % dicing, and wagering, and therefore highly immoral, is the only
+  % ``Mathematics for Practical Men,'' as we ought to be.
+\end{quote}
+
+What, then, is \emph{statistics} for Maxwell? We find a beautiful
+explanation on page~440 of his \emph{Molecules} \citey{maxwell1873c}:
+\begin{quotation}\small
+  When the working members of Section F\footnote{I believe Maxwell is
+    referring to a Section (Economic Science and Statistics) of the British
+    Association for the Advancement of Science.} get hold of a Report of
+  the Census, or any other document containing the numerical data of
   Economic and Social Science, they begin by distributing the whole
   population into groups, according to age, income-tax, education,
   religious belief, or criminal convictions. The number of individuals is
@@ -719,9 +772,11 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
   which ever becomes individually sensible to us. We cannot, therefore,
   ascertain the actual motion of any one of these molecules, so that we are
   obliged to abandon the strict historical method, and to adopt the
-  statistical method of dealing with large groups of
-  molecules.\sourceatright{Maxwell \citey[p.~440]{maxwell1873c}}\end{quotation}
+  statistical method of dealing with large groups of molecules.
+\end{quotation}
 
+
+\iffalse
 \begin{quote}
   The data of the statistical method as applied to molecular science are the 
 sums of large numbers of molecular quantities. 
@@ -757,11 +812,7 @@ molecule, not even so far as to estimate the length of its mean path.
   The theory of atoms and void leads us to attach more importance to the doctrines of integral numbers and definite proportions; but, in applying dynamical principles to the motion of immense numbers of atoms, the limitation of our faculties forces us to abandon the attempt to express the exact history of each atom, and to be content with estimating the average condition of a group of atoms large enough to be visible. This method of dealing with groups of atoms, which I may call the statistical method, and which in the present state of our knowledge is the only available method of studying the properties of real bodies, involves an abandonment of strict dynamical principles, and an adoption of the mathematical methods belonging to the theory of probability. It is probable that important results will be obtained by the application of this method, which is as yet little known and is not familiar to our minds. If the actual history of Science had been different, and if the scientific doctrines most familiar to us had been those which must be expressed in this way, it is possible that we might have considered the existence of a certain kind of contingency a self-evident truth, and treated the doctrine of philosophical necessity as a mere sophism.
 \end{quote}
 \citep[p.~253]{maxwell1871b}
-
-\begin{quote}
-  They say that Understanding ought to work by the rules of right reason. These rules are, or ought to be, contained in Logic; but the actual science of Logic is conversant at present only with things either certain, impossible, or \emph{entirely} doubtful, none of which (fortunately) we have to reason on. Therefore the true Logic for this world is the Calculus of Probabilities, which takes account of the magnitude of the probability (which is, or which ought to be in a reasonable man's mind). This branch of Math., which is generally thought to favour gambling, dicing, and wagering, and therefore highly immoral, is the only ``Mathematics for Practical Men,'' as we ought to be.
-\end{quote}
- \citep[\chap~V, Letter to L. Campbell, June? 1850, p.~143]{campbelletal1882}
+\fi
 
 
 

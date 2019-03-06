@@ -6,7 +6,7 @@
 %% Home page: http://magnaspesmeretrix.org/
 %% Email (remove ZZ): pglpm0ZZ[at]gmail.com
 %% Created: 2000-08-23T16:53:30+0200
-%% Last-Updated: 2019-02-27T10:26:39+0100
+%% Last-Updated: 2019-03-06T15:56:06+0100
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 % NB: This database contains also items whose content's validity I
@@ -57,6 +57,7 @@
 %% \newcommand*{\mparceprint}[1]{\texttt{\href{http://www.ma.utexas.edu/mp_arc-bin/mpa?yn=#1}{mp\_arc:#1}}}
 %% \newcommand*{\philscieprint}[1]{\texttt{\href{http://philsci-archive.pitt.edu/archive/#1}{PhilSci:#1}}}
 %% \newcommand*{\osfeprint}[1]{\texttt{\href{https://osf.io/#1}{osf.io/#1}}}
+%% \newcommand*{\biorxiveprint}[1]{\texttt{\urlalt{https://doi.org/10.1101/#1}{bioRxiv doi:\hspace{0pt}10.1101/#1}}}
 %% \newcommand*{\langfrench}{\foreignlanguage{french}}
 %% \newcommand*{\langgerman}{\foreignlanguage{german}}
 %% \newcommand*{\langitalian}{\foreignlanguage{italian}}
@@ -392,6 +393,7 @@
 @String{hbm = {Hum.\ Brain Mapp.}}
 @String{hbna = {Handbook Num.\ Anal.}}
 @String{hcr = {Hum.\ Commun.\ Res.}}
+@String{her = {Harv.\ Educ.\ Rev.}}
 @String{hm = {Hist.\ Math.}}
 @String{hmj = {Hiroshima Math.\ J.}}
 @String{hmt = {Heat Mass Tran.}}
@@ -527,6 +529,7 @@
 @String{je = {J. Elasticity}}
 @String{jecons = {J. Econ.\ Surv.}}
 @String{jedc = {J. Econ.\ Dynam.\ Contr.}}
+@String{jee = {J. Exp.\ Educ.}}
 @String{jem = {J. Econometrics}}
 @String{jengm = {J. Eng.\ Mech.}}
 @String{jepg = {J. Exp.\ Psychol.:\ Gen.}}
@@ -3729,6 +3732,28 @@ pages =	       {863--886},
 keywords =     {exchangeability, Bayesian probability theory}
 }
 
+@Article{anscombe1954,
+author =       {Francis J. Anscombe},
+title =	       {Fixed-Sample-Size Analysis of Sequential Observations},
+journal =      bmetrics,
+year =	       {1954},
+volume =       {10},
+number =       {1},
+pages =	       {89--100},
+keywords =     {$p$-values, stopping rule}
+}
+
+@Article{anscombeetal1988,
+author =       {Francis J. Anscombe and Frederick Mosteller and John W. Tukey},
+title =	       {{Frederick Mosteller} and {John W. Tukey}: A Conversation},
+journal =      ss,
+year =	       {1988},
+volume =       {3},
+number =       {1},
+pages =	       {136--144},
+keywords =     {probability theory}
+}
+
 @Article{ansumalietal2005,
 author =       {Santosh Ansumali and Iliya V. Karlin and Hans Christian {\"O}ttinger},
 title =	       {Thermodynamic Theory of Incompressible Hydrodynamics},
@@ -4620,7 +4645,7 @@ booktitle =    {\citein{witten1962}},
 year =	       {1962},
 chapter =      {\chapb~7},
 pages =	       {227--265},
-note =	       {Repr.\ in \citebi{arnowittetal1962_r2008}},
+note =	       {repr.\ in \citebi{arnowittetal1962_r2008}},
 keywords =     {initial-value problem, lapse, shift}
 }
 
@@ -15146,7 +15171,7 @@ volume =       {16},
 number =       {3},
 pages =	       {199--215},
 note =	       {See also comments and rejoinder in \citebi{coxetal2001}},
-keywords =     {probability theory}
+keywords =     {probability theory, probability models}
 }
 
 @Article{breit1938,
@@ -20247,6 +20272,30 @@ pages =	       {205--231},
 keywords =     {hidden variables, quantum theory}
 }
 
+@Article{carver1978,
+author =       {Carver, Ronald P.},
+title =	       {The case against statistical significance testing},
+journal =      her,
+year =	       {1978},
+volume =       {48},
+number =       {3},
+pages =	       {378--399},
+note = 	       {See also \citebi{carver1993}},
+keywords =     {$p$-values, probability theory}
+}
+
+@Article{carver1993,
+author =       {Carver, Ronald P.},
+title =	       {The case against statistical significance testing, revisited},
+journal =      jee,
+year =	       {1993},
+volume =       {61},
+number =       {4},
+pages =	       {287--292},
+note =	       {See also \citebi{carver1978}},
+keywords =     {$p$-values, probability theory}
+}
+
 @InCollection{casado1997,
 author =       {Alberto Casado},
 title =	       {Parametric down-conversion experiments in the {Wigner} representation},
@@ -21549,8 +21598,8 @@ title =	       {Geometry, Mechanics, and Dynamics: The Legacy of Jerry Marsden},
 publisher =    {Springer},
 year =	       {2015},
 volume =       {73},
+series =       {Fields Institute communications},
 address =      {New York},
-edition =      {Fields Institute communications},
 keywords =     {electromagnetism, exterior differential forms, Whitney forms}
 }
 
@@ -25475,6 +25524,17 @@ title =	       {Statistical Mechanics of Irreversible Change},
 publisher =    {The Johns Hopkins Press},
 year =	       {1955},
 address =      {Baltimore}
+}
+
+@Article{cox1958,
+author =       {D. R. Cox},
+title =	       {Some Problems Connected with Statistical Inference},
+journal =      ams,
+year =	       {1958},
+volume =       {29},
+number =       {2},
+pages =	       {357--372},
+keywords =     {$p$-values, p.~368}
 }
 
 @Book{cox1961,
@@ -32829,7 +32889,7 @@ title =	       {The Aim and Structure of Physical Theory},
 publisher =    {Princeton University Press},
 year =	       {1991},
 address =      {Princeton},
-edition =      {Transl.\ of the 2nd ed.},
+edition =      {transl.\ of the 2nd ed.},
 note =	       {Transl.\ of \citebi{duhem1906_r1914} by P. P. Wiener. First publ.\ in French 1906},
 mynote =       {transl.\ of \citebi{duhem1906_r1914}. \enquote{Certain physical theories rest on hypotheses which do not by themselves have any physical meaning}, \sect~VI.9, p.~216}
 }
@@ -39421,7 +39481,7 @@ title =	       {The Feynman Lectures on Physics. Vol.~I: Mainly Mechanics, Radia
 publisher =    {Basic Books},
 year =	       {2010},
 address =      {New York},
-edition =      {New millennium ed.},
+edition =      {new millennium ed.},
 note =	       {First publ.\ 1963},
 origdate =     {1963}
 }
@@ -44948,6 +45008,14 @@ year =	       {2004},
 note =	       {\arxiveprint{physics/0409010}}
 }
 
+@Misc{gilsonetal2019,
+author =       {Matthieu Gilson and David Dahmen and Moreno-Bote, Ruben and Andrea Insabato and Moritz Helias},
+title =	       {The covariance perceptron: A new framework for classification and processing of time series in recurrent neural networks},
+year =	       {2019},
+note =	       {\biorxiveprint{562546}},
+keywords =     {sufficient statistics}
+}
+
 @Article{gingoldetal1977,
 author =       {R. A. Gingold and J. J. Monaghan},
 title =	       {Smoothed particle hydrodynamics: theory and application to non-spherical stars},
@@ -48442,6 +48510,18 @@ number =       {5},
 pages =	       {327--354}
 }
 
+@Article{gronauetal2019,
+author =       {Quentin F. Gronau and Wagenmakers, Eric-Jan},
+title =	       {Limitations of {Bayesian} Leave-One-Out Cross-Validation for Model Selection},
+journal =      cbb,
+year =	       {2019},
+volume =       {2},
+number =       {1},
+pages =	       {1--11},
+note =	       {note = {\url{http://www.ejwagenmakers.com/papers.html}},},
+keywords =     {probability theory}
+}
+
 @Misc{gronwaldetal1997,
 author =       {Frank Gronwald and Friedrich W. Hehl},
 title =	       {Stress and Hyperstress as Fundamental Concepts in Continuum Mechanics and in Relativistic Field Theory},
@@ -50564,6 +50644,17 @@ volume =       {28},
 number =       {1},
 pages =	       {55--61},
 keywords =     {law of total probability}
+}
+
+@Article{haldane1945,
+author =       {J. B. S. Haldane},
+title =	       {On a method of estimating frequencies},
+journal =      bm,
+year =	       {1945},
+volume =       {33},
+number =       {3},
+pages =	       {222--225},
+keywords =     {negative-binomial distribution, stopping rule}
 }
 
 @Article{haldane1948,
@@ -54761,7 +54852,7 @@ title =	       {An Introduction to Statistical Thermodynamics},
 publisher =    {Addison-Wesley},
 year =	       {1986},
 address =      {Reading, USA},
-edition =      {Unabridged, corr.\ republication},
+edition =      {unabridged, corr.\ republication},
 note =	       {First publ.\ 1960},
 origdate =     {1960}
 }
@@ -54783,7 +54874,7 @@ title =	       {Thermodynamics of Small Systems},
 publisher =    {Dover},
 year =	       {1994},
 address =      {New York},
-edition =      {Unabridged, slightly corr.\ republication},
+edition =      {unabridged, slightly corr.\ republication},
 note =	       {Two volumes bound as one. First publ.\ 1963--1964},
 origdate =     {1963}
 }
@@ -64782,7 +64873,7 @@ title =	       {Elementary Mathematics from a Higher Standpoint. Vol.~II: Precis
 publisher =    {Springer},
 year =	       {2016},
 address =      {Berlin},
-edition =      {Transl.\ of 3rd German edition},
+edition =      {transl.\ of 3rd German edition},
 note =	       {Transl.\ by Marta Menghini in collaboration with Anna Baccaglini-Frank and Gert Schubring. First publ.\ in German 1902},
 origdate =     {1902}
 }
@@ -64793,7 +64884,7 @@ title =	       {Elementary Mathematics from a Higher Standpoint. Vol.~I: Arithme
 publisher =    {Springer},
 year =	       {2016},
 address =      {Berlin},
-edition =      {Transl.\ of 4th German edition},
+edition =      {transl.\ of 4th German edition},
 note =	       {Transl.\ by Gert Schubring. First publ.\ in German 1908},
 origdate =     {1908}
 }
@@ -64804,7 +64895,7 @@ title =	       {Elementary Mathematics from a Higher Standpoint. Vol.~II: Geomet
 publisher =    {Springer},
 year =	       {2016},
 address =      {Berlin},
-edition =      {Transl.\ of 4th German edition},
+edition =      {transl.\ of 4th German edition},
 note =	       {Transl.\ by Gert Schubring. First publ.\ in German 1908},
 origdate =     {1908}
 }
@@ -66874,7 +66965,7 @@ title =	       {The First and Last Freedom},
 publisher =    {HarperCollins},
 year =	       {2010},
 address =      {New York},
-edition =      {Digital},
+edition =      {digital ed.},
 note =	       {With an introduction by Aldous Huxley. First publ.\ 1954. \url{http://jiddu-krishnamurti.net/en/the-first-and-last-freedom/}},
 mynote =       {\enquote{You are merely covering with words of authority your own confusion}, Part One, \sect~1},
 origdate =     {1954}
@@ -66886,7 +66977,7 @@ title =	       {Think on These Things},
 publisher =    {HarperCollins},
 year =	       {1989},
 address =      {New York},
-edition =      {Digital},
+edition =      {digital ed.},
 note =	       {Ed.\ by D. Rajagopal. First publ.\ 1964. \url{http://jiddu-krishnamurti.net/en/think-on-these-things/}},
 origdate =     {1964}
 }
@@ -74816,7 +74907,7 @@ title =	       {The Science of Mechanics: A Critical and Historical Account of I
 publisher =    {Open Court},
 year =	       {1919},
 address =      {Chicago},
-edition =      {Fourth English ed.},
+edition =      {fourth English ed.},
 note =	       {Transl.\ from the seventh German ed. by Thomas J. McCormack. First publ.\ 1893. \url{https://archive.org/details/abr2456.0001.001.umich.edu}},
 origdate =     {1893}
 }
@@ -78237,6 +78328,17 @@ keywords =     {probability theory, statistical mechanics},
 mynote =       {\enquote{In the popular treatise, whatever shreds of the science are allowed to appear, are exhibited in an exceedingly diffuse and attenuated form, apparently with the hope that the mental faculties of the reader, though they would reject any stronger food, may insensibly become saturated with scientific phraseology, provided it is diluted with a sufficient quantity of more familiar language. In this way, by simple reading, the student may become possessed of the phrases of the science without having been put to the trouble of thinking a single thought about it. The loss implied in such an acquisition can be estimated only by those who have been compelled to unlearn a science that they might at length begin to learn it.}, p.~257. \enquote{The truth of the second law is therefore a statistical, not a mathematical, truth, for it depends on the fact that the bodies we deal with consist of millions of molecules, and that we never can get hold of single molecules.}, p.~279. \begin{quotation}This calculation belongs of course to molecular theory and not to pure thermodynamics, but it shews that we have reason for believing the truth of the second law to be of the nature of a strong probability, which, though it falls short of certainty by less than any assignable quantity, is not an absolute certainty.\par Several attempts have been made to deduce the second law from purely dynamical principles, such as Hamilton's principle, and without the introduction of any element of probability. If we are right in what has been said above, no deduction of this kind, however apparently satisfactory, can be a sufficient explanation of the second law. Indeed some of them have already indicated their unsoundness by leading to determinations of physical quantities which have no existence, such as the periodic time of the alternations of the volume of particular gases.\end{quotation}, p.~280. \enquote{If we define thermodynamics, as I think we may now do, as the investigation of the dynamical and thermal properties of bodies, deduced entirely from what are called the First and Second laws of Thermodynamics, without any hypotheses as to the molecular constitution of bodies, all speculations as to how much of the energy in a body is in the form of heat are quite out of place.}, p.~258}
 }
 
+@Article{maxwell1878b,
+author =       {Maxwell, (Clerk Maxwell), James},
+title =	       {{Paradoxical Philosophy} {[}book review{]}},
+journal =      nat,
+year =	       {1878},
+volume =       {19},
+number =       {477},
+pages =	       {141--143},
+note =	       {Repr.\ in \citebi{maxwell1890b_r1965}, pp.~756--762. See also \citebi{stoffkraft1879}}
+}
+
 @Article{maxwell1879,
 author =       {Maxwell, (Clerk Maxwell), James},
 title =	       {On Stresses in Rarified Gases Arising from Inequalities of Temperature},
@@ -78244,7 +78346,7 @@ journal =      ptrsl,
 year =	       {1879},
 volume =       {170},
 pages =	       {231--256},
-note =	       {Repr.\ in \citebi{maxwell1890b_r1965}, pp.~681--712}
+note =	       {Repr.\ in \citebi{maxwell1890b_r1965}, pp.~681--712. \url{https://archive.org/details/philtrans09463079}}
 }
 
 @Article{maxwell1879b,
@@ -78257,6 +78359,18 @@ pages =	       {547--570},
 note =	       {Repr.\ in \citebi{maxwell1890b_r1965}, pp.~713--741},
 keywords =     {maximum-entropy, statistical mechanics, rotational ensemble},
 mynote =       {\enquote{Boltzmann defines the probability of the system being in the phase {$(a_1 b)$} as the ratio of the aggregate time during which it is in that phase to the whole time of the motion, the whole time being supposed to be very great. I prefer to suppose that there are a great many systems the properties of which are the same, and that each of these is set in motion with a different set of values for the {$n$} co-ordinates and the {$n-1$} momenta, the value of the total energy {$E$} being the same in all, and to consider the number of these systems which, at a given instant, are in the phase {$(a_1 b)$}. The motion of each system is of course independent of the other systems.}, p.~721}
+}
+
+@Article{maxwell1879c,
+author =       {Maxwell, (Clerk Maxwell), James},
+title =	       {{Thomson} and {Tait's} {Natural Philosophy}},
+journal =      nat,
+year =	       {1879},
+volume =       {20},
+number =       {505},
+pages =	       {213--216},
+note =	       {Repr.\ in \citebi{maxwell1890b_r1965}, pp.~776--785},
+keywords =     {word: concepts}
 }
 
 @Book{maxwell1881,
@@ -82045,6 +82159,29 @@ series =       {Handbook of biological physics},
 address =      {Amsterdam}
 }
 
+@Book{mosteller1965_r1987,
+author =       {Frederick Mosteller},
+title =	       {Fifty Challenging Problems in Probability with Solutions},
+publisher =    {Dover},
+year =	       {1987},
+address =      {New York},
+edition =      {repr.},
+note =	       {First publ.\ 1965},
+origdate =     {1965}
+}
+
+@Article{mosteller1980,
+author =       {Frederick Mosteller},
+title =	       {Classroom and Platform Performance},
+journal =      amst,
+year =	       {1980},
+volume =       {34},
+number =       {1},
+pages =	       {11--17},
+note =	       {\url{http://www.medicine.mcgill.ca/epidemiology/hanley/communicationCommunicationCommunication/MostellerClassoomPlatform.pdf}, \url{https://www.edwardtufte.com/tufte/mosteller_p1}},
+keywords =     {teaching, probability theory}
+}
+
 @Article{mostelleretal1963,
 author =       {Frederick Mosteller and David L. Wallace},
 title =	       {Inference in an Authorship Problem: {A} Comparative Study of Discrimination Methods Applied to the Authorship of the Disputed {\emph{Federalist}} Papers},
@@ -84067,6 +84204,17 @@ title =	       {NEST 2.10.0},
 year =	       {2015},
 note =	       {\url{http://dx.doi.org/10.5281/zenodo.44222}, \url{http://www.nest-simulator.org/}},
 key =	       {nest}
+}
+
+@Article{nester1996,
+author =       {Marks R. Nester},
+title =	       {An Applied Statistician's Creed},
+journal =      ast,
+year =	       {1996},
+volume =       {45},
+number =       {4},
+pages =	       {401--410},
+keywords =     {probability theory, $p$-values}
 }
 
 @Book{nestruev2000_t2003,
@@ -92852,6 +93000,15 @@ mynote =       {\enquote{We might wonder, before we adopt the laws of probabilit
 origdate =     {1988}
 }
 
+@Book{pressetal2001,
+author =       {S. James Press and Judith M. Tanur},
+title =	       {The Subjectivity of Scientists and the Bayesian Approach},
+publisher =    {Wiley},
+year =	       {2001},
+series =       {Wiley series in probability \amp\ statistics},
+address =      {New York}
+}
+
 @Article{preston1979,
 author =       {Chris Preston},
 title =	       {Canonical and microcanonical {Gibbs} states},
@@ -99645,7 +99802,7 @@ volume =       {57},
 number =       {298},
 pages =	       {307--326},
 note =	       {See \citebi{birnbaumetal1962}},
-mynote =       {\begin{quotation}An engineer draws a random sample of electron tubes and measures the plate voltage under certain conditions with a very accurate voltmeter, accurate enough so that measurement error is negligible compared with the variability of the tubes. A statistician examines the measurements, which look normally distributed and vary from 75 to 99 volts with a mean of 87 and a standard deviation of 4. He makes the ordinary normal analysis, giving a confidence interval for the true mean. Later he visits the engineer's laboratory, and notices that the volt meter used reads only as far as 100, so the population appears to be "censored." This necessitates a new analysis, if the statistician is orthodox. However, the engineer says he has another meter, equally accurate and reading to 1000 volts, which he would have used if any voltage had been over 100. This is a relief to the orthodox statistician, because it means the population was effectively uncensored after all. But the next day the engineer telephones and says: ``I just discovered my high-range volt-meter was not working the day I did the experiment you analyzed for me.'' The statistician ascertains that the engineer would not have held up the experiment until the meter was fixed, and informs him that a new analysis will be required. The engineer is astounded. He says: ``But the experiment turned out just the same as if the high-range meter had been working. I obtained the precise voltages of my sample anyway, so I learned exactly what I would have learned if the high-range meter had been available. Next you'll be asking me about my oscilloscope.''\par I agree with the engineer. If the sample has voltages under 100, it doesn't matter whether the upper limit of the meter is 100, 1000, or 1 million. The sample provides the same information in any case. And this is true whether the end-product of the analysis is an evidential interpretation, a working conclusion, a decision, or an action.\end{quotation}, Pratt, pp.~314--315}
+mynote =       {\begin{quotation}An engineer draws a random sample of electron tubes and measures the plate voltage under certain conditions with a very accurate voltmeter, accurate enough so that measurement error is negligible compared with the variability of the tubes. A statistician examines the measurements, which look normally distributed and vary from 75 to 99 volts with a mean of 87 and a standard deviation of 4. He makes the ordinary normal analysis, giving a confidence interval for the true mean. Later he visits the engineer's laboratory, and notices that the volt meter used reads only as far as 100, so the population appears to be ``censored.'' This necessitates a new analysis, if the statistician is orthodox. However, the engineer says he has another meter, equally accurate and reading to 1000 volts, which he would have used if any voltage had been over 100. This is a relief to the orthodox statistician, because it means the population was effectively uncensored after all. But the next day the engineer telephones and says: ``I just discovered my high-range volt-meter was not working the day I did the experiment you analyzed for me.'' The statistician ascertains that the engineer would not have held up the experiment until the meter was fixed, and informs him that a new analysis will be required. The engineer is astounded. He says: ``But the experiment turned out just the same as if the high-range meter had been working. I obtained the precise voltages of my sample anyway, so I learned exactly what I would have learned if the high-range meter had been available. Next you'll be asking me about my oscilloscope.''\par I agree with the engineer. If the sample has voltages under 100, it doesn't matter whether the upper limit of the meter is 100, 1000, or 1 million. The sample provides the same information in any case. And this is true whether the end-product of the analysis is an evidential interpretation, a working conclusion, a decision, or an action.\end{quotation}, J. W. Pratt, pp.~314--315}
 }
 
 @Article{savickas2002,
@@ -106258,7 +106415,7 @@ address =      {New York}
 @Manual{stan2017,
 title =	       {Stan Modeling Language: User's Guide and Reference Manual},
 author =       {{Stan Development Team}},
-edition =      {Stan v.~2.16.0},
+edition =      {v.~2.16.0},
 year =	       {2017},
 note =	       {\url{https://mc-stan.org}},
 keywords =     {exchangeability, Bayesian probability theory}
@@ -107098,6 +107255,17 @@ volume =       {3},
 number =       {1},
 pages =	       {48--68},
 keywords =     {probability theory, exchangeability, quantum theory}
+}
+
+@Article{stoffkraft1879,
+author =       {Hermann Stoffkraft},
+title =	       {{Paradoxical Philosophy}},
+journal =      nat,
+year =	       {1879},
+volume =       {19},
+number =       {479},
+pages =	       {193--194},
+note =	       {See also \citebi{maxwell1879c}}
 }
 
 @Book{stoker1897,
@@ -116482,7 +116650,7 @@ year =	       {2007},
 volume =       {14},
 number =       {5},
 pages =	       {779--804},
-note =	       {\url{http://www.ejwagenmakers.com/2007/pValueProblems.pdf}},
+note =	       {\url{http://www.ejwagenmakers.com/papers.html}},
 keywords =     {Bayesian probability theory}
 }
 

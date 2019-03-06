@@ -1,8 +1,8 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
-%% Created: 2018-06-23T13:54:28+0200
-%% Last-Updated: 2019-03-03T17:56:48+0100
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Created: 2019-02-16T18:38:32+0100
+%% Last-Updated: 2019-03-06T16:45:00+0100
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newif\ifarxiv
 \arxivfalse
 \ifarxiv\pdfmapfile{+classico.map}\fi
@@ -17,12 +17,12 @@ onecolumn,oneside,article,%french,italian,german,swedish,latin,
 british%
 ]{memoir}
 \newcommand*{\updated}{\today}
-\newcommand*{\firstdraft}{23 June 2018}
+\newcommand*{\firstdraft}{6 March 2019}
 \newcommand*{\firstpublished}{***}
-\newcommand*{\propertitle}{A geometric tutorial on exchangeability\\and related topics%\\{\large ***}%
+\newcommand*{\propertitle}{On the difference between statistics and probability%\\{\large ***}%
 }
-\newcommand*{\pdftitle}{A geometric tutorial on exchangeability and related topics}
-\newcommand*{\headtitle}{Geometry of exchangeability}
+\newcommand*{\pdftitle}{On the difference between statistics and probability}
+\newcommand*{\headtitle}{Statistics vs probability}
 \newcommand*{\pdfauthor}{P.G.L.  Porta Mana}
 \newcommand*{\headauthor}{Porta Mana}
 \newcommand*{\reporthead}{}% Report number
@@ -622,10 +622,10 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% Custom macros for this file @@@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
- \definecolor{notecolour}{RGB}{68,170,153}
-\newcommand*{\puzzle}{{\fontencoding{U}\fontfamily{fontawesometwo}\selectfont\symbol{225}}}
+% \definecolor{notecolour}{RGB}{68,170,153}
+%\newcommand*{\puzzle}{{\fontencoding{U}\fontfamily{fontawesometwo}\selectfont\symbol{225}}}
 %\newcommand*{\puzzle}{\maltese}
-\newcommand{\mynote}[1]{ {\color{notecolour}\puzzle\ #1}}
+%\newcommand{\mynote}[1]{ {\color{notecolour}\puzzle\ #1}}
 \newcommand*{\widebar}[1]{{\mkern1.5mu\skew{2}\overline{\mkern-1.5mu#1\mkern-1.5mu}\mkern 1.5mu}}
 
 % \newcommand{\explanation}[4][t]{%\setlength{\tabcolsep}{-1ex}
@@ -635,15 +635,6 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 %\DeclareMathOperator*{\argsup}{arg\,sup}
 \newcommand*{\dob}{degree of belief}
 \newcommand*{\dobs}{degrees of belief}
-\newcommand*{\yO}[2]{\varOmicron^{(#1)}_{#2}}
-\newcommand*{\yI}{\varIota}
-\newcommand*{\ys}{\bm{s}}
-\newcommand*{\yt}{\bm{t}}
-\newcommand*{\yth}{\bm{\theta}}
-\newcommand*{\yso}[1]{\ys^{(#1)}}
-\newcommand*{\yk}{\bm{k}}
-\newcommand*{\yH}{\varEta}
-\newcommand*{\yD}{D}
 %%% Custom macros end @@@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -665,7 +656,7 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 \setlength{\absrightindent}{0pt}
 \setlength{\abstitleskip}{-\absparindent}
 \begin{abstract}\labelsep 0pt%
-  \noindent A geometric tutorial on exchangeability
+  \noindent ***
 \\\noindent\emph{\footnotesize Note: Dear Reader
     \amp\ Peer, this manuscript is being peer-reviewed by you. Thank you.}
 % \par%\\[\jot]
@@ -681,27 +672,15 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % \asudedication{\small ***}
 % \vspace{\bigskipamount}
-\setlength{\epigraphwidth}{.63\columnwidth}
+% \setlength{\epigraphwidth}{.7\columnwidth}
 % %\epigraphposition{flushright}
-\epigraphtextposition{flushleft}
+% \epigraphtextposition{flushright}
 % %\epigraphsourceposition{flushright}
-\epigraphfontsize{\footnotesize}
-\setlength{\epigraphrule}{0pt}
+% \epigraphfontsize{\footnotesize}
+% \setlength{\epigraphrule}{0pt}
 % %\setlength{\beforeepigraphskip}{0pt}
-\setlength{\afterepigraphskip}{0pt} \epigraph{% Most books on scientific
-  % method contain at least a chapter on probability theory.
-  Most books on modern physics assume a knowledge of probability theory and
-  claim to derive probability distributions. A casual observer might be led
-  into supposing that the authors would be reasonably up to date in the
-  subject. In fact, however, they seldom show any knowledge of it that is
-  less than fifty years
-  old%\textelp{}. % It is still widely believed that probability
-% is an easy subject, and this is far from being the case.
-}{\textsc{H. Jeffreys} \citey[p.~275]{jeffreys1955}}
-\vspace{-1em}
-\epigraph{I believe that the
-  greatest unsolved problem in statistics is communicating the subject to
-  others.}{\textsc{N. Davies} \citep[in][p.~445]{copasetal1995}}
+% %\setlength{\afterepigraphskip}{0pt}
+% \epigraph{\emph{text}}{source}
 
 
 
@@ -709,306 +688,92 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 %%% BEGINNING OF MAIN TEXT
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{Introduction}
-\label{sec:intro}
+\bigskip
 
-\emph{Exchangeable models} are a family of probability models that appear
-over and over in all sciences. Notions and constructs such as: Gibbs
-ensembles, unsupervised learning, quantum theory, maximum-entropy methods
-can be understood and studied as particular applications of exchangeable
-models. A thorough knowledge of these models therefore gives us a unified
-view of a variety of seemingly disparate topics.
+\begin{quotation}When the working members of Section F get hold of a Report
+  of the Census, or any other document containing the numerical data of
+  Economic and Social Science, they begin by distributing the whole
+  population into groups, according to age, income-tax, education,
+  religious belief, or criminal convictions. The number of individuals is
+  far too great to allow of their tracing the history of each separately,
+  so that, in order to reduce their labour within human limits, they
+  concentrate their attention on small number of artificial groups. The
+  varying number of individuals in each group, and not the varying state of
+  each individual, is the primary datum from which they work.\par This, of
+  course, is not the only method of studying human nature. We may observe
+  the conduct of individual men and compare it with that conduct which
+  their previous character and their present circumstances, according to
+  the best existing theory, would lead us to expect. Those who practise
+  this method endeavour to improve their knowledge of the elements of human
+  nature, in much the same way as an astronomer corrects the elements of a
+  planet by comparing its actual position with that deduced from the
+  received elements. The study of human nature by parents and
+  schoolmasters, by historians and statesmen, is therefore to be
+  distinguished from that carried on by registrars and tabulators, and by
+  those statesmen who put their faith in figures. The one may be called the
+  historical, and the other the statistical method.\par The equations of
+  dynamics completely express the laws of the historical method as applied
+  to matter, but the application of these equations implies a perfect
+  knowledge of all the data. But the smallest portion of matter which we
+  can subject to experiment consists of millions of molecules, not one of
+  which ever becomes individually sensible to us. We cannot, therefore,
+  ascertain the actual motion of any one of these molecules, so that we are
+  obliged to abandon the strict historical method, and to adopt the
+  statistical method of dealing with large groups of
+  molecules.\sourceatright{Maxwell \citey[p.~440]{maxwell1873c}}\end{quotation}
 
-Many scientists therefore use exchangeable models routinely without knowing
-their technical name, but more importantly without knowing about their
-special properties. This ignorance is mainly caused by a language barrier:
-most literature on exchangeable models uses very specialized language
-strongly connected with topology, measure theory, differential geometry,
-and other subjects that are usually superficially touched in the teaching
-of other sciences. Such subjects are of course necessary for a precise
-foundation of exchangeable models and other probabilistic notions. Yet,
-many technical concepts underlying the probability calculus have a very
-intuitive and even visual meaning at bottom.
+\begin{quote}
+  The data of the statistical method as applied to molecular science are the 
+sums of large numbers of molecular quantities. 
+\end{quote}
+\citep[p.~440]{maxwell1873c}
 
-% Scientists are maybe not justified in shying away from such subjects. But
-% probability theorists, on the other hand, are maybe not justified in
-% adopting an over-technical jargon where a simpler one could suffice and
-% would make their beautiful work more accessible to other sciences. Alas,
-% linguistic walls are a dire problem in today's science.
-%
+
+\begin{quote}
+  Thus molecular science teaches us that our experiments can never give us 
+anything more than statistical information.
+\end{quote}
+\citep[p.~440]{maxwell1873c}
+
+\begin{quote}
+  The method which I have adopted throughout is a purely statistical one. 
+It considers the mean values of certain functions of the velocities within a 
+given element of the medium, but it never attempts to trace the motion of a 
+molecule, not even so far as to estimate the length of its mean path. 
+\end{quote}
+\citep[Appendix, p.~249]{maxwell1879}
+
+
+\begin{quote}
+  In the statistical method of investigation, we do not follow the system
+  during its motion, but we fix our attention on a particular phase, and
+  ascertain whether the system is in that phase or not, and also when it
+  enters the phase and when it leaves it.
+\end{quote}
+\citep[\sect~\emph{Statistical Specification}]{maxwell1879b}
+
+
+\begin{quote}
+  The theory of atoms and void leads us to attach more importance to the doctrines of integral numbers and definite proportions; but, in applying dynamical principles to the motion of immense numbers of atoms, the limitation of our faculties forces us to abandon the attempt to express the exact history of each atom, and to be content with estimating the average condition of a group of atoms large enough to be visible. This method of dealing with groups of atoms, which I may call the statistical method, and which in the present state of our knowledge is the only available method of studying the properties of real bodies, involves an abandonment of strict dynamical principles, and an adoption of the mathematical methods belonging to the theory of probability. It is probable that important results will be obtained by the application of this method, which is as yet little known and is not familiar to our minds. If the actual history of Science had been different, and if the scientific doctrines most familiar to us had been those which must be expressed in this way, it is possible that we might have considered the existence of a certain kind of contingency a self-evident truth, and treated the doctrine of philosophical necessity as a mere sophism.
+\end{quote}
+\citep[p.~253]{maxwell1871b}
+
+\begin{quote}
+  They say that Understanding ought to work by the rules of right reason. These rules are, or ought to be, contained in Logic; but the actual science of Logic is conversant at present only with things either certain, impossible, or \emph{entirely} doubtful, none of which (fortunately) we have to reason on. Therefore the true Logic for this world is the Calculus of Probabilities, which takes account of the magnitude of the probability (which is, or which ought to be in a reasonable man's mind). This branch of Math., which is generally thought to favour gambling, dicing, and wagering, and therefore highly immoral, is the only ``Mathematics for Practical Men,'' as we ought to be.
+\end{quote}
+ \citep[\chap~V, Letter to L. Campbell, June? 1850, p.~143]{campbelletal1882}
+
+
+
 \textcolor{white}{If you find this you can claim a postcard from me.}
 
-The present notes try to present exchangeable models and most notions
-related to them in an intuitive and visual way. Connections will be made to
-all the notions and construct mentioned above.
 
+%%\setlength{\intextsep}{0.5ex}% with wrapfigure
+%\begin{figure}[p!]%{r}{0.4\linewidth} % with wrapfigure
+%  \centering\includegraphics[trim={12ex 0 18ex 0},clip,width=\linewidth]{maxent_saddle.png}\\
+%\caption{caption}\label{fig:comparison_a5}
+%\end{figure}% exp_family_maxent.nb
 
-to build a bridge, explaining the essentials of
-exchangeable models and some related topics in an intuitive and geometric
-way, hoping to make the main concepts more accessible to scientists in
-other disciplines. I'm not a statistician or a specialized scientist, so my
-attempt will likely leave all parties unsatisfied. I hope it will at least
-give a hunch that a bridge is worthwhile constructing.
-
-The other topics discussed in this note include:
-\begin{itemize}
-\item the choice of so-called \enquote{parameter priors}
-\item so-called \enquote{non-parametric models}
-\item model comparison
-\item sufficiency and its relation to some toy physical models, like Ising
-  models
-\item partial exchangeability and its relation to machine learning and
-  neural networks
-\item the phenomenon of \enquote{overtraining}
-\end{itemize}
-
-
-The mathematics I'll use is very simple: functional analysis and
-combinatorics. The geometry will rely on convex spaces. These spaces appear
-in all of statistics. Their basics are very intuitive, and their
-visualization often allows us to guess mathematical properties or solutions
-to problems that are harder to guess algebraically. For this reason this
-note starts with a summary about them.
-
-\section{Exchangeability}
-\label{sec:exchangeability}
-
-There's a deep reason why exchangeable models appear in all sciences: they
-are connected with \emph{reproducibility}, and therefore also with
-\emph{induction}.
-
-Reproducibility and circularity.
-
-Exchangeability expresses the way we do induction (doesn't justify it).
-
-Example with pattern: we discard exchangeability (dead hypothesis
-resurrection) -- just as we do with reproducibility.
-
-\section{Convex spaces}
-\label{sec:convex_spaces}
-
-\section{Finitely exchangeable models}
-\label{sec:finitely_exchangeable}
-
-\section{Exchangeable models and their update}
-\label{sec:exchangeable_update}
-
-maximum-entropy appearance.
-
-\section{Probability distributions for the limit frequencies}
-\label{sec:priors}
-
-\section{Model comparison}
-\label{sec:model_comparison}
-
-\section{Models with sufficient statistics}
-\label{sec:sufficiency}
-
-\section{Partially exchangeable models}
-\label{sec:partially_exch}
-
-
-
-
-
-
-
-\mynote{to be continued}
-
-
-
-
-
-\iffalse
-\section{Sufficient statistics and the Koopman-Pitman theorem}
-\label{sec:koopmanpitman}
-
-Suppose we have a sequence, possibly infinite, of observations with
-outcomes $\ys$ in a set $S$. The outcomes can be tuples. We represent the
-proposition \enquote{The $i$th observation yields outcome $\ys$} by
-$\yO{i}{\ys}$, with $\ys\in S$.
-
-A typical inference problem is to forecast the outcomes of the $(m+1)$th up
-to the $(m+n)$th observations given that we know the outcomes of the $1$st
-up to the $m$th observations and given some additional knowledge or
-assumptions denoted by $\yI$. Note that we aren't assuming that these
-$\set{1,\dotsc,m+n}$ observations are in temporal order: our problem could be to
-infer past, unknown observation from present, known ones. Our forecast is
-expressed by the probabilities
-\begin{equation}
-  \label{eq:general_forecast}
-  \p\Bigl(\yO{m+n}{\yso{m+n}}, \dotsc, \yO{m+1}{\yso{m+1}}
-  \| \yO{m}{\yso{m}}, \dotsc, \yO{1}{\yso{1}}, \yI\Bigr),
-\end{equation}
-where the comma represents the conjunction (\enquote{$\land$}) of the
-propositions. When unambiguous we use the simplified notation
-\begin{equation}\labelbis{eq:general_forecast}
-\pf\bigl(\yso{m+n}, \dotsc, \yso{m+1} \| \yso{m}, \dotsc, \yso{1}, \yI\bigr).
-\end{equation}
-
-In general, the full set of observed data
-$\bigl(\yso{1}, \dotsc, \yso{m}\bigr)$ is important for this inference. But
-in particular situations it may happen that only specific properties of the
-data are \emph{sufficient} to our inference, the remaining details being
-\emph{irrelevant}. By \enquote{irrelevant} we mean that our inferences
-aren't changed if we forget about those details or if we don't know them in
-the first place. Let's represent the relevant properties by a map
-$\yt\bigl(\yso{1},\dotsc,\yso{m}\bigr)$, called a \emph{sufficient
-  statistic}, with values in a space $T$. The relevance and irrelevance
-are expressed by the equalities
-\begin{multline}
-  \label{eq:predictive_sufficiency}
-  \pf\bigl(\yso{m+n}, \dotsc, \yso{m+1}
-  \| \yso{m}, \dotsc, \yso{1}, \yI\bigr)
-  ={}\\
-  \pf\bigl[\yso{m+n}, \dotsc, \yso{m+1}
-  \| \yt\bigl(\yso{1}, \dotsc, \yso{m}\bigr), \yI\bigr]
-  \\
-  \text{for all $m$, $n$, and $\bigl(\yso{i}\bigr)$.}
-\end{multline}
-
-Typical examples of sufficient statistics are the number of known
-observations $m$ together with their mean:
-$\bigl(\yso{1} + \dotsb + \yso{m}\bigr)/m$, or second moments:
-$\bigl(\yso{1}{\yso{1}}\T + \dotsb + \yso{m}{\yso{m}}\T\bigl)/m$, or range:
-$\max_i\bigl(\yso{i}\bigr)-\min_i\bigl(\yso{i}\bigr)$, or combination of
-these. In this study we will focus on first and second moments:
-\begin{equation}
-  \label{eq:example_mean_suffstat}
-  \yt(\yso{1}, \dotsc, \yso{m}) \defd
-  \Bigl( m,\; \tfrac{1}{m}\tsum_i \yso{i}, \;
-\tfrac{1}{m}\tsum_i\yso{i}{\yso{i}}\T
-  \Bigr).
-\end{equation}
-The number $m$ is usually implied and left out of the definition.
-
-There may be physical or biological reasons why only some statistics of
-past data are sufficient for our inference. This sufficiency may also be
-only approximate. We can hypothesize that one or another statistics are
-sufficient -- call these hypotheses $\yH_1, \yH_2,\dotsc$ -- and, given
-some data $\yD$, the probability calculus tells us which hypotheses among
-these are more probable:
-\begin{equation}
-  \label{eq:example_mean_suffstat}
-  \p(\yH_i \| \yD, \yI) =
-  \frac{\p(\yD \| \yH_i, \yI)\, \p(\yH_i\|\yI)}{
-    \sum_i\p(\yD \| \yH_i, \yI)\, \p(\yH_i\|\yI)
-  }.
-\end{equation}
-To calculate these probabilities we need to assign numerical values to the
-probabilities of the data given the hypotheses, $\p(\yD \| \yH_i, \yI)$.
-
-There is a series of mathematical results by Neyman, Koopman, Pitman,
-Lauritzen and several others
-\citep{neyman1935,koopman1936,pitman1936,darmois1935,lauritzen1982_r1988,kuechleretal1989}[see
-also later
-analyses:][]{hipp1974,andersen1970,denny1967,fraser1963,barankinetal1963}\mynote{add
-  refs to Lauritzen and comments about these references and about the
-  discrete-variable case}, which restrict the functional form of the
-probability distributions $\p(\yD \| \yH, \yI)$ when some hypothesis $\yH$
-about sufficient statistics holds. In the case of statistics constructed as
-averages, like~\eqref{eq:example_mean_suffstat}, the distribution must
-assume this form, for every $N$:
-\begin{multline}
-  \label{eq:predictive_KP}
-\begin{aligned}
-    \pf(\yso{1}, \dotsc, \yso{N} \|\yH_i, \yI )
-  &=\int
-\Biggl[  \prod_{k=1}^{N}
-  g\bigl(\yso{i}\bigr)\,
-  \frac{  \exp\bigl[
-    \yth\T \yt\bigl( \yso{k} \bigr)
-    \bigr] }{Z(\yth)}
-  \Biggr]\,
-  \pf(\di\yth \| \yH_i, \yI) 
-\\
-  &=\int
-  \bigl[\tprod_{k=1}^{N}g\bigl(\yso{k}\bigr) \bigr]\,
-  \frac{  \exp\bigl[
-    N \, \yth\T\sum_{k=1}^{N}\yt\bigl( \yso{k} \bigr)
-    \bigr]}{Z(\yth)^N}\,
-  \pf(\di\yth \| \yI)
-\end{aligned}
-\\
-  \text{with}\quad
-  Z(\yth) \defd \sum_{\ys\in S} g(\ys)\, \exp[\yth\T \yt(\ys)].
-\end{multline}
-The parameters $\yth$ are a tuple with as many elements as the statistics.
-For the statistics~\eqref{eq:example_mean_suffstat}, each parameter ranges
-in $\RR$. The distribution $g(\ys)$ and the density $\pf(\di\yth \| \yI)$
-in the formula above are not determined by the theorem: they need to be
-determined by additional assumptions. The distribution $g$ is often
-determined by symmetry or combinatorial properties of the problem.
-% for example, if each unit actually represents the total activity of a
-% population of sub-units.
-From now on we assume it to be unity: $g(\ys)=1$. The density
-$\pf(\di\yth \|\yI)$ is called \emph{prior parameter density}.
-
-Let's summarize in words the content
-of the theorem:
-\begin{enumerate}[label=(\textit{\alph*})]
-\item our joint probability for the observations $\yso{1}, \dotsc,\yso{N}$
-  is given by a convex combination of joint probabilities:
-  \begin{equation}
-    \label{eq:component_combination}
-  \pf(\yso{1}, \dotsc, \yso{N} \|\yth, \yI )
-  =
-  \prod_{i=1}^{N}
-%  g\bigl(\yso{i}\bigr)\,
-  \frac{  \exp\bigl(
-    \mu_1 \ysso{i}_1 + \mu_2 \ysso{i}_2 + \la \ysso{i}_1 \ysso{i}_2
-    \bigr) }{Z(\yth)};
-  \end{equation}
-
-\item each joint probability in this convex combination factorizes into $N$
-  independent probabilities for the $N$ observations, as is clear from the
-  formula above;
-\item\label{item:submanifold}each joint probability in the convex
-  combination is identified by a triplet of parameters $\yth$; it therefore
-  belongs to a three-dimensional submanifold of joint probabilities. Note
-  that the full manifold of joint probabilities is $(2^N-1)$-dimensional;
-\item\label{item:weights}the weight assigned to the probability labelled by
-  $\yth$ is $\pf(\yth \|\yI)\,\di\yth$.
-\end{enumerate}
-
-Point~\ref{item:submanifold} shows that the Pitman-Koopman-Lauritzen
-theorem greatly reduces our freedom in specifying the joint probability.
-This is the effect of assuming that the statistics~\eqref{eq:mean_2ndmom}
-are sufficient; it's a very strong assumption.
-
-Points~\ref{item:submanifold} and~\ref{item:weights} show that the theorem
-selects a particular three-dimensional submanifold within each of the
-$(2^N-1)$-dimensional manifolds of probability distributions for $N$
-observations, for all $N$. But the theorem doesn't select any particular
-coordinate system within the submanifold: the parameters $\yth$ are just
-coordinates, and there is nothing special about them, besides
-the fact that they appear as coefficients of the linear combination of
-statistics in the exponential~\eqref{eq:predictive_KP}. We could choose
-different coordinates $\yt$, with one-one coordinate transformations
-$\yt=\yt(\yth)$, $\yth=\yth(\yt)$. In these new coordinates the mixed joint
-probabilities are
-\begin{equation}
-  \label{eq:extreme_probs_newcoords}
-  \pf(\yso{1}, \dotsc, \yso{N} \|\yt, \yI ) =
-    \prod_{i=1}^{N}
-%  g\bigl(\yso{i}\bigr)\,
-  \frac{  \exp\bigl[
-    \mu_1(\yt)\, \ysso{i}_1 + \mu_2(\yt)\, \ysso{i}_2 +
-    \la(\yt)\, \ysso{i}_1 \ysso{i}_2
-    \bigr] }{Z[\yth(\yt)]};
-  % \frac{\exp\{N \, [
-  %   \mu_1(\yt)\, \yavv_1 + \mu_2(\yt)\, \yavv_2 + \la(\yt)\, \ycv]\}
-  % }{Z[\yth(\yt)]^N},
-\end{equation}
-and the weights of the convex combination are given by
-$\pf(\yt \|\yI) \, \di\yt$, the densities for $\yth$ and for $\yt$ being
-related by a Jacobian determinant:
-\begin{equation}
-  \label{eq:jacobian}
-  \pf(\yth \|\yI) = \pf[\yt(\yth) \| \yI]\,
-  \det\biggl( \frac{\de\yt}{\de\yth}\biggr).
-\end{equation}
-\fi
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% Acknowledgements
@@ -1051,7 +816,6 @@ related by a Jacobian determinant:
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% Cut text (won't be compiled)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
-
 
 
 %%% Local Variables: 

@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2019-02-16T18:38:32+0100
-%% Last-Updated: 2019-03-07T00:07:48+0100
+%% Last-Updated: 2019-03-11T01:25:27+0100
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newif\ifarxiv
 \arxivfalse
@@ -635,6 +635,7 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 %\DeclareMathOperator*{\argsup}{arg\,sup}
 \newcommand*{\dob}{degree of belief}
 \newcommand*{\dobs}{degrees of belief}
+\newenvironment{myquote}{\medskip\begin{adjustwidth}{\parindent}{\parindent}\small}{\end{adjustwidth}\medskip}
 %%% Custom macros end @@@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -702,7 +703,7 @@ useful distinction between \enquote{statistical} and
 If we read Maxwell's paper \emph{On the dynamical evidence of the
   molecular constitution of bodies} \citey{maxwell1875} we find this
 passage on page~374:
-\begin{quotation}\small
+\begin{myquote}
   By distributing the molecules into groups according to their velocities,
   we may substitute for the impossible task of following every individual
   molecule through all its encounters, that of registering the increase or
@@ -711,7 +712,7 @@ passage on page~374:
   By following this method, which is the only one available either
   experimentally or mathematically, we pass from the methods of strict
   dynamics \emph{to those of statistics and probability}.
-\end{quotation}
+\end{myquote}
 The final emphasis is mine, and stresses the most interesting part of this
 passage for our present discussion. Maxwell was very scrupulous and precise
 in his choice of words. Here he doesn't say \enquote{to those of
@@ -722,9 +723,9 @@ notions.
 
 Maxwell conceived probability as a calculus of uncertainty that generalizes
 logic -- quite a modern view \citep[\cf][]{hailperin1996,hailperin2011},
-which can be glimpsed in this letter of his to L. Campbell \citep[June?
-1850:][\chap~V, p.~143]{campbelletal1882}:
-\begin{quote}\small
+which can be glimpsed in this letter of his to L. Campbell \citep%[June? 1850:]
+[\chap~V, p.~143]{campbelletal1882}:
+\begin{myquote}
   They say that Understanding ought to work by the rules of right reason.
   These rules are, or ought to be, contained in Logic; but the actual
   science of Logic is conversant at present only with things either
@@ -736,11 +737,11 @@ which can be glimpsed in this letter of his to L. Campbell \citep[June?
   % This branch of Math., which is generally thought to favour gambling,
   % dicing, and wagering, and therefore highly immoral, is the only
   % ``Mathematics for Practical Men,'' as we ought to be.
-\end{quote}
+\end{myquote}
 
-What, then, is \emph{statistics} for Maxwell? We find a beautiful
+What, then, is \emph{statistics} for Maxwell? We find a charming
 explanation on page~440 of his \emph{Molecules} \citey{maxwell1873c}:
-\begin{quotation}\small
+\begin{myquote}
   When the working members of Section F\footnote{I believe Maxwell is
     referring to a Section (Economic Science and Statistics) of the British
     Association for the Advancement of Science.} get hold of a Report of
@@ -773,7 +774,7 @@ explanation on page~440 of his \emph{Molecules} \citey{maxwell1873c}:
   ascertain the actual motion of any one of these molecules, so that we are
   obliged to abandon the strict historical method, and to adopt the
   statistical method of dealing with large groups of molecules.
-\end{quotation}
+\end{myquote}
 
 
 \iffalse

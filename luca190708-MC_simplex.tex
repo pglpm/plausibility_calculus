@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2015-05-01T20:53:34+0200
-%% Last-Updated: 2019-07-14T15:05:02+0200
+%% Last-Updated: 2019-07-14T15:16:32+0200
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newif\ifarxiv
 \arxivfalse
@@ -487,9 +487,9 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 % {\protect\centering ***\\%
 % \footnotesize\epost{\email{***}{***}}}%
 % \hspace*{\stretch{1}}%
-\parbox{0.5\linewidth}%\makebox[0pt][c]%
+\parbox{0.75\linewidth}%\makebox[0pt][c]%
 {\protect\centering P.G.L.  Porta Mana\\%
-\footnotesize\epost{\email{piero.mana}{ntnu.no}}}%
+\footnotesize\emph{Kavli Institute, Trondheim, Norway}\quad\epost{\email{piero.mana}{ntnu.no}}}%
 \hspace*{\stretch{1}}%
 %\quad\href{https://orcid.org/0000-0002-6070-0784}{\protect\includegraphics[scale=0.16]{orcid_32x32.png}\textsc{orcid}:0000-0002-6070-0784}%
 }
@@ -662,22 +662,22 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% Abstract
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\iffalse\abstractrunin
+\abstractrunin
 \abslabeldelim{}
 \renewcommand*{\abstractname}{}
 \setlength{\absleftindent}{0pt}
 \setlength{\absrightindent}{0pt}
 \setlength{\abstitleskip}{-\absparindent}
 \begin{abstract}\labelsep 0pt%
-  \noindent A way to do Monte Carlo sampling on the simplex
+\noindent\textbf{A simple way to sample general probability distributions defined
+over the simplex is discussed.}
 \\\noindent\emph{\footnotesize Note: Dear Reader
     \amp\ Peer, this manuscript is being peer-reviewed by you. Thank you.}
-% \par%\\[\jot]
 % \noindent
 % {\footnotesize PACS: ***}\qquad%
 % {\footnotesize MSC: ***}%
 %\qquad{\footnotesize Keywords: ***}
-\end{abstract}\fi
+\end{abstract}
 \selectlanguage{british}\frenchspacing
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -703,7 +703,7 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 
 %\section{Intro}
 %\label{sec:intro}
-
+\bigskip
 The need to sample from a general distribution of probability over a
 simplex, that is, over a space of distributions, is more common than one
 might think. For example, it's necessary whenever we use exchangeable

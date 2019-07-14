@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2015-05-01T20:53:34+0200
-%% Last-Updated: 2019-07-08T23:41:24+0200
+%% Last-Updated: 2019-07-14T15:05:02+0200
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newif\ifarxiv
 \arxivfalse
@@ -19,7 +19,7 @@ british%
 \newcommand*{\updated}{\today}
 \newcommand*{\firstdraft}{8 July 2019}
 \newcommand*{\firstpublished}{***}
-\newcommand*{\propertitle}{Monte Carlo on the simplex%\\{\large ***}%
+\newcommand*{\propertitle}{Sampling on the simplex%\\{\large ***}%
 }% title uses LARGE; set Large for smaller
 \newcommand*{\pdftitle}{\propertitle}
 \newcommand*{\headtitle}{\propertitle}
@@ -559,7 +559,7 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 %\DeclarePairedDelimiter\clcl{[}{]}
 %\DeclarePairedDelimiter\clop{[}{[}
 %\DeclarePairedDelimiter\opcl{]}{]}
-%\DeclarePairedDelimiter\opop{]}{[}
+\DeclarePairedDelimiter\opop{]}{[}
 \DeclarePairedDelimiter\abs{\lvert}{\rvert}
 %\DeclarePairedDelimiter\norm{\lVert}{\rVert}
 \DeclarePairedDelimiter\set{\{}{\}}
@@ -637,6 +637,17 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 %\DeclareMathOperator*{\argsup}{arg\,sup}
 \newcommand*{\dob}{degree of belief}
 \newcommand*{\dobs}{degrees of belief}
+\newcommand*{\yff}{f}
+\newcommand*{\yf}{\bm{\yff}}
+\newcommand*{\yfi}{\bm{F}}
+\newcommand*{\yxx}{z}
+\newcommand*{\yx}{\bm{\yxx}}
+\newcommand*{\yg}{g}
+\newcommand*{\yh}{h}
+\newcommand*{\yhb}{H}
+\newcommand*{\ysim}{\triangle}
+\newcommand*{\yyy}{x}
+\newcommand*{\yy}{\bm{\yyy}}
 %%% Custom macros end @@@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -651,7 +662,7 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% Abstract
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\abstractrunin
+\iffalse\abstractrunin
 \abslabeldelim{}
 \renewcommand*{\abstractname}{}
 \setlength{\absleftindent}{0pt}
@@ -666,7 +677,7 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 % {\footnotesize PACS: ***}\qquad%
 % {\footnotesize MSC: ***}%
 %\qquad{\footnotesize Keywords: ***}
-\end{abstract}
+\end{abstract}\fi
 \selectlanguage{british}\frenchspacing
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -690,10 +701,146 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 %%% BEGINNING OF MAIN TEXT
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{Intro}
-\label{sec:intro}
+%\section{Intro}
+%\label{sec:intro}
 
+The need to sample from a general distribution of probability over a
+simplex, that is, over a space of distributions, is more common than one
+might think. For example, it's necessary whenever we use exchangeable
+probability models
+\citep{dawid2013,definetti1930,definetti1937}[\sect~4.2]{bernardoetal1994_r2000},
+ubiquitous in science owing to their intimate connection with
+reproducibility \citep[\sects~B.2.15--16]{jcgm1993_r2012}[\sects~3.3.6,
+3.3.11]{iso2006b}[\chap~IX]{poincare1902_r1992}[\chap~VI]{duhem1906_r1914}{definetti1937}[\chap~IV]{jeffreys1931_r1973}[\chap~1]{popper1935_t2005}.
+
+Sampling on an $N$-dimensional simplex, for example by Monte Carlo methods,
+is difficult because the allowed ranges of the sampled quantities are
+interdependent: denoting by $\yf\defd(\yff_{0},\dotsc, \yff_{N})$ the sampled
+distributions, we must have
+\begin{equation}
+  \label{eq:normalization}
+  \sum_{i=0}^{N} \yff_{i} =1,\qquad
+    0 \le \yff_{i} \le 1,\quad\text{all $i$},
+\end{equation}
+so that $N$ independent components, for example
+$\yfi\defd(\yff_{1},\dotsc,\yff_{N})$, must satisfy
+\begin{equation}
+  \label{eq:interdependence}
+  \sum_{j=1}^{N} \yff_{j} \le 1.
+\end{equation}
+The individual bounds $0 \le \yff_{i} \le 1$ are not difficult to handle
+with a change of variable, using a logistic function for example, because
+they are independent. It's the joint constraint~\eqref{eq:interdependence}
+that's the problem. It needs to be tested for any proposed sample, and in
+high dimensions it leads to high rejection rates, because the
+$N$-dimensional simplex only occupies an $N!$ fraction of the volume of the
+unit hypercube $\set{0 \le \yff_{j} \le 1}$.
+
+I didn't find solutions to this problem in the literature, except for an
+ingenious change of variables $\yf \mapsto \yx$, discussed by Betancourt
+\parentext{\cite*{betancourt2012}; \cite{altmannetal2014}}, which maps the
+simplex into the unit hypercube:
+\begin{equation}
+  \label{eq:betancourt_transf}
+  \begin{split}
+  \yff_{1} &= 1- \yxx_{1} \\
+  \yff_{2} &= (1- \yxx_{2})\;\yxx_{1} \\
+  \yff_{3} &= (1- \yxx_{3})\;\yxx_{2} \;\yxx_{1} \\
+  &\dotso \\
+  \yff_{N} &= (1- \yxx_{N})\;\yxx_{N-1} \dotsm \yxx_{1}\\
+  \yff_{0}&\equiv \yxx_{N} \dotsm \yxx_{1}.
+\end{split}
+\end{equation}
+You can easily check that the quantities
+$\yx \defd (\yxx_{1},\dotsc,\yxx_{N})$ have independent bounds
+$\set{0 \le \yxx_{j} \le 1}$. The Jacobian determinant of this
+transformation can be easily computed. This transformation has a couple of
+practical disadvantages, however, owing to its recursive structure. As $j$
+increases the numerical imprecision of the $\yxx_{j}$ accumulates in the
+$\yff_{j}$, leading to an artificial additional variability in the latter,
+which manifests as a flattening of their marginal densities. The non-linear
+transformation $\yx \mapsto \yf$ moreover destroys the convex structure of
+the simplex; it heavily bends regions that are linear in $\yf$, and can
+thus lead to a slower exploration of regions with high probability.
+
+\bigskip
+
+I want to propose an alternative solution to the problem of interdependent
+bounds~\eqref{eq:interdependence}. This solution is so simple that it has
+surely been used or discussed before \citep[\sect~23.5, p.~316 comes very
+close]{mackay1995_r2003}, so I'm not making any claims of originality. But
+I haven't seen it explicitly discussed in the literature, so it may be
+useful to advertise it.
+
+Suppose you want to sample from the probability distribution
+\begin{equation}
+\label{eq:main_distribution}
+\yg(\yf)\,\di\yfi,
+\qquad \yff_{j} \ge 0, \quad \sum_{j}\yff_{j} \le 1,
+\end{equation}
+defined over the $N$-dimensional simplex $\ysim^{N}$. This distribution can
+be considered as the marginal distribution of the joint, separable
+distribution
+\begin{equation}
+  \label{eq:joint_r}
+  \yh(r)\;\yg(\yf)\;\di r\,\di\yfi,
+  \qquad r \ge 0,\quad \yf\in\ysim^{N},
+\end{equation}
+where $r$ is a positive quantity with a (regular) distribution of
+probability $\yh(r)\,\di r$. If we sample $(r, \yfi)$ from this joint
+distribution, the samples of $\yfi$ will obviously come from
+$\yg(\yf)\,\di\yfi$.
+
+Now consider the quantities $\yy \defd (\yyy_{0}, dotsc, \yyy_{N})$ in the
+positive $(N+1)$-dimensional orthant ${\yyy_{i} \ge 0}$. Note that they
+have independent ranges. Consider the following transformation
+$\yy \mapsto (r,\yfi)$:
+\begin{subequations}
+  \label{eq:main_transformation}
+  \begin{align}
+      \label{eq:main_transformation_r}
+    r&= \yyy_{0} + \dotsb + \yyy_{N} \\
+      \label{eq:main_transformation_f}
+    \yff_{i}&= \frac{\yyy_{i}}{\yyy_{0} + \dotsb + \yyy_{N}}
+  \end{align}
+\end{subequations}
+You can prove, by induction for example, that the Jacobian determinant of
+this transformation is $r^{-N}$. The joint probability
+distribution~\eqref{eq:joint_r} can therefore be written as
+\begin{equation}
+  \label{eq:joint_x}
+  \yhb[r(\yy)]\;\yg[\yf(\yy)]\;\di\yy,
+  \qquad \yyy_{i} \ge 0,
+\end{equation}
+where the Jacobian determinant has been absorbed into
+$\yhb(r) \defd \yh(r)/r^{N}$.
+
+We can therefore easily sample from the distribution~\eqref{eq:joint_x} for
+the quantities $\yy$, on a space with no interdependent bounds, and then
+construct samples of $\yf$ from $\yy$ via the
+transformation~\eqref{eq:main_transformation_f}. The resulting $\yf$
+samples are drawn from our distribution of
+interest~\eqref{eq:main_distribution}. The $r$ samples are drawn from
+$\yh(r)\,\di r$ but they're discarded (unless this quantity is of interest
+for some reason). Note that $\yh$ and therefore $\yhb$ are completely
+arbitrary; we can choose a normal distribution as the latter, for example.
 \textcolor{white}{If you find this you can claim a postcard from me.}
+
+\bigskip
+
+Some final, practical points. The fact that the quantities $\yyy_{i}$ are
+bounded from below can be easily solved by a further exponential transformation
+$\yyy_{i} = \exp(t_{i})$, for example. But, if our probability
+distribution~\eqref{eq:main_distribution} has its mass distributed enough
+far away from the faces of the simplex, it's actually possible and
+practical to sample the $\yy$ directly, by using a density function
+$\yh(r)$ with a sharp peak at high values of $r$, typically at $r\approx
+1/N$. This way, even if some typical $\yff_{i}$ may be close to zero, the
+corresponding $\yyy_{i}$ will be of order unity, enough far away from their
+lower bound to be sampled directly without worrying about high rejection rates.
+
+
+
 
 
 
@@ -708,7 +855,7 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% Acknowledgements
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
-\iffalse
+%\iffalse
 \begin{acknowledgements}
   \ldots to Mari \amp\ Miri for continuous encouragement and affection, and
   to Buster Keaton and Saitama for filling life with awe and inspiration.
@@ -718,7 +865,7 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 %\rotatebox{15}{P}\rotatebox{5}{I}\rotatebox{-10}{P}\rotatebox{10}{\reflectbox{P}}\rotatebox{-5}{O}.
 \sourceatright{\autanet}
 \end{acknowledgements}
-\fi
+%\fi
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% Appendices

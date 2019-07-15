@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2015-05-01T20:53:34+0200
-%% Last-Updated: 2019-07-14T17:00:36+0200
+%% Last-Updated: 2019-07-15T14:27:40+0200
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newif\ifarxiv
 \arxivfalse
@@ -535,7 +535,7 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 %\DeclareMathOperator{\ent}{ent}%integer less or equal to
 %\DeclareMathOperator{\Ord}{O}%same order as
 %\DeclareMathOperator{\ord}{o}%lower order than
-%\newcommand*{\incr}{\triangle}%finite increment
+\newcommand*{\incr}{\triangle}%finite increment
 \newcommand*{\defd}{\coloneqq}
 \newcommand*{\defs}{\eqqcolon}
 %\newcommand*{\Land}{\bigwedge}
@@ -746,8 +746,8 @@ simplex into the unit hypercube:
   \begin{split}
   \yff_{1} &= 1- \yxx_{1} \\
   \yff_{2} &= (1- \yxx_{2})\;\yxx_{1} \\
-  \yff_{3} &= (1- \yxx_{3})\;\yxx_{2} \;\yxx_{1} \\
-  &\dotso \\
+  \yff_{3} &= (1- \yxx_{3})\;\yxx_{2} \;\yxx_{1} \\[-\jot]
+  &\dotso \\[-\jot]
   \yff_{n} &= (1- \yxx_{n})\;\yxx_{n-1} \dotsm \yxx_{1}\\
   \yff_{0}&\equiv \yxx_{n} \dotsm \yxx_{1}.
 \end{split}
@@ -757,22 +757,24 @@ $\yx \defd (\yxx_{1},\dotsc,\yxx_{n})$ have independent bounds
 $\set{0 \le \yxx_{j} \le 1}$. The Jacobian determinant of this
 transformation can also be computed. This transformation has a couple of
 practical disadvantages, however, owing to its recursive structure. The
-numerical imprecision of the $\yxx_{j}$ accumulates in the $\yff_{j}$ as
+numerical relative imprecision of the $\yxx_{j}$ accumulates in the $\yff_{j}$ as
 $j$ increases, leading to an artefactual additional variability in the
 latter, which manifests as an artificial broadening of their marginal
 densities, increasing with $j$. The non-linear transformation
 $\yx \mapsto \yf$ moreover destroys the convex structure of the simplex; it
 heavily bends regions that are linear in $\yf$, and can thus lead to a
 slower exploration of regions with high probability in some Markov-chain methods.
+\textcolor{white}{If you find this you can claim a postcard from me.}
 
-\medskip
+%\smallskip
 
 I want to propose an alternative solution to the problem of interdependent
 bounds~\eqref{eq:interdependence}. This solution is so simple that it has
-surely been used or discussed before \citep[\sect~23.5, p.~316 comes very
-close]{mackay1995_r2003}, so I'm not making any claims of originality. But
-I haven't seen it explicitly discussed in the literature, so it may be
-useful to advertise it.
+surely been used or discussed before, %\citep[\sect~23.5, p.~316 comes very
+% close]{mackay1995_r2003},
+so I'm not making any claims of originality. But I haven't seen it
+explicitly discussed in the literature, so it may be useful to advertise
+it.
 
 Suppose you want to sample from the probability distribution
 \begin{equation}
@@ -797,9 +799,8 @@ distribution, the samples of $\yfi$ will obviously come from
 $\yg(\yf)\,\di\yfi$.
 
 Now consider the quantities $\yy \defd (\yyy_{0}, \dotsc, \yyy_{n})$ in the
-positive $(n+1)$-dimensional orthant $\set{\yyy_{i} \ge 0}$. Note that they
-have independent ranges. Consider the following transformation
-$\yy \mapsto (r,\yfi)$:
+positive $(n+1)$-dimensional orthant $\set{\yyy_{i} \ge 0}$. Consider the
+following transformation $\yy \mapsto (r,\yfi)$:
 \begin{subequations}
   \label{eq:main_transformation}
   \begin{align}
@@ -809,8 +810,9 @@ $\yy \mapsto (r,\yfi)$:
     \yff_{i}&= \frac{\yyy_{i}}{\yyy_{0} + \dotsb + \yyy_{n}}
   \end{align}
 \end{subequations}
-You can prove, by induction for example, that the Jacobian determinant of
-this transformation is $r^{-n}$. The joint probability
+You can prove, for example by considering the inverse transformation
+$(r,\yfi) \mapsto \yy$, that the Jacobian determinant of
+$\yy \mapsto (r,\yfi)$ is $r^{-n}$. The joint probability
 distribution~\eqref{eq:joint_r} can therefore be written as
 \begin{equation}
   \label{eq:joint_x}
@@ -818,7 +820,8 @@ distribution~\eqref{eq:joint_r} can therefore be written as
   \qquad \yyy_{i} \ge 0,
 \end{equation}
 where the Jacobian determinant has been absorbed into
-$\yhb(r) \defd \yh(r)/r^{n}$.
+$\yhb(r) \defd \yh(r)/r^{n}$. Most important, \emph{the $\yyy_{i}$ have
+  independent ranges}.
 
 We can therefore easily sample from the distribution~\eqref{eq:joint_x} for
 the quantities $\yy$, on a space with no interdependent bounds, and then
@@ -829,22 +832,21 @@ interest~\eqref{eq:main_distribution}. The $r$ samples are drawn from
 $\yh(r)\,\di r$ but they're discarded (unless this quantity is of interest
 for some reason). Note that $\yh$ and therefore $\yhb$ are completely
 arbitrary; we can choose a normal distribution as the latter, for example.
-\textcolor{white}{If you find this you can claim a postcard from me.}
+Also, the numerical relative imprecision of every $\yff_{i}$ is roughly
+twice that of $\yyy_{i}$: no accumulation occurs.
 
-\medskip
+\smallskip
 
 Some final, practical points: The lower bound of the quantities $\yyy_{i}$
 can be easily eliminated by a further exponential transformation
-$\yyy_{i} = \exp(t_{i})$, for example. But, if our probability
+$\yyy_{i} = \exp(t_{i})$. But, if our probability
 distribution~\eqref{eq:main_distribution} has its main mass enough far away
 from the faces of the simplex, it's actually possible and practical to
-sample the $\yy$ directly, by using a density function $\yhb(r)$ with a
-sharp peak at high values of $r$, say around $r\approx n$. This way, even
-if some typical $\yff_{i}$ may be close to zero, the corresponding
-$\yyy_{i}$ will be of order unity, enough far away from their lower bound
-to be sampled directly without worrying about high rejection rates.
-
-
+sample the $\yy$ directly if we use a density function $\yhb(r)$ with a
+sharp peak at high values of $r$, say $r\approx n$. This way, even if some
+typical $\yff_{i}$ may be close to zero, the corresponding $\yyy_{i}$ will
+be of order unity, enough far away from its lower bound to be sampled
+directly without worrying about high rejection rates.
 
 
 
@@ -875,7 +877,7 @@ to be sampled directly without worrying about high rejection rates.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% Appendices
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
-\clearpage
+%\clearpage
 % %\renewcommand*{\appendixpagename}{Appendix}
 % %\renewcommand*{\appendixname}{Appendix}
 % %\appendixpage

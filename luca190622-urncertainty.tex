@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2015-05-01T20:53:34+0200
-%% Last-Updated: 2019-07-14T23:23:26+0200
+%% Last-Updated: 2019-07-15T15:40:09+0200
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newif\ifarxiv
 \arxivfalse
@@ -695,12 +695,12 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 
 Quantifying our degree of belief about the contents of an urn that
 contains, say, white and black balls in an unknown proportion is a standard
-textbook topic. Our belief depends on our data about the urn and on our
+textbook topic. Our belief depends on our drawing data about the urn and on our
 state of knowledge about the urn before we knew those data. For example, we
 may know the colours of five balls drawn from the urn, and how or why the
-urn was prepared. Jaynes's book \citey[\chaps~3 \amp\ 6]{jaynes1994_r2003}
+urn was prepared. Jaynes's book \citey[\chaps~3, 6]{jaynes1994_r2003}
 gives a superb analysis and discussion of this problem and of the
-probability formulae that typically arise there; and even of more realistic
+probability formulae that it typically involves; and even of more realistic
 variants, such as an increased frequency of drawing and replacing from the
 top layer of the urn \citep[\sect~3.9]{jaynes1994_r2003}.
 
@@ -712,25 +712,44 @@ be mapped to the present problem.\mynote{examples}
 The problem we consider is the following. There's an urn with $N$ balls,
 each of which can be white or black. At regular intervals of time every
 ball can change its colour: a white can turn black, or vice versa, or it
-can keep the colour it has. We can observe $n$ out of the $N$ balls for $T$
+can keep the colour it has. We  observe $n$ out of the $N$ balls for $T$
 time intervals. The $n$ observed balls are initially chosen in a way
 unknown to us. Note that we observe the \emph{same} $n$ balls at all times.
 Some variations of this set-up will be discussed later on.
-
+% {3, 997}, {17, 983}, {23, 977}, {29, 971}, {47, 953}, {53, 947}, {59,
+% 941}, {71, 929}, {89, 911}, {113, 887}, {137, 863}, {173, 827}, {179,
+% 821}, {191, 809}, {227, 773}, {239, 761}, {257, 743}, {281, 719}, {317,
+% 683}, {347, 653}, {353, 647}, {359, 641}, {383, 617}, {401, 599}, {431,
+% 569}, {443, 557}, {479, 521}, {491, 509}
 We ask several questions about this magic urn:
 \begin{enumerate}[label=Q\arabic*]
 \item \label{item:q_p_known}What was the proportion of white and black
-  balls in the urn at some specific time, among the times we observed?
+  balls in the urn at some specific time, among the times we observed? For
+  example, did the urn contain 383 white and 617 black balls during the
+  3rd time step?
+\item \label{item:q_f_known}How frequently did each possible proportion of
+  white and black balls appear, during the times we observed? For example:
+  did the urn have a white/black proportion of 887/113 during 37 out of
+  10\,000 time steps?
 \item \label{item:q_p_unknown}What was (or will be) the proportion of white
   and black balls in the urn at some specific time, among the times we did
   not observe?
-\item \label{item:q_f_known}How frequently did every possible proportion of
-  white and black balls appear, during the times we observed?
 \item \label{item:q_f_unknown}How frequently will every possible proportion
   of white and black balls appear, during all times the urn exists?
 \end{enumerate}
 Our goal is to quantify how our belief is distributed among the possible
-answers to these questions, assuming the following prior beliefs:
+answers to these questions. This belief depends on our observation of the
+$n$ balls for $T$ time steps, and on our knowledge about the mechanism
+behind the magic changes of the urn, expressed as a prior belief.
+
+We consider this specific prior belief: \emph{we are equally uncertain
+  about all sequences proportions of urn colours that differ only by their
+  ordering}. For example, we have equal beliefs that the sequences of
+proportions $(239/761, 647/353, 17/983, 239/761)$,  $(17/983, 647/353,
+239/761, 239/761)$, and $(647/353, 17/983, 239/761, 239/761)$ may occur.
+
+
+
 
 % The set-up above is an abstract picture; in a real situation our knowledge
 % would be more specific -- although its details are often difficult to

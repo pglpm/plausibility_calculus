@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2015-05-01T20:53:34+0200
-%% Last-Updated: 2019-07-16T00:20:06+0200
+%% Last-Updated: 2019-07-16T00:23:36+0200
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newif\ifarxiv
 \arxivfalse
@@ -821,7 +821,7 @@ distribution~\eqref{eq:joint_r} can therefore be written as
 \end{equation}
 where the Jacobian determinant has been absorbed into
 $\yhb(r) \defd \yh(r)/r^{n}$. Most important, \emph{the $\yyy_{i}$ have
-  independent ranges}.
+  independent bounds}.
 
 We can therefore easily sample from the distribution~\eqref{eq:joint_x} for
 the quantities $\yy$, on a space with no interdependent bounds, and then
@@ -829,11 +829,11 @@ construct samples of $\yf$ from $\yy$ via the
 transformation~\eqref{eq:main_transformation_f}. The resulting $\yf$
 samples are drawn from our distribution of
 interest~\eqref{eq:main_distribution}. The $r$ samples are drawn from
-$\yh(r)\,\di r$ but they're discarded (unless this quantity is of interest
+$\yh(r)\,\di r$ but they aren't calculated (unless this quantity is of interest
 for some reason). Note that $\yh$ and therefore $\yhb$ are completely
 arbitrary; we can choose a normal distribution as the latter, for example.
 Also, the numerical relative imprecision of every $\yff_{i}$ is roughly
-twice that of $\yyy_{i}$: no accumulation occurs.
+twice that of $\yyy_{i}$: no accumulation of imprecision occurs.
 
 \smallskip
 

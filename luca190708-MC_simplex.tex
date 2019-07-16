@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2015-05-01T20:53:34+0200
-%% Last-Updated: 2019-07-16T00:31:44+0200
+%% Last-Updated: 2019-07-16T15:58:51+0200
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newif\ifarxiv
 \arxivfalse
@@ -648,6 +648,8 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 \newcommand*{\ysim}{\triangle}
 \newcommand*{\yyy}{x}
 \newcommand*{\yy}{\bm{\yyy}}
+\newcommand*{\ytt}{t}
+\newcommand*{\yt}{\bm{\ytt}}
 %%% Custom macros end @@@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -669,10 +671,9 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 \setlength{\absrightindent}{0pt}
 \setlength{\abstitleskip}{-\absparindent}
 \begin{abstract}\labelsep 0pt%
-\noindent\textbf{A simple way to sample general probability distributions defined
-over the simplex is discussed.}
-%\\\noindent
-\emph{\footnotesize Note: Dear Reader
+  \noindent\textbf{Two simple methods for sampling general probability
+    distributions defined over the simplex are presented.}
+\\\noindent{\footnotesize Note: Dear Reader
     \amp\ Peer, this manuscript is being peer-reviewed by you. Thank you.}
 % \noindent
 % {\footnotesize PACS: ***}\qquad%
@@ -763,25 +764,33 @@ variability in the $\yff_{j}$ with larger $j$, which manifests as an
 artificial broadening of their marginal densities. The non-linear
 transformation $\yx \mapsto \yf$ moreover destroys the convex structure of
 the simplex; it heavily bends regions that are linear in $\yf$, and can
-thus lead to a slower exploration of bent regions of high probability in some
+thus lead to a slower exploration of bent regions of high probability for some
 Markov-chain methods. \textcolor{white}{If you find this you can claim a
   postcard from me.}
 
-%\smallskip
+%\bigskip
 
-I want to propose an alternative solution to the problem of interdependent
-bounds~\eqref{eq:interdependence}. This solution is so simple that it has
-surely been used or discussed before, %\citep[\sect~23.5, p.~316 comes very
+I want to propose two alternative solutions to the problem of
+interdependent bounds~\eqref{eq:interdependence}. These solutions are so
+simple -- the first in particular -- that they have surely been used or
+discussed before, %\citep[\sect~23.5, p.~316 comes very
 % close]{mackay1995_r2003},
-so I'm not making any claim of originality. But I haven't seen it
+so I'm not making any claim of originality. But I haven't seen them
 explicitly discussed in the literature, so it may be useful to advertise
-it.
+them. The main idea behind them is to give an additional dimension to the
+simplex.
+
+\bigskip
 
 Suppose we want to sample from the probability distribution
 \begin{equation}
 \label{eq:main_distribution}
-\yg(\yf)\,\di\yfi,
-\qquad \yff_{j} \ge 0, \quad  \tsum_{j=1}^{n}\yff_{j} \le 1,
+\begin{gathered}
+\yg(\yf)\,\di\yfi\\
+%\qquad
+\yff_{0}\equiv 1-\tsum_{j=1}^{n}\yff_{j},\quad
+\yff_{j} \ge 0, \quad  \tsum_{j=1}^{n}\yff_{j} \le 1,
+\end{gathered}
 \end{equation}
 defined over the $n$-dimensional simplex. %$\ysim^{n}\defd\set{\yfi
 % \suchthat \yff_{j} \ge 0, \quad \sum_{j}\yff_{j} \le 1}$.
@@ -799,6 +808,8 @@ probability $\yh(r)\,\di r$. If we sample $(r, \yfi)$ from this joint
 distribution, the samples of $\yfi$ will obviously come from
 $\yg(\yf)\,\di\yfi$.
 
+
+\paragraph{First method}
 Now consider the quantities $\yy \defd (\yyy_{0}, \dotsc, \yyy_{n})$ in the
 positive $(n+1)$-dimensional orthant $\set{\yyy_{i} \ge 0}$. Consider the
 following transformation $\yy \mapsto (r,\yfi)$:
@@ -808,13 +819,13 @@ following transformation $\yy \mapsto (r,\yfi)$:
       \label{eq:main_transformation_r}
     r&= \yyy_{0} + \dotsb + \yyy_{n} \\
       \label{eq:main_transformation_f}
-    \yff_{i}&= \frac{\yyy_{i}}{\yyy_{0} + \dotsb + \yyy_{n}}
+    \yff_{i}&= \frac{\yyy_{i}}{\yyy_{0} + \dotsb + \yyy_{n}} .
   \end{align}
 \end{subequations}
 You can prove, for example by considering the inverse transformation
 $(r,\yfi) \mapsto \yy$, that the Jacobian determinant of
 $\yy \mapsto (r,\yfi)$ is $r^{-n}$. The joint probability
-distribution~\eqref{eq:joint_r} can therefore be written as
+distribution~\eqref{eq:joint_r} can thus be written as
 \begin{equation}
   \label{eq:joint_x}
   \yhb[r(\yy)]\;\yg[\yf(\yy)]\;\di\yy,
@@ -836,18 +847,66 @@ arbitrary; we can choose a normal distribution as the latter, for example.
 Also, the numerical relative imprecision of every $\yff_{i}$ is roughly
 twice that of $\yyy_{i}$: no accumulation of imprecision occurs.
 
-\smallskip
+If our probability distribution~\eqref{eq:main_distribution} has its main
+mass enough far away from the faces of the simplex, it's practical to
+sample the $\yy$ directly -- despite their lower bound -- by using a
+density function $\yhb(r)$ with a sharp peak at high values of $r$, say
+$r\approx n$. This way, even if some typical $\yff_{i}$ may be close to
+zero, the corresponding $\yyy_{i}$ will be of order unity, enough far away
+from its lower bound to be sampled directly without worrying about high
+rejection rates.
 
-Some final, practical points: The lower bound of the quantities $\yyy_{i}$
-can be easily eliminated by a further exponential transformation
-$\yyy_{i} = \exp(t_{i})$. But, if our probability
-distribution~\eqref{eq:main_distribution} has its main mass enough far away
-from the faces of the simplex, it's actually possible and practical to
-sample the $\yy$ directly if we use a density function $\yhb(r)$ with a
-sharp peak at high values of $r$, say $r\approx n$. This way, even if some
-typical $\yff_{i}$ may be close to zero, the corresponding $\yyy_{i}$ will
-be of order unity, enough far away from its lower bound to be sampled
-directly without worrying about high rejection rates.
+%\bigskip
+
+\paragraph{Second method}
+If we prefer to have completely unbounded quantities, we can still consider
+the probability distribution~\eqref{eq:joint_r} extended with $r$, but use
+the following transformation $\yt \mapsto (r,\yfi)$ \citep[\cf][\sect~23.5,
+p.~316]{mackay1995_r2003}:
+\begin{subequations}
+  \label{eq:main_transformation_t}
+  \begin{align}
+      \label{eq:main_transformation_t_r}
+    r&= \ytt_{0} + \dotsb + \ytt_{n} \\
+      \label{eq:main_transformation_t_f}
+    \yff_{i}&= \frac{\exp(\ytt_{i})}{\exp(\ytt_{0}) + \dotsb + \exp(\ytt_{n})} .
+  \end{align}
+\end{subequations}
+You can prove, for example by induction on $n$, that the Jacobian determinant of
+the transformation above is
+\begin{equation}
+  \label{eq:jac_t}
+  \abs*{\det\frac{\de(r,\yfi)}{\de\yt}} =
+  (n+1)\prod_{i=0}^{n}\yff_{i} \equiv
+  (n+1)\;\exp(r)\; \Bigl[\tsum_{i}\exp(\ytt_{i})\Bigr]^{-(n+1)} .
+\end{equation}
+The joint probability distribution~\eqref{eq:joint_r} can thus be written as
+\begin{equation}
+  \label{eq:joint_t}
+  (n+1)\;\yh[r(\yt)]\;\yg[\yf(\yt)]\;\prod_{i=0}^{n}\yff_{i}(\yt)\;\di\yt,
+  \qquad \yt \in \RR^{n+1}.
+\end{equation}
+
+We can therefore sample from the distribution~\eqref{eq:joint_t}, defined
+over $\RR^{n+1}$, and then construct samples for $\yf$ from $\yt$ via the
+transformation~\eqref{eq:main_transformation_t_f}. Also in this case the
+resulting $\yf$ samples are drawn from our distribution of
+interest~\eqref{eq:main_distribution}. The probability density function $\yh(r)$ is again completely arbitrary,
+and can be conveniently chosen as a normal sharply peaked at $r\approx 0$;
+it's also possible to include the Jacobian term $\exp(r)$
+from~\eqref{eq:jac_t} in it.
+
+A final remark: instead of the
+transformation~\eqref{eq:main_transformation_t_r} we could also have
+considered $r = \sum_{i}\exp(\yt_{i})$. This transformation is
+inconvenient, however: surfaces of constant $r$ would then be heavily bent
+in $\yt$ coordinates, leading to slower convergence for some Markov-chain
+methods. It is also possible to use the
+transformation~\eqref{eq:main_transformation_t_f} without $r$, by using the
+independent quantities $(\ytt_{1},\dotsc,\ytt_{n})$ and defining
+$\ytt_{0} \defd -\tsum_{j=1}^{n}\ytt_{j}$. The calculation of the Jacobian
+determinant in this case is left again as an exercise for you.
+
 
 
 
@@ -865,9 +924,12 @@ directly without worrying about high rejection rates.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
 %\iffalse
 \begin{acknowledgements}
-  \ldots to Mari \amp\ Miri for continuous encouragement and affection, and
-  to Buster Keaton and Saitama for filling life with awe and inspiration.
-  To the developers and maintainers of \LaTeX, Emacs, AUC\TeX, Open Science
+  \ldots to The Kavli Foundation and the Centre of Excellence scheme of the
+  Research Council of Norway (Yasser Roudi group) for financial support. To
+  Iv\'an Davidovich for a useful discussion. To
+  Mari \amp\ Miri for continuous encouragement and affection. To Buster
+  Keaton and Saitama for filling life with awe and inspiration. To the
+  developers and maintainers of \LaTeX, Emacs, AUC\TeX, Open Science
   Framework, Python, Inkscape, Sci-Hub for making a free and unfiltered
   scientific exchange possible.
 %\rotatebox{15}{P}\rotatebox{5}{I}\rotatebox{-10}{P}\rotatebox{10}{\reflectbox{P}}\rotatebox{-5}{O}.

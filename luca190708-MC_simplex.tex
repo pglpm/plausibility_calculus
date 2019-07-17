@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2015-05-01T20:53:34+0200
-%% Last-Updated: 2019-07-16T15:58:51+0200
+%% Last-Updated: 2019-07-17T14:51:20+0200
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newif\ifarxiv
 \arxivfalse
@@ -495,7 +495,7 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 }
 
 %\date{Draft of \today\ (first drafted \firstdraft)}
-\date{\firstpublished}
+\date{\firstpublished; updated \updated}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% Macros @@@
@@ -717,8 +717,8 @@ reproducibility \citep[\sects~B.2.15--16]{jcgm1993_r2012}[\sects~3.3.6,
 
 Sampling on an $n$-dimensional simplex, for example by Monte Carlo methods,
 is difficult because the allowed ranges of the sampled quantities are
-interdependent: denoting by $\yf\defd(\yff_{0},\dotsc, \yff_{n})$ the sampled
-distributions, we must have
+interdependent: denoting by $\yf\defd(\yff_{0},\dotsc, \yff_{n})$ a sampled
+distribution, we must have
 \begin{equation}
   \label{eq:normalization}
   \sum_{i=0}^{n} \yff_{i} =1,\qquad
@@ -741,7 +741,7 @@ unit hypercube $\set{0 \le \yff_{j} \le 1}$.
 I didn't find solutions to this problem in the literature, except for an
 ingenious change of variables $\yf \mapsto \yx$, discussed by Betancourt
 \parentext{\cite*{betancourt2012}; \cite{altmannetal2014}}, which maps the
-simplex into the unit hypercube:
+unit hypercube onto (but not into) the simplex:
 \begin{equation}
   \label{eq:betancourt_transf}
   \begin{split}
@@ -759,9 +759,9 @@ $\set{0 \le \yxx_{j} \le 1}$. The Jacobian determinant of this
 transformation can also be computed. This transformation has a couple of
 practical disadvantages, however, owing to its recursive structure. The
 numerical relative imprecision of the $\yxx_{j}$ accumulates in the
-$\yff_{j}$ as $j$ increases, leading to an artefactual additional
+$\yff_{j}$ as $j$ increases, leading to an additional
 variability in the $\yff_{j}$ with larger $j$, which manifests as an
-artificial broadening of their marginal densities. The non-linear
+artefactual broadening of their marginal densities. The non-linear
 transformation $\yx \mapsto \yf$ moreover destroys the convex structure of
 the simplex; it heavily bends regions that are linear in $\yf$, and can
 thus lead to a slower exploration of bent regions of high probability for some
@@ -811,7 +811,7 @@ $\yg(\yf)\,\di\yfi$.
 
 \paragraph{First method}
 Now consider the quantities $\yy \defd (\yyy_{0}, \dotsc, \yyy_{n})$ in the
-positive $(n+1)$-dimensional orthant $\set{\yyy_{i} \ge 0}$. Consider the
+positive $(n+1)$-dimensional orthant $\set{\yyy_{i} \ge 0}$, and the
 following transformation $\yy \mapsto (r,\yfi)$:
 \begin{subequations}
   \label{eq:main_transformation}
@@ -822,7 +822,7 @@ following transformation $\yy \mapsto (r,\yfi)$:
     \yff_{i}&= \frac{\yyy_{i}}{\yyy_{0} + \dotsb + \yyy_{n}} .
   \end{align}
 \end{subequations}
-You can prove, for example by considering the inverse transformation
+You can prove, for example using the inverse transformation
 $(r,\yfi) \mapsto \yy$, that the Jacobian determinant of
 $\yy \mapsto (r,\yfi)$ is $r^{-n}$. The joint probability
 distribution~\eqref{eq:joint_r} can thus be written as

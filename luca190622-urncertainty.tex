@@ -1,13 +1,13 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2015-05-01T20:53:34+0200
-%% Last-Updated: 2019-07-15T15:40:09+0200
+%% Last-Updated: 2019-07-17T16:40:17+0200
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newif\ifarxiv
 \arxivfalse
 \ifarxiv\pdfmapfile{+classico.map}\fi
 \newif\ifafour
-\afourfalse% true = A4, false = A5
+\afourtrue% true = A4, false = A5
 \newif\iftypodisclaim % typographical disclaim on the side
 \typodisclaimtrue
 \newcommand*{\memfontfamily}{zplx}
@@ -195,7 +195,7 @@ british%
 \renewcommand\sfdefault{uop}
 \DeclareMathAlphabet{\mathsf}  {T1}{\sfdefault}{m}{sl}
 \SetMathAlphabet{\mathsf}{bold}{T1}{\sfdefault}{b}{sl}
-%\newcommand*{\mathte}[1]{\textbf{\textit{\textsf{#1}}}}
+\newcommand*{\mathte}[1]{\textbf{\textit{\textsf{#1}}}}
 % Upright sans-serif math alphabet
 % \DeclareMathAlphabet{\mathsu}  {T1}{\sfdefault}{m}{n}
 % \SetMathAlphabet{\mathsu}{bold}{T1}{\sfdefault}{b}{n}
@@ -569,7 +569,7 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 %\newcommand*{\E}{\mathrm{E}}
 %\renewcommand*{\|}{\nonscript\,\vert\nonscript\;\mathopen{}}
 \renewcommand*{\|}[1][]{\nonscript\,#1\vert\nonscript\;\mathopen{}}
-%\DeclarePairedDelimiterX{\cond}[2]{(}{)}{#1\nonscript\,\delimsize\vert\nonscript\;\mathopen{}#2}
+\DeclarePairedDelimiterX{\cond}[2]{(}{)}{#1\nonscript\,\delimsize\vert\nonscript\;\mathopen{}#2}
 %\DeclarePairedDelimiterX{\condt}[2]{[}{]}{#1\nonscript\,\delimsize\vert\nonscript\;\mathopen{}#2}
 %\DeclarePairedDelimiterX{\conds}[2]{\{}{\}}{#1\nonscript\,\delimsize\vert\nonscript\;\mathopen{}#2}
 %\newcommand*{\+}{\lor}
@@ -634,9 +634,28 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 % %\smash{
 % \begin{tabular}[#1]{c}#2\\[0.5\jot]\rule{1pt}{#3}\\#4\end{tabular}}%}
 % \newcommand*{\ptext}[1]{\text{\small #1}}
-%\DeclareMathOperator*{\argsup}{arg\,sup}
+\DeclareMathOperator*{\argsup}{arg\,sup}
 \newcommand*{\dob}{degree of belief}
 \newcommand*{\dobs}{degrees of belief}
+\newcommand*{\yff}{f}
+\newcommand*{\yf}{\bm{\yff}}
+\newcommand*{\yFF}{F}
+\newcommand*{\yF}{\bm{\yFF}}
+\newcommand*{\yRR}{R}
+\newcommand*{\yR}{\bm{\yRR}}
+\newcommand*{\yL}{L}
+\newcommand*{\yMM}{M}
+\newcommand*{\yM}{\mathte{\yMM}}
+\newcommand*{\ymm}{\delta}
+\newcommand*{\ySS}{S}
+\newcommand*{\yS}{\mathte{\ySS}}
+\newcommand*{\yss}{\sigma}
+\newcommand*{\re}{\mathrm{H}}
+\newcommand*{\yI}{\varIota}
+%\newcommand*{\yD}{\text{data}}
+\newcommand*{\yD}{\yf}
+\newcommand*{\ysum}{\bm{\tsum}}
+\newcommand*{\yprod}{\bm{\tprod}}
 %%% Custom macros end @@@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -764,7 +783,82 @@ proportions $(239/761, 647/353, 17/983, 239/761)$,  $(17/983, 647/353,
 
 \textcolor{white}{If you find this you can claim a postcard from me.}
 
+\section{Formulae (draft)}
+\label{sec:formulae}
+\clearpage
 
+
+%\begin{multline*}
+\[\hspace{-3em}  \pf\cond*{\raisebox{-1em}{\includegraphics[width=4em]{talkhighD_histoxs143.png}}}{\raisebox{-1em}{\includegraphics[width=4em]{talkhighD_histo0.png}},
+    \yI}\;\di\yF \propto%{}\\
+%
+  \pf\cond*{\raisebox{-1em}{\includegraphics[width=4em]{talkhighD_histo0.png}}}{
+   \raisebox{-1em}{\includegraphics[width=4em]{talkhighD_histoxs143.png}}, \yI}\times \pf\cond*{ \raisebox{-1em}{\includegraphics[width=4em]{talkhighD_histoxs143.png}}}{\yI}\;\di\yF\]
+%\end{multline*}
+
+\[
+  \pf(\yF \| \yD, \yI)\;\di\yF \propto
+\pf(\yD \|\yF, \yI)\times  \pf(\yF \| \yI)\;\di\yF
+\]
+
+\[
+  \pf(\yF \| \yI)\;\di\yF \propto
+  \exp\Biggl(-\frac{\abs{\yS\yF}^{2}}{2\yss^{2}}\Biggr)
+  \;
+\exp\bigl[-\yL \; \re(\yF; \yR) \bigr] \;\di\yF
+\]
+
+\[
+  \exp\bigl[-\yL \; \re(\yF; \yR) \bigr] \approx
+\binom{\yL}{\yL\yF}\;\yprod \yR^{\yL\yF}
+\]
+
+\[
+  \yS \defd
+  \begin{pmatrix}
+  1 & -4 &  6 & -4 &  1 &  0 &  0 & \dotso \\
+  0 &  1 & -4 &  6 & -4 &  1 &  0 & \dotso \\
+  0 &  0 &  1 & -4 &  6 & -4 &  1 & \dotso \\
+  0 &  0 &  0 &  1 & -4 &  6 & -4 & \dotso \\
+  0 &  0 &  0 &  0 &  1 & -4 &  6 & \dotso \\
+  0 &  0 &  0 &  0 &  0 &  1 & -4 & \dotso \\
+  0 &  0 &  0 &  0 &  0 &  0 &  1 & \dotso \\
+  0 &  0 &  0 &  0 &  0 &  0 &  0 & \dotso \\
+  \hdotsfor{8}
+  \end{pmatrix}  
+  \]
+
+  
+\[
+  \pf(\yD \|\yF, \yI) \propto
+  \exp\Biggl(-\frac{\abs{\yM\yF-\yf}^{2}}{2\ymm^{2}}\Biggr)
+\]
+
+\[
+  \pf(\yF \| \yD, \yI)\;\di\yF \propto
+  \exp\Biggl(-\frac{\abs{\yM\yF-\yf}^{2}}{2\ymm^{2}}\Biggr)
+  \times
+  \exp\Biggl(-\frac{\abs{\yS\yF}^{2}}{2\yss^{2}}\Biggr)
+  \;
+\exp\bigl[-\yL \; \re(\yF; \yR) \bigr] \;\di\yF
+\]
+
+\[
+  \pf(\yF \| \yD, \yI) \propto \exp\Biggl[
+  -\frac{\abs{\yM\yF-\yf}^{2}}{2\ymm^{2}}
+-\frac{\abs{\yS\yF}^{2}}{2\yss^{2}}
+-\yL \; \re(\yF; \yR) \Biggr]
+\]
+
+
+\begin{multline*}
+  \text{$\ymm$ small, $\yL$ large, $\yL/\ymm$ small} \implies{}\\
+  \text{``\,mode of $\pf(\yF \| \yD, \yI)$\,''} \approx
+  \text{``\,$\yF$ that minimizes
+  $\re(\yF; \yR)$ subject to $\yM\yF=\yf$\,''}
+\end{multline*}
+
+  
 %%\setlength{\intextsep}{0.5ex}% with wrapfigure
 %\begin{figure}[p!]%{r}{0.4\linewidth} % with wrapfigure
 %  \centering\includegraphics[trim={12ex 0 18ex 0},clip,width=\linewidth]{maxent_saddle.png}\\

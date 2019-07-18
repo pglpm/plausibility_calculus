@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2015-05-01T20:53:34+0200
-%% Last-Updated: 2019-07-17T14:51:20+0200
+%% Last-Updated: 2019-07-18T11:37:29+0200
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newif\ifarxiv
 \arxivfalse
@@ -672,7 +672,8 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 \setlength{\abstitleskip}{-\absparindent}
 \begin{abstract}\labelsep 0pt%
   \noindent\textbf{Two simple methods for sampling general probability
-    distributions defined over the simplex are presented.}
+    distributions defined over the simplex, especially with Markov-chain
+    Monte Carlo algorithms, are presented.}
 \\\noindent{\footnotesize Note: Dear Reader
     \amp\ Peer, this manuscript is being peer-reviewed by you. Thank you.}
 % \noindent
@@ -715,7 +716,8 @@ ubiquitous in science owing to their intimate connection with
 reproducibility \citep[\sects~B.2.15--16]{jcgm1993_r2012}[\sects~3.3.6,
 3.3.11]{iso2006b}[\chap~IX]{poincare1902_r1992}[\chap~VI]{duhem1906_r1914}{definetti1937}[\chap~IV]{jeffreys1931_r1973}[\chap~1]{popper1935_t2005}.
 
-Sampling on an $n$-dimensional simplex, for example by Monte Carlo methods,
+Sampling on an $n$-dimensional simplex, for example by Monte Carlo methods
+\citep{neal1993}[\chaps~29, 30]{mackay1995_r2003}{hall2014},
 is difficult because the allowed ranges of the sampled quantities are
 interdependent: denoting by $\yf\defd(\yff_{0},\dotsc, \yff_{n})$ a sampled
 distribution, we must have

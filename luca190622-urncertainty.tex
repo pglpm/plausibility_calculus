@@ -1,13 +1,13 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2015-05-01T20:53:34+0200
-%% Last-Updated: 2019-07-17T16:40:17+0200
+%% Last-Updated: 2019-07-18T08:37:59+0200
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newif\ifarxiv
 \arxivfalse
 \ifarxiv\pdfmapfile{+classico.map}\fi
 \newif\ifafour
-\afourtrue% true = A4, false = A5
+\afourfalse% true = A4, false = A5
 \newif\iftypodisclaim % typographical disclaim on the side
 \typodisclaimtrue
 \newcommand*{\memfontfamily}{zplx}
@@ -566,7 +566,7 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 %\DeclareMathOperator{\pr}{P}%probability
 \newcommand*{\pf}{\mathrm{p}}%probability
 \newcommand*{\p}{\mathrm{P}}%probability
-%\newcommand*{\E}{\mathrm{E}}
+\newcommand*{\E}{\mathrm{E}}
 %\renewcommand*{\|}{\nonscript\,\vert\nonscript\;\mathopen{}}
 \renewcommand*{\|}[1][]{\nonscript\,#1\vert\nonscript\;\mathopen{}}
 \DeclarePairedDelimiterX{\cond}[2]{(}{)}{#1\nonscript\,\delimsize\vert\nonscript\;\mathopen{}#2}
@@ -654,6 +654,7 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 \newcommand*{\yI}{\varIota}
 %\newcommand*{\yD}{\text{data}}
 \newcommand*{\yD}{\yf}
+\newcommand*{\yA}{A}
 \newcommand*{\ysum}{\bm{\tsum}}
 \newcommand*{\yprod}{\bm{\tprod}}
 %%% Custom macros end @@@
@@ -789,11 +790,12 @@ proportions $(239/761, 647/353, 17/983, 239/761)$,  $(17/983, 647/353,
 
 
 %\begin{multline*}
-\[\hspace{-3em}  \pf\cond*{\raisebox{-1em}{\includegraphics[width=4em]{talkhighD_histoxs143.png}}}{\raisebox{-1em}{\includegraphics[width=4em]{talkhighD_histo0.png}},
-    \yI}\;\di\yF \propto%{}\\
-%
-  \pf\cond*{\raisebox{-1em}{\includegraphics[width=4em]{talkhighD_histo0.png}}}{
-   \raisebox{-1em}{\includegraphics[width=4em]{talkhighD_histoxs143.png}}, \yI}\times \pf\cond*{ \raisebox{-1em}{\includegraphics[width=4em]{talkhighD_histoxs143.png}}}{\yI}\;\di\yF\]
+\[\hspace{-3em}  \pf\cond*{\raisebox{-2.5em}{\includegraphics[width=7em]{talkhighD_histoxsyesm300.png}}\;}{\;\raisebox{-2.5em}{\includegraphics[width=7em]{talkhighD_histo0.png}},\;
+    \yI}\;\di\yF % \propto%{}\\
+% %
+%   \pf\cond*{\raisebox{-1em}{\includegraphics[width=4em]{talkhighD_histo0.png}}}{
+%    \raisebox{-1em}{\includegraphics[width=4em]{talkhighD_histoxs143.png}}, \yI}\times \pf\cond*{ \raisebox{-1em}{\includegraphics[width=4em]{talkhighD_histoxs143.png}}}{\yI}\;\di\yF
+\]
 %\end{multline*}
 
 \[
@@ -844,11 +846,29 @@ proportions $(239/761, 647/353, 17/983, 239/761)$,  $(17/983, 647/353,
 \]
 
 \[
+\re(\yF; \yR) \defd \ysum \yF \ln(\yF/\yR)
+\]
+
+\[
   \pf(\yF \| \yD, \yI) \propto \exp\Biggl[
   -\frac{\abs{\yM\yF-\yf}^{2}}{2\ymm^{2}}
 -\frac{\abs{\yS\yF}^{2}}{2\yss^{2}}
 -\yL \; \re(\yF; \yR) \Biggr]
 \]
+
+
+\[
+  \begin{split}
+  \pf(\yA \| \yD, \yI) &=
+  \int\! \pf(\yA \| \yF, \yI)\;\pf(\yF \| \yD, \yI)\;\di\yF
+  \\
+  &=  \int\! \yFF_{\yA}\;\pf(\yF \| \yD, \yI)\;\di\yF
+  \\
+  &\equiv \E(\yFF_{\yA} \| \yD, \yI)
+\end{split}
+\]
+
+\[ \pf(\yA \| \yD, \yI) = \E(\yFF_{\yA} \| \yD, \yI) \]
 
 
 \begin{multline*}

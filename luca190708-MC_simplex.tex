@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2015-05-01T20:53:34+0200
-%% Last-Updated: 2019-07-18T11:37:29+0200
+%% Last-Updated: 2019-07-19T08:42:16+0200
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newif\ifarxiv
 \arxivfalse
@@ -672,8 +672,7 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 \setlength{\abstitleskip}{-\absparindent}
 \begin{abstract}\labelsep 0pt%
   \noindent\textbf{Two simple methods for sampling general probability
-    distributions defined over the simplex, especially with Markov-chain
-    Monte Carlo algorithms, are presented.}
+    distributions defined over the simplex, especially with Monte Carlo algorithms, are presented.}
 \\\noindent{\footnotesize Note: Dear Reader
     \amp\ Peer, this manuscript is being peer-reviewed by you. Thank you.}
 % \noindent
@@ -741,7 +740,7 @@ $n$-dimensional simplex only occupies $1/n!$ of the volume of the
 unit hypercube $\set{0 \le \yff_{j} \le 1}$.
 
 I didn't find solutions to this problem in the literature, except for an
-ingenious change of variables $\yf \mapsto \yx$, discussed by Betancourt
+ingenious change of variables $\yx \mapsto \yf$, discussed by Betancourt
 \parentext{\cite*{betancourt2012}; \cite{altmannetal2014}}, which maps the
 unit hypercube onto (but not into) the simplex:
 \begin{equation}
@@ -893,10 +892,10 @@ We can therefore sample from the distribution~\eqref{eq:joint_t}, defined
 over $\RR^{n+1}$, and then construct samples for $\yf$ from $\yt$ via the
 transformation~\eqref{eq:main_transformation_t_f}. Also in this case the
 resulting $\yf$ samples are drawn from our distribution of
-interest~\eqref{eq:main_distribution}. The probability density function $\yh(r)$ is again completely arbitrary,
-and can be conveniently chosen as a normal sharply peaked at $r\approx 0$;
-it's also possible to include the Jacobian term $\exp(r)$
-from~\eqref{eq:jac_t} in it.
+interest~\eqref{eq:main_distribution}. The probability density function
+$\yh(r)$ is again completely arbitrary, and can be conveniently chosen as a
+normal sharply peaked at $r\approx 0$; it's also possible to include the
+Jacobian term $\exp(r)$ from~\eqref{eq:jac_t} in it.
 
 A final remark: instead of the
 transformation~\eqref{eq:main_transformation_t_r} we could also have
@@ -906,8 +905,9 @@ in $\yt$ coordinates, leading to slower convergence for some Markov-chain
 methods. It is also possible to use the
 transformation~\eqref{eq:main_transformation_t_f} without $r$, by using the
 independent quantities $(\ytt_{1},\dotsc,\ytt_{n})$ and defining
-$\ytt_{0} \defd -\tsum_{j=1}^{n}\ytt_{j}$. The calculation of the Jacobian
-determinant in this case is left again as an exercise for you.
+$\ytt_{0} \defd -\tsum_{j=1}^{n}\ytt_{j}$. The Jacobian determinant in this
+case is still~\eqref{eq:jac_t}; the proof is left again as an exercise for
+you.
 
 
 

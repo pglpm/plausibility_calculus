@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2015-05-01T20:53:34+0200
-%% Last-Updated: 2019-07-18T08:37:59+0200
+%% Last-Updated: 2019-07-19T11:33:00+0200
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newif\ifarxiv
 \arxivfalse
@@ -714,28 +714,30 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 \label{sec:magic_urn}
 
 Quantifying our degree of belief about the contents of an urn that
-contains, say, white and black balls in an unknown proportion is a standard
-textbook topic. Our belief depends on our drawing data about the urn and on our
-state of knowledge about the urn before we knew those data. For example, we
-may know the colours of five balls drawn from the urn, and how or why the
-urn was prepared. Jaynes's book \citey[\chaps~3, 6]{jaynes1994_r2003}
-gives a superb analysis and discussion of this problem and of the
-probability formulae that it typically involves; and even of more realistic
-variants, such as an increased frequency of drawing and replacing from the
-top layer of the urn \citep[\sect~3.9]{jaynes1994_r2003}.
+contains, say, white and black balls (identical in all other respects) in
+an unknown proportion is a standard textbook topic. Our belief depends on
+our drawing data about the urn and on our state of knowledge about the urn
+before we knew those data. For example, we may know the colours of five
+balls drawn from the urn, and how or why the urn was prepared. Jaynes's
+book \citey[\chaps~3, 6]{jaynes1994_r2003} gives a superb analysis and
+discussion of this problem and of the probability formulae that it
+typically involves; and even of more realistic variants, such as an
+increased frequency of drawing and replacing from the top layer of the urn
+\citep[\sect~3.9]{jaynes1994_r2003}.
 
 In this note I derive some probability formulae for a more complex version
-of the urn problem, and some approximations of these formulae. They can be
-useful in several scientific questions that, sufficiently simplified, can
-be mapped to the present problem.\mynote{examples}
+of the urn problem, in which the balls can change colour with time. These
+formulae can be useful in scientific questions that, sufficiently
+simplified, can be mapped to the present problem.\mynote{examples} And their
+derivation can be a useful exercise in the probability calculus.
 
-The problem we consider is the following. There's an urn with $N$ balls,
-each of which can be white or black. At regular intervals of time every
-ball can change its colour: a white can turn black, or vice versa, or it
-can keep the colour it has. We  observe $n$ out of the $N$ balls for $T$
-time intervals. The $n$ observed balls are initially chosen in a way
-unknown to us. Note that we observe the \emph{same} $n$ balls at all times.
-Some variations of this set-up will be discussed later on.
+The problem we consider is the following. There's an urn with $N$ identical
+balls except for the colour: each can be white or black. At regular
+intervals of time every ball can change its colour: a white can turn black,
+or vice versa; or it can keep the colour it has. We observe $n$ out of the
+$N$ balls for $T$ time intervals; note that we observe the \emph{same} $n$
+balls at all times. These $n$ balls are initially chosen in a way unknown
+to us. Some variations of this set-up will be discussed later on.
 % {3, 997}, {17, 983}, {23, 977}, {29, 971}, {47, 953}, {53, 947}, {59,
 % 941}, {71, 929}, {89, 911}, {113, 887}, {137, 863}, {173, 827}, {179,
 % 821}, {191, 809}, {227, 773}, {239, 761}, {257, 743}, {281, 719}, {317,
@@ -753,7 +755,7 @@ We ask several questions about this magic urn:
   10\,000 time steps?
 \item \label{item:q_p_unknown}What was (or will be) the proportion of white
   and black balls in the urn at some specific time, among the times we did
-  not observe?
+  \emph{not} observe?
 \item \label{item:q_f_unknown}How frequently will every possible proportion
   of white and black balls appear, during all times the urn exists?
 \end{enumerate}
@@ -784,11 +786,7 @@ proportions $(239/761, 647/353, 17/983, 239/761)$,  $(17/983, 647/353,
 
 \textcolor{white}{If you find this you can claim a postcard from me.}
 
-\section{Formulae (draft)}
-\label{sec:formulae}
-\clearpage
-
-
+\iffalse
 %\begin{multline*}
 \[\hspace{-3em}  \pf\cond*{\raisebox{-2.5em}{\includegraphics[width=7em]{talkhighD_histoxsyesm300.png}}\;}{\;\raisebox{-2.5em}{\includegraphics[width=7em]{talkhighD_histo0.png}},\;
     \yI}\;\di\yF % \propto%{}\\
@@ -877,7 +875,7 @@ proportions $(239/761, 647/353, 17/983, 239/761)$,  $(17/983, 647/353,
   \text{``\,$\yF$ that minimizes
   $\re(\yF; \yR)$ subject to $\yM\yF=\yf$\,''}
 \end{multline*}
-
+\fi
   
 %%\setlength{\intextsep}{0.5ex}% with wrapfigure
 %\begin{figure}[p!]%{r}{0.4\linewidth} % with wrapfigure

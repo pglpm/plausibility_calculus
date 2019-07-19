@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2015-05-01T20:53:34+0200
-%% Last-Updated: 2019-07-19T11:33:00+0200
+%% Last-Updated: 2019-07-19T15:51:11+0200
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newif\ifarxiv
 \arxivfalse
@@ -761,14 +761,24 @@ We ask several questions about this magic urn:
 \end{enumerate}
 Our goal is to quantify how our belief is distributed among the possible
 answers to these questions. This belief depends on our observation of the
-$n$ balls for $T$ time steps, and on our knowledge about the mechanism
-behind the magic changes of the urn, expressed as a prior belief.
+$n$ balls for $T$ time steps, and on our beliefs about the mechanism
+behind the magic changes of the urn before making the observations.
 
-We consider this specific prior belief: \emph{we are equally uncertain
-  about all sequences proportions of urn colours that differ only by their
-  ordering}. For example, we have equal beliefs that the sequences of
-proportions $(239/761, 647/353, 17/983, 239/761)$,  $(17/983, 647/353,
-239/761, 239/761)$, and $(647/353, 17/983, 239/761, 239/761)$ may occur.
+We consider this pre-observation belief: \emph{we have the same belief
+  about sequences of proportions of urn colours that differ only by their
+  ordering, no matter how long the sequences are}. For example, we have
+equal beliefs that the sequences of proportions
+$(239/761, 647/353, 17/983, 239/761)$,
+$(17/983, 647/353, 239/761, 239/761)$, and
+$(647/353, 17/983, 239/761, 239/761)$ may occur, and similarly for
+arbitrarily long sequences. This \emph{exchangeable} belief is clearly
+inappropriate in some situations, for example if we think that the colour
+changes depends on the previous colours of the balls, or if we hold similar
+hypotheses involving memory. Most important, this belief is
+\emph{irrevocable}: no data, such as peculiar patterns in the sequences,
+can ever change it. Exchangeable beliefs can therefore be used as
+approximations of our real belief only if our inferences involve sequences
+that are not too long.
 
 
 

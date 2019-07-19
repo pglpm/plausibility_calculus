@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2015-05-01T20:53:34+0200
-%% Last-Updated: 2019-07-19T15:51:11+0200
+%% Last-Updated: 2019-07-19T16:25:47+0200
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newif\ifarxiv
 \arxivfalse
@@ -768,20 +768,22 @@ We consider this pre-observation belief: \emph{we have the same belief
   about sequences of proportions of urn colours that differ only by their
   ordering, no matter how long the sequences are}. For example, we have
 equal beliefs that the sequences of proportions
-$(239/761, 647/353, 17/983, 239/761)$,
-$(17/983, 647/353, 239/761, 239/761)$, and
-$(647/353, 17/983, 239/761, 239/761)$ may occur, and similarly for
-arbitrarily long sequences. This \emph{exchangeable} belief is clearly
-inappropriate in some situations, for example if we think that the colour
-changes depends on the previous colours of the balls, or if we hold similar
-hypotheses involving memory. Most important, this belief is
-\emph{irrevocable}: no data, such as peculiar patterns in the sequences,
-can ever change it. Exchangeable beliefs can therefore be used as
-approximations of our real belief only if our inferences involve sequences
-that are not too long.
-
-
-
+\begin{equation*}
+  \begin{aligned}
+&(239/761,\; 647/353,\; 17/983,\; 239/761),\\
+\text{or}\quad&(17/983,\; 647/353,\; 239/761,\; 239/761),\\
+\text{or}\quad&(647/353,\; 17/983,\; 239/761,\; 239/761)
+\end{aligned}
+\end{equation*}
+may occur, and similarly for other permutations and arbitrarily long
+sequences. This \emph{exchangeable} belief is clearly inappropriate in many
+situations, for example if we think that the changes of colour depend on
+the previous colours of the balls, or if we hold similar hypotheses
+involving memory. Most important, this belief is \emph{irrevocable}: no
+data, such as peculiar patterns in the sequences, can ever change it.
+Exchangeable beliefs can therefore be used as approximations of our real
+belief only if our inferences involve sequences that are not too long, so
+that the presence of patterns isn't very important.
 
 % The set-up above is an abstract picture; in a real situation our knowledge
 % would be more specific -- although its details are often difficult to
@@ -791,6 +793,9 @@ that are not too long.
 % apply only to an abstract, unrealistic situation. But they may be taken as
 % an approximation or as a starting point for formulae more suited to some
 % particular, real situations.
+
+\section{Set-up and notation}
+\label{sec:notation}
 
 
 

@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2015-05-01T20:53:34+0200
-%% Last-Updated: 2019-07-19T08:42:16+0200
+%% Last-Updated: 2019-07-23T20:30:20+0200
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newif\ifarxiv
 \arxivfalse
@@ -671,8 +671,9 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 \setlength{\absrightindent}{0pt}
 \setlength{\abstitleskip}{-\absparindent}
 \begin{abstract}\labelsep 0pt%
-  \noindent\textbf{Two simple methods for sampling general probability
-    distributions defined over the simplex, especially with Monte Carlo algorithms, are presented.}
+  \noindent\textbf{Two simple approaches to sampling general probability
+    distributions defined over the simplex, especially with Monte Carlo
+    algorithms and in high dimensions, are presented.}
 \\\noindent{\footnotesize Note: Dear Reader
     \amp\ Peer, this manuscript is being peer-reviewed by you. Thank you.}
 % \noindent
@@ -771,10 +772,11 @@ Markov-chain methods. \textcolor{white}{If you find this you can claim a
 
 %\bigskip
 
-I want to propose two alternative solutions to the problem of
-interdependent bounds~\eqref{eq:interdependence}. These solutions are so
-simple -- the first in particular -- that they have surely been used or
-discussed before, %\citep[\sect~23.5, p.~316 comes very
+I want to propose two alternative approaches to the problem of
+interdependent bounds~\eqref{eq:interdependence}. These approaches also
+work very well in high dimensions. They are so simple -- the first in
+particular -- that they have probably been used
+before, %\citep[\sect~23.5, p.~316 comes very
 % close]{mackay1995_r2003},
 so I'm not making any claim of originality. But I haven't seen them
 explicitly discussed in the literature, so it may be useful to advertise
@@ -810,7 +812,7 @@ distribution, the samples of $\yfi$ will obviously come from
 $\yg(\yf)\,\di\yfi$.
 
 
-\paragraph{First method}
+\paragraph{First approach}
 Now consider the quantities $\yy \defd (\yyy_{0}, \dotsc, \yyy_{n})$ in the
 positive $(n+1)$-dimensional orthant $\set{\yyy_{i} \ge 0}$, and the
 following transformation $\yy \mapsto (r,\yfi)$:
@@ -859,7 +861,7 @@ rejection rates.
 
 %\bigskip
 
-\paragraph{Second method}
+\paragraph{Second approach}
 If we prefer to have completely unbounded quantities, we can still consider
 the probability distribution~\eqref{eq:joint_r} extended with $r$, but use
 the following transformation $\yt \mapsto (r,\yfi)$ \citep[\cf][\sect~23.5,
@@ -902,7 +904,7 @@ transformation~\eqref{eq:main_transformation_t_r} we could also have
 considered $r = \sum_{i}\exp(\yt_{i})$. This transformation is
 inconvenient, however: surfaces of constant $r$ would then be heavily bent
 in $\yt$ coordinates, leading to slower convergence for some Markov-chain
-methods. It is also possible to use the
+methods. It's also possible to use the
 transformation~\eqref{eq:main_transformation_t_f} without $r$, by using the
 independent quantities $(\ytt_{1},\dotsc,\ytt_{n})$ and defining
 $\ytt_{0} \defd -\tsum_{j=1}^{n}\ytt_{j}$. The Jacobian determinant in this
@@ -926,7 +928,7 @@ you.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
 %\iffalse
 \begin{acknowledgements}
-  \ldots to The Kavli Foundation and the Centre of Excellence scheme of the
+  \ldots to the Kavli Foundation and the Centre of Excellence scheme of the
   Research Council of Norway (Yasser Roudi group) for financial support. To
   Iv\'an Davidovich for a useful discussion. To
   Mari \amp\ Miri for continuous encouragement and affection. To Buster

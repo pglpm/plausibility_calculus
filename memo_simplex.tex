@@ -1,18 +1,15 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
-%% Created: 2015-05-01T20:53:34+0200
-%% Last-Updated: 2019-01-24T10:39:40+0100
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Report-no: ***
+%% Created: 2019-01-24T10:39:40+0100
+%% Last-Updated: 2019-07-29T21:45:50+0200
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newif\ifarxiv
 \arxivfalse
 \ifarxiv\pdfmapfile{+classico.map}\fi
 \newif\ifafour
-\afourfalse % true = A4, false = A5
+\afourfalse% true = A4, false = A5
 \newif\iftypodisclaim % typographical disclaim on the side
 \typodisclaimtrue
-\newif\ifpublic
-\publicfalse % true = for publication, false = personal notes
 \newcommand*{\memfontfamily}{zplx}
 \newcommand*{\memfontpack}{newpxtext}
 \documentclass[\ifafour a4paper,12pt,\else a5paper,10pt,\fi%extrafontsizes,%
@@ -22,20 +19,27 @@ british%
 \newcommand*{\updated}{\today}
 \newcommand*{\firstdraft}{11 January 2019}
 \newcommand*{\firstpublished}{***}
-\newcommand*{\propertitle}{Memos on densities and metrics on simplices}
+\newcommand*{\propertitle}{Probability and the simplex%\\{\large ***}%
+}% title uses LARGE; set Large for smaller
 \newcommand*{\pdftitle}{\propertitle}
-\newcommand*{\headtitle}{Memos on simplices}
+\newcommand*{\headtitle}{***}
 \newcommand*{\pdfauthor}{P.G.L.  Porta Mana}
-\newcommand*{\headauthor}{\ifpublic Porta Mana%
-\else Luca\fi}
-\newcommand*{\reporthead}{}
+\newcommand*{\headauthor}{Porta Mana}
+\newcommand*{\reporthead}{}% Report number
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Calls to packages (uncomment as needed)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 %\usepackage{pifont}
+
 %\usepackage{fontawesome}
+
 \usepackage[T1]{fontenc} 
 \input{glyphtounicode} \pdfgentounicode=1
+
 \usepackage[utf8]{inputenx}
+
 %\usepackage{newunicodechar}
 % \newunicodechar{Ĕ}{\u{E}}
 % \newunicodechar{ĕ}{\u{e}}
@@ -58,27 +62,37 @@ british%
 % \newunicodechar{Ȳ}{\=Y}
 % \newunicodechar{ȳ}{\=y}
 
-\newcommand*{\bmmax}{0} % reduce number of bold fonts, before bm
-\newcommand*{\hmmax}{0} % reduce number of heavy fonts, before bm
+\newcommand*{\bmmax}{0} % reduce number of bold fonts, before font packages
+\newcommand*{\hmmax}{0} % reduce number of heavy fonts, before font packages
+
 \usepackage{textcomp}
-\usepackage[normalem]{ulem}
+
+%\usepackage[normalem]{ulem}% package for underlining
 % \makeatletter
 % \def\ssout{\bgroup \ULdepth=-.35ex%\UL@setULdepth
 %  \markoverwith{\lower\ULdepth\hbox
 %    {\kern-.03em\vbox{\hrule width.2em\kern1.2\p@\hrule}\kern-.03em}}%
 %  \ULon}
 % \makeatother
+
 \usepackage{amsmath}
+
 \usepackage{mathtools}
 \addtolength{\jot}{\jot} % increase spacing in multiline formulae
-\usepackage{empheq}% automatically calls amsmath and mathtools
-\newcommand*{\widefbox}[1]{\fbox{\hspace{1em}#1\hspace{1em}}}
 \setlength{\multlinegap}{0pt}
+
+%\usepackage{empheq}% automatically calls amsmath and mathtools
+\newcommand*{\widefbox}[1]{\fbox{\hspace{1em}#1\hspace{1em}}}
+
 %\usepackage{fancybox}
+
 %\usepackage{framed}
+
 % \usepackage[misc]{ifsym} % for dice
 % \newcommand*{\diceone}{{\scriptsize\Cube{1}}}
+
 \usepackage{amssymb}
+
 \usepackage{amsxtra}
 
 \usepackage[main=british,french,italian,german,swedish,latin,esperanto]{babel}\selectlanguage{british}
@@ -102,7 +116,6 @@ british%
 \theoremstyle{innote}
 \newtheorem*{innote}{}
 
-
 \usepackage[shortlabels,inline]{enumitem}
 \SetEnumitemKey{para}{itemindent=\parindent,leftmargin=0pt,listparindent=\parindent,parsep=0pt,itemsep=\topsep}
 % \begin{asparaenum} = \begin{enumerate}[para]
@@ -118,9 +131,10 @@ british%
 % \setlist[description]{leftmargin=\parindent}
 
 \usepackage[babel,theoremfont,largesc]{newpxtext}
+
 \usepackage[bigdelims,nosymbolsc%,smallerops % probably arXiv doesn't have it
 ]{newpxmath}
-\useosf\linespread{1.083}
+\linespread{1.083}%\useosf
 %% smaller operators for old version of newpxmath
 \makeatletter
 \def\re@DeclareMathSymbol#1#2#3#4{%
@@ -146,8 +160,7 @@ british%
 %\re@DeclareMathSymbol{\coprodop}{\mathop}{largesymbols}{"60}
 %\re@DeclareMathSymbol{\varprod}{\mathop}{largesymbolsPXA}{16}
 \makeatother
-
-
+%%
 %% With euler font cursive for Greek letters - the [1] means 100% scaling
 \DeclareFontFamily{U}{egreek}{\skewchar\font'177}%
 \DeclareFontShape{U}{egreek}{m}{n}{<-6>s*[1]eurm5 <6-8>s*[1]eurm7 <8->s*[1]eurm10}{}%
@@ -175,127 +188,10 @@ british%
 \def\prod{\DOTSI\prodop\slimits@}
 \def\coprod{\DOTSI\coprodop\slimits@}
 \makeatother
-\ifarxiv\else\input{undefinegreek.tex}\fi% make sure no CMF greek letters sneak in
-% Greek letters not usually given in LaTeX. Comment the unneeded ones
-% \DeclareMathSymbol{\varpartial}{\mathalpha}{egreeki}{"40}
- \DeclareMathSymbol{\partialup}{\mathalpha}{egreekr}{"40}
-% \DeclareMathSymbol{\alpha}{\mathalpha}{egreeki}{"0B}
-% \DeclareMathSymbol{\beta}{\mathalpha}{egreeki}{"0C}
-% \DeclareMathSymbol{\gamma}{\mathalpha}{egreeki}{"0D}
-% \DeclareMathSymbol{\delta}{\mathalpha}{egreeki}{"0E}
- \DeclareMathSymbol{\epsilon}{\mathalpha}{egreeki}{"0F}
-% \DeclareMathSymbol{\zeta}{\mathalpha}{egreeki}{"10}
-% \DeclareMathSymbol{\eta}{\mathalpha}{egreeki}{"11}
-% \DeclareMathSymbol{\theta}{\mathalpha}{egreeki}{"12}
-% \DeclareMathSymbol{\iota}{\mathalpha}{egreeki}{"13}
- \DeclareMathSymbol{\kappa}{\mathalpha}{egreeki}{"14}
- \DeclareMathSymbol{\lambda}{\mathalpha}{egreeki}{"15}
-% \DeclareMathSymbol{\mu}{\mathalpha}{egreeki}{"16}
- \DeclareMathSymbol{\nu}{\mathalpha}{egreeki}{"17}
-% \DeclareMathSymbol{\xi}{\mathalpha}{egreeki}{"18}
-% \DeclareMathSymbol{\omicron}{\mathalpha}{egreeki}{"6F}
-% \DeclareMathSymbol{\pi}{\mathalpha}{egreeki}{"19}
-% \DeclareMathSymbol{\rho}{\mathalpha}{egreeki}{"1A}
-% \DeclareMathSymbol{\sigma}{\mathalpha}{egreeki}{"1B}
-% \DeclareMathSymbol{\tau}{\mathalpha}{egreeki}{"1C}
-% \DeclareMathSymbol{\upsilon}{\mathalpha}{egreeki}{"1D}
-% \DeclareMathSymbol{\phi}{\mathalpha}{egreeki}{"1E}
-% \DeclareMathSymbol{\chi}{\mathalpha}{egreeki}{"1F}
-% \DeclareMathSymbol{\psi}{\mathalpha}{egreeki}{"20}
-% \DeclareMathSymbol{\omega}{\mathalpha}{egreeki}{"21}
-% \DeclareMathSymbol{\varepsilon}{\mathalpha}{egreeki}{"22}
-% \DeclareMathSymbol{\vartheta}{\mathalpha}{egreeki}{"23}
-% \DeclareMathSymbol{\varpi}{\mathalpha}{egreeki}{"24}
-% \let\varrho\rho 
-% \let\varsigma\sigma
- \let\varkappa\kappa
-% \DeclareMathSymbol{\varphi}{\mathalpha}{egreeki}{"27}
-% %
-% \DeclareMathSymbol{\varAlpha}{\mathalpha}{egreeki}{"41}
-% \DeclareMathSymbol{\varBeta}{\mathalpha}{egreeki}{"42}
-% \DeclareMathSymbol{\varGamma}{\mathalpha}{egreeki}{"00}
- \DeclareMathSymbol{\varDelta}{\mathalpha}{egreeki}{"01}
- \DeclareMathSymbol{\varEpsilon}{\mathalpha}{egreeki}{"45}
-% \DeclareMathSymbol{\varZeta}{\mathalpha}{egreeki}{"5A}
-% \DeclareMathSymbol{\varEta}{\mathalpha}{egreeki}{"48}
-% \DeclareMathSymbol{\varTheta}{\mathalpha}{egreeki}{"02}
- \DeclareMathSymbol{\varIota}{\mathalpha}{egreeki}{"49}
-% \DeclareMathSymbol{\varKappa}{\mathalpha}{egreeki}{"4B}
-% \DeclareMathSymbol{\varLambda}{\mathalpha}{egreeki}{"03}
-% \DeclareMathSymbol{\varMu}{\mathalpha}{egreeki}{"4D}
-% \DeclareMathSymbol{\varNu}{\mathalpha}{egreeki}{"4E}
-% \DeclareMathSymbol{\varXi}{\mathalpha}{egreeki}{"04}
-% \DeclareMathSymbol{\varOmicron}{\mathalpha}{egreeki}{"4F}
-% \DeclareMathSymbol{\varPi}{\mathalpha}{egreeki}{"05}
-% \DeclareMathSymbol{\varRho}{\mathalpha}{egreeki}{"50}
-% \DeclareMathSymbol{\varSigma}{\mathalpha}{egreeki}{"06}
-% \DeclareMathSymbol{\varTau}{\mathalpha}{egreeki}{"54}
-% \DeclareMathSymbol{\varUpsilon}{\mathalpha}{egreeki}{"07}
-% \DeclareMathSymbol{\varPhi}{\mathalpha}{egreeki}{"08}
-% \DeclareMathSymbol{\varChi}{\mathalpha}{egreeki}{"58}
-% \DeclareMathSymbol{\varPsi}{\mathalpha}{egreeki}{"09}
-% \DeclareMathSymbol{\varOmega}{\mathalpha}{egreeki}{"0A} 
-% %
-% \DeclareMathSymbol{\Alpha}{\mathalpha}{egreekr}{"41}
-% \DeclareMathSymbol{\Beta}{\mathalpha}{egreekr}{"42}
- \DeclareMathSymbol{\Gamma}{\mathalpha}{egreekr}{"00}
-% \DeclareMathSymbol{\Delta}{\mathalpha}{egreekr}{"01}
-% \DeclareMathSymbol{\Epsilon}{\mathalpha}{egreekr}{"45}
-% \DeclareMathSymbol{\Zeta}{\mathalpha}{egreekr}{"5A}
- \DeclareMathSymbol{\Eta}{\mathalpha}{egreekr}{"48}
-% \DeclareMathSymbol{\Theta}{\mathalpha}{egreekr}{"02}
-% \DeclareMathSymbol{\Iota}{\mathalpha}{egreekr}{"49}
-% \DeclareMathSymbol{\Kappa}{\mathalpha}{egreekr}{"4B}
-% \DeclareMathSymbol{\Lambda}{\mathalpha}{egreekr}{"03}
-% \DeclareMathSymbol{\Mu}{\mathalpha}{egreekr}{"4D}
-% \DeclareMathSymbol{\Nu}{\mathalpha}{egreekr}{"4E}
-% \DeclareMathSymbol{\Xi}{\mathalpha}{egreekr}{"04}
-% \DeclareMathSymbol{\Omicron}{\mathalpha}{egreekr}{"4F}
-% \DeclareMathSymbol{\Pi}{\mathalpha}{egreekr}{"05}
-% \DeclareMathSymbol{\Rho}{\mathalpha}{egreekr}{"50}
-% \DeclareMathSymbol{\Sigma}{\mathalpha}{egreekr}{"06}
-% \DeclareMathSymbol{\Tau}{\mathalpha}{egreekr}{"54}
-% \DeclareMathSymbol{\Upsilon}{\mathalpha}{egreekr}{"07}
-% \DeclareMathSymbol{\Phi}{\mathalpha}{egreekr}{"08}
-% \DeclareMathSymbol{\Chi}{\mathalpha}{egreekr}{"58}
-% \DeclareMathSymbol{\Psi}{\mathalpha}{egreekr}{"09}
-% \DeclareMathSymbol{\Omega}{\mathalpha}{egreekr}{"0A}
-% %
-% \DeclareMathSymbol{\alphaup}{\mathalpha}{egreekr}{"0B}
-% \DeclareMathSymbol{\betaup}{\mathalpha}{egreekr}{"0C}
-% \DeclareMathSymbol{\gammaup}{\mathalpha}{egreekr}{"0D}
- \DeclareMathSymbol{\deltaup}{\mathalpha}{egreekr}{"0E}
-% \DeclareMathSymbol{\epsilonup}{\mathalpha}{egreekr}{"0F}
-% \DeclareMathSymbol{\zetaup}{\mathalpha}{egreekr}{"10}
-% \DeclareMathSymbol{\etaup}{\mathalpha}{egreekr}{"11}
-% \DeclareMathSymbol{\thetaup}{\mathalpha}{egreekr}{"12}
-% \DeclareMathSymbol{\iotaup}{\mathalpha}{egreekr}{"13}
-% \DeclareMathSymbol{\kappaup}{\mathalpha}{egreekr}{"14}
-% \DeclareMathSymbol{\lambdaup}{\mathalpha}{egreekr}{"15}
-% \DeclareMathSymbol{\muup}{\mathalpha}{egreekr}{"16}
-% \DeclareMathSymbol{\nuup}{\mathalpha}{egreekr}{"17}
-% \DeclareMathSymbol{\xiup}{\mathalpha}{egreekr}{"18}
-% \DeclareMathSymbol{\omicronup}{\mathalpha}{egreekr}{"6F}
-  \DeclareMathSymbol{\piup}{\mathalpha}{egreekr}{"19}
-% \DeclareMathSymbol{\rhoup}{\mathalpha}{egreekr}{"1A}
-% \DeclareMathSymbol{\sigmaup}{\mathalpha}{egreekr}{"1B}
-% \DeclareMathSymbol{\tauup}{\mathalpha}{egreekr}{"1C}
-% \DeclareMathSymbol{\upsilonup}{\mathalpha}{egreekr}{"1D}
-% \DeclareMathSymbol{\phiup}{\mathalpha}{egreekr}{"1E}
-% \DeclareMathSymbol{\chiup}{\mathalpha}{egreekr}{"1F}
-% \DeclareMathSymbol{\psiup}{\mathalpha}{egreekr}{"20}
-% \DeclareMathSymbol{\omegaup}{\mathalpha}{egreekr}{"21}
-% \DeclareMathSymbol{\varepsilonup}{\mathalpha}{egreekr}{"22}
-% \DeclareMathSymbol{\varthetaup}{\mathalpha}{egreekr}{"23}
-% \DeclareMathSymbol{\varpiup}{\mathalpha}{egreekr}{"24}
-% \let\varrhoup\rhoup 
-% \let\varsigmaup\sigmaup
-% \let\varkappaup\kappaup
-% \DeclareMathSymbol{\varphiup}{\mathalpha}{egreekr}{"27}
+\input{definegreek.tex}% Greek letters not usually given in LaTeX.
 
-% Optima as sans-serif font
 %\usepackage%[scaled=0.9]%
-%{classico}
+%{classico}%  Optima as sans-serif font
 \renewcommand\sfdefault{uop}
 \DeclareMathAlphabet{\mathsf}  {T1}{\sfdefault}{m}{sl}
 \SetMathAlphabet{\mathsf}{bold}{T1}{\sfdefault}{b}{sl}
@@ -306,7 +202,6 @@ british%
 
 % DejaVu Mono as typewriter text
 \usepackage[scaled=0.84]{DejaVuSansMono}
-
 
 \usepackage{mathdots}
 
@@ -319,7 +214,6 @@ british%
 \definecolor{myred}{RGB}{238,102,119}
 \definecolor{myredpurple}{RGB}{170,51,119}
 \definecolor{mygrey}{RGB}{187,187,187}
-
 % Tol (2012) colour-blind-, print-, screen-friendly colours; Munsell terminology
 % \definecolor{lbpurple}{RGB}{51,34,136}
 % \definecolor{lblue}{RGB}{136,204,238}
@@ -330,12 +224,13 @@ british%
 % \definecolor{lred}{RGB}{204,102,119}
 % \definecolor{lpred}{RGB}{136,34,85}
 % \definecolor{lrpurple}{RGB}{170,68,153}
- \definecolor{lgrey}{RGB}{221,221,221}
+\definecolor{lgrey}{RGB}{221,221,221}
 %\newcommand*\mycolourbox[1]{%
 %\colorbox{mygrey}{\hspace{1em}#1\hspace{1em}}}
 \colorlet{shadecolor}{lgrey}
 
 \usepackage{bm}
+
 \usepackage{microtype}
 
 \usepackage[backend=biber,mcite,%subentry,
@@ -381,7 +276,7 @@ citestyle=authoryear-comp,bibstyle=pglpm-authoryear,autopunct=false,sorting=ny,s
 }
 \newcommand*{\subtitleproc}[1]{}
 \newcommand*{\chapb}{ch.}
-
+%
 % \def\arxivp{}
 % \def\mparcp{}
 % \def\philscip{}
@@ -415,20 +310,34 @@ citestyle=authoryear-comp,bibstyle=pglpm-authoryear,autopunct=false,sorting=ny,s
 }
 
 \usepackage{graphicx}
+
 %\usepackage{wrapfig}
+
 %\usepackage{tikz-cd}
 
 \PassOptionsToPackage{hyphens}{url}\usepackage[hypertexnames=false]{hyperref}
+
 \usepackage[depth=4]{bookmark}
 \hypersetup{colorlinks=true,bookmarksnumbered,pdfborder={0 0 0.25},citebordercolor={0.2667 0.4667 0.6667},citecolor=mypurpleblue,linkbordercolor={0.6667 0.2 0.4667},linkcolor=myredpurple,urlbordercolor={0.1333 0.5333 0.2},urlcolor=mygreen,breaklinks=true,pdftitle={\pdftitle},pdfauthor={\pdfauthor}}
 % \usepackage[vertfit=local]{breakurl}% only for arXiv
 \providecommand*{\urlalt}{\href}
 
+\usepackage[british]{datetime2}
+\DTMnewdatestyle{mydate}%
+{% definitions
+\renewcommand*{\DTMdisplaydate}[4]{%
+\number##3\ \DTMenglishmonthname{##2} ##1}%
+\renewcommand*{\DTMDisplaydate}{\DTMdisplaydate}%
+}
+\DTMsetdatestyle{mydate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% Layout. I do not know on which kind of paper the reader will print the
 %%% paper on (A4? letter? one-sided? double-sided?). So I choose A5, which
 %%% provides a good layout for reading on screen and save paper if printed
 %%% two pages per sheet. Average length line is 66 characters and page
 %%% numbers are centred.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \ifafour\setstocksize{297mm}{210mm}%{*}% A4
 \else\setstocksize{210mm}{5.5in}%{*}% 210x139.7
 \fi
@@ -473,7 +382,7 @@ citestyle=authoryear-comp,bibstyle=pglpm-authoryear,autopunct=false,sorting=ny,s
 \counterwithout{section}{chapter}
 \setsecnumformat{\upshape\csname the#1\endcsname\quad}
 \setsecheadstyle{\large\bfseries\sffamily%
-\raggedright}
+\centering}
 \setsubsecheadstyle{\bfseries\sffamily%
 \raggedright}
 %\setbeforesecskip{-1.5ex plus 1ex minus .2ex}% plus 1ex minus .2ex}
@@ -492,7 +401,7 @@ citestyle=authoryear-comp,bibstyle=pglpm-authoryear,autopunct=false,sorting=ny,s
 \newcommand{\addpara}[1]{\paragraph*{#1.}\addcontentsline{toc}{subsubsection}{#1}}
 \newcommand{\addparap}[1]{\paragraph*{#1}\addcontentsline{toc}{subsubsection}{#1}}
 
-% Headers and footers
+%%% Headers, footers, pagestyle
 \copypagestyle{manaart}{plain}
 \makeheadrule{manaart}{\headwidth}{0.5\normalrulethickness}
 \makeoddhead{manaart}{%
@@ -518,7 +427,6 @@ citestyle=authoryear-comp,bibstyle=pglpm-authoryear,autopunct=false,sorting=ny,s
 \makeoddfoot{plain}{}{\makebox[0pt]{\thepage}}{}
 \fi%typodisclaimtrue
 \makeoddhead{plain}{}{}{\footnotesize\reporthead}
-
 % \copypagestyle{manainitial}{plain}
 % \makeheadrule{manainitial}{\headwidth}{0.5\normalrulethickness}
 % \makeoddhead{manainitial}{%
@@ -530,7 +438,7 @@ citestyle=authoryear-comp,bibstyle=pglpm-authoryear,autopunct=false,sorting=ny,s
 \pagestyle{manaart}
 
 \setlength{\droptitle}{-3.9\onelineskip}
-\pretitle{\begin{center}\Large\sffamily%
+\pretitle{\begin{center}\LARGE\sffamily%
 \bfseries}
 \posttitle{\bigskip\end{center}}
 
@@ -546,15 +454,6 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 \postauthor{\par\end{center}}
 \predate{\DTMsetdatestyle{mydate}\begin{center}\footnotesize}
 \postdate{\end{center}\vspace{-\medskipamount}}
-\usepackage[british]{datetime2}
-\DTMnewdatestyle{mydate}%
-{% definitions
-\renewcommand*{\DTMdisplaydate}[4]{%
-\number##3\ \DTMenglishmonthname{##2} ##1}%
-\renewcommand*{\DTMDisplaydate}{\DTMdisplaydate}%
-}
-\DTMsetdatestyle{mydate}
-
 
 \setfloatadjustment{figure}{\footnotesize}
 \captiondelim{\quad}
@@ -563,7 +462,6 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 \captiontitlefont{\footnotesize}
 \firmlists*
 \midsloppy
-
 % handling orphan/widow lines, memman.pdf
 % \clubpenalty=10000
 % \widowpenalty=10000
@@ -575,14 +473,13 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 \predisplaypenalty=10000
 \postdisplaypenalty=1549
 \displaywidowpenalty=1602
-
+\raggedbottom
 \selectlanguage{british}\frenchspacing
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Paper's details
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%% Paper's details %%%%
-\title{\propertitle%\\
-%  {\large A geometric commentary on maximum-entropy proofs}% ***
-}
+\title{\propertitle}
 \author{%
 \hspace*{\stretch{1}}%
 %% uncomment if additional authors present
@@ -591,7 +488,7 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 % \footnotesize\epost{\email{***}{***}}}%
 % \hspace*{\stretch{1}}%
 \parbox{0.5\linewidth}%\makebox[0pt][c]%
-{\protect\centering\ifpublic P.G.L.  Porta Mana\\\else Luca  \fi%
+{\protect\centering P.G.L.  Porta Mana\\%
 \footnotesize\epost{\email{piero.mana}{ntnu.no}}}%
 \hspace*{\stretch{1}}%
 %\quad\href{https://orcid.org/0000-0002-6070-0784}{\protect\includegraphics[scale=0.16]{orcid_32x32.png}\textsc{orcid}:0000-0002-6070-0784}%
@@ -600,7 +497,10 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 \date{Draft of \today\ (first drafted \firstdraft)}
 %\date{\firstpublished; updated \updated}
 
-%@@@@@@@@@@ new macros @@@@@@@@@@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Macros @@@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 % Common ones - uncomment as needed
 %\providecommand{\nequiv}{\not\equiv}
 %\providecommand{\coloneqq}{\mathrel{\mathop:}=}
@@ -614,8 +514,8 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 %\providecommand{\degree}{\textdegree}% degree
 %\newcommand*{\celsius}{\textcelsius}% degree Celsius
 %\newcommand*{\micro}{\textmu}% degree Celsius
-%\newcommand*{\I}{\mathrm{i}}%imaginary unit
-%\newcommand*{\e}{\mathrm{e}}%Neper
+\newcommand*{\I}{\mathrm{i}}%imaginary unit
+\newcommand*{\e}{\mathrm{e}}%Neper
 \newcommand*{\di}{\mathrm{d}}%differential
 %\newcommand*{\Di}{\mathrm{D}}%capital differential
 %\newcommand*{\planckc}{\hslash}
@@ -640,18 +540,10 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 \newcommand*{\defs}{\eqqcolon}
 %\newcommand*{\Land}{\bigwedge}
 %\newcommand*{\Lor}{\bigvee}
-%\newcommand*{\lland}{\mathbin{\ \land\ }}
-%\newcommand*{\llor}{\mathbin{\ \lor\ }}
-%\newcommand*{\lonlyif}{\mathbin{\Rightarrow}}%implies
+%\newcommand*{\lland}{\DOTSB\;\land\;}
+%\newcommand*{\llor}{\DOTSB\;\lor\;}
 %\newcommand*{\limplies}{\mathbin{\Rightarrow}}%implies
-\newcommand*{\mimplies}{\Rightarrow}%implies
-%\newcommand*{\liff}{\mathbin{\Leftrightarrow}}%if and only if
-%\newcommand*{\cond}{\mathpunct{|}}%conditional sign (in probabilities)
-%\newcommand*{\lcond}{\mathpunct{|\ }}%conditional sign (in probabilities)
-%\newcommand*{\bigcond}{\mathpunct{\big|}}%conditional sign (in probabilities)
-%\newcommand*{\lbigcond}{\mathpunct{\big|\ }}%conditional sign (in probabilities)
-\newcommand*{\suchthat}{\mid}%{\mathpunct{|}}%such that (eg in sets)
-%\newcommand*{\bigst}{\mathpunct{\big|}}%such that (eg in sets)
+%\newcommand*{\suchthat}{\mid}%{\mathpunct{|}}%such that (eg in sets)
 %\newcommand*{\with}{\colon}%with (list of indices)
 %\newcommand*{\mul}{\times}%multiplication
 %\newcommand*{\inn}{\cdot}%inner product
@@ -665,20 +557,21 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 \renewcommand*{\le}{\leqslant}%less or equal
 \renewcommand*{\ge}{\geqslant}%greater or equal
 %\DeclarePairedDelimiter\clcl{[}{]}
-\DeclarePairedDelimiter\clop{[}{[}
+%\DeclarePairedDelimiter\clop{[}{[}
 %\DeclarePairedDelimiter\opcl{]}{]}
 %\DeclarePairedDelimiter\opop{]}{[}
-%\DeclarePairedDelimiter\abs{\lvert}{\rvert}
+\DeclarePairedDelimiter\abs{\lvert}{\rvert}
 %\DeclarePairedDelimiter\norm{\lVert}{\rVert}
 \DeclarePairedDelimiter\set{\{}{\}}
 %\DeclareMathOperator{\pr}{P}%probability
 \newcommand*{\pf}{\mathrm{p}}%probability
 \newcommand*{\p}{\mathrm{P}}%probability
-%\newcommand*{\tf}{\mathrm{T}}%probability
-\renewcommand*{\|}{\mathpunct{|}}
-%\newcommand*{\lcond}{\mathpunct{|\ }}%conditional sign (in probabilities)
-\newcommand*{\bigcond}{\mathpunct{\big|\ }}%conditional sign (in probabilities)
-%\newcommand*{\lbigcond}{\mathpunct{\big|\ }}%conditional sign (in probabilities)
+%\newcommand*{\E}{\mathrm{E}}
+%\renewcommand*{\|}{\nonscript\,\vert\nonscript\;\mathopen{}}
+\renewcommand*{\|}[1][]{\nonscript\,#1\vert\nonscript\;\mathopen{}}
+%\DeclarePairedDelimiterX{\cond}[2]{(}{)}{#1\nonscript\,\delimsize\vert\nonscript\;\mathopen{}#2}
+%\DeclarePairedDelimiterX{\condt}[2]{[}{]}{#1\nonscript\,\delimsize\vert\nonscript\;\mathopen{}#2}
+%\DeclarePairedDelimiterX{\conds}[2]{\{}{\}}{#1\nonscript\,\delimsize\vert\nonscript\;\mathopen{}#2}
 %\newcommand*{\+}{\lor}
 %\renewcommand{\*}{\land}
 \newcommand*{\sect}{\S}% Sect.~
@@ -724,45 +617,41 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 %\newcommand*{\sland}{\mathop{\textstyle\bigwedge}}
 %\newcommand*{\slor}{\mathop{\textstyle\bigvee}}
 \newcommand*{\T}{^\intercal}%transpose
-%\newcommand*{\E}{\mathrm{E}}
-%\DeclarePairedDelimiter\expp{(}{)}
-%\newcommand*{\expe}{\E\expp}%round
-%\newcommand*{\expeb}{\E\clcl}%square
 %%\newcommand*{\QEM}%{\textnormal{$\Box$}}%{\ding{167}}
 %\newcommand*{\qem}{\leavevmode\unskip\penalty9999 \hbox{}\nobreak\hfill
 %\quad\hbox{\QEM}}
 
-%\definecolor{notecolour}{RGB}{68,170,153}
-%\newcommand*{\puzzle}{{\fontencoding{U}\fontfamily{fontawesometwo}\selectfont\symbol{225}}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Custom macros for this file @@@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ \definecolor{notecolour}{RGB}{68,170,153}
+\newcommand*{\puzzle}{{\fontencoding{U}\fontfamily{fontawesometwo}\selectfont\symbol{225}}}
 %\newcommand*{\puzzle}{\maltese}
-%\newcommand{\mynote}[1]{ {\color{notecolour}\puzzle\ #1}}
-%\newcommand*{\widebar}[1]{{\mkern1.5mu\skew{2}\overline{\mkern-1.5mu#1\mkern-1.5mu}\mkern 1.5mu}}
+\newcommand{\mynote}[1]{ {\color{notecolour}\puzzle\ #1}}
+\newcommand*{\widebar}[1]{{\mkern1.5mu\skew{2}\overline{\mkern-1.5mu#1\mkern-1.5mu}\mkern 1.5mu}}
 
 % \newcommand{\explanation}[4][t]{%\setlength{\tabcolsep}{-1ex}
 % %\smash{
 % \begin{tabular}[#1]{c}#2\\[0.5\jot]\rule{1pt}{#3}\\#4\end{tabular}}%}
 % \newcommand*{\ptext}[1]{\text{\small #1}}
-
-%@@@@ Custom macros for this file @@@@
 %\DeclareMathOperator*{\argsup}{arg\,sup}
 \newcommand*{\dob}{degree of belief}
-\newcommand*{\yq}{\bm{q}}
-\newcommand*{\yx}{\bm{x}}
-\newcommand*{\yu}{\bm{u}}
-\newcommand*{\HS}{\mathrm{H}}
-\newcommand*{\sh}{\Eta}
-\newcommand*{\yid}{I}
-\newcommand*{\ysim}{\varDelta}
-\newcommand*{\ysum}{\mathop{\textstyle\sum}}
-%@@@@@@@@@@ new macros end @@@@@@@@@@
+\newcommand*{\dobs}{degrees of belief}
+\newcommand*{\ymm}{\mathte{M}}
+%%% Custom macros end @@@
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Beginning of document
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \firmlists
 \begin{document}
 \captiondelim{\quad}\captionnamefont{\footnotesize}\captiontitlefont{\footnotesize}
 \selectlanguage{british}\frenchspacing
-
-%%% Title and abstract %%%
 \maketitle
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Abstract
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \abstractrunin
 \abslabeldelim{}
 \renewcommand*{\abstractname}{}
@@ -770,20 +659,23 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 \setlength{\absrightindent}{0pt}
 \setlength{\abstitleskip}{-\absparindent}
 \begin{abstract}\labelsep 0pt%
-  \noindent Some memos on densities and metrics on simplices.
-  \ifpublic\\\noindent\emph{\footnotesize Note: Dear Reader \amp\ Peer, this
-    manuscript is being peer-reviewed by you. Thank you.}\fi
+  \noindent Some facts about simplices and about probability distributions
+  on them.
+\\\noindent\emph{\footnotesize Note: Dear Reader
+    \amp\ Peer, this manuscript is being peer-reviewed by you. Thank you.}
 % \par%\\[\jot]
 % \noindent
 % {\footnotesize PACS: ***}\qquad%
 % {\footnotesize MSC: ***}%
 %\qquad{\footnotesize Keywords: ***}
 \end{abstract}
-
 \selectlanguage{british}\frenchspacing
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Epigraph
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % \asudedication{\small ***}
 % \vspace{\bigskipamount}
-
 % \setlength{\epigraphwidth}{.7\columnwidth}
 % %\epigraphposition{flushright}
 % \epigraphtextposition{flushright}
@@ -794,6 +686,11 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 % %\setlength{\afterepigraphskip}{0pt}
 % \epigraph{\emph{text}}{source}
 
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% BEGINNING OF MAIN TEXT
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Setup and base density}
 \label{sec:base}
 
@@ -967,42 +864,65 @@ as fictitious coordinates, multiplying by a delta for normalization
 matrix $\yid_{N+1}$.
 
 
+\section{Diverse}
+\label{sec:diverse}
+
+Suppose we have a covariance matrix -- equivalent to the inverse of a
+quadratic form.-- on a simplex. In the canonical embedding orthant, this
+covariance matrix has a zero axis, corresponding to the plane of the
+embedded simplex. Taking the \emph{pseudo}inverse leaves this axis to zero
+while inverting the others to give the quadratic form. This doesn't affect
+the results for vectors tangent to the simplex, since they have no
+components along that axis.
+
+Consider the projection from a higher-dimensional simplex to the previous
+one via a hypergeometric distribution (\enquote{drawing without
+  replacement}). This is done via a projection matrix $\ymm$, with the
+hypergeometric distribution as its entries.
+
+We can pull back the quadratic form from the lower-D to the higher-D
+simplex, obtaining a degenerate quadratic form. This is done by multiplying
+the quadratic form on the left and right by $\ymm\T$ and $\ymm$. This form
+has a covariance matrix with several infinite axes, corresponding to the
+kernel of the projection, and the zero axis corresponding to the direction
+outside of the simplex.
+
+\begin{itemize}
+\item The projection matrix has a right inverse (pseudoinverse, and
+  different from the transpose).
+\item The projection matrix maps the uniform distribution to the uniform
+  distribution; the inverse projection also maps the uniform distribution
+  to the uniform distribution.
+\item The previous fact implies that the projection and its pseudoinverse
+  map the outside axes of covariance matrices in the two simplices to each other.
+\item We can \enquote{add thickness} to the axis outside of the simplex by
+  adding a constant term to \emph{all} entries of the covariance matrix.
+\item The projection and its pull-back map the outside axis to itself.
+\item Therefore we can add a constant term to the low-D covariance matrix
+  or to its pull-back.
+\item The pseudoinverse of the pulled-back quadratic form -- that is, its
+  covariance matrix -- can be obtained by multiplying original covariance
+  matrix by the pseudoinverses of the projectors. This, however, can only
+  be done as long as we leave the axis outside the simplex equal to zero
+  (so that the pseudoinverse doesn't touch it).
+\item The pseudoinverse maps a spher
+\end{itemize}
 
 
-% \[
-%   \begin{tikzcd}
-%       M_{n,n}(\CC) \arrow{r}{R'_{**}(\Hat{U})} & M_{n,n}(\CC)
-%     \\
-%     L(\mathcal{H}) \arrow{r}{\Hat{U}} \arrow[swap]{d}{R_*}\arrow[swap]{u}{R'_*} & L(\mathcal{H}) \arrow{d}{R_*}\arrow{u}{R'_*} \\
-%       M_{n,n}(\CC) \arrow{r}{R_{**}(\Hat{U})} & M_{n,n}(\CC)
-%   \end{tikzcd}
-% \]
-
-% \[
-%   \begin{tikzcd}
-%       \CC^n \arrow{r}{R'_*(A)} & \CC^n
-%     \\
-%     \mathcal{H} \arrow{r}{A} \arrow[swap]{d}{R}\arrow[swap]{u}{R'} & \mathcal{H} \arrow{d}{R}\arrow{u}{R'} \\
-%       \CC^n \arrow{r}{R_*(A)} & \CC^n
-%   \end{tikzcd}
-% \]
 
 
-% \[
-%   \begin{tikzcd}
-%     \mathcal{H} \arrow{r}{A} \arrow[swap]{d}{R} & \mathcal{H} \arrow{d}{R} \\
-%       \CC^n \arrow{r}{R_*(A)} & \CC^n
-%   \end{tikzcd}
-% \]
 
 %%\setlength{\intextsep}{0.5ex}% with wrapfigure
 %\begin{figure}[p!]%{r}{0.4\linewidth} % with wrapfigure
 %  \centering\includegraphics[trim={12ex 0 18ex 0},clip,width=\linewidth]{maxent_saddle.png}\\
-%\caption{***}\label{fig:comparison_a5}
+%\caption{caption}\label{fig:comparison_a5}
 %\end{figure}% exp_family_maxent.nb
 
 
-\ifpublic
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Acknowledgements
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+\iffalse
 \begin{acknowledgements}
   \ldots to Mari \amp\ Miri for continuous encouragement and affection, and
   to Buster Keaton and Saitama for filling life with awe and inspiration.
@@ -1014,16 +934,18 @@ matrix $\yid_{N+1}$.
 \end{acknowledgements}
 \fi
 
-
-\newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Appendices
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+\clearpage
 % %\renewcommand*{\appendixpagename}{Appendix}
 % %\renewcommand*{\appendixname}{Appendix}
 % %\appendixpage
 % \appendix
 
-
-%%%%%%%%%%%%%%% BIB %%%%%%%%%%%%%%%
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Bibliography
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
 \defbibnote{prenote}{{\footnotesize (\enquote{de $X$} is listed under D,
     \enquote{van $X$} under V, and so on, regardless of national
     conventions.)\par}}
@@ -1033,9 +955,11 @@ matrix $\yid_{N+1}$.
 \printbibliography[prenote=prenote%,postnote=postnote
 ]
 
-
 \end{document}
----------- cut text ----------------
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Cut text (won't be compiled)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
 
 
 %%% Local Variables: 

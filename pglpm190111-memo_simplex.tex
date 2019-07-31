@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2019-01-11T10:39:40+0100
-%% Last-Updated: 2019-07-31T16:34:09+0200
+%% Last-Updated: 2019-07-31T19:56:50+0200
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newif\ifarxiv
 \arxivfalse
@@ -647,8 +647,8 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 \newcommand*{\ysum}{\bm{\tsum}}
 \newcommand*{\sh}{\Eta}
 \newcommand*{\yL}{L}
-\newcommand*{\yu}{\bm{\upsilon}}
-\newcommand*{\yuo}{\mathte{U}^{\mathord{\perp}}}
+\newcommand*{\yu}{\bm{u}}
+\newcommand*{\yuu}{\mathte{U}} % this is the "u-u" one
 \newcommand*{\yui}{\mathte{U}^{\mathord{\shortparallel}}}
 \newcommand*{\yid}{\mathte{I}}
 \newcommand*{\yx}{\bm{x}}
@@ -978,64 +978,80 @@ matrix $\yid_{N+1}$.
 \section{Truncated normal distributions}
 \label{sec:normal_distr}
 
-A truncated normal distribution on the simplex is proportional to
+A truncated normal distribution on the simplex is -- we would think --
+proportional to
 \begin{equation}
   \label{eq:normal}
 \exp\Bigl[-\tfrac{1}{2}
 (\yq-\yqr)\T \, \ySigma^{-1}\, (\yq-\yqr)
   \Bigr] \;\di\yq\;.
 \end{equation}
-It's truncated because it's defined only on the simplex. The normalization
-constant is therefore not the one of the standard normal on $\RR^{N}$.
-The scale matrix $\ySigma$ is \emph{not} the covariance of $\yq$:
+It's truncated because it's defined only on the simplex.
+
+Let's first remind some facts about truncated normal distributions 
+on any compact space, not just on the simplex:
+\begin{itemize}
+\item The normalization constant is not the one of the standard
+  normal on $\RR^{N}$, for obvious reasons of integration domain.
+\item The scale matrix $\ySigma$ is \emph{not} the covariance of $\yq$:
+  \begin{equation}
+    \label{eq:normal_not_cov}
+    \E(\yq\yq\T) \ne \ySigma \;!
+  \end{equation}
+  that's why it's better to call $\ySigma$ \enquote{scale matrix} than
+  \enquote{covariance matrix}.
+\item The scale matrix $\ySigma$ can also be negative-definite or
+  indefinite. In the directions where its singular values are negative, the
+  resulting distribution function in $\yq$ coordinates is $\cup$-shaped and
+  has maxima at the boundaries. (Positive-definiteness is only required on
+  unbounded spaces such as $\RR^{N}$: negative values would try to push the
+  probability mass to infinity.)
+\item If most mass is enough away from the boundaries (the distribution
+  function is very peaked), so that there's little difference for the
+  integrals if we extend them outside the simplex, then the covariance
+  matrix will be approximately equal to the scale matrix $\ySigma$.
+\end{itemize}
+
+There are additional subtleties with the mathematical
+expression~\eqref{eq:normal}, though, owing to the fact that it's defined
+on a convex space, that is, a subset of an affine space.
+
+First of all, remember from \sect~\ref{sec:projections} that
+$\yq\T \yuu\yq = 1/(N+1)$ for every point $\yq$ of the simplex. This means
+that -- as long as our integrals are strictly on the simplex -- we can
+rewrite the normal~\eqref{eq:normal} equivalently as
 \begin{equation}
-  \label{eq:normal_not_cov}
-  \E(\yq\yq\T) \ne \ySigma \;!
+  \label{eq:normal_equivalent}
+\exp\Bigl[-\tfrac{1}{2}
+(\yq-\yqr)\T \, (\ySigma^{-1} + k\yuu)\, (\yq-\yqr)
+\Bigr] \;\di\yq
+\quad\text{\footnotesize equivalent to \eqref{eq:normal}}
 \end{equation}
-This happens exactly because the normal is truncated. Moreover, the scale
-matrix $\ySigma$ can also be negative-definite or indefinite. In the
-directions where its singular values are negative, the resulting
-distribution function in $\yq$ coordinates is $\cup$-shaped and has maxima
-at the boundaries. (This is also true of any truncated normal on a compact
-space; positive-definiteness is only required on $\RR^{N}$ because it's
-unbounded: negative values would try to push the probability mass to
-infinity.) But, if the distribution function is very peaked and most mass
-is enough away from the boundaries (so that there's little difference for
-the integrals if we extend them outside the simplex), then the covariance
-matrix will be approximately equal to the scale matrix $\ySigma$.
+for arbitrary real $k$, because the additional term proportional to
+$\yq\T \yuu \yq \equiv 1/(N+1)$ is constant and can be absorbed by the
+normalization constant. Note that the (pseudo)inverse of
+$\ySigma^{-1} + k\yuu$ is different from $\ySigma$.
 
-There are some subtleties in the mathematical expression~\eqref{eq:normal}
-though, generally valid for a normal defined on an affine space.
+But then, if we see an expression like~\eqref{eq:normal}, how do we know
+that its $\ySigma^{-1}$ is \emph{really} an approximation of the inverse
+covariance matrix? what if a $k\yuu$ term was actually added to it?
 
-First of all, since $\yu\T\yq = 1$ every truncated normal can also be
-written in the form
+Second, since $\yu\T\yq = 1$ for every point $\yq$ of the simplex, any
+truncated normal can also be equivalently written in the form
 \begin{equation}
   \label{eq:normal_simple}
   \exp\Bigl(-\tfrac{1}{2}
-\yq\T \yDelta \yq
+\yq\T \yDelta^{-1} \yq
   \Bigr) \;\di\yq
 \end{equation}
 with
 \begin{equation}
   \label{eq:delta_simple_normal}
-  \yDelta \defd \ySigma^{-1} - \yu\yqr{}\T\ySigma^{-1} - \ySigma^{-1}\yqr\yu\T
+  \yDelta^{-1} \defd \ySigma^{-1} - \yu\yqr{}\T\ySigma^{-1} - \ySigma^{-1}\yqr\yu\T
   + \yu\yqr{}\T\ySigma^{-1}\yqr\yu\T \;.
 \end{equation}
-Moreover, if we consider this expression in canonical embedding of the
-$N$\dd-simplex in the orthant and remember that $(N+1)\yuo\yq =\yu$, we see that
-\begin{equation}
-  \label{eq:normal_arbitrary_projection}
-  \exp\Bigl(-\tfrac{1}{2}
-\yq\T \yDelta \yq
-  \Bigr) \;\di\yq
-  \propto
-    \exp\Bigl[-\tfrac{1}{2}
-\yq\T (\yDelta + k \yuo)\, \yq
-  \Bigr] \;\di\yq
-\end{equation}
-for arbitrary $k$, because the additional, constant term proportional to
-$\yq\T \yuo \yq \equiv 1/(N+1)$ is absorbed by the normalization constant.
-
+Also in this case $\yDelta^{-1}$ is determined but by an additional $k\yuu$
+term.
 
 \section{Diverse}
 \label{sec:diverse}

@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
-%% Created: 2019-01-24T10:39:40+0100
-%% Last-Updated: 2019-07-29T21:45:50+0200
+%% Created: 2019-01-11T10:39:40+0100
+%% Last-Updated: 2019-07-31T14:49:08+0200
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newif\ifarxiv
 \arxivfalse
@@ -18,11 +18,11 @@ british%
 ]{memoir}
 \newcommand*{\updated}{\today}
 \newcommand*{\firstdraft}{11 January 2019}
-\newcommand*{\firstpublished}{***}
-\newcommand*{\propertitle}{Probability and the simplex%\\{\large ***}%
+\newcommand*{\firstpublished}{\firstdraft}
+\newcommand*{\propertitle}{The simplex and probability%\\{\large ***}%
 }% title uses LARGE; set Large for smaller
 \newcommand*{\pdftitle}{\propertitle}
-\newcommand*{\headtitle}{***}
+\newcommand*{\headtitle}{Simplex and probability}
 \newcommand*{\pdfauthor}{P.G.L.  Porta Mana}
 \newcommand*{\headauthor}{Porta Mana}
 \newcommand*{\reporthead}{}% Report number
@@ -290,6 +290,11 @@ citestyle=authoryear-comp,bibstyle=pglpm-authoryear,autopunct=false,sorting=ny,s
 %\texttt{\href{http://arxiv.org/abs/#1}{\protect\url{arXiv:#1}}}%
 %\renewcommand{\arxivnote}{\texttt{arXiv} eprints available at \url{http://arxiv.org/}.}
 }
+\newcommand*{\haleprint}[1]{%\global\def\arxivp{\arxivsi}%\citeauthor{0arxivcite}\addtocategory{ifarchcit}{0arxivcite}%eprint
+\texttt{\urlalt{https://hal.archives-ouvertes.fr/#1}{HAL:\hspace{0pt}#1}}%
+%\texttt{\href{http://arxiv.org/abs/#1}{\protect\url{arXiv:#1}}}%
+%\renewcommand{\arxivnote}{\texttt{arXiv} eprints available at \url{http://arxiv.org/}.}
+}
 \newcommand*{\mparceprint}[1]{%\global\def\mparcp{\mparcsi}%\citeauthor{0mparccite}\addtocategory{ifarchcit}{0mparccite}%eprint
 \texttt{\urlalt{http://www.ma.utexas.edu/mp_arc-bin/mpa?yn=#1}{mp\_arc:\hspace{0pt}#1}}%
 %\texttt{\href{http://www.ma.utexas.edu/mp_arc-bin/mpa?yn=#1}{\protect\url{mp_arc:#1}}}%
@@ -487,15 +492,14 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 % {\protect\centering ***\\%
 % \footnotesize\epost{\email{***}{***}}}%
 % \hspace*{\stretch{1}}%
-\parbox{0.5\linewidth}%\makebox[0pt][c]%
+\parbox{0.75\linewidth}%\makebox[0pt][c]%
 {\protect\centering P.G.L.  Porta Mana\\%
-\footnotesize\epost{\email{piero.mana}{ntnu.no}}}%
+\footnotesize Kavli Institute, Trondheim \quad \epost{\email{pgl}{portamana.org}}}%
 \hspace*{\stretch{1}}%
 %\quad\href{https://orcid.org/0000-0002-6070-0784}{\protect\includegraphics[scale=0.16]{orcid_32x32.png}\textsc{orcid}:0000-0002-6070-0784}%
 }
 
-\date{Draft of \today\ (first drafted \firstdraft)}
-%\date{\firstpublished; updated \updated}
+\date{\firstpublished; updated \updated}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% Macros @@@
@@ -543,7 +547,7 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 %\newcommand*{\lland}{\DOTSB\;\land\;}
 %\newcommand*{\llor}{\DOTSB\;\lor\;}
 %\newcommand*{\limplies}{\mathbin{\Rightarrow}}%implies
-%\newcommand*{\suchthat}{\mid}%{\mathpunct{|}}%such that (eg in sets)
+\newcommand*{\suchthat}{\mid}%{\mathpunct{|}}%such that (eg in sets)
 %\newcommand*{\with}{\colon}%with (list of indices)
 %\newcommand*{\mul}{\times}%multiplication
 %\newcommand*{\inn}{\cdot}%inner product
@@ -557,7 +561,7 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 \renewcommand*{\le}{\leqslant}%less or equal
 \renewcommand*{\ge}{\geqslant}%greater or equal
 %\DeclarePairedDelimiter\clcl{[}{]}
-%\DeclarePairedDelimiter\clop{[}{[}
+\DeclarePairedDelimiter\clop{[}{[}
 %\DeclarePairedDelimiter\opcl{]}{]}
 %\DeclarePairedDelimiter\opop{]}{[}
 \DeclarePairedDelimiter\abs{\lvert}{\rvert}
@@ -637,6 +641,14 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 %\DeclareMathOperator*{\argsup}{arg\,sup}
 \newcommand*{\dob}{degree of belief}
 \newcommand*{\dobs}{degrees of belief}
+\newcommand*{\yq}{\bm{q}}
+\newcommand*{\ysim}{\varDelta}
+\newcommand*{\ysum}{\bm{\tsum}}
+\newcommand*{\sh}{\Eta}
+\newcommand*{\yL}{L}
+\newcommand*{\yu}{\bm{u}}
+\newcommand*{\yid}{\mathte{I}}
+\newcommand*{\yx}{\bm{x}}
 \newcommand*{\ymm}{\mathte{M}}
 %%% Custom macros end @@@
 
@@ -659,10 +671,11 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 \setlength{\absrightindent}{0pt}
 \setlength{\abstitleskip}{-\absparindent}
 \begin{abstract}\labelsep 0pt%
-  \noindent Some facts about simplices and about probability distributions
-  on them.
-\\\noindent\emph{\footnotesize Note: Dear Reader
-    \amp\ Peer, this manuscript is being peer-reviewed by you. Thank you.}
+  \noindent A collection of geometric and mathematical facts about
+  simplices of any dimension and about probability distributions on them.
+  This collection is regularly updated \\\noindent\emph{\footnotesize Note:
+    Dear Reader \amp\ Peer, this manuscript is being peer-reviewed by you.
+    Thank you.}
 % \par%\\[\jot]
 % \noindent
 % {\footnotesize PACS: ***}\qquad%
@@ -691,7 +704,19 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% BEGINNING OF MAIN TEXT
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Setup and base density}
+
+\bigskip
+
+I collect here some geometric and mathematical facts about simplices of any
+dimensions, and about distributions of probability on them. I often use
+them in my research and thought they can be useful to other people. I'll
+update this collection regularly. Almost no explicit proofs are given,
+although sometimes I give the idea of the proof. Please let me know if you
+find any mistakes or if you think some other fact should be included.
+
+
+
+\section{Simplex}
 \label{sec:base}
 
 Consider $N+1$ mutually exclusive and exhaustive propositions. The
@@ -699,21 +724,96 @@ distributions of their relative frequencies form an $N$-dimensional
 simplex. Label the propositions $\set{0,\dotsc,N}$, denote a
 relative-frequency distribution by $(q_0, \dotsc, q_N) \defs \yq$. In the
 rest of this memo it's always implicitly assumed that $q_i\ge 0$, also in
-the integration domains. Denote
+the integration domains. Denote by
 \begin{equation}
   \label{eq:def_orthant}
-  \ysim_N \defd \set{(x_1,\dotsc,x_N) \suchthat x_i\ge 0, \tsum_i x_i \le 1},
+  \ysim_N \defd \set{(x_{0},\dotsc,x_{N}) \suchthat x_i\ge 0, \tsum_i x_i = 1}
 \end{equation}
-which is the $(N+1)$-simplex asymmetrically embedded in $\RR^{N+1}$. As
-basic density (that is, volume element) we can take either
+the $N$-dimensional simplex, or $N$d-simplex, which can be thought of as
+embedded in the non-negative orthant of $\RR^{N+1}$. It is a convex space,
+and therefore part of an affine space \citep{portamana2011_r2019}.
+
+
+\section{Geometric properties}
+\label{sec:geometry}
+
+Let's examine some geometric properties of the $N$d-simplex, embedded as a
+symmetric $(N+1)$-hyperhedron (triangle, tetrahedron, and so on) in
+$N$-dimensional Euclidean space -- that is, a space with a flat metric.
+Suppose its edges have length $\yL$; note that when it's naturally embedded
+in the nonnegative orthant, then $\yL=\sqrt{2}$.
+
+\begin{itemize}[wide]
+\item Its hypervolume is
+  \begin{equation}
+    \label{eq:volume}
+    \Biggl(\frac{\yL}{\sqrt{2}}\Biggr)^{N}\frac{\sqrt{N+1}}{N!} \;.
+  \end{equation}
+\item The hyperarea of a facet (equal to the hypervolume of one less
+  dimension) is
+  \begin{equation}
+    \label{eq:area_facet}
+    \Biggl(\frac{\yL}{\sqrt{2}}\Biggr)^{N-1}\frac{\sqrt{N}}{(N-1)!} \;.
+  \end{equation}
+\item The distance between the centre and a vertex is
+  \begin{equation}
+    \label{eq:centre_vertex}
+    \frac{\yL}{\sqrt{2}} \sqrt{\frac{N}{N+1}} \;,
+    \end{equation}
+    which is also the radius of its circum-hypersphere.
+\item The distance between the centre and the centre of a facet is
+  \begin{equation}
+    \label{eq:centre_facet}
+    \frac{\yL}{\sqrt{2}}\frac{1}{\sqrt{N\,(N+1)}} \;,
+  \end{equation}
+  which is also the radius of its in-hypersphere.
+\item The distance between a vertex and its opposite facet is therefore
+  \begin{equation}
+    \label{eq:vertex_facet}
+    \frac{\yL}{\sqrt{2}}\sqrt{\frac{N+1}{N}} \;.
+  \end{equation}
+\item The distance between the centre and the origin in the embedding
+  orthant is
+  \begin{equation}
+    \label{eq:centre_origin}
+    \frac{\yL}{\sqrt{2}} \frac{1}{\sqrt{N+1}}\;.
+  \end{equation}
+\end{itemize}
+
+Note the following curious facts as $N$ grows:
+\begin{itemize}[wide]
+\item the hypervolume is smaller and smaller compared to that of the
+  embedding hypercube;
+\item the ratio of the radii of circum- and in-hypersphere is $N$,
+  therefore the ratio between their hypervolumes is $N^{N}$: most of the
+  hypervolume of the $N$d-simplex is \enquote{at the corners};
+\item the centre becomes closer and closer to the origin of the embedding
+  orthant, with respect to the size of the edges;
+\item the centre becomes closer and closer to the facets with respect to
+  the distance to the edges;
+\item almost all of the segment from a vertex to its opposite facet is
+  between the vertex and the centre.
+\end{itemize}
+
+
+
+
+
+
+
+\section{Densities}
+\label{sec:densities}
+
+As basic
+density (that is, volume element) we can take either
 \begin{gather}
   \label{eq:vol_element_1N}
-  \di q_1 \dotsm \di q_N,
-  \qquad (q_1,\dotsc,q_N) \in \ysim_N,
+  \di q_1 \dotsm \di q_N\;,
+  \qquad (q_1,\dotsc,q_N) \in \ysim_N\;,
 \\\shortintertext{or}
   \label{eq:vol_element_0N}
-  \di q_0 \dotsm \di q_N\;\delt(1-\ysum\yq),
-  \qquad (q_0,\dotsc,q_N) \in \clop{0,+\infty}^{N+1},
+  \di q_0 \dotsm \di q_N\;\delt(1-\ysum\yq)\;,
+  \qquad (q_0,\dotsc,q_N) \in \clop{0,+\infty}^{N+1}\;,
 \end{gather}
 which is borrowed from a Euclidean volume element of the embedding space.
 The latter leads to more symmetric formulae. The two densities are
@@ -734,7 +834,7 @@ the same \dob\ to any two $N$-volumes having unit ratio:
 \begin{equation}
   \label{eq:canonical_unif_density}
   % \frac{\sqrt{2}^N\,N!}{\sqrt{N+1}}\;
-  N! \;\di\yq,
+  N! \;\di\yq\;,
 \end{equation}
 called the flat prior.
 
@@ -746,7 +846,7 @@ in $\clop{0,+\infty}^{N+1}$ via
 \begin{equation}
   \label{eq:sphere_embedding}
   (q_1, \dotsc, q_N) \mapsto (x_0, x_1,\dotsc, x_N) =
-  \bigl( \sqrt{1-q_1 -\dotsb -q_N}, \sqrt{q_1}, \dotsc, \sqrt{q_N} \bigr).
+  \bigl( \sqrt{1-q_1 -\dotsb -q_N}, \sqrt{q_1}, \dotsc, \sqrt{q_N} \bigr)\;.
 \end{equation}
 The normalized density induced by the Euclidean one is in this case
 \begin{equation}
@@ -771,7 +871,7 @@ of these ways and $m$ is very large, our belief about the relative
 frequency $\yq$ can be approximated by the density
 \begin{equation}
   \label{eq:entropy_prior}
-  \frac{\exp[m \sh(\yq)]}{\int\!\di\yq\; \exp[m \sh(\yq)]}\;\di\yq,
+  \frac{\exp[m \sh(\yq)]}{\int\!\di\yq\; \exp[m \sh(\yq)]}\;\di\yq\;,
 \end{equation}
 called the entropic prior.
 
@@ -784,7 +884,7 @@ called the entropic prior.
 % $\bigl(1/(N+1), \dotsc, 1/(N+1)\bigr)$ of length $1/\sqrt{N+1}$:
 % \begin{equation}
 %   \label{eq:volume_Np1_from_N}
-%   \frac{1}{(N+1)!} = \frac{1}{N+1}\;\sqrt{2}^N\,V\;\frac{1}{\sqrt{N+1}},
+%   \frac{1}{(N+1)!} = \frac{1}{N+1}\;\sqrt{2}^N\,V\;\frac{1}{\sqrt{N+1}}\;,
 % \end{equation}
 % from which we obtain $V = \frac{\sqrt{N+1}}{\sqrt{2}^N\,N!}$. Thus $1/V$ is
 % the normalization of the density uniform in $(q_1, \dotsc, q_N)$.
@@ -807,7 +907,7 @@ define a metric either in terms of intrinsic properties of the simplex or by emb
 The flat metric is the one that respects the convex structure of the
 simplex, in the sense that every two parallel $d$-dimensional subsets whose
 $d$-volumes are in a ratio of one-to-one -- this can be calculated using
-only the convex structure \citep{portamana2011} -- are given equal
+only the convex structure \citep{portamana2011_r2019} -- are given equal
 $d$-volumes by the metric. The metric also allows the comparison of
 non-parallel $d$-volumes, something that can't be done with the convex
 structure alone. This metric can also be obtained by embedding the
@@ -830,9 +930,9 @@ The embedding above has tangent map
 \yu \defd
 \underbrace{\begin{pmatrix}
   1 &\dotso &1
-\end{pmatrix}}_{N},
+\end{pmatrix}}_{N}\;,
 \qquad
-\yid_{N} \defd \text{identity $N$-matrix}.
+\yid_{N} \defd \text{identity $N$-matrix}\;.
 \end{gather}
 
 In coordinates $\yx$ the metric is represented by the identity matrix
@@ -848,20 +948,26 @@ $\yid_{N+1}$. The representation of its pull-back is therefore
   \begin{pmatrix}
 -\yu\T \\ \yid_N    
 \end{pmatrix}
-= \yid_N + \yu\T\yu.
+= \yid_N + \yu\T\yu\;.
 \end{equation}
 This is a matrix with all unit elements outside the diagonal and $2$ on the
 diagonal. Its determinant can be found with Sylvester's theorem
 \citep{sylvester1851,akritasetal1996}:
 \begin{equation}
   \label{eq:sylvester}
-  \det(\yid_N + \yu\T\yu) = \det(\yid_1 + \yu\yu\T) = 1 + N.
+  \det(\yid_N + \yu\T\yu) = \det(\yid_1 + \yu\yu\T) = 1 + N\;.
 \end{equation}
 This peculiar expression for the metric comes from the fact that $q_0$ is
 a function of the other $q_i$. If we use $(q_0, q_1, \dotsc, q_N)$
 as fictitious coordinates, multiplying by a delta for normalization
 (\sect~\ref{sec:base}), then the metric is simply expressed by the identity
 matrix $\yid_{N+1}$.
+
+\section{Projections}
+\label{sec:projections}
+
+The simplex can be naturally embedded in
+
 
 
 \section{Diverse}

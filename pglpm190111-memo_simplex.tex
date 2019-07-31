@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2019-01-11T10:39:40+0100
-%% Last-Updated: 2019-07-31T19:56:50+0200
+%% Last-Updated: 2019-07-31T22:05:29+0200
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newif\ifarxiv
 \arxivfalse
@@ -986,21 +986,28 @@ proportional to
 (\yq-\yqr)\T \, \ySigma^{-1}\, (\yq-\yqr)
   \Bigr] \;\di\yq\;.
 \end{equation}
-It's truncated because it's defined only on the simplex.
+It's truncated because it's defined on the simplex, a bounded space.
 
-Let's first remind some facts about truncated normal distributions 
-on any compact space, not just on the simplex:
+Let's first recall some facts about truncated normal distributions on any
+bounded space, not just on the simplex:
 \begin{itemize}
 \item The normalization constant is not the one of the standard
   normal on $\RR^{N}$, for obvious reasons of integration domain.
+\item The centre $\yqr$ is \emph{not} the mean of $\yq$:
+  \begin{equation}
+    \label{eq:normal_not_mean}
+    \E(\yq) \ne \yqr \;!
+  \end{equation}
+  That's why it's better to call $\yqr$ \enquote{centre} (owing to the
+  symmetries of the distribution function) or \enquote{location parameter}.
 \item The scale matrix $\ySigma$ is \emph{not} the covariance of $\yq$:
   \begin{equation}
     \label{eq:normal_not_cov}
     \E(\yq\yq\T) \ne \ySigma \;!
   \end{equation}
-  that's why it's better to call $\ySigma$ \enquote{scale matrix} than
+  That's why it's better to call $\ySigma$ \enquote{scale form} than
   \enquote{covariance matrix}.
-\item The scale matrix $\ySigma$ can also be negative-definite or
+\item The scale form $\ySigma$ can also be negative-definite or
   indefinite. In the directions where its singular values are negative, the
   resulting distribution function in $\yq$ coordinates is $\cup$-shaped and
   has maxima at the boundaries. (Positive-definiteness is only required on
@@ -1009,7 +1016,7 @@ on any compact space, not just on the simplex:
 \item If most mass is enough away from the boundaries (the distribution
   function is very peaked), so that there's little difference for the
   integrals if we extend them outside the simplex, then the covariance
-  matrix will be approximately equal to the scale matrix $\ySigma$.
+  matrix will be approximately equal to the scale form $\ySigma$.
 \end{itemize}
 
 There are additional subtleties with the mathematical
@@ -1032,10 +1039,6 @@ $\yq\T \yuu \yq \equiv 1/(N+1)$ is constant and can be absorbed by the
 normalization constant. Note that the (pseudo)inverse of
 $\ySigma^{-1} + k\yuu$ is different from $\ySigma$.
 
-But then, if we see an expression like~\eqref{eq:normal}, how do we know
-that its $\ySigma^{-1}$ is \emph{really} an approximation of the inverse
-covariance matrix? what if a $k\yuu$ term was actually added to it?
-
 Second, since $\yu\T\yq = 1$ for every point $\yq$ of the simplex, any
 truncated normal can also be equivalently written in the form
 \begin{equation}
@@ -1052,6 +1055,23 @@ with
 \end{equation}
 Also in this case $\yDelta^{-1}$ is determined but by an additional $k\yuu$
 term.
+
+These two subtleties raise two questions. If we see expressions such
+as~\eqref{eq:normal} or~\eqref{eq:normal_equivalent}, how do we know that
+its $\ySigma^{-1}$ or $\yDelta^{-1}$ is \emph{really} an approximation of
+the inverse covariance matrix? what if a $k\yuu$ term was actually added to
+it? And how do we know what the centre $\yqr$ of the distribution is in the
+expression~\eqref{eq:normal_equivalent}?
+
+The possibility of expression~\eqref{eq:normal_equivalent} can be
+understood intuitively as follows. A truncated normal on an $N$-dimensional
+space has $N$ location parameters and $N\,(N+1)/2$ scale parameters. But
+$\yDelta^{-1}$ in expression~\eqref{eq:normal_equivalent} comprises
+$(N+1)\,(N+2)/2 \equiv N\,(N+1)/2 + N + 1$ parameters: of the additional
+$N+1$, one is superfluous -- leading to the freedom of a constant additive
+term -- and the rest encode the location parameter.
+
+
 
 \section{Diverse}
 \label{sec:diverse}

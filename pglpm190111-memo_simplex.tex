@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2019-01-11T10:39:40+0100
-%% Last-Updated: 2019-07-31T16:26:29+0200
+%% Last-Updated: 2019-07-31T16:34:09+0200
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newif\ifarxiv
 \arxivfalse
@@ -620,7 +620,7 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 %\newcommand*{\sint}{\begingroup\textstyle\int\endgroup}
 %\newcommand*{\sland}{\mathop{\textstyle\bigwedge}}
 %\newcommand*{\slor}{\mathop{\textstyle\bigvee}}
-\newcommand*{\T}{^\intercal}%transpose
+\newcommand*{\T}{^{\mathord{\!\intercal}}}%transpose
 %%\newcommand*{\QEM}%{\textnormal{$\Box$}}%{\ding{167}}
 %\newcommand*{\qem}{\leavevmode\unskip\penalty9999 \hbox{}\nobreak\hfill
 %\quad\hbox{\QEM}}
@@ -1030,12 +1030,11 @@ $N$\dd-simplex in the orthant and remember that $(N+1)\yuo\yq =\yu$, we see that
   \Bigr) \;\di\yq
   \propto
     \exp\Bigl[-\tfrac{1}{2}
-\yq\T (\yDelta + k \yuo) \yq
+\yq\T (\yDelta + k \yuo)\, \yq
   \Bigr] \;\di\yq
 \end{equation}
 for arbitrary $k$, because the additional, constant term proportional to
 $\yq\T \yuo \yq \equiv 1/(N+1)$ is absorbed by the normalization constant.
-
 
 
 \section{Diverse}

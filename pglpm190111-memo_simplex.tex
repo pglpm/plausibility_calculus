@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2019-01-11T10:39:40+0100
-%% Last-Updated: 2019-07-31T15:08:55+0200
+%% Last-Updated: 2019-07-31T16:26:29+0200
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newif\ifarxiv
 \arxivfalse
@@ -570,7 +570,7 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 %\DeclareMathOperator{\pr}{P}%probability
 \newcommand*{\pf}{\mathrm{p}}%probability
 \newcommand*{\p}{\mathrm{P}}%probability
-%\newcommand*{\E}{\mathrm{E}}
+\newcommand*{\E}{\mathrm{E}}
 %\renewcommand*{\|}{\nonscript\,\vert\nonscript\;\mathopen{}}
 \renewcommand*{\|}[1][]{\nonscript\,#1\vert\nonscript\;\mathopen{}}
 %\DeclarePairedDelimiterX{\cond}[2]{(}{)}{#1\nonscript\,\delimsize\vert\nonscript\;\mathopen{}#2}
@@ -647,10 +647,15 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 \newcommand*{\ysum}{\bm{\tsum}}
 \newcommand*{\sh}{\Eta}
 \newcommand*{\yL}{L}
-\newcommand*{\yu}{\bm{u}}
+\newcommand*{\yu}{\bm{\upsilon}}
+\newcommand*{\yuo}{\mathte{U}^{\mathord{\perp}}}
+\newcommand*{\yui}{\mathte{U}^{\mathord{\shortparallel}}}
 \newcommand*{\yid}{\mathte{I}}
 \newcommand*{\yx}{\bm{x}}
 \newcommand*{\ymm}{\mathte{M}}
+\newcommand*{\yqr}{\yq^{*}}
+\newcommand*{\ySigma}{\bm{\varSigma}}
+\newcommand*{\yDelta}{\bm{\varDelta}}
 %%% Custom macros end @@@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -970,8 +975,66 @@ matrix $\yid_{N+1}$.
 
 ***
 
-\section{\enquote{Normal} distributions}
+\section{Truncated normal distributions}
 \label{sec:normal_distr}
+
+A truncated normal distribution on the simplex is proportional to
+\begin{equation}
+  \label{eq:normal}
+\exp\Bigl[-\tfrac{1}{2}
+(\yq-\yqr)\T \, \ySigma^{-1}\, (\yq-\yqr)
+  \Bigr] \;\di\yq\;.
+\end{equation}
+It's truncated because it's defined only on the simplex. The normalization
+constant is therefore not the one of the standard normal on $\RR^{N}$.
+The scale matrix $\ySigma$ is \emph{not} the covariance of $\yq$:
+\begin{equation}
+  \label{eq:normal_not_cov}
+  \E(\yq\yq\T) \ne \ySigma \;!
+\end{equation}
+This happens exactly because the normal is truncated. Moreover, the scale
+matrix $\ySigma$ can also be negative-definite or indefinite. In the
+directions where its singular values are negative, the resulting
+distribution function in $\yq$ coordinates is $\cup$-shaped and has maxima
+at the boundaries. (This is also true of any truncated normal on a compact
+space; positive-definiteness is only required on $\RR^{N}$ because it's
+unbounded: negative values would try to push the probability mass to
+infinity.) But, if the distribution function is very peaked and most mass
+is enough away from the boundaries (so that there's little difference for
+the integrals if we extend them outside the simplex), then the covariance
+matrix will be approximately equal to the scale matrix $\ySigma$.
+
+There are some subtleties in the mathematical expression~\eqref{eq:normal}
+though, generally valid for a normal defined on an affine space.
+
+First of all, since $\yu\T\yq = 1$ every truncated normal can also be
+written in the form
+\begin{equation}
+  \label{eq:normal_simple}
+  \exp\Bigl(-\tfrac{1}{2}
+\yq\T \yDelta \yq
+  \Bigr) \;\di\yq
+\end{equation}
+with
+\begin{equation}
+  \label{eq:delta_simple_normal}
+  \yDelta \defd \ySigma^{-1} - \yu\yqr{}\T\ySigma^{-1} - \ySigma^{-1}\yqr\yu\T
+  + \yu\yqr{}\T\ySigma^{-1}\yqr\yu\T \;.
+\end{equation}
+Moreover, if we consider this expression in canonical embedding of the
+$N$\dd-simplex in the orthant and remember that $(N+1)\yuo\yq =\yu$, we see that
+\begin{equation}
+  \label{eq:normal_arbitrary_projection}
+  \exp\Bigl(-\tfrac{1}{2}
+\yq\T \yDelta \yq
+  \Bigr) \;\di\yq
+  \propto
+    \exp\Bigl[-\tfrac{1}{2}
+\yq\T (\yDelta + k \yuo) \yq
+  \Bigr] \;\di\yq
+\end{equation}
+for arbitrary $k$, because the additional, constant term proportional to
+$\yq\T \yuo \yq \equiv 1/(N+1)$ is absorbed by the normalization constant.
 
 
 

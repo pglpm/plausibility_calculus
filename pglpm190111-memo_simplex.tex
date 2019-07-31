@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2019-01-11T10:39:40+0100
-%% Last-Updated: 2019-07-31T22:05:29+0200
+%% Last-Updated: 2019-07-31T23:10:40+0200
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newif\ifarxiv
 \arxivfalse
@@ -649,13 +649,16 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 \newcommand*{\yL}{L}
 \newcommand*{\yu}{\bm{u}}
 \newcommand*{\yuu}{\mathte{U}} % this is the "u-u" one
-\newcommand*{\yui}{\mathte{U}^{\mathord{\shortparallel}}}
+\newcommand*{\yui}{\mathte{U}^{\mathord{\parallel}}}
 \newcommand*{\yid}{\mathte{I}}
 \newcommand*{\yx}{\bm{x}}
 \newcommand*{\ymm}{\mathte{M}}
 \newcommand*{\yqr}{\yq^{*}}
 \newcommand*{\ySigma}{\bm{\varSigma}}
+\newcommand*{\ySigmab}{\Hat{\ySigma}\vphantom{\ySigma}}
 \newcommand*{\yDelta}{\bm{\varDelta}}
+\newcommand*{\yya}{\bm{h}}
+\newcommand*{\yyb}{k}
 %%% Custom macros end @@@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1024,22 +1027,26 @@ expression~\eqref{eq:normal}, though, owing to the fact that it's defined
 on a convex space, that is, a subset of an affine space.
 
 First of all, remember from \sect~\ref{sec:projections} that
-$\yq\T \yuu\yq = 1/(N+1)$ for every point $\yq$ of the simplex. This means
-that -- as long as our integrals are strictly on the simplex -- we can
-rewrite the normal~\eqref{eq:normal} equivalently as
+$\yu\T\yq = 1$ for every point $\yq$ and $\yq''$ of the simplex.
+This means that -- as long as our integrals are strictly over the simplex
+-- we can equivalently rewrite the normal~\eqref{eq:normal} as
 \begin{equation}
   \label{eq:normal_equivalent}
+  \begin{gathered}
 \exp\Bigl[-\tfrac{1}{2}
-(\yq-\yqr)\T \, (\ySigma^{-1} + k\yuu)\, (\yq-\yqr)
+(\yq-\yqr)\T \, \ySigmab^{-1}\, (\yq-\yqr)
 \Bigr] \;\di\yq
-\quad\text{\footnotesize equivalent to \eqref{eq:normal}}
+\\
+\text{with}\quad
+\ySigmab^{-1} =
+\ySigma^{-1} + \yya\yu\T + \yu\yya\T % + \yyb\yui
+\end{gathered}
+%\quad\text{\footnotesize equivalent to \eqref{eq:normal}}
 \end{equation}
-for arbitrary real $k$, because the additional term proportional to
-$\yq\T \yuu \yq \equiv 1/(N+1)$ is constant and can be absorbed by the
-normalization constant. Note that the (pseudo)inverse of
-$\ySigma^{-1} + k\yuu$ is different from $\ySigma$.
+with \emph{arbitrary} $(N+1)$-vector $\yya$. Note that
+$\ySigma^{-1}$ and $\ySigmab^{-1}$ have generally different (pseudo)inverses.
 
-Second, since $\yu\T\yq = 1$ for every point $\yq$ of the simplex, any
+Second, from expression~\eqref{eq:normal_equivalent} we see that any
 truncated normal can also be equivalently written in the form
 \begin{equation}
   \label{eq:normal_simple}
@@ -1053,8 +1060,9 @@ with
   \yDelta^{-1} \defd \ySigma^{-1} - \yu\yqr{}\T\ySigma^{-1} - \ySigma^{-1}\yqr\yu\T
   + \yu\yqr{}\T\ySigma^{-1}\yqr\yu\T \;.
 \end{equation}
-Also in this case $\yDelta^{-1}$ is determined but by an additional $k\yuu$
-term.
+Also in this case $\yDelta^{-1}$ is determined but by an additional
+$\yyb\yuu$ term which leads to a constant term that can be absorbed by the
+normalization constant.
 
 These two subtleties raise two questions. If we see expressions such
 as~\eqref{eq:normal} or~\eqref{eq:normal_equivalent}, how do we know that

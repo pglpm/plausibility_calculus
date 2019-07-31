@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2019-01-11T10:39:40+0100
-%% Last-Updated: 2019-07-31T14:49:08+0200
+%% Last-Updated: 2019-07-31T15:08:55+0200
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newif\ifarxiv
 \arxivfalse
@@ -121,9 +121,9 @@ british%
 % \begin{asparaenum} = \begin{enumerate}[para]
 % \begin{inparaenum} = \begin{enumerate*}
 \setlist[enumerate,2]{label=\alph*.}
-\setlist[enumerate]{label=\arabic*.,leftmargin=1.5\parindent}
-\setlist[itemize]{leftmargin=1.5\parindent}
-\setlist[description]{leftmargin=1.5\parindent}
+\setlist[enumerate]{label=\arabic*.,leftmargin=1.5\parindent,topsep=0.5\baselineskip}
+\setlist[itemize]{leftmargin=1.5\parindent,topsep=0.5\baselineskip}
+\setlist[description]{leftmargin=1.5\parindent,topsep=0.5\baselineskip}
 % old alternative:
 % \setlist[enumerate,2]{label=\alph*.}
 % \setlist[enumerate]{leftmargin=\parindent}
@@ -641,6 +641,7 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 %\DeclareMathOperator*{\argsup}{arg\,sup}
 \newcommand*{\dob}{degree of belief}
 \newcommand*{\dobs}{degrees of belief}
+\newcommand*{\dd}{\textsc{d}}
 \newcommand*{\yq}{\bm{q}}
 \newcommand*{\ysim}{\varDelta}
 \newcommand*{\ysum}{\bm{\tsum}}
@@ -729,7 +730,7 @@ the integration domains. Denote by
   \label{eq:def_orthant}
   \ysim_N \defd \set{(x_{0},\dotsc,x_{N}) \suchthat x_i\ge 0, \tsum_i x_i = 1}
 \end{equation}
-the $N$-dimensional simplex, or $N$d-simplex, which can be thought of as
+the $N$-dimensional simplex, or $N$\dd-simplex, which can be thought of as
 embedded in the non-negative orthant of $\RR^{N+1}$. It is a convex space,
 and therefore part of an affine space \citep{portamana2011_r2019}.
 
@@ -737,7 +738,7 @@ and therefore part of an affine space \citep{portamana2011_r2019}.
 \section{Geometric properties}
 \label{sec:geometry}
 
-Let's examine some geometric properties of the $N$d-simplex, embedded as a
+Let's examine some geometric properties of the $N$\dd-simplex, embedded as a
 symmetric $(N+1)$-hyperhedron (triangle, tetrahedron, and so on) in
 $N$-dimensional Euclidean space -- that is, a space with a flat metric.
 Suppose its edges have length $\yL$; note that when it's naturally embedded
@@ -778,6 +779,7 @@ in the nonnegative orthant, then $\yL=\sqrt{2}$.
     \label{eq:centre_origin}
     \frac{\yL}{\sqrt{2}} \frac{1}{\sqrt{N+1}}\;.
   \end{equation}
+  \mbox{}
 \end{itemize}
 
 Note the following curious facts as $N$ grows:
@@ -786,7 +788,7 @@ Note the following curious facts as $N$ grows:
   embedding hypercube;
 \item the ratio of the radii of circum- and in-hypersphere is $N$,
   therefore the ratio between their hypervolumes is $N^{N}$: most of the
-  hypervolume of the $N$d-simplex is \enquote{at the corners};
+  hypervolume of the $N$\dd-simplex is \enquote{at the corners};
 \item the centre becomes closer and closer to the origin of the embedding
   orthant, with respect to the size of the edges;
 \item the centre becomes closer and closer to the facets with respect to
@@ -966,7 +968,10 @@ matrix $\yid_{N+1}$.
 \section{Projections}
 \label{sec:projections}
 
-The simplex can be naturally embedded in
+***
+
+\section{\enquote{Normal} distributions}
+\label{sec:normal_distr}
 
 
 
@@ -974,7 +979,7 @@ The simplex can be naturally embedded in
 \label{sec:diverse}
 
 Suppose we have a covariance matrix -- equivalent to the inverse of a
-quadratic form.-- on a simplex. In the canonical embedding orthant, this
+quadratic form -- on a simplex. In the canonical embedding orthant, this
 covariance matrix has a zero axis, corresponding to the plane of the
 embedded simplex. Taking the \emph{pseudo}inverse leaves this axis to zero
 while inverting the others to give the quadratic form. This doesn't affect

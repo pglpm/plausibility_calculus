@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2015-05-01T20:53:34+0200
-%% Last-Updated: 2019-07-23T20:30:20+0200
+%% Last-Updated: 2019-08-03T19:17:02+0200
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newif\ifarxiv
 \arxivfalse
@@ -717,31 +717,35 @@ reproducibility \citep[\sects~B.2.15--16]{jcgm1993_r2012}[\sects~3.3.6,
 3.3.11]{iso2006b}[\chap~IX]{poincare1902_r1992}[\chap~VI]{duhem1906_r1914}{definetti1937}[\chap~IV]{jeffreys1931_r1973}[\chap~1]{popper1935_t2005}.
 
 Sampling on an $n$-dimensional simplex, for example by Monte Carlo methods
-\citep{neal1993}[\chaps~29, 30]{mackay1995_r2003}{hall2014},
-is difficult because the allowed ranges of the sampled quantities are
-interdependent: denoting by $\yf\defd(\yff_{0},\dotsc, \yff_{n})$ a sampled
-distribution, we must have
+\citep{neal1993}[\chaps~29, 30]{mackay1995_r2003}{hall2014}, is difficult
+because the allowed ranges of the sampled quantities are interdependent:
+denoting by $\yf\defd(\yff_{0},\dotsc, \yff_{n})$ a generic sample, we must
+have
 \begin{equation}
   \label{eq:normalization}
   \sum_{i=0}^{n} \yff_{i} =1,\qquad
-    0 \le \yff_{i} \le 1,\quad\text{all $i$},
+    \yff_{i} \ge 0, \quad \text{all $i \in \set{0,\dotsc,n}$},
 \end{equation}
 so that $n$ independent components, for example
 $\yfi\defd(\yff_{1},\dotsc,\yff_{n})$, must satisfy
 \begin{equation}
   \label{eq:interdependence}
-  \sum_{j=1}^{n} \yff_{j} \le 1.
+  \sum_{l=1}^{n} \yff_{l} \le 1,\qquad
+  \yff_{l} \ge 0, \quad \text{all $l \in \set{1,\dotsc,n}$} .
 \end{equation}
-The individual bounds $\set{0 \le \yff_{i} \le 1}$ are not difficult to handle
+In the following, $i$ always runs from $0$ to $n$, and $l$ from $1$ to $n$.
+
+Individual bounds $\set{0 \le \yff_{l} \le 1}$ are not difficult to handle
 with a change of variable, using a logistic function for example, because
-they are independent. It's the joint constraint~\eqref{eq:interdependence}
-that's the problem. It needs to be tested for any proposed sample, and in
-high dimensions it leads to high rejection rates, because the
-$n$-dimensional simplex only occupies $1/n!$ of the volume of the
-unit hypercube $\set{0 \le \yff_{j} \le 1}$.
+they are independent. It's the joint bound from the sum
+in~\eqref{eq:interdependence} that's the problem. It needs to be tested for
+any proposed sample, and in high dimensions it leads to high rejection
+rates, because the $n$-dimensional simplex, considered as embedded in the
+positive orthant of $\RR^{n}$, only occupies $1/n!$ of the volume of the
+unit hypercube $\set{0 \le \yff_{l} \le 1}$.
 
 I didn't find solutions to this problem in the literature, except for an
-ingenious change of variables $\yx \mapsto \yf$, discussed by Betancourt
+ingenious change of variables $\yx \mapsto \yfi$, discussed by Betancourt
 \parentext{\cite*{betancourt2012}; \cite{altmannetal2014}}, which maps the
 unit hypercube onto (but not into) the simplex:
 \begin{equation}
@@ -752,20 +756,20 @@ unit hypercube onto (but not into) the simplex:
   \yff_{3} &= (1- \yxx_{3})\;\yxx_{2} \;\yxx_{1} \\[-\jot]
   &\dotso \\[-\jot]
   \yff_{n} &= (1- \yxx_{n})\;\yxx_{n-1} \dotsm \yxx_{1}\\
-  \yff_{0}&\equiv \yxx_{n} \dotsm \yxx_{1}.
+  [\; \yff_{0}&\equiv \yxx_{n} \dotsm \yxx_{1} \;].
 \end{split}
 \end{equation}
 You can easily check that the quantities
 $\yx \defd (\yxx_{1},\dotsc,\yxx_{n})$ have independent bounds
-$\set{0 \le \yxx_{j} \le 1}$. The Jacobian determinant of this
+$\set{0 \le \yxx_{l} \le 1}$. The Jacobian determinant of this
 transformation can also be computed. This transformation has a couple of
 practical disadvantages, however, owing to its recursive structure. The
-numerical relative imprecision of the $\yxx_{j}$ accumulates in the
-$\yff_{j}$ as $j$ increases, leading to an additional
-variability in the $\yff_{j}$ with larger $j$, which manifests as an
+numerical relative imprecision of the $\yxx_{l}$ accumulates in the
+$\yff_{l}$ as $l$ increases, leading to an additional
+variability in the $\yff_{l}$ with larger $l$, which manifests as an
 artefactual broadening of their marginal densities. The non-linear
-transformation $\yx \mapsto \yf$ moreover destroys the convex structure of
-the simplex; it heavily bends regions that are linear in $\yf$, and can
+transformation $\yx \mapsto \yfi$ moreover destroys the convex structure of
+the simplex; it heavily bends regions that are linear in the $\yff_{l}$, and can
 thus lead to a slower exploration of bent regions of high probability for some
 Markov-chain methods. \textcolor{white}{If you find this you can claim a
   postcard from me.}
@@ -789,27 +793,28 @@ Suppose we want to sample from the probability distribution
 \begin{equation}
 \label{eq:main_distribution}
 \begin{gathered}
-\yg(\yf)\,\di\yfi\\
+\yg(\yfi)\,\di\yfi\\
 %\qquad
-\yff_{0}\equiv 1-\tsum_{j=1}^{n}\yff_{j},\quad
-\yff_{j} \ge 0, \quad  \tsum_{j=1}^{n}\yff_{j} \le 1,
+\yff_{l} \ge 0, \quad  \tsum_{l=1}^{n}\yff_{l} \le 1,
+\quad
+\bigl[\; \yff_{0}\equiv 1-\tsum_{l=1}^{n}\yff_{l} \;\bigr],
 \end{gathered}
 \end{equation}
 defined over the $n$-dimensional simplex. %$\ysim^{n}\defd\set{\yfi
-% \suchthat \yff_{j} \ge 0, \quad \sum_{j}\yff_{j} \le 1}$.
+% \suchthat \yff_{l} \ge 0, \quad \sum_{l}\yff_{l} \le 1}$.
 This distribution can be considered as the marginal distribution of the
 joint, separable distribution
 \begin{equation}
   \label{eq:joint_r}
-  \yh(r)\;\yg(\yf)\;\di r\,\di\yfi,
+  \yh(r)\;\yg(\yfi)\;\di r\,\di\yfi,
   \qquad r \ge 0,\quad
-  \yff_{j} \ge 0, \quad  \tsum_{j=1}^{n}\yff_{j} \le 1,
+  \yff_{l} \ge 0, \quad  \tsum_{l=1}^{n}\yff_{l} \le 1,
   %\yf\in\ysim^{N},
 \end{equation}
 where $r$ is a positive quantity with a (regular) distribution of
 probability $\yh(r)\,\di r$. If we sample $(r, \yfi)$ from this joint
 distribution, the samples of $\yfi$ will obviously come from
-$\yg(\yf)\,\di\yfi$.
+$\yg(\yfi)\,\di\yfi$.
 
 
 \paragraph{First approach}
@@ -822,7 +827,12 @@ following transformation $\yy \mapsto (r,\yfi)$:
       \label{eq:main_transformation_r}
     r&= \yyy_{0} + \dotsb + \yyy_{n} \\
       \label{eq:main_transformation_f}
-    \yff_{i}&= \frac{\yyy_{i}}{\yyy_{0} + \dotsb + \yyy_{n}} .
+    \begin{split}
+    \yff_{l}&= \frac{\yyy_{l}}{\yyy_{0} + \dotsb + \yyy_{n}}
+    \\
+    \biggl[\; \yff_{0}&\equiv \frac{\yyy_{0}}{\yyy_{0} + \dotsb + \yyy_{n}}
+                         \;\biggr].
+                       \end{split}
   \end{align}
 \end{subequations}
 You can prove, for example using the inverse transformation
@@ -831,24 +841,25 @@ $\yy \mapsto (r,\yfi)$ is $r^{-n}$. The joint probability
 distribution~\eqref{eq:joint_r} can thus be written as
 \begin{equation}
   \label{eq:joint_x}
-  \yhb[r(\yy)]\;\yg[\yf(\yy)]\;\di\yy,
+  \yhb[r(\yy)]\;\yg[\yfi(\yy)]\;\di\yy,
   \qquad \yyy_{i} \ge 0,
 \end{equation}
 where the Jacobian determinant has been absorbed into
-$\yhb(r) \defd \yh(r)/r^{n}$. Most important, \emph{the $\yyy_{i}$ have
-  independent bounds}.
+$\yhb(r) \defd \yh(r)/r^{n}$.
+
+Most important, \emph{the $\yyy_{i}$ have independent bounds}.
 
 We can therefore easily sample from the distribution~\eqref{eq:joint_x} for
 the quantities $\yy$, on a space with no interdependent bounds, and then
-construct samples of $\yf$ from $\yy$ via the
-transformation~\eqref{eq:main_transformation_f}. The resulting $\yf$
+construct samples of $\yfi$ (and therefore $\yf$) from $\yy$ via the
+transformation~\eqref{eq:main_transformation_f}. The resulting $\yfi$
 samples are drawn from our distribution of
 interest~\eqref{eq:main_distribution}. The $r$ samples are drawn from
-$\yh(r)\,\di r$ but they aren't calculated (unless this quantity is of interest
-for some reason). Note that $\yh$ and therefore $\yhb$ are completely
-arbitrary; we can choose a normal distribution as the latter, for example.
-Also, the numerical relative imprecision of every $\yff_{i}$ is roughly
-twice that of $\yyy_{i}$: no accumulation of imprecision occurs.
+$\yh(r)\,\di r$ but they aren't calculated (unless this quantity is of
+interest for some reason). Note that $\yh$ and therefore $\yhb$ are
+completely arbitrary; we can choose a normal distribution as the latter,
+for example. Also, the numerical relative imprecision of every $\yff_{i}$
+is roughly twice that of $\yyy_{i}$: no accumulation of imprecision occurs.
 
 If our probability distribution~\eqref{eq:main_distribution} has its main
 mass enough far away from the faces of the simplex, it's practical to
@@ -864,15 +875,20 @@ rejection rates.
 \paragraph{Second approach}
 If we prefer to have completely unbounded quantities, we can still consider
 the probability distribution~\eqref{eq:joint_r} extended with $r$, but use
-the following transformation $\yt \mapsto (r,\yfi)$ \citep[\cf][\sect~23.5,
-p.~316]{mackay1995_r2003}:
+the following transformation $\yt \mapsto (r,\yfi)$ with $t \in \RR^{n+1}$
+\citep[\cf][\sect~23.5, p.~316]{mackay1995_r2003}:
 \begin{subequations}
   \label{eq:main_transformation_t}
   \begin{align}
       \label{eq:main_transformation_t_r}
     r&= \ytt_{0} + \dotsb + \ytt_{n} \\
       \label{eq:main_transformation_t_f}
-    \yff_{i}&= \frac{\exp(\ytt_{i})}{\exp(\ytt_{0}) + \dotsb + \exp(\ytt_{n})} .
+    \begin{split}
+    \yff_{l}&= \frac{\exp(\ytt_{l})}{\exp(\ytt_{0}) + \dotsb + \exp(\ytt_{n})} 
+    \\
+%      \label{eq:main_transformation_t_f0}
+  \biggl[\;  \yff_{0}&= \frac{\exp(\ytt_{0})}{\exp(\ytt_{0}) + \dotsb + \exp(\ytt_{n})} \;\biggr].
+    \end{split}
   \end{align}
 \end{subequations}
 You can prove, for example by induction on $n$, that the Jacobian determinant of
@@ -886,14 +902,14 @@ the transformation above is
 The joint probability distribution~\eqref{eq:joint_r} can thus be written as
 \begin{equation}
   \label{eq:joint_t}
-  (n+1)\;\yh[r(\yt)]\;\yg[\yf(\yt)]\;\prod_{i=0}^{n}\yff_{i}(\yt)\;\di\yt,
+  (n+1)\;\yh[r(\yt)]\;\yg[\yfi(\yt)]\;\prod_{i=0}^{n}\yff_{i}(\yt)\;\di\yt,
   \qquad \yt \in \RR^{n+1}.
 \end{equation}
 
 We can therefore sample from the distribution~\eqref{eq:joint_t}, defined
-over $\RR^{n+1}$, and then construct samples for $\yf$ from $\yt$ via the
-transformation~\eqref{eq:main_transformation_t_f}. Also in this case the
-resulting $\yf$ samples are drawn from our distribution of
+over $\RR^{n+1}$, and then construct samples for $\yfi$ and $\yf$ from
+$\yt$ via the transformation~\eqref{eq:main_transformation_t_f}. Also in
+this case the resulting $\yfi$ samples are drawn from our distribution of
 interest~\eqref{eq:main_distribution}. The probability density function
 $\yh(r)$ is again completely arbitrary, and can be conveniently chosen as a
 normal sharply peaked at $r\approx 0$; it's also possible to include the
@@ -907,7 +923,7 @@ in $\yt$ coordinates, leading to slower convergence for some Markov-chain
 methods. It's also possible to use the
 transformation~\eqref{eq:main_transformation_t_f} without $r$, by using the
 independent quantities $(\ytt_{1},\dotsc,\ytt_{n})$ and defining
-$\ytt_{0} \defd -\tsum_{j=1}^{n}\ytt_{j}$. The Jacobian determinant in this
+$\ytt_{0} \defd -\tsum_{l=1}^{n}\ytt_{l}$. The Jacobian determinant in this
 case is still~\eqref{eq:jac_t}; the proof is left again as an exercise for
 you.
 

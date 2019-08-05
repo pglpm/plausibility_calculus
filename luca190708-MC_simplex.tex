@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2015-05-01T20:53:34+0200
-%% Last-Updated: 2019-08-03T19:17:02+0200
+%% Last-Updated: 2019-08-05T14:40:48+0200
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newif\ifarxiv
 \arxivfalse
@@ -673,7 +673,9 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 \begin{abstract}\labelsep 0pt%
   \noindent\textbf{Two simple approaches to sampling general probability
     distributions defined over the simplex, especially with Monte Carlo
-    algorithms and in high dimensions, are presented.}
+    algorithms and in high dimensions, are presented. The approaches can be
+  generalized to spaces bounded by  linear
+  constraints.}
 \\\noindent{\footnotesize Note: Dear Reader
     \amp\ Peer, this manuscript is being peer-reviewed by you. Thank you.}
 % \noindent
@@ -707,6 +709,7 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 %\section{Intro}
 %\label{sec:intro}
 \bigskip
+
 The need to sample from a general distribution of probability over a
 simplex, that is, over a space of distributions, is more common than one
 might think. For example, it's necessary whenever we use exchangeable
@@ -771,21 +774,30 @@ artefactual broadening of their marginal densities. The non-linear
 transformation $\yx \mapsto \yfi$ moreover destroys the convex structure of
 the simplex; it heavily bends regions that are linear in the $\yff_{l}$, and can
 thus lead to a slower exploration of bent regions of high probability for some
-Markov-chain methods. \textcolor{white}{If you find this you can claim a
-  postcard from me.}
+Markov-chain methods.
+
+A more general version of this problem appears for spaces bounded by linear
+or affine inequalities of the type
+\begin{equation}
+\set{\tsum_{l=1}^{n}A_{c\,l}\yff_{l} \le b_{c}}.\label{eq:general_bounds}
+\end{equation}
+\textcolor{white}{If you
+  find this you can claim a postcard from me.}
 
 %\bigskip
 
 I want to propose two alternative approaches to the problem of
-interdependent bounds~\eqref{eq:interdependence}. These approaches also
-work very well in high dimensions. They are so simple -- the first in
-particular -- that they have probably been used
+interdependent bounds~\eqref{eq:interdependence}. These approaches work
+very well in high dimensions. They are so simple -- the first in particular
+-- that they have probably been used
 before, %\citep[\sect~23.5, p.~316 comes very
 % close]{mackay1995_r2003},
 so I'm not making any claim of originality. But I haven't seen them
 explicitly discussed in the literature, so it may be useful to advertise
 them. The main idea behind them is to give an additional dimension to the
-simplex.
+simplex; more precisely, to sample in a space of which the simplex is a
+central projection. These approaches can be extended to more general bounds
+like~\eqref{eq:general_bounds}.
 
 \bigskip
 
@@ -818,9 +830,11 @@ $\yg(\yfi)\,\di\yfi$.
 
 
 \paragraph{First approach}
+  
 Now consider the quantities $\yy \defd (\yyy_{0}, \dotsc, \yyy_{n})$ in the
-positive $(n+1)$-dimensional orthant $\set{\yyy_{i} \ge 0}$, and the
-following transformation $\yy \mapsto (r,\yfi)$:
+non-negative $(n+1)$-dimensional orthant $\set{\yyy_{i} \ge 0}$, origin
+excluded, $\yy \ne \bm{0}$, and the following
+transformation $\yy \mapsto (r,\yfi)$:
 \begin{subequations}
   \label{eq:main_transformation}
   \begin{align}
@@ -847,7 +861,26 @@ distribution~\eqref{eq:joint_r} can thus be written as
 where the Jacobian determinant has been absorbed into
 $\yhb(r) \defd \yh(r)/r^{n}$.
 
-Most important, \emph{the $\yyy_{i}$ have independent bounds}.
+\smallskip
+
+Most important, \emph{the $\yyy_{i}$ have independent bounds}: if
+$\yyy_{i} \ge 0$ and $\yy \ne \bm{0}$, the interdependent
+bounds~\eqref{eq:interdependence} are automatically satisfied, and vice
+versa:
+\begin{equation}
+  \label{eq:translation_bounds}
+  \begin{aligned}
+    \yff_{l} \equiv \frac{\yyy_{l}}{\yyy_{0} + \dotsb + \yyy_{n}}\ge 0
+    \quad&\Longleftrightarrow\quad \yyy_{l} \ge 0
+    \\
+    \sum_{l=1}^{n} \yff_{l} \equiv
+    \frac{\sum_{l=1}^{n} \yyy_{l}}{\yyy_{0} + \sum_{l=1}^{n} \yyy_{l}} \le 1
+    \quad&\Longleftrightarrow\quad
+    \yyy_{0} \ge 0.
+  \end{aligned}
+\end{equation}
+
+
 
 We can therefore easily sample from the distribution~\eqref{eq:joint_x} for
 the quantities $\yy$, on a space with no interdependent bounds, and then
@@ -860,6 +893,9 @@ interest for some reason). Note that $\yh$ and therefore $\yhb$ are
 completely arbitrary; we can choose a normal distribution as the latter,
 for example. Also, the numerical relative imprecision of every $\yff_{i}$
 is roughly twice that of $\yyy_{i}$: no accumulation of imprecision occurs.
+We have increased the dimension of our sample space by one, but the cost of
+sampling the extra dimension can be more than repaid by the gain of avoiding
+interdependent bounds like~\eqref{eq:interdependence}.
 
 If our probability distribution~\eqref{eq:main_distribution} has its main
 mass enough far away from the faces of the simplex, it's practical to
@@ -869,6 +905,11 @@ $r\approx n$. This way, even if some typical $\yff_{i}$ may be close to
 zero, the corresponding $\yyy_{i}$ will be of order unity, enough far away
 from its lower bound to be sampled directly without worrying about high
 rejection rates.
+
+This approach can be generalized to bounds like~\eqref{eq:general_bounds}
+by introducing an extra dimension per constraint and rescaling.
+
+
 
 %\bigskip
 
@@ -913,7 +954,8 @@ this case the resulting $\yfi$ samples are drawn from our distribution of
 interest~\eqref{eq:main_distribution}. The probability density function
 $\yh(r)$ is again completely arbitrary, and can be conveniently chosen as a
 normal sharply peaked at $r\approx 0$; it's also possible to include the
-Jacobian term $\exp(r)$ from~\eqref{eq:jac_t} in it.
+Jacobian term $\exp(r)$ from~\eqref{eq:jac_t} in it. This approach can also
+be extended to general bounds like~\eqref{eq:general_bounds}.
 
 A final remark: instead of the
 transformation~\eqref{eq:main_transformation_t_r} we could also have

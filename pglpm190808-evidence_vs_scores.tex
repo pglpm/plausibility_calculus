@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2019-08-08T08:04:04+0200
-%% Last-Updated: 2019-08-08T19:16:32+0200
+%% Last-Updated: 2019-08-08T21:31:00+0200
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newif\ifarxiv
 \arxivfalse
@@ -19,11 +19,11 @@ british%
 \newcommand*{\updated}{\today}
 \newcommand*{\firstdraft}{8 August 2019}
 \newcommand*{\firstpublished}{***}
-\newcommand*{\propertitle}{The relation between\\leave-one-out
-  log-scores\\and log-evidence%\\{\large ***}%
+\newcommand*{\propertitle}{The relation between cross-validation
+  log-scores,\\ weight of evidence, and Bayes factors%\\{\large ***}%
 }% title uses LARGE; set Large for smaller
-\newcommand*{\pdftitle}{\propertitle}
-\newcommand*{\headtitle}{***}
+\newcommand*{\pdftitle}{The relation between cross-validation log-scores, weight of evidence, and Bayes factors}
+\newcommand*{\headtitle}{log-scores, evidence, Bayes factors}
 \newcommand*{\pdfauthor}{P.G.L.  Porta Mana}
 \newcommand*{\headauthor}{Porta Mana}
 \newcommand*{\reporthead}{}% Report number
@@ -495,7 +495,7 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 % \hspace*{\stretch{1}}%
 \parbox{0.5\linewidth}%\makebox[0pt][c]%
 {\protect\centering P.G.L.  Porta Mana\\%
-\footnotesize\epost{\email{piero.mana}{ntnu.no}}}%
+\footnotesize Kavli Institute, Trondheim, Norway \quad\epost{\email{piero.mana}{ntnu.no}}}%
 \hspace*{\stretch{1}}%
 %\quad\href{https://orcid.org/0000-0002-6070-0784}{\protect\includegraphics[scale=0.16]{orcid_32x32.png}\textsc{orcid}:0000-0002-6070-0784}%
 }
@@ -809,31 +809,70 @@ Note that upon taking the logarithm of this expression, the factors
 vertically aligned on the left turn together into the
 log-score~\eqref{eq:log-score}, as indicated.
 
-Now note that steps  we just made for $\p(D \| H \, \yK)$ -- the
+Now note that the mathematical reshaping of $\p(D \| H \, \yK)$ -- that is, the
 root-product identity~\eqref{eq:root_product} and the
 expansion~\eqref{eq:product_2} -- can be done for each of the remaining factors
 $\p(D_{-i} \| H \, \yK)$, and so on recursively. Here is an explicit
 example for $d=3$:
 \begin{multline}
   \label{eq:example_further_expansion}
-    \p(D \| H \, \yK) \equiv{}\\
-    \begin{alignedat}{2}
-      \Bigl\{\,&\p(D_{1} \| D_{2} \,D_{3} \, H \, \yK) \times
-                 \bigl[ &&\p(D_{2} \| D_{3} \, H \, \yK) \times \p( D_{3} \| H \, \yK) \times{}\\[-0.5\jot]
-                 &&&\p(D_{3} \| D_{2} \, H \, \yK) \times \p( D_{2} \| H \, \yK)
-                 \bigr]^{1/2}\times{}\\[\jot]
-                 %
-                          &\p(D_{2} \| D_{1} \,D_{3} \, H \, \yK) \times
-                 \bigl[&&\p(D_{1} \| D_{3} \, H \, \yK) \times \p( D_{3} \| H \, \yK) \times{}\\[-0.5\jot]
-                 &&&\p(D_{3} \| D_{1} \, H \, \yK) \times \p( D_{1} \| H \, \yK)
-                 \bigr]^{1/2}\times{}\\[\jot]
-      &\p(D_{3} \| D_{1} \,D_{2} \, H \, \yK) \times
-                 \bigl[&&\p(D_{1} \| D_{2} \, H \, \yK) \times \p( D_{2} \| H \, \yK) \times{}\\[-0.5\jot]
-                 &&&\p(D_{2} \| D_{1} \, H \, \yK) \times \p( D_{1} \| H \, \yK)
-                 \bigr]^{1/2}\Bigr\}^{1/3}.
-               \end{alignedat}
+  \p(D \| H \, \yK) \equiv{}\\
+  \begin{alignedat}{2}
+    \Bigl\{\,&\p(D_{1} \| D_{2} \,D_{3} \, H \, \yK) \times
+    \bigl[ &&\p(D_{2} \| D_{3} \, H \, \yK) \times \p( D_{3} \| H \, \yK) \times{}\\[-0.5\jot]
+    &&&\p(D_{3} \| D_{2} \, H \, \yK) \times \p( D_{2} \| H \, \yK)
+    \bigr]^{1/2}\times{}\\[\jot]
+ %
+    &\p(D_{2} \| D_{1} \,D_{3} \, H \, \yK) \times
+    \bigl[&&\p(D_{1} \| D_{3} \, H \, \yK) \times \p( D_{3} \| H \, \yK) \times{}\\[-0.5\jot]
+    &&&\p(D_{3} \| D_{1} \, H \, \yK) \times \p( D_{1} \| H \, \yK)
+    \bigr]^{1/2}\times{}\\[\jot]
+ %
+    &\p(D_{3} \| D_{1} \,D_{2} \, H \, \yK) \times
+    \bigl[&&\p(D_{1} \| D_{2} \, H \, \yK) \times \p( D_{2} \| H \, \yK) \times{}\\[-0.5\jot]
+    &&&\p(D_{2} \| D_{1} \, H \, \yK) \times \p( D_{1} \| H \, \yK)
+    \bigr]^{1/2}\Bigr\}^{1/3}.
+  \end{alignedat}
 \end{multline}
+In this example, the logarithm of the three vertically aligned factors in
+the left column is, as already noted, the log-score~\eqref{eq:log-score}.
+We also note that the logarithm of the six vertically aligned factors in
+the central column is an average of the log-scores calculated for the three
+distinct subsets of pairs of data $\set{D_{1}\,D_{2}}$,
+$\set{D_{1}\, D_{3}}$, $\set{D_{2}\, D_{3}}$. Likewise, the logarithm of
+the six factors vertically aligned on the right is the average of the
+log-scores for the three distinct subsets of data singletons $\set{D_{1}}$,
+$\set{D_{2}}$, $\set{D_{3}}$.
 
+
+In the general case with $d$ data there are $k\,\binom{d}{k}$ possible
+leave-one-out partitions formed out of $k$ data points. We therefore obtain
+\begin{equation}
+  \label{eq:general_equivalence}
+  \begin{aligned}
+  \ln\p(D \| H \, \yK) &\equiv
+  \frac{1}{d} \sum_{i=1}^{d} \ln\p(D_{i} \| D_{-i} \, H \, \yK)
++{}\\
+  &\quad
+    \begin{aligned}
+\frac{1}{d\,(d-1)} \sum_{i\in\set{1,\dotsc,d}} \sum_{j\in\set{1,\dotsc,d}}^{j\ne i}  \ln\p(D_{-i,j} \| D_{-i,-j} \, H \, \yK)
+  +  \dotsb +{}&\\[0.5\jot]
+  \Bigl[k\,\tbinom{d}{k}\Bigr]^{-1}
+  \sum_{\mathclap{\text{$k$-tuples}}}   \ln\p(D_{i_{1}} \| \underbracket{D_{i_{2}} \dotsm D_{i_{k}}}_{\mathclap{\text{order doesn't matter}}} \, H \, \yK)
+  + \dotsb +{}&\\[0.5\jot]
+  \frac{1}{d} \sum_{i=1}^{d} \ln\p(D_{i} \| H \, \yK),&
+    \end{aligned}
+\\
+%    \hphantom{\ln\p(D \| H \, \yK)}
+                       &\equiv \sum_{k=1}^{d}
+  \Bigl[k\,\tbinom{d}{k}\Bigr]^{-1}
+  \sum_{\mathclap{\text{$k$-tuples}}}   \ln\p(D_{i_{1}} \| \underbracket{D_{i_{2}} \dotsm D_{i_{k}}}_{\mathclap{\text{order doesn't matter}}} \, H \, \yK) 
+  \end{aligned}
+\end{equation}
+
+
+
+*** with similar procedure we can included all k-fold scores.
 
 
 
@@ -885,10 +924,12 @@ example for $d=3$:
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
 \iffalse
 \begin{acknowledgements}
-  \ldots to Mari \amp\ Miri for continuous encouragement and affection, and
-  to Buster Keaton and Saitama for filling life with awe and inspiration.
-  To the developers and maintainers of \LaTeX, Emacs, AUC\TeX, Open Science
-  Framework, Python, Inkscape, Sci-Hub for making a free and unfiltered
+  \ldots to the Kavli Foundation and the Centre of Excellence scheme of the
+  Research Council of Norway (Yasser Roudi group) for financial support. To
+  Mari \amp\ Miri for continuous encouragement and affection, and to Buster
+  Keaton and Saitama for filling life with awe and inspiration. To the
+  developers and maintainers of Open Science Framework, \LaTeX, Emacs,
+  AUC\TeX, Python, Inkscape, Sci-Hub for making a free and impartial
   scientific exchange possible.
 %\rotatebox{15}{P}\rotatebox{5}{I}\rotatebox{-10}{P}\rotatebox{10}{\reflectbox{P}}\rotatebox{-5}{O}.
 \sourceatright{\autanet}

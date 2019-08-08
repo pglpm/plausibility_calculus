@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       158,          7]
-NotebookDataLength[    290583,       6580]
-NotebookOptionsPosition[    287323,       6522]
-NotebookOutlinePosition[    287665,       6537]
-CellTagsIndexPosition[    287622,       6534]
+NotebookDataLength[    290579,       6580]
+NotebookOptionsPosition[    287319,       6522]
+NotebookOutlinePosition[    287661,       6537]
+CellTagsIndexPosition[    287618,       6534]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -6457,12 +6457,12 @@ Cell[BoxData[
 Cell[BoxData[
  TagBox[
   StyleBox[
-   DynamicModuleBox[{$CellContext`t$$ = 61, Typeset`show$$ = True, 
+   DynamicModuleBox[{$CellContext`t$$ = 59, Typeset`show$$ = True, 
     Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
     Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
     "\"untitled\"", Typeset`specs$$ = {{
       Hold[$CellContext`t$$], 1, 100, 1}}, Typeset`size$$ = {
-    360., {177., 182.}}, Typeset`update$$ = 0, Typeset`initDone$$, 
+    189., {42., 48.}}, Typeset`update$$ = 0, Typeset`initDone$$, 
     Typeset`skipInitDone$$ = True, $CellContext`t$54780$$ = 0}, 
     DynamicBox[Manipulate`ManipulateBoxes[
      1, StandardForm, "Variables" :> {$CellContext`t$$ = 1}, 
@@ -6501,7 +6501,7 @@ $CellContext`green,
        ControlType -> Animator, AppearanceElements -> None, DefaultBaseStyle -> 
         "Animate", DefaultLabelStyle -> "AnimateLabel", SynchronousUpdating -> 
         True, ShrinkingDelay -> 10.}, "DefaultOptions" :> {}],
-     ImageSizeCache->{411., {214., 221.}},
+     ImageSizeCache->{331., {79., 86.}},
      SingleEvaluation->True],
     Deinitialization:>None,
     DynamicModuleValues:>{},
@@ -6580,7 +6580,7 @@ Cell[277506, 6285, 5273, 127, 376, "Output",ExpressionUUID->"49038366-3a57-466e-
 }, Open  ]],
 Cell[CellGroupData[{
 Cell[282816, 6417, 1657, 37, 124, "Input",ExpressionUUID->"d28e829a-390e-47ba-b12b-ba476ed8bd86"],
-Cell[284476, 6456, 2831, 63, 454, "Output",ExpressionUUID->"600e3578-e688-4f85-8466-a7cef9900503"]
+Cell[284476, 6456, 2827, 63, 184, "Output",ExpressionUUID->"600e3578-e688-4f85-8466-a7cef9900503"]
 }, Open  ]]
 }
 ]

@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2019-08-08T08:04:04+0200
-%% Last-Updated: 2019-08-08T10:10:30+0200
+%% Last-Updated: 2019-08-08T13:42:45+0200
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newif\ifarxiv
 \arxivfalse
@@ -705,25 +705,19 @@ hypothesis $H_{h}$ given data $D$ and knowledge $\yK$ is related to our \dob\
 in observing those data when we entertain that hypothesis as true:
 \begin{equation}
   \label{eq:posterior_hypothesis}
-  \p(H_{h} \| D \yK) = \frac{\p(D \| H_{h} \yK)\;\p(H \| \yK)}{\p(D \| \yK)}.
+  \p(H_{h} \| D \, \yK) = \frac{\p(D \| H_{h} \, \yK)\;\p(H \| \yK)}{\sum_{h} \p(D \| H_{h} \, \yK)\; \p(H_{h} \| \yK)}.
 \end{equation}
-The probability in the denominator is usually calculated by considering a
-set of mutually exclusive and exhaustive hypotheses $\set{H_{h}}$
-comprising $H_{h}$ and using the law of total probability:
-\begin{equation}
-  \label{eq:data_total_prob}
-  \p(D \| \yK) = \sum_{h} \p(D \| H_{h} \yK)\; \p(H_{h} \| \yK).
-\end{equation}
-Let's call $\p(H_{h} \| D \yK)$ the post-data probability or
-belief in $H_{h}$. If our pre-data beliefs $\p(H_{h} \| \yK)$ in the hypotheses
-under consideration are all equal, then the ratio of the post-data
-probabilities for the various hypotheses is equal to the ratio of the
-beliefs in the data given the hypotheses:
+The hypothesis is one in a set of mutually exclusive and exhaustive
+hypotheses $\set{H_{h}}$. Let's call $\p(H_{h} \| D \, \yK)$ the post-data
+probability or belief in $H_{h}$. If our pre-data beliefs
+$\p(H_{h} \| \yK)$ in the hypotheses all equal,
+then the ratio of the post-data probabilities for two hypotheses is
+equal to the ratio of the beliefs in the data given the hypotheses:
 \begin{equation}
   \label{eq:ratios_posteriors}
-  \frac{\p(H_{h} \| D \yK)}{\p(H_{h'} \| D \yK)} =
-  \frac{\p(D \| H_{h} \yK)}{\p(D \| H_{h'} D \yK)}
-  \quad\text{\footnotesize (if $\p(H_{h} \| \yK) = \p(H_{h'} \| \yK)$)}.
+  \frac{\p(H_{h} \| D \, \yK)}{\p(H_{h'} \| D \, \yK)} =
+  \frac{\p(D \| H_{h} \, \yK)}{\p(D \| H_{h'} \, \yK)}
+  \qquad\text{\footnotesize (if $\p(H_{h} \| \yK) = \p(H_{h'} \| \yK)$)}.
 \end{equation}
 Such ratio or its logarithm is variously called \emph{weight of evidence}
 and \emph{Bayes factor}
@@ -731,9 +725,47 @@ and \emph{Bayes factor}
 also][\chaps~V, VI, A]{jeffreys1939_r1983}. \enquote{It is historically interesting that the expression ``weight of evidence'', in its technical sense, anticipated the term ``likelihood'' by over forty years}  \citep[\sect~1.4.2 p.~12]{osteyeeetal1974}.
 
 The literature in probability and statistics has also employed, for quite
-some time, various other measures to compare our beliefs in a set of hypotheses
-given some data.
+some time, various other ad-hoc measures to assess our beliefs in a set of
+hypotheses given some data. Here I consider one in particular, the
+\emph{leave-one-out cross-validation log-score}
+\citep{krnjajicetal2011,geisseretal1979,vehtarietal2002,vehtarietal2012,draperetal2014,piironenetal2017}:
+\begin{equation}
+  \label{eq:log-score}
+  \frac{1}{d} \sum_{i=1}^{d} \ln\p(D_{i} \| D_{-i} \, H_{h} \, \yK)
+\end{equation}
+where every $D_{d}$ is a datum in the data $D$, and $D_{-d}$ represents the
+data with datum $D_{d}$ excluded. The intuition behind this measure is more
+or less this: \enquote{let's see what my belief in the last datum should
+  be, on average, once I've observed the other data, if I consider $H_{h}$
+  as true}. On average means considering all the different orders in which
+the data could have been observed.
 
+This is a reasonable intuition, and the log-score~\eqref{eq:log-score} and
+post-data probability~\eqref{eq:posterior_hypothesis} often leads to
+qualitatively similar results in comparing two hypotheses. There are
+exceptions, though.
+
+My point of view, however, is that every
+intuitively built quantitative assessment of belief is either
+\begin{enumerate*}[label=(\arabic*)]
+\item an approximation of a formula that can be derived from the
+  probability calculus, or
+\item wrong.
+\end{enumerate*}
+
+I shall now show that log-score above can be viewed as an approximation of
+the logarithm of the post-data probability~\eqref{eq:posterior_hypothesis}
+is actually a refined ***
+
+\begin{equation}
+  \label{eq:product_2}
+  \begin{aligned}
+\bigr[&\p(D_{1} \| D_{-1} \, H_{h} \, \yK) \times \p(D_{-1} \|  H_{h} \, \yK) \times{}\\
+  &\p(D_{2} \| D_{-2} \, H_{h} \, \yK) \times  \p(D_{-2} \| H_{h} \, \yK)\times{}\\
+    &\hphantom{\p(D_{2} \| D_{-2} \, H_{h} \, \yK)} \mathrlap{\dotso}\hphantom{{}\times  \p(D_{-2} \| H_{h} \, \yK)}\times{}\\
+ &\p(D_{d} \| D_{-d} \, H_{h} \, \yK) \times \p(D_{-} \|  H_{h} \, \yK) \bigl]^{\frac{1}{d}}
+  \end{aligned}
+\end{equation}
 
 
 

@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2019-08-08T08:04:04+0200
-%% Last-Updated: 2019-08-08T21:31:00+0200
+%% Last-Updated: 2019-08-08T21:49:56+0200
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newif\ifarxiv
 \arxivfalse
@@ -796,17 +796,16 @@ The result can be displayed thus:
             \p(D_{-2} \| H \, \yK)\times{}\\
           &\hphantom{\p(D_{2} \| D_{-2} \, H \, \yK)}
             \mathrlap{\dotso}\hphantom{{}\times  \p(D_{-2} \| H \, \yK)}\times{}\\
-          &\underbracket[0pt][1ex]{\p(D_{d} \| D_{-d} \, H \, \yK)}_{
+          &\p(D_{d} \|\underbracket[0pt][1ex]{ D_{-d} }_{\mathclap{
             \begin{smallmatrix}
               \Big\uparrow\\\text{log-score}
             \end{smallmatrix}
-} \times
-            \p(D_{-d} \|  H \, \yK)
+}} H \, \yK) \times\p(D_{-d} \|  H \, \yK)
             \,\bigr]^{1/d}.
   \end{aligned}
 \end{equation}
-Note that upon taking the logarithm of this expression, the factors
-vertically aligned on the left turn together into the
+Note that upon taking the logarithm of this expression, the $d$ factors
+vertically aligned on the left add up to the
 log-score~\eqref{eq:log-score}, as indicated.
 
 Now note that the mathematical reshaping of $\p(D \| H \, \yK)$ -- that is, the
@@ -841,7 +840,7 @@ the central column is an average of the log-scores calculated for the three
 distinct subsets of pairs of data $\set{D_{1}\,D_{2}}$,
 $\set{D_{1}\, D_{3}}$, $\set{D_{2}\, D_{3}}$. Likewise, the logarithm of
 the six factors vertically aligned on the right is the average of the
-log-scores for the three distinct subsets of data singletons $\set{D_{1}}$,
+log-scores for the three  subsets of data singletons $\set{D_{1}}$,
 $\set{D_{2}}$, $\set{D_{3}}$.
 
 
@@ -855,9 +854,9 @@ leave-one-out partitions formed out of $k$ data points. We therefore obtain
 +{}\\
   &\quad
     \begin{aligned}
-\frac{1}{d\,(d-1)} \sum_{i\in\set{1,\dotsc,d}} \sum_{j\in\set{1,\dotsc,d}}^{j\ne i}  \ln\p(D_{-i,j} \| D_{-i,-j} \, H \, \yK)
+\frac{1}{d} \sum_{i\in\set{1,\dotsc,d}} \frac{1}{d-1} \sum_{j\in\set{1,\dotsc,d}}^{j\ne i}  \ln\p(D_{-i,j} \| D_{-i,-j} \, H \, \yK)
   +  \dotsb +{}&\\[0.5\jot]
-  \Bigl[k\,\tbinom{d}{k}\Bigr]^{-1}
+  \binom{d}{k}^{-1}\frac{1}{k}\quad
   \sum_{\mathclap{\text{$k$-tuples}}}   \ln\p(D_{i_{1}} \| \underbracket{D_{i_{2}} \dotsm D_{i_{k}}}_{\mathclap{\text{order doesn't matter}}} \, H \, \yK)
   + \dotsb +{}&\\[0.5\jot]
   \frac{1}{d} \sum_{i=1}^{d} \ln\p(D_{i} \| H \, \yK),&
@@ -866,7 +865,7 @@ leave-one-out partitions formed out of $k$ data points. We therefore obtain
 %    \hphantom{\ln\p(D \| H \, \yK)}
                        &\equiv \sum_{k=1}^{d}
   \Bigl[k\,\tbinom{d}{k}\Bigr]^{-1}
-  \sum_{\mathclap{\text{$k$-tuples}}}   \ln\p(D_{i_{1}} \| \underbracket{D_{i_{2}} \dotsm D_{i_{k}}}_{\mathclap{\text{order doesn't matter}}} \, H \, \yK) 
+  \sum_{\mathclap{\text{$k$-tuples}}}   \ln\p(D_{i_{1}} \| \underbracket{D_{i_{2}} \dotsm D_{i_{k}}}_{\mathclap{\text{order doesn't matter}}} \, H \, \yK).
   \end{aligned}
 \end{equation}
 

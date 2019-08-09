@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2019-08-08T08:04:04+0200
-%% Last-Updated: 2019-08-08T21:49:56+0200
+%% Last-Updated: 2019-08-09T16:53:44+0200
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newif\ifarxiv
 \arxivfalse
@@ -709,17 +709,24 @@ hypothesis $H_{h}$ given data $D$ and knowledge $\yK$ is related to our
 \end{equation}
 This post-data \dob\ is of course conditional on the set $\set{H_{h}}$ of
 mutually exclusive and exhaustive hypotheses under consideration (implicit
-in the knowledge $\yK$).
+in the knowledge $\yK$). The term $\p(D \| H_{h} \, \yK)$ is the
+\emph{likelihood} of the hypothesis given the data \citep[\sect~6.1,
+p.~62]{good1950}.
 
 We can combine the post-data beliefs in two hypotheses in different ways to
-form a quantitative ideas of how much the data is giving evidence for one
-or the other. For example their ratio or the logarithm of their ratio,
-often called \emph{weight of evidence} and \emph{Bayes factor}
-\citep{good1950,osteyeeetal1974,mackay1992,kassetal1995}[see
+form a quantitative idea of how much the data is giving evidence for one or
+the other. For example their ratio or the logarithm of their ratio, often
+called \emph{weight of evidence} and \emph{Bayes factor}
+\citep[\chap~6]{good1950}[\sect~1.4]{osteyeeetal1974}{mackay1992,kassetal1995}[see
 also][\chaps~V, VI, A]{jeffreys1939_r1983}. \enquote{It is historically
   interesting that the expression ``weight of evidence'', in its technical
   sense, anticipated the term ``likelihood'' by over forty years}
-\citep[\sect~1.4.2 p.~12]{osteyeeetal1974}.
+\citep[\sect~1.4.2 p.~12]{osteyeeetal1974}. I'm here speaking of the
+\emph{comparison} of hypotheses, not of their \emph{selection} -- that is,
+of choosing one based on the data and discarding the others for future
+calculations. For such selection, probabilities aren't enough: we also need
+to specify a utility or cost function to calculate the expected gains of
+choosing one or another hypothesis.
 % \begin{equation}
 %   \label{eq:ratios_posteriors}
 %   \frac{\p(H_{h} \| D \, \yK)}{\p(H_{h'} \| D \, \yK)} =
@@ -727,11 +734,11 @@ also][\chaps~V, VI, A]{jeffreys1939_r1983}. \enquote{It is historically
 %   \qquad\text{\footnotesize (if $\p(H_{h} \| \yK) = \p(H_{h'} \| \yK)$)}.
 % \end{equation}
 
-The literature in probability and statistics has also employed for quite
-some time various other ad-hoc measures to assess our beliefs in a set of
-hypotheses given some data. Here I consider one in particular, the
-\emph{leave-one-out cross-validation log-score}
-\citep{krnjajicetal2011,geisseretal1979,vehtarietal2002,vehtarietal2012,draperetal2014,piironenetal2017}:
+The literature in probability and statistics has also employed various
+other ad-hoc measures to assess our beliefs in a set of hypotheses given
+some data. Here I consider one in particular, the \emph{leave-one-out
+  cross-validation log-score}
+\citep{krnjajicetal2011,krnjajicetal2014,geisseretal1979,vehtarietal2002,vehtarietal2012,piironenetal2017}:
 \begin{equation}
   \label{eq:log-score}
   \frac{1}{d} \sum_{i=1}^{d} \ln\p(D_{i} \| D_{-i} \, H_{h} \, \yK)
@@ -741,8 +748,14 @@ and $D_{-i}$ denotes the data with datum $D_{i}$ excluded. The intuition
 behind this measure is more or less this: \enquote{let's see what my belief
   in one datum should be, on average, once I've observed the other data, if
   I consider $H_{h}$ as true}. \enquote{On average} means considering such
-belief for every single datum in turn, and then taking the geometric mean
-(arithmetic mean on a log scale).
+belief for every single datum in turn, and then taking the geometric mean,
+which is the arithmetic mean on a log scale. Krnjaji\'c \amp\ Draper
+\citey{krnjajicetal2011,krnjajicetal2014} compare this log-score with the
+deviance information criterion  (There's an ambiguity in this
+definition, because we can ask: what's a \enquote{datum} in the case of
+multi-dimensional observations? a single numerical value? or a
+multidimensional point? Different interpretations lead to different
+log-scores. We'll come back to this point later.)
 
 This is a reasonable intuition, and the log-score~\eqref{eq:log-score} and
 post-data probability~\eqref{eq:posterior_hypothesis} often lead to
@@ -759,10 +772,10 @@ is that every intuitively built quantitative assessment of belief is either
 \item wrong.
 \end{enumerate*}
 
-I shall now show that the log-score above can be viewed as an approximation of
-the logarithm of the post-data probability~\eqref{eq:posterior_hypothesis};
-or, if you like, that the post-data probability can be seen as a refined
-version of the log-score.
+I shall now show that the log-score above can be viewed as an approximation
+of the log-likelihood $\p(D \| H_{h} \, \yK)$ of the post-data
+probability~\eqref{eq:posterior_hypothesis}; or, if you like, that the
+post-data probability can be seen as a refined version of the log-score.
 
 We can obviously write
 \begin{equation}
@@ -835,17 +848,17 @@ example for $d=3$:
 \end{multline}
 In this example, the logarithm of the three vertically aligned factors in
 the left column is, as already noted, the log-score~\eqref{eq:log-score}.
-We also note that the logarithm of the six vertically aligned factors in
-the central column is an average of the log-scores calculated for the three
-distinct subsets of pairs of data $\set{D_{1}\,D_{2}}$,
-$\set{D_{1}\, D_{3}}$, $\set{D_{2}\, D_{3}}$. Likewise, the logarithm of
-the six factors vertically aligned on the right is the average of the
-log-scores for the three  subsets of data singletons $\set{D_{1}}$,
-$\set{D_{2}}$, $\set{D_{3}}$.
+The logarithm of the six vertically aligned factors in the central column
+is an average of the log-scores calculated for the three distinct subsets
+of pairs of data $\set{D_{1}\,D_{2}}$, $\set{D_{1}\, D_{3}}$,
+$\set{D_{2}\, D_{3}}$. Likewise, the logarithm of the six factors
+vertically aligned on the right is the average of the log-scores for the
+three subsets of data singletons $\set{D_{1}}$, $\set{D_{2}}$,
+$\set{D_{3}}$.
 
 
-In the general case with $d$ data there are $k\,\binom{d}{k}$ possible
-leave-one-out partitions formed out of $k$ data points. We therefore obtain
+In the general case with $d$ data there are $\binom{d}{k}$ subsets with $k$
+data points. We therefore obtain
 \begin{equation}
   \label{eq:general_equivalence}
   \begin{aligned}
@@ -868,13 +881,39 @@ leave-one-out partitions formed out of $k$ data points. We therefore obtain
   \sum_{\mathclap{\text{$k$-tuples}}}   \ln\p(D_{i_{1}} \| \underbracket{D_{i_{2}} \dotsm D_{i_{k}}}_{\mathclap{\text{order doesn't matter}}} \, H \, \yK).
   \end{aligned}
 \end{equation}
+The post-data log-probability for $H$ will be equal to this expression,
+plus the pre-data log-probability for $H$, plus a term that is the same for
+all hypotheses.
 
+I'd like to offer three ways of looking at the
+relation~\eqref{eq:general_equivalence} between the log-likelihood and the
+log-score.
+
+The first point of view sees the log-likelihood as a refinement and
+improvement of the log-score. The log-likelihood takes into account not
+only the log-score for the whole data, but also the log-scores for all
+possible subsets of data. Figuratively speaking it examines the
+relationship between hypothesis and data locally, globally, and on all
+intermediate scales.
+
+The second point of view is that the log-score is an approximation of the
+log-likelihood; more precisely of the log-likelihood per datum:
+\begin{equation}
+  \label{eq:logscore_approx_loglh}
+  \frac{1}{d} \sum_{i=1}^{d} \ln\p(D_{i} \| D_{-i} \, H \, \yK)
+  \approx \frac{1}{d} \ln\p(D \| H \, \yK).
+\end{equation}
+This approximation is reasonable if the amount of data is large with
+respect to the dimension of the space of a single datum, because *** (ref
+to geisser, stone, gelfandetal)
+
+*** problems calculation with time-relevant hypotheses
 
 
 *** with similar procedure we can included all k-fold scores.
 
 
-
+**
 
 
 

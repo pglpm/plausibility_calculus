@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2019-08-08T08:04:04+0200
-%% Last-Updated: 2019-08-09T16:53:44+0200
+%% Last-Updated: 2019-08-10T01:53:19+0200
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newif\ifarxiv
 \arxivfalse
@@ -26,7 +26,7 @@ british%
 \newcommand*{\headtitle}{log-scores, evidence, Bayes factors}
 \newcommand*{\pdfauthor}{P.G.L.  Porta Mana}
 \newcommand*{\headauthor}{Porta Mana}
-\newcommand*{\reporthead}{}% Report number
+\newcommand*{\reporthead}{Open Science Framework \href{https://doi.org/10.17605/osf.io/xxxx}{\textsc{doi}:xxxx}}% Report number
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% Calls to packages (uncomment as needed)
@@ -432,7 +432,7 @@ citestyle=authoryear-comp,bibstyle=pglpm-authoryear,autopunct=false,sorting=ny,s
 \else
 \makeoddfoot{plain}{}{\makebox[0pt]{\thepage}}{}
 \fi%typodisclaimtrue
-\makeoddhead{plain}{}{}{\footnotesize\reporthead}
+\makeoddhead{plain}{\footnotesize\reporthead}{}{}
 % \copypagestyle{manainitial}{plain}
 % \makeheadrule{manainitial}{\headwidth}{0.5\normalrulethickness}
 % \makeoddhead{manainitial}{%
@@ -493,7 +493,7 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 % {\protect\centering ***\\%
 % \footnotesize\epost{\email{***}{***}}}%
 % \hspace*{\stretch{1}}%
-\parbox{0.5\linewidth}%\makebox[0pt][c]%
+\parbox{0.75\linewidth}%\makebox[0pt][c]%
 {\protect\centering P.G.L.  Porta Mana\\%
 \footnotesize Kavli Institute, Trondheim, Norway \quad\epost{\email{piero.mana}{ntnu.no}}}%
 \hspace*{\stretch{1}}%
@@ -644,6 +644,7 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 \newcommand*{\dob}{degree of belief}
 \newcommand*{\dobs}{degrees of belief}
 \newcommand*{\yK}{K}
+\newcommand*{\hH}{\Hat{H}}
 %%% Custom macros end @@@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -882,32 +883,59 @@ data points. We therefore obtain
   \end{aligned}
 \end{equation}
 The post-data log-probability for $H$ will be equal to this expression,
-plus the pre-data log-probability for $H$, plus a term that is the same for
+plus the pre-data log-probability for $H$, plus a term which is the same for
 all hypotheses.
 
 I'd like to offer three ways of looking at the
 relation~\eqref{eq:general_equivalence} between the log-likelihood and the
 log-score.
 
-The first point of view sees the log-likelihood as a refinement and
-improvement of the log-score. The log-likelihood takes into account not
-only the log-score for the whole data, but also the log-scores for all
-possible subsets of data. Figuratively speaking it examines the
-relationship between hypothesis and data locally, globally, and on all
-intermediate scales.
+First, we can see the log-likelihood as a refinement and improvement of the
+log-score. The log-likelihood takes into account not only the log-score for
+the whole data, but also the log-scores for all possible subsets of data.
+Figuratively speaking it examines the relationship between hypothesis and
+data locally, globally, and on all intermediate scales.
 
-The second point of view is that the log-score is an approximation of the
-log-likelihood; more precisely of the log-likelihood per datum:
+The second point of view only holds for hypotheses $\hH$ which make any
+observed data irrelevant:
+\begin{equation}
+  \label{eq:irrelevance_data}
+  \p(D \| D' \, \hH \, \yK) = \p(D \| \hH \, \yK)
+  \qquad\text{if $D' \nRightarrow D$},
+\end{equation}
+or super-hypotheses $H$ about such hypotheses, leading to exchangeable
+joint beliefs:
+\begin{equation}
+  \label{eq:superhypothesis_irrelevance_data}
+  \p(D D' \| H \, \yK) = \sum_{h} \p(D \| \hH_{h} \, H \, \yK)\;
+  \p(D' \| \hH_{h} \, H \, \yK)\;
+  \p(\hH_{h} \| H \, \yK)
+  \qquad\text{if $D' \nRightarrow D$}.
+\end{equation}
+In either case the log-score can be seen as an approximation of the log-likelihood;
+more precisely of the log-likelihood per datum:
 \begin{equation}
   \label{eq:logscore_approx_loglh}
   \frac{1}{d} \sum_{i=1}^{d} \ln\p(D_{i} \| D_{-i} \, H \, \yK)
   \approx \frac{1}{d} \ln\p(D \| H \, \yK).
 \end{equation}
+This is in fact an exact equality if property~\eqref{eq:irrelevance_data}
+holds for $H$.
+
+which lead to
+exchangeable beliefs about the data
+
+Second, we can see 
+This approximation is only valid
+
 This approximation is reasonable if the amount of data is large with
 respect to the dimension of the space of a single datum, because *** (ref
 to geisser, stone, gelfandetal)
 
 *** problems calculation with time-relevant hypotheses
+
+
+\enquote{we cannot give a universal rule for them beyond the common-sense one, that if anybody does not know what his suggested value is, or whether there is one, he does not know what question he is asking and consequently does not know what his answer means} \citep[\sect~3.1, p.~124 ]{jeffreys1939_r1983}.
 
 
 *** with similar procedure we can included all k-fold scores.

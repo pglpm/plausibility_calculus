@@ -8793,7 +8793,7 @@ Cell[BoxData[
   "In[337]:=",ExpressionUUID->"d28e829a-390e-47ba-b12b-ba476ed8bd86"]
 },
 WindowSize->{640, 755},
-WindowMargins->{{294, Automatic}, {Automatic, 0}},
+WindowMargins->{{296, Automatic}, {Automatic, 0}},
 FrontEndVersion->"11.3 for Microsoft Windows (32-bit) (March 6, 2018)",
 StyleDefinitions->"Default.nb"
 ]

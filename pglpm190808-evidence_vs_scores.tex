@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2019-08-08T08:04:04+0200
-%% Last-Updated: 2019-08-10T01:53:19+0200
+%% Last-Updated: 2019-08-11T12:34:44+0200
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newif\ifarxiv
 \arxivfalse
@@ -26,7 +26,7 @@ british%
 \newcommand*{\headtitle}{log-scores, evidence, Bayes factors}
 \newcommand*{\pdfauthor}{P.G.L.  Porta Mana}
 \newcommand*{\headauthor}{Porta Mana}
-\newcommand*{\reporthead}{Open Science Framework \href{https://doi.org/10.17605/osf.io/xxxx}{\textsc{doi}:xxxx}}% Report number
+\newcommand*{\reporthead}{Open Science Framework \href{https://doi.org/10.31219/osf.io/***}{\textsc{doi}:10.31219/osf.io/***}}% Report number
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% Calls to packages (uncomment as needed)
@@ -432,7 +432,7 @@ citestyle=authoryear-comp,bibstyle=pglpm-authoryear,autopunct=false,sorting=ny,s
 \else
 \makeoddfoot{plain}{}{\makebox[0pt]{\thepage}}{}
 \fi%typodisclaimtrue
-\makeoddhead{plain}{\footnotesize\reporthead}{}{}
+\makeoddhead{plain}{\scriptsize\reporthead}{}{}
 % \copypagestyle{manainitial}{plain}
 % \makeheadrule{manainitial}{\headwidth}{0.5\normalrulethickness}
 % \makeoddhead{manainitial}{%
@@ -545,7 +545,7 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 \newcommand*{\defd}{\coloneqq}
 \newcommand*{\defs}{\eqqcolon}
 \newcommand*{\Land}{\bigwedge}
-%\newcommand*{\Lor}{\bigvee}
+\newcommand*{\Lor}{\bigvee}
 %\newcommand*{\lland}{\DOTSB\;\land\;}
 %\newcommand*{\llor}{\DOTSB\;\lor\;}
 %\newcommand*{\limplies}{\mathbin{\Rightarrow}}%implies
@@ -616,7 +616,7 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 \newcommand*{\tsum}{\mathop{\textstyle\sum}\nolimits}
 %\newcommand*{\tint}{\begingroup\textstyle\int\endgroup\nolimits}
 %\newcommand*{\tland}{\mathop{\textstyle\bigwedge}\nolimits}
-%\newcommand*{\tlor}{\mathop{\textstyle\bigvee}\nolimits}
+\newcommand*{\tlor}{\mathop{\textstyle\bigvee}\nolimits}
 %\newcommand*{\sprod}{\mathop{\textstyle\prod}}
 %\newcommand*{\ssum}{\mathop{\textstyle\sum}}
 %\newcommand*{\sint}{\begingroup\textstyle\int\endgroup}
@@ -701,20 +701,39 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 \section{***}
 \label{sec:***}
 
-The probability calculus tells us unequivocally how our \dob\ in a
-hypothesis $H_{h}$ given data $D$ and knowledge $\yK$ is related to our
-\dob\ in observing those data when we entertain that hypothesis as true:
+The probability calculus unequivocally tells us how our \dob\ in a
+hypothesis $H_{h}$ given data $D$ and background knowledge $\yK$, that is,
+$\p(H_{h} \| D \, \yK)$, is related to our \dob\ in observing those data
+when we entertain that hypothesis as true, that is,
+$\p(D \| H_{h} \, \yK)$:
 \begin{equation}
   \label{eq:posterior_hypothesis}
   \p(H_{h} \| D \, \yK) = \frac{\p(D \| H_{h} \, \yK)\;\p(H_{h} \| \yK)}{\sum_{h} \p(D \| H_{h} \, \yK)\; \p(H_{h} \| \yK)}.
 \end{equation}
-This post-data \dob\ is of course conditional on the set $\set{H_{h}}$ of
-mutually exclusive and exhaustive hypotheses under consideration (implicit
-in the knowledge $\yK$). The term $\p(D \| H_{h} \, \yK)$ is the
-\emph{likelihood} of the hypothesis given the data \citep[\sect~6.1,
-p.~62]{good1950}.
+The term $\p(D \| H_{h} \, \yK)$ is called the \emph{likelihood} of the
+hypothesis given the data \citep[\sect~6.1, p.~62]{good1950}. $D$, $H_{h}$,
+$\yK$ denote propositions, which usually are about numeric quantities. I'll
+use the terms \enquote{\dob}, \enquote{belief}, and \enquote{probability}
+as synonyms.
 
-We can combine the post-data beliefs in two hypotheses in different ways to
+The post-data belief~\eqref{eq:posterior_hypothesis} is of course
+conditional on the set $\set{H_{h}}$ of mutually exclusive and exhaustive
+hypotheses under consideration, which is implicit in the knowledge $\yK$ --
+in fact, the above formula is only valid if
+\begin{equation}
+  \label{eq:implicit_knowledge}
+  \p\bigl(\tlor_{h} H_{h} \| \yK\bigr) = 1,
+  \qquad
+  \p(H_{h} \land H_{h'} \| \yK) = 0 \quad \forall h \ne h'.
+\end{equation}
+Only in extremely rare cases does the set of hypotheses $\set{H_{h}}$
+encompass and reflect the extremely complex and fuzzy hypotheses that lie
+in the backs of our minds. The background knowledge $\yK$ is therefore only
+a simplified picture of our actual knowledge. That's why $\yK$ is called a
+\emph{model}. \enquote{A theory cannot duplicate nature, for if it did so in all respects, it would be isomorphic to nature itself and hence useless, a mere repetition of all the complexity which nature presents to us, that very complexity we frame theories to penetrate and set aside. If a theory were not simpler than the phenomena it was designed to model, it would serve no purpose. Like a portrait, it can represent only a part of the subject it pictures. This part it exaggerates, if only because it leaves out the rest. Its simplicity is its virtue, provided the aspect it portrays be that which we wish to study} \citep[\sect~VII(\textit{vi}) p.~102]{truesdelletal1980}.
+
+
+We can combine our post-data beliefs in two hypotheses in different ways to
 form a quantitative idea of how much the data is giving evidence for one or
 the other. For example their ratio or the logarithm of their ratio, often
 called \emph{weight of evidence} and \emph{Bayes factor}

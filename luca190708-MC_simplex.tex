@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2015-05-01T20:53:34+0200
-%% Last-Updated: 2019-08-08T21:29:15+0200
+%% Last-Updated: 2019-08-10T13:18:51+0200
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newif\ifarxiv
 \arxivfalse
@@ -25,7 +25,7 @@ british%
 \newcommand*{\headtitle}{\propertitle}
 \newcommand*{\pdfauthor}{P.G.L.  Porta Mana}
 \newcommand*{\headauthor}{Porta Mana}
-\newcommand*{\reporthead}{}% Report number
+\newcommand*{\reporthead}{Open Science Framework \href{https://doi.org/10.31219/osf.io/5zu6}{\textsc{doi}:10.31219/osf.io/5zu6}}% Report number
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% Calls to packages (uncomment as needed)
@@ -426,7 +426,7 @@ citestyle=authoryear-comp,bibstyle=pglpm-authoryear,autopunct=false,sorting=ny,s
 \else
 \makeoddfoot{plain}{}{\makebox[0pt]{\thepage}}{}
 \fi%typodisclaimtrue
-\makeoddhead{plain}{}{}{\footnotesize\reporthead}
+\makeoddhead{plain}{\scriptsize\reporthead}{}{}
 % \copypagestyle{manainitial}{plain}
 % \makeheadrule{manainitial}{\headwidth}{0.5\normalrulethickness}
 % \makeoddhead{manainitial}{%

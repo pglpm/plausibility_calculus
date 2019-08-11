@@ -6,7 +6,7 @@
 %% Home page: http://magnaspesmeretrix.org/
 %% Email (remove ZZ): pglpm0ZZ[at]gmail.com
 %% Created: 2000-08-23T16:53:30+0200
-%% Last-Updated: 2019-08-09T16:44:41+0200
+%% Last-Updated: 2019-08-11T12:34:15+0200
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 % NB: This database contains also items whose content's validity I
@@ -7674,7 +7674,8 @@ year =	       {1974},
 volume =       {1},
 series =       {Memoirs},
 address =      {Aarhus},
-keywords =     {exchangeability, Bayesian probability theory}
+keywords =     {exchangeability, Bayesian probability theory, sufficient statistics, exponential family, extremal family},
+mynote =       {Rasch: \begin{quotation}First a terminological remark. The ``prediction'' is suggestive of the statistician as a magician who can tell the future. Economists have an expression that is less pretentious: forecasting -- not much more reliable than weather forecasting.\par To speak seriously: you do not really \emph{predict} anything. What you do, is to calculate the distribution of the variate in question, possibly offering its mean value or the like as a likely event -- but only on the assumption that the model -- or a characteristic feature of it -- on which you based this forecasting, still holds, i.e. confronted with what eventually does happen \emph{you are faced with a test of this hypothesis} and nothing else -- \emph{you were not telling what the future would be}!\end{quotation} p.~268. Rasch: \begin{quotation}Next I wish to make it quite explicit, that the reason for using both significance and redundancy lies in the contention that \emph{every model is basically wrong}, i.e.\ it is bound to fail, given enough data.\par When you are in the possession of a set of data you may then either be in the position that your significance test tells you that the model fails, or you may not have got enough observations for that purpose. In the latter case you \emph{cannot yet reject} the model on statistical grounds -- which of course should not be construed as meaning that you really \emph{accept} it. In the former case you have to realize that the model fails -- and I have no sympathy for relaxing the significance requirement for the reason that the data are substantial enough to show it -- but that does not mean that the model is too bad to be applied in the actual case.\par To take a parallel from elementary physics: A ``mathematical pendulum'' is defined as ``a heavy point, swinging frictionless in a weightless string in vacuum''. A contraption like that was never seen; thus as a model for the motion of a real pendulum it is ``unrealistic''. Notwithstanding, it works quite well for a short time interval, but it begins soon to show a systematic decrease of the oscillation angle. To the model -- a second order differential equation -- thus requiring an amendment, a friction term is added, and now it works perfectly well for a long time, even during a few days, until another systematic deviation shows. If needed, a further correction, for air resistance, say, should be attempted -- but as a matter of fact, \emph{this is not needed}, because it has worked well enough for the purpose of the geo-physicist, which was to measure the gravity constant (``g'') with decimal places!\end{quotation} pp.~36--37. Rasch: \enquote{we should never succumb to the illusion that any of our models are correct, but we should certainly aim at \emph{making them adequate for our purposes}} p.~38}
 }
 
 @Article{barndorffnielsenetal1984,
@@ -21833,6 +21834,18 @@ author =       {V. Ravi Chandra and S. Ramasesha and Diptiman Sen},
 title =	       {Magnetic properties of a helical spin chain with alternating isotropic and anisotropic spins: magnetization plateaus and finite entropy},
 year =	       {2004},
 note =	       {\arxiveprint{cond-mat/0403555}}
+}
+
+@Article{chandramoulietal2019,
+author =       {Suyog H. Chandramouli and Richard M. Shiffrin and Aki Vehtari and Daniel P. Simpson and Yuling Yao and Andrew Gelman and Danielle J. Navarro and Quentin F. Gronau and Eric-Jan Wagenmakers},
+title =	       {Commentary on {Gronau} and {Wagenmakers}. {Limitations} of ``{Limitations} of {Bayesian} Leave-one-out Cross-Validation for Model Selection''. {Between} the Devil and the Deep Blue Sea: Tensions Between Scientific Judgement and Statistical Model Selection. {Rejoinder}: More Limitations of {Bayesian} Leave-One-Out Cross-Validation},
+journal =      cbb,
+year =	       {2019},
+volume =       {2},
+number =       {1},
+pages =	       {12--47},
+note =	       {See \citebi{gronauetal2019}},
+keywords =     {probability theory}
 }
 
 @Article{chandrasekhar1943,
@@ -44481,6 +44494,17 @@ pages =	       {8--38},
 keywords =     {conjugate prior, Bayesian probability theory}
 }
 
+@Article{gelmanetal2014,
+author =       {Andrew Gelman and Jessica Hwang and Aki Vehtari},
+title =	       {Understanding predictive information criteria for {Bayesian} models},
+journal =      sc,
+year =	       {2014},
+volume =       {24},
+number =       {6},
+pages =	       {997--1016},
+keywords =     {leave-one-out cross-validation, Bayes factor}
+}
+
 @Article{gelmanetal2017,
 author =       {Andrew Gelman and Christian Hennig},
 title =	       {Beyond subjective and objective in statistics},
@@ -49095,7 +49119,7 @@ year =	       {2019},
 volume =       {2},
 number =       {1},
 pages =	       {1--11},
-note =	       {\url{http://www.ejwagenmakers.com/papers.html}},
+note =	       {See also comments and rejoinder in \citebi{chandramoulietal2019}},
 keywords =     {probability theory}
 }
 
@@ -70273,8 +70297,7 @@ booktitle =    {\citein{barndorffnielsenetal1974}},
 year =	       {1974},
 pages =	       {249--269},
 note =	       {With discussion. Repr.\ without discussion in \citebi{lauritzen1974_r1974}},
-keywords =     {sufficient statistics, exchangeability, exponential family, Bayesian probability theory, extremal family},
-mynote =       {Rasch: \begin{quotation}First a terminological remark. The ``prediction'' is suggestive of the statistician as a magician who can tell the future. Economists have an expression that is less pretentious: forecasting -- not much more reliable than weather forecasting.\par To speak seriously: you do not really \emph{predict} anything. What you do, is to calculate the distribution of the variate in question, possibly offering its mean value or the like as a likely event -- but only on the assumption that the model -- or a characteristic feature of it -- on which you based this forecasting, still holds, i.e. confronted with what eventually does happen \emph{you are faced with a test of this hypothesis} and nothing else -- \emph{you were not telling what the future would be}!\end{quotation}, p.~268}
+keywords =     {sufficient statistics, exchangeability, exponential family, Bayesian probability theory, extremal family}
 }
 
 @Article{lauritzen1974_r1974,
@@ -73535,7 +73558,8 @@ volume =       {77},
 number =       {378},
 pages =	       {334--351},
 note =	       {See \citebi{shafer1982}},
-keywords =     {evidence, Bayesian probability theory, improper priors, rare events, measure theory, importance of conditional}
+keywords =     {evidence, Bayesian probability theory, improper priors, rare events, measure theory, importance of conditional},
+mynote =       {Hill: \enquote{Finally, I'd like to suggest that such words as ``evidence'' or ``belief'' not be used until one has specified the operational meaning to be attached to them. In physics and other highly developed sciences it has become largely accepted that words unaccompanied by operational meaning are suspect, and likely to prove meaningless \citex{bridgman1927_r1958}. This would seem to be particularly important in a less highly developed field such as statistics, where many are misled by terminology} p.~346}
 }
 
 @Article{lindner2006,
@@ -82259,6 +82283,20 @@ volume =       {70},
 pages =	       {1--11},
 note =	       {See also \citebi{montanaroetal1981,montanaroetal1981b}},
 keywords =     {probability theory}
+}
+
+@Book{montavonetal1998_r2012,
+editor =       {Gr{\'e}goire Montavon and Genevi{\`e}ve B. Orr and Klaus-Robert M{\"u}ller},
+title =	       {Neural Networks: Tricks of the Trade},
+publisher =    {Springer},
+year =	       {2012},
+volume =       {7700},
+series =       {Lecture notes in computer science},
+address =      {Berlin},
+edition =      {2},
+note =	       {First publ.\ 1998},
+keywords =     {early stopping, machine learning, cross-validation},
+origdate =     {1998}
 }
 
 @Article{montbrioetal2015,
@@ -93984,6 +94022,19 @@ year =	       {1994},
 volume =       {134},
 series =       {Studies in logic and the foundations of mathematics},
 address =      {Amsterdam}
+}
+
+@InCollection{prechelt1998_r2012,
+author =       {Lutz Prechelt},
+title =	       {Early Stopping -- But When?},
+booktitle =    {\citein{montavonetal1998_r2012}},
+publisher =    {},
+year =	       {2012},
+chapter =      {2},
+pages =	       {53--67},
+keywords =     {early stopping, machine learning, cross-validation},
+note = 	       {\url{http://page.mi.fu-berlin.de/prechelt/Biblio/}},
+origdate =     {1998}
 }
 
 @Article{prendergastetal2005,
@@ -114556,7 +114607,7 @@ publisher =    {Academic Press},
 year =	       {1980},
 series =       {Pure and applied mathematics},
 address =      {New York},
-mynote =       {\begin{quotation}A theory is a mathematical model for an aspect of nature. One good theory extracts and exaggerates some facets of the truth. Another good theory may idealize other facets. A theory cannot duplicate nature, for if it did so in all respects, it would be isomorphic to nature itself and hence useless, a mere repetition of all the complexity which nature presents to us, that very complexity we frame theories to penetrate and set aside.\par If a theory were not simpler than the phenomena it was designed to model, it would serve no purpose. Like a portrait, it can represent only a part of the subject it pictures. This part it exaggerates, if only because it leaves out the rest. Its simplicity is its virtue, provided the aspect it portrays be that which we wish to study. If, on the other hand, our concern is an aspect of nature which a particular theory leaves out of account, then that theory is for us not wrong but simply irrelevant. For example, if we would analyse the stagnation of traffic in the streets, to take into account the behavior of the elementary particles that make up the engine, the body, the tires, and the driver of each automobile, however ``fundamental'' the physicists like to call those particles, would be useless even if it were not insuperably difficult. The quantum theory of individual particles is not wrong in studies of the deformation of large samples of air; it is simply a model for something else, something irrelevant to matter in gross. [Prologue, p.~xv] \end{quotation} \begin{quotation} Clearly the molecular schema employed, however plausible it may seem, is not consistent with the principles of Newtonian mechanics. If the intermolecular forces extend to infinity, then no encounter can be binary, and the motions of any two molecules are influenced, though possibly indeed not much, by the motions of all the rest. If the intermolecular forces have a cut-off, then binary encounters indeed become possible, but nevertheless we are not justified in assuming that all encounters are of this kind. The motions of a set of mass-points subjects to specified mutual forces are determined uniquely by the initial conditions and the dynamical equations. Thus we are not at liberty to assume anything about those motions. Whether or not all encounters of an assembly of mass-points be binary, is a matter for mathematical analysis and proof, not for guesswork. Indeed, if the molecules have finite spheres of action, analytical dynamics leads us to expect that ultimately three such spheres will intersect, not merely two, unless we start the system of molecules in some exceptional way. In general, therefore, \textsc{Maxwell}\emph{'s assumptions regarding the molecular motion contradict the laws of analytical dynamics}. [\sect~VII(\textit{vi}), p.~102]}
+mynote =       {\begin{quotation}A theory is a mathematical model for an aspect of nature. One good theory extracts and exaggerates some facets of the truth. Another good theory may idealize other facets. A theory cannot duplicate nature, for if it did so in all respects, it would be isomorphic to nature itself and hence useless, a mere repetition of all the complexity which nature presents to us, that very complexity we frame theories to penetrate and set aside.\par If a theory were not simpler than the phenomena it was designed to model, it would serve no purpose. Like a portrait, it can represent only a part of the subject it pictures. This part it exaggerates, if only because it leaves out the rest. Its simplicity is its virtue, provided the aspect it portrays be that which we wish to study. If, on the other hand, our concern is an aspect of nature which a particular theory leaves out of account, then that theory is for us not wrong but simply irrelevant. For example, if we would analyse the stagnation of traffic in the streets, to take into account the behavior of the elementary particles that make up the engine, the body, the tires, and the driver of each automobile, however ``fundamental'' the physicists like to call those particles, would be useless even if it were not insuperably difficult. The quantum theory of individual particles is not wrong in studies of the deformation of large samples of air; it is simply a model for something else, something irrelevant to matter in gross. [Prologue, p.~xv] \end{quotation} \begin{quotation} Clearly the molecular schema employed, however plausible it may seem, is not consistent with the principles of Newtonian mechanics. If the intermolecular forces extend to infinity, then no encounter can be binary, and the motions of any two molecules are influenced, though possibly indeed not much, by the motions of all the rest. If the intermolecular forces have a cut-off, then binary encounters indeed become possible, but nevertheless we are not justified in assuming that all encounters are of this kind. The motions of a set of mass-points subjects to specified mutual forces are determined uniquely by the initial conditions and the dynamical equations. Thus we are not at liberty to assume anything about those motions. Whether or not all encounters of an assembly of mass-points be binary, is a matter for mathematical analysis and proof, not for guesswork. Indeed, if the molecules have finite spheres of action, analytical dynamics leads us to expect that ultimately three such spheres will intersect, not merely two, unless we start the system of molecules in some exceptional way. In general, therefore, \textsc{Maxwell}\emph{'s assumptions regarding the molecular motion contradict the laws of analytical dynamics} Prologue p.~xvi}
 }
 
 @Book{truesdelletal1999_r2009,

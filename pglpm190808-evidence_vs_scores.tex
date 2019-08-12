@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2019-08-08T08:04:04+0200
-%% Last-Updated: 2019-08-12T12:37:05+0200
+%% Last-Updated: 2019-08-12T15:33:56+0200
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newif\ifarxiv
 \arxivfalse
@@ -644,6 +644,7 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 \newcommand*{\dob}{degree of belief}
 \newcommand*{\dobs}{degrees of belief}
 \newcommand*{\yK}{K}
+\newcommand*{\yO}{\mathrm{O}}
 \newcommand*{\hH}{\Hat{H}}
 %%% Custom macros end @@@
 
@@ -722,29 +723,28 @@ scientific (physical, biological, \etc) hypothesis, a state or development
 of things capable of experimental verification, at least in a thought
 experiment.
 \begin{innote}
-  Unfortunately we too often abuse of the fact that the probability
-  calculus, just like the truth calculus, proceeds purely syntactically
-  rather than semantically. That is, if I tell you that $H$ and
-  $H \limplies D$ are true, you can conclude that $D$ is true; similarly,
-  if I tell you that $\p(H \| \yK) = p$ and $\p(H \limplies D \| \yK) = q$,
-  you can conclude (try it as an exercise) that
-  $\p(H\;D \| \yK) = p + q -1$. In either case you don't need to know what
-  $H$ and $D$ are about -- they could very well be about Donald Duck or
-  parallel universes. And so we often say \enquote{under model $\theta$ our
-    belief about the value of quantity $x$ is expressed by such and such
-    distribution $\pf(x \| \theta)=f(x)$}, without explaining what $\theta$
-  really is and why it leads to $f$. The terms \enquote{model} and
-  \enquote{hypothesis}, as often used in probability and statistics, are
-  convenient and respectable-looking rugs under which we can sweep the fact
-  that we don't really know what we're speaking about. The need to look
-  under the rug arises, though, the moment we have to specify our pre-data
-  belief, the prior, about the mysterious $\theta$.
+  Don't we too often abuse of the fact that the probability calculus, just
+  like the truth calculus, proceeds purely syntactically rather than
+  semantically? That is, if I tell you that $H$ and $H \limplies D$ are
+  true, you can conclude that $D$ is true; similarly, if I tell you that
+  $\p(H \| \yK) = p$ and $\p(H \limplies D \| \yK) = q$, you can conclude
+  (try it as an exercise) that $\p(H\;D \| \yK) = p + q -1$. In either case
+  you don't need to know what $H$ and $D$ are about -- they could be about
+  Donald Duck or parallel universes. And so we often say \enquote{under
+    model $\theta$ our belief about the value of quantity $x$ is expressed
+    by such and such distribution $\pf(x \| \theta)=f(x)$}, without
+  explaining what $\theta$ really is and why it leads to $f$. Aren't terms
+  such as \enquote{model} and \enquote{hypothesis}, as often used in
+  probability and statistics, convenient and respectable-looking carpets
+  under which we can sweep the fact that we barely know what we're speaking
+  about? The need to look under the carpet arises, though, the moment we
+  have to specify our pre-data belief, the prior, about the mysterious
+  $\theta$.
   
   But semantics can very well be a by-product of syntax, or the distinction
   between the two be a chimera
   \citep{wittgenstein1945_t1999,girard2001,girard2003}. Such important
-  matters are, even more unfortunately, rarely discussed in probability and
-  statistics.
+  matters are unfortunately rarely discussed in probability and statistics.
 \end{innote}
 
 
@@ -759,7 +759,7 @@ the right side is only valid if
   \p(H_{h} \land H_{h'} \| \yK) = 0 \quad \text{if $h \ne h'$}.
 \end{equation}
 Only in extremely rare cases does the set of hypotheses $\set{H_{h}}$
-encompass and reflect the extremely complex and fuzzy hypotheses that lie
+encompass and reflect the extremely complex and fuzzy hypotheses lying
 in the backs of our minds. The background knowledge $\yK$ is therefore only
 a simplified picture of our actual knowledge. That's why $\yK$ or the
 hypotheses $\set{H_{h}}$ are often called \emph{models}.\; \enquote{A
@@ -773,36 +773,73 @@ hypotheses $\set{H_{h}}$ are often called \emph{models}.\; \enquote{A
   rest. Its simplicity is its virtue, provided the aspect it portrays be
   that which we wish to study} \citep[Prologue p.~xvi]{truesdelletal1980}.
 
-Expression~\eqref{eq:posterior_hypothesis_universal} is universally
-valid instead, but its denominator $\p(D \| \yK)$ is effectively impossible
-to quantify unless we simplify our inferential problem by introducing a
-possibly unrealistically exhaustive set of hypotheses, thus falling back
+Expression~\eqref{eq:posterior_hypothesis_universal} is universally valid
+instead, but it's rarely possible to quantify its denominator
+$\p(D \| \yK)$ unless we simplify our inferential problem by introducing a
+possibly unrealistic exhaustive set of hypotheses, thus falling back
 to~\eqref{eq:posterior_hypothesis_sethypotheses}. We can bypass this
-problem if we are content with only comparing our beliefs about any two
+problem if we are content with comparing our beliefs about any two
 hypotheses through their ratio, so that the term $\p(D \| \yK)$ cancels
 out. See Jaynes's \citey[\sects~4.3--4.4]{jaynes1994_r2003} insightful
-remarks about such binary comparisons, and also Good's \citey[\sect~6.3--6.6]{good1950}.
+remarks about such binary comparisons, and also Good's
+\citey[\sect~6.3--6.6]{good1950}.
 
 
 \bigskip
 
-In a problem of \emph{selection} of hypotheses
+If our problem is to finally choose a hypothesis, discarding its
+competitors for future calculations, or more generally to make a decision
+(for example, choice of medical treatment) based on the observed data, the
+post-data belief~\eqref{eq:posterior_hypothesis} is necessary but not
+sufficient. We also need to specify a utility or cost function to calculate
+the expected gains of choosing one or another hypothesis or making one or
+another decision
+\citep{kadaneetal1980b,degroot1970_r2004}[\chap~2]{bernardoetal1994_r2000}.
 
+If our problem has an exploratory nature instead -- for example, evaluating
+which hypotheses to include in our simplified set, or examining whether a
+hypothesis leads to peculiar beliefs for peculiar kinds of data -- then all
+terms appearing in expression~\eqref{eq:posterior_hypothesis} are usually
+freely examined. In particular the term $\p(D \| H_{h} \, \yK)$, called the
+\emph{likelihood} of the hypothesis given the data \citep[\sect~6.1,
+p.~62]{good1950}. The likelihoods of several hypotheses are often compared,
+through their ratios for example, called \emph{relative Bayes factor}, or
+its logarithm, called \emph{relative weight of evidence}
+\citep[\chap~6]{good1950}{good1975,good1981,good1985}[and many other works
+in][]{good1983}[\sect~1.4]{osteyeeetal1974}{mackay1992,kassetal1995}[see
+also][\chaps~V, VI, A]{jeffreys1939_r1983}. \enquote{It is historically
+  interesting that the expression ``weight of evidence'', in its technical
+  sense, anticipated the term ``likelihood'' by over forty years}
+\citep[\sect~1.4.2 p.~12]{osteyeeetal1974}.
+\begin{innote}
+  I'd like to point out that the (non-relative) Bayes factor for a
+  hypothesis $H_{h}$ provided by data $D$ is actually defined as
+  \citep[\sect~2]{good1981}
+  \begin{equation}
+    \label{eq:proper_Bayes_factor}
+    \frac{\p(D \| H_{h} \; \yK)}{\p(D \| \lnot H_{h} \; \yK)} \equiv
+    \frac{\yO(H_{h} \| D \; \yK)}{\yO(H_{h} \| \yK)} =
+    \frac{\p(D \| H_{h}\; \yK)\; [1- \p(H_{h} \| \yK)]}{
+\sum_{h'}^{h' \ne h} \p(D \| H_{h'} \; \yK) \; \p(H_{h'} \| \yK)
+    },
+  \end{equation}
+  where the \emph{odds} $\yO$ is defined as $\yO \defd \p/(1-\p)$. Looking
+  at the expression on the right, which can be derived from the probability
+  rules, it's clear that the Bayes factor for a hypothesis involves the
+  likelihood of \emph{all} other hypotheses as well as their pre-data
+  probabilities. This quantity and its logarithm, the (non-relative) weight
+  of evidence, has important properties which \emph{relative} Bayes factors
+  don't enjoy. For example, the  \citep[\sect~6.7]{good1950}
+\end{innote}
 
-The term $\p(D \| H_{h} \, \yK)$ is called the \emph{likelihood} of the
-hypothesis given the data \citep[\sect~6.1, p.~62]{good1950}. 
 
 The post-data belief~\eqref{eq:posterior_hypothesis} is often
 
 We can combine our post-data beliefs in two hypotheses in different ways to
 form a quantitative idea of how much the data is giving evidence for one or
 the other. For example their ratio or the logarithm of their ratio, often
-called \emph{weight of evidence} and \emph{Bayes factor}
-\citep[\chap~6]{good1950}[\sect~1.4]{osteyeeetal1974}{mackay1992,kassetal1995}[see
-also][\chaps~V, VI, A]{jeffreys1939_r1983}. \enquote{It is historically
-  interesting that the expression ``weight of evidence'', in its technical
-  sense, anticipated the term ``likelihood'' by over forty years}
-\citep[\sect~1.4.2 p.~12]{osteyeeetal1974}. I'm here speaking of the
+called  and \emph{Bayes factor}
+ I'm here speaking of the
 \emph{comparison} of hypotheses, not of their \emph{selection} -- that is,
 of choosing one based on the data and discarding the others for future
 calculations. For such selection, probabilities aren't enough: we also need

@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2019-08-08T08:04:04+0200
-%% Last-Updated: 2019-08-11T12:34:44+0200
+%% Last-Updated: 2019-08-12T12:37:05+0200
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newif\ifarxiv
 \arxivfalse
@@ -548,7 +548,7 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 \newcommand*{\Lor}{\bigvee}
 %\newcommand*{\lland}{\DOTSB\;\land\;}
 %\newcommand*{\llor}{\DOTSB\;\lor\;}
-%\newcommand*{\limplies}{\mathbin{\Rightarrow}}%implies
+\newcommand*{\limplies}{\mathbin{\Rightarrow}}%implies
 %\newcommand*{\suchthat}{\mid}%{\mathpunct{|}}%such that (eg in sets)
 %\newcommand*{\with}{\colon}%with (list of indices)
 %\newcommand*{\mul}{\times}%multiplication
@@ -592,7 +592,7 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 \newcommand*{\fig}{fig.}%
 \newcommand*{\figs}{figs}%
 \newcommand*{\vs}{{vs}}
-%\newcommand*{\etc}{{etc.}}
+\newcommand*{\etc}{{etc.}}
 %\newcommand*{\ie}{{i.e.}}
 %\newcommand*{\ca}{{c.}}
 %\newcommand*{\eg}{{e.g.}}
@@ -701,37 +701,98 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 \section{***}
 \label{sec:***}
 
-The probability calculus unequivocally tells us how our \dob\ in a
-hypothesis $H_{h}$ given data $D$ and background knowledge $\yK$, that is,
-$\p(H_{h} \| D \, \yK)$, is related to our \dob\ in observing those data
-when we entertain that hypothesis as true, that is,
-$\p(D \| H_{h} \, \yK)$:
-\begin{equation}
-  \label{eq:posterior_hypothesis}
-  \p(H_{h} \| D \, \yK) = \frac{\p(D \| H_{h} \, \yK)\;\p(H_{h} \| \yK)}{\sum_{h} \p(D \| H_{h} \, \yK)\; \p(H_{h} \| \yK)}.
-\end{equation}
-The term $\p(D \| H_{h} \, \yK)$ is called the \emph{likelihood} of the
-hypothesis given the data \citep[\sect~6.1, p.~62]{good1950}. $D$, $H_{h}$,
-$\yK$ denote propositions, which usually are about numeric quantities. I'll
-use the terms \enquote{\dob}, \enquote{belief}, and \enquote{probability}
-as synonyms.
+The probability calculus unequivocally tells us how our \dob\
+$\p(H_{h} \| D \, \yK)$ in a hypothesis $H_{h}$ given data $D$ and
+background knowledge $\yK$ is related to our \dob\ $\p(D \| H_{h} \, \yK)$
+in observing those data when we entertain that hypothesis as true:
+\begin{subequations}
+    \label{eq:posterior_hypothesis}
+  \begin{align}
+    \label{eq:posterior_hypothesis_universal}
+    \p(H_{h} \| D \, \yK) &=
+    \frac{\p(D \| H_{h} \, \yK)\;\p(H_{h} \| \yK)}{\p(D \| \yK)}\\
+    \label{eq:posterior_hypothesis_sethypotheses}
+    &=\frac{\p(D \| H_{h} \, \yK)\;\p(H_{h} \| \yK)}{\sum_{h'} \p(D \| H_{h'} \, \yK)\; \p(H_{h'} \| \yK)}.
+  \end{align}
+\end{subequations}
+$D$, $H_{h}$, $\yK$ denote propositions, which usually are about numeric
+quantities. I use the terms \enquote{\dob}, \enquote{belief}, and
+\enquote{probability} as synonyms. By \enquote{hypothesis} I mean a
+scientific (physical, biological, \etc) hypothesis, a state or development
+of things capable of experimental verification, at least in a thought
+experiment.
+\begin{innote}
+  Unfortunately we too often abuse of the fact that the probability
+  calculus, just like the truth calculus, proceeds purely syntactically
+  rather than semantically. That is, if I tell you that $H$ and
+  $H \limplies D$ are true, you can conclude that $D$ is true; similarly,
+  if I tell you that $\p(H \| \yK) = p$ and $\p(H \limplies D \| \yK) = q$,
+  you can conclude (try it as an exercise) that
+  $\p(H\;D \| \yK) = p + q -1$. In either case you don't need to know what
+  $H$ and $D$ are about -- they could very well be about Donald Duck or
+  parallel universes. And so we often say \enquote{under model $\theta$ our
+    belief about the value of quantity $x$ is expressed by such and such
+    distribution $\pf(x \| \theta)=f(x)$}, without explaining what $\theta$
+  really is and why it leads to $f$. The terms \enquote{model} and
+  \enquote{hypothesis}, as often used in probability and statistics, are
+  convenient and respectable-looking rugs under which we can sweep the fact
+  that we don't really know what we're speaking about. The need to look
+  under the rug arises, though, the moment we have to specify our pre-data
+  belief, the prior, about the mysterious $\theta$.
+  
+  But semantics can very well be a by-product of syntax, or the distinction
+  between the two be a chimera
+  \citep{wittgenstein1945_t1999,girard2001,girard2003}. Such important
+  matters are, even more unfortunately, rarely discussed in probability and
+  statistics.
+\end{innote}
 
-The post-data belief~\eqref{eq:posterior_hypothesis} is of course
-conditional on the set $\set{H_{h}}$ of mutually exclusive and exhaustive
-hypotheses under consideration, which is implicit in the knowledge $\yK$ --
-in fact, the above formula is only valid if
+
+Expression~\eqref{eq:posterior_hypothesis_sethypotheses} assumes that
+we have a set $\set{H_{h}}$ of mutually exclusive and exhaustive hypotheses
+under consideration, which is implicit in our knowledge $\yK$ -- in fact,
+the right side is only valid if
 \begin{equation}
   \label{eq:implicit_knowledge}
   \p\bigl(\tlor_{h} H_{h} \| \yK\bigr) = 1,
   \qquad
-  \p(H_{h} \land H_{h'} \| \yK) = 0 \quad \forall h \ne h'.
+  \p(H_{h} \land H_{h'} \| \yK) = 0 \quad \text{if $h \ne h'$}.
 \end{equation}
 Only in extremely rare cases does the set of hypotheses $\set{H_{h}}$
 encompass and reflect the extremely complex and fuzzy hypotheses that lie
 in the backs of our minds. The background knowledge $\yK$ is therefore only
-a simplified picture of our actual knowledge. That's why $\yK$ is called a
-\emph{model}. \enquote{A theory cannot duplicate nature, for if it did so in all respects, it would be isomorphic to nature itself and hence useless, a mere repetition of all the complexity which nature presents to us, that very complexity we frame theories to penetrate and set aside. If a theory were not simpler than the phenomena it was designed to model, it would serve no purpose. Like a portrait, it can represent only a part of the subject it pictures. This part it exaggerates, if only because it leaves out the rest. Its simplicity is its virtue, provided the aspect it portrays be that which we wish to study} \citep[\sect~VII(\textit{vi}) p.~102]{truesdelletal1980}.
+a simplified picture of our actual knowledge. That's why $\yK$ or the
+hypotheses $\set{H_{h}}$ are often called \emph{models}.\; \enquote{A
+  theory cannot duplicate nature, for if it did so in all respects, it
+  would be isomorphic to nature itself and hence useless, a mere repetition
+  of all the complexity which nature presents to us, that very complexity
+  we frame theories to penetrate and set aside. If a theory were not
+  simpler than the phenomena it was designed to model, it would serve no
+  purpose. Like a portrait, it can represent only a part of the subject it
+  pictures. This part it exaggerates, if only because it leaves out the
+  rest. Its simplicity is its virtue, provided the aspect it portrays be
+  that which we wish to study} \citep[Prologue p.~xvi]{truesdelletal1980}.
 
+Expression~\eqref{eq:posterior_hypothesis_universal} is universally
+valid instead, but its denominator $\p(D \| \yK)$ is effectively impossible
+to quantify unless we simplify our inferential problem by introducing a
+possibly unrealistically exhaustive set of hypotheses, thus falling back
+to~\eqref{eq:posterior_hypothesis_sethypotheses}. We can bypass this
+problem if we are content with only comparing our beliefs about any two
+hypotheses through their ratio, so that the term $\p(D \| \yK)$ cancels
+out. See Jaynes's \citey[\sects~4.3--4.4]{jaynes1994_r2003} insightful
+remarks about such binary comparisons, and also Good's \citey[\sect~6.3--6.6]{good1950}.
+
+
+\bigskip
+
+In a problem of \emph{selection} of hypotheses
+
+
+The term $\p(D \| H_{h} \, \yK)$ is called the \emph{likelihood} of the
+hypothesis given the data \citep[\sect~6.1, p.~62]{good1950}. 
+
+The post-data belief~\eqref{eq:posterior_hypothesis} is often
 
 We can combine our post-data beliefs in two hypotheses in different ways to
 form a quantitative idea of how much the data is giving evidence for one or

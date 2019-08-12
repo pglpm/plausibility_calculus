@@ -6,7 +6,7 @@
 %% Home page: http://magnaspesmeretrix.org/
 %% Email (remove ZZ): pglpm0ZZ[at]gmail.com
 %% Created: 2000-08-23T16:53:30+0200
-%% Last-Updated: 2019-08-11T12:34:15+0200
+%% Last-Updated: 2019-08-12T12:31:59+0200
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 % NB: This database contains also items whose content's validity I
@@ -2236,6 +2236,18 @@ year =	       {1980},
 volume =       {57},
 number =       {2},
 pages =	       {261--272}
+}
+
+@Article{aitkin1991,
+author =       {Murray Aitkin},
+title =	       {Posterior {Bayes} Factors},
+journal =      jrssb,
+year =	       {1991},
+volume =       {53},
+number =       {1},
+pages =	       {111--128},
+note =	       {See also discussion in \citebi{barnardetal1991}},
+mynote =       {Amazingly dull idea, no sense whatever for logic}
 }
 
 @Article{aizenmanetal1987,
@@ -7629,6 +7641,18 @@ number =       {2},
 pages =	       {133--147},
 note =	       {See \citebi{stone1974}},
 keywords =     {cross-validation, model selection}
+}
+
+@Article{barnardetal1991,
+author =       {G. A. Barnard and Dennis V. Lindley and David Cox and R. L. Smith and A. F. M. Smith and A. C. Davison and Michael Goldstein and T. Fearn and D. A. Sprott and A. P. Dawid and H. Akaike and Jack Cuzick and O'Hagan, A. and L. I. Pettit and T. E. Raghunathan and Trevor J. Sweeting and H. Tong and Joe Whittaker and Murray Aitkin},
+title =	       {Discussion of the paper by {Aitkin}},
+journal =      jrssb,
+year =	       {1991},
+volume =       {53},
+number =       {1},
+pages =	       {128--142},
+note =	       {See \citebi{aitkin1991}},
+keywords =     {decision theory (Smith), model selection (Smith), nested models (Lindley)}
 }
 
 @Article{barnardetal2000,
@@ -46647,7 +46671,9 @@ author =       {Irving John Good},
 title =	       {Probability and the Weighing of Evidence},
 publisher =    {Griffin},
 year =	       {1950},
-address =      {London}
+address =      {London},
+keywords =     {Bayesian probability theory, Bayes factors, weight of evidence, composite hypotheses hierarchical model (\sect~6.5)},
+mynote =       {On considering hypotheses about future frequencies: \enquote{An alternative approach would be to define $H$ and $\overline{H}$ as stating that two fixed proportions of the lot would pass the test. This approach would lead to nearly the same results if the lot were assumed to be large compared with the sample} \sect~6.2 pp.~64--65}
 }
 
 @Article{good1952,
@@ -46851,9 +46877,22 @@ year =	       {1980},
 volume =       {31},
 number =       {1},
 pages =	       {489--519},
-note =	       {Repr.\ in \citebi{good1983}, \chap~9, pp.~95--105},
+note =	       {Repr.\ in \citebi{good1983} \chap~9 pp.~95--105},
 keywords =     {hierarchical models, Bayesian probability theory, Dirichlet prior},
 mynote =       {\enquote{Perhaps a statistical argument is not fully Bayesian unless it is subjective enough to be controversial, even if the controversy is between Bayesians themselves} \sect~1, p.~492}
+}
+
+@InCollection{good1981,
+author =       {Irving John Good},
+title =	       {Some Logic and History of Hypothesis Testing},
+booktitle =    {Philosophy in Economics\subtitleproc{: Papers Deriving from and Related to a Workshop on Testability and Explanation in Economics held at Virginia Polytechnic Institute and State University, 1979}},
+publisher =    {Reidel},
+year =	       {1981},
+editor =       {Joseph C. Pitt},
+volume =       {16},
+series =       {The University of Western Ontario series in philosophy of science},
+pages =	       {149--174},
+note =	       {Repr.\ in \citebi{good1983} \chap~14 pp.~129--148}
 }
 
 @Article{good1982,
@@ -61251,6 +61290,18 @@ year =	       {2004},
 note =	       {\arxiveprint{physics/0403033}}
 }
 
+@Book{jevons1874_r1883,
+author =       {W. Stanley Jevons},
+title =	       {The Principles of Science: A Treatise on Logic and Scientific Method},
+publisher =    {Macmillan},
+year =	       {1883},
+address =      {London},
+edition =      {3},
+note =	       {\url{https://archive.org/details/principlesofsci00jevo/}. First publ.\ 1874},
+keywords =     {Bayesian probability theory, formal logic},
+origdate =     {1874}
+}
+
 @Misc{jiang2006,
 author =       {Tiefeng Jiang},
 title =	       {How Many Entries of A Typical Orthogonal Matrix Can Be Approximated By Independent Normals?},
@@ -62602,6 +62653,18 @@ number =       {372},
 pages =	       {845--854},
 note =	       {\url{https://www4.stat.ncsu.edu/~wilson/bayes/Kadane80.pdf}},
 keywords =     {Bayesian probability theory, predictive approach}
+}
+
+@InCollection{kadaneetal1980b,
+author =       {Joseph B.Kadane and James M. Dickey},
+title =	       {Bayesian Decision Theory and the Simplification of Models},
+booktitle =    {Evaluation of Econometric Models},
+publisher =    {Academic Press},
+year =	       {1980},
+editor =       {Jan Kmenta and James B. Ramsey},
+pages =	       {245--268},
+address =      {New York},
+note =	       {\url{https://www.nber.org/chapters/c11704}}
 }
 
 @Article{kadaneetal1982,
@@ -121560,10 +121623,11 @@ origdate =     {1937}
 author =       {Wittgenstein, Ludwig},
 title =	       {Philosophical Investigations / \langgerman{Philosophische Untersuchungen}},
 publisher =    {Blackwell},
-year =	       {2009},
+year =	       {1999},
 address =      {Oxford},
 edition =      {re-issued second ed.},
 note =	       {German text, with English transl.\ by G.~E.~M. Anscombe. Written 1945--49; first publ.\ 1953},
+keywords =     {syntax, semantics, language-games},
 origdate =     {1945}
 }
 

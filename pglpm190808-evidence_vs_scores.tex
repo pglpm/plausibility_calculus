@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2019-08-08T08:04:04+0200
-%% Last-Updated: 2019-08-12T17:30:06+0200
+%% Last-Updated: 2019-08-12T20:46:22+0200
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newif\ifarxiv
 \arxivfalse
@@ -643,7 +643,7 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 %\DeclareMathOperator*{\argsup}{arg\,sup}
 \newcommand*{\dob}{degree of belief}
 \newcommand*{\dobs}{degrees of belief}
-\newcommand*{\yK}{K}
+\newcommand*{\yK}{I}
 \newcommand*{\yO}{\mathrm{O}}
 \newcommand*{\hH}{\Hat{H}}
 %%% Custom macros end @@@
@@ -702,10 +702,11 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 \section{***}
 \label{sec:***}
 
-The probability calculus unequivocally tells us how our \dob\
-$\p(H_{h} \| D \, \yK)$ in a hypothesis $H_{h}$ given data $D$ and
-background knowledge $\yK$ is related to our \dob\ $\p(D \| H_{h} \, \yK)$
-in observing those data when we entertain that hypothesis as true:
+The probability calculus unequivocally tells us how
+$\p(H_{h} \| D \, \yK)$, our \dob\ in a hypothesis $H_{h}$ given data $D$
+and background information or assumptions $\yK$, is related to
+$\p(D \| H_{h} \, \yK)$, our \dob\ in observing those data when we
+entertain that hypothesis as true:
 \begin{subequations}
     \label{eq:posterior_hypothesis}
   \begin{align}
@@ -856,18 +857,18 @@ just call \enquote{log-score} for brevity:
 \end{equation}
 where every $D_{i}$ is one datum in the data $D \equiv \Land_{i} D_{i}$,
 and $D_{-i}$ denotes the data with datum $D_{i}$ excluded. The intuition
-behind this score is more or less this: \enquote{let's see what my belief
-  in one datum should be, on average, once I've observed the other data, if
-  I consider $H_{h}$ as true}. \enquote{On average} means considering such
-belief for every single datum in turn, and then taking the geometric mean,
-which is the arithmetic mean on a log scale.
+behind this score, cursorily speaking, is this: \enquote{let's see what my
+  belief in one datum should be, on average, once I've observed the other
+  data, if I consider $H_{h}$ as true}. \enquote{On average} means
+considering such belief for every single datum in turn, and then taking the
+geometric mean, which is the arithmetic mean on a log scale.
 
-There is an ample literature discussing the properties and use of the
-log-score \citep[for
+An ample literature discusses the properties and use of the log-score
+\citep[for
 example][]{geisseretal1979,vehtarietal2002,vehtarietal2012,krnjajicetal2011,krnjajicetal2014,gelmanetal2014,piironenetal2017,gronauetal2019,chandramoulietal2019}.
-Gelman \etal\ \citey{gelmanetal2014}, for example, show among other things
-that it's approximately equal to expected value of the post-data
-log-probability of a new datum:
+Gelman \etal\ \citey{gelmanetal2014} show among other things that it's
+approximately equal to expected value of the post-data log-probability of a
+new datum:
 \begin{equation}
   \label{eq:logscore_approx_logposterior}
   \E\condt[\Big]{\log\p(D' \| D\; H_{h} \; \yK)}{ D\; H_{h} \; \yK},

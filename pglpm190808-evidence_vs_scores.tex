@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2019-08-08T08:04:04+0200
-%% Last-Updated: 2019-08-13T00:21:47+0200
+%% Last-Updated: 2019-08-13T00:32:20+0200
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newif\ifarxiv
 \arxivfalse
@@ -873,6 +873,7 @@ new datum:
   \label{eq:logscore_approx_logposterior}
   \E\condt[\Big]{\log\p(D' \| D\; H_{h} \; \yK)}{ D\; H_{h} \; \yK},
 \end{equation}
+***entropy, remark on invariance***
 where $D'$ represents the new datum. Krnjaji\'c \etal\
 \citey{krnjajicetal2011,krnjajicetal2014} numerically compare it with the
 deviance information criterion. Regarding its uses I recommend reading the
@@ -1035,13 +1036,13 @@ That is, \emph{the log-likelihood is the sum of all averaged log-scores
 the average for the $k$th-order log-scores being over the $\binom{d}{k}$
 subsets having the same cardinality $k$.
 
-There's also an equivalent form with a slightly different interpretation:
-We take each datum $D_{i}$ in turn and calculate our log-belief in it
-conditional on all possible subsets of remaining data, from the empty
-subset with no data (term $k=0$), to the only subset $D_{-i}$ with all data
-except $D_{i}$ (term $k=d-1$). These log-beliefs are averaged over the
-$\binom{d-1}{k}$ subsets having the same cardinality $k$. The result can be
-expressed as
+There's also an equivalent form with a slightly different cross-validating
+interpretation: We take each datum $D_{i}$ in turn and calculate our
+log-belief in it conditional on all possible subsets of remaining data,
+from the empty subset with no data (term $k=0$), to the only subset
+$D_{-i}$ with all data except $D_{i}$ (term $k=d-1$). These log-beliefs are
+averaged over the $\binom{d-1}{k}$ subsets having the same cardinality $k$.
+The result can be expressed as
 \begin{mdframed}
   \begin{equation}
     \label{eq:general_equivalence_alternative}

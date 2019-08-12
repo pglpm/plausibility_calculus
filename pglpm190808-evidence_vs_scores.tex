@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2019-08-08T08:04:04+0200
-%% Last-Updated: 2019-08-12T17:24:05+0200
+%% Last-Updated: 2019-08-12T17:25:52+0200
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newif\ifarxiv
 \arxivfalse
@@ -870,7 +870,7 @@ that it's approximately equal to expected value of the post-data
 log-probability of a new datum:
 \begin{equation}
   \label{eq:logscore_approx_logposterior}
-  \E\condt[\Big]{\log\p(D' \| D\; H \; \yK)}{ D\; H \; \yK},
+  \E\condt[\Big]{\log\p(D' \| D\; H_{h} \; \yK)}{ D\; H_{h} \; \yK},
 \end{equation}
 where $D'$ represent the new datum. Krnjaji\'c \etal\
 \citey{krnjajicetal2011,krnjajicetal2014} numerically compare it with the
@@ -914,7 +914,7 @@ that \emph{the log-likelihood is the sum of all log-scores that can be
 
 \bigskip
 
-We can obviously write the likelihood as
+We can obviously write the likelihood as the $d$th root of its $d$th power:
 \begin{equation}
   \label{eq:root_product}
   \p(D \| H \, \yK) \equiv  \bigl[\,

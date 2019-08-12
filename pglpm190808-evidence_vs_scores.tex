@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2019-08-08T08:04:04+0200
-%% Last-Updated: 2019-08-12T23:46:59+0200
+%% Last-Updated: 2019-08-12T23:48:52+0200
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newif\ifarxiv
 \arxivfalse
@@ -1039,13 +1039,13 @@ There's also an equivalent form with a slightly different interpretation:
   \frac{1}{d}\sum_{i=1}^{d}
   \sum_{k=0}^{d-1}
   \binom{d-1}{k}^{-1}
-  \;\sum_{\mathclap{\substack{\text{ordered}\\\text{$k$-tuples}\\\text{$i$ excluded}}}}
+  \sum_{\mathclap{\substack{\text{ordered}\\\text{$k$-tuples,}\\\text{$i$ excluded}}}}
   \log\p(D_{i} \| D_{i_{1}} \dotsm D_{i_{k}} \, H \, \yK).
 \end{equation}
 Here we are considering each datum $D_{i}$ in turn and calculating our
-belief in it conditional on all possible subsets of remaining data, from
+log-belief in it conditional on all possible subsets of remaining data, from
 the empty subset with no data (term $k=0$), to the only subset $D_{-i}$
-with all data except $D_{i}$ (term $k=d-1$). These beliefs are averaged over
+with all data except $D_{i}$ (term $k=d-1$). These log-beliefs are averaged over
 the $\binom{d-1}{k}$ subsets having the same cardinality $k$.
 
 It's remarkable that the individual log-scores in

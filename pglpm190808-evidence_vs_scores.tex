@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2019-08-08T08:04:04+0200
-%% Last-Updated: 2019-08-12T23:48:52+0200
+%% Last-Updated: 2019-08-13T00:21:47+0200
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newif\ifarxiv
 \arxivfalse
@@ -19,11 +19,11 @@ british%
 \newcommand*{\updated}{\today}
 \newcommand*{\firstdraft}{8 August 2019}
 \newcommand*{\firstpublished}{***}
-\newcommand*{\propertitle}{The relation between cross-validation
-  log-scores,\\ weight of evidence, and Bayes factors%\\{\large ***}%
+\newcommand*{\propertitle}{A relation between log-likelihood\\ and cross-validation
+  log-scores\\{\large (with some remarks on both)}%
 }% title uses LARGE; set Large for smaller
-\newcommand*{\pdftitle}{The relation between cross-validation log-scores, weight of evidence, and Bayes factors}
-\newcommand*{\headtitle}{log-scores, evidence, Bayes factors}
+\newcommand*{\pdftitle}{A relation between log-likelihood and cross-validation log-scores (with some remarks on both)}
+\newcommand*{\headtitle}{log-likelihood and cross-validation}
 \newcommand*{\pdfauthor}{P.G.L.  Porta Mana}
 \newcommand*{\headauthor}{Porta Mana}
 \newcommand*{\reporthead}{Open Science Framework \href{https://doi.org/10.31219/osf.io/***}{\textsc{doi}:10.31219/osf.io/***}}% Report number
@@ -87,7 +87,7 @@ british%
 
 %\usepackage{fancybox}
 
-%\usepackage{framed}
+\usepackage{mdframed}
 
 % \usepackage[misc]{ifsym} % for dice
 % \newcommand*{\diceone}{{\scriptsize\Cube{1}}}
@@ -737,10 +737,10 @@ experiment.
   explaining what $\theta$ really is and why it leads to $f$. Aren't terms
   such as \enquote{model} and \enquote{hypothesis}, as often used in
   probability and statistics, convenient and respectable-looking carpets
-  under which we can sweep the fact that we barely know what we're speaking
-  about? The need to look under the carpet arises, though, the moment we
-  have to specify our pre-data belief, the prior, about the mysterious
-  $\theta$.
+  under which we can sweep the fact that we don't quite know what we're
+  speaking about? The need to look under the carpet arises, though, the
+  moment we have to specify our pre-data belief, the prior, about the
+  mysterious $\theta$.
   
   But semantics can very well be a by-product of syntax, or the distinction
   between the two be a chimera
@@ -820,10 +820,10 @@ also][\chaps~V, VI, A]{jeffreys1939_r1983}. \enquote{It is historically
   sense, anticipated the term ``likelihood'' by over forty years}
 \citep[\sect~1.4.2 p.~12]{osteyeeetal1974}.
 \begin{innote}
-  Since recent literature \citep[for example][]{kassetal1995} seems to
-  exclusively deal with \emph{relative} Bayes factors, I'd like to point
-  out that the non-relative Bayes factor for a hypothesis $H_{h}$
-  provided by data $D$ is actually defined as \citep[\sect~2]{good1981}
+  Recent literature \citep[for example][]{kassetal1995} seems to
+  exclusively deal with \emph{relative} Bayes factors, so I'd like to point
+  out that the non-relative Bayes factor for a hypothesis $H_{h}$ provided
+  by data $D$ is actually defined as \citep[\sect~2]{good1981}
   \begin{equation}
     \label{eq:proper_Bayes_factor}
     \frac{\p(D \| H_{h} \; \yK)}{\p(D \| \lnot H_{h} \; \yK)} \equiv
@@ -835,9 +835,9 @@ also][\chaps~V, VI, A]{jeffreys1939_r1983}. \enquote{It is historically
   where the \emph{odds} $\yO$ is defined as $\yO \defd \p/(1-\p)$. Looking
   at the expression on the right, which can be derived from the probability
   rules, it's clear that the Bayes factor for a hypothesis involves the
-  likelihood of \emph{all} other hypotheses as well as their pre-data
+  likelihoods of \emph{all} other hypotheses as well as their pre-data
   probabilities. This quantity and its logarithm, the (non-relative) weight
-  of evidence, has important properties which \emph{relative} Bayes factors
+  of evidence, have important properties which \emph{relative} Bayes factors
   don't enjoy. For example, the expected weight of evidence for a correct
   hypothesis is always positive, and for a wrong hypotheses always negative
   \citep[\sect~6.7]{good1950}. See Jaynes
@@ -1015,38 +1015,44 @@ data points. We therefore obtain
   \frac{1}{d} \sum_{i=1}^{d} \log\p(D_{i} \| H \, \yK),
 \end{multline}
 which can be compactly written
-\begin{equation}
-  \label{eq:general_equivalence_compact}
-  \log\p(D \| H \, \yK) \equiv
-  \sum_{k=1}^{d}
-  \binom{d}{k}^{-1}
-  \!\sum_{\mathclap{\substack{\text{ordered}\\\text{$k$-tuples}}}} \quad
-  \frac{1}{k}
-  \quad\sum_{\mathclap{\substack{\text{cyclic}\\\text{permutations}}}} 
-  \log\p(D_{i_{1}} \| D_{i_{2}} \dotsm D_{i_{k}} \, H \, \yK).
-\end{equation}
+\begin{mdframed}
+  \begin{equation}
+    \label{eq:general_equivalence_compact}
+    \log\p(D \| H \, \yK) \equiv
+    \sum_{k=1}^{d}
+    \binom{d}{k}^{-1}
+    \!\smashoperator{\sum_{\substack{\text{ordered}\\\text{$k$-tuples}}}} \quad
+    \frac{1}{k}
+    \quad\smashoperator{\sum_{\substack{\text{cyclic}\\\text{permutations}}}} 
+    \log\p(D_{i_{1}} \| D_{i_{2}} \dotsm D_{i_{k}} \, H \, \yK).
+  \end{equation}
+\end{mdframed}
 % The post-data log-probability for $H$ will be equal to this expression,
 % plus the pre-data log-probability for $H$, plus a term which is the same for
 % all hypotheses.
-That is, \emph{the log-likelihood is the sum of all averaged log-scores that can be
-  formed from all (non-empty) data subsets}, the averages being over 
-the $\binom{d}{k}$ subsets having the same cardinality $k$.
+That is, \emph{the log-likelihood is the sum of all averaged log-scores
+  that can be formed from all (non-empty) data subsets with $k$ elements},
+the average for the $k$th-order log-scores being over the $\binom{d}{k}$
+subsets having the same cardinality $k$.
 
 There's also an equivalent form with a slightly different interpretation:
-\begin{equation}
-  \label{eq:general_equivalence_alternative}
-  \log\p(D \| H \, \yK) \equiv
-  \frac{1}{d}\sum_{i=1}^{d}
-  \sum_{k=0}^{d-1}
-  \binom{d-1}{k}^{-1}
-  \sum_{\mathclap{\substack{\text{ordered}\\\text{$k$-tuples,}\\\text{$i$ excluded}}}}
-  \log\p(D_{i} \| D_{i_{1}} \dotsm D_{i_{k}} \, H \, \yK).
-\end{equation}
-Here we are considering each datum $D_{i}$ in turn and calculating our
-log-belief in it conditional on all possible subsets of remaining data, from
-the empty subset with no data (term $k=0$), to the only subset $D_{-i}$
-with all data except $D_{i}$ (term $k=d-1$). These log-beliefs are averaged over
-the $\binom{d-1}{k}$ subsets having the same cardinality $k$.
+We take each datum $D_{i}$ in turn and calculate our log-belief in it
+conditional on all possible subsets of remaining data, from the empty
+subset with no data (term $k=0$), to the only subset $D_{-i}$ with all data
+except $D_{i}$ (term $k=d-1$). These log-beliefs are averaged over the
+$\binom{d-1}{k}$ subsets having the same cardinality $k$. The result can be
+expressed as
+\begin{mdframed}
+  \begin{equation}
+    \label{eq:general_equivalence_alternative}
+    \log\p(D \| H \, \yK) \equiv
+    \frac{1}{d}\sum_{i=1}^{d}
+    \sum_{k=0}^{d-1}
+    \binom{d-1}{k}^{-1}
+    \smashoperator{\sum_{\substack{\text{ordered}\\\text{$k$-tuples,}\\\text{$i$ excluded}}}}
+    \log\p(D_{i} \| D_{i_{1}} \dotsm D_{i_{k}} \, H \, \yK).
+  \end{equation}
+\end{mdframed}
 
 It's remarkable that the individual log-scores in
 expressions~\eqref{eq:general_equivalence_compact} and
@@ -1099,6 +1105,11 @@ This approximation is only valid
 This approximation is reasonable if the amount of data is large with
 respect to the dimension of the space of a single datum, because *** (ref
 to geisser, stone, gelfandetal)
+
+*** remark that $D\,H$ is a \emph{new} probability model: which of the two
+are we assessing? Connection with learning vs non-learning models which I
+hope to take up in another work.
+
 
 *** problems calculation with time-relevant hypotheses
 

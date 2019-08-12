@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2019-08-08T08:04:04+0200
-%% Last-Updated: 2019-08-12T17:25:52+0200
+%% Last-Updated: 2019-08-12T17:30:06+0200
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newif\ifarxiv
 \arxivfalse
@@ -948,7 +948,7 @@ The result can be displayed thus:
             \mathrlap{\dotso}\hphantom{{}\times  \p(D_{-2} \| H \, \yK)}\times{}\\
           &\p(D_{d} \|\underbracket[0pt][1ex]{ D_{-d} }_{\mathclap{
             \begin{smallmatrix}
-              \Big\uparrow\\\text{log-score}
+              \Big\uparrow\\\text{these contribute to the log-score}
             \end{smallmatrix}
 }} H \, \yK) \times\p(D_{-d} \|  H \, \yK)
             \,\bigr]^{1/d}.
@@ -958,10 +958,11 @@ Note that upon taking the logarithm of this expression, the $d$ factors
 vertically aligned on the left add up to the
 log-score~\eqref{eq:log-score}, as indicated.
 
-Now note that the mathematical reshaping of $\p(D \| H \, \yK)$ -- that is, the
+The mathematical reshaping of $\p(D \| H \, \yK)$ -- that is, the
 root-product identity~\eqref{eq:root_product} and the
-expansion~\eqref{eq:product_2} -- can be done for each of the remaining factors
-$\p(D_{-i} \| H \, \yK)$, and so on recursively. Here is an explicit
+expansion~\eqref{eq:product_2} -- can be done for each of the remaining
+factors $\p(D_{-i} \| H \, \yK)$ vertically aligned on the right in
+expression~\eqref{eq:product_2}; and so on recursively. Here is an explicit
 example for $d=3$:
 \begin{multline}
   \label{eq:example_further_expansion}

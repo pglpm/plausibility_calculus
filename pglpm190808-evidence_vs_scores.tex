@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2019-08-08T08:04:04+0200
-%% Last-Updated: 2019-08-12T20:46:22+0200
+%% Last-Updated: 2019-08-12T23:46:59+0200
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newif\ifarxiv
 \arxivfalse
@@ -873,12 +873,12 @@ new datum:
   \label{eq:logscore_approx_logposterior}
   \E\condt[\Big]{\log\p(D' \| D\; H_{h} \; \yK)}{ D\; H_{h} \; \yK},
 \end{equation}
-where $D'$ represent the new datum. Krnjaji\'c \etal\
+where $D'$ represents the new datum. Krnjaji\'c \etal\
 \citey{krnjajicetal2011,krnjajicetal2014} numerically compare it with the
-deviance information criterion. Regarding its uses I recommend the recent,
-beautiful debate in Gronau \etal\ \parentext{\cite*{gronauetal2019} \amp\
-  \cite{chandramoulietal2019}}, where all authors give very
-insightful remarks.
+deviance information criterion. Regarding its uses I recommend reading the
+recent debate among Gronau \etal\ \parentext{\cite*{gronauetal2019} \amp\
+  \cite{chandramoulietal2019}}, where all authors give very insightful
+remarks.
 %  (There's an ambiguity in this
 % definition, because we can ask: what's a \enquote{datum} in the case of
 % multi-dimensional observations? a single numerical value? or a
@@ -894,9 +894,9 @@ insightful remarks.
 
 I now show an exact relation between the log-score~\eqref{eq:log-score} and
 the log-likelihood~\eqref{eq:log-likelihood} which doesn't seem to appear
-in the literature. I find this relation very intriguing because it says
-that \emph{the log-likelihood is the sum of all log-scores that can be
-  formed from all data subsets}.
+in the literature. I find this relation very intriguing: it says that
+\emph{the log-likelihood is the sum of all averaged log-scores that can be formed
+  from all data subsets}.
 
 % My point of view, which hinges on the logical foundations of the
 % probability calculus
@@ -930,13 +930,12 @@ of probability we have
   \p(D \| H \, \yK) =
   \p(D_{i} \| D_{-i} \, H_{h} \, \yK) \times \p(D_{-i} \|  H_{h} \, \yK)
 \end{equation}
-and this holds no matter what specific $i \in \set{1, \dotsc,
-  d}$ we choose (temporal ordering and similar matters are completely
-irrelevant in the formula above: it's a logical relation between
-propositions). So let's expand each of the $d$ factors in the
-identity~\eqref{eq:root_product} using the product
-rule~\eqref{eq:product_rule}, but using a different datum in each of them.
-The result can be displayed thus:
+no matter which specific $i \in \set{1, \dotsc, d}$ we choose (temporal
+ordering and similar matters are completely irrelevant in the formula
+above: it's a logical relation between propositions). So let's expand each
+of the $d$ factors in the identity~\eqref{eq:root_product} using the
+product rule~\eqref{eq:product_rule}, using a different $i$ for each of
+them. The result can be thus displayed:
 \begin{equation}
   \label{eq:product_2}
   \begin{aligned}
@@ -947,28 +946,24 @@ The result can be displayed thus:
             \p(D_{-2} \| H \, \yK)\times{}\\
           &\hphantom{\p(D_{2} \| D_{-2} \, H \, \yK)}
             \mathrlap{\dotso}\hphantom{{}\times  \p(D_{-2} \| H \, \yK)}\times{}\\
-          &\p(D_{d} \|\underbracket[0pt][1ex]{ D_{-d} }_{\mathclap{
-            \begin{smallmatrix}
-              \Big\uparrow\\\text{these contribute to the log-score}
-            \end{smallmatrix}
+          &\p(D_{d} \|\underbracket[0pt][1ex]{ D_{-d} }_{\mathclap{%
+              \substack{\Big\uparrow\\\text{this column contributes to the log-score}}%
 }} H \, \yK) \times\p(D_{-d} \|  H \, \yK)
             \,\bigr]^{1/d}.
   \end{aligned}
 \end{equation}
-Note that upon taking the logarithm of this expression, the $d$ factors
-vertically aligned on the left add up to the
-log-score~\eqref{eq:log-score}, as indicated.
-
-The mathematical reshaping of $\p(D \| H \, \yK)$ -- that is, the
-root-product identity~\eqref{eq:root_product} and the
-expansion~\eqref{eq:product_2} -- can be done for each of the remaining
-factors $\p(D_{-i} \| H \, \yK)$ vertically aligned on the right in
-expression~\eqref{eq:product_2}; and so on recursively. Here is an explicit
-example for $d=3$:
+Upon taking the logarithm of this expression, the $d$ factors vertically
+aligned on the left add up to the log-score~\eqref{eq:log-score}, as
+indicated. But the mathematical reshaping we just did for
+$\p(D \| H \, \yK)$ -- that is, the root-product
+identity~\eqref{eq:root_product} and the expansion~\eqref{eq:product_2} --
+can be done for each of the remaining factors $\p(D_{-i} \| H \, \yK)$
+vertically aligned on the right in expression~\eqref{eq:product_2}; and so
+on recursively. Here is an explicit example for $d=3$:
 \begin{multline}
   \label{eq:example_further_expansion}
   \p(D \| H \, \yK) \equiv{}\\
-  \begin{alignedat}{2}
+  \begin{alignedat}[b]{2}
     \Bigl\{\,&\p(D_{1} \| D_{2} \,D_{3} \, H \, \yK) \times
     \bigl[ &&\p(D_{2} \| D_{3} \, H \, \yK) \times \p( D_{3} \| H \, \yK) \times{}\\[-0.5\jot]
     &&&\p(D_{3} \| D_{2} \, H \, \yK) \times \p( D_{2} \| H \, \yK)
@@ -998,31 +993,66 @@ $\set{D_{3}}$.
 
 In the general case with $d$ data there are $\binom{d}{k}$ subsets with $k$
 data points. We therefore obtain
-\begin{equation}
+\begin{multline}
   \label{eq:general_equivalence}
-  \begin{aligned}
-  \log\p(D \| H \, \yK) &\equiv
+  \log\p(D \| H \, \yK) \equiv
   \frac{1}{d} \sum_{i=1}^{d} \log\p(D_{i} \| D_{-i} \, H \, \yK)
 +{}\\
-  &\quad
-    \begin{aligned}
-\frac{1}{d} \sum_{i\in\set{1,\dotsc,d}} \frac{1}{d-1} \sum_{j\in\set{1,\dotsc,d}}^{j\ne i}  \log\p(D_{-i,j} \| D_{-i,-j} \, H \, \yK)
-  +  \dotsb +{}&\\[0.5\jot]
-  \binom{d}{k}^{-1}\frac{1}{k}\quad
-  \sum_{\mathclap{\text{$k$-tuples}}}   \log\p(D_{i_{1}} \| \underbracket{D_{i_{2}} \dotsm D_{i_{k}}}_{\mathclap{\text{order doesn't matter}}} \, H \, \yK)
-  + \dotsb +{}&\\[0.5\jot]
-  \frac{1}{d} \sum_{i=1}^{d} \log\p(D_{i} \| H \, \yK),&
-    \end{aligned}
-\\
-%    \hphantom{\log\p(D \| H \, \yK)}
-                       &\equiv \sum_{k=1}^{d}
-  \Bigl[k\,\tbinom{d}{k}\Bigr]^{-1}
-  \sum_{\mathclap{\text{$k$-tuples}}}   \log\p(D_{i_{1}} \| \underbracket{D_{i_{2}} \dotsm D_{i_{k}}}_{\mathclap{\text{order doesn't matter}}} \, H \, \yK).
-  \end{aligned}
+\shoveright{\frac{1}{d} \sum_{i\in\set{1,\dotsc,d}} \frac{1}{d-1} \sum_{j\in\set{1,\dotsc,d}}^{j\ne i}  \!\!\! \log\p(D_{-i,j} \| D_{-i,-j} \, H \, \yK)
+  +{}}\\[0.5\jot]
+\shoveright{\binom{d}{d-2}^{-1} \!\!\! \sum_{i,j\in\set{1,\dotsc,d}}^{i<j} \frac{1}{d-2} \sum_{k\in\set{1,\dotsc,d}}^{k\ne i,j} \!\!\! \log\p(D_{-i,-j,k} \| D_{-i,-j,-k} \, H \, \yK)
+      +{}}\\[\jot]
+       {} \dotsb +{}\\
+  % \binom{d}{k}^{-1}\frac{1}{k}\quad
+  % \sum_{\mathclap{\text{$k$-tuples}}}   \log\p(D_{i_{1}} \| \underbracket{D_{i_{2}} \dotsm D_{i_{k}}}_{\mathclap{\text{order doesn't matter}}} \, H \, \yK)
+  % +{}&\\[0.5\jot]
+  % \dotsb +{}&\\[0.5\jot]
+\shoveright{      \binom{d}{2}^{-1} \!\!\! \sum_{i,j\in\set{1,\dotsc,d}}^{i<j} \frac{1}{2}
+%      \sum_{k\in\set{1,\dotsc,d}}^{k\ne i,j}  \!\!\! \log\p(D_{k} \| D_{i,j} \, H \, \yK)
+      \bigl[ \log\p(D_{i} \| D_{j} \, H \, \yK) +
+      \log\p(D_{j} \| D_{i} \, H \, \yK)\bigr]
+  +{}}\\[0.5\jot]
+  \frac{1}{d} \sum_{i=1}^{d} \log\p(D_{i} \| H \, \yK),
+\end{multline}
+which can be compactly written
+\begin{equation}
+  \label{eq:general_equivalence_compact}
+  \log\p(D \| H \, \yK) \equiv
+  \sum_{k=1}^{d}
+  \binom{d}{k}^{-1}
+  \!\sum_{\mathclap{\substack{\text{ordered}\\\text{$k$-tuples}}}} \quad
+  \frac{1}{k}
+  \quad\sum_{\mathclap{\substack{\text{cyclic}\\\text{permutations}}}} 
+  \log\p(D_{i_{1}} \| D_{i_{2}} \dotsm D_{i_{k}} \, H \, \yK).
 \end{equation}
-The post-data log-probability for $H$ will be equal to this expression,
-plus the pre-data log-probability for $H$, plus a term which is the same for
-all hypotheses.
+% The post-data log-probability for $H$ will be equal to this expression,
+% plus the pre-data log-probability for $H$, plus a term which is the same for
+% all hypotheses.
+That is, \emph{the log-likelihood is the sum of all averaged log-scores that can be
+  formed from all (non-empty) data subsets}, the averages being over 
+the $\binom{d}{k}$ subsets having the same cardinality $k$.
+
+There's also an equivalent form with a slightly different interpretation:
+\begin{equation}
+  \label{eq:general_equivalence_alternative}
+  \log\p(D \| H \, \yK) \equiv
+  \frac{1}{d}\sum_{i=1}^{d}
+  \sum_{k=0}^{d-1}
+  \binom{d-1}{k}^{-1}
+  \;\sum_{\mathclap{\substack{\text{ordered}\\\text{$k$-tuples}\\\text{$i$ excluded}}}}
+  \log\p(D_{i} \| D_{i_{1}} \dotsm D_{i_{k}} \, H \, \yK).
+\end{equation}
+Here we are considering each datum $D_{i}$ in turn and calculating our
+belief in it conditional on all possible subsets of remaining data, from
+the empty subset with no data (term $k=0$), to the only subset $D_{-i}$
+with all data except $D_{i}$ (term $k=d-1$). These beliefs are averaged over
+the $\binom{d-1}{k}$ subsets having the same cardinality $k$.
+
+It's remarkable that the individual log-scores in
+expressions~\eqref{eq:general_equivalence_compact} and
+\eqref{eq:general_equivalence_alternative} above are computationally
+expensive, but their sum results in a less expensive quantity: the
+log-likelihood.
 
 I'd like to offer three ways of looking at the
 relation~\eqref{eq:general_equivalence} between the log-likelihood and the

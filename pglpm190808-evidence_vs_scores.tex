@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2019-08-08T08:04:04+0200
-%% Last-Updated: 2019-08-13T00:32:20+0200
+%% Last-Updated: 2019-08-13T11:46:00+0200
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newif\ifarxiv
 \arxivfalse
@@ -82,12 +82,12 @@ british%
 \addtolength{\jot}{\jot} % increase spacing in multiline formulae
 \setlength{\multlinegap}{0pt}
 
-%\usepackage{empheq}% automatically calls amsmath and mathtools
-\newcommand*{\widefbox}[1]{\fbox{\hspace{1em}#1\hspace{1em}}}
+\usepackage{empheq}% automatically calls amsmath and mathtools
+%\newcommand*{\widefbox}[1]{\fbox{\hspace{1ex}#1\hspace{1ex}}}
 
 %\usepackage{fancybox}
 
-\usepackage{mdframed}
+%\usepackage{mdframed}
 
 % \usepackage[misc]{ifsym} % for dice
 % \newcommand*{\diceone}{{\scriptsize\Cube{1}}}
@@ -699,8 +699,8 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 %%% BEGINNING OF MAIN TEXT
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{***}
-\label{sec:***}
+\section{Log-likelihoods}
+\label{sec:loglh}
 
 The probability calculus unequivocally tells us how
 $\p(H_{h} \| D \, \yK)$, our \dob\ in a hypothesis $H_{h}$ given data $D$
@@ -785,7 +785,6 @@ out. See Jaynes's \citey[\sects~4.3--4.4]{jaynes1994_r2003} insightful
 remarks about such binary comparisons, and also Good's
 \citey[\sect~6.3--6.6]{good1950}.
 
-
 \bigskip
 
 If our problem is to finally choose a hypothesis, discarding its
@@ -845,12 +844,14 @@ also][\chaps~V, VI, A]{jeffreys1939_r1983}. \enquote{It is historically
   numeric example.
 \end{innote}
 
-\bigskip
+\section{Cross-validation log-scores}
+\label{sec:logscore}
 
 The literature in probability and statistics has also employed various
 other ad-hoc measures to make exploratory analyses. Here I consider one in
-particular: the \emph{leave-one-out cross-validation log-score}, which I'll
-just call \enquote{log-score} for brevity:
+particular: the \emph{leave-one-out cross-validation log-score} \citep[for
+example][]{geisseretal1979,vehtarietal2002,vehtarietal2012,krnjajicetal2011,krnjajicetal2014,gelmanetal2014,piironenetal2017,gronauetal2019,chandramoulietal2019},
+which I'll just call \enquote{log-score} for brevity:
 \begin{equation}
   \label{eq:log-score}
   \frac{1}{d} \sum_{i=1}^{d} \log\p(D_{i} \| D_{-i} \, H_{h} \, \yK)
@@ -863,24 +864,25 @@ behind this score, cursorily speaking, is this: \enquote{let's see what my
 considering such belief for every single datum in turn, and then taking the
 geometric mean, which is the arithmetic mean on a log scale.
 
-An ample literature discusses the properties and use of the log-score
-\citep[for
-example][]{geisseretal1979,vehtarietal2002,vehtarietal2012,krnjajicetal2011,krnjajicetal2014,gelmanetal2014,piironenetal2017,gronauetal2019,chandramoulietal2019}.
-Gelman \etal\ \citey{gelmanetal2014} show among other things that it's
-approximately equal to expected value of the post-data log-probability of a
-new datum:
-\begin{equation}
-  \label{eq:logscore_approx_logposterior}
-  \E\condt[\Big]{\log\p(D' \| D\; H_{h} \; \yK)}{ D\; H_{h} \; \yK},
-\end{equation}
-***entropy, remark on invariance***
-where $D'$ represents the new datum. Krnjaji\'c \etal\
-\citey{krnjajicetal2011,krnjajicetal2014} numerically compare it with the
-deviance information criterion. Regarding its uses I recommend reading the
-recent debate among Gronau \etal\ \parentext{\cite*{gronauetal2019} \amp\
-  \cite{chandramoulietal2019}}, where all authors give very insightful
-remarks.
-%  (There's an ambiguity in this
+Other variants of this score use more general partitions of the data into two
+disjoint subsets.
+
+% Gelman \etal\ \citey{gelmanetal2014} show among other things that it's
+% approximately equal to expected value of the post-data log-probability of a
+% new datum:
+% \begin{equation}
+%   \label{eq:logscore_approx_logposterior}
+%   \E\condt[\Big]{\log\p(D' \| D\; H_{h} \; \yK)}{ D\; H_{h} \; \yK},
+% \end{equation}
+% ***entropy, remark on invariance***
+% where $D'$ represents the new datum. Krnjaji\'c \etal\
+% \citey{krnjajicetal2011,krnjajicetal2014} numerically compare it with the
+% deviance information criterion. Regarding its uses I recommend reading the
+% recent debate among Gronau \etal\ \parentext{\cite*{gronauetal2019} \amp\
+%   \cite{chandramoulietal2019}}, where all authors give very insightful
+% remarks.
+
+% (There's an ambiguity in this
 % definition, because we can ask: what's a \enquote{datum} in the case of
 % multi-dimensional observations? a single numerical value? or a
 % multidimensional point? Different interpretations lead to different
@@ -891,9 +893,10 @@ remarks.
 % qualitatively similar results in comparing two hypotheses. There are
 % exceptions, though.
 
-\bigskip
+\section{A relation}
+\label{sec:relation}
 
-I now show an exact relation between the log-score~\eqref{eq:log-score} and
+I'd like to show an exact relation between the log-score~\eqref{eq:log-score} and
 the log-likelihood~\eqref{eq:log-likelihood} which doesn't seem to appear
 in the literature. I find this relation very intriguing: it says that
 \emph{the log-likelihood is the sum of all averaged log-scores that can be formed
@@ -948,7 +951,7 @@ them. The result can be thus displayed:
           &\hphantom{\p(D_{2} \| D_{-2} \, H \, \yK)}
             \mathrlap{\dotso}\hphantom{{}\times  \p(D_{-2} \| H \, \yK)}\times{}\\
           &\p(D_{d} \|\underbracket[0pt][1ex]{ D_{-d} }_{\mathclap{%
-              \substack{\Big\uparrow\\\text{this column contributes to the log-score}}%
+              \substack{\Big\uparrow\\\text{this column leads to the log-score}}%
 }} H \, \yK) \times\p(D_{-d} \|  H \, \yK)
             \,\bigr]^{1/d}.
   \end{aligned}
@@ -1016,18 +1019,16 @@ data points. We therefore obtain
   \frac{1}{d} \sum_{i=1}^{d} \log\p(D_{i} \| H \, \yK),
 \end{multline}
 which can be compactly written
-\begin{mdframed}
-  \begin{equation}
+\begin{empheq}[box=\fbox]{equation}
     \label{eq:general_equivalence_compact}
     \log\p(D \| H \, \yK) \equiv
     \sum_{k=1}^{d}
     \binom{d}{k}^{-1}
-    \!\smashoperator{\sum_{\substack{\text{ordered}\\\text{$k$-tuples}}}} \quad
-    \frac{1}{k}
-    \quad\smashoperator{\sum_{\substack{\text{cyclic}\\\text{permutations}}}} 
+    \!\smashoperator{\sum_{\substack{\text{ordered}\\\text{$k$-tuples}}}} 
+    \;\;\;\frac{1}{k}\;\;
+    \smashoperator{\sum_{\substack{\text{cyclic}\\\text{permutations}}}} 
     \log\p(D_{i_{1}} \| D_{i_{2}} \dotsm D_{i_{k}} \, H \, \yK).
-  \end{equation}
-\end{mdframed}
+\end{empheq}
 % The post-data log-probability for $H$ will be equal to this expression,
 % plus the pre-data log-probability for $H$, plus a term which is the same for
 % all hypotheses.
@@ -1037,23 +1038,27 @@ the average for the $k$th-order log-scores being over the $\binom{d}{k}$
 subsets having the same cardinality $k$.
 
 There's also an equivalent form with a slightly different cross-validating
-interpretation: We take each datum $D_{i}$ in turn and calculate our
+interpretation: We take each datum $D_{j}$ in turn and calculate our
 log-belief in it conditional on all possible subsets of remaining data,
 from the empty subset with no data (term $k=0$), to the only subset
-$D_{-i}$ with all data except $D_{i}$ (term $k=d-1$). These log-beliefs are
+$D_{-j}$ with all data except $D_{j}$ (term $k=d-1$). These log-beliefs are
 averaged over the $\binom{d-1}{k}$ subsets having the same cardinality $k$.
 The result can be expressed as
-\begin{mdframed}
-  \begin{equation}
+\begin{empheq}[box=\fbox]{equation}
     \label{eq:general_equivalence_alternative}
     \log\p(D \| H \, \yK) \equiv
-    \frac{1}{d}\sum_{i=1}^{d}
+    \frac{1}{d}\sum_{j=1}^{d}
     \sum_{k=0}^{d-1}
     \binom{d-1}{k}^{-1}
-    \smashoperator{\sum_{\substack{\text{ordered}\\\text{$k$-tuples,}\\\text{$i$ excluded}}}}
-    \log\p(D_{i} \| D_{i_{1}} \dotsm D_{i_{k}} \, H \, \yK).
-  \end{equation}
-\end{mdframed}
+    \smashoperator{\sum_{\substack{\text{ordered}\\\text{$k$-tuples,}\\\text{$j$ excluded}}}}
+    \log\p(D_{j} \| D_{i_{1}} \dotsm D_{i_{k}} \, H \, \yK).
+\end{empheq}
+
+\section{Discussion}
+\label{sec:discussion}
+
+The relation~\eqref{eq:general_equivalence_compact} just proven between the
+log-likelihood and the log-score leads to further thoughts.
 
 It's remarkable that the individual log-scores in
 expressions~\eqref{eq:general_equivalence_compact} and
@@ -1061,9 +1066,7 @@ expressions~\eqref{eq:general_equivalence_compact} and
 expensive, but their sum results in a less expensive quantity: the
 log-likelihood.
 
-I'd like to offer three ways of looking at the
-relation~\eqref{eq:general_equivalence} between the log-likelihood and the
-log-score.
+Relation.
 
 First, we can see the log-likelihood as a refinement and improvement of the
 log-score. The log-likelihood takes into account not only the log-score for

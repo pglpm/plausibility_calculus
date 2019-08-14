@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2019-08-08T08:04:04+0200
-%% Last-Updated: 2019-08-14T16:03:59+0200
+%% Last-Updated: 2019-08-14T16:47:34+0200
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newif\ifarxiv
 \arxivfalse
@@ -254,8 +254,8 @@ citestyle=authoryear-comp,bibstyle=pglpm-authoryear,autopunct=false,sorting=ny,s
 \setcounter{biburlnumpenalty}{1}
 \setcounter{biburlucpenalty}{0}
 \setcounter{biburllcpenalty}{1}
-\DeclareDelimFormat{multicitedelim}{\addsemicolon\space}
-\DeclareDelimFormat{compcitedelim}{\addsemicolon\space}
+\DeclareDelimFormat{multicitedelim}{\addcomma\space}
+\DeclareDelimFormat{compcitedelim}{\addcomma\space}
 \DeclareDelimFormat{postnotedelim}{\space}
 \ifarxiv\else\addbibresource{portamanabib.bib}\fi
 \renewcommand{\bibfont}{\footnotesize}
@@ -265,7 +265,7 @@ citestyle=authoryear-comp,bibstyle=pglpm-authoryear,autopunct=false,sorting=ny,s
 \newcommand*{\citep}{\parencites}
 \newcommand*{\citey}{\parencites*}
 %\renewcommand*{\cite}{\parencite}
-\renewcommand*{\cites}{\parencites}
+%\renewcommand*{\cites}{\parencites}
 \providecommand{\href}[2]{#2}
 \providecommand{\eprint}[2]{\texttt{\href{#1}{#2}}}
 \newcommand*{\amp}{\&}
@@ -836,15 +836,16 @@ cited works for the practical advantages of such choice).
 
 The ratio of the likelihoods of two hypotheses, called \emph{relative Bayes
   factor}, or its logarithm, the \emph{relative weight of evidence}
-\citep[\chap~6]{good1950}{good1975,good1981,good1985}[and many other works
-in][]{good1983}[\sect~1.4]{osteyeeetal1974}{mackay1992,kassetal1995}[see
-also][\chaps~V, VI, A]{jeffreys1939_r1983}, are often used to get an idea
-of how much the data favour our belief in one versus the other hypothesis
-(that is, assuming at least momentarily that they be exhaustive).
-\enquote{It is historically
-  interesting that the expression ``weight of evidence'', in its technical
-  sense, anticipated the term ``likelihood'' by over forty years}
-\citep[\sect~1.4.2 p.~12]{osteyeeetal1974}.
+\parentext{\cites[\chap~6]{good1950}{good1975,good1981,good1985}, and many
+  other works in \cite{good1983};
+  \cites[\sect~1.4]{osteyeeetal1974}{mackay1992,kassetal1995}; see
+  also \cite[\chaps~V, VI, A]{jeffreys1939_r1983}}, are often used to get an
+idea of how much the data favour our belief in one versus the other
+hypothesis (that is, assuming at least momentarily that they be
+exhaustive). \enquote{It is historically interesting that the expression
+  ``weight of evidence'', in its technical sense, anticipated the term
+  ``likelihood'' by over forty years} \citep[\sect~1.4.2
+p.~12]{osteyeeetal1974}.
 \begin{innote}
   Recent literature \citep[for example][]{kassetal1995} seems to
   exclusively deal with \emph{relative} Bayes factors, so I'd like to
@@ -1108,11 +1109,33 @@ data, but also the log-scores for all possible subsets of data.
 Figuratively speaking it examines the relationship between data and
 hypothesis locally, globally, and on all intermediate scales.
 
-To me this makes sense, because our interest is in how the hypothesis
+To me this makes sense, because our interest is in how the hypothesis $H$
 relates to single data points as well as to groups of them. A good portion
-of recent literature seems to focus on the \dobs\ about data given some
-hypothesis only \emph{after} some data have been collected
-\citep{ohagan1995,bergeretal1996,bergeretal1998}.
+of recent literature seems to focus on the relation between a hypothesis
+and \emph{future} data rather than the collected data; but I think it's
+equally important to see how it relates to the data we already have. This
+tension between future and past data stems, in my opinion, from a
+misunderstanding about which model or hypothesis we're actually interested
+in. I hope to discuss this topic more at length in another work; but let me
+give a brief sketch of this misunderstanding.
+
+As mentioned in the introduction, $H$ sometimes denotes some unspecified
+knowledge that leads to a specific probabilistic model
+$\p(\dotso \| H \, \yK)$ (see the remark about syntax and semantics on
+p.~\pageref{note:syntax}). We must remember that the conjunction of $H$ and
+some data $D$ simply defines a new and \emph{different} probabilistic model
+$H' \defd H \, D$. In the context of exchangeable models
+\citep[\sect~4.2]{bernardoetal1994_r2000}{dawid2013,definetti1937,kingman1978,kochetal1982}[see
+also][]{diaconisetal1980}
+
+
+
+
+the \dobs\ about data given some
+hypothesis only \emph{after} some data have been collected, but I think
+it's equally important to see how it relates to the data we already have.
+(compare for example \citep{ohagan1995,bergeretal1996,bergeretal1998},
+although their motivation stems from o
 
 If we see the symbol $H$ as just a placeholder for a probabilistic model,
 rather than an empirical hypothesis (see the remark about syntax and

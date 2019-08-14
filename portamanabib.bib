@@ -6,7 +6,7 @@
 %% Home page: http://magnaspesmeretrix.org/
 %% Email (remove ZZ): pglpm0ZZ[at]gmail.com
 %% Created: 2000-08-23T16:53:30+0200
-%% Last-Updated: 2019-08-12T14:45:30+0200
+%% Last-Updated: 2019-08-14T15:05:01+0200
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 % NB: This database contains also items whose content's validity I
@@ -560,6 +560,7 @@
 @String{jhapltd = {Johns Hopkins APL Technical Digest}}
 @String{jhep = {J. High Energy Phys.}}
 @String{jhi = {J. Hist.\ Ideas}}
+@String{jia = {J. Inst.\ Actuaries}}
 @String{jiee = {J. IEE}}
 @String{jima = {J. Inst.\ Maths.\ Applics}}
 @String{jjhg = {Japan J. Human Genet.}}
@@ -16640,7 +16641,8 @@ volume =       {27},
 number =       {108},
 pages =	       {389--404},
 note =	       {See also \citebi{broad1920}},
-keywords =     {Laplace's rule of succession, prior probability, probability of probability, sampling, Bayesian probability theory, Jeffreys prior}
+keywords =     {Laplace's rule of succession, prior probability, probability of probability, sampling, Bayesian probability theory, Jeffreys prior},
+mynote =       {\enquote{Since probability, like truth, implication, etc., is an attribute of propositions, the laws of probability are laws of logic, not of nature, just like the principle of the syllogism or the law of contradiction. That is, they are principles which hold in all possible worlds, and do not depend on the special structure of the world that actually exists.} \sect~2 p.~392}
 }
 
 @Article{broad1920,
@@ -31525,6 +31527,19 @@ number =       {10},
 pages =	       {925--930}
 }
 
+@Book{dickens1843_r2002,
+author =       {Charles Dickens},
+title =	       {The Life and Adventures of Martin Chuzzlewit},
+publisher =    {Penguin Books},
+year =	       {2002},
+series =       {Penguin classics},
+address =      {London},
+edition =      {repr.},
+note =	       {Ed.\ with an Introduction and Notes by P. Ingham. First publ.\ 1843},
+keywords =     {Mrs Gamp},
+origdate =     {1843}
+}
+
 @Article{dickey1967,
 author =       {James M. Dickey},
 title =	       {Matricvariate Generalizations of the Multivariate {$t$}~Distribution and the Inverted Multivariate {$t$}~Distribution},
@@ -46143,6 +46158,17 @@ year =	       {2006},
 note =	       {\arxiveprint{math.PR/0602091}}
 }
 
+@Article{gneiting2011,
+author =       {Tilmann Gneiting},
+title =	       {Making and Evaluating Point Forecasts},
+journal =      jasa,
+year =	       {2011},
+volume =       {106},
+number =       {494},
+pages =	       {746--762},
+keywords =     {log-scores, utility functions}
+}
+
 @Article{gnutzmannetal2001,
 author =       {Gnutzmann, Sven and {\.Z}yczkowski, Karol},
 title =	       {{R{\'e}nyi-Wehrl} entropies as measures of localization in phase space},
@@ -46684,7 +46710,9 @@ year =	       {1952},
 volume =       {14},
 number =       {1},
 pages =	       {107--114},
-keywords =     {Bayesian probability theory, Shannon entropy, maximum entropy, Bayes factor, surprise}
+note =	       {Repr.\ in \citebi{good1983} \chap~1},
+keywords =     {Bayesian probability theory, Shannon entropy, maximum entropy, Bayes factor, surprise, log score (\sect~8), weight of evidence},
+mynote =       {\enquote{Some of you may be thinking of the slogan ``science deals only with what is objective''. If the slogan were true there would be no point for scientific purposes in introducing subjective judgments. But actually the slogan is false. For example, intuition (which is subjective) is the main instrument of original scientific research, according to Einstein. The obsession with objectivity arises largely from the desire to be convincing in published work. There are, however, several activities in which it is less important to convince other people than to find out the truth for oneself. There is another reason for wanting an objective theory, namely that there is a tendency to wishful thinking in subjective judgments. But objectivity is precisely what a subjective theory of probability is for: its function is to introduce extra rationality (and therefore objectivity) into your degrees of belief.} \sect~3 p.~109}
 }
 
 @Article{good1953,
@@ -46730,6 +46758,18 @@ volume =       {103},
 number =       {3},
 pages =	       {200--204},
 keywords =     {Shannon entropy}
+}
+
+@Article{good1956c,
+author =       {Irving John Good},
+title =	       {Which Comes First, Probability or Statistics?},
+journal =      jia,
+year =	       {1956},
+volume =       {82},
+number =       {2},
+pages =	       {249--255},
+note =	       {Partly repr.\ in \citebi{good1983} \chap~5},
+keywords =     {Bayesian probability theory, confidence intervals, maximum likelihood, p-values}
 }
 
 @InCollection{good1957,
@@ -46830,7 +46870,30 @@ volume =       {29},
 number =       {3},
 pages =	       {399--418},
 note =	       {See also discussion and reply in \citebi{lindleyetal1967}},
-keywords =     {Johnson-Dirichlet prior, exchangeability, frequencies of frequencies}
+keywords =     {Johnson-Dirichlet prior, exchangeability, frequencies of frequencies, device of imaginary results}
+}
+
+@Article{good1968,
+author =       {Irving John Good},
+title =	       {Corroboration, Explanation, Evolving Probability, Simplicity and a Sharpened Razor},
+journal =      bjps,
+year =	       {1968},
+volume =       {19},
+number =       {2},
+pages =	       {123--143},
+keywords =     {Bayes factors, model comparison, hypothesis testing, induction, weight of evidence}
+}
+
+@Article{good1969,
+author =       {Irving John Good},
+title =	       {A Subjective Evaluation of {Bode's} Law and an `Objective' Test for Approximate Numerical Rationality},
+journal =      jasa,
+year =	       {1969},
+volume =       {64},
+number =       {325},
+pages =	       {23--49},
+note =	       {Partly repr.\ in \citebi{good1983} \chap~13},
+keywords =     {decibel, deciban, weight of evidence, Bayes factor, Bayesian probabilit}
 }
 
 @Article{good1975,
@@ -46841,7 +46904,7 @@ year =	       {1975},
 volume =       {30},
 number =       {1--2},
 pages =	       {39--73},
-note =	       {Repr.\ in \citebi{good1983}, \chap~15, pp.~149--170},
+note =	       {Partly repr.\ in \citebi{good1983} \chap~15},
 keywords =     {Bayes factors, model comparison, hypothesis testing, induction, weight of evidence},
 mynote =       {\enquote{Note how it is difficult to establish high probability for a hypothesis unless one is able to state other hypotheses clearly enough} \sect~VI p.~62}
 }
@@ -114541,6 +114604,7 @@ year =	       {1987},
 address =      {New York},
 edition =      {second printing, rev.\ and augmented},
 note =	       {First publ.\ 1984},
+mynote =       {\enquote{In a period of increasing specialization \textsc{Bateman} remained a natural philosopher. He published in too many fields to be admitted to the inner circle of cyclic citation in any of them, though he was awarded a few medals.} \chap~35 p.~425},
 origdate =     {1984}
 }
 

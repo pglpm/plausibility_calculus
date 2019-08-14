@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2019-08-08T08:04:04+0200
-%% Last-Updated: 2019-08-13T11:46:00+0200
+%% Last-Updated: 2019-08-14T15:14:06+0200
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newif\ifarxiv
 \arxivfalse
@@ -717,33 +717,36 @@ entertain that hypothesis as true:
     &=\frac{\p(D \| H_{h} \, \yK)\;\p(H_{h} \| \yK)}{\sum_{h'} \p(D \| H_{h'} \, \yK)\; \p(H_{h'} \| \yK)}.
   \end{align}
 \end{subequations}
-$D$, $H_{h}$, $\yK$ denote propositions, which usually are about numeric
+$D$, $H_{h}$, $\yK$ denote propositions, which are usually about numeric
 quantities. I use the terms \enquote{\dob}, \enquote{belief}, and
-\enquote{probability} as synonyms. By \enquote{hypothesis} I mean a
-scientific (physical, biological, \etc) hypothesis, a state or development
-of things capable of experimental verification, at least in a thought
-experiment.
-\begin{innote}
-  Don't we too often abuse of the fact that the probability calculus, just
-  like the truth calculus, proceeds purely syntactically rather than
-  semantically? That is, if I tell you that $H$ and $H \limplies D$ are
-  true, you can conclude that $D$ is true; similarly, if I tell you that
-  $\p(H \| \yK) = p$ and $\p(H \limplies D \| \yK) = q$, you can conclude
-  (try it as an exercise) that $\p(H\;D \| \yK) = p + q -1$. In either case
-  you don't need to know what $H$ and $D$ are about -- they could be about
-  Donald Duck or parallel universes. And so we often say \enquote{under
-    model $\theta$ our belief about the value of quantity $x$ is expressed
-    by such and such distribution $\pf(x \| \theta)=f(x)$}, without
-  explaining what $\theta$ really is and why it leads to $f$. Aren't terms
-  such as \enquote{model} and \enquote{hypothesis}, as often used in
-  probability and statistics, convenient and respectable-looking carpets
-  under which we can sweep the fact that we don't quite know what we're
-  speaking about? The need to look under the carpet arises, though, the
-  moment we have to specify our pre-data belief, the prior, about the
-  mysterious $\theta$.
+\enquote{probability} as synonyms. By \enquote{hypothesis} I mean either a
+scientific (physical, biological, \etc) hypothesis -- a state or
+development of things capable of experimental verification, at least in a
+thought experiment; or more generally some proposition, often not precisely
+specified, which leads us to assign the particular \dobs\
+$\p(\dotso \| H \, \yK)$. In the latter case $H$ is often called a
+\enquote{(probabilistic) model}.
+\begin{innote}\label{note:syntax}
+  The probability calculus, just like the truth calculus, proceeds purely
+  syntactically rather than semantically. That is, if I tell you that $H$
+  and $H \limplies D$ are true, you can conclude that $D$ is true;
+  similarly, if I tell you that $\p(H \| \yK) = p$ and
+  $\p(H \limplies D \| \yK) = q$, you can conclude (try it as an exercise)
+  that $\p(H\;D \| \yK) = p + q -1$. And in either case you don't need to
+  know what $H$ and $D$ are about -- they could be about Donald Duck or
+  parallel universes. Don't we too often abuse of this syntactical
+  property? We often say \enquote{under model $H$ our belief about the
+    value of quantity $x$ is expressed by such and such distribution
+    $\pf(x \| H)=f(x)$}, without explaining what $\theta$ really is
+  and why it leads to $f$. Aren't terms such as \enquote{model} and
+  \enquote{hypothesis}, as often used in probability and statistics,
+  convenient and respectable-looking carpets under which we can sweep the
+  fact that we don't quite know what we're speaking about? The need to look
+  under the carpet arises, though, the moment we have to specify our
+  pre-data belief, the prior, about the mysterious $H$.
   
-  But semantics can very well be a by-product of syntax, or the distinction
-  between the two be a chimera
+  And yet again, semantics can very well be a by-product of syntax, or the
+  distinction between the two be a chimera
   \citep{wittgenstein1945_t1999,girard2001,girard2003}. Such important
   matters are unfortunately rarely discussed in probability and statistics.
 \end{innote}
@@ -787,6 +790,8 @@ remarks about such binary comparisons, and also Good's
 
 \bigskip
 
+All terms in \eqn~\eqref{eq:posterior_hypothesis}
+
 If our problem is to finally choose a hypothesis, discarding its
 competitors for future calculations, or more generally to make a decision
 (for example, choice of medical treatment) based on the observed data, the
@@ -805,24 +810,30 @@ freely examined. In particular the term $\p(D \| H_{h} \, \yK)$, called the
 p.~62]{good1950}, or its logarithm
 \begin{equation}
   \label{eq:log-likelihood}
-  \log\p(D \| H_{h} \, \yK).
+  \log\p(D \| H_{h} \, \yK),
 \end{equation}
+in an arbitrary basis (Turing, Good
+\citey[\eg][]{good1985,good1950,good1969}, Jaynes
+\citey[\sect~4.2]{jaynes1994_r2003} recommend base
+$\cramped10^{1/10}$, leading to a measurement in decibels; see the
+cited works for the practical advantages of such choice).
 
-
-The likelihoods of several hypotheses are often compared, through their
-ratios for example, called \emph{relative Bayes factor}, or its logarithm,
-called \emph{relative weight of evidence}
+The ratio of the likelihoods of two hypotheses, called \emph{relative Bayes
+  factor}, or its logarithm, the \emph{relative weight of evidence}
 \citep[\chap~6]{good1950}{good1975,good1981,good1985}[and many other works
 in][]{good1983}[\sect~1.4]{osteyeeetal1974}{mackay1992,kassetal1995}[see
-also][\chaps~V, VI, A]{jeffreys1939_r1983}. \enquote{It is historically
+also][\chaps~V, VI, A]{jeffreys1939_r1983}, are often used to get an idea
+of how much the data favour our belief in one versus the other hypothesis
+(that is, assuming at least momentarily that they be exhaustive).
+\enquote{It is historically
   interesting that the expression ``weight of evidence'', in its technical
   sense, anticipated the term ``likelihood'' by over forty years}
 \citep[\sect~1.4.2 p.~12]{osteyeeetal1974}.
 \begin{innote}
   Recent literature \citep[for example][]{kassetal1995} seems to
-  exclusively deal with \emph{relative} Bayes factors, so I'd like to point
-  out that the non-relative Bayes factor for a hypothesis $H_{h}$ provided
-  by data $D$ is actually defined as \citep[\sect~2]{good1981}
+  exclusively deal with \emph{relative} Bayes factors, so I'd like to
+  mention that the non-relative Bayes factor for a hypothesis $H_{h}$
+  provided by data $D$ is actually defined as \citep[\sect~2]{good1981}
   \begin{equation}
     \label{eq:proper_Bayes_factor}
     \frac{\p(D \| H_{h} \; \yK)}{\p(D \| \lnot H_{h} \; \yK)} \equiv
@@ -848,9 +859,9 @@ also][\chaps~V, VI, A]{jeffreys1939_r1983}. \enquote{It is historically
 \label{sec:logscore}
 
 The literature in probability and statistics has also employed various
-other ad-hoc measures to make exploratory analyses. Here I consider one in
+ ad-hoc measures to make exploratory analyses. Here I consider one in
 particular: the \emph{leave-one-out cross-validation log-score} \citep[for
-example][]{geisseretal1979,vehtarietal2002,vehtarietal2012,krnjajicetal2011,krnjajicetal2014,gelmanetal2014,piironenetal2017,gronauetal2019,chandramoulietal2019},
+example][]{stone1977,geisseretal1979}[\sects~3.4, 6.1.6]{bernardoetal1994}{vehtarietal2002,vehtarietal2012,krnjajicetal2011,krnjajicetal2014,gelmanetal2014,piironenetal2017,gronauetal2019,chandramoulietal2019},
 which I'll just call \enquote{log-score} for brevity:
 \begin{equation}
   \label{eq:log-score}
@@ -1058,7 +1069,7 @@ The result can be expressed as
 \label{sec:discussion}
 
 The relation~\eqref{eq:general_equivalence_compact} just proven between the
-log-likelihood and the log-score leads to further thoughts.
+log-likelihood and the log-score brings forth several thoughts.
 
 It's remarkable that the individual log-scores in
 expressions~\eqref{eq:general_equivalence_compact} and
@@ -1066,13 +1077,26 @@ expressions~\eqref{eq:general_equivalence_compact} and
 expensive, but their sum results in a less expensive quantity: the
 log-likelihood.
 
-Relation.
-
-First, we can see the log-likelihood as a refinement and improvement of the
-log-score. The log-likelihood takes into account not only the log-score for
-the whole data, but also the log-scores for all possible subsets of data.
+The relation~\eqref{eq:general_equivalence_compact} invites us to see the
+log-likelihood as a refinement and improvement of the log-score. The
+log-likelihood takes into account not only the log-score for the whole
+data, but also the log-scores for all possible subsets of data.
 Figuratively speaking it examines the relationship between hypothesis and
 data locally, globally, and on all intermediate scales.
+
+To me this makes sense, because our interest is in how the hypothesis
+relates to single data points as well as to groups of them. A good portion
+of recent literature seems to focus on the \dobs\ about data given some
+hypothesis only \emph{after} some data have been collected
+\citep{ohagan1995,bergeretal1996,bergeretal1998}.
+
+If we see the symbol $H$ as just a placeholder for a probabilistic model,
+rather than an empirical hypothesis (see the remark about syntax and
+semantics on p.~\pageref{note:syntax}), we must remember that the
+conjunction of $H$ and some data $D$ simply defines a new probabilistic
+model $H' \defd H \, D$.
+
+
 
 The second point of view only holds for hypotheses $\hH$ which make any
 observed data irrelevant:
@@ -1113,6 +1137,10 @@ to geisser, stone, gelfandetal)
 *** remark that $D\,H$ is a \emph{new} probability model: which of the two
 are we assessing? Connection with learning vs non-learning models which I
 hope to take up in another work.
+
+***  \citep[\sect~6.1.6]{bernardoetal1994} show the approximation only
+valid if number of data large enough -- not very interesting situation in
+today's problems.
 
 
 *** problems calculation with time-relevant hypotheses

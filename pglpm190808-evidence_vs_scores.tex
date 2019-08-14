@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2019-08-08T08:04:04+0200
-%% Last-Updated: 2019-08-14T15:14:06+0200
+%% Last-Updated: 2019-08-14T16:03:59+0200
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newif\ifarxiv
 \arxivfalse
@@ -20,9 +20,9 @@ british%
 \newcommand*{\firstdraft}{8 August 2019}
 \newcommand*{\firstpublished}{***}
 \newcommand*{\propertitle}{A relation between log-likelihood\\ and cross-validation
-  log-scores\\{\large (with some remarks on both)}%
+  log-scores\\{\large (with some remarks on models)}%
 }% title uses LARGE; set Large for smaller
-\newcommand*{\pdftitle}{A relation between log-likelihood and cross-validation log-scores (with some remarks on both)}
+\newcommand*{\pdftitle}{A relation between log-likelihood and cross-validation log-scores (with some remarks on models)}
 \newcommand*{\headtitle}{log-likelihood and cross-validation}
 \newcommand*{\pdfauthor}{P.G.L.  Porta Mana}
 \newcommand*{\headauthor}{Porta Mana}
@@ -699,8 +699,8 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 %%% BEGINNING OF MAIN TEXT
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{Log-likelihoods}
-\label{sec:loglh}
+\section{Introduction}
+\label{sec:intro}
 
 The probability calculus unequivocally tells us how
 $\p(H_{h} \| D \, \yK)$, our \dob\ in a hypothesis $H_{h}$ given data $D$
@@ -790,29 +790,45 @@ remarks about such binary comparisons, and also Good's
 
 \bigskip
 
-All terms in \eqn~\eqref{eq:posterior_hypothesis}
+All terms in \eqn~\eqref{eq:posterior_hypothesis} are always important in
+an inference problem, both at decision stages (for example, evaluating
+which hypotheses to include in our simplified set, or which hypothesis to
+finally choose -- if we \emph{have to} -- discarding its competitors for
+future calculations; or if we must choose among possible medical
+treatment), and at exploratory stages (for example, examining whether a
+hypothesis leads to peculiar beliefs for peculiar kinds of data). But also
+other expressions are often used, either derived via the probability rules or
+constructed on more intuitive grounds.
 
-If our problem is to finally choose a hypothesis, discarding its
-competitors for future calculations, or more generally to make a decision
-(for example, choice of medical treatment) based on the observed data, the
-post-data belief~\eqref{eq:posterior_hypothesis} is necessary but not
-sufficient. We also need to specify a utility or cost function to calculate
-the expected gains of choosing one or another hypothesis or making one or
-another decision
-\citep{kadaneetal1980b,degroot1970_r2004}[\chap~2]{bernardoetal1994_r2000}.
+My purpose is to show an exact relation between two specific quantities of
+either kind: the \emph{log-likelihood} and the \emph{leave-one-out cross-validation
+log-score}, although the relation can probably be extended to more general
+cross-validation log-scores. 
 
-If our problem has an exploratory nature instead -- for example, evaluating
-which hypotheses to include in our simplified set, or examining whether a
-hypothesis leads to peculiar beliefs for peculiar kinds of data -- then all
-terms appearing in expression~\eqref{eq:posterior_hypothesis} are usually
-freely examined. In particular the term $\p(D \| H_{h} \, \yK)$, called the
-\emph{likelihood} of the hypothesis given the data \citep[\sect~6.1
-p.~62]{good1950}, or its logarithm
+% based on the observed data, the
+% post-data belief~\eqref{eq:posterior_hypothesis} is necessary but not
+% sufficient. We also need to specify a utility or cost function to calculate
+% the expected gains of choosing one or another hypothesis or making one or
+% another decision
+% \citep{kadaneetal1980b,degroot1970_r2004}[\chap~2]{bernardoetal1994_r2000}.
+
+% If our problem has an exploratory nature instead -- for example, evaluating
+% which hypotheses to include in our simplified set, or examining whether a
+% hypothesis leads to peculiar beliefs for peculiar kinds of data -- then all
+% terms appearing in expression~\eqref{eq:posterior_hypothesis} are usually
+% freely examined.
+
+\section{Log-likelihood}
+\label{sec:loglh}
+
+The term $\p(D \| H_{h} \, \yK)$ in \eqn~\eqref{eq:posterior_hypothesis} is
+called the \emph{likelihood} of the hypothesis given the data
+\citep[\sect~6.1 p.~62]{good1950}. Its logarithm is surprisingly called log-likelihood:
 \begin{equation}
   \label{eq:log-likelihood}
   \log\p(D \| H_{h} \, \yK),
 \end{equation}
-in an arbitrary basis (Turing, Good
+where the logarithm can be taken in an arbitrary basis (Turing, Good
 \citey[\eg][]{good1985,good1950,good1969}, Jaynes
 \citey[\sect~4.2]{jaynes1994_r2003} recommend base
 $\cramped10^{1/10}$, leading to a measurement in decibels; see the
@@ -855,13 +871,12 @@ of how much the data favour our belief in one versus the other hypothesis
   numeric example.
 \end{innote}
 
-\section{Cross-validation log-scores}
+\section{Cross-validation log-score}
 \label{sec:logscore}
 
 The literature in probability and statistics has also employed various
  ad-hoc measures to make exploratory analyses. Here I consider one in
-particular: the \emph{leave-one-out cross-validation log-score} \citep[for
-example][]{stone1977,geisseretal1979}[\sects~3.4, 6.1.6]{bernardoetal1994}{vehtarietal2002,vehtarietal2012,krnjajicetal2011,krnjajicetal2014,gelmanetal2014,piironenetal2017,gronauetal2019,chandramoulietal2019},
+particular: the \emph{leave-one-out cross-validation log-score}
 which I'll just call \enquote{log-score} for brevity:
 \begin{equation}
   \label{eq:log-score}
@@ -873,10 +888,18 @@ behind this score, cursorily speaking, is this: \enquote{let's see what my
   belief in one datum should be, on average, once I've observed the other
   data, if I consider $H_{h}$ as true}. \enquote{On average} means
 considering such belief for every single datum in turn, and then taking the
-geometric mean, which is the arithmetic mean on a log scale.
+geometric mean. % , that is, the arithmetic mean on a log scale.
+Other variants of this score use more general partitions of the data into
+two disjoint subsets.
 
-Other variants of this score use more general partitions of the data into two
-disjoint subsets.
+
+The literature presents some theoretical motivations and use of the
+log-score, as well as some debate \citep[\sects~3.4, 6.1.6 gives the
+clearest motivation and explanation]{bernardoetal1994}[see
+also][]{stone1977,geisseretal1979,vehtarietal2012,vehtarietal2002,krnjajicetal2011,krnjajicetal2014,gelmanetal2014,gronauetal2019,chandramoulietal2019}.
+The relation that I'm going to show in the next section might be of
+interest for such debate.
+
 
 % Gelman \etal\ \citey{gelmanetal2014} show among other things that it's
 % approximately equal to expected value of the post-data log-probability of a
@@ -904,14 +927,15 @@ disjoint subsets.
 % qualitatively similar results in comparing two hypotheses. There are
 % exceptions, though.
 
-\section{A relation}
+\section{A relation between log-likelihood and log-score}
 \label{sec:relation}
 
 I'd like to show an exact relation between the log-score~\eqref{eq:log-score} and
 the log-likelihood~\eqref{eq:log-likelihood} which doesn't seem to appear
-in the literature. I find this relation very intriguing: it says that
-\emph{the log-likelihood is the sum of all averaged log-scores that can be formed
-  from all data subsets}.
+in the literature. I find this relation very intriguing because it portrays
+the log-likelihood as a sort of full-scale use of the log-score.% : it says that
+% \emph{the log-likelihood is the sum of all averaged log-scores that can be formed
+%   from all data subsets}.
 
 % My point of view, which hinges on the logical foundations of the
 % probability calculus
@@ -1074,15 +1098,15 @@ log-likelihood and the log-score brings forth several thoughts.
 It's remarkable that the individual log-scores in
 expressions~\eqref{eq:general_equivalence_compact} and
 \eqref{eq:general_equivalence_alternative} above are computationally
-expensive, but their sum results in a less expensive quantity: the
-log-likelihood.
+expensive, but their sum results in the
+log-likelihood, which is less expensive.
 
 The relation~\eqref{eq:general_equivalence_compact} invites us to see the
 log-likelihood as a refinement and improvement of the log-score. The
 log-likelihood takes into account not only the log-score for the whole
 data, but also the log-scores for all possible subsets of data.
-Figuratively speaking it examines the relationship between hypothesis and
-data locally, globally, and on all intermediate scales.
+Figuratively speaking it examines the relationship between data and
+hypothesis locally, globally, and on all intermediate scales.
 
 To me this makes sense, because our interest is in how the hypothesis
 relates to single data points as well as to groups of them. A good portion

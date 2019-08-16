@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2019-08-08T08:04:04+0200
-%% Last-Updated: 2019-08-16T13:24:09+0200
+%% Last-Updated: 2019-08-16T15:23:59+0200
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newif\ifarxiv
 \arxivfalse
@@ -262,8 +262,8 @@ citestyle=authoryear-comp,bibstyle=pglpm-authoryear,autopunct=false,sorting=ny,s
 %\appto{\citesetup}{\footnotesize}% smaller font for citations
 \defbibheading{bibliography}[\bibname]{\section*{#1}\addcontentsline{toc}{section}{#1}%\markboth{#1}{#1}
 }
-\newcommand*{\citep}{\parencites}
-\newcommand*{\citey}{\parencites*}
+\newcommand*{\citep}{\footcites}
+\newcommand*{\citey}{\footcites}%{\parencites*}
 %\renewcommand*{\cite}{\parencite}
 %\renewcommand*{\cites}{\parencites}
 \providecommand{\href}[2]{#2}
@@ -775,7 +775,7 @@ hypotheses $\set{H_{h}}$ are often called \emph{models}.\; \enquote{A
   purpose. Like a portrait, it can represent only a part of the subject it
   pictures. This part it exaggerates, if only because it leaves out the
   rest. Its simplicity is its virtue, provided the aspect it portrays be
-  that which we wish to study} \citep[Prologue p.~xvi]{truesdelletal1980}.
+  that which we wish to study} (Truesdell \citep[Prologue p.~xvi]{truesdelletal1980}).
 
 Expression~\eqref{eq:posterior_hypothesis_universal} is universally valid
 instead, but it's rarely possible to quantify its denominator
@@ -829,17 +829,17 @@ called the \emph{likelihood} of the hypothesis given the data
   \log\p(D \| H_{h} \, \yK),
 \end{equation}
 where the logarithm can be taken in an arbitrary basis (Turing, Good
-\citey[\eg][]{good1985,good1950,good1969}, Jaynes
-\citey[\sect~4.2]{jaynes1994_r2003} recommend base
+\citep[\eg][]{good1985,good1950,good1969}, Jaynes
+\citep[\sect~4.2]{jaynes1994_r2003} recommend base
 $\cramped10^{1/10}$, leading to a measurement in decibels; see the
 cited works for the practical advantages of such choice).
 
 The ratio of the likelihoods of two hypotheses, called \emph{relative Bayes
   factor}, or its logarithm, the \emph{relative weight of evidence}
-\parentext{\cites[\chap~6]{good1950}{good1975,good1981,good1985}, and many
+\footnote{\cites[\chap~6]{good1950}{good1975,good1981,good1985}, and many
   other works in \cite{good1983};
   \cites[\sect~1.4]{osteyeeetal1974}{mackay1992,kassetal1995}; see
-  also \cite[\chaps~V, VI, A]{jeffreys1939_r1983}}, are often used to get an
+  also \cite[\chaps~V, VI, A]{jeffreys1939_r1983}.}, are often used to get an
 idea of how much the data favour our belief in one versus the other
 hypothesis (that is, assuming at least momentarily that they be
 exhaustive). \enquote{It is historically interesting that the expression
@@ -1128,13 +1128,13 @@ $H' \defd D \, H$. In the context of exchangeable models
 \citep[\sect~4.2]{bernardoetal1994_r2000}{dawid2013,definetti1937,kingman1978,kochetal1982}[see
 also][]{diaconisetal1980} there's an important distinction between two
 kinds of models:
-\begin{enumerate}[\label=(\alph*)]
+\begin{enumerate}[label=(\alph*)]
 \item models that lead to the \emph{same} belief about new data,
   independently of the data already observed:
   \begin{equation}
   \label{eq:irrelevance_data}
-  \p(D \| D' \, \hH \, \yK) = \p(D \| \hH \, \yK)
-  \qquad\text{(if $D' \nRightarrow D$)};
+  \p(D' \| D \, H \, \yK) = \p(D' \| H \, \yK)
+  \qquad\text{(if $D \nRightarrow D'$)};
 \end{equation}
 these are usually called \enquote{simple} hypotheses or models
 \citep[\sect~6.1.4]{bernardoetal1994_r2000}, but I prefer to call them
@@ -1145,26 +1145,33 @@ observed data are of course relevant for our belief about the model);
   the data already observed:
   \begin{equation}
   \label{eq:irrelevance_data}
-  \p(D \| D' \, \hH \, \yK) \ne \p(D \| \hH \, \yK)
-  \qquad\text{(if $D' \nRightarrow D$)};
+  \p(D' \| D \, H \, \yK) \ne \p(D' \| H \, \yK)
+  \qquad\text{(if $D \nRightarrow D'$)};
 \end{equation}
-these are usually called \enquote{composite} hypotheses or models
-\citep[\sect~6.1.4]{bernardoetal1994_r2000}, but I prefer to call them
-\emph{learning} models, for reasons analogous to the ones in the previous
-point.
+these are usually called \enquote{composite} hypotheses or models\addtocounter{footnote}{-1}\footnotemark{},% \citep[\sect~6.1.4]{bernardoetal1994_r2000},
+but I prefer to call them \emph{learning} models, for reasons analogous to
+the ones in the previous point.
 \end{enumerate}
+Geometrically, learning models constitute a convex set, of which the
+non-learning models are the extreme points
+\footcites{lauritzen1974,lauritzen1982_r1988,lauritzen1984,barndorffnielsen1978_r2014,dynkin1978}[gives
+a terse summary]{dawid2013}.
+
 Learning models have the important, factual property that \emph{their
   conjunction with observed data tends to a non-learning model} as the
-number of observed data increases. I say \enquote{factual} because this is
-not a mathematical theorem -- we may imagine and we do encounter sequences
-of data for which no convergence occurs \citep[see
-\eg][]{bruno1964,berk1966,berk1970}[see also][\sect~3]{diaconis1988}
-
-; \enquote{Alas, this seems like a model
-  of the way things work in practical inference -- as more data comes in,
-  one admits a richer and richer variety of explanatory hypothesis}
-\citep[\sect~3, p.~113]{diaconis1988}
-
+number of observed data increases. Geometrically, as data accumulate, our
+model moves in the convex set mentioned above, approaching an extreme
+point.\citep[compare Hjort in][]{barronetal1986}[\chap~3]{hjort1986} I say
+\enquote{factual} because this is not a mathematical theorem: we may
+imagine and do encounter sequences of data for which no convergence occurs;\citep[see
+\eg][]{bruno1964,berk1966,berk1970}[also][\sect~3]{diaconis1988} but in
+practice this usually makes us replace our simplified set of hypotheses
+with a less simplified one and start anew. There's a sort of Bayes theorem
+operating on a large hypothesis space which we keep on the back of our
+minds, of which the space represented on paper is just a necessarily
+simplified portrait or caricature (see Truesdell's quote in
+\sect~\ref{sec:intro}). Compare Jaynes's\citep[\sect~4.4.1]{jaynes1994_r2003} discussion about the
+\enquote{resurrection of dead hypotheses}.
 
 
 

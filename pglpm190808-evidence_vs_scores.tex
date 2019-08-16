@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2019-08-08T08:04:04+0200
-%% Last-Updated: 2019-08-14T16:47:34+0200
+%% Last-Updated: 2019-08-16T13:24:09+0200
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newif\ifarxiv
 \arxivfalse
@@ -1110,7 +1110,7 @@ Figuratively speaking it examines the relationship between data and
 hypothesis locally, globally, and on all intermediate scales.
 
 To me this makes sense, because our interest is in how the hypothesis $H$
-relates to single data points as well as to groups of them. A good portion
+relates to single data points as well as to any collection of them. A good portion
 of recent literature seems to focus on the relation between a hypothesis
 and \emph{future} data rather than the collected data; but I think it's
 equally important to see how it relates to the data we already have. This
@@ -1123,10 +1123,47 @@ As mentioned in the introduction, $H$ sometimes denotes some unspecified
 knowledge that leads to a specific probabilistic model
 $\p(\dotso \| H \, \yK)$ (see the remark about syntax and semantics on
 p.~\pageref{note:syntax}). We must remember that the conjunction of $H$ and
-some data $D$ simply defines a new and \emph{different} probabilistic model
-$H' \defd H \, D$. In the context of exchangeable models
+some data $D$  defines a new and \emph{different} probabilistic model
+$H' \defd D \, H$. In the context of exchangeable models
 \citep[\sect~4.2]{bernardoetal1994_r2000}{dawid2013,definetti1937,kingman1978,kochetal1982}[see
-also][]{diaconisetal1980}
+also][]{diaconisetal1980} there's an important distinction between two
+kinds of models:
+\begin{enumerate}[\label=(\alph*)]
+\item models that lead to the \emph{same} belief about new data,
+  independently of the data already observed:
+  \begin{equation}
+  \label{eq:irrelevance_data}
+  \p(D \| D' \, \hH \, \yK) = \p(D \| \hH \, \yK)
+  \qquad\text{(if $D' \nRightarrow D$)};
+\end{equation}
+these are usually called \enquote{simple} hypotheses or models
+\citep[\sect~6.1.4]{bernardoetal1994_r2000}, but I prefer to call them
+\emph{non-learning} models, because when we assume such a model, observed
+data become irrelevant for our beliefs about unobserved data (although
+observed data are of course relevant for our belief about the model);
+\item models that lead to different beliefs about new data, depending on
+  the data already observed:
+  \begin{equation}
+  \label{eq:irrelevance_data}
+  \p(D \| D' \, \hH \, \yK) \ne \p(D \| \hH \, \yK)
+  \qquad\text{(if $D' \nRightarrow D$)};
+\end{equation}
+these are usually called \enquote{composite} hypotheses or models
+\citep[\sect~6.1.4]{bernardoetal1994_r2000}, but I prefer to call them
+\emph{learning} models, for reasons analogous to the ones in the previous
+point.
+\end{enumerate}
+Learning models have the important, factual property that \emph{their
+  conjunction with observed data tends to a non-learning model} as the
+number of observed data increases. I say \enquote{factual} because this is
+not a mathematical theorem -- we may imagine and we do encounter sequences
+of data for which no convergence occurs \citep[see
+\eg][]{bruno1964,berk1966,berk1970}[see also][\sect~3]{diaconis1988}
+
+; \enquote{Alas, this seems like a model
+  of the way things work in practical inference -- as more data comes in,
+  one admits a richer and richer variety of explanatory hypothesis}
+\citep[\sect~3, p.~113]{diaconis1988}
 
 
 

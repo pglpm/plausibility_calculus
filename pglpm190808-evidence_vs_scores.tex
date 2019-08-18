@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2019-08-08T08:04:04+0200
-%% Last-Updated: 2019-08-18T19:04:39+0200
+%% Last-Updated: 2019-08-18T19:08:16+0200
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newif\ifarxiv
 \arxivfalse
@@ -16,9 +16,9 @@
 onecolumn,oneside,article,%french,italian,german,swedish,latin,
 british%
 ]{memoir}
-\newcommand*{\updated}{\today}
 \newcommand*{\firstdraft}{8 August 2019}
 \newcommand*{\firstpublished}{18 August 2019}
+\newcommand*{\updated}{\ifarxiv***\else\today\fi}
 \newcommand*{\propertitle}{A relation between log-likelihood\\ and cross-validation
   log-scores%\\{\large}%
 }% title uses LARGE; set Large for smaller

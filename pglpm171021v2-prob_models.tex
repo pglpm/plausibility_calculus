@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2017-10-21T20:53:34+0200
-%% Last-Updated: 2019-08-17T16:14:27+0200
+%% Last-Updated: 2019-08-18T19:06:33+0200
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newif\ifarxiv
 \arxivfalse
@@ -19,6 +19,7 @@ british%
 \newcommand*{\updated}{\today}
 \newcommand*{\firstdraft}{***}
 \newcommand*{\firstpublished}{***}
+\newcommand*{\updated}{\ifarxiv\firstpublished\else\today\fi}
 \newcommand*{\propertitle}{Probabilistic models:\\ models for what?%\\{\large ***}%
 }% title uses LARGE; set Large for smaller
 \newcommand*{\pdftitle}{\propertitle}

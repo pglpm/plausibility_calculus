@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2017-10-21T20:53:34+0200
-%% Last-Updated: 2019-08-18T19:06:33+0200
+%% Last-Updated: 2019-08-18T20:05:43+0200
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newif\ifarxiv
 \arxivfalse
@@ -19,7 +19,7 @@ british%
 \newcommand*{\updated}{\today}
 \newcommand*{\firstdraft}{***}
 \newcommand*{\firstpublished}{***}
-\newcommand*{\updated}{\ifarxiv\firstpublished\else\today\fi}
+\newcommand*{\updated}{\ifarxiv***\else\today\fi}
 \newcommand*{\propertitle}{Probabilistic models:\\ models for what?%\\{\large ***}%
 }% title uses LARGE; set Large for smaller
 \newcommand*{\pdftitle}{\propertitle}
@@ -262,10 +262,10 @@ citestyle=authoryear-comp,bibstyle=pglpm-authoryear,autopunct=false,sorting=ny,s
 %\appto{\citesetup}{\footnotesize}% smaller font for citations
 \defbibheading{bibliography}[\bibname]{\section*{#1}\addcontentsline{toc}{section}{#1}%\markboth{#1}{#1}
 }
-\newcommand*{\citep}{\parencites}
-\newcommand*{\citey}{\parencites*}
+\newcommand*{\citep}{\footnotecites}
+\newcommand*{\citey}{\footnotecites}
 %\renewcommand*{\cite}{\parencite}
-\renewcommand*{\cites}{\parencites}
+%\renewcommand*{\cites}{\parencites}
 \providecommand{\href}[2]{#2}
 \providecommand{\eprint}[2]{\texttt{\href{#1}{#2}}}
 \newcommand*{\amp}{\&}
@@ -480,6 +480,14 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 \postdisplaypenalty=1549
 \displaywidowpenalty=1602
 \raggedbottom
+
+\paragraphfootnotes
+% \threecolumnfootnotes
+\setlength{\footmarkwidth}{0em}
+%\setlength{\footmarksep}{0em}
+\footmarkstyle{\textsuperscript{\color{myred}\bfseries#1}~}
+%\footmarkstyle{\textsuperscript{[#1]}~}
+
 \selectlanguage{british}\frenchspacing
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

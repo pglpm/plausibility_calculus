@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2019-08-08T08:04:04+0200
-%% Last-Updated: 2019-08-16T15:23:59+0200
+%% Last-Updated: 2019-08-18T19:04:39+0200
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newif\ifarxiv
 \arxivfalse
@@ -18,15 +18,15 @@ british%
 ]{memoir}
 \newcommand*{\updated}{\today}
 \newcommand*{\firstdraft}{8 August 2019}
-\newcommand*{\firstpublished}{***}
+\newcommand*{\firstpublished}{18 August 2019}
 \newcommand*{\propertitle}{A relation between log-likelihood\\ and cross-validation
-  log-scores\\{\large (with some remarks on models)}%
+  log-scores%\\{\large}%
 }% title uses LARGE; set Large for smaller
-\newcommand*{\pdftitle}{A relation between log-likelihood and cross-validation log-scores (with some remarks on models)}
+\newcommand*{\pdftitle}{A relation between log-likelihood and cross-validation log-scores}
 \newcommand*{\headtitle}{log-likelihood and cross-validation}
 \newcommand*{\pdfauthor}{P.G.L.  Porta Mana}
 \newcommand*{\headauthor}{Porta Mana}
-\newcommand*{\reporthead}{Open Science Framework \href{https://doi.org/10.31219/osf.io/***}{\textsc{doi}:10.31219/osf.io/***}}% Report number
+\newcommand*{\reporthead}{\ifarxiv\else Open Science Framework \href{https://doi.org/10.31219/osf.io/k8mj3}{\textsc{doi}:10.31219/osf.io/k8mj3}\fi}% Report number
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% Calls to packages (uncomment as needed)
@@ -480,6 +480,14 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 \postdisplaypenalty=1549
 \displaywidowpenalty=1602
 \raggedbottom
+
+\paragraphfootnotes
+% \threecolumnfootnotes
+\setlength{\footmarkwidth}{0em}
+%\setlength{\footmarksep}{0em}
+\footmarkstyle{\textsuperscript{\color{myred}\bfseries#1}~}
+%\footmarkstyle{\textsuperscript{[#1]}~}
+
 \selectlanguage{british}\frenchspacing
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -500,8 +508,8 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 %\quad\href{https://orcid.org/0000-0002-6070-0784}{\protect\includegraphics[scale=0.16]{orcid_32x32.png}\textsc{orcid}:0000-0002-6070-0784}%
 }
 
-\date{Draft of \today\ (first drafted \firstdraft)}
-%\date{\firstpublished; updated \updated}
+%\date{Draft of \today\ (first drafted \firstdraft)}
+\date{\firstpublished; updated \updated}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% Macros @@@
@@ -667,7 +675,11 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 \setlength{\absrightindent}{0pt}
 \setlength{\abstitleskip}{-\absparindent}
 \begin{abstract}\labelsep 0pt%
-  \noindent ***
+  \noindent It is shown that the log-likelihood of a hypothesis or model
+  given some data is equivalent to an average of all leave-one-out
+  cross-validation log-scores that can be calculated from all subsets of
+  the data. This relation can be generalized to any $k$-fold
+  cross-validation log-scores.
 \\\noindent\emph{\footnotesize Note: Dear Reader
     \amp\ Peer, this manuscript is being peer-reviewed by you. Thank you.}
 % \par%\\[\jot]
@@ -699,14 +711,14 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 %%% BEGINNING OF MAIN TEXT
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{Introduction}
+\section{Log-likelihoods and cross-validation log-scores}
 \label{sec:intro}
 
-The probability calculus unequivocally tells us how
-$\p(H_{h} \| D \, \yK)$, our \dob\ in a hypothesis $H_{h}$ given data $D$
-and background information or assumptions $\yK$, is related to
-$\p(D \| H_{h} \, \yK)$, our \dob\ in observing those data when we
-entertain that hypothesis as true:
+The probability calculus unequivocally tells us how our \dob\ in a
+hypothesis $H_{h}$ given data $D$ and background information or assumptions
+$\yK$, that is, $\p(H_{h} \| D \, \yK)$, is related to our \dob\ in
+observing those data when we entertain that hypothesis as true, that is,
+$\p(D \| H_{h} \, \yK)$:
 \begin{subequations}
     \label{eq:posterior_hypothesis}
   \begin{align}
@@ -717,93 +729,192 @@ entertain that hypothesis as true:
     &=\frac{\p(D \| H_{h} \, \yK)\;\p(H_{h} \| \yK)}{\sum_{h'} \p(D \| H_{h'} \, \yK)\; \p(H_{h'} \| \yK)}.
   \end{align}
 \end{subequations}
-$D$, $H_{h}$, $\yK$ denote propositions, which are usually about numeric
-quantities. I use the terms \enquote{\dob}, \enquote{belief}, and
+$D$, $H_{h}$, $\yK$ denote propositions, which are usually about
+numeric quantities. I use the terms \enquote{\dob}, \enquote{belief}, and
 \enquote{probability} as synonyms. By \enquote{hypothesis} I mean either a
 scientific (physical, biological, \etc) hypothesis -- a state or
 development of things capable of experimental verification, at least in a
-thought experiment; or more generally some proposition, often not precisely
-specified, which leads us to assign the particular \dobs\
-$\p(\dotso \| H \, \yK)$. In the latter case $H$ is often called a
-\enquote{(probabilistic) model}.
-\begin{innote}\label{note:syntax}
-  The probability calculus, just like the truth calculus, proceeds purely
-  syntactically rather than semantically. That is, if I tell you that $H$
-  and $H \limplies D$ are true, you can conclude that $D$ is true;
-  similarly, if I tell you that $\p(H \| \yK) = p$ and
-  $\p(H \limplies D \| \yK) = q$, you can conclude (try it as an exercise)
-  that $\p(H\;D \| \yK) = p + q -1$. And in either case you don't need to
-  know what $H$ and $D$ are about -- they could be about Donald Duck or
-  parallel universes. Don't we too often abuse of this syntactical
-  property? We often say \enquote{under model $H$ our belief about the
-    value of quantity $x$ is expressed by such and such distribution
-    $\pf(x \| H)=f(x)$}, without explaining what $\theta$ really is
-  and why it leads to $f$. Aren't terms such as \enquote{model} and
-  \enquote{hypothesis}, as often used in probability and statistics,
-  convenient and respectable-looking carpets under which we can sweep the
-  fact that we don't quite know what we're speaking about? The need to look
-  under the carpet arises, though, the moment we have to specify our
-  pre-data belief, the prior, about the mysterious $H$.
+thought experiment -- or more generally some proposition, often not
+precisely specified, which leads to quantitatively specific distributions
+of beliefs for any contemplated data set.
+% $\p(\dotso \| H \, \yK)$.
+In the latter case we often call $H_{h}$  a
+\enquote{(probabilistic) model} rather than a \enquote{hypothesis}.
+% \begin{innote}\label{note:syntax}
+%   The probability calculus, just like the truth calculus, proceeds purely
+%   syntactically rather than semantically. That is, if I tell you that $H$
+%   and $H \limplies D$ are true, you can conclude that $D$ is true;
+%   similarly, if I tell you that $\p(H \| \yK) = p$ and
+%   $\p(H \limplies D \| \yK) = q$, you can conclude (try it as an exercise)
+%   that $\p(H\;D \| \yK) = p + q -1$. And in either case you don't need to
+%   know what $H$ and $D$ are about -- they could be about Donald Duck or
+%   parallel universes. Don't we too often abuse of this syntactical
+%   property? We often say \enquote{under model $H$ our belief about the
+%     value of quantity $x$ is expressed by such and such distribution
+%     $\pf(x \| H)=f(x)$}, without explaining what $\theta$ really is
+%   and why it leads to $f$. Aren't terms such as \enquote{model} and
+%   \enquote{hypothesis}, as often used in probability and statistics,
+%   convenient and respectable-looking carpets under which we can sweep the
+%   fact that we don't quite know what we're speaking about? The need to look
+%   under the carpet arises, though, the moment we have to specify our
+%   pre-data belief, the prior, about the mysterious $H$.
   
-  And yet again, semantics can very well be a by-product of syntax, or the
-  distinction between the two be a chimera
-  \citep{wittgenstein1945_t1999,girard2001,girard2003}. Such important
-  matters are unfortunately rarely discussed in probability and statistics.
-\end{innote}
+%   And yet again, semantics can very well be a by-product of syntax, or the
+%   distinction between the two be a chimera
+%   \citep{wittgenstein1945_t1999,girard2001,girard2003}. Such important
+%   matters are unfortunately rarely discussed in probability and statistics.
+% \end{innote}
 
 
-Expression~\eqref{eq:posterior_hypothesis_sethypotheses} assumes that
-we have a set $\set{H_{h}}$ of mutually exclusive and exhaustive hypotheses
-under consideration, which is implicit in our knowledge $\yK$ -- in fact,
-the right side is only valid if
+Expression~\eqref{eq:posterior_hypothesis_sethypotheses} assumes that we
+have a set $\set{H_{h}}$ of mutually exclusive and exhaustive hypotheses
+under consideration, which is implicit in our knowledge $\yK$. In fact it's
+only valid if
 \begin{equation}
   \label{eq:implicit_knowledge}
   \p\bigl(\tlor_{h} H_{h} \| \yK\bigr) = 1,
   \qquad
   \p(H_{h} \land H_{h'} \| \yK) = 0 \quad \text{if $h \ne h'$}.
-\end{equation}
-Only in extremely rare cases does the set of hypotheses $\set{H_{h}}$
-encompass and reflect the extremely complex and fuzzy hypotheses lying
-in the backs of our minds. The background knowledge $\yK$ is therefore only
-a simplified picture of our actual knowledge. That's why $\yK$ or the
-hypotheses $\set{H_{h}}$ are often called \emph{models}.\; \enquote{A
-  theory cannot duplicate nature, for if it did so in all respects, it
-  would be isomorphic to nature itself and hence useless, a mere repetition
-  of all the complexity which nature presents to us, that very complexity
-  we frame theories to penetrate and set aside. If a theory were not
-  simpler than the phenomena it was designed to model, it would serve no
-  purpose. Like a portrait, it can represent only a part of the subject it
-  pictures. This part it exaggerates, if only because it leaves out the
-  rest. Its simplicity is its virtue, provided the aspect it portrays be
-  that which we wish to study} (Truesdell \citep[Prologue p.~xvi]{truesdelletal1980}).
+\end{equation}\pagebreak
+Only  rarely does the set of hypotheses $\set{H_{h}}$
+encompass and reflect the extremely complex and fuzzy hypotheses lying in
+the backs of our minds. They're simplified pictures. That's also why
+they're %$\yK$ or the hypotheses $\set{H_{h}}$
+called \enquote{models}.
+% The background knowledge $\yK$ and the hypotheses
+% $\set{H_{h}}$ are therefore only simplified pictures of our actual
+% knowledge and conjectures. That's why
+% they're %$\yK$ or the hypotheses $\set{H_{h}}$
+% often called \emph{models}.% \; \enquote{A theory cannot duplicate nature,
+  % for if it did so in all respects, it would be isomorphic to nature itself
+  % and hence useless, a mere repetition of all the complexity which nature
+  % presents to us, that very complexity we frame theories to penetrate and
+  % set aside. If a theory were not simpler than the phenomena it was
+  % designed to model, it would serve no purpose. Like a portrait, it can
+  % represent only a part of the subject it pictures. This part it
+  % exaggerates, if only because it leaves out the rest. Its simplicity is
+  % its virtue, provided the aspect it portrays be that which we wish to
+  % study} (Truesdell \citep[Prologue p.~xvi]{truesdelletal1980}).
 
-Expression~\eqref{eq:posterior_hypothesis_universal} is universally valid
-instead, but it's rarely possible to quantify its denominator
-$\p(D \| \yK)$ unless we simplify our inferential problem by introducing a
-possibly unrealistic exhaustive set of hypotheses, thus falling back
-to~\eqref{eq:posterior_hypothesis_sethypotheses}. We can bypass this
-problem if we are content with comparing our beliefs about any two
-hypotheses through their ratio, so that the term $\p(D \| \yK)$ cancels
-out. See Jaynes's \citey[\sects~4.3--4.4]{jaynes1994_r2003} insightful
-remarks about such binary comparisons, and also Good's
-\citey[\sect~6.3--6.6]{good1950}.
+% Expression~\eqref{eq:posterior_hypothesis_universal} is universally valid
+% instead, but it's rarely possible to quantify its denominator
+% $\p(D \| \yK)$ unless we simplify our inferential problem by introducing a
+% possibly unrealistic exhaustive set of hypotheses, thus falling back
+% to~\eqref{eq:posterior_hypothesis_sethypotheses}. We can bypass this
+% problem if we are content with comparing our beliefs about any two
+% hypotheses through their ratio, so that the term $\p(D \| \yK)$ cancels
+% out. See Jaynes's \citey[\sects~4.3--4.4]{jaynes1994_r2003} insightful
+% remarks about such binary comparisons, and also Good's
+% \citey[\sect~6.3--6.6]{good1950}.
 
 \bigskip
 
-All terms in \eqn~\eqref{eq:posterior_hypothesis} are always important in
-an inference problem, both at decision stages (for example, evaluating
-which hypotheses to include in our simplified set, or which hypothesis to
-finally choose -- if we \emph{have to} -- discarding its competitors for
-future calculations; or if we must choose among possible medical
-treatment), and at exploratory stages (for example, examining whether a
-hypothesis leads to peculiar beliefs for peculiar kinds of data). But also
-other expressions are often used, either derived via the probability rules or
-constructed on more intuitive grounds.
+The term $\p(D \| H_{h} \, \yK)$ in \eqn~\eqref{eq:posterior_hypothesis} is
+called the \emph{likelihood} of the hypothesis given the data
+\citep[\sect~6.1 p.~62]{good1950}. Its logarithm is surprisingly called
+log-likelihood:
+\begin{equation}
+  \label{eq:log-likelihood}
+  \log\p(D \| H_{h} \, \yK),
+\end{equation}
+where the logarithm can be taken in an arbitrary basis (Turing, Good
+\citep[\eg][]{good1985,good1950,good1969}, Jaynes
+\citep[\sect~4.2]{jaynes1994_r2003} recommend base
+$\cramped10^{1/10}$, leading to a measurement in decibels; see the
+cited works for the practical advantages of such choice).
 
-My purpose is to show an exact relation between two specific quantities of
-either kind: the \emph{log-likelihood} and the \emph{leave-one-out cross-validation
-log-score}, although the relation can probably be extended to more general
-cross-validation log-scores. 
+The ratio of the likelihoods of two hypotheses, called \emph{relative Bayes
+  factor}, or its logarithm, the \emph{relative weight of
+  evidence},\footnote{\cites[\chap~6]{good1950}{good1975,good1981,good1985},
+  and many other works in \cite{good1983};
+  \cites[\sect~1.4]{osteyeeetal1974}{mackay1992,kassetal1995}; see also
+  \cite[\chaps~V, VI, A]{jeffreys1939_r1983}.} are often used to quantify
+how much the data favour our belief in one versus the other
+hypothesis (that is, assuming at least momentarily that they be
+exhaustive). \enquote{It is historically interesting that the expression
+  ``weight of evidence'', in its technical sense, anticipated the term
+  ``likelihood'' by over forty years} \citep[\sect~1.4.2
+p.~12]{osteyeeetal1974}.
+\begin{innote}
+  Recent literature \citep[for example][]{kassetal1995} seems to
+  exclusively deal with \emph{relative} Bayes factors. I'd like to recall,
+  lest it fades from the memory, the definition of the non-relative Bayes
+  factor for a hypothesis $H_{h}$ provided by data
+  $D$:\citep[\sect~2]{good1981}
+  \begin{equation}
+    \label{eq:proper_Bayes_factor}
+    \frac{\p(D \| H_{h} \; \yK)}{\p(D \| \lnot H_{h} \; \yK)} \equiv
+    \frac{\yO(H_{h} \| D \; \yK)}{\yO(H_{h} \| \yK)} =
+    \frac{\p(D \| H_{h}\; \yK)\; [1- \p(H_{h} \| \yK)]}{
+\sum_{h'}^{h' \ne h} \p(D \| H_{h'} \; \yK) \; \p(H_{h'} \| \yK)
+    },
+  \end{equation}
+  where the \emph{odds} $\yO$ is defined as $\yO \defd \p/(1-\p)$. Looking
+  at the expression on the right, which can be derived from the probability
+  rules, it's clear that the Bayes factor for a hypothesis involves the
+  likelihoods of \emph{all} other hypotheses as well as their pre-data
+  probabilities. This quantity and its logarithm, the (non-relative) weight
+  of evidence, have important properties which relative Bayes factors and
+  relative weights of evidence don't enjoy. For example, the expected
+  weight of evidence for a correct hypothesis is always positive, and for a
+  wrong hypotheses always negative\citep[\sect~6.7]{good1950}. See
+  Jaynes\citey[\sects~4.3--4.4]{jaynes1994_r2003} for further discussion
+  and a numeric example.
+\end{innote}
+
+
+\bigskip
+
+The literature in probability and statistics has also employed and debated
+other ad-hoc measures to quantify how the data relate to the hypotheses --
+or even to select one hypothesis for further use, discarding the
+others\citep[\sects~3.4, 6.1.6 gives the clearest motivation and
+explanation]{bernardoetal1994_r2000}[see
+also][]{stone1977,geisseretal1979,vehtarietal2012,vehtarietal2002,krnjajicetal2011,krnjajicetal2014,gelmanetal2014,gronauetal2019,chandramoulietal2019}.
+Here I consider one measure in particular: the \emph{leave-one-out
+  cross-validation log-score}\addtocounter{footnote}{-1}\footnotemark{},
+which I'll just call \enquote{log-score} for brevity:
+\begin{equation}
+  \label{eq:log-score}
+  \frac{1}{d} \sum_{i=1}^{d} \log\p(D_{i} \| D_{-i} \, H_{h} \, \yK)
+\end{equation}
+where every $D_{i}$ is one datum in the data $D \equiv \Land_{i} D_{i}$,
+and $D_{-i}$ denotes the data with datum $D_{i}$ excluded. The intuition
+behind this score can be colloquially expressed thus: \enquote{let's see
+  what my belief in one datum would be, on average, once I've observed the
+  other data, if I consider $H_{h}$ as true}. \enquote{On average} means
+considering such belief for every single datum in turn, and then taking the
+geometric mean of the resulting
+beliefs. % , that is, the arithmetic mean on a log scale.
+Other variants of this score use more general partitions of the data into
+two disjoint subsets\addtocounter{footnote}{-1}\footnotemark{}.
+
+\textcolor{white}{If you find this you can claim a postcard from me.}
+
+
+My purpose is to show an exact relation between the
+log-likelihood~\eqref{eq:log-likelihood} and the leave-one-out
+cross-validation log-score~\eqref{eq:log-score}. This relation doesn't seem
+to appear in the literature, and I find it very intriguing because it
+portrays the log-likelihood as a sort of full-scale use of the log-score:
+it says that \emph{the log-likelihood is the sum of all averaged log-scores
+  that can be formed from all data subsets}. The relation can be extended
+to more general cross-validation log-scores, and it can be of interest for
+the debate about the soundness of log-scores in deciding among hypotheses.
+
+
+
+
+% All terms in \eqn~\eqref{eq:posterior_hypothesis} are always important in
+% an inference problem, both at decision stages (for example, evaluating
+% which hypotheses to include in our simplified set, or which hypothesis to
+% finally choose -- if we \emph{have to} -- discarding its competitors for
+% future calculations; or if we must choose among possible medical
+% treatment), and at exploratory stages (for example, examining whether a
+% hypothesis leads to peculiar beliefs for peculiar kinds of data). But also
+% other expressions are often used, either derived via the probability rules or
+% constructed on more intuitive grounds.
+
 
 % based on the observed data, the
 % post-data belief~\eqref{eq:posterior_hypothesis} is necessary but not
@@ -818,88 +929,6 @@ cross-validation log-scores.
 % terms appearing in expression~\eqref{eq:posterior_hypothesis} are usually
 % freely examined.
 
-\section{Log-likelihood}
-\label{sec:loglh}
-
-The term $\p(D \| H_{h} \, \yK)$ in \eqn~\eqref{eq:posterior_hypothesis} is
-called the \emph{likelihood} of the hypothesis given the data
-\citep[\sect~6.1 p.~62]{good1950}. Its logarithm is surprisingly called log-likelihood:
-\begin{equation}
-  \label{eq:log-likelihood}
-  \log\p(D \| H_{h} \, \yK),
-\end{equation}
-where the logarithm can be taken in an arbitrary basis (Turing, Good
-\citep[\eg][]{good1985,good1950,good1969}, Jaynes
-\citep[\sect~4.2]{jaynes1994_r2003} recommend base
-$\cramped10^{1/10}$, leading to a measurement in decibels; see the
-cited works for the practical advantages of such choice).
-
-The ratio of the likelihoods of two hypotheses, called \emph{relative Bayes
-  factor}, or its logarithm, the \emph{relative weight of evidence}
-\footnote{\cites[\chap~6]{good1950}{good1975,good1981,good1985}, and many
-  other works in \cite{good1983};
-  \cites[\sect~1.4]{osteyeeetal1974}{mackay1992,kassetal1995}; see
-  also \cite[\chaps~V, VI, A]{jeffreys1939_r1983}.}, are often used to get an
-idea of how much the data favour our belief in one versus the other
-hypothesis (that is, assuming at least momentarily that they be
-exhaustive). \enquote{It is historically interesting that the expression
-  ``weight of evidence'', in its technical sense, anticipated the term
-  ``likelihood'' by over forty years} \citep[\sect~1.4.2
-p.~12]{osteyeeetal1974}.
-\begin{innote}
-  Recent literature \citep[for example][]{kassetal1995} seems to
-  exclusively deal with \emph{relative} Bayes factors, so I'd like to
-  mention that the non-relative Bayes factor for a hypothesis $H_{h}$
-  provided by data $D$ is actually defined as \citep[\sect~2]{good1981}
-  \begin{equation}
-    \label{eq:proper_Bayes_factor}
-    \frac{\p(D \| H_{h} \; \yK)}{\p(D \| \lnot H_{h} \; \yK)} \equiv
-    \frac{\yO(H_{h} \| D \; \yK)}{\yO(H_{h} \| \yK)} =
-    \frac{\p(D \| H_{h}\; \yK)\; [1- \p(H_{h} \| \yK)]}{
-\sum_{h'}^{h' \ne h} \p(D \| H_{h'} \; \yK) \; \p(H_{h'} \| \yK)
-    },
-  \end{equation}
-  where the \emph{odds} $\yO$ is defined as $\yO \defd \p/(1-\p)$. Looking
-  at the expression on the right, which can be derived from the probability
-  rules, it's clear that the Bayes factor for a hypothesis involves the
-  likelihoods of \emph{all} other hypotheses as well as their pre-data
-  probabilities. This quantity and its logarithm, the (non-relative) weight
-  of evidence, have important properties which \emph{relative} Bayes factors
-  don't enjoy. For example, the expected weight of evidence for a correct
-  hypothesis is always positive, and for a wrong hypotheses always negative
-  \citep[\sect~6.7]{good1950}. See Jaynes
-  \citey[\sects~4.3--4.4]{jaynes1994_r2003} for further discussion and a
-  numeric example.
-\end{innote}
-
-\section{Cross-validation log-score}
-\label{sec:logscore}
-
-The literature in probability and statistics has also employed various
- ad-hoc measures to make exploratory analyses. Here I consider one in
-particular: the \emph{leave-one-out cross-validation log-score}
-which I'll just call \enquote{log-score} for brevity:
-\begin{equation}
-  \label{eq:log-score}
-  \frac{1}{d} \sum_{i=1}^{d} \log\p(D_{i} \| D_{-i} \, H_{h} \, \yK)
-\end{equation}
-where every $D_{i}$ is one datum in the data $D \equiv \Land_{i} D_{i}$,
-and $D_{-i}$ denotes the data with datum $D_{i}$ excluded. The intuition
-behind this score, cursorily speaking, is this: \enquote{let's see what my
-  belief in one datum should be, on average, once I've observed the other
-  data, if I consider $H_{h}$ as true}. \enquote{On average} means
-considering such belief for every single datum in turn, and then taking the
-geometric mean. % , that is, the arithmetic mean on a log scale.
-Other variants of this score use more general partitions of the data into
-two disjoint subsets.
-
-
-The literature presents some theoretical motivations and use of the
-log-score, as well as some debate \citep[\sects~3.4, 6.1.6 gives the
-clearest motivation and explanation]{bernardoetal1994}[see
-also][]{stone1977,geisseretal1979,vehtarietal2012,vehtarietal2002,krnjajicetal2011,krnjajicetal2014,gelmanetal2014,gronauetal2019,chandramoulietal2019}.
-The relation that I'm going to show in the next section might be of
-interest for such debate.
 
 
 % Gelman \etal\ \citey{gelmanetal2014} show among other things that it's
@@ -931,10 +960,10 @@ interest for such debate.
 \section{A relation between log-likelihood and log-score}
 \label{sec:relation}
 
-I'd like to show an exact relation between the log-score~\eqref{eq:log-score} and
-the log-likelihood~\eqref{eq:log-likelihood} which doesn't seem to appear
-in the literature. I find this relation very intriguing because it portrays
-the log-likelihood as a sort of full-scale use of the log-score.% : it says that
+% I'd like to show an exact relation between the log-score~\eqref{eq:log-score} and
+% the log-likelihood~\eqref{eq:log-likelihood} which doesn't seem to appear
+% in the literature. I find this relation very intriguing because it portrays
+% the log-likelihood as a sort of full-scale use of the log-score.% : it says that
 % \emph{the log-likelihood is the sum of all averaged log-scores that can be formed
 %   from all data subsets}.
 
@@ -998,8 +1027,8 @@ indicated. But the mathematical reshaping we just did for
 $\p(D \| H \, \yK)$ -- that is, the root-product
 identity~\eqref{eq:root_product} and the expansion~\eqref{eq:product_2} --
 can be done for each of the remaining factors $\p(D_{-i} \| H \, \yK)$
-vertically aligned on the right in expression~\eqref{eq:product_2}; and so
-on recursively. Here is an explicit example for $d=3$:
+vertically aligned on the right in the expression above; and so on
+recursively. Here is an explicit example for $d=3$:
 \begin{multline}
   \label{eq:example_further_expansion}
   \p(D \| H \, \yK) \equiv{}\\
@@ -1020,7 +1049,7 @@ on recursively. Here is an explicit example for $d=3$:
     \bigr]^{1/2}\Bigr\}^{1/3}.
   \end{alignedat}
 \end{multline}
-In this example, the logarithm of the three vertically aligned factors in
+In this example the logarithm of the three vertically aligned factors in
 the left column is, as already noted, the log-score~\eqref{eq:log-score}.
 The logarithm of the six vertically aligned factors in the central column
 is an average of the log-scores calculated for the three distinct subsets
@@ -1070,8 +1099,8 @@ which can be compactly written
 % all hypotheses.
 That is, \emph{the log-likelihood is the sum of all averaged log-scores
   that can be formed from all (non-empty) data subsets with $k$ elements},
-the average for the $k$th-order log-scores being over the $\binom{d}{k}$
-subsets having the same cardinality $k$.
+the average for log-scores over $k$ data being taken over the
+$\binom{d}{k}$ subsets having the same cardinality $k$.
 
 There's also an equivalent form with a slightly different cross-validating
 interpretation: We take each datum $D_{j}$ in turn and calculate our
@@ -1090,11 +1119,11 @@ The result can be expressed as
     \log\p(D_{j} \| D_{i_{1}} \dotsm D_{i_{k}} \, H \, \yK).
 \end{empheq}
 
-\section{Discussion}
+\section{Brief discussion}
 \label{sec:discussion}
 
-The relation~\eqref{eq:general_equivalence_compact} just proven between the
-log-likelihood and the log-score brings forth several thoughts.
+% The relation~\eqref{eq:general_equivalence_compact} just proven between the
+% log-likelihood and the log-score brings forth several thoughts.
 
 It's remarkable that the individual log-scores in
 expressions~\eqref{eq:general_equivalence_compact} and
@@ -1107,147 +1136,154 @@ log-likelihood as a refinement and improvement of the log-score. The
 log-likelihood takes into account not only the log-score for the whole
 data, but also the log-scores for all possible subsets of data.
 Figuratively speaking it examines the relationship between data and
-hypothesis locally, globally, and on all intermediate scales.
+hypothesis locally, globally, and on all intermediate scales. To me this
+property makes the log-likelihood preferable to any single log-score
+(besides the fact that the log-likelihood is directly obtained from the
+principles of probability calculus), because our interest is usually in how
+the hypothesis $H$ relates to single data points as well as to any
+collection of them. I hope to discuss this point, which also involves the
+distinction between simple and composite
+hypotheses\citep[\sect~6.1.4]{bernardoetal1994_r2000}, more in detail
+elsewhere\citep{portamana9999b}.
 
-To me this makes sense, because our interest is in how the hypothesis $H$
-relates to single data points as well as to any collection of them. A good portion
-of recent literature seems to focus on the relation between a hypothesis
-and \emph{future} data rather than the collected data; but I think it's
-equally important to see how it relates to the data we already have. This
-tension between future and past data stems, in my opinion, from a
-misunderstanding about which model or hypothesis we're actually interested
-in. I hope to discuss this topic more at length in another work; but let me
-give a brief sketch of this misunderstanding.
-
-As mentioned in the introduction, $H$ sometimes denotes some unspecified
-knowledge that leads to a specific probabilistic model
-$\p(\dotso \| H \, \yK)$ (see the remark about syntax and semantics on
-p.~\pageref{note:syntax}). We must remember that the conjunction of $H$ and
-some data $D$  defines a new and \emph{different} probabilistic model
-$H' \defd D \, H$. In the context of exchangeable models
-\citep[\sect~4.2]{bernardoetal1994_r2000}{dawid2013,definetti1937,kingman1978,kochetal1982}[see
-also][]{diaconisetal1980} there's an important distinction between two
-kinds of models:
-\begin{enumerate}[label=(\alph*)]
-\item models that lead to the \emph{same} belief about new data,
-  independently of the data already observed:
-  \begin{equation}
-  \label{eq:irrelevance_data}
-  \p(D' \| D \, H \, \yK) = \p(D' \| H \, \yK)
-  \qquad\text{(if $D \nRightarrow D'$)};
-\end{equation}
-these are usually called \enquote{simple} hypotheses or models
-\citep[\sect~6.1.4]{bernardoetal1994_r2000}, but I prefer to call them
-\emph{non-learning} models, because when we assume such a model, observed
-data become irrelevant for our beliefs about unobserved data (although
-observed data are of course relevant for our belief about the model);
-\item models that lead to different beliefs about new data, depending on
-  the data already observed:
-  \begin{equation}
-  \label{eq:irrelevance_data}
-  \p(D' \| D \, H \, \yK) \ne \p(D' \| H \, \yK)
-  \qquad\text{(if $D \nRightarrow D'$)};
-\end{equation}
-these are usually called \enquote{composite} hypotheses or models\addtocounter{footnote}{-1}\footnotemark{},% \citep[\sect~6.1.4]{bernardoetal1994_r2000},
-but I prefer to call them \emph{learning} models, for reasons analogous to
-the ones in the previous point.
-\end{enumerate}
-Geometrically, learning models constitute a convex set, of which the
-non-learning models are the extreme points
-\footcites{lauritzen1974,lauritzen1982_r1988,lauritzen1984,barndorffnielsen1978_r2014,dynkin1978}[gives
-a terse summary]{dawid2013}.
-
-Learning models have the important, factual property that \emph{their
-  conjunction with observed data tends to a non-learning model} as the
-number of observed data increases. Geometrically, as data accumulate, our
-model moves in the convex set mentioned above, approaching an extreme
-point.\citep[compare Hjort in][]{barronetal1986}[\chap~3]{hjort1986} I say
-\enquote{factual} because this is not a mathematical theorem: we may
-imagine and do encounter sequences of data for which no convergence occurs;\citep[see
-\eg][]{bruno1964,berk1966,berk1970}[also][\sect~3]{diaconis1988} but in
-practice this usually makes us replace our simplified set of hypotheses
-with a less simplified one and start anew. There's a sort of Bayes theorem
-operating on a large hypothesis space which we keep on the back of our
-minds, of which the space represented on paper is just a necessarily
-simplified portrait or caricature (see Truesdell's quote in
-\sect~\ref{sec:intro}). Compare Jaynes's\citep[\sect~4.4.1]{jaynes1994_r2003} discussion about the
-\enquote{resurrection of dead hypotheses}.
+By applying the identity~\eqref{eq:root_product} and generalizing the
+expansion~\eqref{eq:product_rule} to different divisions of the data --
+leave-two-out, leave-three-out, and so on -- we see that the
+relation~\eqref{eq:general_equivalence_compact} can be generalized to any
+$k$-fold cross-validation log-scores. Thus the log-likelihood is also
+equivalent to an average of \emph{all conceivable} cross-validation
+log-scores for all subsets of data, though I haven't calculated the weights
+of this average.
 
 
+% A good
+% portion of recent literature seems to focus on the relation between a
+% hypothesis and \emph{future} data rather than the collected data; but I
+% think it's equally important to see how it relates to the data we already
+% have. This tension between future and past data stems, in my opinion, from
+% a misunderstanding about which model or hypothesis we're actually
+% interested in. I hope to discuss this topic more at length in another work;
+% but let me give a brief sketch of this misunderstanding.
 
-the \dobs\ about data given some
-hypothesis only \emph{after} some data have been collected, but I think
-it's equally important to see how it relates to the data we already have.
-(compare for example \citep{ohagan1995,bergeretal1996,bergeretal1998},
-although their motivation stems from o
+% As mentioned in the introduction, $H$ sometimes denotes some unspecified
+% knowledge that leads to a specific probabilistic model
+% $\p(\dotso \| H \, \yK)$ (see the remark about syntax and semantics on
+% p.~\pageref{note:syntax}). We must remember that the conjunction of $H$ and
+% some data $D$  defines a new and \emph{different} probabilistic model
+% $H' \defd D \, H$. In the context of exchangeable models
+% \citep[\sect~4.2]{bernardoetal1994_r2000}{dawid2013,definetti1937,kingman1978,kochetal1982}[see
+% also][]{diaconisetal1980} there's an important distinction between two
+% kinds of models:
+% \begin{enumerate}[label=(\alph*)]
+% \item models that lead to the \emph{same} belief about new data,
+%   independently of the data already observed:
+%   \begin{equation}
+%   \label{eq:irrelevance_data}
+%   \p(D' \| D \, H \, \yK) = \p(D' \| H \, \yK)
+%   \qquad\text{(if $D \nRightarrow D'$)};
+% \end{equation}
+% these are usually called \enquote{simple} hypotheses or models
+% \citep[\sect~6.1.4]{bernardoetal1994_r2000}, but I prefer to call them
+% \emph{non-learning} models, because when we assume such a model, observed
+% data become irrelevant for our beliefs about unobserved data (although
+% observed data are of course relevant for our belief about the model);
+% \item models that lead to different beliefs about new data, depending on
+%   the data already observed:
+%   \begin{equation}
+%   \label{eq:irrelevance_data}
+%   \p(D' \| D \, H \, \yK) \ne \p(D' \| H \, \yK)
+%   \qquad\text{(if $D \nRightarrow D'$)};
+% \end{equation}
+% these are usually called \enquote{composite} hypotheses or models,\addtocounter{footnote}{-1}\footnotemark{}% \citep[\sect~6.1.4]{bernardoetal1994_r2000},
+% but I prefer to call them \emph{learning} models, for reasons analogous to
+% the ones in the previous point.
+% \end{enumerate}
+% Geometrically, learning models constitute a convex set, of which the
+% non-learning models are the extreme points.
+% \footcites{lauritzen1974,lauritzen1982_r1988,lauritzen1984,barndorffnielsen1978_r2014,dynkin1978}[gives
+% a terse summary]{dawid2013} In fact, a learning model can be considered as
+% a state of uncertainty about which specific non-learning model holds,
+% within a certain set of non-learning models. Our belief about new data is
+% therefore give, by the theorem of total probability, by a mixture of our
+% beliefs conditional on the contemplated non-learning models entertained;
+% the weights of this mixture being our distribution of belief among these
+% models themselves. 
 
-If we see the symbol $H$ as just a placeholder for a probabilistic model,
-rather than an empirical hypothesis (see the remark about syntax and
-semantics on p.~\pageref{note:syntax}), we must remember that the
-conjunction of $H$ and some data $D$ simply defines a new probabilistic
-model $H' \defd H \, D$.
-
-
-
-The second point of view only holds for hypotheses $\hH$ which make any
-observed data irrelevant:
-\begin{equation}
-  \label{eq:irrelevance_data}
-  \p(D \| D' \, \hH \, \yK) = \p(D \| \hH \, \yK)
-  \qquad\text{if $D' \nRightarrow D$},
-\end{equation}
-or super-hypotheses $H$ about such hypotheses, leading to exchangeable
-joint beliefs:
-\begin{equation}
-  \label{eq:superhypothesis_irrelevance_data}
-  \p(D D' \| H \, \yK) = \sum_{h} \p(D \| \hH_{h} \, H \, \yK)\;
-  \p(D' \| \hH_{h} \, H \, \yK)\;
-  \p(\hH_{h} \| H \, \yK)
-  \qquad\text{if $D' \nRightarrow D$}.
-\end{equation}
-In either case the log-score can be seen as an approximation of the log-likelihood;
-more precisely of the log-likelihood per datum:
-\begin{equation}
-  \label{eq:logscore_approx_loglh}
-  \frac{1}{d} \sum_{i=1}^{d} \log\p(D_{i} \| D_{-i} \, H \, \yK)
-  \approx \frac{1}{d} \log\p(D \| H \, \yK).
-\end{equation}
-This is in fact an exact equality if property~\eqref{eq:irrelevance_data}
-holds for $H$.
-
-which lead to
-exchangeable beliefs about the data
-
-Second, we can see 
-This approximation is only valid
-
-This approximation is reasonable if the amount of data is large with
-respect to the dimension of the space of a single datum, because *** (ref
-to geisser, stone, gelfandetal)
-
-*** remark that $D\,H$ is a \emph{new} probability model: which of the two
-are we assessing? Connection with learning vs non-learning models which I
-hope to take up in another work.
-
-***  \citep[\sect~6.1.6]{bernardoetal1994} show the approximation only
-valid if number of data large enough -- not very interesting situation in
-today's problems.
-
-
-*** problems calculation with time-relevant hypotheses
-
-
-\enquote{we cannot give a universal rule for them beyond the common-sense one, that if anybody does not know what his suggested value is, or whether there is one, he does not know what question he is asking and consequently does not know what his answer means} \citep[\sect~3.1 p.~124 ]{jeffreys1939_r1983}.
-
-
-*** with similar procedure we can included all k-fold scores.
-
-
-**
+% From this point of view the question \enquote{how well does the
+%   \emph{learning} model forecast new data?} appears somewhat strange.
+% Because it's the \emph{non-learning} models that, so to speak, forecast new
+% data, while the learning model only expresses our beliefs in those models.
+% And it's the \emph{observed} data that help us sharpen such beliefs (future
+% data can't help us: we don't have them) -- precisely by quantifying how
+% much the competing individual non-learning models have been able to
+% forecast the observed data so far. And this is exactly what the likelihood or
+% log-likelihood~\eqref{eq:log-likelihood} does, whereas the
+% log-score~\eqref{eq:log-score} only does so incompletely.
 
 
 
-\textcolor{white}{If you find this you can claim a postcard from me.}
+% Learning models have the important, factual
+% property that \emph{their conjunction with observed data tends to a
+%   non-learning model} as the number of observed data increases.
+% Geometrically, as data accumulate, our model moves in the convex set
+% mentioned above, approaching an extreme point.\citep[compare Hjort
+% in][p.~50]{barronetal1986}[\chap~3]{hjort1986} I say \enquote{factual}
+% because this is not a mathematical theorem: we may imagine and do encounter
+% sequences of data for which no convergence occurs;\citep[see
+% \eg][]{bruno1964,berk1966,berk1970}[also][\sect~3]{diaconis1988} but in
+% practice this usually makes us replace our simplified set of hypotheses
+% with a less simplified one and start anew. There's a sort of Bayes theorem
+% operating on a large hypothesis space which we keep on the back of our
+% minds, of which the space represented on paper is just a necessarily
+% simplified portrait or caricature (see Truesdell's quote in
+% \sect~\ref{sec:intro}). Compare
+% Jaynes's\citep[\sect~4.4.1]{jaynes1994_r2003} discussion about the
+% \enquote{resurrection of dead hypotheses}.
+
+% The hypotheses typically investigated in the sciences are non-learning models.
+
+
+% the \dobs\ about data given some
+% hypothesis only \emph{after} some data have been collected, but I think
+% it's equally important to see how it relates to the data we already have.
+% (compare for example \citep{ohagan1995,bergeretal1996,bergeretal1998},
+% although their motivation stems from o
+
+% If we see the symbol $H$ as just a placeholder for a probabilistic model,
+% rather than an empirical hypothesis (see the remark about syntax and
+% semantics on p.~\pageref{note:syntax}), we must remember that the
+% conjunction of $H$ and some data $D$ simply defines a new probabilistic
+% model $H' \defd H \, D$.
+
+
+
+% The second point of view only holds for hypotheses $\hH$ which make any
+% observed data irrelevant:
+% \begin{equation}
+%   \label{eq:irrelevance_data}
+%   \p(D \| D' \, \hH \, \yK) = \p(D \| \hH \, \yK)
+%   \qquad\text{if $D' \nRightarrow D$},
+% \end{equation}
+% or super-hypotheses $H$ about such hypotheses, leading to exchangeable
+% joint beliefs:
+% \begin{equation}
+%   \label{eq:superhypothesis_irrelevance_data}
+%   \p(D D' \| H \, \yK) = \sum_{h} \p(D \| \hH_{h} \, H \, \yK)\;
+%   \p(D' \| \hH_{h} \, H \, \yK)\;
+%   \p(\hH_{h} \| H \, \yK)
+%   \qquad\text{if $D' \nRightarrow D$}.
+% \end{equation}
+% In either case the log-score can be seen as an approximation of the log-likelihood;
+% more precisely of the log-likelihood per datum:
+% \begin{equation}
+%   \label{eq:logscore_approx_loglh}
+%   \frac{1}{d} \sum_{i=1}^{d} \log\p(D_{i} \| D_{-i} \, H \, \yK)
+%   \approx \frac{1}{d} \log\p(D \| H \, \yK).
+% \end{equation}
+% This is in fact an exact equality if property~\eqref{eq:irrelevance_data}
+% holds for $H$.
+
+
 
 
 
@@ -1290,24 +1326,24 @@ today's problems.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% Acknowledgements
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
-\iffalse
+%\iffalse
 \begin{acknowledgements}
   \ldots to the Kavli Foundation and the Centre of Excellence scheme of the
   Research Council of Norway (Yasser Roudi group) for financial support. To
-  Mari \amp\ Miri for continuous encouragement and affection, and to Buster
+  Mari, Miri, Emma for continuous encouragement and affection, and to Buster
   Keaton and Saitama for filling life with awe and inspiration. To the
   developers and maintainers of Open Science Framework, \LaTeX, Emacs,
   AUC\TeX, Python, Inkscape, Sci-Hub for making a free and impartial
   scientific exchange possible.
 %\rotatebox{15}{P}\rotatebox{5}{I}\rotatebox{-10}{P}\rotatebox{10}{\reflectbox{P}}\rotatebox{-5}{O}.
-\sourceatright{\autanet}
+\hfill{\autanet}
 \end{acknowledgements}
-\fi
+%\fi
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% Appendices
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
-\clearpage
+%\clearpage
 % %\renewcommand*{\appendixpagename}{Appendix}
 % %\renewcommand*{\appendixname}{Appendix}
 % %\appendixpage
@@ -1322,7 +1358,7 @@ today's problems.
 % \defbibnote{postnote}{\par\medskip\noindent{\footnotesize% Note:
 %     \arxivp \mparcp \philscip \biorxivp}}
 
-\printbibliography[prenote=prenote%,postnote=postnote
+\printbibliography[%prenote=prenote%,postnote=postnote
 ]
 
 \end{document}

@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
-%% Created: 2019-08-08T08:04:04+0200
-%% Last-Updated: 2019-08-23T11:53:42+0200
+%% Created: 2019-09-01T11:35:53+0200
+%% Last-Updated: 2019-09-01T17:32:49+0200
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newif\ifarxiv
 \arxivfalse
@@ -16,17 +16,16 @@
 onecolumn,oneside,article,%french,italian,german,swedish,latin,
 british%
 ]{memoir}
-\newcommand*{\firstdraft}{8 August 2019}
-\newcommand*{\firstpublished}{18 August 2019}
-\newcommand*{\updated}{20 August 2019}
-\newcommand*{\propertitle}{A relation between log-likelihood\\ and cross-validation
-  log-scores%\\{\large}%
+\newcommand*{\firstdraft}{1 September 2019}
+\newcommand*{\firstpublished}{***}
+\newcommand*{\updated}{\ifarxiv***\else\today\fi}
+\newcommand*{\propertitle}{Investigations on model comparison and selection [draft]%\\{\large ***}%
 }% title uses LARGE; set Large for smaller
-\newcommand*{\pdftitle}{A relation between log-likelihood and cross-validation log-scores}
-\newcommand*{\headtitle}{log-likelihood and cross-validation}
+\newcommand*{\pdftitle}{\propertitle}
+\newcommand*{\headtitle}{Model comparison and selection}
 \newcommand*{\pdfauthor}{P.G.L.  Porta Mana}
 \newcommand*{\headauthor}{Porta Mana}
-\newcommand*{\reporthead}{\ifarxiv\else Open Science Framework \href{https://doi.org/10.31219/osf.io/k8mj3}{\textsc{doi}:10.31219/osf.io/k8mj3}\fi}% Report number
+\newcommand*{\reporthead}{\iftrue\else Open Science Framework \href{https://doi.org/10.31219/osf.io/***}{\textsc{doi}:10.31219/osf.io/***}\fi}% Report number
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% Calls to packages (uncomment as needed)
@@ -82,12 +81,12 @@ british%
 \addtolength{\jot}{\jot} % increase spacing in multiline formulae
 \setlength{\multlinegap}{0pt}
 
-\usepackage{empheq}% automatically calls amsmath and mathtools
-%\newcommand*{\widefbox}[1]{\fbox{\hspace{1ex}#1\hspace{1ex}}}
+%\usepackage{empheq}% automatically calls amsmath and mathtools
+%\newcommand*{\widefbox}[1]{\fbox{\hspace{1em}#1\hspace{1em}}}
 
+%%%% empheq above seems more versatile than these:
 %\usepackage{fancybox}
-
-%\usepackage{mdframed}
+%\usepackage{framed}
 
 % \usepackage[misc]{ifsym} % for dice
 % \newcommand*{\diceone}{{\scriptsize\Cube{1}}}
@@ -254,8 +253,8 @@ citestyle=authoryear-comp,bibstyle=pglpm-authoryear,autopunct=false,sorting=ny,s
 \setcounter{biburlnumpenalty}{1}
 \setcounter{biburlucpenalty}{0}
 \setcounter{biburllcpenalty}{1}
-\DeclareDelimFormat{multicitedelim}{\addcomma\space}
-\DeclareDelimFormat{compcitedelim}{\addcomma\space}
+\DeclareDelimFormat{multicitedelim}{\addsemicolon\space}
+\DeclareDelimFormat{compcitedelim}{\addsemicolon\space}
 \DeclareDelimFormat{postnotedelim}{\space}
 \ifarxiv\else\addbibresource{portamanabib.bib}\fi
 \renewcommand{\bibfont}{\footnotesize}
@@ -501,9 +500,9 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 % {\protect\centering ***\\%
 % \footnotesize\epost{\email{***}{***}}}%
 % \hspace*{\stretch{1}}%
-\parbox{0.75\linewidth}%\makebox[0pt][c]%
+\parbox{0.5\linewidth}%\makebox[0pt][c]%
 {\protect\centering P.G.L.  Porta Mana\\%
-\footnotesize Kavli Institute, Trondheim, Norway \quad\epost{\email{piero.mana}{ntnu.no}}}%
+\footnotesize Kavli Institute, Trondheim, Norway\quad\epost{\email{pgl}{portamana.org}}}%
 \hspace*{\stretch{1}}%
 %\quad\href{https://orcid.org/0000-0002-6070-0784}{\protect\includegraphics[scale=0.16]{orcid_32x32.png}\textsc{orcid}:0000-0002-6070-0784}%
 }
@@ -552,11 +551,11 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 %\newcommand*{\incr}{\triangle}%finite increment
 \newcommand*{\defd}{\coloneqq}
 \newcommand*{\defs}{\eqqcolon}
-\newcommand*{\Land}{\bigwedge}
-\newcommand*{\Lor}{\bigvee}
+%\newcommand*{\Land}{\bigwedge}
+%\newcommand*{\Lor}{\bigvee}
 %\newcommand*{\lland}{\DOTSB\;\land\;}
 %\newcommand*{\llor}{\DOTSB\;\lor\;}
-\newcommand*{\limplies}{\mathbin{\Rightarrow}}%implies
+%\newcommand*{\limplies}{\mathbin{\Rightarrow}}%implies
 %\newcommand*{\suchthat}{\mid}%{\mathpunct{|}}%such that (eg in sets)
 %\newcommand*{\with}{\colon}%with (list of indices)
 %\newcommand*{\mul}{\times}%multiplication
@@ -580,11 +579,11 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 %\DeclareMathOperator{\pr}{P}%probability
 \newcommand*{\pf}{\mathrm{p}}%probability
 \newcommand*{\p}{\mathrm{P}}%probability
-\newcommand*{\E}{\mathrm{E}}
+%\newcommand*{\E}{\mathrm{E}}
 %\renewcommand*{\|}{\nonscript\,\vert\nonscript\;\mathopen{}}
 \renewcommand*{\|}[1][]{\nonscript\,#1\vert\nonscript\;\mathopen{}}
 %\DeclarePairedDelimiterX{\cond}[2]{(}{)}{#1\nonscript\,\delimsize\vert\nonscript\;\mathopen{}#2}
-\DeclarePairedDelimiterX{\condt}[2]{[}{]}{#1\nonscript\,\delimsize\vert\nonscript\;\mathopen{}#2}
+%\DeclarePairedDelimiterX{\condt}[2]{[}{]}{#1\nonscript\,\delimsize\vert\nonscript\;\mathopen{}#2}
 %\DeclarePairedDelimiterX{\conds}[2]{\{}{\}}{#1\nonscript\,\delimsize\vert\nonscript\;\mathopen{}#2}
 %\newcommand*{\+}{\lor}
 %\renewcommand{\*}{\land}
@@ -600,10 +599,10 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 \newcommand*{\fig}{fig.}%
 \newcommand*{\figs}{figs}%
 \newcommand*{\vs}{{vs}}
-\newcommand*{\etc}{{etc.}}
+%\newcommand*{\etc}{{etc.}}
 %\newcommand*{\ie}{{i.e.}}
 %\newcommand*{\ca}{{c.}}
-\newcommand*{\eg}{{e.g.}}
+%\newcommand*{\eg}{{e.g.}}
 \newcommand*{\foll}{{ff.}}
 %\newcommand*{\viz}{{viz}}
 \newcommand*{\cf}{{cf.}}
@@ -624,7 +623,7 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 \newcommand*{\tsum}{\mathop{\textstyle\sum}\nolimits}
 %\newcommand*{\tint}{\begingroup\textstyle\int\endgroup\nolimits}
 %\newcommand*{\tland}{\mathop{\textstyle\bigwedge}\nolimits}
-\newcommand*{\tlor}{\mathop{\textstyle\bigvee}\nolimits}
+%\newcommand*{\tlor}{\mathop{\textstyle\bigvee}\nolimits}
 %\newcommand*{\sprod}{\mathop{\textstyle\prod}}
 %\newcommand*{\ssum}{\mathop{\textstyle\sum}}
 %\newcommand*{\sint}{\begingroup\textstyle\int\endgroup}
@@ -647,13 +646,11 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 % \newcommand{\explanation}[4][t]{%\setlength{\tabcolsep}{-1ex}
 % %\smash{
 % \begin{tabular}[#1]{c}#2\\[0.5\jot]\rule{1pt}{#3}\\#4\end{tabular}}%}
-% \newcommand*{\ptext}[1]{\text{\small #1}}
+\newcommand*{\ptext}[1]{\text{\small #1}}
 %\DeclareMathOperator*{\argsup}{arg\,sup}
 \newcommand*{\dob}{degree of belief}
 \newcommand*{\dobs}{degrees of belief}
-\newcommand*{\yK}{I}
-\newcommand*{\yO}{\mathrm{O}}
-\newcommand*{\hH}{\Hat{H}}
+\newcommand*{\fmri}{fMRI}
 %%% Custom macros end @@@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -675,11 +672,8 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 \setlength{\absrightindent}{0pt}
 \setlength{\abstitleskip}{-\absparindent}
 \begin{abstract}\labelsep 0pt%
-  \noindent It is shown that the log-likelihood of a hypothesis or model
-  given some data is equal to an average of all leave-one-out
-  cross-validation log-scores that can be calculated from all subsets of
-  the data. This relation can be generalized to any $k$-fold
-  cross-validation log-scores.
+  \noindent Some questions and investigations on model comparison and
+  selection, based on previous work on fMRI data and health conditions \parencites{portamanaetal2018}.
 \\\noindent\emph{\footnotesize Note: Dear Reader
     \amp\ Peer, this manuscript is being peer-reviewed by you. Thank you.}
 % \par%\\[\jot]
@@ -711,472 +705,134 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 %%% BEGINNING OF MAIN TEXT
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{Log-likelihoods and cross-validation log-scores}
-\label{sec:intro}
+\section{What is the question?}
+\label{sec:question}
 
-The probability calculus unequivocally tells us how our \dob\ in a
-hypothesis $H_{h}$ given data $D$ and background information or assumptions
-$\yK$, that is, $\p(H_{h} \| D \, \yK)$, is related to our \dob\ in
-observing those data when we entertain that hypothesis as true, that is,
-$\p(D \| H_{h} \, \yK)$:
-\begin{subequations}
-    \label{eq:posterior_hypothesis}
-  \begin{align}
-    \label{eq:posterior_hypothesis_universal}
-    \p(H_{h} \| D \, \yK) &=
-    \frac{\p(D \| H_{h} \, \yK)\;\p(H_{h} \| \yK)}{\p(D \| \yK)}\\
-    \label{eq:posterior_hypothesis_sethypotheses}
-    &=\frac{\p(D \| H_{h} \, \yK)\;\p(H_{h} \| \yK)}{\sum_{h'} \p(D \| H_{h'} \, \yK)\; \p(H_{h'} \| \yK)}.
-  \end{align}
-\end{subequations}
-$D$, $H_{h}$, $\yK$ denote propositions, which are usually about
-numeric quantities. I use the terms \enquote{\dob}, \enquote{belief}, and
-\enquote{probability} as synonyms. By \enquote{hypothesis} I mean either a
-scientific (physical, biological, \etc) hypothesis -- a state or
-development of things capable of experimental verification, at least in a
-thought experiment -- or more generally some proposition, often not
-precisely specified, which leads to quantitatively specific distributions
-of beliefs for any contemplated data set.
-% $\p(\dotso \| H \, \yK)$.
-In the latter case we often call $H_{h}$  a
-\enquote{(probabilistic) model} rather than a \enquote{hypothesis}.
-% \begin{innote}\label{note:syntax}
-%   The probability calculus, just like the truth calculus, proceeds purely
-%   syntactically rather than semantically. That is, if I tell you that $H$
-%   and $H \limplies D$ are true, you can conclude that $D$ is true;
-%   similarly, if I tell you that $\p(H \| \yK) = p$ and
-%   $\p(H \limplies D \| \yK) = q$, you can conclude (try it as an exercise)
-%   that $\p(H\;D \| \yK) = p + q -1$. And in either case you don't need to
-%   know what $H$ and $D$ are about -- they could be about Donald Duck or
-%   parallel universes. Don't we too often abuse of this syntactical
-%   property? We often say \enquote{under model $H$ our belief about the
-%     value of quantity $x$ is expressed by such and such distribution
-%     $\pf(x \| H)=f(x)$}, without explaining what $\theta$ really is
-%   and why it leads to $f$. Aren't terms such as \enquote{model} and
-%   \enquote{hypothesis}, as often used in probability and statistics,
-%   convenient and respectable-looking carpets under which we can sweep the
-%   fact that we don't quite know what we're speaking about? The need to look
-%   under the carpet arises, though, the moment we have to specify our
-%   pre-data belief, the prior, about the mysterious $H$.
-  
-%   And yet again, semantics can very well be a by-product of syntax, or the
-%   distinction between the two be a chimera
-%   \citep{wittgenstein1945_t1999,girard2001,girard2003}. Such important
-%   matters are unfortunately rarely discussed in probability and statistics.
-% \end{innote}
+Consider the following scenario:
 
-
-Expression~\eqref{eq:posterior_hypothesis_sethypotheses} assumes that we
-have a set $\set{H_{h}}$ of mutually exclusive and exhaustive hypotheses
-under consideration, which is implicit in our knowledge $\yK$. In fact it's
-only valid if
+New software will be put into use in several clinical centres, for use in
+diagnosis of schizophrenia (or some other brain disease or condition). The
+software must be designed to give clinicians the \emph{likelihood} that a
+subject has one of two health conditions, given \fmri\ data of some kind
+recorded from the subject. In other words, the software must calculate the
+numerical value of
 \begin{equation}
-  \label{eq:implicit_knowledge}
-  \p\bigl(\tlor_{h} H_{h} \| \yK\bigr) = 1,
-  \qquad
-  \p(H_{h} \land H_{h'} \| \yK) = 0 \quad \text{if $h \ne h'$}.
-\end{equation}\pagebreak
-Only  rarely does the set of hypotheses $\set{H_{h}}$
-encompass and reflect the extremely complex and fuzzy hypotheses lying in
-the backs of our minds. They're simplified pictures. That's also why
-they're %$\yK$ or the hypotheses $\set{H_{h}}$
-called \enquote{models}.
-% The background knowledge $\yK$ and the hypotheses
-% $\set{H_{h}}$ are therefore only simplified pictures of our actual
-% knowledge and conjectures. That's why
-% they're %$\yK$ or the hypotheses $\set{H_{h}}$
-% often called \emph{models}.% \; \enquote{A theory cannot duplicate nature,
-  % for if it did so in all respects, it would be isomorphic to nature itself
-  % and hence useless, a mere repetition of all the complexity which nature
-  % presents to us, that very complexity we frame theories to penetrate and
-  % set aside. If a theory were not simpler than the phenomena it was
-  % designed to model, it would serve no purpose. Like a portrait, it can
-  % represent only a part of the subject it pictures. This part it
-  % exaggerates, if only because it leaves out the rest. Its simplicity is
-  % its virtue, provided the aspect it portrays be that which we wish to
-  % study} (Truesdell \citep[Prologue p.~xvi]{truesdelletal1980}).
-
-Expression~\eqref{eq:posterior_hypothesis_universal} is universally valid
-instead, but it's rarely possible to quantify its denominator
-$\p(D \| \yK)$ unless we simplify our inferential problem by introducing a
-possibly unrealistic exhaustive set of hypotheses, thus falling back
-to~\eqref{eq:posterior_hypothesis_sethypotheses}. We can bypass this
-problem if we are content with comparing our beliefs about any two
-hypotheses through their ratio, so that the term $\p(D \| \yK)$ cancels
-out. See Jaynes's \citey[\sects~4.3--4.4]{jaynes1994_r2003} insightful
-remarks about such binary comparisons, and also Good's
-\citey[\sect~6.3--6.6]{good1950}.
-
-\bigskip
-
-The term $\p(D \| H_{h} \, \yK)$ in \eqn~\eqref{eq:posterior_hypothesis} is
-called the \emph{likelihood} of the hypothesis given the data
-\citep[\sect~6.1 p.~62]{good1950}. Its logarithm is surprisingly called
-log-likelihood:
-\begin{equation}
-  \label{eq:log-likelihood}
-  \log\p(D \| H_{h} \, \yK),
+  \label{eq:software_likelihood}
+  \pf(\ptext{\fmri\ data} \| \ptext{health condition}, \ptext{pre-test info})
 \end{equation}
-where the logarithm can be taken in an arbitrary basis (Turing, Good
-\citep[\eg][]{good1985,good1950,good1969}, Jaynes
-\citep[\sect~4.2]{jaynes1994_r2003} recommend base
-$\cramped10^{1/10}$, leading to a measurement in decibels; see the
-cited works for the practical advantages of such choice).
+which will be used by the clinician together with the likelihoods from
+other tests and her pre-test probabilities for the health conditions, to
+arrive at a final probability for the health conditions, to be used to
+decide upon treatment, dismissal, or other
+actions\citep[\sect~1]{portamanaetal2018}.
 
-The ratio of the likelihoods of two hypotheses, called \emph{relative Bayes
-  factor}, or its logarithm, the \emph{relative weight of
-  evidence},\footnote{\cites[\chap~6]{good1950}{good1975,good1981,good1985},
-  and many other works in \cite{good1983};
-  \cites[\sect~1.4]{osteyeeetal1974}{mackay1992,kassetal1995}; see also
-  \cite[\chaps~V, VI, A]{jeffreys1939_r1983}.} are often used to quantify
-how much the data favour our belief in one versus the other
-hypothesis (that is, assuming at least momentarily that they be
-exhaustive). \enquote{It is historically interesting that the expression
-  ``weight of evidence'', in its technical sense, anticipated the term
-  ``likelihood'' by over forty years} \citep[\sect~1.4.2
-p.~12]{osteyeeetal1974}.
-\begin{innote}
-  Recent literature \citep[for example][]{kassetal1995} seems to
-  exclusively deal with \emph{relative} Bayes factors. I'd like to recall,
-  lest it fades from the memory, the definition of the non-relative Bayes
-  factor for a hypothesis $H_{h}$ provided by data
-  $D$:\citep[\sect~2]{good1981}
-  \begin{equation}
-    \label{eq:proper_Bayes_factor}
-    \frac{\p(D \| H_{h} \; \yK)}{\p(D \| \lnot H_{h} \; \yK)} \equiv
-    \frac{\yO(H_{h} \| D \; \yK)}{\yO(H_{h} \| \yK)} =
-    \frac{\p(D \| H_{h}\; \yK)\; [1- \p(H_{h} \| \yK)]}{
-\sum_{h'}^{h' \ne h} \p(D \| H_{h'} \; \yK) \; \p(H_{h'} \| \yK)
-    },
-  \end{equation}
-  where the \emph{odds} $\yO$ is defined as $\yO \defd \p/(1-\p)$. Looking
-  at the expression on the right, which can be derived from the probability
-  rules, it's clear that the Bayes factor for a hypothesis involves the
-  likelihoods of \emph{all} other hypotheses as well as their pre-data
-  probabilities. This quantity and its logarithm, the (non-relative) weight
-  of evidence, have important properties which relative Bayes factors and
-  relative weights of evidence don't enjoy. For example, the expected
-  weight of evidence for a correct hypothesis is always positive, and for a
-  wrong hypotheses always negative\citep[\sect~6.7]{good1950}. See
-  Jaynes\citey[\sects~4.3--4.4]{jaynes1994_r2003} for further discussion
-  and a numeric example.
-\end{innote}
+We have to prepare and deliver such software, using two possible parametric
+learning models to build it and some data, consisting in pairs of \fmri\
+recordings and health conditions, to train it.
+
+There are three possible sub-scenarios:
+\begin{enumerate}[label=(S\arabic*)]
+\item The software doesn't have the ability to update its decisions based
+  on new data the clinician acquires during its actual use, and we must 
+  choose one particular \emph{non-learning} model among those constituting
+  our two learning models (the latter are a convex combinations of the
+  former).
+\item The software doesn't have the ability to update its decisions based
+  on new data the clinician acquires during its actual use, and we must 
+  choose one of the two learning models, which will be used in its final
+  state of training.
+\item The software will be able to update its decisions based on new data
+  the clinician acquires during its use. We must still choose one of the
+  two learning models.
+\end{enumerate}
+
+For each sub-scenario we ask two questions: which model must we choose for
+the software? And how to make such a decision?
+
+We can also ask which of the three sub-scenarios should we choose, if we
+had the possibility of choosing one.
 
 
-\bigskip
 
-The literature in probability and statistics has also employed and debated
-other ad-hoc measures to quantify how the data relate to the hypotheses --
-or even to select one hypothesis for further use, discarding the
-others\citep[\sects~3.4, 6.1.6 gives the clearest motivation and
-explanation]{bernardoetal1994_r2000}[see
-also][]{stone1977,geisseretal1979,vehtarietal2012,vehtarietal2002,krnjajicetal2011,krnjajicetal2014,gelmanetal2014,gronauetal2019,chandramoulietal2019}.
-Here I consider one measure in particular: the \emph{leave-one-out
-  cross-validation log-score}\addtocounter{footnote}{-1}\footnotemark{},
-which I'll just call \enquote{log-score} for brevity:
-\begin{equation}
-  \label{eq:log-score}
-  \frac{1}{d} \sum_{i=1}^{d} \log\p(D_{i} \| D_{-i} \, H_{h} \, \yK)
-\end{equation}
-where every $D_{i}$ is one datum in the data $D \equiv \Land_{i=1}^{d} D_{i}$,
-and $D_{-i}$ denotes the data with datum $D_{i}$ excluded. The intuition
-behind this score can be colloquially expressed thus: \enquote{let's see
-  what my belief in one datum would be, on average, once I've observed the
-  other data, if I consider $H_{h}$ as true}. \enquote{On average} means
-considering such belief for every single datum in turn, and then taking the
-geometric mean of the resulting
-beliefs. % , that is, the arithmetic mean on a log scale.
-Other variants of this score use more general partitions of the data into
-two disjoint subsets\addtocounter{footnote}{-1}\footnotemark{}.
 
 \textcolor{white}{If you find this you can claim a postcard from me.}
 
 
-My purpose is to show an exact relation between the
-log-likelihood~\eqref{eq:log-likelihood} and the leave-one-out
-cross-validation log-score~\eqref{eq:log-score}. This relation doesn't seem
-to appear in the literature, and I find it very intriguing because it
-portrays the log-likelihood as a sort of full-scale use of the log-score:
-it says that \emph{the log-likelihood is the sum of all averaged log-scores
-  that can be formed from all data subsets}. The relation can be extended
-to more general cross-validation log-scores, and it can be of interest for
-the debate about the soundness of log-scores in deciding among hypotheses.
+
+%%%% examples use empheq
+%   \begin{empheq}[left={\mathllap{\begin{aligned}    \de\yF_{\yc}/\de\yp&=0\text{:} \\
+%         \de\yF_{\yc}/\de\ym&=0\text{:}\\ \de\yF_{\yc}/\de\yl&=0\text{:}\end{aligned}}\qquad}\empheqlbrace]{align}
+%     \label{eq:con_p}
+% %    \de\yF_{\yc}/\de\yp &\equiv
+%     -\ln\yp + \ln\yq + \yl\yM + \ym\yu &=0,\\
+%     \label{eq:con_u}
+% %    \de\yF_{\yc}/\de\ym &\equiv
+%     \yu\yp-1 &=0,\\
+%     \label{eq:con_l}
+%     %\de\yF_{\yc}/\de\yl &\equiv
+%     \yM\yp-\yc &=0.
+%   \end{empheq}
+%%%%
+% \begin{empheq}[box=\widefbox]{equation}
+%   \label{eq:maxent_question}
+%   \p\bigl[\yE{N+1}{k} \bigcond \tsum\yo\yf{N}\in\yA, \yM\bigr] = \mathord{?}
+% \end{empheq}
 
 
 
+% \[
+%   \begin{tikzcd}
+%       M_{n,n}(\CC) \arrow{r}{R'_{a}(\Hat{U})} & M_{n,n}(\CC)
+%     \\
+%     L(\mathcal{H}) \arrow{r}{\Hat{U}} \arrow[swap]{d}{R_*}\arrow[swap]{u}{R'_*} & L(\mathcal{H}) \arrow{d}{R_*}\arrow{u}{R'_*} \\
+%       M_{n,n}(\CC) \arrow{r}{R_{a}(\Hat{U})} & M_{n,n}(\CC)
+%   \end{tikzcd}
+% \]
 
-% All terms in \eqn~\eqref{eq:posterior_hypothesis} are always important in
-% an inference problem, both at decision stages (for example, evaluating
-% which hypotheses to include in our simplified set, or which hypothesis to
-% finally choose -- if we \emph{have to} -- discarding its competitors for
-% future calculations; or if we must choose among possible medical
-% treatment), and at exploratory stages (for example, examining whether a
-% hypothesis leads to peculiar beliefs for peculiar kinds of data). But also
-% other expressions are often used, either derived via the probability rules or
-% constructed on more intuitive grounds.
-
-
-% based on the observed data, the
-% post-data belief~\eqref{eq:posterior_hypothesis} is necessary but not
-% sufficient. We also need to specify a utility or cost function to calculate
-% the expected gains of choosing one or another hypothesis or making one or
-% another decision
-% \citep{kadaneetal1980b,degroot1970_r2004}[\chap~2]{bernardoetal1994_r2000}.
-
-% If our problem has an exploratory nature instead -- for example, evaluating
-% which hypotheses to include in our simplified set, or examining whether a
-% hypothesis leads to peculiar beliefs for peculiar kinds of data -- then all
-% terms appearing in expression~\eqref{eq:posterior_hypothesis} are usually
-% freely examined.
+% \[
+%   \begin{tikzcd}
+%       \CC^n \arrow{r}{R'_*(A)} & \CC^n
+%     \\
+%     \mathcal{H} \arrow{r}{A} \arrow[swap]{d}{R}\arrow[swap]{u}{R'} & \mathcal{H} \arrow{d}{R}\arrow{u}{R'} \\
+%       \CC^n \arrow{r}{R_*(A)} & \CC^n
+%   \end{tikzcd}
+% \]
 
 
+% \[
+%   \begin{tikzcd}
+%     \mathcal{H} \arrow{r}{A} \arrow[swap]{d}{R} & \mathcal{H} \arrow{d}{R} \\
+%       \CC^n \arrow{r}{R_*(A)} & \CC^n
+%   \end{tikzcd}
+% \]
 
-% Gelman \etal\ \citey{gelmanetal2014} show among other things that it's
-% approximately equal to expected value of the post-data log-probability of a
-% new datum:
-% \begin{equation}
-%   \label{eq:logscore_approx_logposterior}
-%   \E\condt[\Big]{\log\p(D' \| D\; H_{h} \; \yK)}{ D\; H_{h} \; \yK},
-% \end{equation}
-% ***entropy, remark on invariance***
-% where $D'$ represents the new datum. Krnjaji\'c \etal\
-% \citey{krnjajicetal2011,krnjajicetal2014} numerically compare it with the
-% deviance information criterion. Regarding its uses I recommend reading the
-% recent debate among Gronau \etal\ \parentext{\cite*{gronauetal2019} \amp\
-%   \cite{chandramoulietal2019}}, where all authors give very insightful
-% remarks.
+%%\setlength{\intextsep}{0.5ex}% with wrapfigure
+%\begin{figure}[p!]%{r}{0.4\linewidth} % with wrapfigure
+%  \centering\includegraphics[trim={12ex 0 18ex 0},clip,width=\linewidth]{maxent_saddle.png}\\
+%\caption{caption}\label{fig:comparison_a5}
+%\end{figure}% exp_family_maxent.nb
 
-% (There's an ambiguity in this
-% definition, because we can ask: what's a \enquote{datum} in the case of
-% multi-dimensional observations? a single numerical value? or a
-% multidimensional point? Different interpretations lead to different
-% log-scores. We'll come back to this point later.)
-
-% This is a reasonable intuition, and the log-score~\eqref{eq:log-score} and
-% post-data probability~\eqref{eq:posterior_hypothesis} often lead to
-% qualitatively similar results in comparing two hypotheses. There are
-% exceptions, though.
-
-\section{A relation between log-likelihood and log-score}
-\label{sec:relation}
-
-% I'd like to show an exact relation between the log-score~\eqref{eq:log-score} and
-% the log-likelihood~\eqref{eq:log-likelihood} which doesn't seem to appear
-% in the literature. I find this relation very intriguing because it portrays
-% the log-likelihood as a sort of full-scale use of the log-score.% : it says that
-% \emph{the log-likelihood is the sum of all averaged log-scores that can be formed
-%   from all data subsets}.
-
-% My point of view, which hinges on the logical foundations of the
-% probability calculus
-% \citep{polya1939_t1941,polya1949,polya1954b_r1968,cox1946,hailperin1996,jaynes1994_r2003,paris1994_r2006,snow1998,tereninetal2015_r2017},
-% is that every intuitively built quantitative assessment of belief is either
-% \begin{enumerate*}[label=(\arabic*)]
-% \item an approximation of a formula that can be derived from the
-%   probability calculus, or
-% \item wrong.
-% \end{enumerate*}
-
-% I shall now show that the log-score above can be viewed as an approximation
-% of the log-likelihood $\p(D \| H_{h} \, \yK)$ of the post-data
-% probability~\eqref{eq:posterior_hypothesis}; or, if you like, that the
-% post-data probability can be seen as a refined version of the log-score.
-
-\bigskip
-
-We can obviously write the likelihood as the $d$th root of its $d$th power:
-\begin{equation}
-  \label{eq:root_product}
-  \p(D \| H \, \yK) \equiv  \bigl[\,
-  \underbracket{\p(D \| H \, \yK) \times \dotsm \times
-  \p(D \| H \, \yK)}_{\text{$d$ times}}
-  \,\bigr]^{1/d}
-\end{equation}
-where we have dropped the subscript ${}_{h}$ for simplicity. By the rules
-of probability we have
-\begin{equation}
-  \label{eq:product_rule}
-  \p(D \| H \, \yK) =
-  \p(D_{i} \| D_{-i} \, H_{h} \, \yK) \times \p(D_{-i} \|  H_{h} \, \yK)
-\end{equation}
-no matter which specific $i \in \set{1, \dotsc, d}$ we choose (temporal
-ordering and similar matters are completely irrelevant in the formula
-above: it's a logical relation between propositions). So let's expand each
-of the $d$ factors in the identity~\eqref{eq:root_product} using the
-product rule~\eqref{eq:product_rule}, using a different $i$ for each of
-them. The result can be thus displayed:
-\begin{equation}
-  \label{eq:product_2}
-  \begin{aligned}
-    \p(D \| H \, \yK) \equiv{}
-    \bigl[\,&\p(D_{1} \| D_{-1} \, H \, \yK) \times
-            \p(D_{-1} \|  H \, \yK) \times{}\\
-          &\p(D_{2} \| D_{-2} \, H \, \yK) \times
-            \p(D_{-2} \| H \, \yK)\times{}\\
-          &\hphantom{\p(D_{2} \| D_{-2} \, H \, \yK)}
-            \mathrlap{\dotso}\hphantom{{}\times  \p(D_{-2} \| H \, \yK)}\times{}\\
-          &\p(D_{d} \|\underbracket[0pt][1ex]{ D_{-d} }_{\mathclap{%
-              \substack{\Big\uparrow\\\text{this column leads to the log-score}}%
-}} H \, \yK) \times\p(D_{-d} \|  H \, \yK)
-            \,\bigr]^{1/d}.
-  \end{aligned}
-\end{equation}
-Upon taking the logarithm of this expression, the $d$ factors vertically
-aligned on the left add up to the log-score~\eqref{eq:log-score}, as
-indicated. But the mathematical reshaping we just did for
-$\p(D \| H \, \yK)$ -- that is, the root-product
-identity~\eqref{eq:root_product} and the expansion~\eqref{eq:product_2} --
-can be done for each of the remaining factors $\p(D_{-i} \| H \, \yK)$
-vertically aligned on the right in the expression above; and so on
-recursively. Here is an explicit example for $d=3$:
-\begin{multline}
-  \label{eq:example_further_expansion}
-  \p(D \| H \, \yK) \equiv{}\\
-  \begin{alignedat}[b]{2}
-    \Bigl\{\,&\p(D_{1} \| D_{2} \,D_{3} \, H \, \yK) \times
-    \bigl[ &&\p(D_{2} \| D_{3} \, H \, \yK) \times \p( D_{3} \| H \, \yK) \times{}\\[-0.5\jot]
-    &&&\p(D_{3} \| D_{2} \, H \, \yK) \times \p( D_{2} \| H \, \yK)
-    \bigr]^{1/2}\times{}\\[\jot]
- %
-    &\p(D_{2} \| D_{1} \,D_{3} \, H \, \yK) \times
-    \bigl[&&\p(D_{1} \| D_{3} \, H \, \yK) \times \p( D_{3} \| H \, \yK) \times{}\\[-0.5\jot]
-    &&&\p(D_{3} \| D_{1} \, H \, \yK) \times \p( D_{1} \| H \, \yK)
-    \bigr]^{1/2}\times{}\\[\jot]
- %
-    &\p(D_{3} \| D_{1} \,D_{2} \, H \, \yK) \times
-    \bigl[&&\p(D_{1} \| D_{2} \, H \, \yK) \times \p( D_{2} \| H \, \yK) \times{}\\[-0.5\jot]
-    &&&\p(D_{2} \| D_{1} \, H \, \yK) \times \p( D_{1} \| H \, \yK)
-    \bigr]^{1/2}\Bigr\}^{1/3}.
-  \end{alignedat}
-\end{multline}
-In this example the logarithm of the three vertically aligned factors in
-the left column is, as already noted, the log-score~\eqref{eq:log-score}.
-The logarithm of the six vertically aligned factors in the central column
-is an average of the log-scores calculated for the three distinct subsets
-of pairs of data $\set{D_{1}\,D_{2}}$, $\set{D_{1}\, D_{3}}$,
-$\set{D_{2}\, D_{3}}$. Likewise, the logarithm of the six factors
-vertically aligned on the right is the average of the log-scores for the
-three subsets of data singletons $\set{D_{1}}$, $\set{D_{2}}$,
-$\set{D_{3}}$.
-
-
-In the general case with $d$ data there are $\binom{d}{k}$ subsets with $k$
-data points. We therefore obtain
-\begin{multline}
-  \label{eq:general_equivalence}
-  \log\p(D \| H \, \yK) \equiv
-  \frac{1}{d} \sum_{i=1}^{d} \log\p(D_{i} \| D_{-i} \, H \, \yK)
-+{}\\
-\shoveright{\frac{1}{d} \sum_{i\in\set{1,\dotsc,d}} \frac{1}{d-1} \sum_{j\in\set{1,\dotsc,d}}^{j\ne i}  \!\!\! \log\p(D_{-i,j} \| D_{-i,-j} \, H \, \yK)
-  +{}}\\[0.5\jot]
-\shoveright{\binom{d}{d-2}^{-1} \!\!\! \sum_{i,j\in\set{1,\dotsc,d}}^{i<j} \frac{1}{d-2} \sum_{k\in\set{1,\dotsc,d}}^{k\ne i,j} \!\!\! \log\p(D_{-i,-j,k} \| D_{-i,-j,-k} \, H \, \yK)
-      +{}}\\[\jot]
-       {} \dotsb +{}\\
-  % \binom{d}{k}^{-1}\frac{1}{k}\quad
-  % \sum_{\mathclap{\text{$k$-tuples}}}   \log\p(D_{i_{1}} \| \underbracket{D_{i_{2}} \dotsm D_{i_{k}}}_{\mathclap{\text{order doesn't matter}}} \, H \, \yK)
-  % +{}&\\[0.5\jot]
-  % \dotsb +{}&\\[0.5\jot]
-\shoveright{      \binom{d}{2}^{-1} \!\!\! \sum_{i,j\in\set{1,\dotsc,d}}^{i<j} \frac{1}{2}
-%      \sum_{k\in\set{1,\dotsc,d}}^{k\ne i,j}  \!\!\! \log\p(D_{k} \| D_{i,j} \, H \, \yK)
-      \bigl[ \log\p(D_{i} \| D_{j} \, H \, \yK) +
-      \log\p(D_{j} \| D_{i} \, H \, \yK)\bigr]
-  +{}}\\[0.5\jot]
-  \frac{1}{d} \sum_{i=1}^{d} \log\p(D_{i} \| H \, \yK),
-\end{multline}
-which can be compactly written
-\begin{empheq}[box=\fbox]{equation}
-    \label{eq:general_equivalence_compact}
-    \log\p(D \| H \, \yK) \equiv
-    \sum_{k=1}^{d}
-    \binom{d}{k}^{-1}
-    \!\smashoperator{\sum_{\substack{\text{ordered}\\\text{$k$-tuples}}}} 
-    \;\;\;\frac{1}{k}\;\;
-    \smashoperator{\sum_{\substack{\text{cyclic}\\\text{permutations}}}} 
-    \log\p(D_{i_{1}} \| D_{i_{2}} \dotsm D_{i_{k}} \, H \, \yK).
-\end{empheq}
-% The post-data log-probability for $H$ will be equal to this expression,
-% plus the pre-data log-probability for $H$, plus a term which is the same for
-% all hypotheses.
-That is, \emph{the log-likelihood is the sum of all averaged log-scores
-  that can be formed from all (non-empty) data subsets with $k$ elements},
-the average for log-scores over $k$ data being taken over the
-$\binom{d}{k}$ subsets having the same cardinality $k$.
-
-There's also an equivalent form with a slightly different cross-validating
-interpretation: We take each datum $D_{j}$ in turn and calculate our
-log-belief in it conditional on all possible subsets of remaining data,
-from the empty subset with no data (term $k=0$), to the only subset
-$D_{-j}$ with all data except $D_{j}$ (term $k=d-1$). These log-beliefs are
-averaged over the $\binom{d-1}{k}$ subsets having the same cardinality $k$.
-The result can be expressed as
-\begin{empheq}[box=\fbox]{equation}
-    \label{eq:general_equivalence_alternative}
-    \log\p(D \| H \, \yK) \equiv
-    \frac{1}{d}\sum_{j=1}^{d}
-    \sum_{k=0}^{d-1}
-    \binom{d-1}{k}^{-1}
-    \smashoperator{\sum_{\substack{\text{ordered}\\\text{$k$-tuples,}\\\text{$j$ excluded}}}}
-    \log\p(D_{j} \| D_{i_{1}} \dotsm D_{i_{k}} \, H \, \yK).
-\end{empheq}
-
-\section{Brief discussion}
-\label{sec:discussion}
-
-% The relation~\eqref{eq:general_equivalence_compact} just proven between the
-% log-likelihood and the log-score brings forth several thoughts.
-
-It's remarkable that the individual log-scores in
-expressions~\eqref{eq:general_equivalence_compact} and
-\eqref{eq:general_equivalence_alternative} above are computationally
-expensive, but their sum results in the
-log-likelihood, which is less expensive.
-
-The relation~\eqref{eq:general_equivalence_compact} invites us to see the
-log-likelihood as a refinement and improvement of the log-score. The
-log-likelihood takes into account not only the log-score for the whole
-data, but also the log-scores for all possible subsets of data.
-Figuratively speaking it examines the relationship between data and
-hypothesis locally, globally, and on all intermediate scales. To me this
-property makes the log-likelihood preferable to any single log-score
-(besides the fact that the log-likelihood is directly obtained from the
-principles of the probability calculus), because our interest is usually in how
-the hypothesis $H$ relates to single data points as well as to any
-collection of them. I hope to discuss this point, which also involves the
-distinction between simple and composite
-hypotheses\citep[\sect~6.1.4]{bernardoetal1994_r2000}, more in detail
-elsewhere\citep{portamana9999b}.
-
-By applying the identity~\eqref{eq:root_product} and generalizing the
-expansion~\eqref{eq:product_rule} to different divisions of the data --
-leave-two-out, leave-three-out, and so on -- we see that the
-relation~\eqref{eq:general_equivalence_compact} can be generalized to any
-$k$-fold cross-validation log-scores. Thus the log-likelihood is also
-equivalent to an average of \emph{all conceivable} cross-validation
-log-scores for all subsets of data, though I haven't calculated the weights
-of such average.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% Acknowledgements
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
-%\iffalse
+\iffalse
 \begin{acknowledgements}
-  \ldots to the Kavli Foundation and the Centre of Excellence scheme of the
-  Research Council of Norway (Yasser Roudi group) for financial support. To
-  Aki Vehtari for some references. To the staff of the NTNU library for
-  their always prompt assistance. To Mari, Miri, Emma for continuous
-  encouragement and affection, and to Buster Keaton and Saitama for filling
-  life with awe and inspiration. To the developers and maintainers of Open
-  Science Framework, \LaTeX, Emacs, AUC\TeX, Python, Inkscape, Sci-Hub for
-  making a free and impartial scientific exchange possible.%
+  \ldots to Mari \amp\ Miri for continuous encouragement and affection, and
+  to Buster Keaton and Saitama for filling life with awe and inspiration.
+  To the developers and maintainers of \LaTeX, Emacs, AUC\TeX, Open Science
+  Framework, R, Python, Inkscape, Sci-Hub for making a free and impartial
+  scientific exchange possible.
 %\rotatebox{15}{P}\rotatebox{5}{I}\rotatebox{-10}{P}\rotatebox{10}{\reflectbox{P}}\rotatebox{-5}{O}.
-\\\mbox{}\hfill\autanet
+%\sourceatright{\autanet}
+\mbox{}\hfill\autanet
 \end{acknowledgements}
-%\fi
+\fi
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% Appendices
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
-%\clearpage
+\clearpage
 % %\renewcommand*{\appendixpagename}{Appendix}
 % %\renewcommand*{\appendixname}{Appendix}
 % %\appendixpage
@@ -1191,7 +847,7 @@ of such average.
 % \defbibnote{postnote}{\par\medskip\noindent{\footnotesize% Note:
 %     \arxivp \mparcp \philscip \biorxivp}}
 
-\printbibliography[%prenote=prenote%,postnote=postnote
+\printbibliography[prenote=prenote%,postnote=postnote
 ]
 
 \end{document}

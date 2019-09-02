@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2019-09-01T11:35:53+0200
-%% Last-Updated: 2019-09-02T14:54:20+0200
+%% Last-Updated: 2019-09-02T15:38:03+0200
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newif\ifarxiv
 \arxivfalse
@@ -651,6 +651,8 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 \newcommand*{\dob}{degree of belief}
 \newcommand*{\dobs}{degrees of belief}
 \newcommand*{\fmri}{fMRI}
+\newcommand*{\Ma}{M_1}
+\newcommand*{\Mb}{M_2}
 \newcommand*{\Ki}{I_{\text{gen}}}
 \newcommand*{\Ks}{I_{\text{subj}}}
 \newcommand*{\Kt}{I_{\text{tests}}}
@@ -734,16 +736,17 @@ arrive at a final probability for the health conditions, to be used to
 decide upon treatment, dismissal, or other
 actions\citep[\sect~1]{portamanaetal2018}.
 
-We have to prepare and deliver such software, using two possible parametric
-learning models to build it and some data, consisting in pairs of \fmri\
-recordings and health conditions, to train it.
+We have to prepare and deliver such software, using two possible
+probability models, $\Ma$ and $\Mb$, to build it and some data, consisting
+in pairs of \fmri\ recordings and health conditions, to train it. Each
+model is a mixture of parametric \emph{non-learning} models.
 
 There are three possible sub-scenarios:
 \begin{enumerate}[label=(S\arabic*)]
 \item The software doesn't have the ability to take into account new data
   that the clinician acquires during its actual use, and we must choose one
-  particular \emph{non-learning} model among those constituting our two
-  learning models (the latter are a convex combinations of the former).
+  particular \emph{non-learning} model among those constituting each of our
+  two models.
 \item The software doesn't have the ability to take into account new data
   that the clinician acquires during its actual use, and we must choose one
   of the two learning models, which will be used in its final state of
@@ -846,27 +849,44 @@ the \fmri\ test from the others with the product rule,
   \label{eq:bayes_simplif}
   \p(  \hh \| \yx,\; \Xp,\; \Xt,\; \Kt,\; \Ks,\; \Ki)
   \propto{}\\
-  \begin{aligned}[b]
-  \p( \Kt \| \yx,\; \hh,\; \Xp,\; \Xt,\; \Ks,\; \Ki)& \times{}\\
-  \p( \yx\| \hh,\; \Xp,\; \Xt,\; \Ks,\; \Ki)& \times{}\\
-  \p(  \hh \|\Ks,\; \Ki).&
-  \end{aligned}
+\shoveright{  \p( \Kt \| \yx,\; \hh,\; \Xp,\; \Xt,\; \Ks,\; \Ki) \times{}}\\
+\shoveright{  \p( \yx\| \hh,\; \Xp,\; \Xt,\; \Ks,\; \Ki) \times{}}\\
+  \p(  \hh \|\Ks,\; \Ki).
 \end{multline}
 The second probability on the right side,
 \begin{empheq}[box=\widefbox]{equation}
   \label{eq:software_prob}
   \p( \yx\| \hh,\; \Xp,\; \Xt,\; \Ks,\; \Ki)
 \end{empheq}
-is what our software must provide. This expression answers the questions
-that we asked in our scenario:
+is what our software must provide, \eqn~\eqref{eq:software_likelihood}. This
+expression answers the questions that we asked in our scenario:
 \begin{itemize}
 \item If our software can learn from data acquired during its use, they
-  enter the expression above. If it can't learn, it means that $\Xp$ above
-  is simply unavailable and therefore drops out of the expression.
-\item 
+  enter the expression above as $\Xp$. If it can't learn, it means that
+  $\Xp$ is unavailable and therefore drops out of the expression.
+\item If $\Xp$ past is unavailable, then the probability is the one that
+  would be given at the end of the training: no non-learning model is
+  chosen within the two learning models. The learning model has become a
+  non-learning one, so to speak, because new data are discarded instead of
+  being fed to it.
+\item No choice between the two probability models $\Ma$ and $\Mb$ is made
+  either: our software should use their mixture, weighted by the
+  probability that the training data (and past data, if available) give to
+  each. In formulae,
 \end{itemize}
+\vspace{-\medskipamount}
+  \begin{multline}
+    \label{eq:software_uses_mixture}
+    \p( \yx\| \hh,\; \Xp,\; \Xt,\; \Ks,\; \Ki) ={}\\
+\shoveright{    \p( \yx\| \hh,\; \Xp,\; \Xt,\; \Ks,\; \Ki,\; \Ma) \times{}}\\ 
+\shoveright{ \p(\Ma \| \Xp,\; \Xt,\; \Ki) +{}}\\ 
+    \shoveright{\p( \yx\| \hh,\; \Xp,\; \Xt,\; \Ks,\; \Ki,\; \Mb) \times{}}\\
+    \p(\Mb \| \Xp,\; \Xt,\; \Ki).
+  \end{multline}
 
-
+But it may be the case that the software can only implement one of the two
+models, or only one of the parametric non-learning ones they're the
+mixtures of. In this case we must face a decision problem.
 
 %%%% examples use empheq
 %   \begin{empheq}[left={\mathllap{\begin{aligned}    \de\yF_{\yc}/\de\yp&=0\text{:} \\

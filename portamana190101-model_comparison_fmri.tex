@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2019-09-01T11:35:53+0200
-%% Last-Updated: 2019-09-01T17:52:21+0200
+%% Last-Updated: 2019-09-02T12:28:09+0200
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newif\ifarxiv
 \arxivfalse
@@ -651,6 +651,11 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 \newcommand*{\dob}{degree of belief}
 \newcommand*{\dobs}{degrees of belief}
 \newcommand*{\fmri}{fMRI}
+\newcommand*{\Ki}{I_{\text{gen}}}
+\newcommand*{\Ks}{I_{\text{subj}}}
+\newcommand*{\Dt}{D_{\text{tests}}}
+\newcommand*{\yx}{x}
+\newcommand*{\hs}{S}
 %%% Custom macros end @@@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -705,7 +710,7 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 %%% BEGINNING OF MAIN TEXT
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{What is the question?}
+\section{Probability models}
 \label{sec:question}
 
 Consider the following scenario:
@@ -760,11 +765,42 @@ will also be examined.
 
 The purpose of this investigation is not to give a final answer to the
 questions above, but rather to bring to light all the different factors
-that enter this complex problem.
-
-
+that enter this complex problem. I'll first also show the answer that's
+straightforwardly given by the probability calculus -- and which is the
+simplest -- to compare it to the other answers we obtained.
 
 \textcolor{white}{If you find this you can claim a postcard from me.}
+
+
+\subsection{Solution from the probability calculus}
+\label{sec:sol_probcalculus}
+
+The direct application of the probability calculus and decision theory to our
+scenario gives a straightforward answer to our problem.
+
+Consider the clinician being visited by an actual subject in the future.
+She will make a general assessment of the subject's brain health, taking
+also into account gender, age, family history, lifestyle, environment, and
+similar factors. She will order some tests, including the \fmri\ scan. She
+will also have background knowledge about schizophrenia and also a
+statistics of the subjects she examined in the past. Let's denote groups of
+these pieces of information symbolically:
+\begin{subequations}
+  \begin{align}
+    \Ki &\defd \parbox[c]{0.75\columnwidth}{\small general background information, including statistics of past schizophrenic and healthy subjects,}
+    \\
+    \Ks &\defd \parbox[t]{0.75\columnwidth}{\small information about the subject gathered before clinical tests}
+    \\
+    \Dt &\defd \parbox[t]{0.75\columnwidth}{\small results from tests, excluding \fmri}
+    \\
+    \yx &\defd \parbox[t]{0.75\columnwidth}{\small\fmri\ test result}
+    \\
+    \hs &\defd \parbox[t]{0.75\columnwidth}{\small\enquote{the subject suffers from schizophrenia}}
+  \end{align}
+\end{subequations}
+
+
+
 
 
 

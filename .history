@@ -39,3 +39,50 @@ m<-read.matrix(datafilenames[1])
 dim(m)
 q()
 n
+m <- matrix(1:12,3,4)
+m
+cov(m)
+cov(t(m))
+m <- matrix(1:12,4,3)
+m
+cov(m)
+cov(m)/4*3
+colMeans(m)
+co <- colMeans(m)
+co
+crossprod(co)
+crossprod(t(co))
+parlogit2
+dim(hdata)
+dim(hdata)
+fun <- function(x){x^2}
+fun(4)
+testf <- fun
+testf(4)
+c(4>1)
+(4>1)*1
+(4<1)*1
+arctan(1)
+a <- tg2(0.3)
+a
+itg2(a)
+itg2(a)
+tg2(1)
+tg2(0.9)
+itg2(tg2(0.9))
+ilogit2(logit2(0.01))
+ilogit2(logit2(0.01))
+1:10:2
+seq(1,10,2)
+seq(1,100,10)
+c(1:10)[0.4]
+c(1:10)[4.3]
+seq(1,100,length.out=10)
+seq(1,101,length.out=10)
+dim(hdata)
+dim(cov(hdata))
+length(colMeans(data))
+length(colMeans(hdata))
+ls(globalenv())
+q()
+n

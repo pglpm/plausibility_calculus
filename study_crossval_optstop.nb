@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       158,          7]
-NotebookDataLength[    545236,      10579]
-NotebookOptionsPosition[    540866,      10505]
-NotebookOutlinePosition[    541200,      10520]
-CellTagsIndexPosition[    541157,      10517]
+NotebookDataLength[    545246,      10579]
+NotebookOptionsPosition[    540863,      10505]
+NotebookOutlinePosition[    541210,      10520]
+CellTagsIndexPosition[    541167,      10517]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -10444,13 +10444,13 @@ Cell[BoxData[
 Cell[BoxData[
  TagBox[
   StyleBox[
-   DynamicModuleBox[{$CellContext`t$$ = 1, Typeset`show$$ = True, 
+   DynamicModuleBox[{$CellContext`t$$ = 15, Typeset`show$$ = True, 
     Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
     Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
     "\"untitled\"", Typeset`specs$$ = {{
-      Hold[$CellContext`t$$], 1, 20, 1}}, Typeset`size$$ = {
-    360., {177., 182.}}, Typeset`update$$ = 0, Typeset`initDone$$, 
-    Typeset`skipInitDone$$ = True, $CellContext`t$14602$$ = 0}, 
+      Hold[$CellContext`t$$], 1, 20, 1}}, Typeset`size$$ = {189., {42., 48.}},
+     Typeset`update$$ = 0, Typeset`initDone$$, Typeset`skipInitDone$$ = 
+    True, $CellContext`t$14602$$ = 0}, 
     DynamicBox[Manipulate`ManipulateBoxes[
      1, StandardForm, "Variables" :> {$CellContext`t$$ = 1}, 
       "ControllerVariables" :> {
@@ -10488,7 +10488,7 @@ $CellContext`green,
        ControlType -> Animator, AppearanceElements -> None, DefaultBaseStyle -> 
         "Animate", DefaultLabelStyle -> "AnimateLabel", SynchronousUpdating -> 
         True, ShrinkingDelay -> 10.}, "DefaultOptions" :> {}],
-     ImageSizeCache->{411., {214., 221.}},
+     ImageSizeCache->{331., {79., 86.}},
      SingleEvaluation->True],
     Deinitialization:>None,
     DynamicModuleValues:>{},
@@ -10503,8 +10503,8 @@ $CellContext`green,
  CellLabel->"Out[55]=",ExpressionUUID->"220c7215-df17-49f5-989e-0cf6beb3045c"]
 }, Open  ]]
 },
-WindowSize->{640, Automatic},
-WindowMargins->{{296, 336}, {0, 0}},
+WindowSize->{640, 755},
+WindowMargins->{{-198, Automatic}, {Automatic, -1061}},
 FrontEndVersion->"11.3 for Microsoft Windows (32-bit) (March 6, 2018)",
 StyleDefinitions->"Default.nb"
 ]
@@ -10579,7 +10579,7 @@ Cell[507156, 9878, 29306, 522, 376, 21727, 397, "CachedBoxData", "BoxData", "Out
 }, Open  ]],
 Cell[CellGroupData[{
 Cell[536499, 10405, 1687, 36, 143, "Input",ExpressionUUID->"d28e829a-390e-47ba-b12b-ba476ed8bd86"],
-Cell[538189, 10443, 2661, 59, 454, "Output",ExpressionUUID->"220c7215-df17-49f5-989e-0cf6beb3045c"]
+Cell[538189, 10443, 2658, 59, 184, "Output",ExpressionUUID->"220c7215-df17-49f5-989e-0cf6beb3045c"]
 }, Open  ]]
 }
 ]

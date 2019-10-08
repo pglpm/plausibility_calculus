@@ -6,7 +6,7 @@
 %% Home page: http://magnaspesmeretrix.org/
 %% Email (remove ZZ): pglpm0ZZ[at]gmail.com
 %% Created: 2000-08-23T16:53:30+0200
-%% Last-Updated: 2019-10-05T11:54:52+0200
+%% Last-Updated: 2019-10-08T23:52:03+0200
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 % NB: This database contains also items whose content's validity I
@@ -96,6 +96,7 @@
 @String{actan = {Acta Numerica}}
 @String{actapa = {Acta Phys.\ Austriaca}}
 @String{adam = {Adv.\ Appl.\ Mech.}}
+@String{adama = {Adv.\ Appl.\ Math.}}
 @String{adap = {Adv.\ Appl.\ Prob.}}
 @String{ade = {Adv.\ Differential Equations}}
 @String{adep = {Ann.\ de Phys.}}
@@ -945,6 +946,7 @@
 @String{rmp = {Rev.\ Mod.\ Phys.}}
 @String{rms = {Russ.\ Math.\ Surveys (\langnohyph{Uspekhi Mat.\ Nauk})}}
 @String{rmses = {\langitalian{Riv.\ mat.\ scienze econ.\ sociali}}}
+@String{rmta = {Random Matrices: Th.\ Appl.}}
 @String{rnc = {Riv.\ Nuovo Cimento}}
 @String{rpj = {Russ.\ Phys.\ J.}}
 @String{rpp = {Rep.\ Prog.\ Phys.}}
@@ -2840,7 +2842,7 @@ title =	       {The Barycentric Calculus of {M{\"o}bius}},
 journal =      pems,
 year =	       {1891},
 volume =       {10},
-pages =	       {2-21},
+pages =	       {2--21},
 keywords =     {affine forms, Grassmann spaces}
 }
 
@@ -5751,6 +5753,17 @@ institution =  {\langgerman{Technische Universit{\"a}t Wien}},
 year =	       {1993},
 number =       {TUW-E185.2-BFZ.1-93},
 note =	       {\url{http://www.ucalgary.ca/~rzach/papers/mvnd.html}; a shorter version in \citebi{baazetal1993}}
+}
+
+@Article{bacalladoetal2015,
+author =       {Sergio Bacallado and Persi Diaconis and Susan Holmes},
+title =	       {{de Finetti} Priors using {Markov} chain {Monte Carlo} computations},
+journal =      sc,
+year =	       {2015},
+volume =       {25},
+number =       {4},
+pages =	       {797--808},
+keywords =     {partial exchangeability}
 }
 
 @InCollection{bacciagaluppi2003_r2005,
@@ -12150,7 +12163,7 @@ title =	       {Probability and Mathematical Genetics: Papers in Honour of Sir J
 publisher =    {Cambridge University Press},
 year =	       {2010},
 volume =       {378},
-series =       {London Mathematical Society lecture notes series},
+series =       {London Mathematical Society lecture notes},
 address =      {Cambridge},
 keywords =     {Bayesian probability theory, exchangeability}
 }
@@ -23745,7 +23758,8 @@ publisher =    {Penguin Books},
 year =	       {1960},
 series =       {Pelican books},
 address =      {Oxford},
-keywords =     {probability theory, de Finetti}
+keywords =     {probability theory, de Finetti},
+mynote =       {\enquote{The last words are italicized to emphasize my suggestion that the training of the mathematical imagination of school-children might be vastly improved if we had as much understanding of \emph{whom} we teach as of \emph{what} we teach.} \sect~2.III p.~37}
 }
 
 @Book{cohen1962,
@@ -25800,6 +25814,17 @@ year =	       {2000},
 volume =       {537},
 series =       {Lecture notes in physics},
 keywords =     {initial-value problem for Einstein's equations}
+}
+
+@Article{cotteretal2013,
+author =       {S. L. Cotter and G. O. Roberts and A. M. Stuart and D. White},
+title =	       {{MCMC} Methods for Functions: Modifying Old Algorithms to Make Them Faster},
+journal =      ss,
+year =	       {2013},
+volume =       {28},
+number =       {3},
+pages =	       {424-446},
+keywords =     {pre-conditioned Crank-Nicolson}
 }
 
 @Book{courant1924_r1966,
@@ -31282,6 +31307,17 @@ pages =	       {179--205},
 keywords =     {probability theory}
 }
 
+@Article{diaconis2013,
+author =       {Persi Diaconis},
+title =	       {Some things we've learned (about {Markov} chain {Monte Carlo})},
+journal =      bern,
+year =	       {2013},
+volume =       {19},
+number =       {4},
+pages =	       {1294--1305},
+keywords =     {probability theory, sampling}
+}
+
 @Article{diaconisetal1979,
 author =       {Persi Diaconis and David Freedman},
 title =	       {On Rounding Percentages},
@@ -31495,6 +31531,17 @@ number =       {1},
 pages =	       {136--169},
 note =	       {\url{http://statweb.stanford.edu/~cgates/PERSI/papers/gibbscouplmo-2.pdf}, \url{http://www.stat.berkeley.edu/~aldous/206-RWG/RWGpapers/diaconis_gibbs.pdf}},
 keywords =     {exponential family}
+}
+
+@Article{diaconisetal2017,
+author =       {Persi Diaconis and Peter J. Forrester},
+title =	       {Hurwitz and the origins of random matrix theory in mathematics},
+journal =      rmta,
+year =	       {2017},
+volume =       {6},
+number =       {1},
+pages =	       {1730001},
+keywords =     {probability theory, group theory, invariant measures}
 }
 
 @Article{diamondetal1983,
@@ -33871,6 +33918,16 @@ volume =       {243},
 number =       {1},
 pages =	       {263--275},
 note =	       {See also \citebi{vienneetal1991,vienneetal1992}}
+}
+
+@PhdThesis{durmus2016,
+author =       {Alain Durmus},
+title =	       {High dimensional {Markov} Chain {Monte Carlo} Methods: theory, methods and application},
+school =       {Universit{\'e} Paris-Saclay},
+year =	       {2016},
+address =      {Paris},
+note =	       {\haleprint{tel-01429303}},
+keywords =     {pre-conditioned Crank-Nicolson}
 }
 
 @Article{dutta2012,
@@ -37363,7 +37420,7 @@ journal =      arma,
 year =	       {1977},
 volume =       {66},
 number =       {1},
-pages =	       {1-18},
+pages =	       {1--18},
 keywords =     {continuum mechanics}
 }
 
@@ -42279,6 +42336,17 @@ journal =      imslnms,
 year =	       {1996},
 volume =       {30},
 pages =	       {83--98}
+}
+
+@Article{freedman1997,
+author =       {David Freedman},
+title =	       {From Association to Causation via Regression},
+journal =      adama,
+year =	       {1997},
+volume =       {18},
+number =       {1},
+pages =	       {59--110},
+keywords =     {linear regression, causality, probability theory}
 }
 
 @Book{freedmanetal1978_r2007,
@@ -49761,7 +49829,7 @@ booktitle =    {Cornelius Lanczos: Collected Published Papers with Commentaries.
 publisher =    {North Carolina State University},
 year =	       {1998},
 editor =       {William R. Davis},
-pages =	       {{2-15}\,--\,{2-23}},
+pages =	       {{2-15}--{2-23}},
 address =      {Raleigh, USA}
 }
 
@@ -60002,7 +60070,8 @@ title =	       {Geometry of {Bloch} vectors in two-qubit system},
 journal =      pla,
 year =	       {2001},
 volume =       {286},
-pages =	       {383--390}
+pages =	       {383--390},
+keywords =     {convex geometry, quantum state space}
 }
 
 @Article{jakobsenetal2008,
@@ -63287,6 +63356,17 @@ note =	       {\arxiveprint{1412.2044}},
 keywords =     {evidence, Bayesian probability theory, improper priors, model comparison}
 }
 
+@Article{kamatani2018,
+author =       {Kengo Kamatani},
+title =	       {Efficient strategy for the {Markov} chain {Monte Carlo} in high-dimension with heavy-tailed target probability distribution},
+journal =      bern,
+year =	       {2018},
+volume =       {24},
+number =       {4B},
+pages =	       {3711--3750},
+keywords =     {probability theory, pre-conditioned Crank-Nicolson}
+}
+
 @Article{kambetal1987,
 author =       {Alexander Kamb and Linda E. Iverson and Mark A. Tanouye},
 title =	       {Molecular characterization of {\emph{Shaker}}, a {Drosophila} gene that encodes a potassium channel},
@@ -63364,7 +63444,7 @@ journal =      managsci,
 year =	       {1960},
 volume =       {6},
 number =       {4},
-pages =	       {366-422},
+pages =	       {366--422},
 note =	       {First publ.\ in Russian 1939},
 keywords =     {Vasershtejn-Kantorovich distance},
 origdate =     {1939}
@@ -64978,7 +65058,8 @@ journal =      pla,
 year =	       {2003},
 volume =       {314},
 number =       {5--6},
-pages =	       {339--349}
+pages =	       {339--349},
+keywords =     {convex geometry, quantum state space}
 }
 
 @Article{kimuraetal2004,
@@ -64988,7 +65069,8 @@ journal =      osid,
 year =	       {2005},
 volume =       {12},
 number =       {3},
-pages =	       {207--229}
+pages =	       {207--229},
+keywords =     {convex geometry, quantum state space}
 }
 
 @Book{kindermannetal1980,
@@ -73968,6 +74050,17 @@ note =	       {See \citebi{dawid1979}. \url{http://distancecovariance.googlecode
 keywords =     {Bayesian probability theory, exchangeability}
 }
 
+@Article{lindleyetal1981,
+author =       {Dennis V. Lindley and Melvin R. Novick},
+title =	       {The Role of Exchangeability in Inference},
+journal =      as,
+year =	       {1981},
+volume =       {9},
+number =       {1},
+pages =	       {45--58},
+keywords =     {Bayesian probability theory, causation, causality, partial exchangeability, decision theory, spurious correlation}
+}
+
 @Article{lindleyetal1982,
 author =       {Dennis V. Lindley and Morris H. DeGroot and A. P. Dempster and Irving John Good and Bruce M. Hill and Robert E. Kass and Glenn Shafer},
 title =	       {{[}{Lindley's} Paradox{]} {Comments} and rejoinder},
@@ -75996,7 +76089,8 @@ author =       {Anders M{\aa}nsson and Porta Mana, Piero Giovanni Luca and Gunna
 title =	       {Numerical {Bayesian} state assignment for a three-level quantum system. {I}. {Absolute}-frequency data; constant and {Gaussian}-like priors},
 year =	       {2006},
 note =	       {\arxiveprint{quant-ph/0612105}},
-keywords =     {Bayesian probability theory, statistical models}
+keywords =     {Bayesian probability theory, statistical models},
+keywords =     {convex geometry, quantum state space, Bloch vector}
 }
 
 @Misc{maanssonetal2007,
@@ -92238,6 +92332,19 @@ pages =	       {567--579},
 keywords =     {exponential family, probability theory}
 }
 
+@Book{pitman2002_r2006,
+author =       {Jim Pitman},
+title =	       {Combinatorial Stochastic Processes\subtitleproc{: Ecole d'Et{\'e} de Probabilit{\'e}s de Saint-Flour XXXII -- 2002}},
+publisher =    {Springer},
+year =	       {2006},
+volume =       {1875},
+series =       {Lecture notes in mathematics},
+address =      {Berlin},
+note =	       {First publ.\ 2002 as technical report. \emph{Page numbers refer to the electronic version at} \url{http://bibserver.berkeley.edu/csp/april05/bookcsp.pdf}},
+keywords =     {exchangeability, probability theory},
+origdate =     {2002}
+}
+
 @Article{pitowsky1982,
 author =       {Itamar Pitowsky},
 title =	       {Resolution of the {Einstein-Podolsky-Rosen} and {Bell} Paradoxes},
@@ -100265,6 +100372,17 @@ pages =	       {34--58},
 keywords =     {probability theory}
 }
 
+@Article{rubin1981,
+author =       {Donald B. Rubin},
+title =	       {The {Bayesian} Bootstrap},
+journal =      as,
+year =	       {1981},
+volume =       {9},
+number =       {1},
+pages =	       {130--134},
+keywords =     {probability theory}
+}
+
 @Article{rubio2015,
 author =       {Francisco J. Rubio},
 title =	       {On the use of improper priors for the shape parameters of asymmetric exponential power models},
@@ -105852,6 +105970,17 @@ number =       {2},
 pages =	       {125--183},
 note =	       {New version at \url{http://www.cds.caltech.edu/~marsden/bib/1988/05-SiMaKr1988/}},
 keywords =     {thermomechanics}
+}
+
+@Article{simon1954,
+author =       {Herbert A. Simon},
+title =	       {Spurious Correlation: A Causal Interpretation},
+journal =      jasa,
+year =	       {1954},
+volume =       {49},
+number =       {267},
+pages =	       {467--479},
+keywords =     {causality, probability theory, exchangeability}
 }
 
 @Article{simon1955,

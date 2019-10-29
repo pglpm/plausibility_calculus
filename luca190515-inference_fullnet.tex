@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2019-05-15T11:30:05+0200
-%% Last-Updated: 2019-10-29T15:50:10+0100
+%% Last-Updated: 2019-10-29T17:11:00+0100
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newif\ifarxiv
 \arxivfalse
@@ -648,7 +648,7 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 
 \newcommand*{\ypp}{G}
 
-\newcommand*{\yG}{G}
+\newcommand*{\yG}{\bm{G}}
 
 %\newcommand*{\yXv}{\varSigma}
 \newcommand*{\yAv}{A}
@@ -720,6 +720,7 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 \newcommand*{\ycmm}{C}
 \newcommand*{\ycm}{\mathte{\ycmm}}
 \newcommand*{\ycs}{\bm{\sigma}}
+\newcommand*{\ysig}{\bm{\sigma}}
 \newcommand*{\yL}{L}
 \newcommand*{\yd}{\bm{\varDelta}}
 \newcommand*{\yds}{\delta}
@@ -2754,13 +2755,15 @@ using the definition of Shannon entropy. \mynote{Is it possible that this
 
 The sum over $\yAs$ in formula~\eqref{eq:joint_q_J_almost-final} can
 therefore be replaced by any single summand multiplied by the
-multiplicity~\eqref{eq:multinomial_coefficient_withinrow_approx} above. We
-find
-\begin{equation}
+multiplicity~\eqref{eq:multinomial_coefficient_withinrow_approx} above. The
+marginal frequency distribution $\yf$ is still fixed, determined by $\yas$,
+so we still have the constraint $\sum_{A}J_{a\,A}=f_{a}$ for each $a$,
+which we compactly write $\delt(\tsum\yJ\yeq \yf)$. We find
+\begin{multline}
   \label{eq:final_expression_multiplicity}
-  \begin{split}
-      \pf(\yJ, \ynu \| \yas, \yI) &=
-  \frac{1}{Z}
+      \pf(\yJ, \ynu \| \yas, \yI) \\
+  \begin{aligned}
+  &=\frac{1}{Z}\;\delt(\tsum\yJ \yeq \yf)
   % \int\!\!\di\ynu
   \;q(\ynu)\;
   %\sum_{\yAs}\delt\bigl[\yJ \yeq \yJ(\yas,\yAs)\bigr]\;
@@ -2769,7 +2772,7 @@ find
   \\
      &=
 %     \begin{multlined}[t][0.7\linewidth]
-  \frac{1}{Z}
+  \frac{1}{Z}\;\delt(\tsum\yJ \yeq \yf)
   % \int\!\!\di\ynu
   \;q(\ynu)\;%\times{}\\
   \exp\bigl\{T\bigl[
@@ -2777,12 +2780,14 @@ find
   + \tsum_{a,A} J_{a\,A}\ln(G_{a\,A}\,\nu_{A})
   \bigr]\bigr\},
 %\end{multlined}
-\end{split}
-\end{equation}
+\end{aligned}
+\end{multline}
 where the second equality comes from re-expressing the product over $(a,A)$
-in exponential-logarithm form. Finally, we note that $G_{a\,A}\,\nu_{A}$ is
-a normalized distribution in $(a,A)$ owing to the properties of the
-hypergeometric distribution and of $\ynu$, and we use the definition of
+in exponential-logarithm form.
+
+Now we note that $G_{a\,A}\,\nu_{A}$ is a normalized distribution in
+$(a,A)$ owing to the properties of the hypergeometric distribution and of
+$\ynu$. We denote it $\yG\cdot\ynu$. We can also use the definition of
 relative entropy
 \begin{equation}
   \label{eq:rel_entropy}
@@ -2790,23 +2795,58 @@ relative entropy
 \equiv -\ysh[(x_{i})] -\tsum_{i} x_{i} \ln y_{i},
 \end{equation}
 to combine the first and last terms within the exponential. The logarithm
-of our joint density~\eqref{eq:joint_q_J_almost-final} can finally be
+of our joint density~\eqref{eq:joint_q_J_almost-final} can then finally be
 written as
 \begin{empheq}[box=\widefbox]{equation}
   \label{eq:log-density_final}
-  \ln \pf(\yJ, \ynu \| \yas, \yI) = \ln q(\ynu)
-  -T\,\ysh\bigl[\yJ; (G_{a\,A}\,\nu_{A})\bigr]
-  - T\,\ysh(\yf) - \ln Z(\yas)
+  \begin{multlined}[][0.9\linewidth]
+    \ln \pf(\yJ, \ynu \| \yas, \yI) =
+\ln\delt(\tsum\yJ \yeq \yf) + 
+    \ln q(\ynu)
+  -T\,\ysh(\yJ; \yG\cdot\ynu)
+\\[\jot]{}  - T\,\ysh(\yf) - \ln Z(\yas)
+%  \text{with $\tsum_{a}\yJ=\yf(\yas)$}
+\end{multlined}
 \end{empheq}
 
 The last two terms are constants: they only depend on $\yas$ and
 $\yf(\yas)$, which are given and fixed in our problem. They can therefore
-be discarded in Monte Carlo sampling.
+be discarded in Monte Carlo sampling. In sampling, the delta term is taken
+care of by restricting the sampling to the set of allowed $\yJ$.
 
 \subsection{Approximations}
 \label{sec:approx_final}
 
+We consider two successive approximations of the
+log-density~\eqref{eq:log-density_final}, based on the fact that $T$ is
+large.
 
+\bigskip
+
+The relative entropy $\ysh(\yJ; \yG\cdot\ynu)$ is always positive, and
+vanishes if only if $J = \yG\cdot\ynu$. This term is multiplied by $-T$ and
+appears in an exponential. We can therefore approximate it with a delta.
+
+This delta restricts $\yJ$ to the form $\yG\cdot\ynu$, making it completely
+determined by $\ynu$. The density~\eqref{eq:log-density_final} therefore
+collapses onto the $\ynu$ space. More precisely, a subspace of $\ynu$,
+since $\yJ$ must also satisfy the constraint $\sum_{a}\yJ=\yf$, which
+becomes $\sum_{a}\yG\cdot\ynu = \yf$, constraining $\ynu$.
+
+Such a constraint is actually too strong, in the sense that no distribution
+$\ynu$ can satisfy it -- it leads to negative values $nu_{a}$ for some
+$a$s. This problem can be mitigated by considering a softer constraint
+between $\yJ$ and $\yf$, for example considering that there are errors in
+spike sorting or just considering the first $m$ moments of $\yf$. We
+express the softer constraint by replacing the delta with a normal $\Nd$ whose
+covariance matrix $\ysig$ is determined from the spike-sorting error. With this
+approximation we reduce our problem to the density
+\begin{equation}
+    \ln \pf(\ynu \| \yas, \yI) =
+\ln\Nd(\tsum_{a}\yG\cdot\ynu \| \yf, \ysig) + \ln q(\ynu)
+%\\[\jot]{}  - T\,\ysh(\yf) - \ln Z(\yas)
+%  \text{with $\tsum_{a}\yJ=\yf(\yas)$}
+\end{equation}
 
 
 

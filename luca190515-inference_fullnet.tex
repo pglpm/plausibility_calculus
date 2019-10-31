@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2019-05-15T11:30:05+0200
-%% Last-Updated: 2019-10-29T17:11:00+0100
+%% Last-Updated: 2019-10-31T13:53:44+0100
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newif\ifarxiv
 \arxivfalse
@@ -701,6 +701,7 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 
 \newcommand*{\yJJ}{J}
 \newcommand*{\yJ}{\bm{\yJJ}}
+\newcommand*{\yr}{\bm{r}}
 
 \newcommand*{\ynuu}{\nu}
 \newcommand*{\ynu}{\bm{\ynuu}}
@@ -2441,12 +2442,12 @@ properties.
 %%% Appendices
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
 \clearpage
-% %\renewcommand*{\appendixpagename}{Appendix}
+\renewcommand*{\appendixpagename}{}
 % %\renewcommand*{\appendixname}{Appendix}
 % %\appendixpage
  \appendix
 
-\section{Derivation of the probability distribution and of its approximations}
+\section{Derivation of the probability distribution\\ and of its approximations}
 \label{sec:derivation}
 
 \subsection{Notation}
@@ -2461,9 +2462,9 @@ properties.
 
 Bins are indexed by $t\in\set{1,\dotsc,T}$.
 
-\item $A\in\set{0,1,\dotsc,N}$: total activity of the full network.
+\item $A\in\set{0,1,\dotsc,N}$: levels of total activity of the full network.
 
-\item $A_{t}\in\set{0,1,\dotsc,N}$: activity of the full network at bin $t$.
+\item $A_{t}\in\set{0,1,\dotsc,N}$: total activity of the full network at bin $t$.
 
 \item $\yAs \defd (A_{1}, A_{2}, \dotsc, A_{T})$: sequence of activities of full
 network during the recording.
@@ -2481,9 +2482,11 @@ in $T F_{A}$ out of $T$ bins: $T F_{A} = \sum_{t}\delt(A_{t}\yeq A)$.
 of full network during all hypothetical repetitions of the same recording
 in the same conditions.
 
-\item $a\in\set{0,1,\dotsc,n}$: total activity of the sample.
+\item $\ynu \defd (\nu_{0}, \nu_{1}, \dotsc, \nu_{N})$: frequency distribution.
 
-\item $a_{t}\in\set{0,1,\dotsc,n}$: activity of the sample at bin $t$.
+\item $a\in\set{0,1,\dotsc,n}$: levels of total activity of the sample.
+
+\item $a_{t}\in\set{0,1,\dotsc,n}$: total activity of the sample at bin $t$.
 
 \item $\yas \defd (a_{1}, a_{2}, \dotsc, a_{T})$: sequence of activities of
 sample during the recording.
@@ -2530,11 +2533,14 @@ of sample during the recording.
 \subsection{Derivation}
 \label{sec:derivation_steps}
 
-We want $\pf(\yF \| \yas,\yI)$. This can be obtained as the marginal of
+We want to know which distribution of frequencies of full-network
+activities occurred during the recording, given our observations of the
+sample. Namely, $\pf(\yF \| \yas,\yI)$. This can be obtained as the
+marginal of the probability distribution for the joint frequencies,
 $\pf(\yJ \| \yas, \yI)$. If this probability distribution is represented by
 a set of Monte Carlo samples $\set{\yJ^{(i)}}$, then
-$\set{\yF^{(i)}\equiv\sum_{a}J^{(i)}_{a\,A}}$ are automatically samples of
-$\pf(\yF \| \yas,\yI)$.
+$\set{\yF^{(i)}\equiv (\sum_{a}J^{(i)}_{a\,A})}$ are automatically samples
+of $\pf(\yF \| \yas,\yI)$.
 
 By the theorem of total probability,
 \begin{equation}
@@ -2544,7 +2550,8 @@ By the theorem of total probability,
 \end{equation}
 the sum being over all possible sequences $\set{\yAs}$ of total activities.
 
-The first factor is a singular distribution:
+The first factor is a singular probability distribution, because $\yas$,
+$\yAs$ jointly determine $\yJ$:
 \begin{equation}
   \label{eq:singular_J}
   \begin{split}
@@ -2566,7 +2573,7 @@ The second factor is derived from Bayes's theorem:
 \bigskip
 
 In the last formula, let's first derive $\pf(\yas \| \yAs, \yI)$. We make
-this
+the following
 \begin{equation}
   \label{eq:assumption_irrelevance_t}
   \parbox{0.9\linewidth}{\textbf{assumption}: if $A_{t}$ is known, then
@@ -2574,7 +2581,7 @@ this
     inferences about $a_{t}$.}  
 \end{equation}
 It isn't a realistic assumption, but it's the one behind the
-maximum-entropy method in this particular application. From this assumption
+maximum-entropy method in this kind of applications. From this assumption
 we have, using the product rule,
 \begin{equation}
   \label{eq:factor_at_At}
@@ -2597,11 +2604,12 @@ where $\prod_{a,A} \defd \prod_{a}\prod_{A}$.
 
 \medskip
 
-Now let's derive $\pf(\yAs \| \yI)$ in formula~\eqref{eq:bayes_sequences}.
-We assume that the value of this probability has the same value for all
-sequences $\yAs$ having the same frequency distribution $\yF(\yAs)$; that
-is, it functionally depends on $\yAs$ only through $\yF(\yAs)$. More
-specifically we assume it can be written hierarchically as
+Now let's decide upon $\pf(\yAs \| \yI)$ in
+formula~\eqref{eq:bayes_sequences}. We assume that this probability has the
+same value for all sequences $\yAs$ having the same frequency distribution
+$\yF(\yAs)$; that is, it functionally depends on $\yAs$ only through
+$\yF(\yAs)$. More specifically we assume that it can be hierarchically
+written as
 \begin{equation}
   \label{eq:p_as_exchangeable}
   \pf(\yAs \| \yI) = \pi(\yF) =
@@ -2609,11 +2617,11 @@ specifically we assume it can be written hierarchically as
 \end{equation}
 for some density function $q(\ynu)\,\di\ynu$. The integral expression is
 simply a mathematical way to write $\pi(\yF)$, and doesn't need to be
-further interpreted (if we can solve the integral analytically, it just
-disappears). But it's also the formula for infinite exchangeability, and
+further interpreted (the integral disappears if we can solve it
+analytically). But it's also the formula for infinite exchangeability, and
 from this point of view $\ynu$ can be interpreted as the long-run frequency
 distribution of the activities in all experiments performed in the same
-conditions (imagining to joint together their recording times). This is the
+conditions -- imagining to join together their recording times. This is the
 point of view underlying the maximum-entropy method.
 
 \medskip
@@ -2724,8 +2732,9 @@ of~\eqref{eq:joint_q_J_almost-final} is
 \end{equation}
 
 If $T$ is large the logarithm of the multinomial coefficient can be
-approximated using the Shannon entropy $\ysh$, which satisfies the bounds
-\citep[Lemma 2.2 pp. 429--430]{csiszaretal2004b}
+approximated using the Shannon entropy $\ysh$, which for a generic
+distribution $(x_{i})$ satisfies the bounds \footfullcite[Lemma 2.2 pp.
+429--430 in][]{csiszaretal2004b}
 \begin{equation}
   \label{eq:approx_multinomial}
   T \ysh(x_{0},\dotsc,x_{N}) - \ln\binom{T+N}{T} \le
@@ -2749,7 +2758,8 @@ multiplicity~\eqref{eq:multinomial_coefficient_withinrow} as
 \end{multline}
 where the second line is obtained by combining the sums, simplifying, and
 using the definition of Shannon entropy. \mynote{Is it possible that this
-  approximation affects the result? Check this!}
+  approximation affects the result? -- Update: the discrepancy is less than
+0.1\%.}
 
 \bigskip
 
@@ -2814,6 +2824,24 @@ $\yf(\yas)$, which are given and fixed in our problem. They can therefore
 be discarded in Monte Carlo sampling. In sampling, the delta term is taken
 care of by restricting the sampling to the set of allowed $\yJ$.
 
+\medskip
+
+The density $q(\ynu)$ remains to be specified. We use an entropic density
+\begin{equation}
+  \label{eq:density_nu_entropic}
+  q(\ynu) \propto \exp[-L\;\ysh(\ynu;\yr)]
+\end{equation}
+where $\yr$ is a reference distribution -- we take the uniform one for
+simplicity -- and $L$ is of order unity, say less than $10$. This density
+is motivated by the consideration of multiplicities: a frequency
+distribution, like $\ynu$, can be realized in a number of ways equal to a
+multinomial coefficient. This coefficient, by
+formula~\eqref{eq:approx_multinomial}, approximately equal to the
+exponential of the Shannon entropy of the distribution. So the
+density~\eqref{eq:density_nu_entropic} keeps track of this multiplicity,
+but regulates its importance via the parameter $L$. We can also choose
+$L=0$, which leads to $q(\ynu)$ being uniform in $\ynu$.
+
 \subsection{Approximations}
 \label{sec:approx_final}
 
@@ -2825,29 +2853,57 @@ large.
 
 The relative entropy $\ysh(\yJ; \yG\cdot\ynu)$ is always positive, and
 vanishes if only if $J = \yG\cdot\ynu$. This term is multiplied by $-T$ and
-appears in an exponential. We can therefore approximate it with a delta.
+appears in an exponential. We therefore approximate it with a delta.
 
 This delta restricts $\yJ$ to the form $\yG\cdot\ynu$, making it completely
-determined by $\ynu$. The density~\eqref{eq:log-density_final} therefore
-collapses onto the $\ynu$ space. More precisely, a subspace of $\ynu$,
-since $\yJ$ must also satisfy the constraint $\sum_{a}\yJ=\yf$, which
-becomes $\sum_{a}\yG\cdot\ynu = \yf$, constraining $\ynu$.
+determined by $\ynu$. The density~\eqref{eq:log-density_final} thus
+collapses onto the $\ynu$-space. More precisely a subspace, since $\yJ$
+must also satisfy the constraint $\sum_{a}\yJ=\yf$, which becomes
+$\sum_{a}\yG\cdot\ynu = \yf$, constraining $\ynu$.
 
 Such a constraint is actually too strong, in the sense that no distribution
 $\ynu$ can satisfy it -- it leads to negative values $nu_{a}$ for some
-$a$s. This problem can be mitigated by considering a softer constraint
-between $\yJ$ and $\yf$, for example considering that there are errors in
-spike sorting or just considering the first $m$ moments of $\yf$. We
-express the softer constraint by replacing the delta with a normal $\Nd$ whose
-covariance matrix $\ysig$ is determined from the spike-sorting error. With this
+$a$s. This problem is mitigated by considering a softer constraint between
+$\yJ$ and $\yf$, for example taking into account errors in spike sorting or
+just considering the first $m$ moments of $\yf$. We express the softer
+constraint by replacing the delta with a normal $\Nd$ whose covariance
+matrix $\ysig$ is determined from the spike-sorting error. With this
 approximation we reduce our problem to the density
-\begin{equation}
-    \ln \pf(\ynu \| \yas, \yI) =
-\ln\Nd(\tsum_{a}\yG\cdot\ynu \| \yf, \ysig) + \ln q(\ynu)
+\begin{empheq}[box=\widefbox]{equation}\label{eq:maxent_bayes_approx}
+    \ln \pf(\ynu \| \yas, \yI) \propto
+    \ln\Nd(\tsum_{a}\yG\cdot\ynu \| \yf, \ysig) 
+   - L\;\ysh(\ynu;\yr),
 %\\[\jot]{}  - T\,\ysh(\yf) - \ln Z(\yas)
 %  \text{with $\tsum_{a}\yJ=\yf(\yas)$}
-\end{equation}
+\end{empheq}
+where $q(\ynu)$ has been replaced by the entropic
+density~\eqref{eq:density_nu_entropic}. We can call this the
+\enquote{maximum-entropy approximation with Bayesian correction}. It can
+also be represented by a set of Monte Carlo samples $\set{\ynu^{(i)}}$.
 
+\bigskip
+
+As a further approximation we can simply consider the mode
+of~\eqref{eq:maxent_bayes_approx}. This is found by maximizing the relative
+entropy in its expression under the moment constraints about $\yf$. The solution
+is the one given by the maximum-entropy method applied to the full network
+with subnetwork constraints.
+
+\bigskip
+
+Figure A shows comparison of the expected values (means of the Monte Carlo
+samples) for the density~\eqref{eq:log-density_final} (for $\yF$), the
+density~\eqref{eq:maxent_bayes_approx} (for $\ynu$ and using the first six
+moments of $\yf$ as constraints), and the maximum-entropy solution (six
+moments as constraints).
+\begin{figure}[!b]
+\centering
+\includegraphics[width=\linewidth]{maxent_latest.png}%
+\caption{Comparison of~\eqref{eq:log-density_final},
+  \eqref{eq:maxent_bayes_approx}, and the maximum-entropy approximation
+  (the vertical-axis label is wrong).}
+\label{fig:compare_approxs}
+\end{figure}% maxent_solutions_jointfreq.nb
 
 
 

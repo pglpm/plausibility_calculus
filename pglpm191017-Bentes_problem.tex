@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2015-05-01T20:53:34+0200
-%% Last-Updated: 2019-10-17T14:59:14+0200
+%% Last-Updated: 2019-11-03T15:06:01+0100
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newif\ifarxiv
 \arxivfalse
@@ -651,7 +651,8 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 %\DeclareMathOperator*{\argsup}{arg\,sup}
 \newcommand*{\dob}{degree of belief}
 \newcommand*{\dobs}{degrees of belief}
-
+\newcommand*{\yC}{C}
+\newcommand*{\yc}{c}
 %%% Custom macros end @@@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -709,52 +710,107 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 \label{sec:synopsis}
 
 We're considering neurons in a specific region $A$ of the mouse brain, and
-neurons in a specific region $B$ which connects to those in region $A$.
+neurons in a specific region $B$ which connects to those in region $A$. Our
+question is how many neurons in region $B$ project, on average, to a single
+neuron in region $A$.
 
-\emph{The question}: if we examine a new neuron in region $A$ in a new
-mouse, how many neurons in region $B$ will project to it? We want to
-calculate the probabilities of the possible numbers. Call this number $c$.
-A slightly more detailed question is this: in the long run, how often will
-we observe neurons in region $A$ with $0$ or $1$ or $2$ or $3$ or\ldots\
-input neurons from region $B$?
+First of all let's make our question more precise. We can rephrase it in
+two different ways; it's the second that probably interests us:
 
-It seems that the analysis will also yield probabilities for other another
-quantity: how many neurons are there in region $B$, in the next mouse we
-observe?
+\begin{enumerate}[label=\textbf{Q\arabic*}.,ref=Q\arabic*]
+  \item\label{item:Q1} If we examine a new neuron in region $A$ in a new
+  mouse, how many neurons in region $B$ will project to it? The possible
+  answers to this question are: $0$, $1$, $2$, and so on.
+  \item\label{item:Q2} If we examine all neurons in region $A$ in a very
+  large sample of mice, and for each neuron we count how many neurons from
+  region $B$ project to it, then what are the frequencies with which we'll
+  observe $0$ connections, $1$ connection, $2$ connections, and so on? One
+  possible answer could be this distribution:
+  \[\text{0: }0.1\%, \quad \text{1: }0.3\%, \quad\dotsc,
+    \quad \text{1\,000: }24\%, \quad \dotsc\]
+  another answer could be this distribution:
+  \[\text{0: }0.02\%, \quad \text{1: }0.07\%, \quad\dotsc,
+    \quad \text{1\,000: }31\%, \quad \dotsc\]
+  and so on, for all possible distributions of frequencies.
+\end{enumerate}
+For the first question we must give a distribution of probability over all
+possible answers $0$, $1$, and so on. For the second the probability is
+distributed over all possible frequency distributions.
 
-\emph{The observations and data we use}: in several mice a small number of
-neurons in region $A$ -- \emph{starter neurons} -- are infected with a
+The answers to these two questions and their probabilities are connected;
+in particular, from the second we can obtain the first. The second is more
+informative, because it gives us also a range of variability.
+
+Our analysis will also produce probabilities for other another quantity:
+how many neurons are there in region $B$, in the next mouse we observe?
+
+Our question actually concerns several input regions at once. For the
+moment we focus on setting up the calculation for one input region only,
+but the calculation will generalized to several input regions later.
+Considering several at once will actually improve the results, even if just
+a little.
+
+\medskip
+
+\textbf{The observations and data we use}: in several mice a small number
+of neurons in region $A$ -- \emph{starter neurons} -- are infected with a
 virus. This virus spreads, with time, to neurons -- \emph{input neurons} --
 that projects to the starter neurons. The virus can't spread further than
 that. Some of the infected neurons will be in region $B$. The virus also
 leads to colouring of starter and input neurons. Each mouse is killed after
 several days (different for each mouse) and the starter and input neurons
-are counted. So our data are the number of starter and input neurons for a
-number of mice.
+are counted. So our data are the number of starter and input neurons for
+several mice.
 
-We have this problem and data not just for one input region, but several.
-These joint data can be used to get more accurate inferences for each input
-region.
+There's a complication: if the mouse is killed too early, the virus hasn't
+had the time to spread to all input neurons. If the mouse is killed too
+late, the starter cells decay and are no longer visible. So we also need to
+guess, for each observed mouse, whether there were additional starter
+neurons, no longer visible, and what proportion of input neurons have been
+reached by the virus. A data, we have the number of days between virus
+injection and killing, for each mouse. This complication for the moment is
+set aside, to simplify the initial calculation, but will be taken into
+account later.
 
-Complication: if the mouse is killed too early, the virus hasn't had the
-time to spread to all input neurons. If the mouse is killed too late, the
-starter cells decay and are no longer visible. So we also need to guess,
-for each observed mouse, whether there were additional starter neurons, no
-longer visible, and what proportion of input neurons have been reached by
-the virus. We have, for each mouse, the number of days between virus
-injection and killing.
-
-\section{Strategies for solving the problem}
+\section{Strategy for solving the problem}
 \label{sec:strategies}
 
+We must consider the set of mice that have been observed and those that will
+be observed in the future. Let's label each mouse with an index $m$. For
+our inferences to be valid, these mice must be judged \enquote{similar}.
 
-It may be useful to give a first answer without the time-lapse
-complication, and add that complication afterward.
+For each mouse consider all neurons in the input region, label them with
+$i=1,2,\dotsc$; and all neurons in the target region, label them
+$j=1,2,\dotsc$. Mouse $m$ has $K_{m}$ neurons in the input region $B$ and
+$L_{m}$ neurons in the target region $A$.
 
-The core of the problem is trying to infer how many input neurons project
-to a starter neuron in the case in which we have several starter neurons.
-An input neuron can project to several starter neurons, so we can't just
-divide the number of input neurons by the number of starter neurons.
+Now that we've labelled the mice and their neurons in the two regions, we
+can make several concrete statements, such as
+\[\parbox{0.95\linewidth}{\enquote{In mouse \#\,64, the neuron \#\,931 in the input
+      region projects to the neuron \#\,1\,488 in the target region.}}\]
+which can be either true or false. Let's denote such kind of statement with
+\begin{equation}
+  \label{eq:statement_connection}
+  \yC_{mij} \defd \parbox[t]{0.8\linewidth}{\enquote{In mouse $m$, neuron $i$ in input region projects to neuron $j$ in target region}}
+\end{equation}
+and let's introduce the quantity
+\begin{equation}
+  \label{eq:quantity_connection}
+  \yc_{mij} =
+  \begin{cases}
+    1&\text{if $\yC_{mij}$ is true},\\
+    0&\text{if $\yC_{mij}$ is false}.
+  \end{cases}
+\end{equation}
+
+
+Obviously for most of these statements we'll never be able to ascertain
+whether they're true or false. But the answers to our
+questions~\ref{item:Q1} and \ref{item:Q2} are built up from the specific
+statements~\eqref{eq:statement_connection}, counting how many of them are
+true and how many are false. Therefore the probabilities of our answers
+depend on the probabilities of the individual
+statements~\eqref{eq:statement_connection}.
 
 \textcolor{white}{If you find this you can claim a postcard from me.}
 

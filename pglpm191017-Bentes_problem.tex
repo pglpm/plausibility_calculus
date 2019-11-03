@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2015-05-01T20:53:34+0200
-%% Last-Updated: 2019-11-03T15:06:01+0100
+%% Last-Updated: 2019-11-03T15:53:41+0100
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newif\ifarxiv
 \arxivfalse
@@ -651,8 +651,10 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 %\DeclareMathOperator*{\argsup}{arg\,sup}
 \newcommand*{\dob}{degree of belief}
 \newcommand*{\dobs}{degrees of belief}
+\newcommand*{\yI}{\varIota}
 \newcommand*{\yC}{C}
 \newcommand*{\yc}{c}
+\newcommand*{\statm}[1]{\textsl{\textsf{#1}}}
 %%% Custom macros end @@@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -786,12 +788,12 @@ $L_{m}$ neurons in the target region $A$.
 
 Now that we've labelled the mice and their neurons in the two regions, we
 can make several concrete statements, such as
-\[\parbox{0.95\linewidth}{\enquote{In mouse \#\,64, the neuron \#\,931 in the input
+\[\parbox{0.95\linewidth}{\statm{In mouse \#\,64, the neuron \#\,931 in the input
       region projects to the neuron \#\,1\,488 in the target region.}}\]
 which can be either true or false. Let's denote such kind of statement with
 \begin{equation}
   \label{eq:statement_connection}
-  \yC_{mij} \defd \parbox[t]{0.8\linewidth}{\enquote{In mouse $m$, neuron $i$ in input region projects to neuron $j$ in target region}}
+  \yC_{mij} \defd \parbox[t]{0.8\linewidth}{\statm{In mouse $m$, neuron $i$ in input region projects to neuron $j$ in target region}}
 \end{equation}
 and let's introduce the quantity
 \begin{equation}
@@ -806,11 +808,72 @@ and let's introduce the quantity
 
 Obviously for most of these statements we'll never be able to ascertain
 whether they're true or false. But the answers to our
-questions~\ref{item:Q1} and \ref{item:Q2} are built up from the specific
-statements~\eqref{eq:statement_connection}, counting how many of them are
-true and how many are false. Therefore the probabilities of our answers
-depend on the probabilities of the individual
-statements~\eqref{eq:statement_connection}.
+question~\ref{item:Q2} and the statement of our experimental observations
+are built up from the specific statements~\eqref{eq:statement_connection}.
+For example, the statement \statm{In mouse \#\,3, neuron \#\,1 in the
+  target region receives input from 2 neurons in the input region} is
+equivalent to the composite statement \statm{In mouse \#\,3, neuron \#\,1
+  in the target region receives input from neurons \#\,1 and \#\,2, or
+  \#\,1 and \#\,3, or \#\,1 and \#\,4, or \ldots\ in the input region},
+which we can express as
+\begin{multline}
+  (\yC_{311} \mathbin{\text{and}} \yC_{312}) \mathbin{\text{or}}
+  (\yC_{311} \mathbin{\text{and}} \yC_{313}) \mathbin{\text{or}}
+  \dotsb{}\\ {}\mathbin{\text{or}}
+  (\yC_{312} \mathbin{\text{and}} \yC_{313}) \mathbin{\text{or}}
+  (\yC_{312} \mathbin{\text{and}} \yC_{314}) \mathbin{\text{or}}
+  \dotsb{}
+\end{multline}
+
+The probabilities of such combinations are completely determined once we
+give an initial joint probability distribution for all
+statements~\eqref{eq:statement_connection} and their negations, which is
+equivalent to the joint distribution of 
+\begin{equation}
+  \pf[(\yc_{mij}) \| \yI] \equiv
+  \pf(\yc_{111}, \yc_{112},\yc_{113},\dotsc \| \yI)
+  \label{eq:main_init_prob}
+\end{equation}
+conditional on the information $\yI$ that we have before doing the
+experiments and the observations.
+
+Now, we'll want the probability of a specific answer $A$ to our question,
+conditional on the data $D$ we observed: $\pf(A \| D,\yI)$. By the rule of
+conditional probability we obtain it as
+\begin{equation}
+  \label{eq:Bayes_main}
+  \pf(A \| D \mathbin{\text{and}} \yI) =
+\frac{\pf(A \mathbin{\text{and}} D \| \yI)}{\pf(D \| \yI)}.
+\end{equation}
+The probabilities in the  numerator and denominator can be obtained from
+our main joint probability~\eqref{eq:main_init_prob} using the basic rules
+of the probability calculus.
+
+\medskip
+
+So our strategy is as follows:
+\begin{enumerate}
+\item Quantitatively determine the initial joint probability
+  $\pf[(\yc_{mij}) \| \yI]$.
+\item Resolve the answers to question~\ref{item:Q2} in terms of the basic
+  statements $\yC_{mij}$.
+\item Resolve the experimental observations in terms of the basic
+  statements $\yC_{mij}$.
+\item Calculate the probabilities in~\eqref{eq:Bayes_main}.
+\end{enumerate}
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 \textcolor{white}{If you find this you can claim a postcard from me.}
 

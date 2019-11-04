@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2015-05-01T20:53:34+0200
-%% Last-Updated: 2019-11-04T11:58:46+0100
+%% Last-Updated: 2019-11-04T12:46:38+0100
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newif\ifarxiv
 \arxivfalse
@@ -907,6 +907,16 @@ unrealistic than the previous two, because it gives the same probability to
 the situation where each input neuron is connected with only one, distinct,
 target neuron, as to the situation where only one input neuron is connected
 to all target neurons, and all other input neurons are unconnected.
+
+With this approximation the joint probability distribution for a given
+mouse $m$ assumes this form, by de Finetti's representation
+theorem:\citep{definetti1930,hewittetal1955,heathetal1976,diaconis1977,diaconisetal1980,dawid2013}
+\begin{equation}
+  \label{eq:definetti_ij}
+  \pf[(\yc_{mij}) \| m, \yI]
+\end{equation}
+
+
 
 
 

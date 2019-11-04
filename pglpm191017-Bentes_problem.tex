@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2015-05-01T20:53:34+0200
-%% Last-Updated: 2019-11-04T12:46:38+0100
+%% Last-Updated: 2019-11-04T17:00:12+0100
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newif\ifarxiv
 \arxivfalse
@@ -570,7 +570,7 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 %\providecommand{\varparallel}{\ensuremath{\mathbin{/\mkern-7mu/}}}%parallel (tentative symbol)
 \renewcommand*{\le}{\leqslant}%less or equal
 \renewcommand*{\ge}{\geqslant}%greater or equal
-%\DeclarePairedDelimiter\clcl{[}{]}
+\DeclarePairedDelimiter\clcl{[}{]}
 %\DeclarePairedDelimiter\clop{[}{[}
 %\DeclarePairedDelimiter\opcl{]}{]}
 %\DeclarePairedDelimiter\opop{]}{[}
@@ -656,6 +656,9 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 \newcommand*{\yc}{c}
 \newcommand*{\statm}[1]{\textsl{\textsf{#1}}}
 \newcommand*{\eq}{\mathrel{\!=\!}}
+\newcommand*{\yf}{f}
+\newcommand*{\yq}{q}
+\newcommand*{\yth}{\theta}
 %%% Custom macros end @@@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -909,14 +912,63 @@ target neuron, as to the situation where only one input neuron is connected
 to all target neurons, and all other input neurons are unconnected.
 
 With this approximation the joint probability distribution for a given
-mouse $m$ assumes this form, by de Finetti's representation
-theorem:\citep{definetti1930,hewittetal1955,heathetal1976,diaconis1977,diaconisetal1980,dawid2013}
+mouse $m$ assumes the following form, by de~Finetti's representation
+theorem:\citep{definetti1930,hewittetal1955,heathetal1976,diaconis1977,diaconisetal1980,dawid2013}.
+Take a set of $k_{m}$ input neurons and $l_{m}$ target neurons, and
+consider all possible connections $\yc_{mij}$ between them, with
+$i=1,\dotsc,k_{m}$ and $j=1,\dotsc,l_{m}$. Then
 \begin{equation}
   \label{eq:definetti_ij}
-  \pf[(\yc_{mij}) \| m, \yI]
+  \begin{split}
+  \pf[(\yc_{mij}) \| m, \yI] &=
+  \int_{0}^{1}\!\!\!\!\di\nu_{m}\;\pf(\nu_{m} \| \yI)\;
+  \prod_{ij}\bigl[
+  {\nu_{m}}^{\yc_{mij}}\;(1-\nu_{m})^{1-\yc_{mij}}
+  \bigr]
+  \\
+  &\equiv \int_{0}^{1}\!\!\!\!\di\nu_{m}\;\pf(\nu_{m} \| \yI)\;
+  {\nu_{m}}^{k_{m}l_{m}\yf_{m}}\;
+  (1-\nu_{m})^{k_{m}l_{m}(1-\yf_{m})}.
+\end{split}
 \end{equation}
+Here $k_{m}l_{m}\yf_{m} = \sum_{ij} \yc_{mij}$ is the total number of
+connections between the $k_{m}$ input neurons and the $l_{m}$ target
+neurons, and $0\le \nu_{m} \le 1$ is the population-averaged number of
+connections from the \emph{whole} input region to the \emph{whole} target
+region. The probability distribution $\pf(\nu_{m} \| I)$ expresses our
+beliefs about the total number of connections from input to target region
+in mouse $m$. The formula above is valid only if $k_{m}$ and $l_{m}$ are
+small (say, one tenth at most) compared to their region sizes.
 
+\medskip
 
+The probability distribution for the connections present in different mice
+can be obtained by combining the expressions above for each $m$. To do this
+we need the initial joint probability distribution
+\begin{equation}\label{eq:joint_nu_generic}
+  \pf[(\nu_{m}) \| \yI]
+  \equiv \pf(\nu_{1}, \nu_{2}, \dotsc \| \yI)
+\end{equation}
+for the total number of connections in several mice.
+
+Our question has another symmetry, more realistic than the previous two. We
+don't believe any of the mice to be examined to be special with respect to
+the others, nor we do believe that the particular order in which they are
+observed has any relevance. This means that our initial probability
+distribution above should be invariant with respect to permutations of the
+index $m$. Then we obtain the following expression, again by de~Finetti's
+theorem:
+\begin{equation}\label{eq:joint_nu_definetti}
+  \pf[(\nu_{m}) \| \yI] =
+  \int\!\!\!\di\yth\;\pf(\yth \| \yI)\;
+  \prod_{m}  \yq(\nu_{m} \| \yth),
+\end{equation}
+where $\yq$ is a distribution that depends on the parameter $\yth$. This
+parameter, which can be infinite-dimensional, in principle represents every
+possible distribution of total number of connections across the mice. For
+example, a particular $\yth$ can say that 7\% of mice had $10^6$
+connections, 11\% had $5\times 10^{7}$ connections, and so on. The above
+considers all such possible distributions.
 
 
 

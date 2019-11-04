@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2015-05-01T20:53:34+0200
-%% Last-Updated: 2019-11-04T17:00:12+0100
+%% Last-Updated: 2019-11-04T19:13:36+0100
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newif\ifarxiv
 \arxivfalse
@@ -659,6 +659,7 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 \newcommand*{\yf}{f}
 \newcommand*{\yq}{q}
 \newcommand*{\yth}{\theta}
+\newcommand*{\ynu}{\bm{\ynu}}
 %%% Custom macros end @@@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -963,12 +964,44 @@ theorem:
   \int\!\!\!\di\yth\;\pf(\yth \| \yI)\;
   \prod_{m}  \yq(\nu_{m} \| \yth),
 \end{equation}
-where $\yq$ is a distribution that depends on the parameter $\yth$. This
-parameter, which can be infinite-dimensional, in principle represents every
-possible distribution of total number of connections across the mice. For
+where $\yq$ is a distribution that depends on the parameter $\yth$, and
+$\pf(\yth \| \yI)$ is our initial probability distribution for this
+parameter.
+
+The parameter $\yth$ in principle represents every possible distribution --
+or histogram -- of the total number of connections across the mice. For
 example, a particular $\yth$ can say that 7\% of mice had $10^6$
 connections, 11\% had $5\times 10^{7}$ connections, and so on. The above
-considers all such possible distributions.
+formula sums over all such possible distributions. There is an infinite of
+such distributions, so the integral is over an infinite-dimensional space.
+When we calculate this integral with this full generality, we're using a
+so-called \emph{non-parametric} method. But for mathematical simplicity we
+can also decide to restrict our attention to histograms of specific shape,
+such as a normal for example. In this case the integral is restricted to a
+finite-dimensional space and we're using a \emph{parametric} method.
+
+\medskip
+
+Combining the initial probability distributions~\eqref{eq:definetti_ij} and
+\eqref{eq:joint_nu_definetti} we finally obtain our initial probability
+distribution for a joint set of statements $(\yC_{mij})$:
+\begin{equation}
+  \label{eq:main_init_prob_simplified}
+    \pf[(\yc_{mij}) \| \yI] =
+    \iint\!\!\!\di\yth\;\di\ynu\;
+    \pf(\yth \| \yI)\;
+    \prod_{mij}\Bigl[ \yq(\nu_{m} \| \yth)\;
+  {\nu_{m}}^{\yc_{mij}}\;(1-\nu_{m})^{1-\yc_{mij}}
+  \Bigr],
+\end{equation}
+where $\ynu \defd (\nu_{m})$.
+
+
+
+\section{Statements of the questions and data}
+\label{sec:statements_question_data}
+
+
 
 
 

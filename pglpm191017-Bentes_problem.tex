@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2015-05-01T20:53:34+0200
-%% Last-Updated: 2019-11-03T15:53:41+0100
+%% Last-Updated: 2019-11-04T11:58:46+0100
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newif\ifarxiv
 \arxivfalse
@@ -655,6 +655,7 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 \newcommand*{\yC}{C}
 \newcommand*{\yc}{c}
 \newcommand*{\statm}[1]{\textsl{\textsf{#1}}}
+\newcommand*{\eq}{\mathrel{\!=\!}}
 %%% Custom macros end @@@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -862,7 +863,50 @@ So our strategy is as follows:
 \item Calculate the probabilities in~\eqref{eq:Bayes_main}.
 \end{enumerate}
 
+We now face these steps in turn. We shall discuss several possible
+alternative assumptions and conceptual or mathematical approximations that
+we can make in order to proceed.
 
+\section{Initial probability distribution}
+\label{sec:init_prob}
+
+In order to formulate the initial probability distribution $\pf[(\yc_{mij})
+\| \yI]$ we explore the symmetries of our problem.
+
+Let's analyse two approximate symmetries first. Consider a specific mouse
+$m$.
+
+For each neuron $i$ in the input region, we can approximately judge as
+equally likely that it will connect to any of the neurons $j$ in the target
+region. This means that our initial probability distribution should remain
+the same if we swap some values of the index $j$, with $m$ and $i$ fixed.
+For example, the probability that neuron \#\,3 in the input region projects
+to neuron \#\,2 in the target region and does not project to neuron \#\,5
+should be the same if we exchange 2 and 5 in that statement. And similarly
+for combinations of such statements:
+\begin{equation}
+  \label{eq:example_exch_j}
+  \pf(\yc_{m\,3\,2} \eq 1, \yc_{m\,3\,5} \eq 0 \| \yI )
+=  \pf(\yc_{m\,3\,2} \eq 0, \yc_{m\,3\,5} \eq 1 \| \yI ).
+\end{equation}
+This symmetry is an approximation: if the indices $i$ and $j$ bear some
+information about the neurons' locations, our probability should reflect
+the possibility that nearby neurons may connect more easily, for example.
+
+We have an analogous approximate symmetry under exchanges of the
+input-neuron index $i$ for fixed target neuron $j$.
+
+These two approximate symmetries together are important because they
+greatly restrict the possible values of our initial probability
+distribution $\pf[(\yc_{mij}) \| \yI]$. The result they lead
+to\citep{hoover1979,aldous1981,diaconisetal1981b} is mathematically
+difficult for me, however. To further simplify the problem I make an even
+rougher approximation: that the symmetries above hold not just for $i$ and
+$j$ separately, but for any pairs of them. This assumption is even more
+unrealistic than the previous two, because it gives the same probability to
+the situation where each input neuron is connected with only one, distinct,
+target neuron, as to the situation where only one input neuron is connected
+to all target neurons, and all other input neurons are unconnected.
 
 
 

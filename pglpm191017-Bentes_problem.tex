@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2015-05-01T20:53:34+0200
-%% Last-Updated: 2019-11-06T11:42:21+0100
+%% Last-Updated: 2019-11-06T14:27:19+0100
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newif\ifarxiv
 \arxivfalse
@@ -659,6 +659,8 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 \newcommand*{\yq}{q}
 \newcommand*{\yth}{\theta}
 \newcommand*{\ynu}{\bm{\nu}}
+\newcommand*{\yN}{N}
+\newcommand*{\yF}{\bm{F}}
 %%% Custom macros end @@@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -749,41 +751,44 @@ injection and killing, for each mouse. This complication for the moment is
 set aside to simplify the initial calculation, but will be taken into
 account later.
 
-\section{Strategy for solving the problem}
+\section{Probabilistic formulation of the problem}
 \label{sec:strategies}
 
 First of all let's sketch a schematic picture of our problem and make
 our question more precise.
 
-We consider a very large number of mice, those we have observed and all those
-that we might observe in the future. Let's label each mouse with an index
-$m=1,2,\dotsc$. For our inferences to be valid, these mice must be judged
-\enquote{similar} in some respects. For each mouse we consider all neurons
-in its input region, labelling them with the index $i=1,2,\dotsc$, and all
-neurons in its target region, labelling them with the index $j=1,2,\dotsc$.
-Mouse $m$ has $K_{m}$ neurons in the input region and $L_{m}$ neurons in
-the target region. These indices are arbitrary, but $m$ may be chosen to
-reflect a temporal order and $i$, $j$ each to reflect a topographical
-order.
+We consider a very large number of mice: those we have observed and all
+those that we might observe in the future. Let's label each mouse with an
+index $m=1,2,\dotsc$. For our inferences to be valid, these mice must be
+judged \enquote{similar} in some respects. For each mouse, we consider all
+neurons in its input region, labelling them with the index
+$i=1,2,\dotsc, K_{m}$, and all neurons in its target region, labelling them
+with the index $j=1,2,\dotsc, L_{m}$. These indices are arbitrary, but $m$
+may be chosen to reflect a temporal order and $i$, $j$ each to reflect a
+topographical order. The number $K_{m}$ of neurons in the input region and
+the number $L_{m}$ in the target region will be different for each mouse
+$m$.
 
 Now that we've labelled the mice and their neurons in the two regions we
-can consider specific statements about their connections, such as
+can consider specific statements about their connections, for example
 \[\parbox{0.95\linewidth}{\statm{In mouse $m=3$, the neuron $i=5$ in the input
-      region projects to the neuron $j=4$ in the target region.}}\]
-which can be either true or false. This is illustrated in
-\fig~\ref{fig:cmij}: we have a grid for each mouse; each row $i$ in the
-grid represents a neuron in the input region, each column $j$ a neuron in
-the target region. If in mouse $m$ neuron $i$ projects to neuron $j$, then
-we colour the corresponding entry $i,j$ in grid $m$ in black, or we can
-associate the number 1 with it; if it doesn't project, then white or the
-number 0.
+      region projects to the neuron $j=4$ in the target region}}\]
+which can be either true or false. The situation described by these
+statements is visualized in \fig~\ref{fig:cmij}: we have a grid for each
+mouse; each row $i$ in the grid represents a neuron in the input region,
+each column $j$ a neuron in the target region. If in mouse $m$ neuron $i$
+projects to neuron $j$, then we colour the corresponding entry $i,j$ in
+grid $m$ in black, or we can associate the number 1 with it; if it doesn't
+project, then we use white or the number 0.
 %%\setlength{\intextsep}{0.5ex}% with wrapfigure
 \begin{figure}[b!]%{r}{0.4\linewidth} % with wrapfigure
  \centering\includegraphics[width=\linewidth]{bente_notes_drawings.png}\\
-\caption{caption}\label{fig:cmij}
+ \caption{Imaginary layout of the connectivity from input to target region
+   for all mice examined}\label{fig:cmij}
 \end{figure}% bente_notes_drawings.svg
 
-Mathematically we represent these statements with these quantities:
+Mathematically we represent these statements and the grids of
+\fig~\ref{fig:cmij} with these quantities:
 \begin{equation}
   \label{eq:quantity_connection}
   \yc_{mij} =
@@ -794,36 +799,60 @@ Mathematically we represent these statements with these quantities:
 \end{equation}
 Obviously for most of these statements we'll never be able to ascertain
 whether they're true or false. But our question can be made more precise in
-terms of them.
+terms of them:
 
-In our question we imagine to check every neuron $i$ in the target region
-of every mouse $m$, counting for each how many neurons from the input
-region project to it. From the point of view of \fig~\ref{fig:cmij} we're
-considering all columns from all grids and counting how many black entries
-each column has. If we were able to perform these observations, at the end
-we could build a histogram showing the proportion of neurons in the target
-regions that had $0$ inputs, $1$ input, $2$ inputs, and so on, from the
-input region.
+We imagine to check every neuron $i$ in the target region of every mouse
+$m$. For each such neuron we count how many neurons from the input region
+project to it. Let's call this number $\yN_{mi}$. From the point of view of
+\fig~\ref{fig:cmij} we're considering every column from every grid, in
+turn, and counting how many black entries it has. If we were able to
+perform these observations, at the end we could build a histogram of the
+numbers $(\yN_{mi})$, showing the proportion of neurons in the target
+region that have $0$ inputs from the input region, or $1$ input, $2$
+inputs, $n$ inputs, and so on. These values would be the bins of the
+histogram. The number of bins is large -- as much as the largest number of
+neurons that could make the input region of a mouse. Denote by $F_{n}$ the
+proportion (between $0$ and $1$) of neurons that receive $n$ inputs. This
+proportion is calculated from all numbers $(\yN_{mi})$ by
+\begin{equation}
+  \label{eq:histogram_from_N}
+F_{n} =
+\frac{\sum_{mi}\delt(\yN_{mi}=n)}{\sum_{m}L_{m}} \equiv
+  \frac{\text{\small number of $\yN_{mi}$s equal to $n$}}
+  {\text{\small total number of neurons in target regions}}.
+\end{equation}
+The whole histogram is the set of proportions
+$\yF \defd (F_{0}, F_{1}, \dotsc)$.
 
-With such a histogram we the question \enquote{how many inputs from the
-  input region does a neuron in the target region have on average?} has a
-definite meaning: its the mean of the histogram. The histogram would tell
-us even more, for example the percentage of target neurons that have
-between $100$ and $200$ inputs.
 
+With this histogram the question \enquote{how many inputs from the input
+  region does a neuron in the target region have on average?} has a
+definite meaning: it is the mean of the histogram,
+\begin{equation}
+  \label{eq:mean_histogram}
+  \text{\small average number of inputs} =
+  \sum_{n}n\,F_{n} \equiv \frac{\sum_{mi}\yN_{mi}}{\sum_{m}L_{m}}.
+\end{equation}
+But the histogram would tell us even more, for example the percentage of
+target neurons that receive between $100$ and $200$ inputs from the input
+region, obtained by summing $F_{100} + \dotsb + F_{200}$.
 
-Although we'll never be able to construct this histogram, we can
+\medskip
+
+Although we'll never be able to construct such a histogram, we can
 nevertheless guess, from our observations in a small set of mice, what kind
-of shape and numerical values it could have. Our goal is to determine the
-probabilities
+of shape and numerical values it could have. So our goal is to determine
+the probability
 \begin{equation}
   \label{eq:prob_histogram_general}
   \pf(\text{\small histogram} \| \text{\small data}, \yI)
 \end{equation}
-for all possible histograms, given the data collected in our observations
-and any other information $\yI$ we have, such as our present knowledge of
-brain biology. These probabilities can be found using the rule for
-conditional probabilities:
+for each possible histogram, given the data collected in our observations
+and any other information $\yI$ we have, including our present knowledge of
+brain biology.
+
+These probability above can be found using the rule for conditional
+probabilities:
 \begin{equation}
   \label{eq:prob_histogram_bayes}
   \pf(\text{\small histogram} \| \text{\small data}, \yI)
@@ -836,17 +865,37 @@ To calculate these we need to determine our initial probability
 distribution $\pf(\text{\small histogram} \| \yI)$ for all possible
 histograms. In fact we need to determine the initial probability of a
 couple more things, for example the total number of neurons in the input
-region, for each mouse. All other probabilities are calculated from this
-initial probability distribution.
+region $K_{m}$, for each mouse $m$. All other probabilities are calculated
+from this initial probability distribution.
 
-In the next section we discuss several possible assumptions and
-approximations that we can use to build the distribution
-$\pf(\text{\small histogram} \| \yI)$, making our choice among them along
-the way.
+In the next section we discuss and analyse several alternative assumptions
+that we can use to build the distribution
+$\pf(\text{\small histogram} \| \yI) \equiv \pf(\yF \| \yI)$. Some of these
+assumptions are approximate or unrealistic, yet unfortunately necessary for
+making the problem mathematically tractable. After discussing the
+alternatives we'll choose specific ones to arrive at formulae that we can
+use with the data. The discussion of the alternatives is useful because we
+can step back and try to change the less realistic assumptions if we see
+that our formulae don't work well.
 
 
 \section{Initial probability distribution}
 \label{sec:init_prob}
+
+The assumptions we use to build our initial probability distribution
+$\pf(\yF \| \yI)$ are about the symmetries of our problem.
+
+The first symmetry is very intuitive and compelling. Take the distribution
+of numbers of inputs for a given mouse $m$: $(\yN_{m1}, \yN_{m2})$ ***
+
+
+
+In order to formulate the initial probability distribution $\pf[(\yc_{mij})
+\| \yI]$ we explore the symmetries of our problem.
+
+Let's analyse two approximate symmetries first. Consider a specific mouse
+$m$.
+
 
 
 

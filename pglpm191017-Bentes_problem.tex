@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2015-05-01T20:53:34+0200
-%% Last-Updated: 2019-11-07T13:56:40+0100
+%% Last-Updated: 2019-11-07T16:56:34+0100
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newif\ifarxiv
 \arxivfalse
@@ -758,6 +758,28 @@ question more precise and to discuss possible strategies.
 \section{Formulation and strategies}
 \label{sec:strategies}
 
+The strategies we can consider vary in their complexity, both both
+conceptual and mathematical. This complexity reflects the \emph{hierarchic}
+depth at which we analyse our problem. What do we mean by
+\enquote{hierarchy}? For example, we could study the similarities and
+dissimilarities (say, means and deviations) of the connections from the
+input region to \emph{one} neuron. Then we can study how these similarities
+and dissimilarities are themselves similar and dissimilar across all target
+neurons in \emph{one} mouse. And finally we can study how these
+higher-order similarities and dissimilarities are themselves similar and
+dissimilar across all mice. This approach would have a three-level
+hierarchy. As an opposite example, we could study the similarities and
+dissimilarities of all connections to all target neurons in all mice, in a
+way pooling across target neurons and mice at once. This approach would
+have only a one-level hierarchy.
+
+The hierarchic depth at which we analyse our problem constrains the kind of
+questions we can ask and the kind of mathematical approximations we can
+use. In the second example above we would be forsaking the possibility of
+asking across-mouse variability. In the first example above our
+mathematical formulae would be very complex.
+
+
 Here's a first schematic picture of our inference.
 
 We consider a very large number of mice: those we have observed and all
@@ -805,7 +827,7 @@ For most of these statements we'll never be able to ascertain whether
 they're true or false, obviously. But they make our question and our data
 more precise.
 
-First, let's see how our question is expressed in term of these statements.
+First, let's see how our question can be expressed in term of these statements.
 
 We imagine to check every neuron $i$ in the target region of every mouse
 $m$. For each such neuron we count how many neurons from the input region
@@ -831,9 +853,10 @@ The whole histogram is the set of proportions
 $\yF \defd (F_{0}, F_{1}, \dotsc)$.
 
 
-With this histogram the question \enquote{how many inputs from the input
-  region does a neuron in the target region have on average?} has a
-definite meaning: it is the mean of the histogram,
+This histogram can give one definite meaning to the question \enquote{how
+  many inputs from the input region does a neuron in the target region have
+  on average?}: we are asking \enquote{what the mean of the histogram?},
+that is,
 \begin{equation}
   \label{eq:mean_histogram}
   \text{\small average number of inputs} =
@@ -842,6 +865,31 @@ definite meaning: it is the mean of the histogram,
 But the histogram would tell us even more, for example the percentage of
 target neurons that receive between $100$ and $200$ inputs from the input
 region, obtained by summing $F_{100} + \dotsb + F_{200}$.
+
+It's good to keep in mind that our question could also be approached in
+slightly different ways, leading to different secondary questions. For
+example, we could construct a histogram for the number of inputs for each
+mouse individually, thus obtaining several
+$\yF^{(m)}=\bigl(F^{{m}}_{0}, F^{{m}}_{1}, \dotsc)$, one for each $m$. Then
+we could ask: \enquote{what is the average connectivity histogram for a
+  mouse?}, that is,
+\begin{equation}
+  \label{eq:average_histogram_per_mouse}
+  \frac{1}{\text{\footnotesize number of mice}}\sum_{m}\; \yF^{(m)}
+\end{equation}
+and also ask how much such histogram can vary from mouse to mouse.
+
+\medskip
+
+These alternative questions are important in view of possible
+approximations in our assumptions and maths.
+
+
+
+For example, if we assume that
+all target neurons from all mice can be somehow pooled together -- which
+makes the maths easier -- then we are forsaking the possibility of
+analysing the individual connectivity histograms.
 
 \medskip
 

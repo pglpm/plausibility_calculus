@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2015-05-01T20:53:34+0200
-%% Last-Updated: 2019-11-06T14:27:19+0100
+%% Last-Updated: 2019-11-07T13:56:40+0100
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newif\ifarxiv
 \arxivfalse
@@ -724,10 +724,9 @@ region. Let's call the first \emph{target region}, and the second
 input region project, on average, to a single neuron in the target region?
 
 Our question actually concerns several input regions at once. For the
-moment we focus on setting up the calculation for one input region only,
-but the calculation will generalized to several input regions later.
-Considering several at once will actually improve the results, even if just
-a little.
+moment we focus on making inferences for one input region only, but the
+calculation will generalized to several input regions later. Considering
+several at once will actually improve the results, even if just a little.
 
 \medskip
 
@@ -751,25 +750,30 @@ injection and killing, for each mouse. This complication for the moment is
 set aside to simplify the initial calculation, but will be taken into
 account later.
 
-\section{Probabilistic formulation of the problem}
+\medskip
+
+Now let's sketch a schematic picture of our problem in order to make our
+question more precise and to discuss possible strategies.
+
+\section{Formulation and strategies}
 \label{sec:strategies}
 
-First of all let's sketch a schematic picture of our problem and make
-our question more precise.
+Here's a first schematic picture of our inference.
 
 We consider a very large number of mice: those we have observed and all
-those that we might observe in the future. Let's label each mouse with an
-index $m=1,2,\dotsc$. For our inferences to be valid, these mice must be
-judged \enquote{similar} in some respects. For each mouse, we consider all
-neurons in its input region, labelling them with the index
-$i=1,2,\dotsc, K_{m}$, and all neurons in its target region, labelling them
-with the index $j=1,2,\dotsc, L_{m}$. These indices are arbitrary, but $m$
-may be chosen to reflect a temporal order and $i$, $j$ each to reflect a
-topographical order. The number $K_{m}$ of neurons in the input region and
-the number $L_{m}$ in the target region will be different for each mouse
-$m$.
+those that we might observe in the future or we could have observed in the
+past. For our inferences to be valid, these mice must be judged
+\enquote{similar} in some respects. Let's label each mouse with an index
+$m=1,2,\dotsc$. For each mouse, we consider all neurons constituting its
+input region, labelling them $i=1,2,\dotsc, K_{m}$, and all neurons
+constituting its target region, labelling them $j=1,2,\dotsc, L_{m}$. The
+values of the three labels $m,i,j$ may be arbitrary or carry some
+information. For example, $m$ could reflect a temporal order, and $i$, $j$
+could each reflect a topographical order. The number $K_{m}$ of neurons in
+the input region and the number $L_{m}$ in the target region are different
+for each mouse $m$.
 
-Now that we've labelled the mice and their neurons in the two regions we
+Now that we've labelled the mice and their neurons in the two regions, we
 can consider specific statements about their connections, for example
 \[\parbox{0.95\linewidth}{\statm{In mouse $m=3$, the neuron $i=5$ in the input
       region projects to the neuron $j=4$ in the target region}}\]
@@ -797,9 +801,11 @@ Mathematically we represent these statements and the grids of
     0&\text{if neuron $i$ doesn't project to neuron $j$ in mouse $m$}.
   \end{cases}
 \end{equation}
-Obviously for most of these statements we'll never be able to ascertain
-whether they're true or false. But our question can be made more precise in
-terms of them:
+For most of these statements we'll never be able to ascertain whether
+they're true or false, obviously. But they make our question and our data
+more precise.
+
+First, let's see how our question is expressed in term of these statements.
 
 We imagine to check every neuron $i$ in the target region of every mouse
 $m$. For each such neuron we count how many neurons from the input region

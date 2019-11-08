@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2015-05-01T20:53:34+0200
-%% Last-Updated: 2019-11-08T13:38:47+0100
+%% Last-Updated: 2019-11-08T15:22:24+0100
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newif\ifarxiv
 \arxivfalse
@@ -759,13 +759,18 @@ question more precise and to discuss possible strategies for answering it.
 \section{Formulation and strategies}
 \label{sec:strategies}
 
+\setcounter{subsection}{-1}
+\subsection{Preliminary remarks}
+\label{sec:prelim_remarks}
+
+
 Our inference, based the probability calculus, boils down to these steps:
 \begin{enumerate}[label=\arabic*.]
 \item \label{item:step_statements} Find a set of elementary, factual
   statements, in terms of which we can formulate our questions and our
   data.
 
-\item \label{item:step_joint_prob} Determine the joint probability
+\item \label{item:step_joint_prob} Assign a joint probability
   distribution for all the possible combinations of these statements. This
   probability distribution depends on our background information and
   assumptions, denoted by $\yI$.
@@ -774,35 +779,31 @@ Our inference, based the probability calculus, boils down to these steps:
   answers to our questions in terms of the elementary statements.
 
 \item \label{item:step_calculate_probabilities} Use the probability
-  calculus to determine the probability
+  calculus to determine, from the joint probability distribution for the
+  elementary statements of step~\ref{item:step_joint_prob}, the probability
   \begin{equation}
     \label{eq:basic_conditional_prob}
     \pf(\text{\small answer} \| \text{\small data}, \yI) =
     \frac{\pf(\text{\small answer} \| \yI)}
     {\pf(\text{\small data} \| \yI)}
   \end{equation}
-from the joint probability distribution for the elementary statements.
+  for all answers of interest.
 \end{enumerate}
 
-The first two steps are especially important because they 
+
+\bigskip
+
+The first two steps are especially important: it's there that we decide on
+the level of simplification or realism of our formulation. Let's make a
+couple of remarks about this.
 
 
-
-
-
-Next, we try to analyse our problem in terms of some elementary statements,
-in terms of which we can formulate our questions and 
-
-
-
-First some remarks about the possible complexity of our analysis.
-
-There are several possible strategies to attack our inference problem; they
-differ in their degree of realism or simplification, in the kinds of
-questions they allow us to answer, and in their mathematical complexity.
-Their degree of realism is, in the present case, tightly connected with the
-\emph{hierarchic} depth at which we analyse our problem. What do we mean by
-\enquote{hierarchy}? Here are two examples.
+The possible formulations of our inference problem differ in their degree
+of simplification or realism, in the kinds of questions they allow us to
+answer, and in their mathematical complexity. Their degree of realism is,
+in the present case, tightly connected with the \emph{hierarchic} depth at
+which we analyse our problem. What do we mean by \enquote{hierarchy}? Here
+are two examples.
 \begin{enumerate}[label=(\roman*)]
 \item \label{item:3-level}We could study the similarities and
   dissimilarities (expressed as, say, means and variances) of the
@@ -830,13 +831,11 @@ The number of hierarchies goes hand in hand with the number of
 across target neurons; then it treats in a symmetric way the statistics of
 the connectivity of every target neuron in a mouse, but not across all
 mice; and so on. In the second example, our analysis treats all target
-neurons in all mice in a symmetric way. We'll now see that these symmetries
+neurons in all mice in a symmetric way. We'll shortly see how these symmetries
 have a mathematical counterpart and determine the formulae we use.
 
-\bigskip
-
-
-Here's a schematic formulation of our problem.
+\subsection{Step 1: elementary statements}
+\label{sec:step_statements}
 
 We consider a very large number of mice: those we have observed and all
 those that we might observe in the future or we could have observed in the
@@ -845,7 +844,7 @@ past. For our inferences to be valid, these mice must be judged
 $m=1,2,\dotsc$. For each mouse, we consider all neurons constituting its
 input region, labelling them $i=1,2,\dotsc, K_{m}$, and all neurons
 constituting its target region, labelling them $j=1,2,\dotsc, L_{m}$. The
-values of the three labels $m,i,j$ may be arbitrary or carry some
+values of the three labels $i,j,m$ may be arbitrary or carry some
 information. For example, $m$ could reflect a temporal order, and $i$, $j$
 could each reflect a topographical order. The number $K_{m}$ of neurons in
 the input region and the number $L_{m}$ in the target region are different
@@ -863,7 +862,7 @@ projects to neuron $j$, then we colour the corresponding entry $i,j$ in
 grid $m$ in black, or we can associate the number 1 with it; if it doesn't
 project, then we use white or the number 0.
 %%\setlength{\intextsep}{0.5ex}% with wrapfigure
-\begin{figure}[b!]%{r}{0.4\linewidth} % with wrapfigure
+\begin{figure}[t!]%{r}{0.4\linewidth} % with wrapfigure
  \centering\includegraphics[width=\linewidth]{bente_notes_drawings.png}\\
  \caption{Imaginary layout of the connectivity from input to target region
    for all mice}\label{fig:cmij}
@@ -873,20 +872,136 @@ Mathematically we represent these statements and the grids of
 \fig~\ref{fig:cmij} with the following quantities:
 \begin{equation}
   \label{eq:quantity_connection}
-  \yc_{mij} =
+  \yc_{ijm} =
   \begin{cases}
     1&\text{if neuron $i$ projects to neuron $j$ in mouse $m$},\\
     0&\text{if neuron $i$ doesn't project to neuron $j$ in mouse $m$}.
   \end{cases}
 \end{equation}
-For most of these statements we'll obviously never be able to ascertain
-whether they're true or false. But they make our question and our data more
-precise.
+Let's call them \emph{connections}.
 
-This formulation is already based on some simplifications and the neglect
-of possible hierarchies. We could have distinguished the neurons in the two
-regions according to morphology or location, and the mice according to age,
-weight, and so on.
+
+For most of these statements we'll obviously never be able to ascertain
+whether they're true or false. But they serve us well as elementary
+statements: we can precisely formulate our questions and data in terms of
+them.
+
+\bigskip
+
+The formulation just proposed is already based on some simplifications and
+the neglect of possible hierarchies: we could have distinguished the
+neurons in the two regions according to morphology or location, and the
+mice according to age, weight, and so on. But I take it as a good starting
+compromise between simplification and realism. We'll consider further
+simplifications in the next step.
+
+\subsection{Step 2: joint probability distribution for the connections}
+\label{sec:step_joint_prob}
+
+
+In order to assign the initial joint probability distribution
+$\pf[(\yc_{ijm}) \| \yI]$, for all values of the connections $(\yc_{mij})$,
+we explore the symmetries of our problem. Symmetries translate into
+equalities of some values of the joint distribution, and therefore restrict
+its possible values and mathematical form.
+
+Let's give an example corresponding to the three-level
+hierarchy~\ref{item:3-level} of \sect~\ref{sec:prelim_remarks}. If we
+consider all input neurons $(i)$ to a specific target neuron $j$ in a
+specific mouse $m$ as similar, then the joint probability should stay the
+same under exchanges of the indices $i$ having the same values. For example:
+\begin{multline}
+  \label{eq:example_exchange_i}
+  \pf(\yc_{2\,jm}=0, \yc_{5\,jm}=1, \yc_{6\,jm}=1, \yc_{9\,jm}=0 \| \yI) ={}\\
+  \pf(\underbracket[0.5pt]{\yc_{9\,jm}=0, \yc_{5\,jm}=1, \yc_{6\,jm}=1, \yc_{2\,jm}=0}_{2\leftrightarrow 9} \| \yI) ={}\\
+  \pf(\underbracket[0.5pt]{\yc_{2\,jm}=0, \yc_{6\,jm}=1, \yc_{5\,jm}=1, \yc_{9\,jm}=0}_{5\leftrightarrow 6} \| \yI) ={}\\
+  \pf(\underbracket[0.5pt]{\yc_{9\,jm}=0, \yc_{6\,jm}=1, \yc_{5\,jm}=1, \yc_{2\,jm}=0}_{2\leftrightarrow 9,\quad 5\leftrightarrow 6} \| \yI).
+\end{multline}
+We can't exchange $i=2$ and $i=5$ because their connections have different
+values. Because of this symmetry in $i$ the joint probability must have a
+specific form, by de~Finetti's representation
+theorem:\citep{definetti1930,hewittetal1955,heathetal1976,diaconis1977,diaconisetal1980,dawid2013}
+\begin{equation}
+  \label{eq:definetti_example_i}
+  \pf[(\yc_{ijm}) \| \yI] =
+  \int\!\!\!\prod_{jm}\Bigl[\di f_{jm}\;
+  {f_{jm}}^{\sum_{i}\yc_{ijm}}\;(1-f_{jm})^{\sum_{i}(1-\yc_{ijm})}\Bigr]\;
+  \pf[(f_{jm}) \| \yI].
+\end{equation}
+In this expression, $f_{jm}$ is the total number of neurons projecting to
+target neuron $j$ in mouse $m$, and what remains to be assigned is the
+probability distribution $\pf[(f_{jm}) \| \yI]$ over such numbers for all
+$j$ and $m$. It may look like a complicated expression, but it has
+considerably reduced 
+
+
+The symmetries briefly discussed previously
+
+Let's analyse two approximate symmetries first. Consider a specific mouse
+$m$.
+
+For each neuron $i$ in the input region, we can approximately judge as
+equally likely that it will connect to any of the neurons $j$ in the target
+region. This means that our initial probability distribution should remain
+the same if we swap some values of the index $j$, with $m$ and $i$ fixed.
+For example, the probability that neuron \#\,3 in the input region projects
+to neuron \#\,2 in the target region and does not project to neuron \#\,5
+should be the same if we exchange 2 and 5 in that statement. And similarly
+for combinations of such statements:
+\begin{equation}
+  \label{eq:example_exch_j}
+  \pf(\yc_{m\,3\,2} \eq 1, \yc_{m\,3\,5} \eq 0 \| \yI )
+=  \pf(\yc_{m\,3\,2} \eq 0, \yc_{m\,3\,5} \eq 1 \| \yI ).
+\end{equation}
+This symmetry is an approximation: if the indices $i$ and $j$ bear some
+information about the neurons' locations, our probability should reflect
+the possibility that nearby neurons may connect more easily, for example.
+
+We have an analogous approximate symmetry under exchanges of the
+input-neuron index $i$ for fixed target neuron $j$.
+
+These two approximate symmetries together are important because they
+greatly restrict the possible values of our initial probability
+distribution $\pf[(\yc_{mij}) \| \yI]$. The result they lead
+to\citep{hoover1979,aldous1981,diaconisetal1981b} is mathematically
+difficult for me, however. To further simplify the problem I make an even
+rougher approximation: that the symmetries above hold not just for $i$ and
+$j$ separately, but for any pairs of them. This assumption is even more
+unrealistic than the previous two, because it gives the same probability to
+the situation where each input neuron is connected with only one, distinct,
+target neuron, as to the situation where only one input neuron is connected
+to all target neurons, and all other input neurons are unconnected.
+
+With this approximation the joint probability distribution for a given
+mouse $m$ assumes the following form, by de~Finetti's representation
+theorem:\citep{definetti1930,hewittetal1955,heathetal1976,diaconis1977,diaconisetal1980,dawid2013}.
+Take a set of $k_{m}$ input neurons and $l_{m}$ target neurons, and
+consider all possible connections $\yc_{mij}$ between them, with
+$i=1,\dotsc,k_{m}$ and $j=1,\dotsc,l_{m}$. Then
+\begin{equation}
+  \label{eq:definetti_ij}
+  \begin{split}
+  \pf[(\yc_{mij}) \| m, \yI] &=
+  \int_{0}^{1}\!\!\!\!\di\nu_{m}\;\pf(\nu_{m} \| \yI)\;
+  \prod_{ij}\bigl[
+  {\nu_{m}}^{\yc_{mij}}\;(1-\nu_{m})^{1-\yc_{mij}}
+  \bigr]
+  \\
+  &\equiv \int_{0}^{1}\!\!\!\!\di\nu_{m}\;\pf(\nu_{m} \| \yI)\;
+  {\nu_{m}}^{k_{m}l_{m}\yf_{m}}\;
+  (1-\nu_{m})^{k_{m}l_{m}(1-\yf_{m})}.
+\end{split}
+\end{equation}
+Here $k_{m}l_{m}\yf_{m} = \sum_{ij} \yc_{mij}$ is the total number of
+connections between the $k_{m}$ input neurons and the $l_{m}$ target
+neurons, and $0\le \nu_{m} \le 1$ is the population-averaged number of
+connections from the \emph{whole} input region to the \emph{whole} target
+region. The probability distribution $\pf(\nu_{m} \| I)$ expresses our
+beliefs about the total number of connections from input to target region
+in mouse $m$. The formula above is valid only if $k_{m}$ and $l_{m}$ are
+small (say, one tenth at most) compared to their region sizes.
+
+
 
 \bigskip
 

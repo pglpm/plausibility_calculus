@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2015-05-01T20:53:34+0200
-%% Last-Updated: 2019-11-08T12:02:59+0100
+%% Last-Updated: 2019-11-08T13:38:47+0100
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newif\ifarxiv
 \arxivfalse
@@ -119,7 +119,8 @@ british%
 \usepackage[shortlabels,inline]{enumitem}
 \SetEnumitemKey{para}{itemindent=\parindent,leftmargin=0pt,listparindent=\parindent,parsep=0pt,itemsep=\topsep}
 % \begin{asparaenum} = \begin{enumerate}[para]
-% \begin{inparaenum} = \begin{enumerate*}
+%     \begin{inparaenum} = \begin{enumerate*}
+\setlist{itemsep=0pt,topsep=\parsep}
 \setlist[enumerate,2]{label=\alph*.}
 \setlist[enumerate]{label=\arabic*.,leftmargin=1.5\parindent}
 \setlist[itemize]{leftmargin=1.5\parindent}
@@ -465,7 +466,7 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 \captionnamefont{\footnotesize\sffamily%
 }
 \captiontitlefont{\footnotesize}
-\firmlists*
+%\firmlists
 \midsloppy
 % handling orphan/widow lines, memman.pdf
 % \clubpenalty=10000
@@ -666,7 +667,7 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% Beginning of document
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\firmlists
+%\firmlists
 \begin{document}
 \captiondelim{\quad}\captionnamefont{\footnotesize}\captiontitlefont{\footnotesize}
 \selectlanguage{british}\frenchspacing
@@ -758,6 +759,42 @@ question more precise and to discuss possible strategies for answering it.
 \section{Formulation and strategies}
 \label{sec:strategies}
 
+Our inference, based the probability calculus, boils down to these steps:
+\begin{enumerate}[label=\arabic*.]
+\item \label{item:step_statements} Find a set of elementary, factual
+  statements, in terms of which we can formulate our questions and our
+  data.
+
+\item \label{item:step_joint_prob} Determine the joint probability
+  distribution for all the possible combinations of these statements. This
+  probability distribution depends on our background information and
+  assumptions, denoted by $\yI$.
+
+\item \label{item:step_formulate_question_data} Express our data and the possible
+  answers to our questions in terms of the elementary statements.
+
+\item \label{item:step_calculate_probabilities} Use the probability
+  calculus to determine the probability
+  \begin{equation}
+    \label{eq:basic_conditional_prob}
+    \pf(\text{\small answer} \| \text{\small data}, \yI) =
+    \frac{\pf(\text{\small answer} \| \yI)}
+    {\pf(\text{\small data} \| \yI)}
+  \end{equation}
+from the joint probability distribution for the elementary statements.
+\end{enumerate}
+
+The first two steps are especially important because they 
+
+
+
+
+
+Next, we try to analyse our problem in terms of some elementary statements,
+in terms of which we can formulate our questions and 
+
+
+
 First some remarks about the possible complexity of our analysis.
 
 There are several possible strategies to attack our inference problem; they
@@ -765,7 +802,7 @@ differ in their degree of realism or simplification, in the kinds of
 questions they allow us to answer, and in their mathematical complexity.
 Their degree of realism is, in the present case, tightly connected with the
 \emph{hierarchic} depth at which we analyse our problem. What do we mean by
-\enquote{hierarchy}? Let's give two examples.
+\enquote{hierarchy}? Here are two examples.
 \begin{enumerate}[label=(\roman*)]
 \item \label{item:3-level}We could study the similarities and
   dissimilarities (expressed as, say, means and variances) of the
@@ -785,7 +822,7 @@ ask specific questions, such as \enquote{how does the connectivity vary
 (integrals over function spaces). The second example is drastically
 simplified and doesn't allow us to ask very specific questions. But it
 leads to much simpler mathematical expressions. Other approaches are also
-possible in between these two.
+possible in between and outside of these two.
 
 The number of hierarchies goes hand in hand with the number of
 \emph{symmetries}. In the first example, our analysis treats in a similar
@@ -796,10 +833,10 @@ mice; and so on. In the second example, our analysis treats all target
 neurons in all mice in a symmetric way. We'll now see that these symmetries
 have a mathematical counterpart and determine the formulae we use.
 
-\medskip
+\bigskip
 
 
-Here's a first schematic picture of our inference.
+Here's a schematic formulation of our problem.
 
 We consider a very large number of mice: those we have observed and all
 those that we might observe in the future or we could have observed in the
@@ -819,8 +856,8 @@ can consider specific statements about their connections, for example
 \[\parbox{0.95\linewidth}{\statm{In mouse $m=3$, the neuron $i=5$ in the input
       region projects to the neuron $j=4$ in the target region}}\]
 which can be either true or false. The situation described by these
-statements is visualized in \fig~\ref{fig:cmij}: we have a grid for each
-mouse; each row $i$ in the grid represents a neuron in the input region,
+statements is visualized in \fig~\ref{fig:cmij}. We have a grid for each
+mouse $m$; each row $i$ in the grid represents a neuron in the input region,
 each column $j$ a neuron in the target region. If in mouse $m$ neuron $i$
 projects to neuron $j$, then we colour the corresponding entry $i,j$ in
 grid $m$ in black, or we can associate the number 1 with it; if it doesn't
@@ -829,11 +866,11 @@ project, then we use white or the number 0.
 \begin{figure}[b!]%{r}{0.4\linewidth} % with wrapfigure
  \centering\includegraphics[width=\linewidth]{bente_notes_drawings.png}\\
  \caption{Imaginary layout of the connectivity from input to target region
-   for all mice examined}\label{fig:cmij}
+   for all mice}\label{fig:cmij}
 \end{figure}% bente_notes_drawings.svg
 
 Mathematically we represent these statements and the grids of
-\fig~\ref{fig:cmij} with these quantities:
+\fig~\ref{fig:cmij} with the following quantities:
 \begin{equation}
   \label{eq:quantity_connection}
   \yc_{mij} =
@@ -842,11 +879,20 @@ Mathematically we represent these statements and the grids of
     0&\text{if neuron $i$ doesn't project to neuron $j$ in mouse $m$}.
   \end{cases}
 \end{equation}
-For most of these statements we'll never be able to ascertain whether
-they're true or false, obviously. But they make our question and our data
-more precise.
+For most of these statements we'll obviously never be able to ascertain
+whether they're true or false. But they make our question and our data more
+precise.
 
-First, let's see how our question can be expressed in term of these statements.
+This formulation is already based on some simplifications and the neglect
+of possible hierarchies. We could have distinguished the neurons in the two
+regions according to morphology or location, and the mice according to age,
+weight, and so on.
+
+\bigskip
+
+
+Let's see how our question and data can be expressed in term of these
+statements and the quantities $(\yc_{mij})$.
 
 We imagine to check every neuron $i$ in the target region of every mouse
 $m$. For each such neuron we count how many neurons from the input region

@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2015-05-01T20:53:34+0200
-%% Last-Updated: 2019-11-08T15:22:24+0100
+%% Last-Updated: 2019-11-08T16:36:53+0100
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newif\ifarxiv
 \arxivfalse
@@ -909,7 +909,8 @@ Let's give an example corresponding to the three-level
 hierarchy~\ref{item:3-level} of \sect~\ref{sec:prelim_remarks}. If we
 consider all input neurons $(i)$ to a specific target neuron $j$ in a
 specific mouse $m$ as similar, then the joint probability should stay the
-same under exchanges of the indices $i$ having the same values. For example:
+same under exchanges of the indices $i$ for which the connections have the
+same values. For example:
 \begin{multline}
   \label{eq:example_exchange_i}
   \pf(\yc_{2\,jm}=0, \yc_{5\,jm}=1, \yc_{6\,jm}=1, \yc_{9\,jm}=0 \| \yI) ={}\\
@@ -932,7 +933,58 @@ In this expression, $f_{jm}$ is the total number of neurons projecting to
 target neuron $j$ in mouse $m$, and what remains to be assigned is the
 probability distribution $\pf[(f_{jm}) \| \yI]$ over such numbers for all
 $j$ and $m$. It may look like a complicated expression, but it has
-considerably reduced 
+considerably reduced the possible assignments of joint probabilities.
+
+The second level of the hierarchy of this example was to consider a
+similarity of connectivity statistics -- which are the quantities $f_{jo}$
+-- among all target neurons in each specific mouse. This means that the
+joint probability $\pf[(f_{jm}) \| \yI]$ in the formula above is symmetric
+in the index $j$ for each fixed $m$. This leads, again by de~Finetti's
+theorem, to a new expression similar to the one above, with new
+$m$-dependent statistics as parameters and a joint distribution for htem.
+The final level in the hierarchy says that this distribution is itself
+symmetric in the index $m$, thus leading to a final integral expression in
+terms of a single parameter only with an associated probability
+distribution.
+
+\bigskip
+
+The difficulty of the three-level formulation just sketched is
+mathematical: the integrals involved are over more complex spaces which are
+numerically more expensive to handle.
+
+As a first, simpler formulation we consider instead the more unrealistic
+but powerful symmetry of example~\ref{item:1-level}: the joint distribution
+$\pf[(\yc_{ijm}) \| \yI]$ stays the same under exchanges of \emph{any}
+indices $(i,j,m)$ for which the connections have the same values. For example,
+\begin{multline}
+  \label{eq:example_exchange_i}
+  \pf(\yc_{2\,3\,7}=0, \yc_{5\,5\,2}=1, \yc_{9\,1\,4}=0 \| \yI) =
+  \pf(\yc_{9\,3\,7}=0, \yc_{5\,5\,2}=1, \yc_{2\,1\,4}=0 \| \yI) ={}\\
+  \pf(\yc_{2\,1\,7}=0, \yc_{5\,5\,2}=1, \yc_{9\,3\,4}=0 \| \yI) =
+  \pf(\yc_{2\,3\,4}=0, \yc_{5\,5\,2}=1, \yc_{9\,1\,7}=0 \| \yI) ={}\\
+  \pf(\yc_{9\,1\,7}=0, \yc_{5\,5\,2}=1, \yc_{2\,3\,4}=0 \| \yI) =
+  \dotsb\quad\text{and so on.}
+\end{multline}
+We can only exchange indices with the same connection values, but
+we have full freedom otherwise.
+
+Again by de~Finetti's theorem, this symmetry forces our joint probability
+distribution to have this form:
+\begin{equation}
+  \label{eq:definetti_1level}
+  \pf[(\yc_{ijm}) \| \yI] =
+  \int\!\!\!\di q\;
+  q^{\sum_{i}\yc_{ijm}}\;(1-q)^{\sum_{i}(1-\yc_{ijm})}\;
+  \pf(q \| \yI)
+  \equiv
+  \int\!\!\!\di q;
+  q^{R f}\;(1-q)^{R\,(1-f)}\;
+  \pf(q \| \yI)
+  \equiv
+\end{equation}
+
+
 
 
 The symmetries briefly discussed previously

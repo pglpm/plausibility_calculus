@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2015-05-01T20:53:34+0200
-%% Last-Updated: 2019-11-08T16:36:53+0100
+%% Last-Updated: 2019-11-09T11:04:13+0100
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newif\ifarxiv
 \arxivfalse
@@ -766,21 +766,22 @@ question more precise and to discuss possible strategies for answering it.
 
 Our inference, based the probability calculus, boils down to these steps:
 \begin{enumerate}[label=\arabic*.]
-\item \label{item:step_statements} Find a set of elementary, factual
+\item \label{item:step_statements} Find a set of basic, factual
   statements, in terms of which we can formulate our questions and our
-  data.
+  data (\enquote{basic} in the sense that they're the building blocks of
+  our analysis).
 
 \item \label{item:step_joint_prob} Assign a joint probability
-  distribution for all the possible combinations of these statements. This
+  distribution for all the possible combinations of these basic statements. This
   probability distribution depends on our background information and
   assumptions, denoted by $\yI$.
 
 \item \label{item:step_formulate_question_data} Express our data and the possible
-  answers to our questions in terms of the elementary statements.
+  answers to our questions in terms of the basic statements.
 
 \item \label{item:step_calculate_probabilities} Use the probability
   calculus to determine, from the joint probability distribution for the
-  elementary statements of step~\ref{item:step_joint_prob}, the probability
+  basic statements of step~\ref{item:step_joint_prob}, the probability
   \begin{equation}
     \label{eq:basic_conditional_prob}
     \pf(\text{\small answer} \| \text{\small data}, \yI) =
@@ -834,7 +835,7 @@ mice; and so on. In the second example, our analysis treats all target
 neurons in all mice in a symmetric way. We'll shortly see how these symmetries
 have a mathematical counterpart and determine the formulae we use.
 
-\subsection{Step 1: elementary statements}
+\subsection{Step 1: basic statements}
 \label{sec:step_statements}
 
 We consider a very large number of mice: those we have observed and all
@@ -882,9 +883,8 @@ Let's call them \emph{connections}.
 
 
 For most of these statements we'll obviously never be able to ascertain
-whether they're true or false. But they serve us well as elementary
-statements: we can precisely formulate our questions and data in terms of
-them.
+whether they're true or false. But they serve us well as basic statements:
+we can precisely formulate our questions and data in terms of them.
 
 \bigskip
 
@@ -973,15 +973,16 @@ Again by de~Finetti's theorem, this symmetry forces our joint probability
 distribution to have this form:
 \begin{equation}
   \label{eq:definetti_1level}
-  \pf[(\yc_{ijm}) \| \yI] =
+  \begin{split}
+  \pf[(\yc_{ijm}) \| \yI] &=
   \int\!\!\!\di q\;
   q^{\sum_{i}\yc_{ijm}}\;(1-q)^{\sum_{i}(1-\yc_{ijm})}\;
   \pf(q \| \yI)
-  \equiv
-  \int\!\!\!\di q;
+\\ &\equiv
+  \int\!\!\!\di q\;
   q^{R f}\;(1-q)^{R\,(1-f)}\;
   \pf(q \| \yI)
-  \equiv
+\end{split}
 \end{equation}
 
 

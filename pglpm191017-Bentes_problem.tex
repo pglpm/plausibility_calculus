@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2015-05-01T20:53:34+0200
-%% Last-Updated: 2019-11-09T11:04:13+0100
+%% Last-Updated: 2019-11-10T16:54:48+0100
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newif\ifarxiv
 \arxivfalse
@@ -718,38 +718,30 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 \section{Synopsis of the problem}
 \label{sec:synopsis}
 
-We're considering neurons in some specific region of the mouse brain, and
-neurons some other specific region, which connect to those in the first
-region. Let's call the first \emph{target region}, and the second
-\emph{input region}. Our question is, roughly: how many neurons in the
-input region project, on average, to a single neuron in the target region?
-
-Our question actually concerns several input regions at once. For the
-moment we focus on making inferences for one input region only, but the
-calculation will generalized to several input regions later. Considering
-several at once will actually improve the results, even if just a little.
+We're considering two sets of neurons, which we call \emph{target} set and
+\emph{input} set. The target set comprises several neuron types, which can
+each be located in several regions. Same holds for the input set. Our
+question is, roughly: \emph{what proportions of neurons of each input kind
+  project to neurons of each target kind?} By \enquote{kind} we mean
+neurons that differ either in type or region.
 
 \medskip
 
-\textbf{The observations and data we use}: in several mice a small number
-of neurons in region $A$ -- \emph{starter neurons} -- are infected with a
-virus. This virus spreads, with time, to neurons -- \emph{input neurons} --
-that projects to the starter neurons. The virus can't spread further than
-that. Some of the infected neurons will be in region $B$. The virus also
-leads to colouring of starter and input neurons. Each mouse is killed after
-several days (different for each mouse) and the starter and input neurons
-are counted. So our data are the number of starter and input neurons for
-several mice.
+\textbf{The observations and data we use}: In a mouse, virus methodologies
+allow us to select several neurons in the target set and to collectively
+see which neurons in the input set project to them. We can't distinguish,
+however, which input neuron projects to which target neurons. This
+observation is made in several mice.
 
-There's a complication: if the mouse is killed too early, the virus hasn't
-had the time to spread to all input neurons. If the mouse is killed too
-late, the starter cells decay and are no longer visible. So we also need to
-guess, for each observed mouse, whether there were additional starter
-neurons, no longer visible, and what proportion of input neurons have been
-reached by the virus. As data we have the number of days between virus
-injection and killing, for each mouse. This complication for the moment is
-set aside to simplify the initial calculation, but will be taken into
-account later.
+There's a complication: to make this observation the mouse must be killed.
+If it's killed too early, the virus hasn't had the time to spread to all
+input neurons. If the mouse is killed too late, the starter neurons decay
+and are no longer visible. So we also need to guess, for each observed
+mouse, whether there were additional starter neurons, no longer visible,
+and what proportion of input neurons have been reached by the virus. As
+data we have the number of days between virus injection and killing, for
+each mouse. This complication for the moment is set aside to simplify the
+initial calculation, but will be taken into account later.
 
 \medskip
 
@@ -806,16 +798,18 @@ in the present case, tightly connected with the \emph{hierarchic} depth at
 which we analyse our problem. What do we mean by \enquote{hierarchy}? Here
 are two examples.
 \begin{enumerate}[label=(\roman*)]
-\item \label{item:3-level}We could study the similarities and
-  dissimilarities (expressed as, say, means and variances) of the
-  connections from the input region to \emph{one} neuron. Then study how
-  these similarities and dissimilarities are themselves similar and
-  dissimilar across all target neurons in \emph{one} mouse. And finally
-  study how these higher-order similarities and dissimilarities are
-  themselves similar and dissimilar across all mice. 
-\item \label{item:1-level}We could study the similarities and
-  dissimilarities of the connections to all target neurons in all mice at
-  once, pooling across target neurons and mice.
+\item \label{item:3-level}For each pair of input-target kinds, we could
+  study the similarities and dissimilarities (expressed as, say, means and
+  variances) of the connections from the input kind to \emph{one} target
+  neuron. Then study how these similarities and dissimilarities are
+  themselves similar and dissimilar across all target neurons of the same
+  kind in \emph{one} mouse. And finally study how these higher-order
+  similarities and dissimilarities are themselves similar and dissimilar
+  across all mice.
+\item \label{item:1-level}For each pair of input-target kinds, we could
+  study the similarities and dissimilarities of the connections to all
+  target neurons of the same kind in all mice at once, pooling across
+  target neurons and mice.
 \end{enumerate}
 The first example is more realistic because it acknowledges different
 levels of similarities and variations in our study. It also allows us to

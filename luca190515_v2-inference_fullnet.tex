@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2015-05-01T20:53:34+0200
-%% Last-Updated: 2020-01-15T14:44:47+0100
+%% Last-Updated: 2020-01-16T10:10:33+0100
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newif\ifarxiv
 \arxivfalse
@@ -19,7 +19,7 @@ british%
 \newcommand*{\firstdraft}{15 May 2019}
 \newcommand*{\firstpublished}{15 May 2019}
 \newcommand*{\updated}{\ifarxiv***\else\today\fi}
-\newcommand*{\propertitle}{Inferring the total activity of a large neuronal population\\ from a small sample. II: full Bayes [draft]%\\{\large ***}%
+\newcommand*{\propertitle}{Inferring the total activity of a large neuronal population\\ from a small sample\\ II: full Bayesian approach [draft]%\\{\large ***}%
 }% title uses LARGE; set Large for smaller
 \newcommand*{\pdftitle}{\propertitle}
 \newcommand*{\headtitle}{Bayesian inferences about large neuronal populations}
@@ -444,7 +444,7 @@ citestyle=authoryear-comp,bibstyle=pglpm-authoryear,autopunct=false,sorting=ny,s
 \pagestyle{manaart}
 
 \setlength{\droptitle}{-3.9\onelineskip}
-\pretitle{\begin{center}\LARGE\sffamily%
+\pretitle{\begin{center}\Large\sffamily%
 \bfseries}
 \posttitle{\bigskip\end{center}}
 
@@ -503,9 +503,9 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 % {\protect\centering ***\\%
 % \footnotesize\epost{\email{***}{***}}}%
 % \hspace*{\stretch{1}}%
-\parbox{0.5\linewidth}%\makebox[0pt][c]%
+\parbox{0.75\linewidth}%\makebox[0pt][c]%
 {\protect\centering P.G.L.  Porta Mana\\%
-\footnotesize\epost{\email{piero.mana}{ntnu.no}}}%
+\footnotesize Kavli Institute, Trondheim\quad\epost{\email{pgl}{portamana.org}}}%
 \hspace*{\stretch{1}}%
 %\quad\href{https://orcid.org/0000-0002-6070-0784}{\protect\includegraphics[scale=0.16]{orcid_32x32.png}\textsc{orcid}:0000-0002-6070-0784}%
 }
@@ -706,8 +706,11 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 %%% BEGINNING OF MAIN TEXT
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{***}
-\label{sec:***}
+\section{Introduction}
+\label{sec:introduction}
+
+
+
 
 \textcolor{white}{If you find this you can claim a postcard from me.}
 
@@ -770,7 +773,6 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% Acknowledgements
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
-\iffalse
 \begin{acknowledgements}
   \ldots to Mari \amp\ Miri for continuous encouragement and affection, and
   to Buster Keaton and Saitama for filling life with awe and inspiration.
@@ -780,13 +782,15 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 %\rotatebox{15}{P}\rotatebox{5}{I}\rotatebox{-10}{P}\rotatebox{10}{\reflectbox{P}}\rotatebox{-5}{O}.
 %\sourceatright{\autanet}
 \mbox{}\hfill\autanet
+
+This work is financially supported by the Kavli Foundation and the Centre
+  of Excellence scheme of the  Research Council of Norway (Yasser Roudi group).
 \end{acknowledgements}
-\fi
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% Appendices
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
-\clearpage
+\bigskip
 % %\renewcommand*{\appendixpagename}{Appendix}
 % %\renewcommand*{\appendixname}{Appendix}
 % %\appendixpage

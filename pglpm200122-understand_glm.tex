@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2015-05-01T20:53:34+0200
-%% Last-Updated: 2020-01-16T10:26:28+0100
+%% Last-Updated: 2020-01-22T11:49:30+0100
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newif\ifarxiv
 \arxivfalse
@@ -16,13 +16,13 @@
 onecolumn,oneside,article,%french,italian,german,swedish,latin,
 british%
 ]{memoir}
-\newcommand*{\firstdraft}{15 May 2019}
-\newcommand*{\firstpublished}{15 May 2019}
+\newcommand*{\firstdraft}{22 January 2020}
+\newcommand*{\firstpublished}{\firstdraft}
 \newcommand*{\updated}{\ifarxiv***\else\today\fi}
-\newcommand*{\propertitle}{Inferring the total activity of a large neuronal population\\ from a small sample\\ II: full Bayesian approach [draft]%\\{\large ***}%
+\newcommand*{\propertitle}{Understanding generalized linear models [draft]%\\{\large ***}%
 }% title uses LARGE; set Large for smaller
 \newcommand*{\pdftitle}{\propertitle}
-\newcommand*{\headtitle}{Bayesian inferences about large neuronal populations}
+\newcommand*{\headtitle}{Generalized linear models}
 \newcommand*{\pdfauthor}{P.G.L.  Porta Mana}
 \newcommand*{\headauthor}{Porta Mana}
 \newcommand*{\reporthead}{\ifarxiv\else Open Science Framework \href{https://doi.org/10.31219/osf.io/***}{\textsc{doi}:10.31219/osf.io/***}\fi}% Report number
@@ -444,7 +444,7 @@ citestyle=authoryear-comp,bibstyle=pglpm-authoryear,autopunct=false,sorting=ny,s
 \pagestyle{manaart}
 
 \setlength{\droptitle}{-3.9\onelineskip}
-\pretitle{\begin{center}\Large\sffamily%
+\pretitle{\begin{center}\LARGE\sffamily%
 \bfseries}
 \posttitle{\bigskip\end{center}}
 
@@ -503,11 +503,16 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 % {\protect\centering ***\\%
 % \footnotesize\epost{\email{***}{***}}}%
 % \hspace*{\stretch{1}}%
-\parbox{0.75\linewidth}%\makebox[0pt][c]%
+\parbox{0.5\linewidth}%\makebox[0pt][c]%
 {\protect\centering P.G.L.  Porta Mana\\%
-\footnotesize Kavli Institute, Trondheim\quad\epost{\email{pgl}{portamana.org}}}%
-\hspace*{\stretch{1}}%
+\footnotesize\epost{\email{pgl}{portamana.org}}}%
 %\quad\href{https://orcid.org/0000-0002-6070-0784}{\protect\includegraphics[scale=0.16]{orcid_32x32.png}\textsc{orcid}:0000-0002-6070-0784}%
+%% uncomment if additional authors present
+% \hspace*{\stretch{1}}%
+% \parbox{0.5\linewidth}%\makebox[0pt][c]%
+% {\protect\centering ***\\%
+% \footnotesize\epost{\email{***}{***}}}%
+\hspace*{\stretch{1}}%
 }
 
 %\date{Draft of \today\ (first drafted \firstdraft)}
@@ -674,9 +679,9 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 \setlength{\absrightindent}{0pt}
 \setlength{\abstitleskip}{-\absparindent}
 \begin{abstract}\labelsep 0pt%
-  \noindent ***
-\\\noindent\emph{\footnotesize Note: Dear Reader
-    \amp\ Peer, this manuscript is being peer-reviewed by you. Thank you.}
+  \noindent An explanation of generalized linear models
+\\\noindent\emph{\footnotesize Note: Dear Reader, please remember that
+  you're the ultimate peer-reviewer of anything you read.}
 % \par%\\[\jot]
 % \noindent
 % {\footnotesize PACS: ***}\qquad%
@@ -690,15 +695,22 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % \asudedication{\small ***}
 % \vspace{\bigskipamount}
-% \setlength{\epigraphwidth}{.7\columnwidth}
-% %\epigraphposition{flushright}
-% \epigraphtextposition{flushright}
-% %\epigraphsourceposition{flushright}
-% \epigraphfontsize{\footnotesize}
-% \setlength{\epigraphrule}{0pt}
-% %\setlength{\beforeepigraphskip}{0pt}
-% %\setlength{\afterepigraphskip}{0pt}
-% \epigraph{\emph{text}}{source}
+\setlength{\epigraphwidth}{.7\columnwidth}
+%\epigraphposition{flushright}
+\epigraphtextposition{flushright}
+%\epigraphsourceposition{flushright}
+\epigraphfontsize{\footnotesize}
+\setlength{\epigraphrule}{0pt}
+%\setlength{\beforeepigraphskip}{0pt}
+%\setlength{\afterepigraphskip}{0pt}
+\epigraph{\emph{Where do probability models come from? To judge by the
+    resounding silence over this question on the part of most
+    statisticians, it seems highly embarrassing. In general, the
+    theoretician is happy to accept that his abstract \textins{model} % probability triple
+    % {$(\Omega, \mathcal{A}, \mathcal{P})$}
+    was found under a gooseberry
+    bush, while the applied statistician's model ``just growed''.} }{A. P.
+  Dawid \parencites*[\sect~4, p.~220]{dawid1982}}
 
 
 
@@ -706,15 +718,10 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 %%% BEGINNING OF MAIN TEXT
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{Introduction}
-\label{sec:introduction}
+\section{Generalized linear models}
+\label{sec:intro}
 
-The goal of many experimental recordings of neuronal activity can be
-likened to \emph{survey sampling}:
-
-
-\textcolor{white}{Did you find this? Congrats, you won a postcard! Feel
-  free to send me your address.}
+\textcolor{white}{If you find this you can claim a postcard from me.}
 
 
 
@@ -775,6 +782,7 @@ likened to \emph{survey sampling}:
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% Acknowledgements
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+\iffalse
 \begin{acknowledgements}
   \ldots to Mari \amp\ Miri for continuous encouragement and affection, and
   to Buster Keaton and Saitama for filling life with awe and inspiration.
@@ -784,15 +792,13 @@ likened to \emph{survey sampling}:
 %\rotatebox{15}{P}\rotatebox{5}{I}\rotatebox{-10}{P}\rotatebox{10}{\reflectbox{P}}\rotatebox{-5}{O}.
 %\sourceatright{\autanet}
 \mbox{}\hfill\autanet
-
-This work is financially supported by the Kavli Foundation and the Centre
-  of Excellence scheme of the  Research Council of Norway (Yasser Roudi group).
 \end{acknowledgements}
+\fi
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% Appendices
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
-\bigskip
+\clearpage
 % %\renewcommand*{\appendixpagename}{Appendix}
 % %\renewcommand*{\appendixname}{Appendix}
 % %\appendixpage

@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2020-03-17T00:29:23+0100
-%% Last-Updated: 2020-05-14T23:49:44+0200
+%% Last-Updated: 2020-05-15T00:22:46+0200
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newif\ifarxiv
 \arxivfalse
@@ -16,13 +16,13 @@
 onecolumn,oneside,article,%french,italian,german,swedish,latin,
 british%
 ]{memoir}
-\newcommand*{\firstdraft}{***}
+\newcommand*{\firstdraft}{14 May 2020}
 \newcommand*{\firstpublished}{***}
 \newcommand*{\updated}{\ifarxiv***\else\today\fi}
-\newcommand*{\propertitle}{***[draft]%\\{\large ***}%
+\newcommand*{\propertitle}{On partial and conditional exchangeability[draft]%\\{\large ***}%
 }% title uses LARGE; set Large for smaller
 \newcommand*{\pdftitle}{\propertitle}
-\newcommand*{\headtitle}{***}
+\newcommand*{\headtitle}{Partial and conditional exchangeability}
 \newcommand*{\pdfauthor}{P.G.L.  Porta Mana}
 \newcommand*{\headauthor}{Porta Mana}
 \newcommand*{\reporthead}{\ifarxiv\else Open Science Framework \href{https://doi.org/10.31219/osf.io/***}{\textsc{doi}:10.31219/osf.io/***}\fi}% Report number
@@ -680,7 +680,8 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 \setlength{\absrightindent}{0pt}
 \setlength{\abstitleskip}{-\absparindent}
 \begin{abstract}\labelsep 0pt%
-  \noindent ***
+  \noindent A formula is given connecting the representation of partial and
+  conditional exchangeability
 % \\\noindent\emph{\footnotesize Note: Dear Reader
 %     \amp\ Peer, this manuscript is being peer-reviewed by you. Thank you.}
 % \par%\\[\jot]
@@ -716,6 +717,16 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 \label{sec:***}
 
 \textcolor{white}{If you find this you can claim a postcard from me.}
+
+
+\begin{equation}
+  \label{eq:formula}
+  \int\!\!\di ...
+  \prod_{ij} \bigl( \xi_{i\| j} \, \nu_{j}\bigr)^{q_{i \| j} \, f_{j}}\;
+  \pf(\xi) \, \pf(\nu)
+\end{equation}
+
+
 
 
 

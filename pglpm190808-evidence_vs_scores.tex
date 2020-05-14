@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2019-08-08T08:04:04+0200
-%% Last-Updated: 2019-08-23T11:53:42+0200
+%% Last-Updated: 2020-05-02T18:05:19+0200
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newif\ifarxiv
 \arxivfalse
@@ -18,7 +18,7 @@ british%
 ]{memoir}
 \newcommand*{\firstdraft}{8 August 2019}
 \newcommand*{\firstpublished}{18 August 2019}
-\newcommand*{\updated}{20 August 2019}
+\newcommand*{\updated}{\today}
 \newcommand*{\propertitle}{A relation between log-likelihood\\ and cross-validation
   log-scores%\\{\large}%
 }% title uses LARGE; set Large for smaller
@@ -503,7 +503,7 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 % \hspace*{\stretch{1}}%
 \parbox{0.75\linewidth}%\makebox[0pt][c]%
 {\protect\centering P.G.L.  Porta Mana\\%
-\footnotesize Kavli Institute, Trondheim, Norway \quad\epost{\email{piero.mana}{ntnu.no}}}%
+\footnotesize Kavli Institute, Trondheim, Norway \quad\epost{\email{pgl}{portamana.org}}}%
 \hspace*{\stretch{1}}%
 %\quad\href{https://orcid.org/0000-0002-6070-0784}{\protect\includegraphics[scale=0.16]{orcid_32x32.png}\textsc{orcid}:0000-0002-6070-0784}%
 }
@@ -680,8 +680,8 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
   cross-validation log-scores that can be calculated from all subsets of
   the data. This relation can be generalized to any $k$-fold
   cross-validation log-scores.
-\\\noindent\emph{\footnotesize Note: Dear Reader
-    \amp\ Peer, this manuscript is being peer-reviewed by you. Thank you.}
+% \\\noindent\emph{\footnotesize Note: Dear Reader
+%     \amp\ Peer, this manuscript is being peer-reviewed by you. Thank you.}
 % \par%\\[\jot]
 % \noindent
 % {\footnotesize PACS: ***}\qquad%
@@ -1160,16 +1160,18 @@ of such average.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
 %\iffalse
 \begin{acknowledgements}
-  \ldots to the Kavli Foundation and the Centre of Excellence scheme of the
-  Research Council of Norway (Yasser Roudi group) for financial support. To
+  To
   Aki Vehtari for some references. To the staff of the NTNU library for
   their always prompt assistance. To Mari, Miri, Emma for continuous
   encouragement and affection, and to Buster Keaton and Saitama for filling
   life with awe and inspiration. To the developers and maintainers of Open
   Science Framework, \LaTeX, Emacs, AUC\TeX, Python, Inkscape, Sci-Hub for
-  making a free and impartial scientific exchange possible.%
+  making a free and impartial scientific exchange possible.
+
+    This work is financially supported by the Kavli Foundation and the Centre
+  of Excellence scheme of the  Research Council of Norway (Roudi group).  
 %\rotatebox{15}{P}\rotatebox{5}{I}\rotatebox{-10}{P}\rotatebox{10}{\reflectbox{P}}\rotatebox{-5}{O}.
-\\\mbox{}\hfill\autanet
+%\\\mbox{}\hfill\autanet
 \end{acknowledgements}
 %\fi
 

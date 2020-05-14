@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
-%% Created: 2015-05-01T20:53:34+0200
-%% Last-Updated: 2020-02-29T18:11:58+0100
+%% Created: 2020-03-17T00:29:23+0100
+%% Last-Updated: 2020-05-14T23:49:44+0200
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newif\ifarxiv
 \arxivfalse
@@ -16,13 +16,13 @@
 onecolumn,oneside,article,%french,italian,german,swedish,latin,
 british%
 ]{memoir}
-\newcommand*{\firstdraft}{15 May 2019}
-\newcommand*{\firstpublished}{15 May 2019}
+\newcommand*{\firstdraft}{***}
+\newcommand*{\firstpublished}{***}
 \newcommand*{\updated}{\ifarxiv***\else\today\fi}
-\newcommand*{\propertitle}{Inferring the total activity of a large neuronal population\\ from a small sample\\ II: full Bayesian approach [draft]%\\{\large ***}%
+\newcommand*{\propertitle}{***[draft]%\\{\large ***}%
 }% title uses LARGE; set Large for smaller
 \newcommand*{\pdftitle}{\propertitle}
-\newcommand*{\headtitle}{Bayesian inferences about large neuronal populations}
+\newcommand*{\headtitle}{***}
 \newcommand*{\pdfauthor}{P.G.L.  Porta Mana}
 \newcommand*{\headauthor}{Porta Mana}
 \newcommand*{\reporthead}{\ifarxiv\else Open Science Framework \href{https://doi.org/10.31219/osf.io/***}{\textsc{doi}:10.31219/osf.io/***}\fi}% Report number
@@ -81,8 +81,8 @@ british%
 \addtolength{\jot}{\jot} % increase spacing in multiline formulae
 \setlength{\multlinegap}{0pt}
 
-\usepackage{empheq}% automatically calls amsmath and mathtools
-\newcommand*{\widefbox}[1]{\fbox{\hspace{1em}#1\hspace{1em}}}
+%\usepackage{empheq}% automatically calls amsmath and mathtools
+%\newcommand*{\widefbox}[1]{\fbox{\hspace{1em}#1\hspace{1em}}}
 
 %%%% empheq above seems more versatile than these:
 %\usepackage{fancybox}
@@ -196,7 +196,7 @@ british%
 \renewcommand\sfdefault{uop}
 \DeclareMathAlphabet{\mathsf}  {T1}{\sfdefault}{m}{sl}
 \SetMathAlphabet{\mathsf}{bold}{T1}{\sfdefault}{b}{sl}
-\newcommand*{\mathte}[1]{\textbf{\textit{\textsf{#1}}}}
+%\newcommand*{\mathte}[1]{\textbf{\textit{\textsf{#1}}}}
 % Upright sans-serif math alphabet
 % \DeclareMathAlphabet{\mathsu}  {T1}{\sfdefault}{m}{n}
 % \SetMathAlphabet{\mathsu}{bold}{T1}{\sfdefault}{b}{n}
@@ -251,6 +251,7 @@ citestyle=authoryear-comp,bibstyle=pglpm-authoryear,autopunct=false,sorting=ny,s
 \makeatother\fi
 \DefineBibliographyExtras{british}{\def\finalandcomma{\addcomma}}
 \renewcommand*{\finalnamedelim}{\addspace\amp\space}
+%\renewcommand*{\finalnamedelim}{\addcomma\space}
 \setcounter{biburlnumpenalty}{1}
 \setcounter{biburlucpenalty}{0}
 \setcounter{biburllcpenalty}{1}
@@ -308,12 +309,12 @@ citestyle=authoryear-comp,bibstyle=pglpm-authoryear,autopunct=false,sorting=ny,s
 %\providecommand{\mparcnote}{\texttt{philsci} eprints available at \url{http://philsci-archive.pitt.edu/}.}
 }
 \newcommand*{\biorxiveprint}[1]{%\global\def\biorxivp{\biorxivsi}%\citeauthor{0arxivcite}\addtocategory{ifarchcit}{0arxivcite}%eprint
-\texttt{bioRxiv doi:\urlalt{https://doi.org/10.1101/#1}{10.1101/#1}}%
+bioRxiv \texttt{doi:\urlalt{https://doi.org/10.1101/#1}{10.1101/#1}}%
 %\texttt{\href{http://arxiv.org/abs/#1}{\protect\url{arXiv:#1}}}%
 %\renewcommand{\arxivnote}{\texttt{arXiv} eprints available at \url{http://arxiv.org/}.}
 }
 \newcommand*{\osfeprint}[1]{%
-\texttt{Open Science Framework doi:\urlalt{https://doi.org/10.17605/osf.io/#1}{10.17605/osf.io/#1}}%
+Open Science Framework \texttt{doi:\urlalt{https://doi.org/10.17605/osf.io/#1}{10.17605/osf.io/#1}}%
 }
 
 \usepackage{graphicx}
@@ -445,7 +446,7 @@ citestyle=authoryear-comp,bibstyle=pglpm-authoryear,autopunct=false,sorting=ny,s
 \pagestyle{manaart}
 
 \setlength{\droptitle}{-3.9\onelineskip}
-\pretitle{\begin{center}\Large\sffamily%
+\pretitle{\begin{center}\LARGE\sffamily%
 \bfseries}
 \posttitle{\bigskip\end{center}}
 
@@ -577,7 +578,7 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 %\providecommand{\varparallel}{\ensuremath{\mathbin{/\mkern-7mu/}}}%parallel (tentative symbol)
 \renewcommand*{\le}{\leqslant}%less or equal
 \renewcommand*{\ge}{\geqslant}%greater or equal
-\DeclarePairedDelimiter\clcl{[}{]}
+%\DeclarePairedDelimiter\clcl{[}{]}
 %\DeclarePairedDelimiter\clop{[}{[}
 %\DeclarePairedDelimiter\opcl{]}{]}
 %\DeclarePairedDelimiter\opop{]}{[}
@@ -607,10 +608,10 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 \newcommand*{\fig}{fig.}%
 \newcommand*{\figs}{figs}%
 \newcommand*{\vs}{{vs}}
-%\newcommand*{\etc}{{etc.}}
-%\newcommand*{\ie}{{i.e.}}
+\newcommand*{\eg}{{e.g.}}
+\newcommand*{\etc}{{etc.}}
+\newcommand*{\ie}{{i.e.}}
 %\newcommand*{\ca}{{c.}}
-%\newcommand*{\eg}{{e.g.}}
 \newcommand*{\foll}{{ff.}}
 %\newcommand*{\viz}{{viz}}
 \newcommand*{\cf}{{cf.}}
@@ -658,39 +659,6 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 %\DeclareMathOperator*{\argsup}{arg\,sup}
 \newcommand*{\dob}{degree of belief}
 \newcommand*{\dobs}{degrees of belief}
-
-\newcommand*{\yFF}{F}
-\newcommand*{\yff}{f}
-\newcommand*{\yF}{\bm{\yFF}}
-\newcommand*{\yf}{\bm{\yff}}
-\newcommand*{\yH}{\varIota}
-\newcommand*{\yjj}{\phi}
-\newcommand*{\yj}{\bm{\yjj}}
-\newcommand*{\yAv}{A}
-\newcommand*{\yA}{\yAv}%pop av value
-\newcommand*{\yAs}{\widebar{A}}%pop av value
-\newcommand*{\yav}{a}
-\newcommand*{\ya}{\yav}%subpop av value
-\newcommand*{\yas}{\widebar{a}}%pop av value
-\newcommand*{\ypp}{G}
-\newcommand*{\ynuu}{\nu}
-\newcommand*{\ynu}{\bm{\ynuu}}
-\newcommand*{\ysh}{H}
-\newcommand*{\yRR}{R}
-\newcommand*{\yR}{\bm{\yRR}}
-\newcommand{\appropto}{\mathrel{\vcenter{
-  \offinterlineskip\halign{\hfil$##$\cr
-    \propto\cr\noalign{\kern2pt}\sim\cr\noalign{\kern-2pt}}}}}
-% https://tex.stackexchange.com/a/33547/97039
-\newcommand*{\yeq}{\mathrel{\!=\!}}
-\newcommand*{\yJJ}{J}
-\newcommand*{\yJ}{\bm{\yJJ}}
-\newcommand*{\yI}{\varIota}
-\newcommand*{\yG}{\bm{G}}
-\newcommand*{\yr}{\bm{r}}
-
-
-
 %%% Custom macros end @@@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -744,491 +712,10 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 %%% BEGINNING OF MAIN TEXT
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{Introduction}
-\label{sec:introduction}
+\section{***}
+\label{sec:***}
 
-The goal of many experimental recordings of neuronal activity can be
-likened to \emph{survey sampling}:
-
-
-\textcolor{white}{Did you find this? Congrats, you won a postcard! Feel
-  free to send me your address.}
-
-
-Here are the distributions for our \dobs\ about three different quantities,
-assuming an entropic pre-data distribution for the long-run frequencies of
-the full network:
-
-\textbf{The frequency distribution $\yF$ of the full-network activity
-  \emph{during the recording}}
-
-\begin{equation}
-  \label{eq:fullfreq_from_samplefreq}
-  \begin{split}
-  \p(\yF \|\yf,\yH) &\propto
-  \!\begin{multlined}[t][0.8\linewidth]
-  \int\!\di\ynu\;  \tsum_{\yj}
-  \delt(\tsum_{\yA}\yjj_{\ya\yA} = \yff_{\ya})\;
-  \delt(\tsum_{\ya}\yjj_{\ya\yA} = \yFF_{\yA})\times{}\\
-  \binom{T}{T\yj}\;
-  \biggl[\prod_{\ya\yA}
-(\ypp_{\ya\yA}\ynuu_{\yA})^{T\yjj_{\ya\yA}}
-\biggr]\;
-\exp[-L\;\ysh(\ynu;\yR)]
-\end{multlined}
-\\
-&\appropto \delt(\tsum_{\yA}\ypp_{\ya\yA}\yFF_{\yA} = \yff_{\ya})\;
-\exp[-L\;\ysh(\yF;\yR)]
-\end{split}
-\end{equation}
-
-\bigskip
-
-\textbf{The long-run frequency distribution $\ynu$ of the full-network
-  activity}
-
-\begin{equation}
-  \label{eq:longrun_from_samplefreq}
-  \begin{split}
-  \p(\ynu \|\yf,\yH) &\propto
-    \binom{T}{T\yf}\;
-  \biggl[\prod_{\ya}
-(\tsum_{\yA}\ypp_{\ya\yA}\ynuu_{\yA})^{T\yff_{\ya}}
-\biggr]\;
-\exp[-L\;\ysh(\ynu;\yR)]
-\\
-&\appropto 
-\exp[-T\;\ysh(\yf; \mathte{\ypp}\ynu)
--L\;\ysh(\ynu;\yR)]
-\end{split}
-\end{equation}
-Note that if some $\yff_{\ya}$ are zero, then the first exponential may
-be badly approximated by a delta, because the constraints lie on a facet of the
-simplex of frequencies $\set{\ynu}$.
-
-\bigskip
-
-\textbf{The activity $\yA'$ of the full-network
-  in a \emph{new} time bin}
-
-\begin{equation}
-  \label{eq:newbin_from_samplefreq}
-  \begin{split}
-  \p(\yA' \|\yf,\yH) &\propto
-  \int\!\di\ynu\;\ynuu_{\yA'}\;
-  \binom{T}{T\yf}\;
-  \biggl[\prod_{\ya}
-(\tsum_{\yA}\ypp_{\ya\yA}\ynuu_{\yA})^{T\yff_{\ya}}
-\biggr]\;
-\exp[-L\;\ysh(\ynu;\yR)]
-\\
-&\appropto 
-\int\!\di\ynu\;\ynuu_{\yA'}\;
-\exp[-T\;\ysh(\yf; \mathte{\ypp}\ynu)
--L\;\ysh(\ynu;\yR)]
-\end{split}
-\end{equation}
-Note that if some $\yff_{\ya}$ are zero, then the first exponential may
-be badly approximated by a delta, because the constraints lie on a facet of the
-simplex of frequencies $\set{\ynu}$.
-
-
-\section{Derivation of the probability distribution\\ and of its approximations}
-\label{sec:derivation}
-
-\subsection{Notation}
-\label{sec:notation}
-
-\begin{itemize}[wide,label={}]
-\item $N=1000$: size of the full network.
-
-\item $n=65$: size of the sample.
-
-\item $T=417\,641$: number of bins in the recording.
-
-Bins are indexed by $t\in\set{1,\dotsc,T}$.
-
-\item $A\in\set{0,1,\dotsc,N}$: levels of total activity of the full network.
-
-\item $A_{t}\in\set{0,1,\dotsc,N}$: total activity of the full network at bin $t$.
-
-\item $\yAs \defd (A_{1}, A_{2}, \dotsc, A_{T})$: sequence of activities of full
-network during the recording.
-
-\item $F_{A} \in \set{0,1/T,\dotsc,1}$: relative frequency of activity level $A$
-of full network during the recording. That is, activity level $A$ appears
-in $T F_{A}$ out of $T$ bins: $T F_{A} = \sum_{t}\delt(A_{t}\yeq A)$.
-
-\item $\yF \defd (F_{0},F_{1}, \dotsc,F_{N})$: frequency distribution.
-
-  Note that $\yAs$ completely determines $\yF$. We write the $\yF$
-  determined by $\yAs$ as $\yF(\yAs)$.
-
-\item $\nu_{A} \in \clcl{0,1}$: long-run relative frequency of activity level $A$
-of full network during all hypothetical repetitions of the same recording
-in the same conditions.
-
-\item $\ynu \defd (\nu_{0}, \nu_{1}, \dotsc, \nu_{N})$: frequency distribution.
-
-\item $a\in\set{0,1,\dotsc,n}$: levels of total activity of the sample.
-
-\item $a_{t}\in\set{0,1,\dotsc,n}$: total activity of the sample at bin $t$.
-
-\item $\yas \defd (a_{1}, a_{2}, \dotsc, a_{T})$: sequence of activities of
-sample during the recording.
-
-\item $f_{a} \in \set{0,1/T,\dotsc,1}$: relative frequency of activity level $a$
-of sample during the recording.
-
-\item $\yf \defd (f_{0},f_{1}, \dotsc,f_{n})$: frequency distribution.
-
-  Note that $\yas$ completely determines $\yf$.  We write the $\yf$
-  determined by $\yas$ as $\yf(\yas)$.
-
-  
-\item $J_{a\,A} \in \set{0,1/T,\dotsc,1}$: joint relative frequency of
-  activity levels $a$ and $A$ for sample and full network during the
-  recording. That is, the pair $(a,A)$ appears in $T J_{a\,A}$ out of $T$
-  bins:
-  $T J_{a\,A} = \sum_{t}\delt(a_{t} \yeq  a)\, \delt(A_{t}
-  \yeq  A)$.
-
-  Note that the full network can't have fewer active neurons or fewer
-  silent neurons than its sample (for example, if $A_{t}=0$ then
-  $a_{t}=0$, and if $A_{t}=N$ then $a_{t}=n$), so $J_{a\,A}\equiv 0$ for
-  $a>A$ or $n-a>N-A$.
-
-  Obviously $F_{A}\equiv\sum_{a}J_{a\,A}$ and $f_{a}\equiv\sum_{A}J_{a\,A}$.
-
-\item $\yJ \defd (J_{0\,0},J_{0\,1}, \dotsc,J_{n\,N})$: joint frequency
-  distribution.
-
-  Note that $(\yas,\yAs)$ together completely determine $\yJ$.  We write the $\yJ$
-  determined by $(\yas,\yAs)$ as $\yJ(\yas,\yAs)$.
-
-\item
-  $G_{a\,A} \defd 
-  \binom{n}{a}\binom{N-n}{A-a}\binom{N}{A}^{-1} \equiv
-  \binom{A}{a}\binom{N-A}{n-a}\binom{N}{n}^{-1}$: hypergeometric
-  distribution.
-  
-\item $\yI$: background information and assumptions; includes knowledge of
-  $N$ and $n$.
-\end{itemize}
-
-\subsection{Derivation}
-\label{sec:derivation_steps}
-
-We want to know which distribution of frequencies of full-network
-activities occurred during the recording, given our observations of the
-sample. Namely, $\pf(\yF \| \yas,\yI)$. This can be obtained as the
-marginal of the probability distribution for the joint frequencies,
-$\pf(\yJ \| \yas, \yI)$. If this probability distribution is represented by
-a set of Monte Carlo samples $\set{\yJ^{(i)}}$, then
-$\set{\yF^{(i)}\equiv (\sum_{a}J^{(i)}_{a\,A})}$ are automatically samples
-of $\pf(\yF \| \yas,\yI)$.
-
-By the theorem of total probability,
-\begin{equation}
-  \label{eq:total_prob_As}
-  \pf(\yJ \| \yas, \yI) =
-  \sum_{\yAs}  \pf(\yJ \| \yas, \yAs, \yI)\; \pf(\yAs \| \yas, \yI),
-\end{equation}
-the sum being over all possible sequences $\set{\yAs}$ of total activities.
-
-The first factor is a singular probability distribution, because $\yas$,
-$\yAs$ jointly determine $\yJ$:
-\begin{equation}
-  \label{eq:singular_J}
-  \begin{split}
-  \pf(\yJ \| \yas, \yAs, \yI) 
-&= \delt\bigl[\yJ \yeq \yJ(\yas,\yAs)\bigr]\\
-&\equiv \prod_{a\,A}  \delt\bigl[T J_{a\,A} \yeq  \tsum_{t}
-  \delt(a_{t} \yeq  a)\, \delt(A_{t} \yeq  A)\bigr].
-\end{split}
-\end{equation}
-
-The second factor is derived from Bayes's theorem:
-\begin{equation}
-  \label{eq:bayes_sequences}
-  \pf(\yAs \| \yas, \yI) =
-  \frac{\pf(\yas \| \yAs, \yI)\;\pf(\yAs \| \yI)}
-  {\sum_{\yAs}\pf(\yas \| \yAs, \yI)\;\pf(\yAs \| \yI)}.
-\end{equation}
-
-\bigskip
-
-In the last formula, let's first derive $\pf(\yas \| \yAs, \yI)$. We make
-the following
-\begin{equation}
-  \label{eq:assumption_irrelevance_t}
-  \parbox{0.9\linewidth}{\textbf{assumption}: if $A_{t}$ is known, then
-    knowledge of $a_{t'}$ or $A_{t'}$ with $t'\ne t$ is irrelevant for our
-    inferences about $a_{t}$.}  
-\end{equation}
-It isn't a realistic assumption, but it's the one behind the
-maximum-entropy method in this kind of applications. From this assumption
-we have, using the product rule,
-\begin{equation}
-  \label{eq:factor_at_At}
-  \pf(\yas \| \yAs, \yI) = \prod_{t} \pf(a_{t} \| A_{t}, \yI),
-\end{equation}
-and from simple sampling theory
-$\pf(a_{t} \| A_{t}, \yI) = G_{a_{t}\,A_{t}}$ for each $t$, so that
-\begin{equation}
-  \label{eq:factor_at_At}
-  \pf(\yas \| \yAs, \yI) = \prod_{t} G_{a_{t}\,A_{t}}.
-\end{equation}
-The latter product can be rewritten by grouping together all $t$ in which
-the same $(a,A)$ pair appears: there are $T J_{a\,A}(\yas,\yAs)$ such $t$.
-Then we consider all such pairs:
-\begin{equation}
-  \label{eq:factor_at_At_grouped}
-  \pf(\yas \| \yAs, \yI) = \prod_{a,A} {G_{a\,A}}^{T J_{a\,A}(\yas,\yAs)}
-\end{equation}
-where $\prod_{a,A} \defd \prod_{a}\prod_{A}$.
-
-\medskip
-
-Now let's decide upon $\pf(\yAs \| \yI)$ in
-formula~\eqref{eq:bayes_sequences}. We assume that this probability has the
-same value for all sequences $\yAs$ having the same frequency distribution
-$\yF(\yAs)$; that is, it functionally depends on $\yAs$ only through
-$\yF(\yAs)$. More specifically we assume that it can be hierarchically
-written as
-\begin{equation}
-  \label{eq:p_as_exchangeable}
-  \pf(\yAs \| \yI) = \pi(\yF) =
-  \int\!\!\di\ynu\;q(\ynu)\;\prod_{A}{\nu_{A}}^{T F_{A}}
-\end{equation}
-for some density function $q(\ynu)\,\di\ynu$. The integral expression is
-simply a mathematical way to write $\pi(\yF)$, and doesn't need to be
-further interpreted (the integral disappears if we can solve it
-analytically). But it's also the formula for infinite exchangeability, and
-from this point of view $\ynu$ can be interpreted as the long-run frequency
-distribution of the activities in all experiments performed in the same
-conditions -- imagining to join together their recording times. This is the
-point of view underlying the maximum-entropy method.
-
-\medskip
-
-Replacing \eqref{eq:factor_at_At_grouped} and \eqref{eq:p_as_exchangeable}
-into~\eqref{eq:bayes_sequences} and rearranging we find
-\begin{equation}
-  \label{eq:bayes_sequences_developed}
-  \begin{split}
-  \pf(\yAs \| \yas, \yI) &= \frac{1}{Z}
-  \int\!\!\di\ynu\;q(\ynu)\; %\delt\bigl[\yJ \yeq \yJ(\yas,\yAs)\bigr]\;
-  \prod_{a,A} \Bigl[{G_{a\,A}}^{T J_{a\,A}(\yas,\yAs)}\Bigr]
-  \;\prod_{A}{\nu_{A}}^{T F_{A}}
-  \\
-  &\equiv
-  \frac{1}{Z}
-  \int\!\!\di\ynu\;q(\ynu)\; %\delt\bigl[\yJ \yeq \yJ(\yas,\yAs)\bigr]\;
-  \prod_{a,A} \bigl(G_{a\,A}\,\nu_{A}\bigr)^{T J_{a\,A}(\yas,\yAs)},
-\end{split}
-\end{equation}
-where $Z\defd \sum_{\yAs}\pf(\yas \| \yAs, \yI)\;\pf(\yAs \| \yI)$ is the
-normalization factor and the second equality comes from rewriting
-\begin{equation}
-  \label{eq:rewrite_nu_power}
-  {\nu_{A}}^{T F_{A}} \equiv {\nu_{A}}^{T \sum_{a}J_{a\,A}}
-  \equiv \prod_{a}{\nu_{A}}^{T J_{a\,A}}.
-\end{equation}
-Note that the normalization factor is independent of $\yAs$ and only
-depends on $\yas$, which is given and fixed in our inference.
-
-\bigskip
-
-We can now return to our initial probability
-distribution~\eqref{eq:total_prob_As}. Replacing~\eqref{eq:singular_J} and
-\eqref{eq:bayes_sequences_developed} into it and rearranging we have
-\begin{equation}
-  \label{eq:next-final_expression}
-    \pf(\yJ \| \yas, \yI) =
-  \frac{1}{Z}
-  \int\!\!\di\ynu\;q(\ynu)\;
-  \sum_{\yAs}\delt\bigl[\yJ \yeq \yJ(\yas,\yAs)\bigr]\;
-  \prod_{a,A} \bigl(G_{a\,A}\,\nu_{A}\bigr)^{T J_{a\,A}(\yas,\yAs)}.
-\end{equation}
-
-This expression can be considered as the marginal distribution of the joint
-density function
-\begin{equation}
-  \label{eq:joint_q_J_almost-final}
-      \pf(\yJ, \ynu\| \yas, \yI) =
-  \frac{1}{Z}\;
-  q(\ynu)\;
-  \sum_{\yAs}\delt\bigl[\yJ \yeq \yJ(\yas,\yAs)\bigr]\;
-  \prod_{a,A} \bigl(G_{a\,A}\,\nu_{A}\bigr)^{T J_{a\,A}(\yas,\yAs)}.
-\end{equation}
-If we represent this density by a set of Monte Carlo samples for
-$(\yJ,\ynu)$, we automatically also have samples for the distribution for
-$\yJ$, that for $\yF$, and that for $\ynu$.
-
-
-
-
-\medskip
-
-Let's consider the sum over all possible sequences, $\sum_{\yAs}$, in the
-joint density~\eqref{eq:joint_q_J_almost-final}. Owing to the delta in the
-summand, the only $\yAs$s that contribute to the sum are those for which
-$\yJ(\yas, \yAs)=\yJ$. This also means that all terms in the sum have the
-same numerical value, because their values depend on $\yAs$ only through
-$\yJ(\yas, \yAs)$, which is fixed. We must therefore only find how many
-terms there are in the sum, and multiply the value of one term for the
-number of terms.
-
-With $\yas$ and $\yJ$ fixed, we are asking how many $\yAs$s satisfy
-$\yJ(\yas, \yAs)=\yJ$. Consider the problem from the following point of
-view. We have a grid of boxes with $(n+1)$ rows and $(N+1)$ columns,
-indexed by $(a,A)$. A sequence of $T$ balls go into the boxes: if the $t$th
-ball goes into the $(a,A)$ box, it means that at the $t$th time bin the
-activities of sample and full network were $a_{t}=a$ and $A_{t}=A$. In the
-typical combinatorial problem we would ask in how many ways we can fill the
-boxes, with $T J_{a\,A}$ balls in the box $(a,A)$, by throwing the $T$
-balls. The number would be given by all $T!$ possible permutations of the
-balls, but considering permutations of two or more balls within the same
-box as equivalent, thus finding the multinomial coefficient
-\begin{equation}
-  \label{eq:multinomial_coefficient_generic}
-  \binom{T}{T\yJ} \equiv
-  \binom{T}{T J_{0\,0}, \dotsc, T J_{n\,N}} 
-  \defd
-  \frac{T!}{\prod_{a,A}(T J_{a\,A})!}.
-\end{equation}
-In our case, however, we have one constraint: $\yas$ is fixed, which means
-that the \emph{row} in which each ball must fall is determined and fixed.
-The $t$th ball must perforce fall into row $a_{t}$. In considering all
-possible permutations we must therefore exclude those that change the rows
-of the balls. This means that only within-row permutations are allowed.
-Within each row the counting proceeds as usual, so that for row $a$, which
-has a total of $T\sum_{A}J_{a\,A}\equiv T f_{a}$ balls, we have
-\begin{equation}
-  \label{eq:multinomial_coefficient_row}
-  \binom{T f_{a}}{T J_{a\,0}, \dotsc, T J_{a\,N}} =
-  \frac{(T f_{a})!}{\prod_{A}(T J_{a\,A})!}.
-\end{equation}
-We therefore find that the number of terms in the sum
-of~\eqref{eq:joint_q_J_almost-final} is
-\begin{equation}
-  \label{eq:multinomial_coefficient_withinrow}
-  \prod_{a}\binom{T f_{a}}{T J_{a\,0}, \dotsc, T J_{a\,N}}.
-\end{equation}
-
-If $T$ is large the logarithm of the multinomial coefficient can be
-approximated using the Shannon entropy $\ysh$, which for a generic
-distribution $(x_{i})$ satisfies the bounds \citep[Lemma 2.2 pp.
-429--430 in][]{csiszaretal2004b}
-\begin{equation}
-  \label{eq:approx_multinomial}
-  T \ysh(x_{0},\dotsc,x_{N}) - \ln\binom{T+N}{T} \le
-  \ln\binom{T}{Tx_{0},\dotsc,Tx_{N}} \le T \ysh(x_{0},\dotsc,x_{N}).
-\end{equation}
-We therefore approximate the
-multiplicity~\eqref{eq:multinomial_coefficient_withinrow} as
-\begin{multline}
-  \label{eq:multinomial_coefficient_withinrow_approx}
-  \exp\Biggl[T\sum_{a} f_{a}\;\ysh\Biggl(
-\frac{J_{a\,0}}{f_{a}}, \dotsc,
-\frac{J_{a\,N}}{f_{a}}\Biggr)
-    \Biggr] \equiv
-  \exp\Biggl[-T\sum_{a} f_{a} \sum_{A}
-    \frac{J_{a\,A}}{f_{a}}\ln\frac{J_{a\,A}}{f_{a}}
-    \Biggr]
-    \equiv{}\\
-    \exp\Biggl[-T \sum_{a,A} J_{a\,A}\ln J_{a\,A} + T  \sum_{a} f_{a}\ln f_{a}\Biggr]
-    \equiv
-    \exp[T\,\ysh(\yJ) - T\,\ysh(\yf)],
-\end{multline}
-where the second line is obtained by combining the sums, simplifying, and
-using the definition of Shannon entropy. \mynote{Is it possible that this
-  approximation affects the result? -- Update: the discrepancy is less than
-0.1\%.}
-
-\bigskip
-
-The sum over $\yAs$ in formula~\eqref{eq:joint_q_J_almost-final} can
-therefore be replaced by any single summand multiplied by the
-multiplicity~\eqref{eq:multinomial_coefficient_withinrow_approx} above. The
-marginal frequency distribution $\yf$ is still fixed, determined by $\yas$,
-so we still have the constraint $\sum_{A}J_{a\,A}=f_{a}$ for each $a$,
-which we compactly write $\delt(\tsum\yJ\yeq \yf)$. We find
-\begin{multline}
-  \label{eq:final_expression_multiplicity}
-      \pf(\yJ, \ynu \| \yas, \yI) \\
-  \begin{aligned}
-  &=\frac{1}{Z}\;\delt(\tsum\yJ \yeq \yf)
-  % \int\!\!\di\ynu
-  \;q(\ynu)\;
-  %\sum_{\yAs}\delt\bigl[\yJ \yeq \yJ(\yas,\yAs)\bigr]\;
-  \exp[T\,\ysh(\yJ) - T\,\ysh(\yf)]\;
-  \prod_{a,A} \bigl(G_{a\,A}\,\nu_{A}\bigr)^{T J_{a\,A}(\yas,\yAs)}
-  \\
-     &=
-%     \begin{multlined}[t][0.7\linewidth]
-  \frac{1}{Z}\;\delt(\tsum\yJ \yeq \yf)
-  % \int\!\!\di\ynu
-  \;q(\ynu)\;%\times{}\\
-  \exp\bigl\{T\bigl[
-  \ysh(\yJ) - \ysh(\yf)
-  + \tsum_{a,A} J_{a\,A}\ln(G_{a\,A}\,\nu_{A})
-  \bigr]\bigr\},
-%\end{multlined}
-\end{aligned}
-\end{multline}
-where the second equality comes from re-expressing the product over $(a,A)$
-in exponential-logarithm form.
-
-Now we note that $G_{a\,A}\,\nu_{A}$ is a normalized distribution in
-$(a,A)$ owing to the properties of the hypergeometric distribution and of
-$\ynu$. We denote it $\yG\cdot\ynu$. We can also use the definition of
-relative entropy
-\begin{equation}
-  \label{eq:rel_entropy}
-  \ysh[(x_{i}); (y_{i})] \defd \tsum_{i} x_{i} \ln\frac{x_{i}}{y_{i}}
-\equiv -\ysh[(x_{i})] -\tsum_{i} x_{i} \ln y_{i},
-\end{equation}
-to combine the first and last terms within the exponential. The logarithm
-of our joint density~\eqref{eq:joint_q_J_almost-final} can then finally be
-written as
-\begin{empheq}[box=\widefbox]{equation}
-  \label{eq:log-density_final}
-  \begin{multlined}[][0.9\linewidth]
-    \ln \pf(\yJ, \ynu \| \yas, \yI) =
-\ln\delt(\tsum\yJ \yeq \yf) + 
-    \ln q(\ynu)
-  -T\,\ysh(\yJ; \yG\cdot\ynu)
-\\[\jot]{}  - T\,\ysh(\yf) - \ln Z(\yas)
-%  \text{with $\tsum_{a}\yJ=\yf(\yas)$}
-\end{multlined}
-\end{empheq}
-
-The last two terms are constants: they only depend on $\yas$ and
-$\yf(\yas)$, which are given and fixed in our problem. They can therefore
-be discarded in Monte Carlo sampling. In sampling, the delta term is taken
-care of by restricting the sampling to the set of allowed $\yJ$.
-
-\medskip
-
-The density $q(\ynu)$ remains to be specified. We use an entropic density
-\begin{equation}
-  \label{eq:density_nu_entropic}
-  q(\ynu) \propto \exp[-L\;\ysh(\ynu;\yr)]
-\end{equation}
-where $\yr$ is a reference distribution -- we take the uniform one for
-simplicity -- and $L$ is of order unity, say less than $10$. This density
-is motivated by the consideration of multiplicities: a frequency
-distribution, like $\ynu$, can be realized in a number of ways equal to a
-multinomial coefficient. This coefficient, by
-formula~\eqref{eq:approx_multinomial}, approximately equal to the
-exponential of the Shannon entropy of the distribution. So the
-density~\eqref{eq:density_nu_entropic} keeps track of this multiplicity,
-but regulates its importance via the parameter $L$. We can also choose
-$L=0$, which leads to $q(\ynu)$ being uniform in $\ynu$.
-
-
+\textcolor{white}{If you find this you can claim a postcard from me.}
 
 
 
@@ -1279,8 +766,10 @@ $L=0$, which leads to $q(\ynu)$ being uniform in $\ynu$.
 %   \end{tikzcd}
 % \]
 
-%%\setlength{\intextsep}{0.5ex}% with wrapfigure
-%\begin{figure}[p!]%{r}{0.4\linewidth} % with wrapfigure
+%%\setlength{\intextsep}{0ex}% with wrapfigure
+%%\setlength{\columnsep}{0ex}% with wrapfigure
+%\begin{figure}[p!]% with figure
+%\begin{wrapfigure}{r}{0.4\linewidth} % with wrapfigure
 %  \centering\includegraphics[trim={12ex 0 18ex 0},clip,width=\linewidth]{maxent_saddle.png}\\
 %\caption{caption}\label{fig:comparison_a5}
 %\end{figure}% exp_family_maxent.nb
@@ -1289,6 +778,7 @@ $L=0$, which leads to $q(\ynu)$ being uniform in $\ynu$.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% Acknowledgements
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+\iffalse
 \begin{acknowledgements}
   \ldots to Mari \amp\ Miri for continuous encouragement and affection, and
   to Buster Keaton and Saitama for filling life with awe and inspiration.
@@ -1298,15 +788,13 @@ $L=0$, which leads to $q(\ynu)$ being uniform in $\ynu$.
 %\rotatebox{15}{P}\rotatebox{5}{I}\rotatebox{-10}{P}\rotatebox{10}{\reflectbox{P}}\rotatebox{-5}{O}.
 %\sourceatright{\autanet}
 \mbox{}\hfill\autanet
-
-This work is financially supported by the Kavli Foundation and the Centre
-  of Excellence scheme of the  Research Council of Norway (Yasser Roudi group).
 \end{acknowledgements}
+\fi
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% Appendices
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
-\bigskip
+\clearpage
 % %\renewcommand*{\appendixpagename}{Appendix}
 % %\renewcommand*{\appendixname}{Appendix}
 % %\appendixpage

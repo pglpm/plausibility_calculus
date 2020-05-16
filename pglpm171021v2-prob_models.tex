@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2017-10-21T20:53:34+0200
-%% Last-Updated: 2019-08-18T20:05:43+0200
+%% Last-Updated: 2020-05-16T23:10:14+0200
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newif\ifarxiv
 \arxivfalse
@@ -726,6 +726,64 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% BEGINNING OF MAIN TEXT
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{What is a model?}
+\label{sec:what_model}
+
+
+
+
+\citep[\sect~1.2]{hailperin2011}
+
+\begin{equation}
+  \parbox{0.9\linewidth}{\emph{A \textbf{probability model} is a combination of knowledge and hypotheses that allows You to assign numerical probabilities to a specific set of statements and to all their logical combinations}}
+\label{eq:def_model}
+\end{equation}
+Such assignment is usually done by specifying the joint probability
+distribution over the \emph{constituents} (or \emph{basic conjunctions}, or
+\emph{fundamental products}) of the set of statements, that is, conjunction
+of all of these in which some, none, or all are negated
+\citep[\chap~0]{hailperin1996,hailperin2011}. In scientific inferences such
+constituents statements are typically of the form \enquote{$X=x$} where $X$
+is a measurable quantity.
+
+It is implicit in this definition that the set of statements includes
+\emph{all} statements involved in Your inference. If Your inference is
+about $\sS$ given data $\sD$, then the model $\sM$ must have assigned the
+probability $\p(\sS \land \sD \| \sM)$.
+
+This definition also contains an implicit distinction between \emph{model}
+and \emph{hypothesis}. A scientific hypothesis by itself is often not
+sufficient to assign probabilities for statements about the quantities it
+involves. Measurements of such quantities, for example, often require
+additional knowledge or hypotheses about the measurement process.
+
+For the moment let us neglect this distinction between \emph{model} and
+\emph{hypothesis} and use the two words interchangeably, as often done in
+the statistics literature; replace \enquote{hypotheses} with
+\enquote{conjectures} in the definition above. In view of that definition,
+some problems discussed in the statistics literature appear in a new light,
+and some disappear altogether.
+
+Let consider the following specific, common situation: our statements are
+$\sD_{1} \defd \enquote{X_{1}\eq x_{1}}$,
+$\sD_{2} \defd \enquote{X_{2}\eq x_{2}}$, and so on. They concern a set of
+one, two, or more similar measurements.
+
+\subsection{Parametric models and model comparison}
+\label{sec:param_mods}
+
+
+
+
+\subsection{Composite hypotheses}
+\label{sec:comp_hyp}
+
+
+\subsection{Nested models}
+\label{sec:nested_mods}
+
+
 
 \section{***}
 \label{sec:***}

@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2019-08-08T08:04:04+0200
-%% Last-Updated: 2020-05-16T16:47:36+0200
+%% Last-Updated: 2020-05-17T00:24:05+0200
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newif\ifarxiv
 \arxivfalse
@@ -660,6 +660,8 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 \newcommand*{\sM}{\mathsf{M}}
 \newcommand*{\sH}{\mathsf{H}}
 \newcommand*{\sI}{\mathsf{I}}
+\newcommand*{\eq}{\mathrel{\!=\!}}
+%\newcommand*{\eq}{\DOTSR\!=\!}
 %%% Custom macros end @@@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -717,58 +719,81 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 %%% BEGINNING OF MAIN TEXT
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{What is a model?}
-\label{sec:what_model}
-
-\citep[\sect~1.2]{hailperin2011}
-
-\begin{equation}
-  \parbox{0.9\linewidth}{\emph{A \textbf{probability model} is a combination of knowledge and hypotheses that allows You to assign numerical probabilities to a specific set of statements and to all their logical combinations}}
-\label{eq:def_model}
-\end{equation}
-Such assignment is usually done by specifying the joint probability
-distribution over the \emph{constituents} (or \emph{basic conjunctions}, or
-\emph{fundamental products}) of the set of statements, that is, conjunction
-of all of these in which some, none, or all are negated
-\citep[\chap~0]{hailperin1996,hailperin2011}. In scientific inferences such
-constituents statements are typically of the form \enquote{$X=x$} where $X$
-is a measurable quantity.
-
-It is implicit in this definition that the set of statements includes
-\emph{all} statements involved in Your inference. If Your inference is
-about $\sS$ given data $\sD$, then the model $\sM$ must have assigned the
-probability $\p(\sS \land \sD \| \sM)$.
-
-This definition also contains an implicit distinction between \emph{model}
-and \emph{hypothesis}. A scientific hypothesis by itself is often not
-sufficient to assign probabilities for statements about the quantities it
-involves. Measurements of such quantities, for example, often require
-additional knowledge or hypotheses about the measurement process.
-
-For the moment let us neglect this distinction between \emph{model} and
-\emph{hypothesis} and use the two words interchangeably, as often done in
-the statistics literature; replace \enquote{hypotheses} with
-\enquote{conjectures} in the definition above. In view of that definition,
-some problems discussed in the statistics literature appear in a new light,
-and some disappear altogether:
-
-\subsection{Composite hypotheses}
-\label{sec:comp_hyp}
-
-
-\subsection{Nested models}
-\label{sec:nested_mods}
-
-\subsection{Parametric models and model comparison}
-\label{sec:param_mods}
-
-
-
-
-
-
 \section{Log-likelihoods and cross-validation log-scores}
 \label{sec:loglhood}
+
+What is the probability of hypothesis $H$, given data $D$ in some specific
+context $\yK$? \; It is $\p(H \| D \land \yK)$. The probability-calculus
+gives a straightforward relation between this probability and the
+probability of the data given the hypothesis, $\p(D \| H \land \yK)$ --
+also called the \emph{likelihood} for the hypothesis given the data
+\citep[\sect~6.1 p.~62]{good1950}:
+\begin{equation}
+  \label{eq:posterior_hypothesis_universal}
+  \p(H \| D \land \yK) = \frac{\p(D \| H \land \yK)\;\p(H \| \yK)}{\p(D \| \yK)} \;.
+    % \label{eq:posterior_hypothesis_sethypotheses}
+    % &=\frac{\p(D \| H_{h} \, \yK)\;\p(H_{h} \| \yK)}{\sum_{h'} \p(D \| H_{h'} \, \yK)\; \p(H_{h'} \| \yK)}.
+\end{equation}
+
+If we have hypotheses $\set{H_{h}}$ that are mutually exclusive on context
+$\yK$, and if their probabilities $\set{\p(H_{h} \| \yK)}$ are all equal,
+then their likelihoods decide which among them is the most probable given
+the data, owing to the proportionality in the equation above.
+
+Note that we are speaking about our \dobs\ in the hypotheses, not about the
+\emph{choice} of one among them. Such a choice would require also a utility
+function, and the chosen hypothesis would not need to be the most probable
+one. But in fact we rarely have to \enquote{choose} among hypotheses. We
+usually have to make a decision that can somewhat be interpreted \emph{as
+  if} we fully believed in a hypothesis. A clinician, for example, may give
+a patient some treatment for a disease and yet believe that the patient is
+healthy. Simply because the treatment will not harm the patient if he is
+healthy, and will cure him in the improbable case he is not. Likewise, an
+astrophysicist may use Newton's equations to find the motion of a celestial
+object and yet firmly believe in the correctness of Einstein's equations.
+Simply because the approximate answer of the former is faster to compute
+and enough precise for the problem considered. Beliefs and decisions are
+different things.
+
+I assume that the problem of \emph{model comparison} often discussed in the
+literature ***
+
+Despite the clear relation of
+equation~\eqref{eq:posterior_hypothesis_universal}, the literature in
+probability and statistics employs and debates other ad-hoc measures to
+find which hypothesis should have our highest belief given the data.
+
+Here I consider one measure in particular: the \emph{leave-one-out
+  cross-validation log-score}\addtocounter{footnote}{-1}\footnotemark{},
+which I'll just call \enquote{log-score} for brevity
+
+
+
+
+quantify how the data relate to the hypotheses -- or even to select one
+hypothesis for further use, discarding the others\citep[\sects~3.4, 6.1.6
+gives the clearest motivation and explanation]{bernardoetal1994_r2000}[see
+also][]{stone1977,geisseretal1979,vehtarietal2012,vehtarietal2002,krnjajicetal2011,krnjajicetal2014,gelmanetal2014,gronauetal2019,chandramoulietal2019}.
+Here I consider one measure in particular: the \emph{leave-one-out
+  cross-validation log-score}\addtocounter{footnote}{-1}\footnotemark{},
+which I'll just call \enquote{log-score} for brevity:
+\begin{equation}
+  \label{eq:log-score}
+  \frac{1}{d} \sum_{i=1}^{d} \log\p(D_{i} \| D_{-i} \, H_{h} \, \yK)
+\end{equation}
+where every $D_{i}$ is one datum in the data $D \equiv \Land_{i=1}^{d} D_{i}$,
+and $D_{-i}$ denotes the data with datum $D_{i}$ excluded. The intuition
+behind this score can be colloquially expressed thus: \enquote{let's see
+  what my belief in one datum would be, on average, once I've observed the
+  other data, if I consider $H_{h}$ as true}. \enquote{On average} means
+considering such belief for every single datum in turn, and then taking the
+geometric mean of the resulting
+beliefs. % , that is, the arithmetic mean on a log scale.
+Other variants of this score use more general partitions of the data into
+two disjoint subsets\addtocounter{footnote}{-1}\footnotemark{}.
+
+
+
 
 The probability calculus unequivocally tells us how our \dob\ in a
 hypothesis $H_{h}$ given data $D$ and background information or assumptions

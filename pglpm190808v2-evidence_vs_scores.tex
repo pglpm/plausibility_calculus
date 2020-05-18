@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2019-08-08T08:04:04+0200
-%% Last-Updated: 2020-05-18T17:25:29+0200
+%% Last-Updated: 2020-05-18T23:08:47+0200
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newif\ifarxiv
 \arxivfalse
@@ -755,12 +755,30 @@ log-score of hypothesis $H$ is defined as
 where $D_{-i}$ denotes the conjunction of the data with datum $D_{i}$
 excluded.
 
-The intuition behind this score can be colloquially expressed thus:
-\enquote{let's see what my belief in one datum would be, on average, once
-  I've observed the other data, if I consider $H$ as true}.  Bernardo \amp\
-Smith\citep[\sect~6.1.6]{bernardoetal1994_r2000} give an informal but
-deeper and interesting motivation for this score, basing it in
-the principles of probability theory and decision theory.
+The intuition behind the log-score can be colloquially expressed thus:
+\enquote{let's see what my belief about observing one datum would be, on
+  average, once I've observed the other data, if I consider $H$ as true}.
+Bernardo \amp\ Smith \citep[\sect~6.1.6]{bernardoetal1994_r2000} give a
+deeper though informal motivation for the log-score. From their reasoning,
+based on the principles of probability theory and decision theory, the
+log-score of $H$ comes forth as an approximation of an expected utility.
+This expected utility concerns an act (in the sense of decision theory)
+that can be interpreted \emph{as if} we fully believed in the hypothesis
+$H$. The utility function and the act in Bernardo \amp\ Berger's reasoning
+are quite specific (I personally find them too involved and doubt their
+usefulness outside of their specific context). But they make clear that the
+log-score and the likelihood have very different roles: the first pertain
+to decision theory, the second to probability theory only.
+
+My purpose here is to show that
+\begin{enumerate}[label=(\alph*)]
+\item an analysis of what a hypothesis or \enquote{model} is, and
+  especially of the difference between \emph{hypotheses that allow
+    learning} and \emph{hypotheses that do not allow learning}, leads
+  to a slightly modified log-score involving data subsets of all sizes;
+\item such modified log-score equals the log-likelihood.
+\end{enumerate}
+
 
 
 

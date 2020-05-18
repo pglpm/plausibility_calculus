@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2019-08-08T08:04:04+0200
-%% Last-Updated: 2020-05-17T00:24:05+0200
+%% Last-Updated: 2020-05-18T17:25:29+0200
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newif\ifarxiv
 \arxivfalse
@@ -725,9 +725,9 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 What is the probability of hypothesis $H$, given data $D$ in some specific
 context $\yK$? \; It is $\p(H \| D \land \yK)$. The probability-calculus
 gives a straightforward relation between this probability and the
-probability of the data given the hypothesis, $\p(D \| H \land \yK)$ --
-also called the \emph{likelihood} for the hypothesis given the data
-\citep[\sect~6.1 p.~62]{good1950}:
+likelihood for the hypothesis given the data -- that is \citep[\sect~6.1
+p.~62]{good1950}, the probability of the data given the hypothesis,
+$\p(D \| H \land \yK)$:
 \begin{equation}
   \label{eq:posterior_hypothesis_universal}
   \p(H \| D \land \yK) = \frac{\p(D \| H \land \yK)\;\p(H \| \yK)}{\p(D \| \yK)} \;.
@@ -739,6 +739,44 @@ If we have hypotheses $\set{H_{h}}$ that are mutually exclusive on context
 $\yK$, and if their probabilities $\set{\p(H_{h} \| \yK)}$ are all equal,
 then their likelihoods decide which among them is the most probable given
 the data, owing to the proportionality in the equation above.
+
+In the literature in probability and statistics we also find other
+\enquote{scores} attached to a hypothesis. Here I consider one in
+particular: the \emph{leave-one-out cross-validation
+  log-score}\citep[\sects~3.4, 6.1.6]{bernardoetal1994_r2000}[see
+also][]{stone1977,geisseretal1979,vehtarietal2012,vehtarietal2002,krnjajicetal2011,krnjajicetal2014,gelmanetal2014,gronauetal2019,chandramoulietal2019},
+which I shall call just \enquote{log-score} for brevity. If the data are
+the conjunction of data points $D_{1} \land \dotsb \land D_{N}$, the
+log-score of hypothesis $H$ is defined as
+\begin{equation}
+  \label{eq:log-score}
+  \frac{1}{N} \sum_{d=1}^{N} \log\p(D_{d} \| D_{-d} \land H \land \yK) \;,
+\end{equation}
+where $D_{-i}$ denotes the conjunction of the data with datum $D_{i}$
+excluded.
+
+The intuition behind this score can be colloquially expressed thus:
+\enquote{let's see what my belief in one datum would be, on average, once
+  I've observed the other data, if I consider $H$ as true}.  Bernardo \amp\
+Smith\citep[\sect~6.1.6]{bernardoetal1994_r2000} give an informal but
+deeper and interesting motivation for this score, basing it in
+the principles of probability theory and decision theory.
+
+
+
+
+
+\enquote{On average} means considering such belief for every single datum
+in turn, and then taking the geometric mean of the resulting
+beliefs. % , that is, the arithmetic mean on a log scale.
+Other variants of this score use more general partitions of the data into
+two disjoint subsets\addtocounter{footnote}{-1}\footnotemark{}.
+
+
+
+find which hypothesis should have our highest belief
+given the data.
+
 
 Note that we are speaking about our \dobs\ in the hypotheses, not about the
 \emph{choice} of one among them. Such a choice would require also a utility
@@ -771,9 +809,7 @@ which I'll just call \enquote{log-score} for brevity
 
 
 quantify how the data relate to the hypotheses -- or even to select one
-hypothesis for further use, discarding the others\citep[\sects~3.4, 6.1.6
-gives the clearest motivation and explanation]{bernardoetal1994_r2000}[see
-also][]{stone1977,geisseretal1979,vehtarietal2012,vehtarietal2002,krnjajicetal2011,krnjajicetal2014,gelmanetal2014,gronauetal2019,chandramoulietal2019}.
+hypothesis for further use, discarding the others.
 Here I consider one measure in particular: the \emph{leave-one-out
   cross-validation log-score}\addtocounter{footnote}{-1}\footnotemark{},
 which I'll just call \enquote{log-score} for brevity:

@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2019-08-08T08:04:04+0200
-%% Last-Updated: 2020-05-18T23:08:47+0200
+%% Last-Updated: 2020-05-19T01:14:48+0200
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newif\ifarxiv
 \arxivfalse
@@ -650,6 +650,7 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 % \begin{tabular}[#1]{c}#2\\[0.5\jot]\rule{1pt}{#3}\\#4\end{tabular}}%}
 % \newcommand*{\ptext}[1]{\text{\small #1}}
 %\DeclareMathOperator*{\argsup}{arg\,sup}
+\newcommand*{\prop}[1]{\enquote{{}#1{}}}
 \newcommand*{\dob}{degree of belief}
 \newcommand*{\dobs}{degrees of belief}
 \newcommand*{\yK}{I}
@@ -778,6 +779,30 @@ My purpose here is to show that
   to a slightly modified log-score involving data subsets of all sizes;
 \item such modified log-score equals the log-likelihood.
 \end{enumerate}
+
+
+\section{Hypotheses and learning}
+\label{sec:hyp_learn}
+
+A hypothesis $H$ is not well-defined, in a specific context $\yK$, unless
+it and the context together fully determine the probability-values for all
+the logical combinations of statements we want to infer from it. Let us
+consider the case of statements of the form
+$D_{d} \defd \prop{X_{d}\eq x_{d}}$, concerning the outcomes of several
+measurements or observations $d \in \set{1,2,\dotsc}$. Thus every probability
+such as
+\begin{equation}
+  \label{eq:prob_from_hyp}
+  \p(D_{1} \land D_{2} \land D_{3} \land \dotsb \| H \land \yK) \;,
+\end{equation}
+must have a numerical value. These probabilities allow us to calculate
+others, such as
+\begin{equation}
+  \label{eq:cond_prob_from_hyp}
+  \p( D_{3} \land \dotsb \| D_{1} \land D_{2} \land  H \land \yK) \;,
+\end{equation}
+
+
 
 
 

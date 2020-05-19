@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2019-08-08T08:04:04+0200
-%% Last-Updated: 2020-05-19T01:14:48+0200
+%% Last-Updated: 2020-05-19T17:36:11+0200
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newif\ifarxiv
 \arxivfalse
@@ -650,7 +650,7 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 % \begin{tabular}[#1]{c}#2\\[0.5\jot]\rule{1pt}{#3}\\#4\end{tabular}}%}
 % \newcommand*{\ptext}[1]{\text{\small #1}}
 %\DeclareMathOperator*{\argsup}{arg\,sup}
-\newcommand*{\prop}[1]{\enquote{{}#1{}}}
+\newcommand*{\prop}[1]{\text{\textquoteleft}#1\text{\textquoteright}}
 \newcommand*{\dob}{degree of belief}
 \newcommand*{\dobs}{degrees of belief}
 \newcommand*{\yK}{I}
@@ -784,23 +784,81 @@ My purpose here is to show that
 \section{Hypotheses and learning}
 \label{sec:hyp_learn}
 
-A hypothesis $H$ is not well-defined, in a specific context $\yK$, unless
-it and the context together fully determine the probability-values for all
-the logical combinations of statements we want to infer from it. Let us
-consider the case of statements of the form
-$D_{d} \defd \prop{X_{d}\eq x_{d}}$, concerning the outcomes of several
-measurements or observations $d \in \set{1,2,\dotsc}$. Thus every probability
-such as
+Hypotheses are important for the inferences and forecasts they allow us to
+make.
+
+Consider a set of mutually exclusive statements we are interested in;
+typical in the sciences are statements about observations or
+measurements, of the joint form
 \begin{equation}
-  \label{eq:prob_from_hyp}
-  \p(D_{1} \land D_{2} \land D_{3} \land \dotsb \| H \land \yK) \;,
+  \label{eq:statements_interested}
+  \prop{X_{1}\eq x_{1}} \land
+  \prop{X_{2}\eq x_{2}} \land \dotsb
+  \prop{X_{N}\eq x_{N}}
 \end{equation}
-must have a numerical value. These probabilities allow us to calculate
-others, such as
+where each value $x_{d}$ belongs to a common finite set. We must consider
+all relevant observations, with unknown as well as known outcomes.
+
+A hypothesis $H$ is well-defined in a context $\yK$ only if it and the
+context together fully determine the probability-values of all statements
+above,
 \begin{equation}
-  \label{eq:cond_prob_from_hyp}
-  \p( D_{3} \land \dotsb \| D_{1} \land D_{2} \land  H \land \yK) \;,
+  \label{eq:prob_stat_from_hyp}
+  \p( \prop{X_{1}\eq x_{1}} \land
+  \prop{X_{2}\eq x_{2}} \land \dotsb
+  \prop{X_{N}\eq x_{N}} \| H \land \yK) \;.
 \end{equation}
+This requirement agrees with the emphasis placed by many authors on 
+predictive distributions rather than abstract parameters \citep[\eg][]{definetti1930,definetti1937,roberts1965,lauritzen1974,diaconis1988,bernardoetal1994_r2000,fortinietal2000,fortinietal2012}.
+
+I insist on speaking about a \enquote{context} because a hypothesis alone
+rarely if ever determines probability-values (even if it may constrain them
+\citep{hailperin2011}); it does so only within a larger context, which can
+include additional hypotheses. The hypothesis that there are 7 blue and 3
+red balls in an urn, for example, does not determine a unique \dob\ about
+the draws from the urn. This remark is especially true for so-called
+\enquote{composite hypotheses}, to be discussed shortly.
+
+The notion of context is also important when we consider several
+hypotheses. A context $\yK$ and hypotheses $\set{H_{h}}$ are well-defined
+only if they fully determine the probability-values of all logical
+combinations of the hypotheses, given the context. In particular
+\begin{equation}
+  \label{eq:conj_hyp}
+ \p( H_{h} \| \yK),
+ \quad
+ \p( H_{h'} \lor H_{h''} \| \yK),
+ \quad \dotsc, \quad
+  \p( H_{h'} \land H_{h''} \| \yK)
+\end{equation}
+must be determined for all $h,h',h''$. Typically we consider contexts where
+the hypotheses are mutually exclusive (the third probability above is
+zero), but the context must also determine their individual probabilities
+and the probabilities of their disjunctions.
+
+
+
+
+
+This point of view shows that so-called \enquote{composite hypotheses},
+which have the form
+
+
+% for all the logical
+% combinations of statements we want to infer from it. Let us consider the
+% case of statements of the form $D_{d} \defd \prop{X_{d}\eq x_{d}}$,
+% concerning the outcomes of several measurements or observations
+% $d \in \set{1,2,\dotsc}$. Thus every probability such as
+% \begin{equation}
+%   \label{eq:prob_from_hyp}
+%   \p(D_{1} \land D_{2} \land D_{3} \land \dotsb \| H \land \yK) \;,
+% \end{equation}
+% must have a numerical value. These probabilities allow us to calculate
+% others, such as
+% \begin{equation}
+%   \label{eq:cond_prob_from_hyp}
+%   \p( D_{3} \land \dotsb \| D_{1} \land D_{2} \land  H \land \yK) \;,
+% \end{equation}
 
 
 

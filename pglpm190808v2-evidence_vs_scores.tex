@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2019-08-08T08:04:04+0200
-%% Last-Updated: 2020-05-20T01:04:17+0200
+%% Last-Updated: 2020-05-20T17:43:39+0200
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newif\ifarxiv
 \arxivfalse
@@ -655,6 +655,7 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 \newcommand*{\dob}{degree of belief}
 \newcommand*{\dobs}{degrees of belief}
 \newcommand*{\yK}{I}
+\newcommand*{\yHc}{H_{\text{c}}}
 \newcommand*{\yO}{\mathrm{O}}
 \newcommand*{\hH}{\Hat{H}}
 \newcommand*{\sS}{\mathsf{S}}
@@ -771,7 +772,12 @@ $H$. The utility function and the act in Bernardo \amp\ Berger's reasoning
 are quite specific (I personally find them too involved and doubt their
 usefulness outside of their specific context). But they make clear that the
 log-score and the likelihood have very different roles: the first pertain
-to decision theory, the second to probability theory only.
+to decision theory, the second to probability theory only --
+%in order to underline the general message that
+\enquote{coherent comparison of a finite or countable set of alternative
+  models depends on the specification (at least implicitly) of a decision
+  structure, including a utility function.} \citep[\sect~6.1.3
+p.~388]{bernardoetal1994_r2000}
 
 My purpose here is to show that
 \begin{enumerate}[label=(\alph*)]
@@ -786,33 +792,48 @@ My purpose here is to show that
 \section{Hypotheses and learning}
 \label{sec:hyp_learn}
 
-Hypotheses are important for the inferences and forecasts they allow us to
-make.
+In the previous section the notion of \emph{context} was mentioned but not
+explained, although I trust its meaning was intuitive. By \enquote{context}
+I mean the background knowledge, assumptions, and further hypotheses --
+often difficult to put into words -- that are kept fixed during a
+probabilistic reasoning. It is analogous to the set of axioms in a
+deductive inference problem. We shall see shortly why I emphasize this
+notion.
 
-Consider a set of mutually exclusive statements we are interested in;
-typical in the sciences are statements about observations or
-measurements, of the joint form
+\medskip
+
+Hypotheses are important for the inferences and forecasts they allow us to
+make. We must therefore specify the full set of statements a hypothesis
+refers to. Here we consider statements about observations or measurements,
+of the form $\prop{X \eq x}$, typical in the sciences. And we consider the
+case where the full set of statements is exhausted by the mutually
+exclusive combinations (conjunctions)
 \begin{equation}
   \label{eq:statements_interested}
-  \prop{X_{1}\eq x_{1}} \land
-  \prop{X_{2}\eq x_{2}} \land \dotsb
-  \prop{X_{N}\eq x_{N}}
+  \propf{X_{1}\eq x_{1}} \land
+  \propf{X_{2}\eq x_{2}} \land \dotsb
+  \propf{X_{N}\eq x_{N}}
 \end{equation}
-where each value $x_{d}$ belongs to a common finite set. We must consider
-all relevant observations, with unknown as well as known outcomes.
+where each value $x_{d}$ belongs to a common finite set. We may let $N$ be
+arbitrarily large.
+% We must consider all relevant observations, with unknown as well as known
+% outcomes.
 
-A hypothesis $H$ is well-defined in a context $\yK$ only if it and the
-context together fully determine the probability-values of all statements
-above,
+A hypothesis $H$ is well-defined in a context $\yK$ only if both together
+determine the probability-values of all statements above,
 \begin{equation}
   \label{eq:prob_stat_from_hyp}
   \p( \propf{X_{1}\eq x_{1}} \land
   \propf{X_{2}\eq x_{2}} \land \dotsb \land
-  \propf{X_{N}\eq x_{N}} \| H \land \yK) \;.
+  \propf{X_{N}\eq x_{N}} \| H \land \yK) \;,
 \end{equation}
-This requirement agrees with the emphasis placed by many authors on 
-predictive distributions rather than abstract parameters
-\citep[\eg][]{definetti1930,definetti1937,roberts1965,lauritzen1974,diaconis1988,bernardoetal1994_r2000,fortinietal2000,fortinietal2012}.
+for all values of each $x_{d}$.
+
+The emphasis above on the full set of observations and on its predictive
+distribution, rather than on abstract parameters, is shared by many authors
+\citep[\eg][]{definetti1930,definetti1937,roberts1965,lauritzen1974,diaconis1988,bernardoetal1994_r2000,fortinietal2000,fortinietal2012}[see
+also][]{mccullagh2002}. The rest of this section shows the importance of
+this point of view.
 
 When we consider several hypotheses we must require more. A context $\yK$
 and hypotheses $\set{H_{h}}$, usually assumed mutually exclusive in that
@@ -822,31 +843,55 @@ $\p( H_{h} \| \yK)$ for all $h$.
 I insist on speaking about a \enquote{context} because a hypothesis alone
 rarely, if ever, determines probability-values; even if it may constrain
 them \citep{hailperin2011}. It determines them only when conjoined with a
-larger context, which can itself include additional hypotheses. The
-hypothesis that there are 7 blue and 3 red balls in an urn, for example,
-does not determine a unique \dob\ about the draws from the urn. This remark
-is strikingly true for so-called \enquote{composite hypotheses}, having the
-form $H_{h'} \lor \dotsb \lor H_{h''}$. Since, for any data $D$,
+larger context. The hypothesis \prop{there are 7 blue and 3 red balls in the
+  urn}, for example, does not determine a unique \dob\ about the draws from
+the urn.
+
+The last remark is strikingly true for so-called \enquote{composite
+  hypotheses} \citep[\cf][\sect~6.1.4 p.~391]{bernardoetal1994_r2000},
+having the form $\yHc \defd H_{1} \lor \dotsb \lor H_{m}$. An example is
+the hypothesis \prop{the long-run relative frequency of heads is less than
+  0.4}. The probabilities of the data conditional on a composite hypothesis
+depend much more strongly on the context than the probabilities conditional
+on the individual hypotheses do. This happens because, for any data $D$,
 \begin{multline}
   \label{eq:comp_hyp}
-  \p[ D \| (H_{h'} \lor \dotsb \lor H_{h''} ) \land \yK]
+  \p( D \| %H_{1} \lor \dotsb \lor H_{1'}
+  \yHc \land \yK)
   ={}\\
- \p( D \| H_{h'} \land \yK) \times \p(H_{h'} \| \yK) +
+ \p( D \| H_{1} \land \yK) \times \p(H_{1} \| \yK) +
   \dotsb +
- \p( D \| H_{h''} \land \yK) \times \p(H_{h''} \| \yK) \;,
+ \p( D \| H_{m} \land \yK) \times \p(H_{m} \| \yK) \;.
 \end{multline}
-the probabilities of the data conditional on a composite hypothesis depend
-fully on the context. These probabilities are not determined by those
-conditional on the individual hypotheses. This is apparently a trivial
-remark. And yet it seems to me that many studies that discuss composite
-hypotheses end up comparing \emph{contexts} instead, without realizing the
-shift in intent and getting confused by it.
+Thus $\p( D \| \yHc \land \yK)$ depends through $\p(H_{h} \| \yK)$ on
+elements of the context that are irrelevant for the individual
+$\p( D \| H_{1} \land \yK),\dotsc, \p( D \| H_{m} \land \yK)$.
 
-The definitions just given are important for the present discussion. They
-make clear the difference between two kinds of hypotheses: \emph{hypotheses
-  that do not allow learning} versus \emph{hypotheses that allow learning}.
+In other words, a slight change in the context may not alter the
+probabilities $\p( D \| H_{1} \land \yK),\dotsc$, but may drastically alter
+$\p( D \| \yHc \land \yK)$. In such cases I wonder whether it is at all
+meaningful to consider composite hypotheses. I have the impression that
+some authors wish to compare hypotheses -- only vaguely defined in their
+minds -- but do not realize that some of those hypotheses enter their
+mathematics in the form of a \emph{context} instead. Their maths is not
+comparing what they think. Then they find the result paradoxical. Lindley's
+paradox \citep{lindley1957} seems to be an example of this
+misunderstanding.
 
-The first kind satisfies the property
+\medskip
+
+The preceding remarks are a little pedantic perhaps, but they help
+understanding the argument that follows.
+
+The emphasis on the full set of relevant observations -- with known
+outcomes (data) as well as with yet unknown outcomes -- brings to light an
+important difference between two kinds of hypotheses:
+\begin{itemize}
+\item hypotheses that \emph{do not allow learning},
+\item hypotheses that \emph{allow learning}.
+\end{itemize}
+The
+first kind satisfies the property
 \begin{multline}
   \label{eq:nonlearning_hyp}
 \text{$H$ non-learning} \liff  \p( D \| D' \land H \land \yK) = 
@@ -854,11 +899,12 @@ The first kind satisfies the property
 \\\text{for all logically independent data $D, D'$}\;.
 \end{multline}
 The second kind does not satisfy that property:
-\begin{equation}
+\begin{multline}
   \label{eq:learning_hyp}
 \text{$H$ learning} \liff  \p( D \| D' \land H \land \yK) \ne 
   \p( D \| H \land \yK) \;.
-\end{equation}
+\\\text{for some logically independent data $D, D'$}\;.
+\end{multline}
 Hypotheses about physical theories are often of the first kind, as are
 many hypotheses about long-run statistics, such as frequency distributions, in
 infinite-exchangeability contexts.
@@ -866,6 +912,8 @@ infinite-exchangeability contexts.
 *** non-learning = independent
 
 learning brings hyp1 = hyp2 + data (remark on Bayes factors Berger)
+
+learning tells us how observed data influence beliefs about unobserved
 
 
 

@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2015-05-01T20:53:34+0200
-%% Last-Updated: 2020-05-22T21:23:33+0200
+%% Last-Updated: 2020-05-24T22:42:30+0200
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newif\ifarxiv
 \arxivfalse
@@ -712,15 +712,103 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 %%% BEGINNING OF MAIN TEXT
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\textcolor{white}{If you find this you can claim a postcard from me.}
+
 \section{Would you like to know which one is true, eventually?}
 \label{sec:which}
 
-\textcolor{white}{If you find this you can claim a postcard from me.}
+The word \emph{model} seems to have been taking the place of
+\emph{hypothesis} since around the 1960s. This replacement does not seem to
+be connected with the shift from frequentist to Bayesian methods.
 
-\enquote{Model} is a very hyped word in today's literature on probability
-and statistics. Statistical and probability models are compared and
-selected; sometimes even formulated. Countless papers debate how model
-comparison and selection should be made.
+Does the replacement of \enquote{hypothesis} by \enquote{model} indicate a
+shift in concepts in all probability theory and statistics? Or are these
+two words simply equivalent?
+
+Many hodiernal authors indeed seem to use them interchangeably. An example
+is Kass \amp\ Raftery's famous review \citep{kassetal1995}. Initially they
+define a statistical model as something that represents the probability of
+the data according to a hypothesis (p.~773). Eventually they use the two
+terms interchangeably, for example saying at times \enquote{the hypothesis
+  $H_{k}$}, at times \enquote{the model $H_{k}$}. ***
+
+
+\enquote{It's just a matter of terminology}, some may say. I want to argue
+that it is related to something much more important: the
+\emph{verifiability} of a hypothesis or model. I mean the following.
+
+There's a closed box. You have three hypotheses: the box contains one, two,
+or three balls. By shaking the box a little and listening to the rattle you
+get the impression that there should be three balls. Maybe two. Unlikely to
+be just one. You may express your beliefs with a probability distribution.
+
+But how do you \emph{verify} how many balls there are? If possible you
+could open and look; or X-ray the box; or weigh it (assuming you knew the
+separate weights of box and balls). The electromagnetic or weigh data would
+tell you which hypothesis is true. You verify that there are two balls.
+
+The verification of other hypotheses, often entertained in science, is not
+so straightforward. It would require an infinite amount of data or time.
+
+Someone states that, during the whole history of a specific coin, it will
+come up heads 51\% of the times it will be tossed, and tails 49\% of the
+times. Another person says 50\%/50\%. How do you verify these hypotheses?
+You would need to monitor the coin, probably bequeathing this scientific
+task to several future generations (the oldest coin existing today is about
+2\,600 years
+old\footnote{\url{https://rg.ancients.info/lion/article.html}}), amassing a
+very long sequence of data. Or imagine ancient Greeks making hypotheses
+about the Earth's precise distance from the Sun. The data necessary to
+verify their hypotheses could not be gathered then, owing to lack of
+technology. But they were some centuries later \citep{goldstein1985}. In
+cases like these we say that the hypotheses are verifiable \emph{in
+  principle}. Scientific hypotheses are often of this kind.
+
+There are hypotheses that cannot be verified even with infinite data or
+futuristic technologies. Their verification hinges on dubious notions, such
+as multiple copies of this universe with slightly different initial
+conditions. It is debatable whether we can speak of \enquote{hypotheses}
+and \enquote{verification} in this case.
+
+The three cases above are not sharply distinct. There is an increasing
+difficulty with the kind or quantity of data necessary to verify a set of
+hypotheses.
+
+
+\mynote{\enquote{the null must be nested within the alternative} (end of p.~776)}
+
+% hypo:
+% Jeffreys TP48 300
+% Fisher SM54 60
+% Mosteller+ PS61 80
+% Cox RT62 0
+% Lindley IP65 45+217
+% Feller IP68 34+24
+% Mosteller-Tukey DA77 9
+% Tukey 0
+% Tanur+ S89 10
+% Mosteller+ BS83 56
+% BernardoSm BT84 148
+
+% model:
+% Jeffreys TP48 7
+% Fisher SM 0
+% Mosteller+ PS61 62
+% Cox RT62 47
+% Lindley IP65 8+20
+% Feller IP68 169+65
+% Mosteller-Tukey DA77 39
+% Tukey 0
+% Tanur+ S89 53
+% Mosteller+ BS83 121
+% BernardoSm BT84 899
+
+
+
+% \enquote{Model} is a very hyped word in today's literature on probability
+% and statistics. Statistical and probability models are compared and
+% selected; sometimes even formulated. Countless papers debate how model
+% comparison and selection should be made.
 
 I have never seen a paper in which a probability model is \emph{refuted}.
 Sure, there was \enquote{hypothesis rejection at some significance level}
@@ -729,6 +817,22 @@ Sure, there was \enquote{hypothesis rejection at some significance level}
 
 ***comparing two frequency-priors using exch. data is like using one data
 point only.
+
+
+*** \citep{rafteryetal1989} Raftery: non-testable models
+*** \citep{kassetal1995} is the \enquote{hot hand} example really testable?
+
+\section{Discussion}
+\label{sec:discussion}
+
+The shift from \enquote{hypothesis} to \enquote{model} seems to reflect the
+gradual abandonment of trying to understanding a phenomenon to simply
+trying to fit to it some equation pulled out of a hat. This is also
+reflected in the defacing of the verb \emph{explain}: many authors say
+\enquote{this distribution explains the data} (or the variance of the data,
+or similar) when in reality it just \emph{fits} the data -- it does not explain
+them.
+
 
 
 %%%% examples use empheq

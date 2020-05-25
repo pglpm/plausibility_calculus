@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2015-05-01T20:53:34+0200
-%% Last-Updated: 2020-05-25T00:07:26+0200
+%% Last-Updated: 2020-05-25T09:24:24+0200
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newif\ifarxiv
 \arxivfalse
@@ -749,6 +749,51 @@ unintentionally comparing a different set.
 
 The third problem is the \emph{verifiability} of a hypothesis or model. I
 mean the following.
+
+
+There's a box with three balls, which can be blue or red. You have four
+hypotheses about their colours:
+\begin{enumerate*}[label=$H_{\arabic*}$,start=0]
+\item: no blue balls,
+\item: one blue ball, two red balls,
+\item: two blue balls, one red,
+\item: all blue balls.
+\end{enumerate*}
+Each of these hypotheses, granted additional assumptions about the drawing
+procedure, leads to a probability for the colour in the first draw and in
+all four draws.
+
+You can assign a probability to each hypothesis. As draws are made, your
+probability for each hypothesis changes, and so does the probability for
+each colour in the next draw.
+
+Once all three balls are drawn you see which hypothesis is true (some were
+proven false along the way). This is reflected in their probabilities
+conditional on all data: one hypothesis gets unit probability the rest
+zero.
+
+*** example with composite hypotheses
+
+*** example with models. ... Something peculiar happens: we have collected
+\emph{all possible} data, but none of the models has reached unit
+probability. You are still uncertain about the models. This leads to some
+questions:
+\begin{itemize}
+\item What are your models about? they cannot be about the colour
+  composition, because now you know that perfectly and yet the truth of the
+  models is still unsettled.
+\item What kind of data would you need to settle their truth?
+\item Are your models really relevant for this urn problem?
+\end{itemize}
+
+
+
+
+
+
+
+
+
 
 There's a closed box. You have three hypotheses: the box contains one, two,
 or three balls. By shaking the box a little and listening to the rattle you

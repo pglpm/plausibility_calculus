@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2020-03-17T00:29:23+0100
-%% Last-Updated: 2020-05-29T15:13:56+0200
+%% Last-Updated: 2020-05-29T16:03:14+0200
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newif\ifarxiv
 \arxivfalse
@@ -681,6 +681,8 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 \newcommand*{\xf}{\textsf{F}}
 \newcommand*{\xj}{\textsf{J}}
 \newcommand*{\xa}{\textsf{A}}
+\newcommand*{\xY}{\textsf{Y}}
+\newcommand*{\xZ}{\textsf{Z}}
 \newcommand*{\zI}{I'}
 \newcommand*{\bcond}[1][]{\nonscript\,#1\bm{\vert}\nonscript\;\mathopen{}}
 
@@ -756,7 +758,7 @@ probability distribution as a law of total probability:
   \pf(\ff \| I)\,\di\ff \;,
 \end{equation}
 where $\ff \defd (f_{x})$ is a distribution over the set of values that can
-be assumed by each $\x{i}$, and the integral is over the simplex of such
+be assumed by each $\X{i}$, and the integral is over the simplex of such
 distributions.
 
 The condition for the theorem to hold is that the joint distribution be
@@ -767,9 +769,10 @@ sampling formula from an urn with unknown distribution. From now
   exchangeable}.
 
 A more general version of the theorem holds if the joint distribution is
-\emph{partially exchangeable}, that is, the $\X{i}$ can be divided into two
-or more groups $\Y{j}, \Z{k}, \dotsc$, and permutations are allowed within each
-group but not necessarily across groups. The formula then becomes
+\emph{partially exchangeable}, that is, the $\set{\X{i}}$ can be divided
+into two or more groups $\set{\Y{j}}, \set{\Z{k}}, \dotsc$, and
+permutations are allowed within each group but not necessarily across
+groups. The formula then becomes
 \begin{multline}
   \label{eq:partialdefinetti}
   \p( \Y{1'}\=\y{1'},\; \Y{2'}\=\y{2'},\; \dotsc,\;
@@ -791,22 +794,24 @@ group $Y$ in instances $1',2',\dotsc$, and to group $Z$ in instances
 $1'',2'',\dotsc$, then
 \begin{enumerate*}[label=(\alph*)]
 \item there is some other quantity $C$ that allows us to distinguish the
-  two groups, and \item the value of this quantity \emph{is known} in each
-  instance, $\C{i}\=\cc{i}$.
+  two groups, and \item the values $\C{i}\=\cc{i}$ of this quantity
+  \emph{are known} for all instances.
 \end{enumerate*}
 
 Let us say, for example, that the quantity $X$ is the result of a patient's
 treatment, with values $\xs$uccess and $\xf$ailure. $Y$ refers to the
-result for a $\xj$uvenile patient, and $Z$ for an $\xa$dult patient. If we write
+result for a $\xj$uvenile patient, and $Z$ for an $\xa$dult patient. If we
+write
 $$\p(\Y{3}\=\xs,\;\Z{5}\=\xf \| I)=0.2\;,$$
-then we must already know that patient number~$3$ is juvenile, $\C{3}\=\xj$
-and patient number~$5$ is adult, $\C{5}\=\xa$. This is clear from our very
-notation, otherwise we would not have known whether to use $Y$ or $Z$ for
-these patients. This information is evidently implicit in our background
-information $I$.
+then we must already know that patient number~$3$ is juvenile,
+$\C{3}\=\xj$, and patient number~$5$ is adult, $\C{5}\=\xa$. This is clear
+from our very notation, otherwise we would not have known whether to use
+$Y$ or $Z$ for these patients. This information is evidently implicit in
+our background information $I$.
 
-Let us render this information more explicit in our notation. The
-probability in \eqn~\eqref{eq:partialdefinetti} is rewritten as
+Let us make the information about $C$ explicit. Its values can be
+\enquote{$\xY$} and \enquote{$\xZ$}. We rewrite the probability in
+\eqn~\eqref{eq:partialdefinetti} as
 \begin{equation}
   \label{eq:infoCexplicit}
   \begin{aligned}
@@ -819,36 +824,39 @@ probability in \eqn~\eqref{eq:partialdefinetti} is rewritten as
   \dotsc,\;
   \X{1''}\=\x{1''},\; %\X{2''}\=\x{2''},\;
   \dotsc \| %{}\\
-  \C{1'}\=\cc{1'},\; %\C{2'}\=\cc{2'},\;
+  \C{1'}\=\xY,\; %\C{2'}\=\cc{2'},\;
   \dotsc,\;
-  \C{1''}\=\cc{1''},\; %\C{2''}\=\cc{2''},\;
+  \C{1''}\=\xZ,\; %\C{2''}\=\cc{2''},\;
   \dotsc,\; \zI) \;.
 %\end{multlined}
   \end{aligned}
 \end{equation}
 
-Then it is clear that the partially exchangeable probability distribution~\eqref{eq:partialdefinetti} or \eqref{eq:infoCexplicit} can
+Then it is clear that the partially exchangeable probability
+distribution~\eqref{eq:partialdefinetti} or \eqref{eq:infoCexplicit} can
 also be called \emph{conditionally exchangeable}.
+
 
 \bigskip
 
-The present work presents a representation formula for pairs of quantities $\X{i},\C{i}$ such that
+The present work gives a representation formula for pairs of quantities
+$(\X{i},\C{i})$ such that
 \begin{enumerate}[nosep]
-\item they have, jointly, a fully exchangeable probability distribution,
-\item the distribution for $X{i}$ is only conditionally exchangeable, given
-  $\C{i}$.
+\item they have, as pairs, a fully exchangeable probability distribution,
+\item the distribution for the $\set{\X{i}}$ is only conditionally
+  exchangeable, given $\set{\C{i}}$.
 \end{enumerate}
 The formula is:
 %\begin{empheq}{equation}
 \begin{subequations}
   \label{eq:result}
   \begin{gather}
-  \p( \X{1}\eq\x{1}, \C{1}\eq\cc{1},\:
-  \X{2}\eq\x{2}, \C{2}\eq\cc{2},\: \dotsc \| I) =
- \! \int \!\!\prod_{i}f_{\x{i},\cc{i}}\;
+  \p\bigl[ (\X{1}\eq\x{1}, \C{1}\eq\cc{1}),\;
+  (\X{2}\eq\x{2}, \C{2}\eq\cc{2}),\; \dotsc \| I \bigr] =
+ \int \prod_{i}f_{\x{i},\cc{i}}\;
   \pf(\ff\|I)\,\di\ff\\
   \label{eq:factorizable}
-\boxed{\text{with}\quad \pf(\ff\|I) \equiv
+\boxed{\text{with}\quad \pf(\ff\|I) =
   \pf(f_{\x{i} \bcond \cc{i}} \|I)\;
   \pf(f_{,\cc{i}} \|I)\;\di\ff}
 \end{gather}
@@ -857,14 +865,23 @@ The formula is:
 where
 \begin{itemize}%[label=\textendash]
 \item $\ff \defd (f_{x, c})$ is a joint distribution over the set of values
-  that can be assumed by each $(\x{i},\cc{i})$ pair,
+  that can be assumed by each $(\X{i},\C{i})$ pair,
 \item $\bigl(f_{,c} \defd \sum_{x}f_{x, c} \bigr)$ is the related
-  \emph{marginal} frequency distribution for over the $c$ values,
+  \emph{marginal} frequency distribution for the $c$ values,
 \item $\bigl(f_{x \bcond c} \defd f_{x, c}/f_{,c} \bigr)$ are the related
-  \emph{conditional} frequency distributions obtained from $\ff$.
+  \emph{conditional} frequency distributions of $x$ given $c$, obtained
+  from $\ff$.
 \end{itemize}
 
-The noteworthy feature of the formula above is that the conditional exchangeability of $X$ given $C$ is expressed by the factorizability~\eqref{eq:factorizable} of the density $ \pf(\ff\|I)$ into a density for the 
+\smallskip
+
+The noteworthy feature of the formula above is that the conditional
+exchangeability for $\set{\X{i}}$ given $\set{\C{i}}$ is expressed by \emph{the
+  factorizability of the density $\pf(\ff\|I)$} into
+a density for the conditional frequencies, and a density for the marginal
+frequencies, \eqn~\eqref{eq:factorizable}.
+
+
 
 
 

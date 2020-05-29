@@ -6,7 +6,7 @@
 %% Home page: http://magnaspesmeretrix.org/
 %% Email (remove ZZ): pglpm0ZZ[at]gmail.com
 %% Created: 2000-08-23T16:53:30+0200
-%% Last-Updated: 2020-05-24T22:22:45+0200
+%% Last-Updated: 2020-05-29T13:02:51+0200
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 % NB: This database contains also items whose content's validity I
@@ -552,6 +552,7 @@
 @String{jdm = {J. de Math.}}
 @String{jdp = {J. de Phys.}}
 @String{je = {J. Elasticity}}
+@String{jech = {J. Epidemiol.\ Community Health}}
 @String{jecons = {J. Econ.\ Surv.}}
 @String{jedc = {J. Econ.\ Dynam.\ Contr.}}
 @String{jee = {J. Exp.\ Educ.}}
@@ -1613,6 +1614,7 @@ howpublished = {\arxiveprint{0710.3742}},
 year =	       {2007},
 keywords =     {cognitive science, Plinko}
 }
+
 
 @Article{adamsetal2008,
 author =       {Ryan Prescott Adams and Iain Murray and David J. C. MacKay},
@@ -7464,7 +7466,7 @@ publisher =    {Grove Press},
 year =	       {1984},
 address =      {New York},
 note =	       {Transl.\ from the Japanese by Peter Haskel, ed.\ by Yoshito S. Hakeda; records from \ca~1650--1693},
-origdate =     {1650 \ca}
+origdate =     {1650}
 }
 
 @Book{bannoetal1999_r2004,
@@ -56250,6 +56252,17 @@ note =	       {See \citebi{peters1985} and also \citebi{peters1988}},
 keywords =     {electromagnetism, relativity theory}
 }
 
+@Article{hernanetal2006,
+author =       {Miguel A. Hern{\'a}n and James M. Robins},
+title =	       {Estimating causal effects from epidemiological data},
+journal =      jech,
+year =	       {2006},
+volume =       {60},
+number =       {7},
+pages =	       {578--586},
+keywords =     {conditional exchangeability, probability theory}
+}
+
 @Article{herrey1955,
 author =       {Erna M. J. Herrey},
 title =	       {Experimental Studies on Acoustic Radiation Pressure},
@@ -75788,7 +75801,7 @@ year =	       {1981},
 volume =       {9},
 number =       {1},
 pages =	       {45--58},
-keywords =     {Bayesian probability theory, causation, causality, partial exchangeability, decision theory, spurious correlation}
+keywords =     {Bayesian probability theory, causation, causality, partial exchangeability, conditional exchangeability, decision theory, spurious correlation}
 }
 
 @Article{lindleyetal1982,
@@ -76019,7 +76032,7 @@ pages =	       {133--140}
 author =       {Svante Linusson and Porta Mana, Piero Giovanni Luca},
 title =	       {Extending probabilities on polytopal intersections},
 year =	       {2007},
-note =	       {Research notes. \url{https://portamana.org/linko.php?w=linussonetal2007.pdf}},
+note =	       {Research notes. \url{https://portamana.org/linko.htm?w=linussonetal2007.pdf}},
 keywords =     {convex spaces, statistical models}
 }
 
@@ -95725,14 +95738,6 @@ pages =	       {387--401},
 note =	       {Rev.\ version at \arxiveprint{quant-ph/0403084}}
 }
 
-@Misc{portamana2005,
-author =       {Porta Mana, Piero Giovanni Luca},
-title =	       {Uncertainty, information, and entropy: comparison of two definitions},
-year =	       {2005},
-note =	       {Study notes available upon request},
-keywords =     {convex framework}
-}
-
 @Misc{portamana2006,
 author =       {Porta Mana, Piero Giovanni Luca},
 year =	       {2006},
@@ -95897,6 +95902,21 @@ note =	       {\osfeprint{k8mj3}, \haleprint{hal-02267943}, \arxiveprint{1908.08
 keywords =     {Bayes factors, model comparison, Bayesian probability theory}
 }
 
+@Misc{portamana2019c_r2020,
+author =       {Porta Mana, Piero Giovanni Luca},
+title =	       {Dimensional analysis in general relativity and in differential geometry},
+year =	       {2020},
+note =	       {\osfeprint{jmqnu}},
+origdate =     {2019}
+}
+
+@Misc{portamana2020,
+author =       {Porta Mana, Piero Giovanni Luca},
+title =	       {Cross-validation and early stopping: a {Bayesian} point of view?},
+year =	       {2020},
+note =	       {Invited talk at the 11th Trondheim Symposium in Statistics, Trondheim, Norway. Slides available at \url{https://portamana.org/linko.htm?w=crossvalbayes.svg} (warning: 10 MB file).}
+}
+
 @Misc{portamana9999,
 author =       {Porta Mana, Piero Giovanni Luca},
 title =	       {A geometric understanding of overtraining in machine learning and statistics},
@@ -95925,7 +95945,7 @@ author =       {Porta Mana, Piero Giovanni Luca and Gunnar Bj{\"o}rk},
 title =	       {Uncertainty, information, and entropy: comparison of two definitions},
 howpublished = {Invited talk at the Ninth International Conference on Squeezed States and Uncertainty Relations ICSSUR' 2005, Besan{\c{c}}on, France},
 year =	       {2005},
-note =	       {Slides available at \url{https://portamana.org/}},
+note =	       {Slides available at \url{https://portamana.org/linko.htm?w=icssur05pdf}},
 keywords =     {statistical models}
 }
 
@@ -96019,11 +96039,26 @@ year =	       {2019},
 note =	       {In preparation. Draft available at \url{https://github.com/pglpm/genobayes/blob/master/genobayes2.pdf}}
 }
 
+@Misc{portamanaetal2018d,
+author =       {Porta Mana, Piero Giovanni Luca and Alexandre Filipowicz},
+title =	       {Bayesian {Plinko}: {Bayesian} models to mimic human inferences},
+year =	       {2018},
+note =	       {In preparation. Draft available at \url{https://github.com/pglpm/plinkinetti/raw/master/plinkinetti180414.pdf}},
+keywords =     {plinko, Bayesian probability theory}
+}
+
 @Misc{portamanaetal2020,
 author =       {Porta Mana, Piero Giovanni Luca and Vahid Rostami and Emiliano Torre},
 title =	       {Inferring the total activity of a large neuronal population from a small sample},
 year =	       {2020},
 note =	       {In preparation. Draft available at \url{https://github.com/pglpm/maxNt/blob/master/maxNt_v6.pdf}}
+}
+
+@Misc{portamanaetal2020b,
+author =       {Porta Mana, Piero Giovanni Luca and Bente Jacobsen and Menno Witter},
+title =	       {Bayesian methods for inferring neuronal connectivity},
+year =	       {2020},
+note =	       {In preparation. Draft available at \url{https://github.com/pglpm/rabidcount/raw/master/pglpm191017-Bentes_problem.pdf}}
 }
 
 @Article{porteretal2017,
@@ -123920,6 +123955,17 @@ volume =       {84},
 number =       {9},
 pages =	       {465--467},
 keywords =     {stochastic processes, functional integral}
+}
+
+@InCollection{wiegerincketal2013,
+author =       {Wim Wiegerinck and Willem Burgers and Bert Kappen},
+title =	       {Bayesian Networks, Introduction and Practical Applications},
+booktitle =    {\citein{bianchinietal2013}},
+publisher =    {},
+year =	       {2013},
+chapter =      {12},
+pages =	       {401--431},
+keywords =     {belief networks, Bayesian networks, causality, Bayesian probability theory, causality@@notinart}
 }
 
 @Article{wiener1930,

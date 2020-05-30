@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2020-03-17T00:29:23+0100
-%% Last-Updated: 2020-05-30T11:19:16+0200
+%% Last-Updated: 2020-05-30T18:01:28+0200
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newif\ifarxiv
 \arxivfalse
@@ -137,7 +137,8 @@ british%
 
 \usepackage[bigdelims,nosymbolsc%,smallerops % probably arXiv doesn't have it
 ]{newpxmath}
-\linespread{1.083}%\useosf
+%\linespread{1.083}%\useosf
+\linespread{1.05}%\useosf
 %% smaller operators for old version of newpxmath
 \makeatletter
 \def\re@DeclareMathSymbol#1#2#3#4{%
@@ -544,7 +545,7 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 %\newcommand*{\Di}{\mathrm{D}}%capital differential
 %\newcommand*{\planckc}{\hslash}
 %\newcommand*{\avogn}{N_{\textrm{A}}}
-%\newcommand*{\NN}{\bm{\mathrm{N}}}
+\newcommand*{\NN}{\bm{\mathrm{N}}}
 %\newcommand*{\ZZ}{\bm{\mathrm{Z}}}
 %\newcommand*{\QQ}{\bm{\mathrm{Q}}}
 \newcommand*{\RR}{\bm{\mathrm{R}}}
@@ -628,7 +629,7 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 %\newcommand*{\bd}{\hspace{0pt}}%
 %\def\hy{-\penalty0\hskip0pt\relax}
 %\newcommand*{\labelbis}[1]{\tag*{(\ref{#1})$_\text{r}$}}
-%\newcommand*{\mathbox}[2][.8]{\parbox[t]{#1\columnwidth}{#2}}
+\newcommand*{\mathbox}[2][.8]{\parbox[b]{#1\columnwidth}{#2}}
 %\newcommand*{\zerob}[1]{\makebox[0pt][l]{#1}}
 \newcommand*{\tprod}{\mathop{\textstyle\prod}\nolimits}
 \newcommand*{\tsum}{\mathop{\textstyle\sum}\nolimits}
@@ -673,8 +674,10 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 \newcommand*{\z}[1]{z_{#1}}
 \newcommand*{\C}[1]{C_{#1}}
 \newcommand*{\cc}[1]{c_{#1}}
-\newcommand*{\sX}{S}
+\newcommand*{\sX}{\mathfrak{X}}
+\newcommand*{\sC}{\mathfrak{C}}
 \newcommand*{\ff}{\bm{f}}
+\newcommand*{\FF}{\bm{F}}
 \newcommand*{\bg}{\bm{g}}
 \newcommand*{\bh}{\bm{h}}
 \newcommand*{\xs}{\textsf{S}}
@@ -758,8 +761,8 @@ probability distribution as a law of total probability:
   \pf(\ff \| \zI)\,\di\ff \;,
 \end{equation}
 where $\ff \defd (f_{x})$ is a distribution over the values that can be
-assumed by each $\X{i}$, and the integral is over the simplex of such
-distributions.
+assumed by each quantity $\X{i}$, and the integral is over the simplex of
+such distributions.
 
 The condition for the theorem to hold is that the joint distribution be
 infinitely \emph{fully exchangeable}, that is, symmetric with respect to
@@ -876,43 +879,120 @@ where
 
 \smallskip
 
-The noteworthy feature of the formula above is that the conditional
-exchangeability for $\set{\X{i}}$ given $\set{\C{i}}$ is expressed by
-\emph{the factorizability of the density $\pf(\ff\|I)$} into the product,
-\eqn~\eqref{eq:factorizable}, of a density for the conditional frequencies
-$(f_{x \bcond c})$ and a density for the marginal frequencies $(f_{,c})$.
+The formula~\eqref{eq:result} shows that the pairs $(\X{i},\C{i})$ have a
+fully exchangeable distribution, with a representation analogous to
+\eqn~\eqref{eq:definetti}. The noteworthy feature of this formula is that
+\emph{the density $\pf(\ff\|I)\,\di\ff$ is factorizable into the product of
+  a density for the conditional frequencies $(f_{x \bcond c})$ and a
+  density for the marginal frequencies $(f_{,c})$}, according to
+\eqn~\eqref{eq:factorizable}. This factorization expresses the conditional
+exchangeability for $\set{\X{i}}$ given $\set{\C{i}}$.
+
+\medskip
+
+The proof of formula is given in the next section. In the final section I
+discuss possible generalizations and connections with Bayesian belief
+networks.
 
 
-\section{Setup}
+\section{Setup and proof}
 \label{sec:setup}
 
+For the details about exchangeable distributions I refer to Bernardo \amp\
+Smith \citep[\sects~4.3, 4.6]{bernardoetal1994_r2000} and Diaconis \amp\
+Freedman \citep{diaconisetal1980,diaconisetal1980b}.
 
+The domain of discourse consists of a countably infinite set of statements
+\begin{equation}
+  \label{eq:statements}
+  \set[\big]{\X{i}\=\x{i} \|
+    i \in \NN,\;
+ \forall i\;\x{i} \in \sX}
+\end{equation}
+where $\sX$ is a finite set. (The theorem also holds for statements not
+involving equalities). For each $i$ the statements
+$\set{\X{i}\=x \| x \in \sX}$ are assumed mutually exclusive on information
+$I$.
 
-
-
-
-We have a countably infinite set of statements $\X{t}\=\x{t}$ with $t \in \set{1,2,\dots}$, where each $\X{t}$ is some quantity and each
-$\x{t} \in \sX$, a common finite set of values (the theorem also works with statements that are not about variates). De~Finetti's theorem states that
-if a probability distribution about any subset of such statements is
-exchangeable, that is,
+A probability distribution over these atomic statements (in the logical
+sense)
+%$\set{\X{i}\=\x{i}}$,
+is called fully (infinitely) exchangeable if
 \begin{multline}
   \label{eq:exchangeable}
-  \p( \X{1}\=\x{1}, \X{2}\=\x{2},\dotsc,\X{T}\=\x{T}
-  \| I) ={}\\
-  \shoveright{\p( \X{1}\=\x{\pi(1)}, \X{2}\=\x{\pi(2)},\dotsc,\X{T}\=\x{\pi(T)}
-  \| I)}\\
-  \text{\small for any $T$, any set of indices $\set{1,\dotsc,T}$, and any permutation $\pi$ thereof},
+  \text{\small for every $N$, every set
+    $\set{i_{1},\dotsc,i_{N}}\subset \NN$, and every permutation $\pi$ thereof}
+  \\
+  \shoveleft{\p( \X{i_{1}}\=\x{i_{1}}, \X{i_{2}}\=\x{i_{2}},\dotsc,\X{i_{N}}\=\x{i_{N}}
+    \| I) ={}}\\
+  \p( \X{i_{1}}\=\x{\pi(i_{1})},
+  \X{i_{2}}\=\x{\pi(i_{2})},\dotsc,\X{i_{N}}\=\x{\pi(i_{N})}   \| I),
 \end{multline}
-all such joint probabilities appropriately related by marginalization, then
-we can write
+and if all such probabilities are consistently related by marginalization.
+This property is equivalent to declaring the empirical frequencies of the
+values $x$ to be sufficient statistics.
 
+In the following I let $\set{1, 2, \dotsc}$ denote any subset of $\NN$, to
+avoid a proliferation of subscripts.
 
+De~Finetti's theorem states that a fully exchangeable distribution can be
+written as follows:
 \begin{equation}
-  \label{eq:formula}
-  \int\!\!\di ...
-  \prod_{ij} \bigl( \xi_{i\| j} \, \nu_{j}\bigr)^{q_{i \| j} \, f_{j}}\;
-  \pf(\xi) \, \pf(\nu)
+  \label{eq:definetti_freq}
+  \begin{split}
+  \p( \X{1}\=\x{1},\; \dotsc, \; \X{N}\=\x{N} \| I) &=
+  \int \prod_{i} f_{\x{i}}\;  \pf(\ff \| I)\,\di\ff
+\\ &=
+  \int\prod_{x} {f_{x}}^{N F_{x}}\;   \pf(\ff \| I)\,\di\ff 
+  \end{split}
 \end{equation}
+where $(F_{x})$ are the empirical relative frequencies of the values $x$ in
+the set $\set{x_{1}, \dotsc, x_{N}}$:
+\begin{equation}
+  \label{eq:rel_frequencies}
+  N F_{x} \defd \tsum_{i}\delt(x, x_{i}), \quad x \in \sX \;.
+\end{equation}
+
+\bigskip
+
+I will state the definition of partial exchangeability and its theorem in a
+slightly unusual form, according to the discussion of
+\sect~\ref{sec:inf_exch}, making clear the role of the additional
+information about the category to which each instance belong.
+
+We now have an additional set of atomic statements
+\begin{equation}
+  \label{eq:category_statements}
+  \set[\big]{\C{i}\=\cc{i} \|
+    i \in \NN,\;
+ \forall i\;\cc{i} \in \sC}
+\end{equation}
+identifying each instance $1,2,\dotsc$ as belonging to one or another
+category from a finite set $\sC$. For each $i$ the statements
+$\set{\C{i}\=c \| c \in \sC}$ are mutually exclusive on information $I$.
+
+A probability distribution over the $\X{i}\=\x{i}$ atomic statements
+%$\set{\X{i}\=\x{i}}$,
+is called partially exchangeable if
+\begin{multline}
+  \label{eq:part_exchangeable}
+  \p( \X{1}\=\x{1}, \dotsc, \X{N}\=\x{N}  \|
+  \C{1}\=\cc{1}, \dotsc,\C{N}\=\cc{N},\;    I) ={}\\
+  \shoveright{\p( \X{i_{1}}\=\x{\pi(1)}, \dotsc, \X{i_{N}}\=\x{\pi(N)}   \|
+    \C{1}\=\cc{1}, \dotsc,\C{N}\=\cc{N},\;    I)}
+  \\
+  \mathbox[0.9]{\small for every $N$, every set of indices $\set{1, \dotsc,
+      N}\subset \NN$, and\\ every permutation $\pi$ thereof such that\quad
+  $\pi(i)=j \mathrel{\;\Rightarrow\;} \cc{i}=\cc{j}$}
+\end{multline}
+that is, for every permutation $\pi$ \emph{which only exchanges indices
+  having the same $c$ value}.
+
+
+
+and if all such probabilities are consistently related by marginalization.
+This property is equivalent to declaring the empirical frequencies of the
+values $x$ to be sufficient statistics.
 
 
 

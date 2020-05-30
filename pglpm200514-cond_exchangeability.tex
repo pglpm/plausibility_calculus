@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2020-03-17T00:29:23+0100
-%% Last-Updated: 2020-05-30T08:51:20+0200
+%% Last-Updated: 2020-05-30T11:19:16+0200
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newif\ifarxiv
 \arxivfalse
@@ -679,8 +679,8 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 \newcommand*{\bh}{\bm{h}}
 \newcommand*{\xs}{\textsf{S}}
 \newcommand*{\xf}{\textsf{F}}
-\newcommand*{\xj}{\textsf{J}}
-\newcommand*{\xa}{\textsf{A}}
+%\newcommand*{\xj}{\textsf{J}}
+%\newcommand*{\xa}{\textsf{A}}
 \newcommand*{\xY}{\textsf{Y}}
 \newcommand*{\xZ}{\textsf{Z}}
 \newcommand*{\zI}{J}
@@ -757,8 +757,8 @@ probability distribution as a law of total probability:
   \prod_{i} f_{\x{i}}\;
   \pf(\ff \| \zI)\,\di\ff \;,
 \end{equation}
-where $\ff \defd (f_{x})$ is a distribution over the set of values that can
-be assumed by each $\X{i}$, and the integral is over the simplex of such
+where $\ff \defd (f_{x})$ is a distribution over the values that can be
+assumed by each $\X{i}$, and the integral is over the simplex of such
 distributions.
 
 The condition for the theorem to hold is that the joint distribution be
@@ -769,10 +769,12 @@ content. From now on \enquote{exchangeable} shall be understood as
 \enquote{infinitely exchangeable}.
 
 A more general version of the theorem holds if the joint distribution is
-\emph{partially exchangeable}, that is, the set $\set{\X{i}}$ can be
-divided into two or more categories represented by subsets
+\emph{partially exchangeable}, that is, if the set $\set{\X{i}}$ is divided
+into two or more categories represented by subsets
 $\set{\Y{j}}, \set{\Z{k}}, \dotsc$, and permutations are allowed within
-each subset but not necessarily across subsets. The formula then becomes
+each subset but not necessarily across subsets. The formula then becomes,
+with a suitable re-indexing
+$\set{1,2,\dotsc} \mapsto \set{1', 2', \dotsc, 1'', 2'', \dotsc}$,
 \begin{multline}
   \label{eq:partialdefinetti}
   \p( \Y{1'}\=\y{1'},\; \Y{2'}\=\y{2'},\; \dotsc,\;
@@ -782,36 +784,36 @@ each subset but not necessarily across subsets. The formula then becomes
   \prod_{k} h_{\z{k}}\;
   \pf(\bg,\bh \| \zI)\,\di\bg\,\di\bh \;,
 \end{multline}
-with distinct distributions $\bg$, $\bh$ for each subset. If the density
-$\pf(\bg,\bh \| \zI)$ is diagonal, that is, if it contains a term
-$\delt(\bg-\bh)$, the fully exchangeable form~\eqref{eq:definetti} is
-recovered.
+with distinct distributions $\bg$, $\bh$ for each category. If the density
+$\pf(\bg,\bh \| \zI)\,\di\bg\,\di\bh$ is diagonal, that is, if it contains
+a term $\delt(\bg-\bh)$, the fully exchangeable form~\eqref{eq:definetti}
+is recovered.
 
 \medskip
 
-A little reflection shows that if we know that the quantities $X$ belong to
-category $Y$ in instances $1',2',\dotsc$, and to category $Z$ in instances
-$1'',2'',\dotsc$, then
+With a little reflection we see that if we know that the quantities $X$
+belong to category $Y$ in instances $1',2',\dotsc$, and to category $Z$ in
+instances $1'',2'',\dotsc$, then
 \begin{enumerate*}[label=(\alph*)]
 \item there is some other quantity $C$ that allows us to distinguish the
   two categories, and \item the values $\C{i}\=\cc{i}$ of this quantity
   \emph{are known} for all instances.
 \end{enumerate*}
 
-Let us say, for example, that the quantity $X$ is the result of a patient's
-treatment, with values $\xs$uccess and $\xf$ailure. $Y$ refers to the
-result for a $\xj$uvenile patient, and $Z$ for an $\xa$dult patient. If we
-write
+Let us say, for example, that the quantities $\X{i}$ are the results of
+animal treatments, with values \enquote{$\xs$}uccess and
+\enquote{$\xf$}ailure. $Y$ refers to the results for treatments on
+$\xY$aks, and $Z$ on $\xZ$ebras. If we write
 $$\p(\Y{3}\=\xs,\;\Z{5}\=\xf \| \zI)=0.2\;,$$
-then we must already know that patient number~$3$ is juvenile,
-$\C{3}\=\xj$, and patient number~$5$ is adult, $\C{5}\=\xa$. This is clear
-from our very notation, otherwise we would not have known whether to use
-$Y$ or $Z$ for these patients. This information is evidently implicit in
-our background information $I$.
+then we must already know that animal number~$3$ is a yak, $\C{3}\=\xY$,
+and animal number~$5$ is a zebra, $\C{5}\=\xZ$. This is clear from our very
+notation, otherwise we would not have known whether to use the symbol $Y$
+or $Z$ for those instances. This information is evidently implicit in our
+background information $\zI$.
 
-Let us make this information about $C$ explicit. The values of this
-quantity can be \enquote{$\xY$} and \enquote{$\xZ$}. We rewrite the
-probability in \eqn~\eqref{eq:partialdefinetti} as
+Let us make the information about the $\C{i}$ explicit. Their possible
+values are \enquote{$\xY$} and \enquote{$\xZ$}. We rewrite the probability
+in \eqn~\eqref{eq:partialdefinetti} as
 \begin{equation}
   \label{eq:infoCexplicit}
   \begin{aligned}
@@ -841,9 +843,9 @@ also be called \emph{conditionally exchangeable}.
 The present work gives a representation formula for pairs of quantities
 $(\X{i},\C{i})$ such that
 \begin{enumerate}%[nosep]
-\item they have, as pairs, a fully exchangeable probability distribution,
 \item the distribution for the $\set{\X{i}}$ is conditionally exchangeable,
-  given $\set{\C{i}}$.
+  given $\set{\C{i}}$,
+\item the distribution for the $\set{\C{i}}$ is fully exchangeable.
 \end{enumerate}
 The formula is:
 %\begin{empheq}{equation}
@@ -869,8 +871,7 @@ where
 \item $\bigl(f_{,c} \defd \sum_{x}f_{x, c} \bigr)$ is the related
   \emph{marginal} frequency distribution for the $c$ values,
 \item $\bigl(f_{x \bcond c} \defd f_{x, c}/f_{,c} \bigr)$ are the related
-  \emph{conditional} frequency distributions of $x$ given $c$, obtained
-  from $\ff$.
+  \emph{conditional} frequency distributions of $x$ given $c$.
 \end{itemize}
 
 \smallskip

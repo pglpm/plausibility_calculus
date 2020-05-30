@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2020-03-17T00:29:23+0100
-%% Last-Updated: 2020-05-30T19:28:12+0200
+%% Last-Updated: 2020-05-30T21:48:35+0200
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newif\ifarxiv
 \arxivfalse
@@ -678,7 +678,9 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 \newcommand*{\sC}{\mathfrak{C}}
 \newcommand*{\ff}{\bm{f}}
 \newcommand*{\FF}{\bm{F}}
-\newcommand*{\fc}{\bm{f_{\!\bcond}}}
+\newcommand*{\fc}{\bm{f_{\!x\bcond c}}}
+\newcommand*{\fm}{\bm{f_{\!c}}}
+\newcommand*{\fj}{\bm{f_{\!xc}}}
 \newcommand*{\bg}{\bm{g}}
 \newcommand*{\bh}{\bm{h}}
 \newcommand*{\xs}{\textsf{S}}
@@ -1009,9 +1011,9 @@ $\set{f_{x \bcond c} \| x \in \sX}$ over the values $x$. As the notation
 suggests, it can be considered as a \emph{conditional} distribution over
 $x$ given $c$.
 
-Denote by $\fc \defd (f_{x \bcond c})$ the set of all such conditional
-distributions. This set is the Cartesian product of $\abs{\sC}$ simplices,
-each of dimension $\abs{\sX}-1$.
+Denote (with some abuse of the symbols) by $\fc \defd (f_{x \bcond c})$ the
+set of all such conditional distributions. This set is the Cartesian
+product of $\abs{\sC}$ simplices, each of dimension $\abs{\sX}-1$.
 
 Denote by $(F_{x,c})$ the empirical relative \emph{joint} frequency
 distribution over the values $(x,c)$ in the set of pairs
@@ -1029,7 +1031,7 @@ be written as follows:
 \begin{multline}
   \label{eq:partial_definetti_freq}
     \p( \X{1}\=\x{1}, \dotsc,  \X{N}\=\x{N} \|
-    \C{1}\=\cc{1}, \dotsc,\C{N}\=\cc{N},\;  I) =\\
+    \C{1}\=\cc{1}, \dotsc,\C{N}\=\cc{N},\;  I) ={}\\
 \int\prod_{c,x} {f_{x \bcond c}}^{N F_{x, c}}\;
 %\pf\condt[\big]{(f_{x \bcond c})}{I} \,\di(f_{x \bcond c}) \;.
 \pf\cond[\big]{\fc}{I} \,\di\fc \;.
@@ -1048,9 +1050,31 @@ $\set[\big]{\X{i}\=\x{i}}$ and $\set[\big]{\C{i}\=\cc{i}}$,
 \begin{equation}
   \label{eq:joint_p_xc}
   \p( \X{1}\=\x{1}, \C{1}\=\cc{1},\; \dotsc,\;  \X{N}\=\x{N},\C{N}\=\cc{N}
-  \| I)
+  \| I) \;.
 \end{equation}
-and assume the following:
+Besides the set of conditional distributions $\fc$, consider also the
+joint distribution $\fj$ and the marginal distributions $\fm$ over $c$
+values. Both distributions are defined in an obvious way.
+
+Assume the following:
+\begin{enumerate}[wide]
+\item the marginal distribution for the $\C{i}$ is fully exchangeable,
+\item the distribution for the $\X{i}$ is conditionally exchangeable given
+  the $\C{i}$.
+\end{enumerate}
+
+Then the joint distribution~\eqref{eq:joint_p_xc} is fully exchangeable for
+the pairs $\set[\big]{(\x{i}, \cc{i})}$, and it can be written as
+\begin{multline}
+  \label{eq:result_freq}
+\p( \X{1}\=\x{1}, \C{1}\=\cc{1},\; \dotsc,\;  \X{N}\=\x{N},\C{N}\=\cc{N}
+\| I) ={}\\
+\int\prod_{c,x} {f_{x,c}}^{N F_{x, c}}\;
+%\pf\condt[\big]{(f_{x \bcond c})}{I} \,\di(f_{x \bcond c}) \;.
+\pf\cond[\big]{\fc}{I}\,
+\pf\cond[\big]{\fm}{I}\,
+\,\di\fc\, \di\fm \;.
+\end{multline}
 
 
 

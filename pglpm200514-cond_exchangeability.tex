@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2020-03-17T00:29:23+0100
-%% Last-Updated: 2020-05-29T16:03:14+0200
+%% Last-Updated: 2020-05-30T08:51:20+0200
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newif\ifarxiv
 \arxivfalse
@@ -683,7 +683,7 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 \newcommand*{\xa}{\textsf{A}}
 \newcommand*{\xY}{\textsf{Y}}
 \newcommand*{\xZ}{\textsf{Z}}
-\newcommand*{\zI}{I'}
+\newcommand*{\zI}{J}
 \newcommand*{\bcond}[1][]{\nonscript\,#1\bm{\vert}\nonscript\;\mathopen{}}
 
 %%% Custom macros end @@@
@@ -746,16 +746,16 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 \label{sec:inf_exch}
 
 De Finetti's theorem for infinitely exchangeable probability distributions
-is one of the formulae derived from the probability calculus with the
+is one of the formulae derived from the probability calculus having the
 richest practical and philosophical consequences. Leaving for the moment
 the definition of symbols to intuition, the theorem rewrites a joint
 probability distribution as a law of total probability:
 \begin{equation}
   \label{eq:definetti}
-  \p( \X{1}\=\x{1},\; \X{2}\=\x{2},\; \dotsc \| I) =
+  \p( \X{1}\=\x{1},\; \X{2}\=\x{2},\; \dotsc \| \zI) =
   \int
   \prod_{i} f_{\x{i}}\;
-  \pf(\ff \| I)\,\di\ff \;,
+  \pf(\ff \| \zI)\,\di\ff \;,
 \end{equation}
 where $\ff \defd (f_{x})$ is a distribution over the set of values that can
 be assumed by each $\X{i}$, and the integral is over the simplex of such
@@ -763,38 +763,38 @@ distributions.
 
 The condition for the theorem to hold is that the joint distribution be
 infinitely \emph{fully exchangeable}, that is, symmetric with respect to
-permutations of the $\x{i}$. This formula is the infinite limit for a
-sampling formula from an urn with unknown distribution. From now
-\enquote{exchangeable} shall be understood as \enquote{infinitely
-  exchangeable}.
+permutations of the $\x{i}$, for any set of indices $\set{i}$. This formula
+is the infinite limit of the sampling formula from an urn of unknown
+content. From now on \enquote{exchangeable} shall be understood as
+\enquote{infinitely exchangeable}.
 
 A more general version of the theorem holds if the joint distribution is
-\emph{partially exchangeable}, that is, the $\set{\X{i}}$ can be divided
-into two or more groups $\set{\Y{j}}, \set{\Z{k}}, \dotsc$, and
-permutations are allowed within each group but not necessarily across
-groups. The formula then becomes
+\emph{partially exchangeable}, that is, the set $\set{\X{i}}$ can be
+divided into two or more categories represented by subsets
+$\set{\Y{j}}, \set{\Z{k}}, \dotsc$, and permutations are allowed within
+each subset but not necessarily across subsets. The formula then becomes
 \begin{multline}
   \label{eq:partialdefinetti}
   \p( \Y{1'}\=\y{1'},\; \Y{2'}\=\y{2'},\; \dotsc,\;
-  \Z{1''}\=\z{1''},\; \Z{2''}\=\z{2''},\; \dotsc \| I) ={}\\
+  \Z{1''}\=\z{1''},\; \Z{2''}\=\z{2''},\; \dotsc \| \zI) ={}\\
   \iint
   \prod_{j} g_{\y{j}}\;
   \prod_{k} h_{\z{k}}\;
-  \pf(\bg,\bh \| I)\,\di\bg\,\di\bh \;,
+  \pf(\bg,\bh \| \zI)\,\di\bg\,\di\bh \;,
 \end{multline}
-with distinct distributions $\bg$, $\bh$ for each group. If the density
-$\pf(\bg,\bh \| I)$ is diagonal, that is, if it contains a term
+with distinct distributions $\bg$, $\bh$ for each subset. If the density
+$\pf(\bg,\bh \| \zI)$ is diagonal, that is, if it contains a term
 $\delt(\bg-\bh)$, the fully exchangeable form~\eqref{eq:definetti} is
 recovered.
 
 \medskip
 
 A little reflection shows that if we know that the quantities $X$ belong to
-group $Y$ in instances $1',2',\dotsc$, and to group $Z$ in instances
+category $Y$ in instances $1',2',\dotsc$, and to category $Z$ in instances
 $1'',2'',\dotsc$, then
 \begin{enumerate*}[label=(\alph*)]
 \item there is some other quantity $C$ that allows us to distinguish the
-  two groups, and \item the values $\C{i}\=\cc{i}$ of this quantity
+  two categories, and \item the values $\C{i}\=\cc{i}$ of this quantity
   \emph{are known} for all instances.
 \end{enumerate*}
 
@@ -802,24 +802,24 @@ Let us say, for example, that the quantity $X$ is the result of a patient's
 treatment, with values $\xs$uccess and $\xf$ailure. $Y$ refers to the
 result for a $\xj$uvenile patient, and $Z$ for an $\xa$dult patient. If we
 write
-$$\p(\Y{3}\=\xs,\;\Z{5}\=\xf \| I)=0.2\;,$$
+$$\p(\Y{3}\=\xs,\;\Z{5}\=\xf \| \zI)=0.2\;,$$
 then we must already know that patient number~$3$ is juvenile,
 $\C{3}\=\xj$, and patient number~$5$ is adult, $\C{5}\=\xa$. This is clear
 from our very notation, otherwise we would not have known whether to use
 $Y$ or $Z$ for these patients. This information is evidently implicit in
 our background information $I$.
 
-Let us make the information about $C$ explicit. Its values can be
-\enquote{$\xY$} and \enquote{$\xZ$}. We rewrite the probability in
-\eqn~\eqref{eq:partialdefinetti} as
+Let us make this information about $C$ explicit. The values of this
+quantity can be \enquote{$\xY$} and \enquote{$\xZ$}. We rewrite the
+probability in \eqn~\eqref{eq:partialdefinetti} as
 \begin{equation}
   \label{eq:infoCexplicit}
   \begin{aligned}
   &\p( \Y{1'}\=\y{1'},\; %\Y{2'}\=\y{2'},\;
   \dotsc,\;
   \Z{1''}\=\z{1''},\; %\Z{2''}\=\z{2''},\;
-  \dotsc \| I) \equiv{}\\
-  &%\!\begin{multlined}[b][0.9\linewidth]
+  \dotsc \| \zI) \equiv{}\\
+  &
 \p( \X{1'}\=\x{1'},\; %\X{2'}\=\x{2'},\;
   \dotsc,\;
   \X{1''}\=\x{1''},\; %\X{2''}\=\x{2''},\;
@@ -827,8 +827,7 @@ Let us make the information about $C$ explicit. Its values can be
   \C{1'}\=\xY,\; %\C{2'}\=\cc{2'},\;
   \dotsc,\;
   \C{1''}\=\xZ,\; %\C{2''}\=\cc{2''},\;
-  \dotsc,\; \zI) \;.
-%\end{multlined}
+  \dotsc,\; I) \;.
   \end{aligned}
 \end{equation}
 
@@ -841,10 +840,10 @@ also be called \emph{conditionally exchangeable}.
 
 The present work gives a representation formula for pairs of quantities
 $(\X{i},\C{i})$ such that
-\begin{enumerate}[nosep]
+\begin{enumerate}%[nosep]
 \item they have, as pairs, a fully exchangeable probability distribution,
-\item the distribution for the $\set{\X{i}}$ is only conditionally
-  exchangeable, given $\set{\C{i}}$.
+\item the distribution for the $\set{\X{i}}$ is conditionally exchangeable,
+  given $\set{\C{i}}$.
 \end{enumerate}
 The formula is:
 %\begin{empheq}{equation}
@@ -856,9 +855,10 @@ The formula is:
  \int \prod_{i}f_{\x{i},\cc{i}}\;
   \pf(\ff\|I)\,\di\ff\\
   \label{eq:factorizable}
-\boxed{\text{with}\quad \pf(\ff\|I) =
-  \pf(f_{\x{i} \bcond \cc{i}} \|I)\;
-  \pf(f_{,\cc{i}} \|I)\;\di\ff}
+\text{with}\qquad \boxed{\;\vphantom{\int}\pf(\ff\|I)\,\di\ff =
+  \pf[(f_{x \bcond c}) \|I]\,\di(f_{x \bcond c})
+  \times
+  \pf[(f_{,c}) \|I]\,\di(f_{,c})\;}
 \end{gather}
 \end{subequations}
 %\end{empheq}%\\[-2\baselineskip]
@@ -876,18 +876,10 @@ where
 \smallskip
 
 The noteworthy feature of the formula above is that the conditional
-exchangeability for $\set{\X{i}}$ given $\set{\C{i}}$ is expressed by \emph{the
-  factorizability of the density $\pf(\ff\|I)$} into
-a density for the conditional frequencies, and a density for the marginal
-frequencies, \eqn~\eqref{eq:factorizable}.
-
-
-
-
-
-and the integral is over the simplex of such distributions.
-
-
+exchangeability for $\set{\X{i}}$ given $\set{\C{i}}$ is expressed by
+\emph{the factorizability of the density $\pf(\ff\|I)$} into the product,
+\eqn~\eqref{eq:factorizable}, of a density for the conditional frequencies
+$(f_{x \bcond c})$ and a density for the marginal frequencies $(f_{,c})$.
 
 
 \section{Setup}
@@ -898,10 +890,8 @@ and the integral is over the simplex of such distributions.
 
 
 
-We have a countably infinite set of statements $\X{t}\=\x{t}$ with
-$t \in \set{1,2,\dots}$, where each $\X{t}$ is some quantity and each
-$\x{t} \in \sX$, a common finite set of values (the theorem also works with
-statements that are not about variates). De~Finetti's theorem states that
+We have a countably infinite set of statements $\X{t}\=\x{t}$ with $t \in \set{1,2,\dots}$, where each $\X{t}$ is some quantity and each
+$\x{t} \in \sX$, a common finite set of values (the theorem also works with statements that are not about variates). De~Finetti's theorem states that
 if a probability distribution about any subset of such statements is
 exchangeable, that is,
 \begin{multline}

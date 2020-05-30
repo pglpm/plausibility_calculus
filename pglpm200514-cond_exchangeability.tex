@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2020-03-17T00:29:23+0100
-%% Last-Updated: 2020-05-30T18:01:28+0200
+%% Last-Updated: 2020-05-30T19:04:36+0200
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newif\ifarxiv
 \arxivfalse
@@ -594,9 +594,9 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 %\newcommand*{\E}{\mathrm{E}}
 %\renewcommand*{\|}{\nonscript\,\vert\nonscript\;\mathopen{}}
 \renewcommand*{\|}[1][]{\nonscript\,#1\vert\nonscript\;\mathopen{}}
-%\DeclarePairedDelimiterX{\cond}[2]{(}{)}{#1\nonscript\,\delimsize\vert\nonscript\;\mathopen{}#2}
-%\DeclarePairedDelimiterX{\condt}[2]{[}{]}{#1\nonscript\,\delimsize\vert\nonscript\;\mathopen{}#2}
-%\DeclarePairedDelimiterX{\conds}[2]{\{}{\}}{#1\nonscript\,\delimsize\vert\nonscript\;\mathopen{}#2}
+\DeclarePairedDelimiterX{\cond}[2]{(}{)}{#1\nonscript\,\delimsize\vert\nonscript\;\mathopen{}#2}
+\DeclarePairedDelimiterX{\condt}[2]{[}{]}{#1\nonscript\,\delimsize\vert\nonscript\;\mathopen{}#2}
+\DeclarePairedDelimiterX{\conds}[2]{\{}{\}}{#1\nonscript\,\delimsize\vert\nonscript\;\mathopen{}#2}
 %\newcommand*{\+}{\lor}
 %\renewcommand{\*}{\land}
 \newcommand*{\sect}{\S}% Sect.~
@@ -678,6 +678,7 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 \newcommand*{\sC}{\mathfrak{C}}
 \newcommand*{\ff}{\bm{f}}
 \newcommand*{\FF}{\bm{F}}
+\newcommand*{\fc}{\bm{f_{\!\bcond}}}
 \newcommand*{\bg}{\bm{g}}
 \newcommand*{\bh}{\bm{h}}
 \newcommand*{\xs}{\textsf{S}}
@@ -905,8 +906,7 @@ Freedman \citep{diaconisetal1980,diaconisetal1980b}.
 The domain of discourse consists of a countably infinite set of statements
 \begin{equation}
   \label{eq:statements}
-  \set[\big]{\X{i}\=\x{i} \|
-    i \in \NN,\;
+  \conds[\big]{\X{i}\=\x{i}}{i \in \NN,\;
  \forall i\;\x{i} \in \sX}
 \end{equation}
 where $\sX$ is a finite set. (The theorem also holds for statements not
@@ -950,21 +950,20 @@ where $(F_{x})$ are the empirical relative frequencies of the values $x$ in
 the set $\set{x_{1}, \dotsc, x_{N}}$:
 \begin{equation}
   \label{eq:rel_frequencies}
-  N F_{x} \defd \tsum_{i}\delt(x, x_{i}), \quad x \in \sX \;.
+  N F_{x} \defd \tsum_{i}\delt(x, \x{i}), \quad x \in \sX \;.
 \end{equation}
 
 \bigskip
 
 I will state the definition of partial exchangeability and its theorem in a
-slightly unusual form, according to the discussion of
-\sect~\ref{sec:inf_exch}, making clear the role of the additional
-information about the category to which each instance belong.
+slightly unfamiliar form, according to the discussion of
+\sect~\ref{sec:inf_exch}. The role of the additional information about the
+category to which each instance belongs will be explicit.
 
 We now have an additional set of atomic statements
 \begin{equation}
   \label{eq:category_statements}
-  \set[\big]{\C{i}\=\cc{i} \|
-    i \in \NN,\;
+  \conds[\big]{\C{i}\=\cc{i}}{i \in \NN,\;
  \forall i\;\cc{i} \in \sC}
 \end{equation}
 identifying each instance $1,2,\dotsc$ as belonging to one or another
@@ -988,11 +987,48 @@ is called partially exchangeable if
 that is, for every permutation $\pi$ \emph{which only exchanges indices
   having the same $c$ value}.
 
+As remarked in \sect~\ref{sec:inf_exch}, partial exchangeability is usually
+written by using different symbols for indices belonging to different
+categories, and leaving the information implied by such notation implicit
+in the context.
+
+I will also write de~Finetti's theorem for partial exchangeability in a
+slightly unfamiliar form.
+
+For each value $c \in \sC$, introduce a normalized distribution
+$\set{f_{x \bcond c} \| x \in \sX}$ over the values $x$. As the notation
+suggests, it can be considered as a \emph{conditional} distribution over
+$x$ given $c$.
+
+Denote by $\fc \defd (f_{x \bcond c})$ the set of all such
+conditional distributions. This set is the Cartesian product of $\abs{\sC}$
+simplices, each of dimension $\abs{\sX}-1$.
+
+Denote by $(F_{x,c})$ the empirical relative \emph{joint} frequency
+distribution over the values $(x,c)$ in the set of pairs
+$\set[\big]{(\x{i}, \cc{i}), \dotsc, (\x{N}, \cc{N})}$:
+\begin{equation}
+  \label{eq:rel_frequencies}
+  N F_{x,c} \defd \tsum_{i}\delt(x, \x{i})\,\delt(c, \cc{i}),
+  \quad x \in \sX,\; c \in \sC \;.
+\end{equation}
 
 
-and if all such probabilities are consistently related by marginalization.
-This property is equivalent to declaring the empirical frequencies of the
-values $x$ to be sufficient statistics.
+De Finetti’s theorem states that a partially exchangeable distribution can
+be written as follows:
+\begin{multline}
+  \label{eq:partial_definetti_freq}
+    \p( \X{1}\=\x{1}, \dotsc,  \X{N}\=\x{N} \|
+    \C{1}\=\cc{1}, \dotsc,\C{N}\=\cc{N},\;  I) =\\
+\int\prod_{c,x} {f_{x \bcond c}}^{N F_{x, c}}\;
+%\pf\condt[\big]{(f_{x \bcond c})}{I} \,\di(f_{x \bcond c}) \;.
+\pf\cond[\big]{\fc}{I} \,\di\fc \;.
+\end{multline}
+Scrutiny of this formula should show that this form is equivalent to the
+usual representation. There is one product of $f_{\dotso \bcond c}$ terms
+for every category $c$. In each such product, $f_{\x{i} \bcond c}$ terms
+are multiplied together for those $i$ such that $\cc{i}=c$. There are
+exactly $N F_{x,c}$ such terms.
 
 
 

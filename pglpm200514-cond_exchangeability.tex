@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2020-03-17T00:29:23+0100
-%% Last-Updated: 2020-05-31T19:03:52+0200
+%% Last-Updated: 2020-05-31T21:43:28+0200
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newif\ifarxiv
 \arxivfalse
@@ -677,9 +677,10 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 \newcommand*{\sX}{\mathfrak{X}}
 \newcommand*{\sC}{\mathfrak{C}}
 \newcommand*{\ff}{\bm{f}}
+\newcommand*{\fx}{\bm{f_{\!x}}}
 \newcommand*{\FF}{\bm{F}}
-\newcommand*{\fc}{\bm{f_{\!x\bcond c}}}
-\newcommand*{\fm}{\bm{f_{\!c}}}
+\newcommand*{\fxc}{\bm{f_{\!x\bcond c}}}
+\newcommand*{\fc}{\bm{f_{\!c}}}
 \newcommand*{\fj}{\bm{f_{\!xc}}}
 \newcommand*{\bg}{\bm{g}}
 \newcommand*{\bh}{\bm{h}}
@@ -826,7 +827,7 @@ of $\NN$, to avoid a proliferation of subscripts; it should be read as
 
 \medskip
 
-Denote by $\ff \defd (f_{x})$ a normalized distribution over the values
+Denote by $\fx \defd (f_{x})$ a normalized distribution over the values
 $x \in \sX$. The set of all such distributions is a simplex of dimension
 $\abs{\sX}-1$.
 
@@ -842,10 +843,10 @@ written as follows:
 \begin{multline}
   \label{eq:definetti_freq}
   \p( \X{1}\=\x{1},\; \dotsc, \; \X{N}\=\x{N} \| I) ={}\\
-  \int \prod_{i} f_{\x{i}}\;  \pf(\ff \| I)\,\di\ff
-\equiv  \int\prod_{x} {f_{x}}^{N F_{x}}\;   \pf(\ff \| I)\,\di\ff \;,
+  \int \prod_{i} f_{\x{i}}\;  \pf(\fx \| I)\,\di\fx
+\equiv  \int\prod_{x} {f_{x}}^{N F_{x}}\;   \pf(\fx \| I)\,\di\fx \;,
 \end{multline}
-where the integral is over the simplex of distributions $\set{\ff}$.
+where the integral is over the simplex of distributions $\set{\fx}$.
 
 In the first integral form, the product is over the set of instances
 $1,\dotsc,N$. In the second, equivalent integral form, the product is over
@@ -954,7 +955,7 @@ $\set{f_{x \bcond c} \| x \in \sX}$ over the values $x$. As the notation
 suggests, it can be considered as a \emph{conditional} distribution over
 $x$ given $c$.
 
-Denote (with some abuse of the symbols) by $\fc \defd (f_{x \bcond c})$ the
+Denote (with some abuse of the symbols) by $\fxc \defd (f_{x \bcond c})$ the
 set of all such conditional distributions. This set is the Cartesian
 product of $\abs{\sC}$ simplices, each of dimension $\abs{\sX}-1$.
 
@@ -977,7 +978,7 @@ distribution~\eqref{eq:part_exchangeable} can be written as follows:
     \C{1}\=\cc{1}, \dotsc,\C{N}\=\cc{N},\;  I) ={}\\
 \int\prod_{c,x} {f_{x \bcond c}}^{N F_{x, c}}\;
 %\pf\condt[\big]{(f_{x \bcond c})}{I} \,\di(f_{x \bcond c}) \;.
-\pf\cond[\big]{\fc}{I} \,\di\fc \;.
+\pf\cond[\big]{\fxc}{I} \,\di\fxc \;.
 \end{multline}
 Scrutiny of this formula shows that this form is equivalent to the more
 familiar representation. The integral contains one product of
@@ -1018,13 +1019,71 @@ The joint probability distribution can be rewritten
 where the first factor, partially or conditionally exchangeable, can be
 represented by the integral of \eqn~\eqref{eq:partial_definetti_freq}.
 
-Let us suppose that we our uncertainty about the $\set{\C{i}}$ is expressed
-by a fully exchangeable marginal probability distribution.
+Let us suppose that our uncertainty about the statements
+$\set[\big]{\C{i}\=\cc{i}}$ is expressed by a fully exchangeable marginal
+probability distribution. An integral representation analogous
+to~\eqref{eq:definetti_freq} then holds:
+\begin{equation}
+  \label{eq:definetti_freq_C}
+  \p( \C{1}\=\cc{1},\; \dotsc, \; \C{N}\=\cc{N} \| I) =
+\int\prod_{c} {f_{,c}}^{N F_{,c}}\;   \pf(\fc \| I)\,\di\fc \;,
+\end{equation}
+where $f_{,c} \defd \sum_{x} f_{x,c}$ and $F_{,c} \defd \sum_{x} F_{x,c}$
+are marginal distributions.
 
 
-Besides the set of conditional distributions $\fc$, consider also the
-joint distribution $\fj$ and the marginal distributions $\fm$ over $c$
-values. Both distributions are defined in an obvious way.
+We can now replace the integral
+representations~\eqref{eq:partial_definetti_freq} and
+\eqref{eq:definetti_freq_C} into~\eqref{eq:joint_p_xc_decomposed}. The
+products within their integrals can be combined considering that
+\begin{equation}
+  \label{eq:develop_prodfc}
+  {f_{,c}}^{N F_{,c}} = {f_{,c}}^{N \sum_{x}F_{x,c}} =
+  \prod_{x} {f_{,c}}^{N F_{x,c}} \;.
+\end{equation}
+We obtain
+\begin{subequations}
+  \label{eq:result}
+  \begin{gather}
+    \begin{multlined}[b][0.85\linewidth]
+\p( \X{1}\=\x{1}, \C{1}\=\cc{1},\; \dotsc,\;  \X{N}\=\x{N},\C{N}\=\cc{N}
+\| I) ={}\\
+\int\prod_{c,x} {f_{x,c}}^{N F_{x, c}}\;  \pf(\fj\|I)\,\di\fj
+\end{multlined}
+\\
+  \label{eq:factorizable}
+\text{with}\qquad \boxed{\;\vphantom{\int}\pf(\fj\|I)\,\di\fj =
+\pf(\fxc \| I) \,\di\fxc \times
+\pf(\fc \| I) \,\di\fc }
+\end{gather}
+\end{subequations}
+The last equality comes from the one-one correspondence between the
+variables $(\fxc,\fc)$ and $\fj$, so that the product of density functions
+for $\fxc$ and $\fc$ is just a specific case of a density function for
+$\fj$, apart from a Jacobian factor.
+
+\medskip
+
+The integral expression~\eqref{eq:result} is the representation of a fully
+exchangeable distribution. Thus the joint distribution for the \emph{pairs}
+of statements $\set[\big]{(\x{i}, \cc{i})}$ is fully exchangeable.
+
+The noteworthy feature of the integral expression~\eqref{eq:result} is that
+\emph{the density for the joint distribution $\fj$ is factorizable into the
+  product of a density for the conditional distribution $\fxc$ and a
+  density for the marginal distribution $\fc$}. This factorization
+expresses the partial or conditional exchangeability for
+$\set{\X{i}\=\x{i}}$ given $\set{\C{i}\=\cc{i}}$.
+
+\medskip
+
+It is easy to show that the reverse also holds: if the density of an
+integral representation is factorizable as in~\eqref{eq:factorizable}, then
+the corresponding probability distributions enjoy a symmetry of partial or
+conditional exchangeability.
+
+
+\medskip
 
 Assume the following:
 \begin{enumerate}[wide]
@@ -1035,21 +1094,11 @@ Assume the following:
 
 Then the joint distribution~\eqref{eq:joint_p_xc} is fully exchangeable for
 the pairs $\set[\big]{(\x{i}, \cc{i})}$, and it can be written as
-\begin{multline}
-  \label{eq:result_freq}
-\p( \X{1}\=\x{1}, \C{1}\=\cc{1},\; \dotsc,\;  \X{N}\=\x{N},\C{N}\=\cc{N}
-\| I) ={}\\
-\int\prod_{c,x} {f_{x,c}}^{N F_{x, c}}\;
-%\pf\condt[\big]{(f_{x \bcond c})}{I} \,\di(f_{x \bcond c}) \;.
-\pf\cond[\big]{\fc}{I}\,
-\pf\cond[\big]{\fm}{I}\,
-\,\di\fc\, \di\fm \;.
-\end{multline}
 
 The density
-$\pf\cond[\big]{\fc}{I}\, \pf\cond[\big]{\fm}{I}\, \,\di\fc\, \di\fm$ is
+$\pf\cond[\big]{\fxc}{I}\, \pf\cond[\big]{\fc}{I}\, \,\di\fxc\, \di\fc$ is
 just a special case of a density over the joint frequencies,
-$\pf\cond[\big]{\fj}{I}\, \,\di\fj$, since the variables $(\fc,\fm)$ are in
+$\pf\cond[\big]{\fj}{I}\, \,\di\fj$, since the variables $(\fxc,\fc)$ are in
 one-one correspondence with $\fj$.
 
 
@@ -1165,9 +1214,9 @@ probability distribution as a law of total probability:
   \p( \X{1}\=\x{1},\; \X{2}\=\x{2},\; \dotsc \| \zI) =
   \int
   \prod_{i} f_{\x{i}}\;
-  \pf(\ff \| \zI)\,\di\ff \;,
+  \pf(\fx \| \zI)\,\di\fx \;,
 \end{equation}
-where $\ff \defd (f_{x})$ is a distribution over the values that can be
+where $\fx \defd (f_{x})$ is a distribution over the values that can be
 assumed by each quantity $\X{i}$, and the integral is over the simplex of
 such distributions.
 
@@ -1265,9 +1314,9 @@ The formula is:
   \p\bigl[ (\X{1}\eq\x{1}, \C{1}\eq\cc{1}),\;
   (\X{2}\eq\x{2}, \C{2}\eq\cc{2}),\; \dotsc \| I \bigr] =
  \int \prod_{i}f_{\x{i},\cc{i}}\;
-  \pf(\ff\|I)\,\di\ff\\
+  \pf(\fx\|I)\,\di\fx\\
   \label{eq:factorizable}
-\text{with}\qquad \boxed{\;\vphantom{\int}\pf(\ff\|I)\,\di\ff =
+\text{with}\qquad \boxed{\;\vphantom{\int}\pf(\fx\|I)\,\di\fx =
   \pf[(f_{x \bcond c}) \|I]\,\di(f_{x \bcond c})
   \times
   \pf[(f_{,c}) \|I]\,\di(f_{,c})\;}
@@ -1276,7 +1325,7 @@ The formula is:
 %\end{empheq}%\\[-2\baselineskip]
 where
 \begin{itemize}%[label=\textendash]
-\item $\ff \defd (f_{x, c})$ is a joint distribution over the set of values
+\item $\fx \defd (f_{x, c})$ is a joint distribution over the set of values
   that can be assumed by each $(\X{i},\C{i})$ pair,
 \item $\bigl(f_{,c} \defd \sum_{x}f_{x, c} \bigr)$ is the related
   \emph{marginal} frequency distribution for the $c$ values,
@@ -1289,7 +1338,7 @@ where
 The formula~\eqref{eq:result} shows that the pairs $(\X{i},\C{i})$ have a
 fully exchangeable distribution, with a representation analogous to
 \eqn~\eqref{eq:definetti}. The noteworthy feature of this formula is that
-\emph{the density $\pf(\ff\|I)\,\di\ff$ is factorizable into the product of
+\emph{the density $\pf(\fx\|I)\,\di\fx$ is factorizable into the product of
   a density for the conditional frequencies $(f_{x \bcond c})$ and a
   density for the marginal frequencies $(f_{,c})$}, according to
 \eqn~\eqref{eq:factorizable}. This factorization expresses the conditional

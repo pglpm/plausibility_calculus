@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2020-03-17T00:29:23+0100
-%% Last-Updated: 2020-05-31T21:43:28+0200
+%% Last-Updated: 2020-05-31T21:51:29+0200
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newif\ifarxiv
 \arxivfalse
@@ -680,7 +680,7 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 \newcommand*{\fx}{\bm{f_{\!x}}}
 \newcommand*{\FF}{\bm{F}}
 \newcommand*{\fxc}{\bm{f_{\!x\bcond c}}}
-\newcommand*{\fc}{\bm{f_{\!c}}}
+\newcommand*{\fc}{\bm{f_{\!,c}}}
 \newcommand*{\fj}{\bm{f_{\!xc}}}
 \newcommand*{\bg}{\bm{g}}
 \newcommand*{\bh}{\bm{h}}
@@ -995,7 +995,8 @@ distributions is clear in the
 representation~\eqref{eq:partial_definetti_freq}.
 
 
-\section{Representation for conditionally exchangeable distributions}
+\section{Representation for joint distributions with conditional
+exchangeability  symmetries}
 \label{sec:result}
 
 Suppose that you would assign a partially or conditionally exchangeable
@@ -1052,9 +1053,9 @@ We obtain
 \end{multlined}
 \\
   \label{eq:factorizable}
-\text{with}\qquad \boxed{\;\vphantom{\int}\pf(\fj\|I)\,\di\fj =
-\pf(\fxc \| I) \,\di\fxc \times
-\pf(\fc \| I) \,\di\fc }
+\text{with}\qquad \boxed{\;\vphantom{\int}\pf(\fj\|I)\;\di\fj =
+\pf(\fxc \| I)  \,
+\pf(\fc \| I) \;\di\fxc\,\di\fc }
 \end{gather}
 \end{subequations}
 The last equality comes from the one-one correspondence between the
@@ -1081,6 +1082,12 @@ It is easy to show that the reverse also holds: if the density of an
 integral representation is factorizable as in~\eqref{eq:factorizable}, then
 the corresponding probability distributions enjoy a symmetry of partial or
 conditional exchangeability.
+
+\section{Discussion}
+\label{sec:discuss}
+
+If
+
 
 
 \medskip

@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2020-03-17T00:29:23+0100
-%% Last-Updated: 2020-05-31T21:51:29+0200
+%% Last-Updated: 2020-05-31T23:20:06+0200
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newif\ifarxiv
 \arxivfalse
@@ -593,7 +593,7 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 \newcommand*{\p}{\mathrm{P}}%probability
 %\newcommand*{\E}{\mathrm{E}}
 %\renewcommand*{\|}{\nonscript\,\vert\nonscript\;\mathopen{}}
-\renewcommand*{\|}[1][]{\nonscript\,#1\vert\nonscript\;\mathopen{}}
+\renewcommand*{\|}[1][]{\nonscript\,#1\vert\nonscript\,\mathopen{}}
 \DeclarePairedDelimiterX{\cond}[2]{(}{)}{#1\nonscript\,\delimsize\vert\nonscript\;\mathopen{}#2}
 \DeclarePairedDelimiterX{\condt}[2]{[}{]}{#1\nonscript\,\delimsize\vert\nonscript\;\mathopen{}#2}
 \DeclarePairedDelimiterX{\conds}[2]{\{}{\}}{#1\nonscript\,\delimsize\vert\nonscript\;\mathopen{}#2}
@@ -1054,7 +1054,7 @@ We obtain
 \\
   \label{eq:factorizable}
 \text{with}\qquad \boxed{\;\vphantom{\int}\pf(\fj\|I)\;\di\fj =
-\pf(\fxc \| I)  \,
+\pf(\fxc \| I)  \;
 \pf(\fc \| I) \;\di\fxc\,\di\fc }
 \end{gather}
 \end{subequations}

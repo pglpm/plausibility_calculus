@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2020-03-17T00:29:23+0100
-%% Last-Updated: 2020-05-31T23:20:06+0200
+%% Last-Updated: 2020-06-01T10:51:37+0200
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newif\ifarxiv
 \arxivfalse
@@ -77,8 +77,8 @@ british%
 
 \usepackage{amsmath}
 
-\usepackage{mathtools}
-\addtolength{\jot}{\jot} % increase spacing in multiline formulae
+\usepackage[mathic]{mathtools}
+%\addtolength{\jot}{\jot} % increase spacing in multiline formulae
 \setlength{\multlinegap}{0pt}
 
 \usepackage{empheq}% automatically calls amsmath and mathtools
@@ -138,7 +138,7 @@ british%
 \usepackage[bigdelims,nosymbolsc%,smallerops % probably arXiv doesn't have it
 ]{newpxmath}
 %\linespread{1.083}%\useosf
-\linespread{1.05}%\useosf
+\linespread{1.1}%\useosf
 %% smaller operators for old version of newpxmath
 \makeatletter
 \def\re@DeclareMathSymbol#1#2#3#4{%
@@ -680,7 +680,7 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 \newcommand*{\fx}{\bm{f_{\!x}}}
 \newcommand*{\FF}{\bm{F}}
 \newcommand*{\fxc}{\bm{f_{\!x\bcond c}}}
-\newcommand*{\fc}{\bm{f_{\!,c}}}
+\newcommand*{\fc}{\bm{f_{\!c}}}
 \newcommand*{\fj}{\bm{f_{\!xc}}}
 \newcommand*{\bg}{\bm{g}}
 \newcommand*{\bh}{\bm{h}}
@@ -701,7 +701,7 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 %\firmlists
 \begin{document}
 \captiondelim{\quad}\captionnamefont{\footnotesize}\captiontitlefont{\footnotesize}
-\selectlanguage{british}\frenchspacing
+\selectlanguage{british}\frenchspacing%\raggedyright[1fil]
 \maketitle
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -771,7 +771,7 @@ marginals. I find the representation interesting because it expresses the
 combination of exchangeability condition as the \emph{factorization} of the
 density that appears in de~Finetti's representation.
 
-\medskip
+
 
 The next section explains some notation and gives a reminder of the theorem
 for full exchangeability. The subsequent two sections show the alternative
@@ -791,7 +791,7 @@ Freedman \citep{diaconisetal1980,diaconisetal1980b}.
 Most of this section can be skimmed through by readers familiar with the
 exchangeability theorems, to grasp the notation I use.
 
-\medskip
+
 
 Our domain of discourse consists of a countably infinite set of atomic
 statements (in the logical sense)
@@ -819,13 +819,13 @@ is called fully (infinitely) exchangeable if
 \end{multline}
 and if all such probabilities are consistently related by marginalization.
 This property is equivalent to declaring the empirical frequencies of the
-values $x$ to be sufficient statistics.
+values $x$ to be sufficient statistics. The commas between statements
+denote logical conjunction (\enquote{$\land$}), so the order of the
+statements is immaterial.
 
 In the following I let \enquote{$\set{1, 2, \dotsc, N}$} denote any subset
-of $\NN$, to avoid a proliferation of subscripts; it should be read as
+of $\NN$, to avoid a proliferation of subscripts. They should be read as
 \enquote{$\set{i_{1}, i_{2}, \dotsc, i_{N}}$}.
-
-\medskip
 
 Denote by $\fx \defd (f_{x})$ a normalized distribution over the values
 $x \in \sX$. The set of all such distributions is a simplex of dimension
@@ -882,7 +882,7 @@ the density $\pf(\bg,\bh \| \zI)\,\di\bg\,\di\bh$ is diagonal, that is, if
 it contains a term $\delt(\bg-\bh)$, the fully exchangeable
 form~\eqref{eq:definetti_freq} is recovered.
 
-\medskip
+
 
 With a little reflection we realize that if we know the quantities $X$ to
 belong to category $Y$ in instances $1',2',\dotsc$, and to category $Z$ in
@@ -908,7 +908,7 @@ We now make the dependence upon the category information explicit. We thus
 obtain a slightly different definition of partial exchangeability and a
 slightly different form of its representation theorem.
 
-\medskip
+
 
 Besides the statements $\set{\X{i}\=\x{i}}$, we introduce an additional,
 similar set of atomic statements
@@ -945,7 +945,7 @@ that is, the only allowed permutations are those \emph{which exchange
 % categories, and leaving the information implied by such notation implicit
 % in the context.
 
-\medskip
+
 
 Now let us rewrite the representation formula accordingly.
 
@@ -961,7 +961,7 @@ product of $\abs{\sC}$ simplices, each of dimension $\abs{\sX}-1$.
 
 Denote by $F_{x,c}$ the empirical relative \emph{joint} frequency of the
 pair of values $(x,c)$ occurring in the set of pairs
-$\set[\big]{(\x{i}, \cc{i}), \dotsc, (\x{N}, \cc{N})}$:
+$\set{\x{1}, \cc{1}), \dotsc, (\x{N}, \cc{N})}$:
 \begin{equation}
   \label{eq:rel_frequencies}
   N F_{x,c} \defd \tsum_{i}\delt(x, \x{i})\,\delt(c, \cc{i}),
@@ -986,7 +986,7 @@ $f_{\dotso \bcond c}$ terms for every category $c$. In each such product,
 $f_{\x{i} \bcond c}$ terms are multiplied together for those $i$ such that
 $\cc{i}=c$. There are exactly $N F_{x,c}$ such terms.
 
-\bigskip
+
 
 The alternative formulation~\eqref{eq:part_exchangeable} of partial
 exchangeability shows that this symmetry could also be called
@@ -1000,11 +1000,11 @@ exchangeability  symmetries}
 \label{sec:result}
 
 Suppose that you would assign a partially or conditionally exchangeable
-distribution of probability to the statements $\set[\big]{\X{i}\=\x{i}}$,
-if you knew the true $\set[\big]{\C{i}\=\cc{i}}$. But you do not know the
+distribution of probability to the statements $\set{\X{i}\=\x{i}}$,
+if you knew the true $\set{\C{i}\=\cc{i}}$. But you do not know the
 latter. What kind of properties does the joint probability distribution of
 these statements have? And the marginal distribution for
-$\set[\big]{\X{i}\=\x{i}}$?
+$\set{\X{i}\=\x{i}}$?
 
 The joint probability distribution can be rewritten
 \begin{multline}
@@ -1021,7 +1021,7 @@ where the first factor, partially or conditionally exchangeable, can be
 represented by the integral of \eqn~\eqref{eq:partial_definetti_freq}.
 
 Let us suppose that our uncertainty about the statements
-$\set[\big]{\C{i}\=\cc{i}}$ is expressed by a fully exchangeable marginal
+$\set{\C{i}\=\cc{i}}$ is expressed by a fully exchangeable marginal
 probability distribution. An integral representation analogous
 to~\eqref{eq:definetti_freq} then holds:
 \begin{equation}
@@ -1063,50 +1063,59 @@ variables $(\fxc,\fc)$ and $\fj$, so that the product of density functions
 for $\fxc$ and $\fc$ is just a specific case of a density function for
 $\fj$, apart from a Jacobian factor.
 
-\medskip
+
 
 The integral expression~\eqref{eq:result} is the representation of a fully
-exchangeable distribution. Thus the joint distribution for the \emph{pairs}
-of statements $\set[\big]{(\x{i}, \cc{i})}$ is fully exchangeable.
+exchangeable distribution. Thus the joint distribution for the set of
+\emph{pairs} of statements $\set{(\X{i}\=\x{i}, \C{i}\=\cc{i})}$ is
+fully exchangeable.
 
 The noteworthy feature of the integral expression~\eqref{eq:result} is that
 \emph{the density for the joint distribution $\fj$ is factorizable into the
   product of a density for the conditional distribution $\fxc$ and a
   density for the marginal distribution $\fc$}. This factorization
-expresses the partial or conditional exchangeability for
-$\set{\X{i}\=\x{i}}$ given $\set{\C{i}\=\cc{i}}$.
-
-\medskip
+expresses the partial or conditional exchangeability for the statements
+$\set{\X{i}\=\x{i}}$ given the $\set{\C{i}\=\cc{i}}$.
 
 It is easy to show that the reverse also holds: if the density of an
 integral representation is factorizable as in~\eqref{eq:factorizable}, then
 the corresponding probability distributions enjoy a symmetry of partial or
 conditional exchangeability.
 
-\section{Discussion}
+The factorization~\eqref{eq:factorizable} is not trivial. With a change of
+variables the following identities hold:
+\begin{multline}
+  \label{eq:identities_factor}
+  \pf(\fj\|I)\;\di\fj \equiv
+  \pf[(\fxc,\fc) \| I] \;\di\fxc\,\di\fc
+  \equiv{}\\
+  \pf(\fxc \| \fc, I)  \;
+  \pf(\fc \| I) \;\di\fxc\,\di\fc \;.
+\end{multline}
+The factorization condition is thus equivalent to conditional independence:
+\begin{equation}
+  \label{eq:cond_indep_ff}
+  \pf(\fxc \| \fc, I) \;\di\fxc =
+\pf(\fxc \| I) \;\di\fxc \;.
+\end{equation}
+
+
+\section{Discussion and possible connections with Bayesian networks}
 \label{sec:discuss}
 
-If
-
-
-
-\medskip
-
-Assume the following:
+The result of the previous section is thus summarized: Given infinitely
+countable sets of statements $\set{\X{i}\=\x{i}}$ and
+$\set{\C{i}\=\cc{i}}$, and assuming that
 \begin{enumerate}[wide]
-\item the marginal distribution for the $\C{i}$ is fully exchangeable,
-\item the distribution for the $\X{i}$ is conditionally exchangeable given
-  the $\C{i}$.
+\item the marginal probability distribution for the $C$ statements is fully
+  exchangeable,
+\item the probability distribution for the $X$ statements is partially (or
+  conditionally) exchangeable given the $C$,
 \end{enumerate}
-
-Then the joint distribution~\eqref{eq:joint_p_xc} is fully exchangeable for
-the pairs $\set[\big]{(\x{i}, \cc{i})}$, and it can be written as
-
-The density
-$\pf\cond[\big]{\fxc}{I}\, \pf\cond[\big]{\fc}{I}\, \,\di\fxc\, \di\fc$ is
-just a special case of a density over the joint frequencies,
-$\pf\cond[\big]{\fj}{I}\, \,\di\fj$, since the variables $(\fxc,\fc)$ are in
-one-one correspondence with $\fj$.
+Then the joint distribution for both sets is fully exchangeable, and the
+density within its integral representation \emph{factorizes} into a term
+with a conditional distribution and one with a marginal distribution,
+\eqn~\eqref{eq:factorizable}.
 
 
 
@@ -1255,7 +1264,7 @@ $\pf(\bg,\bh \| \zI)\,\di\bg\,\di\bh$ is diagonal, that is, if it contains
 a term $\delt(\bg-\bh)$, the fully exchangeable form~\eqref{eq:definetti}
 is recovered.
 
-\medskip
+
 
 With a little reflection we see that if we know that the quantities $X$
 belong to category $Y$ in instances $1',2',\dotsc$, and to category $Z$ in
@@ -1304,7 +1313,7 @@ distribution~\eqref{eq:partialdefinetti} or \eqref{eq:infoCexplicit} can
 also be called \emph{conditionally exchangeable}.
 
 
-\bigskip
+
 
 The present work gives a representation formula for pairs of quantities
 $(\X{i},\C{i})$ such that
@@ -1340,7 +1349,7 @@ where
   \emph{conditional} frequency distributions of $x$ given $c$.
 \end{itemize}
 
-\smallskip
+
 
 The formula~\eqref{eq:result} shows that the pairs $(\X{i},\C{i})$ have a
 fully exchangeable distribution, with a representation analogous to
@@ -1351,7 +1360,7 @@ fully exchangeable distribution, with a representation analogous to
 \eqn~\eqref{eq:factorizable}. This factorization expresses the conditional
 exchangeability for $\set{\X{i}}$ given $\set{\C{i}}$.
 
-\medskip
+
 
 The proof of formula is given in the next section. In the final section I
 discuss possible generalizations and connections with Bayesian belief

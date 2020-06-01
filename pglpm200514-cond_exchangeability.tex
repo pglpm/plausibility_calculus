@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2020-03-17T00:29:23+0100
-%% Last-Updated: 2020-06-01T17:41:47+0200
+%% Last-Updated: 2020-06-02T00:00:26+0200
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newif\ifarxiv
 \arxivfalse
@@ -707,7 +707,8 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% Beginning of document
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%\firmlists
+% \firmlists
+\setcounter{section}{-1}
 \begin{document}
 \captiondelim{\quad}\captionnamefont{\footnotesize}\captiontitlefont{\footnotesize}
 \selectlanguage{british}\frenchspacing%\raggedyright[1fil]
@@ -758,49 +759,67 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \textcolor{white}{If you find this you can claim a postcard from me.}
 
-\section{Full, partial, and conditional exchangeability}
+\section{Introduction and notation}
 \label{sec:inf_exch}
 
-De Finetti's theorem for the representation of infinitely, fully
-exchangeable probability distributions yields one of the formulae, derived
-from the probability calculus, with the richest practical and philosophical
-consequences. It belongs to family of theorems whose members are still
-under exploration. Its closest relative is the theorem for infinitely,
-\emph{partially} exchangeable probability distributions.
+De Finetti's theorem for the representation of infinitely exchangeable
+probability distributions yields some of the formulae, derivable from the
+probability calculus, with the richest practical and philosophical
+consequences.%  It belongs to family of theorems whose members are still
+% under exploration. Its closest relative is the theorem for infinitely,
+% \emph{partially} exchangeable probability distributions.
 
-The present note has two purposes. The first is to show an alternative
-representation of the theorem for partial exchangeability. This
-representation emphasizes the role of \emph{conditional} exchangeability
-and of the conditional character of the limit distributions that appear in
-the usual representation.
+In this work I present three results; each may interest a different
+audience.
 
-The second purpose is to give a representation formula for distributions
-that satisfy a combination of conditional and full exchangeability for the
-marginals. I find the representation interesting because it expresses the
-combination of exchangeability condition as the \emph{factorization} of the
-density that appears in de~Finetti's representation.
+The first result is a reformulation of partial exchangeability and its
+representation theorem in a slightly unfamiliar form. Though not
+remarkable, this reformulation gives some insights into the connection
+between partial and conditional exchangeability, and their connection to
+regression.
 
+The second result is an integral representation for joint probability
+distributions with particular symmetries: some of the conditional
+distributions obtained from them satisfy partial exchangeability. This
+integral representation has the usual de~Finetti form but, remarkably, its
+density factorizes in a special way. This factorization expresses the
+conditional-exchangeability symmetries.
 
+The third result brings together exchangeability and Bayesian networks. It
+is an integral representation for repetitions of phenomena or experiments
+whose conditional dependences and independences are described by a Bayesian
+network. This representation is, so to speak, a mixture of copies of the
+same Bayesian network -- analogously to de~Finetti's representation, which
+is a mixture of independent probability distributions (\enquote{i.i.d.}).
 
-The next section explains some notation and gives a reminder of the theorem
-for full exchangeability. The subsequent two sections show the alternative
-representation for partial exchangeability and the representation for
-conditional \amp\ marginal exchangeability. The final section offer some
-thoughts about these representations.
+% The first is to show an alternative
+% representation of the theorem for partial exchangeability. This
+% representation emphasizes the role of \emph{conditional} exchangeability
+% and of the conditional character of the limit distributions that appear in
+% the usual representation.
+
+% The second purpose is to give a representation formula for distributions
+% that satisfy a combination of conditional and full exchangeability for the
+% marginals. I find the representation interesting because it expresses the
+% combination of exchangeability condition as the \emph{factorization} of the
+% density that appears in de~Finetti's representation.
+
+Each of these three results builds on the preceding ones. They are
+presented in the next three sections. The final section discusses them
+further and hints at possible applications for them.
+
+The remainder of this section introduces some notation and summarizes
+de~Finetti's theorem for full exchangeability. It can be skimmed through by
+readers familiar with exchangeability theorems, just to grasp the notation
+I use.
+
+\subsection{Notation and summary of representation for full exchangeability}
+\label{sec:setup}
+
 
 For the details about exchangeable distributions I refer to Bernardo \amp\
 Smith \citep[\sects~4.3, 4.6]{bernardoetal1994_r2000} and Diaconis \amp\
 Freedman \citep{diaconisetal1980,diaconisetal1980b}.
-
-
-
-\section{Notation and summary of representation for full exchangeability}
-\label{sec:setup}
-
-Most of this section can be skimmed through by readers familiar with the
-exchangeability theorems, to grasp the notation I use.
-
-
 
 Our domain of discourse consists of a countably infinite set of atomic
 statements (in the logical sense)
@@ -1121,8 +1140,8 @@ The factorization condition is thus equivalent to conditional independence:
 \end{equation}
 
 
-\section{Discussion and possible connections with Bayesian networks}
-\label{sec:discuss}
+\section{Exchangeable Bayesian networks}
+\label{sec:exch_nets}
 
 \subsection{Graphical representation of conditional exchangeability}
 \label{sec:graph_repr}
@@ -1293,6 +1312,12 @@ integral representation for the full network, that is, for the all the
 statements, has a factorizable density, one factor per node. The arguments
 of these factors are conditional or marginal long-run frequencies
 accordingly to the arrows incoming to their nodes.
+
+
+\section{Discussion}
+\label{sec:discuss}
+
+*** first result can be useful for infinite limits, leading to regression
 
 
 The result of the previous section is thus summarized: Given infinitely

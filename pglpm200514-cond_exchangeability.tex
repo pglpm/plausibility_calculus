@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2020-03-17T00:29:23+0100
-%% Last-Updated: 2020-06-01T17:27:23+0200
+%% Last-Updated: 2020-06-01T17:41:47+0200
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newif\ifarxiv
 \arxivfalse
@@ -1245,29 +1245,48 @@ integral representation~\eqref{eq:example1sep} can be expressed by the network
 \label{sec:graph_repr_gen}
 
 It seems possible to generalize the example presented thus far into a
-consistent set of rules. We have
+consistent set of rules.
+
+We have
 \begin{enumerate}[label=\roman*.]
-\item several sets of statements, $\set{\X{i}\=\x{i}}$,
-  $\set{\A{i}\=\va{i}},\dotsc$;
+\item several sets of $N$ statements, $\set{\X{i}\=\x{i}}$,
+  $\set{\A{i}\=\va{i}},\dotsc$. To each set is associated a set of values
+  $x\in \sX,$ $a \in \sA, \dotsc$.
 \item several conditionally exchangeable probabilities for some groups of
-  such statements conditional on some other groups, such as \eqn~\eqref{eq:partial_definetti_freq};
+  such statements conditional on some other groups, such as
+  \eqn~\eqref{eq:partial_definetti_freq};
 \item several assumptions of conditional independence, such as
   \eqn~\eqref{eq:example_independence}.
 \end{enumerate}
+
 The integral representation of the joint probability distribution for all
-statements can then be represented by a network with these properties:
+the statements involves several sets of integration variables. Each set
+contains either conditional or marginal long-run frequencies in the
+quantities $x,a, \dotsc$.
+
+-- and a factorizable density
+over such variables. The density is multiplied by the product of these
+variables, raised to the joint empirical frequencies
+
+
+can then be represented by an acyclic directed network with
+these properties:
 \begin{enumerate}
 \item nodes represent sets of statements;
 \item there is a set of integration variables for each node. These
   variables are the long-run frequencies for the quantity of the node
   conditional on the quantities of the parent nodes. Nodes without parents
   have marginal, unconditional long-run frequencies;
-\item each set of integration variables has its own density; the density
+\item each set of integration variables has its own density. The densities
   are multiplied in the integral representation.
 \end{enumerate}
-The considerations
-the integral representation to more general acyclic networks.
-Nodes represent sets of statements. An arrow from one node to another
+
+Moreover, s explained in \sect~\ref{sec:graph_repr_indep}, independence
+assumptions are expressed by the set of integration variables, whereas
+conditional-exchangeability assumption are expressed by the factorization
+of the density over the integration variables.
+
+
 indicates the conditional exchangeability of the latter set conditional on
 the former set. Nodes with no incoming arrows are fully exchangeable. The
 integral representation for the full network, that is, for the all the

@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2020-03-17T00:29:23+0100
-%% Last-Updated: 2020-06-01T14:57:48+0200
+%% Last-Updated: 2020-06-01T17:27:23+0200
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newif\ifarxiv
 \arxivfalse
@@ -680,6 +680,8 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 \newcommand*{\vb}[1]{b_{#1}}
 \newcommand*{\sX}{\mathfrak{X}}
 \newcommand*{\sC}{\mathfrak{C}}
+\newcommand*{\sA}{\mathfrak{A}}
+\newcommand*{\sB}{\mathfrak{B}}
 \newcommand*{\vf}{v}
 \newcommand*{\ff}[1]{f_{#1}}
 \newcommand*{\ffb}[1]{\bm{f_{\!#1}}}
@@ -1122,37 +1124,31 @@ The factorization condition is thus equivalent to conditional independence:
 \section{Discussion and possible connections with Bayesian networks}
 \label{sec:discuss}
 
-The result of the previous section is thus summarized: Given infinitely
-countable sets of statements $\set{\X{i}\=\x{i}}$ and
-$\set{\C{i}\=\cc{i}}$, and assuming that
-\begin{enumerate}[wide]
-\item the marginal probability distribution for the $C$ statements is fully
-  exchangeable,
-\item the probability distribution for the $X$ statements is partially (or
-  conditionally) exchangeable given the $C$,
-\end{enumerate}
-Then the joint distribution for both sets is fully exchangeable, and the
-density within its integral representation \emph{factorizes} into a density
-for a conditional long-run frequency distribution, and a density for a
-marginal long-run frequency distribution, \eqn~\eqref{eq:factorizable}.
+\subsection{Graphical representation of conditional exchangeability}
+\label{sec:graph_repr}
 
-This factorization can be expressed in the guise of a Bayesian network:
+The partial (or conditional)
+exchangeability~\eqref{eq:partial_definetti_freq} of the probabilities of
+the $X$ statements given the $C$, the full
+exchangeability~\eqref{eq:definetti_freq_C} of the probabilities of the
+latter, and the final integral representation~\eqref{eq:result} for the
+join probability distribution, can be together expressed in the guise of a
+Bayesian network:
 \begin{center}%[h!]
 \includegraphics[scale=0.5]{bayesnet1.png}
 \end{center}% bayesnet.svg
+The two nodes represent the two sets of statements. The arrow from the
+$C$-node to the $X$-node represent the conditional exchangeability of the
+probabilities for the latter set of statements conditional on the former
+set. The absence of incoming arrows to the $C$-node represents the full
+exchangeability for its probability distribution. The final integral
+representation for the joint probability of full network has a factorizable
+density, with one factor per node.
 
 Using the reasoning and integral representations of
 \sects~\ref{sec:partial_exch}--\ref{sec:result} it is indeed possible to
-generalize the integral representation to more general acyclic networks.
-Nodes represent sets of statements. An arrow from one node to another
-indicates the conditional exchangeability of the latter set conditional on
-the former set. Nodes with no incoming arrows are fully exchangeable. The
-integral representation for the full network, that is, for the all the
-statements, has a factorizable density, one factor per node. The arguments
-of these factors are conditional or marginal long-run frequencies
-accordingly to the arrows incoming to their nodes.
-
-The following network, for example:
+generalize these rules to more complex networks of statements. The
+following network, for example:
 \begin{center}%[h!]
 \includegraphics[scale=0.5]{bayesnet3.png}
 \end{center}% bayesnet.svg
@@ -1166,21 +1162,58 @@ has the representation
 \;\di\ffb{x \bcond ab} \,\di\ffb{a \bcond b} \,\di\ffb{b} \;.
 \end{multline}
 
-Additional independence properties, for example
-\begin{equation}
-  \label{eq:example_independence}
-  \p( \X{i}\=\x{i} \| \A{i}\=\va{i}, \B{i}\=\vb{i},\, I)
-  =   \p( \X{i}\=\x{i} \| \A{i}\=\va{i},\, I)
-\end{equation}
-are expressed not by a factorization of the density, but by a reduction in
-the number of conditional or marginal long-run frequencies in the
-representation.
 
-For example the network
-\begin{center}%[h!]
-\includegraphics[scale=0.5]{bayesnet3s.png}
-\end{center}% bayesnet.svg
-has the representation
+\subsection{Additional independence assumptions}
+\label{sec:graph_repr_indep}
+
+In the last two examples the joint probability density for all the
+statements is decomposed in full accord with the product rule. For example,
+\begin{multline}
+  \label{eq:example_usual_factorization}
+  \p( \set{\X{i}\=\x{i}}, \set{\A{i}\=\va{i}}, \set{\B{i}\=\vb{i}} \| I)
+  \equiv{}\\
+  \p( \set{\X{i}\=\x{i}} \| \set{\A{i}\=\va{i}}, \set{\B{i}\=\vb{i}},\, I)
+  \times{}\\
+  \p(\set{\A{i}\=\va{i}} \| \set{\B{i}\=\vb{i}},\, I)
+\times \p(  \set{\B{i}\=\vb{i}}\| I) \;,
+\end{multline}
+which is an identity in the probability-calculus. In other words, no
+special properties of conditional independence hold. In this case the
+integral representation involves an integration over a set of conditional
+or marginal long-run frequencies which is equivalent to the set of joint
+frequencies. For example, in the representation~\eqref{eq:example1} the
+two sets
+\begin{equation}
+  \label{eq:sets_corr}
+  \set{\ff{x \bcond a,b},\, \ff{,a \bcond b},\, \ff{,,b} \|
+ x \in \sX, a \in \sA, b \in \sB}
+\leftrightarrow
+\set{\ff{x,a,b} \| x \in \sX, a \in \sA, b \in \sB}
+\end{equation}
+are in one-one correspondence.
+
+The factorizability of the density therefore only implies, and is implied
+by, the exchangeability symmetries of conditional probability
+distributions. It does not imply additional independences.
+
+Additional independence properties, such as
+\begin{multline}
+  \label{eq:example_independence}
+  \p( \set{\X{i}\=\x{i}}, \set{\A{i}\=\va{i}}, \set{\B{i}\=\vb{i}} \| I)
+={}\\
+  \p( \set{\X{i}\=\x{i}} \| \set{\A{i}\=\va{i}}, \set{\B{i}\=\vb{i}},\, I)
+  \times{}\\
+  \p(\set{\A{i}\=\va{i}} \|  I)
+  \times \p(  \set{\B{i}\=\vb{i}}\| I) \;,
+\end{multline}
+which is not an identity of the probability-calculus, are instead expressed
+by a reduction in the number of conditional or marginal long-run
+frequencies in the representation (similarly to what happens when partial
+exchangeability reduces to full exchangeability; see
+\sect~\ref{sec:partial_exch}).
+
+For example, when the independence~\eqref{eq:example_independence} hold,
+the representation~\eqref{eq:example1} becomes
 \begin{multline}
   \label{eq:example1sep}
   \p( \X{1}\=\x{1}, \A{1}\=\va{1}, \B{1}\=\vb{1},\, \dotsc,\,
@@ -1189,12 +1222,73 @@ has the representation
      \int\!\prod_{x,a,b}
      (\ff{x \bcond a,b}\, \ff{,a}\, \ff{,,b})^{N \FF{x,a,b}}\;%\times{}%}\\[-\jot]
 \pf(\ffb{x \bcond ab}\|I)\,\pf(\ffb{a}\|I)\,\pf(\ffb{b}\|I)
-\;\di\ffb{x \bcond ab} \,\di\ffb{a} \,\di\ffb{b} \;.
+\;\di\ffb{x \bcond ab} \,\di\ffb{a} \,\di\ffb{b}
 \end{multline}
-This means that $\ff{,a \bcond b} = \ff{,,a}$ for all $b$, which would
-imply the presence of a delta term in the corresponding density
-(analogously to what happens when partial exchangeability reduces to full
-exchangeability; see \sect~\ref{sec:partial_exch}).
+with $\ff{,a} \defd \sum_{x,b}\ff{x,a,b}$ and so on. We see that the
+integration is now over the reduced set of long-run distributions
+\begin{equation}
+  \label{eq:subset_freqs}
+  \set{\ff{x \bcond a,b},\, \ff{,a},\, \ff{,,b} \|
+    x \in \sX, a \in \sA, b \in \sB} \;.
+\end{equation}
+Equivalently this reduction can be expressed as
+$\ff{,a \bcond b} = \ff{,,a}$ for all $b$, implying the presence of a delta
+term in the corresponding density.
+
+The independence condition~\eqref{eq:example_independence} and
+integral representation~\eqref{eq:example1sep} can be expressed by the network
+\begin{center}%[h!]
+\includegraphics[scale=0.5]{bayesnet3s.png}
+\end{center}% bayesnet.svg
+
+\subsection{Generalization and possible graphical rules}
+\label{sec:graph_repr_gen}
+
+It seems possible to generalize the example presented thus far into a
+consistent set of rules. We have
+\begin{enumerate}[label=\roman*.]
+\item several sets of statements, $\set{\X{i}\=\x{i}}$,
+  $\set{\A{i}\=\va{i}},\dotsc$;
+\item several conditionally exchangeable probabilities for some groups of
+  such statements conditional on some other groups, such as \eqn~\eqref{eq:partial_definetti_freq};
+\item several assumptions of conditional independence, such as
+  \eqn~\eqref{eq:example_independence}.
+\end{enumerate}
+The integral representation of the joint probability distribution for all
+statements can then be represented by a network with these properties:
+\begin{enumerate}
+\item nodes represent sets of statements;
+\item there is a set of integration variables for each node. These
+  variables are the long-run frequencies for the quantity of the node
+  conditional on the quantities of the parent nodes. Nodes without parents
+  have marginal, unconditional long-run frequencies;
+\item each set of integration variables has its own density; the density
+  are multiplied in the integral representation.
+\end{enumerate}
+The considerations
+the integral representation to more general acyclic networks.
+Nodes represent sets of statements. An arrow from one node to another
+indicates the conditional exchangeability of the latter set conditional on
+the former set. Nodes with no incoming arrows are fully exchangeable. The
+integral representation for the full network, that is, for the all the
+statements, has a factorizable density, one factor per node. The arguments
+of these factors are conditional or marginal long-run frequencies
+accordingly to the arrows incoming to their nodes.
+
+
+The result of the previous section is thus summarized: Given infinitely
+countable sets of statements $\set{\X{i}\=\x{i}}$ and
+$\set{\C{i}\=\cc{i}}$, and assuming that
+\begin{enumerate}[wide]
+\item the marginal probability distribution for the $C$ statements is fully
+  exchangeable,
+\item the probability distribution for the $X$ statements is partially (or
+  conditionally) exchangeable given the $C$,
+\end{enumerate}
+Then the joint distribution for both sets is fully exchangeable, and the
+density within its integral representation \emph{factorizes} into a density
+for a conditional long-run frequency distribution, and a density for a
+marginal long-run frequency distribution, \eqn~\eqref{eq:factorizable}.
 
 
 %%%% examples use empheq

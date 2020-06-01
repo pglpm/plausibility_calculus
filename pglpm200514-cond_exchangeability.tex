@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2020-03-17T00:29:23+0100
-%% Last-Updated: 2020-06-01T14:21:46+0200
+%% Last-Updated: 2020-06-01T14:57:48+0200
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newif\ifarxiv
 \arxivfalse
@@ -1161,11 +1161,40 @@ has the representation
   \label{eq:example1}
   \p( \X{1}\=\x{1}, \A{1}\=\va{1}, \B{1}\=\vb{1},\, \dotsc,\,
    \X{N}\=\x{N}, \A{N}\=\va{N}, \B{N}\=\vb{N} \| I) ={}\\
-\int\prod_{x,a,b} {\ff{x,a,b}}^{N \FF{x,a,b}}\;
-\pf(\ffb{x \bcond ab}\|I)\,\pf(\ffb{b \bcond a}\|I)\,\pf(\ffb{a}\|I)
-\;\di\ffb{b \bcond a} \,\di\ffb{x \bcond ab} \,\di\ffb{a}
+\int\!\prod_{x,a,b} {\ff{x,a,b}}^{N \FF{x,a,b}}\;
+\pf(\ffb{x \bcond ab}\|I)\,\pf(\ffb{a \bcond b}\|I)\,\pf(\ffb{b}\|I)
+\;\di\ffb{x \bcond ab} \,\di\ffb{a \bcond b} \,\di\ffb{b} \;.
 \end{multline}
 
+Additional independence properties, for example
+\begin{equation}
+  \label{eq:example_independence}
+  \p( \X{i}\=\x{i} \| \A{i}\=\va{i}, \B{i}\=\vb{i},\, I)
+  =   \p( \X{i}\=\x{i} \| \A{i}\=\va{i},\, I)
+\end{equation}
+are expressed not by a factorization of the density, but by a reduction in
+the number of conditional or marginal long-run frequencies in the
+representation.
+
+For example the network
+\begin{center}%[h!]
+\includegraphics[scale=0.5]{bayesnet3s.png}
+\end{center}% bayesnet.svg
+has the representation
+\begin{multline}
+  \label{eq:example1sep}
+  \p( \X{1}\=\x{1}, \A{1}\=\va{1}, \B{1}\=\vb{1},\, \dotsc,\,
+   \X{N}\=\x{N}, \A{N}\=\va{N}, \B{N}\=\vb{N} \| I) ={}\\
+   %\shoveleft{
+     \int\!\prod_{x,a,b}
+     (\ff{x \bcond a,b}\, \ff{,a}\, \ff{,,b})^{N \FF{x,a,b}}\;%\times{}%}\\[-\jot]
+\pf(\ffb{x \bcond ab}\|I)\,\pf(\ffb{a}\|I)\,\pf(\ffb{b}\|I)
+\;\di\ffb{x \bcond ab} \,\di\ffb{a} \,\di\ffb{b} \;.
+\end{multline}
+This means that $\ff{,a \bcond b} = \ff{,,a}$ for all $b$, which would
+imply the presence of a delta term in the corresponding density
+(analogously to what happens when partial exchangeability reduces to full
+exchangeability; see \sect~\ref{sec:partial_exch}).
 
 
 %%%% examples use empheq

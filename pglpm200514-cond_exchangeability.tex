@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2020-03-17T00:29:23+0100
-%% Last-Updated: 2020-06-01T10:51:37+0200
+%% Last-Updated: 2020-06-01T13:16:05+0200
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newif\ifarxiv
 \arxivfalse
@@ -560,7 +560,7 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 %\DeclareMathOperator{\ent}{ent}%integer less or equal to
 %\DeclareMathOperator{\Ord}{O}%same order as
 %\DeclareMathOperator{\ord}{o}%lower order than
-%\newcommand*{\incr}{\triangle}%finite increment
+\newcommand*{\incr}{\triangle}%finite increment
 \newcommand*{\defd}{\coloneqq}
 \newcommand*{\defs}{\eqqcolon}
 %\newcommand*{\Land}{\bigwedge}
@@ -676,8 +676,10 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 \newcommand*{\cc}[1]{c_{#1}}
 \newcommand*{\sX}{\mathfrak{X}}
 \newcommand*{\sC}{\mathfrak{C}}
+\newcommand*{\vf}{v}
 \newcommand*{\ff}{\bm{f}}
 \newcommand*{\fx}{\bm{f_{\!x}}}
+\newcommand*{\Fx}{\bm{F_{\!x}}}
 \newcommand*{\FF}{\bm{F}}
 \newcommand*{\fxc}{\bm{f_{\!x\bcond c}}}
 \newcommand*{\fc}{\bm{f_{\!c}}}
@@ -855,6 +857,18 @@ distribution $(F_{x})$ is a sufficient statistic; it also hint at the
 important role played in the theorem by the relative entropy of $(F_{x})$
 with respect to $(f_{x})$.
 
+For enough large $N$, the probability of observing an empirical frequency
+distribution $\Fx$ within a small volume $\vf$ centred around the
+distribution $\fx$ is approximately given by the density
+$\pf(\fx \| I)\,\di\fx$:
+\begin{equation}
+  \label{eq:longrun_freq}
+  \p( \Fx \in v \| \text{$N$ large}, I)
+  \approx \pf(\fx \| I)\,v \;.
+\end{equation}
+For this reason the parameter $\fx$ can be interpreted as a long-run
+frequency distribution. I will therefore call it so sometimes, but without
+the intention to force such interpretation on you.
 
 
 \section{Partial exchangeability: alternative form}
@@ -1113,9 +1127,24 @@ $\set{\C{i}\=\cc{i}}$, and assuming that
   conditionally) exchangeable given the $C$,
 \end{enumerate}
 Then the joint distribution for both sets is fully exchangeable, and the
-density within its integral representation \emph{factorizes} into a term
-with a conditional distribution and one with a marginal distribution,
-\eqn~\eqref{eq:factorizable}.
+density within its integral representation \emph{factorizes} into a density
+for a conditional long-run frequency distribution, and a density for a
+marginal long-run frequency distribution, \eqn~\eqref{eq:factorizable}.
+
+This factorization can be expressed in the guise of a Bayesian network,
+
+Using the reasoning and integral representations of \sect~\ref{sec:result}
+it is possible to generalize this result to more
+
+\begin{figure}[h!]% with figure
+\centering\includegraphics[scale=0.5]{bayesnet1.png}%\\
+%\caption{caption}\label{fig:comparison_a5}
+\end{figure}% exp_family_maxent.nb
+
+\begin{figure}[h!]% with figure
+\centering\includegraphics[scale=0.5]{bayesnet3.png}%\\
+%\caption{caption}\label{fig:comparison_a5}
+\end{figure}% exp_family_maxent.nb
 
 
 

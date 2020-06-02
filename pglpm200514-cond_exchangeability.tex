@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2020-03-17T00:29:23+0100
-%% Last-Updated: 2020-06-02T00:00:26+0200
+%% Last-Updated: 2020-06-02T10:58:49+0200
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newif\ifarxiv
 \arxivfalse
@@ -487,7 +487,7 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 \raggedbottom
 
 \paragraphfootnotes
-%\setlength{\footmarkwidth}{0em}
+\setlength{\footmarkwidth}{2ex}
 % \threecolumnfootnotes
 %\setlength{\footmarksep}{0em}
 \footmarkstyle{\textsuperscript{%\color{myred}
@@ -772,25 +772,30 @@ consequences.%  It belongs to family of theorems whose members are still
 In this work I present three results; each may interest a different
 audience.
 
-The first result is a reformulation of partial exchangeability and its
-representation theorem in a slightly unfamiliar form. Though not
-remarkable, this reformulation gives some insights into the connection
-between partial and conditional exchangeability, and their connection to
-regression.
+The first result, derived in \sect~\ref{sec:partial_exch}, is a
+reformulation of partial exchangeability and of its representation theorem
+in a slightly unfamiliar form. Though not remarkable, this reformulation
+gives some insights into the connection between partial and conditional
+exchangeability, and their connection to regression.
 
-The second result is an integral representation for joint probability
-distributions with particular symmetries: some of the conditional
-distributions obtained from them satisfy partial exchangeability. This
-integral representation has the usual de~Finetti form but, remarkably, its
-density factorizes in a special way. This factorization expresses the
+The second result, derived is \sect~\ref{sec:result}, is an integral
+representation for joint (predictive) probability distributions with
+particular symmetries: some of the conditional distributions obtained from
+them satisfy partial exchangeability. This integral representation has the
+usual de~Finetti form and, remarkably, its density must factorize in a
+specific way. This factorization is implied by, and implies, the
 conditional-exchangeability symmetries.
 
-The third result brings together exchangeability and Bayesian networks. It
-is an integral representation for repetitions of phenomena or experiments
-whose conditional dependences and independences are described by a Bayesian
-network. This representation is, so to speak, a mixture of copies of the
-same Bayesian network -- analogously to de~Finetti's representation, which
-is a mixture of independent probability distributions (\enquote{i.i.d.}).
+The third result, \sect~\ref{sec:exch_nets}, brings together
+exchangeability and Bayesian networks. A Bayesian network expresses
+assumptions of conditional dependence and independence. Exchangeability
+expresses assumptions about the mutual informational relevance of a set of
+phenomena or experiments, deemed to be \enquote{similar}. When we combine
+these two kinds of assumptions we obtain (predictive) probability
+distributions with a particular integral representation: a mixture of
+copies of the same Bayesian network. This result has some analogies with
+de~Finetti's usual representation, which is a mixture of independent
+probability distributions (\enquote{i.i.d.}).
 
 % The first is to show an alternative
 % representation of the theorem for partial exchangeability. This
@@ -804,9 +809,8 @@ is a mixture of independent probability distributions (\enquote{i.i.d.}).
 % combination of exchangeability condition as the \emph{factorization} of the
 % density that appears in de~Finetti's representation.
 
-Each of these three results builds on the preceding ones. They are
-presented in the next three sections. The final section discusses them
-further and hints at possible applications for them.
+Each of these three results builds on the preceding one(s). The final
+section discusses them further and hints at possible applications for them.
 
 The remainder of this section introduces some notation and summarizes
 de~Finetti's theorem for full exchangeability. It can be skimmed through by
@@ -818,8 +822,9 @@ I use.
 
 
 For the details about exchangeable distributions I refer to Bernardo \amp\
-Smith \citep[\sects~4.3, 4.6]{bernardoetal1994_r2000} and Diaconis \amp\
-Freedman \citep{diaconisetal1980,diaconisetal1980b}.
+Smith \citep[\sects~4.3, 4.6]{bernardoetal1994_r2000}, Diaconis \amp\
+Freedman \citep{diaconisetal1980,diaconisetal1980b}, and Dawid's
+\citep{dawid2013} review. 
 
 Our domain of discourse consists of a countably infinite set of atomic
 statements (in the logical sense)
@@ -830,7 +835,8 @@ statements (in the logical sense)
 \end{equation}
 where $\sX$ is a finite set. For each $i$ the statements
 $\set{\X{i}\=x \| x \in \sX}$ are assumed mutually exclusive on information
-$I$. (The theorem also holds for statements not involving equalities.)
+$I$. (The theorem holds for any set of statements with these properties,
+even if the statements are not of the form \enquote{$X\=x$}.)
 
 A probability distribution over these atomic statements
 %$\set{\X{i}\=\x{i}}$,
@@ -893,19 +899,21 @@ $\pf(\fx \| I)\,\di\fx$:
   \approx \pf(\fx \| I)\,v \;.
 \end{equation}
 For this reason the parameter $\fx$ can be interpreted as a long-run
-frequency distribution. I will therefore call it so sometimes, but without
+frequency distribution\footnote{\enquote{But this \emph{long run} is a
+    misleading guide to current affairs. \emph{In the long run} we are all
+    dead} \parencite[\sect~3.I p.~65]{keynes1923_r2013}.}. I will therefore call it so sometimes, but without
 the intention to force such interpretation on you.
 
 
 \section{Partial exchangeability: alternative form}
 \label{sec:partial_exch}
 
-In the theorem for partially exchangeable distributions, the set
-$\set{\X{i}}$ is divided into two or more categories represented by subsets
-$\set{\Y{j}}, \set{\Z{k}}, \dotsc$. Partial exchangeability of the
-distribution means that permutations are allowed within each subset but not
-necessarily across subsets. The usual representation in this case, after a
-suitable re-indexing
+In de~Finetti's theorem for partially exchangeable distributions, the set
+$\set{\X{i}\=\x{i}}$ is divided into two or more categories represented by
+subsets $\set{\Y{j}\=\y{j}}, \set{\Z{k}\=\z{k}}, \dotsc$. Partial
+exchangeability of the distribution means that permutations are allowed
+within each subset but not necessarily across subsets. The usual
+representation in this case, after a suitable re-indexing
 $\set{1,2,\dotsc} \mapsto \set{1', 2', \dotsc, 1'', 2'', \dotsc}$, has the
 form
 \begin{multline}

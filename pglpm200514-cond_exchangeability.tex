@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2020-03-17T00:29:23+0100
-%% Last-Updated: 2020-06-02T13:02:06+0200
+%% Last-Updated: 2020-06-02T15:08:25+0200
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newif\ifarxiv
 \arxivfalse
@@ -1166,10 +1166,11 @@ the $X$-statements given the $C$-statements, the full
 exchangeability~\eqref{eq:definetti_freq_C} of the probabilities of the
 latter, and the final integral representation~\eqref{eq:result} for their
 join probability distribution, can be all together expressed in the guise
-of a Bayesian network:
-\begin{center}%[h!]
-\includegraphics[scale=0.5]{bayesnet1.png}
-\end{center}% bayesnet.svg
+of a Bayesian network:\\
+\begin{figure}[h!]
+\centering\includegraphics[scale=0.5]{bayesnet1.png}
+\caption{\label{fig:simplenet}}  
+\end{figure}% bayesnet.svg
 The two nodes represent the two sets of statements. The arrow from the
 $C$-node to the $X$-node represents the conditional exchangeability of the
 probabilities for the latter set of statements conditional on the former
@@ -1181,10 +1182,11 @@ factorizable density, with one factor per node.
 Using the reasoning and integral representations of
 \sects~\ref{sec:partial_exch}--\ref{sec:result} it is indeed possible to
 generalize these rules to more complex networks of statements. It can be
-calculated that the following network, for example:
-\begin{center}%[h!]
-\includegraphics[scale=0.5]{bayesnet3.png}
-\end{center}% bayesnet.svg
+calculated that the following network, for example:\\
+\begin{figure}[h!]
+\centering\includegraphics[scale=0.5]{bayesnet3.png}
+\caption{\label{fig:dep3net}}  
+\end{figure}% bayesnet.svg
 has the representation
 \begin{multline}
   \label{eq:example1}
@@ -1202,7 +1204,7 @@ has the representation
 \end{multline}
 with $\ff{,,b} \defd \sum_{x,a}\ff{x,a,b}$ and so on.
 
-\subsection{Additional independence assumptions}
+\subsection{Representing additional independence assumptions}
 \label{sec:graph_repr_indep}
 
 In the last example the joint probability density for all the statements is
@@ -1280,30 +1282,88 @@ density.
 
 The independence condition~\eqref{eq:example_independence}, the various
 conditional-exchangeability conditions, and the integral
-representation~\eqref{eq:example1sep} can be expressed by the network
-\begin{center}%[h!]
-\includegraphics[scale=0.5]{bayesnet3s.png}
-\end{center}% bayesnet.svg
+representation~\eqref{eq:example1sep} can be expressed by the network\\
+\begin{figure}[h!]
+\centering\includegraphics[scale=0.5]{bayesnet3s.png}
+\caption{\label{fig:indep_net}}
+\end{figure}% bayesnet.svg
 
-\subsection{Generalization and possible graphical rules}
+\subsection{Generalization and connection with Bayesian networks}
 \label{sec:graph_repr_gen}
+
+Let us summarize what we have found thus far. We have
+\begin{enumerate}[label=\roman*.]
+\item[0.] several sets of statements, $\set{\X{i}\=\x{i}}$,
+  $\set{\A{i}\=\va{i}},\dotsc$. Each set is countably infinite. For each
+  set we also have an associated set of values $x\in \sX,$
+  $a \in \sA, \dotsc$;
+\item\label{item:assu_bayesnet} several assumptions of conditional independence representable in the
+  guise of a Bayesian network, such as in
+  \eqn~\eqref{eq:example_independence} and \fig~\ref{fig:indep_net};
+\item\label{item:assu_condexch} several assumptions of conditional exchangeability for the predictive
+  probabilities of some groups of such statements conditional on some other
+  groups, such as in \eqn~\eqref{eq:partial_definetti_freq}.
+\end{enumerate}
+These assumptions, taken together, must be sufficient to obtain the
+predictive, joint probability distribution for all statements through the
+product rule of the probability-calculus.
+
+Then the predictive, joint probability distribution for $N$ statements from each
+group has an integral representation of de~Finetti form:
+\begin{multline}
+  \label{eq:general_form}
+  \p( \X{1}\=\x{1}, \A{1}\=\va{1}, \dotsc,\,
+   \X{N}\=\x{N}, \A{N}\=\va{N}, \dotsc \| I) ={}\\
+   %\shoveleft{
+     \int\!\prod_{x,a,\dotsc}
+     (\xi_{x,a,\dotsc})^{N \FF{x,a,\dotsc}}\;%\times{}%}\\[-\jot]
+\pf(\bm{\xi}\|I)\,\di\bm{\xi} 
+% \pf(\ffb{x \bcond ab}\|I)\,\pf(\ffb{a}\|I)\,\pf(\ffb{b}\|I)
+% \;\di\ffb{x \bcond ab} \,\di\ffb{a} \,\di\ffb{b} \;.
+\end{multline}
+where $\FF{x,a,\dotsc}$ are the joint empirical frequencies. This
+representation has these properties:
+\begin{enumerate}[label=\Roman*.]
+\item the set of integration variables $\set{\xi_{x,a,\dotsc}}$ consists of
+  subsets of marginal and conditional distributions: the same that would
+  formally be associated with the Bayesian network of
+  point~\ref{item:assu_bayesnet} For example
+  \[\set{\xi_{x,a,b}} = \set[\big]{\set{\ff{x \bcond a,b}},\,
+    \set{\ff{,a}},\, \set{\ff{,,b}}}\;.\]
+\item the density $\pf(\bm{\xi}\|I)\,\di\bm{\xi}$ over the integration
+  variables factorizes into a product of independent densities, one for
+  each subset of the point above, for example
+  \[\pf(\bm{\xi}\|I)\,\di\bm{\xi} =
+    \pf(\ffb{x \bcond ab}\|I)\,\di\ffb{x \bcond ab}\;\;
+    \pf(\ffb{a}\|I)\,\di\ffb{a}\;\;
+    \pf(\ffb{b}\|I)\,\di\ffb{b} \;.
+  \]
+\end{enumerate}
+
+\subsection{Discussion}
+\label{sec:disc_exchbayesnet}
+
+The representation summarized in the preceding section combines
+exchangeability and Bayesian networks. Both notions express assumptions or
+judgements reflected in specific equalities among probability
+distributions. Some authors
+\citep{pearl2000_r2009}[possibly][]{lindleyetal1981} seem to see these two
+notions almost as mutually incompatible.
+
+
+
+
+The predictive joint probability distribution for $N$ statements from each
+group (with the same indices) 
+
+
+We have seen that assumptions about conditional exchangeability and
+assumptions about conditional independence
 
 
 
 It seems possible to generalize the example presented thus far into a
 consistent set of rules.
-
-We have
-\begin{enumerate}[label=\roman*.]
-\item several sets of $N$ statements, $\set{\X{i}\=\x{i}}$,
-  $\set{\A{i}\=\va{i}},\dotsc$. To each set is associated a set of values
-  $x\in \sX,$ $a \in \sA, \dotsc$.
-\item several conditionally exchangeable probabilities for some groups of
-  such statements conditional on some other groups, such as
-  \eqn~\eqref{eq:partial_definetti_freq};
-\item several assumptions of conditional independence, such as
-  \eqn~\eqref{eq:example_independence}.
-\end{enumerate}
 
 The integral representation of the joint probability distribution for all
 the statements involves several sets of integration variables. Each set

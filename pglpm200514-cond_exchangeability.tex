@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2020-03-17T00:29:23+0100
-%% Last-Updated: 2020-06-02T18:24:41+0200
+%% Last-Updated: 2020-06-02T23:07:08+0200
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newif\ifarxiv
 \arxivfalse
@@ -564,7 +564,7 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 \newcommand*{\incr}{\triangle}%finite increment
 \newcommand*{\defd}{\coloneqq}
 \newcommand*{\defs}{\eqqcolon}
-%\newcommand*{\Land}{\bigwedge}
+\newcommand*{\Land}{\mathop{\textstyle\bigwedge}}
 %\newcommand*{\Lor}{\bigvee}
 %\newcommand*{\lland}{\DOTSB\;\land\;}
 %\newcommand*{\llor}{\DOTSB\;\lor\;}
@@ -635,7 +635,7 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 \newcommand*{\tprod}{\mathop{\textstyle\prod}\nolimits}
 \newcommand*{\tsum}{\mathop{\textstyle\sum}\nolimits}
 %\newcommand*{\tint}{\begingroup\textstyle\int\endgroup\nolimits}
-%\newcommand*{\tland}{\mathop{\textstyle\bigwedge}\nolimits}
+\newcommand*{\tland}{\mathop{\textstyle\bigwedge}\nolimits}
 %\newcommand*{\tlor}{\mathop{\textstyle\bigvee}\nolimits}
 %\newcommand*{\sprod}{\mathop{\textstyle\prod}}
 %\newcommand*{\ssum}{\mathop{\textstyle\sum}}
@@ -875,12 +875,15 @@ $x$ in the set $\set{x_{1}, \dotsc, x_{N}}$:
 
 De~Finetti's theorem states that a fully exchangeable distribution can be
 written as follows:
-\begin{multline}
+\begin{equation}
   \label{eq:definetti_freq}
-  \p( \X{1}\=\x{1},\; \dotsc, \; \X{N}\=\x{N} \| I) ={}\\
+  \begin{split}
+  \p\bigl( \Land_{i=1}^{N}\X{i}\=\x{i} \|[\big] I\bigr) &=
+%  \p( \X{1}\=\x{1},\; \dotsc, \; \X{N}\=\x{N} \| I) ={}\\
   \int \prod_{i} f_{\x{i}}\;  \pf(\fx \| I)\,\di\fx
-\equiv  \int\prod_{x} {f_{x}}^{N F_{x}}\;   \pf(\fx \| I)\,\di\fx \;,
-\end{multline}
+\\&\equiv  \int\prod_{x} {f_{x}}^{N F_{x}}\;   \pf(\fx \| I)\,\di\fx \;,
+\end{split}
+\end{equation}
 where the integral is over the simplex of distributions $\set{\fx}$.
 
 In the first integral form, the product is over the set of instances
@@ -918,15 +921,17 @@ within each subset but not necessarily across subsets. The usual
 representation in this case, after a suitable re-indexing
 $\set{1,2,\dotsc} \mapsto \set{1', 2', \dotsc, 1'', 2'', \dotsc}$, has the
 form
-\begin{multline}
+\begin{equation}
   \label{eq:partialdefinetti}
-  \p( \Y{1'}\=\y{1'},\; \Y{2'}\=\y{2'},\; \dotsc,\;
-  \Z{1''}\=\z{1''},\; \Z{2''}\=\z{2''},\; \dotsc \| \zI) ={}\\
+  \p\Bigl( \Land_{i'}\Y{i'}\=\y{i'},\;
+  \Land_{i''}\Z{i''}\=\z{i''} \|[\Big] \zI\Bigr) =
+  % \p( \Y{1'}\=\y{1'},\; \Y{2'}\=\y{2'},\; \dotsc,\;
+  % \Z{1''}\=\z{1''},\; \Z{2''}\=\z{2''},\; \dotsc \| \zI) ={}\\
   \iint
   \prod_{j} g_{\y{j}}\;
   \prod_{k} h_{\z{k}}\;
   \pf(\bg,\bh \| \zI)\,\di\bg\,\di\bh \;,
-\end{multline}
+\end{equation}
 with distinct normalized distributions $\bg$, $\bh$ for each category. If
 the density $\pf(\bg,\bh \| \zI)\,\di\bg\,\di\bh$ is diagonal, that is, if
 it contains a term $\delt(\bg-\bh)$, the fully exchangeable
@@ -1021,14 +1026,16 @@ pairs with $\cc{i}=c$.
 
 De Finetti’s theorem states that the partially exchangeable
 distribution~\eqref{eq:part_exchangeable} can be written as follows:
-\begin{multline}
+\begin{equation}
   \label{eq:partial_definetti_freq}
-    \p( \X{1}\=\x{1}, \dotsc,  \X{N}\=\x{N} \|
-    \C{1}\=\cc{1}, \dotsc,\C{N}\=\cc{N},\;  I) ={}\\
+    \p\Bigl(\Land_{i=1}^{N} \X{i}\=\x{i} \|[\Big]
+    \Land_{i=1}^{N}\C{i}\=\cc{i},\;  I\Bigr) =
+    % \p( \X{1}\=\x{1}, \dotsc,  \X{N}\=\x{N} \|
+    % \C{1}\=\cc{1}, \dotsc,\C{N}\=\cc{N},\;  I) ={}\\
 \int\prod_{c,x} {f_{x \bcond c}}^{N F_{x, c}}\;
 %\pf\condt[\big]{(f_{x \bcond c})}{I} \,\di(f_{x \bcond c}) \;.
 \pf\cond[\big]{\fxc}{I} \,\di\fxc \;.
-\end{multline}
+\end{equation}
 Scrutiny of this formula shows that this form is equivalent to the more
 familiar representation~\eqref{eq:partialdefinetti}. The integral contains
 one product of $f_{\dotso \bcond c}$ terms for every category $c$. In each
@@ -1057,12 +1064,15 @@ distribution for $\set{\X{i}\=\x{i}}$?
 The joint probability distribution can be rewritten
 \begin{multline}
   \label{eq:joint_p_xc_decomposed}
-  \p( \X{1}\=\x{1}, \C{1}\=\cc{1},\; \dotsc,\;  \X{N}\=\x{N},\C{N}\=\cc{N}
-  \| I) ={}\\
-\p( \X{1}\=\x{1}, \dotsc, \X{N}\=\x{N}  \|
-\C{1}\=\cc{1}, \dotsc,\C{N}\=\cc{N},\;    I)
-\times{}\\
-\p(\C{1}\=\cc{1}, \dotsc,\C{N}\=\cc{N}  \|    I)
+  \p\Bigl(\Land_{i=1}^{N} (\X{i}\=\x{i}, \C{i}\=\cc{i}) \|[\Big] I\Bigr) ={}\\
+  \p\Bigl(\Land_{i=1}^{N} \X{i}\=\x{i} \|[\Big] \Land_{i=1}^{N} \C{i}\=\cc{i},\; I\Bigr) \times
+  \p\Bigl(\Land_{i=1}^{N} \C{i}\=\cc{i} \|[\Big] I\Bigr)
+%   \p( \X{1}\=\x{1}, \C{1}\=\cc{1},\; \dotsc,\;  \X{N}\=\x{N},\C{N}\=\cc{N}
+%   \| I) ={}\\
+% \p( \X{1}\=\x{1}, \dotsc, \X{N}\=\x{N}  \|
+% \C{1}\=\cc{1}, \dotsc,\C{N}\=\cc{N},\;    I)
+% \times{}\\
+% \p(\C{1}\=\cc{1}, \dotsc,\C{N}\=\cc{N}  \|    I)
   \;,
 \end{multline}
 where the first factor, conditionally exchangeable, can be represented by
@@ -1074,7 +1084,8 @@ probability distribution. An integral representation analogous
 to~\eqref{eq:definetti_freq} then holds:
 \begin{equation}
   \label{eq:definetti_freq_C}
-  \p( \C{1}\=\cc{1},\; \dotsc, \; \C{N}\=\cc{N} \| I) =
+  \p\Bigl( \Land_{i=1}^{N}\C{i}\=\cc{i} \|[\Big] I\Bigr) =
+%  \p( \C{1}\=\cc{1},\; \dotsc, \; \C{N}\=\cc{N} \| I) =
 \int\prod_{c} {f_{,c}}^{N F_{,c}}\;   \pf(\fc \| I)\,\di\fc \;,
 \end{equation}
 where $\fc \defd \set{f_{,c}}$, and $F_{,c} \defd \sum_{x} F_{x,c}$ is the
@@ -1095,11 +1106,10 @@ We obtain
 \begin{subequations}
   \label{eq:result}
   \begin{gather}
-    \begin{multlined}[b][0.85\linewidth]
-\p( \X{1}\=\x{1}, \C{1}\=\cc{1},\; \dotsc,\;  \X{N}\=\x{N},\C{N}\=\cc{N}
-\| I) ={}\\
+     \p\Bigl(\Land_{i=1}^{N} (\X{i}\=\x{i}, \C{i}\=\cc{i}) \|[\Big] I\Bigr) =
+% \p( \X{1}\=\x{1}, \C{1}\=\cc{1},\; \dotsc,\;  \X{N}\=\x{N},\C{N}\=\cc{N}
+% \| I) ={}\\
 \int\prod_{c,x} {f_{x,c}}^{N F_{x, c}}\;  \pf(\fj\|I)\,\di\fj
-\end{multlined}
 \\
   \label{eq:factorizable}
 \text{with}\qquad \boxed{\;\vphantom{\int}\pf(\fj\|I)\;\di\fj =
@@ -1211,12 +1221,20 @@ In the last example the joint probability density for all the statements is
 decomposed in full accord with the product rule:
 \begin{multline}
   \label{eq:example_usual_factorization}
-  \p( \set{\X{i}\=\x{i}}, \set{\A{i}\=\va{i}}, \set{\B{i}\=\vb{i}} \| I)
-  \equiv{}\\
-  \p( \set{\X{i}\=\x{i}} \| \set{\A{i}\=\va{i}}, \set{\B{i}\=\vb{i}},\, I)
-  \times{}\\
-  \p(\set{\A{i}\=\va{i}} \| \set{\B{i}\=\vb{i}},\, I)
-\times \p(  \set{\B{i}\=\vb{i}}\| I) \;,
+  \p\Bigl( \Land_{i=1}^{N}\X{i}\=\x{i},  \Land_{i=1}^{N}\A{i}\=\va{i},
+  \Land_{i=1}^{N}\B{i}\=\vb{i} \|[\Big] I\Bigr)  \equiv{}\\
+  \p\Bigl( \Land_{i=1}^{N}\X{i}\=\x{i} \|[\Big]  \Land_{i=1}^{N}\A{i}\=\va{i},
+  \Land_{i=1}^{N}\B{i}\=\vb{i},\;  I\Bigr) \times{}\\
+  \p\Bigl( \Land_{i=1}^{N}\A{i}\=\va{i} \|[\Big]
+  \Land_{i=1}^{N}\B{i}\=\vb{i},\; I\Bigr) \times
+  \p\Bigl( \Land_{i=1}^{N}\B{i}\=\vb{i} \|[\Big]  I\Bigr)
+  \;,
+%   \p( \set{\X{i}\=\x{i}}, \set{\A{i}\=\va{i}}, \set{\B{i}\=\vb{i}} \| I)
+%   \equiv{}\\
+%   \p( \set{\X{i}\=\x{i}} \| \set{\A{i}\=\va{i}}, \set{\B{i}\=\vb{i}},\, I)
+%   \times{}\\
+%   \p(\set{\A{i}\=\va{i}} \| \set{\B{i}\=\vb{i}},\, I)
+% \times \p(  \set{\B{i}\=\vb{i}}\| I) \;,
 \end{multline}
 which is an identity in the probability-calculus. In other words, no
 special properties of conditional independence hold.

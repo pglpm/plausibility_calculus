@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2020-03-17T00:29:23+0100
-%% Last-Updated: 2020-06-02T12:27:00+0200
+%% Last-Updated: 2020-06-02T13:02:06+0200
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newif\ifarxiv
 \arxivfalse
@@ -381,15 +381,16 @@ Open Science Framework \texttt{doi:\urlalt{https://doi.org/10.17605/osf.io/#1}{1
 \newcommand*{\asudedication}[1]{%
 {\par\centering\textit{#1}\par}}
 \newenvironment{acknowledgements}{\section*{Thanks}\addcontentsline{toc}{section}{Thanks}}{\par}
-\makeatletter\renewcommand{\appendix}{\par
-  \bigskip{\centering
-   \interlinepenalty \@M
-   \normalfont
-   \printchaptertitle{\sffamily\appendixpagename}\par}
-  \setcounter{section}{0}%
-  \gdef\@chapapp{\appendixname}%
-  \gdef\thesection{\@Alph\c@section}%
-  \anappendixtrue}\makeatother
+% \makeatletter\renewcommand{\appendix}{\par
+%   \bigskip{\centering
+%    \interlinepenalty \@M
+%    \normalfont
+%    \printchaptertitle{\sffamily\appendixpagename}\par}
+%   \setcounter{section}{0}%
+%   \gdef\@chapapp{\appendixname}%
+%   \gdef\thesection{\@Alph\c@section}%
+%   \anappendixtrue}\makeatother
+\renewcommand*\cftappendixname{\appendixname}
 \counterwithout{section}{chapter}
 \setsecnumformat{\upshape\csname the#1\endcsname\quad}
 \setsecheadstyle{\large\bfseries\sffamily%
@@ -1361,6 +1362,10 @@ for a conditional long-run frequency distribution, and a density for a
 marginal long-run frequency distribution, \eqn~\eqref{eq:factorizable}.
 
 
+
+
+
+
 %%%% examples use empheq
 %   \begin{empheq}[left={\mathllap{\begin{aligned}    \de\yF_{\yc}/\de\yp&=0\text{:} \\
 %         \de\yF_{\yc}/\de\ym&=0\text{:}\\ \de\yF_{\yc}/\de\yl&=0\text{:}\end{aligned}}\qquad}\empheqlbrace]{align}
@@ -1436,12 +1441,19 @@ marginal long-run frequency distribution, \eqn~\eqref{eq:factorizable}.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% Appendices
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
-\clearpage
+%\clearpage
 % %\renewcommand*{\appendixpagename}{Appendix}
 % %\renewcommand*{\appendixname}{Appendix}
 % %\appendixpage
-% \appendix
+%\addtocontents{toc}{\setlength\cftsectionnumwidth{5em}}
+\renewcommand\thesection{Appendix:}
+\section{On the ambiguous meaning of \enquote{$X\eq x$}}
+\label{sec:append}
 
+
+
+
+ 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% Bibliography
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 

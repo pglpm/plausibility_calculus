@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2020-03-17T00:29:23+0100
-%% Last-Updated: 2020-06-02T16:57:33+0200
+%% Last-Updated: 2020-06-02T18:24:41+0200
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newif\ifarxiv
 \arxivfalse
@@ -1310,42 +1310,46 @@ product rule of the probability-calculus.
 
 Then the predictive, joint probability distribution for $N$ statements from each
 group has an integral representation of de~Finetti form:
-\begin{multline}
-  \label{eq:general_form}
-  \p( \X{1}\=\x{1}, \A{1}\=\va{1}, \dotsc,\,
-   \X{N}\=\x{N}, \A{N}\=\va{N}, \dotsc \| I) ={}\\
-   %\shoveleft{
-     \int\!\prod_{x,a,\dotsc}
-     (\xi_{x,a,\dotsc})^{N \FF{x,a,\dotsc}}\;%\times{}%}\\[-\jot]
-\pf(\bm{\xi}\|I)\,\di\bm{\xi} 
-% \pf(\ffb{x \bcond ab}\|I)\,\pf(\ffb{a}\|I)\,\pf(\ffb{b}\|I)
-% \;\di\ffb{x \bcond ab} \,\di\ffb{a} \,\di\ffb{b} \;.
-\end{multline}
-where $\FF{x,a,\dotsc}$ are the joint empirical frequencies. This
+\begin{framed}
+  \begin{multline}
+    \label{eq:general_form}
+    \p( \X{1}\eq \x{1}, \A{1}\eq \va{1}, \dotsc,\,
+    \X{N}\eq \x{N}, \A{N}\eq \va{N}, \dotsc \| I) ={}\\
+    % \shoveleft{
+    \int\!\prod_{x,a,\dotsc}
+    (\xi_{x,a,\dotsc})^{N \FF{x,a,\dotsc}}\;%\times{}%}\\[-\jot]
+    \pf(\bm{\xi}\|I)\,\di\bm{\xi} 
+    % \pf(\ffb{x \bcond ab}\|I)\,\pf(\ffb{a}\|I)\,\pf(\ffb{b}\|I)
+    % \;\di\ffb{x \bcond ab} \,\di\ffb{a} \,\di\ffb{b} \;.
+  \end{multline}
+%\end{framed}
+where $N\,\FF{x,a,\dotsc}$ are the joint empirical frequencies. This
 representation has these properties:
-\begin{enumerate}[label=\Roman*.]
-\item the set of integration variables $\set{\xi_{x,a,\dotsc}}$ consists of
-  subsets of marginal and conditional distributions: the same that would
-  formally be associated with the Bayesian network of
-  point~\ref{item:assu_bayesnet} For example
-  \[\set{\xi_{x,a,b}} = \set[\big]{\set{\ff{x \bcond a,b}},\,
-    \set{\ff{,a}},\, \set{\ff{,,b}}}\;.\]
-\item the density $\pf(\bm{\xi}\|I)\,\di\bm{\xi}$ over the integration
-  variables factorizes into a product of independent densities, one for
-  each subset of the point above, for example
-  \[\pf(\bm{\xi}\|I)\,\di\bm{\xi} =
-    \pf(\ffb{x \bcond ab}\|I)\,\di\ffb{x \bcond ab}\;\;
-    \pf(\ffb{a}\|I)\,\di\ffb{a}\;\;
-    \pf(\ffb{b}\|I)\,\di\ffb{b} \;.
-  \]
-\end{enumerate}
+%\begin{framed}
+  \begin{enumerate}[label=\Roman*.]
+  \item the set of integration variables $\set{\xi_{x,a,\dotsc}}$ consists
+    of subsets of marginal and conditional distributions: the same that
+    would formally be associated with the Bayesian network of
+    point~\ref{item:assu_bayesnet} For example
+    \[\set{\xi_{x,a,b}} = \set[\big]{\set{\ff{x \bcond a,b}},\,
+        \set{\ff{,a}},\, \set{\ff{,,b}}}\;.\]
+  \item the density $\pf(\bm{\xi}\|I)\,\di\bm{\xi}$ over the integration
+    variables factorizes into a product of independent densities, one for
+    each subset of the point above, for example
+    \[\pf(\bm{\xi}\|I)\,\di\bm{\xi} =
+      \pf(\ffb{x \bcond ab}\|I)\,\di\ffb{x \bcond ab}\;\;
+      \pf(\ffb{a}\|I)\,\di\ffb{a}\;\; \pf(\ffb{b}\|I)\,\di\ffb{b} \;.
+    \]
+  \end{enumerate}
+\end{framed}
 
 \subsection{Discussion}
 \label{sec:disc_exchbayesnet}
 
-The representation summarized in the preceding section combines
-exchangeability and Bayesian networks. I find that the combinations of
-these two notion is much needed.
+The representation just derived combines exchangeability and Bayesian
+networks. I believe such a combination to be much needed to make inferences
+in concrete problems, especially when data are few with respect to the
+number of factors involved.
 
 A Bayesian network is a graphical representation of judgements (based for
 example on physical theories) about the informational relevance or
@@ -1358,31 +1362,41 @@ literature. Sometimes their application seem to refer to \emph{individual}
 instances, and therefore to degrees of belief; for example, our degree of
 belief about the effect of a treatment upon a specific person, given the
 gender and health condition of that person. Sometimes their application
-seem to refer to whole populations or even superpopulations, and therefore
-to \enquote{long-run}
-frequencies.\citep[\eg][]{pearl2000_r2009,wiegerincketal2013}[the discussion
-by][is more precise in this respect: they assume, for simplicity, a limit
-in which the two problems become numerically similar]{lindleyetal1981}
+seem to refer to whole \emph{populations} or even superpopulations, and
+therefore to \enquote{long-run}
+frequencies.\citep[\eg][]{pearl2000_r2009,wiegerincketal2013}[the
+discussion by][is more precise in this respect: they assume, for
+simplicity, a limit in which the two problems become numerically
+similar]{lindleyetal1981}
 
 In either case some questions arise. In the first case, the question of how
 our (conditional or unconditional) degrees of belief about the specific
 instance relate to, or are updated by, knowledge about similar instances.
-In the second case, the question of our uncertainty about the usually
+In the second case, the question of our uncertainties about the usually
 unknowable long-run frequencies, and about the empirical frequencies of
 future observations of small groups of individuals. These questions are
 really two sides of the same question.
 
 And these are precisely the questions addressed by exchangeability and its
-theorems. Exchangeability expresses judgements about \enquote{similarity}.
-More precisely, about the relevance or irrelevance of statements concerning
-individual events (observations, experiments, and similar) to sets of
+theorems. Exchangeability expresses judgements about \enquote{similarity};
+more precisely, about the relevance or irrelevance of statements concerning
+individual events (observations, experiments, and so on) to sets of
 statements concerning other individual events. Such relevance or
 irrelevance is expressed by symmetries of conditional and unconditional
-probabilities involving those statements. The result is mathematical
+probabilities involving those statements. The result is a mathematical
 formula that quantitatively relates empirical frequencies from known
 observations (\cf\ $F_{x,a}$), long-run frequencies of superpopulations
 (\cf\ $f_{x,a}$) and degrees of beliefs about individual instances (\cf\
 $\p(\X{1}\=\x{1} \| \dotso)$).
+
+This same mathematical relation is provided by the integral representation
+derived in the previous section, in the case of knowledge or assumptions
+expressed by a Bayesian network.
+
+Its most interesting feature is that it \emph{mixes} terms corresponding to
+the product of conditional probabilities characteristics of the represented
+Bayesian network. This is analogous to the mixture of \enquote{i.i.d.}
+distributions in de~Finetti's theorem.
 
 % can then be represented by an acyclic directed network with
 % these properties:

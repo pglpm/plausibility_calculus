@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2020-03-17T00:29:23+0100
-%% Last-Updated: 2020-06-02T16:42:29+0200
+%% Last-Updated: 2020-06-02T16:57:33+0200
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newif\ifarxiv
 \arxivfalse
@@ -1359,7 +1359,10 @@ instances, and therefore to degrees of belief; for example, our degree of
 belief about the effect of a treatment upon a specific person, given the
 gender and health condition of that person. Sometimes their application
 seem to refer to whole populations or even superpopulations, and therefore
-to \enquote{long-run} frequencies.
+to \enquote{long-run}
+frequencies.\citep[\eg][]{pearl2000_r2009,wiegerincketal2013}[the discussion
+by][is more precise in this respect: they assume, for simplicity, a limit
+in which the two problems become numerically similar]{lindleyetal1981}
 
 In either case some questions arise. In the first case, the question of how
 our (conditional or unconditional) degrees of belief about the specific
@@ -1369,70 +1372,42 @@ unknowable long-run frequencies, and about the empirical frequencies of
 future observations of small groups of individuals. These questions are
 really two sides of the same question.
 
-And these are the questions addressed by exchangeability and its theorems.
-Exchangeability expresses judgements about \enquote{similarity}; more
-precisely about the relevance or irrelevance of sets of individual events
-(observations, experiments, and similar) to other sets of individual
-events.
+And these are precisely the questions addressed by exchangeability and its
+theorems. Exchangeability expresses judgements about \enquote{similarity}.
+More precisely, about the relevance or irrelevance of statements concerning
+individual events (observations, experiments, and similar) to sets of
+statements concerning other individual events. Such relevance or
+irrelevance is expressed by symmetries of conditional and unconditional
+probabilities involving those statements. The result is mathematical
+formula that quantitatively relates empirical frequencies from known
+observations (\cf\ $F_{x,a}$), long-run frequencies of superpopulations
+(\cf\ $f_{x,a}$) and degrees of beliefs about individual instances (\cf\
+$\p(\X{1}\=\x{1} \| \dotso)$).
+
+% can then be represented by an acyclic directed network with
+% these properties:
+% \begin{enumerate}
+% \item nodes represent sets of statements;
+% \item there is a set of integration variables for each node. These
+%   variables are the long-run frequencies for the quantity of the node
+%   conditional on the quantities of the parent nodes. Nodes without parents
+%   have marginal, unconditional long-run frequencies;
+% \item each set of integration variables has its own density. The densities
+%   are multiplied in the integral representation.
+% \end{enumerate}
+
+% Moreover, s explained in \sect~\ref{sec:graph_repr_indep}, independence
+% assumptions are expressed by the set of integration variables, whereas
+% conditional-exchangeability assumption are expressed by the factorization
+% of the density over the integration variables.
 
 
-
-
-
-
-Some authors
-\citep{pearl2000_r2009}[possibly][]{lindleyetal1981} seem to see these two
-notions almost as mutually incompatible.
-
-
-
-
-The predictive joint probability distribution for $N$ statements from each
-group (with the same indices) 
-
-
-We have seen that assumptions about conditional exchangeability and
-assumptions about conditional independence
-
-
-
-It seems possible to generalize the example presented thus far into a
-consistent set of rules.
-
-The integral representation of the joint probability distribution for all
-the statements involves several sets of integration variables. Each set
-contains either conditional or marginal long-run frequencies in the
-quantities $x,a, \dotsc$.
-
--- and a factorizable density
-over such variables. The density is multiplied by the product of these
-variables, raised to the joint empirical frequencies
-
-
-can then be represented by an acyclic directed network with
-these properties:
-\begin{enumerate}
-\item nodes represent sets of statements;
-\item there is a set of integration variables for each node. These
-  variables are the long-run frequencies for the quantity of the node
-  conditional on the quantities of the parent nodes. Nodes without parents
-  have marginal, unconditional long-run frequencies;
-\item each set of integration variables has its own density. The densities
-  are multiplied in the integral representation.
-\end{enumerate}
-
-Moreover, s explained in \sect~\ref{sec:graph_repr_indep}, independence
-assumptions are expressed by the set of integration variables, whereas
-conditional-exchangeability assumption are expressed by the factorization
-of the density over the integration variables.
-
-
-indicates the conditional exchangeability of the latter set conditional on
-the former set. Nodes with no incoming arrows are fully exchangeable. The
-integral representation for the full network, that is, for the all the
-statements, has a factorizable density, one factor per node. The arguments
-of these factors are conditional or marginal long-run frequencies
-accordingly to the arrows incoming to their nodes.
+% indicates the conditional exchangeability of the latter set conditional on
+% the former set. Nodes with no incoming arrows are fully exchangeable. The
+% integral representation for the full network, that is, for the all the
+% statements, has a factorizable density, one factor per node. The arguments
+% of these factors are conditional or marginal long-run frequencies
+% accordingly to the arrows incoming to their nodes.
 
 
 \section{Discussion}

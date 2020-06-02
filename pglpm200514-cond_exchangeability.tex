@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2020-03-17T00:29:23+0100
-%% Last-Updated: 2020-06-02T15:49:55+0200
+%% Last-Updated: 2020-06-02T16:42:29+0200
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newif\ifarxiv
 \arxivfalse
@@ -1353,14 +1353,27 @@ irrelevance of some statements to other statements. Such relevance or
 irrelevance is expressed by equalities or inequalities between conditional
 probabilities involving those statements.
 
+Unfortunately the use of Bayesian networks is a little ambiguous in the
+literature. Sometimes their application seem to refer to \emph{individual}
+instances, and therefore to degrees of belief; for example, our degree of
+belief about the effect of a treatment upon a specific person, given the
+gender and health condition of that person. Sometimes their application
+seem to refer to whole populations or even superpopulations, and therefore
+to \enquote{long-run} frequencies.
 
+In either case some questions arise. In the first case, the question of how
+our (conditional or unconditional) degrees of belief about the specific
+instance relate to, or are updated by, knowledge about similar instances.
+In the second case, the question of our uncertainty about the usually
+unknowable long-run frequencies, and about the empirical frequencies of
+future observations of small groups of individuals. These questions are
+really two sides of the same question.
 
-A Bayesian network is commonly used for individual instances only.
-
-
-Both notions express assumptions or
-judgements reflected in specific equalities among probability
-distributions.
+And these are the questions addressed by exchangeability and its theorems.
+Exchangeability expresses judgements about \enquote{similarity}; more
+precisely about the relevance or irrelevance of sets of individual events
+(observations, experiments, and similar) to other sets of individual
+events.
 
 
 

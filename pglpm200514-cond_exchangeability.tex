@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2020-03-17T00:29:23+0100
-%% Last-Updated: 2020-06-02T23:07:08+0200
+%% Last-Updated: 2020-06-03T14:44:39+0200
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newif\ifarxiv
 \arxivfalse
@@ -709,6 +709,7 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 %%% Beginning of document
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % \firmlists
+\newfixedcaption{\figcaption}{figure}
 \setcounter{section}{-1}
 \begin{document}
 \captiondelim{\quad}\captionnamefont{\footnotesize}\captiontitlefont{\footnotesize}
@@ -854,13 +855,11 @@ is called fully (infinitely) exchangeable if
 \end{multline}
 and if all such probabilities are consistently related by marginalization.
 This property is equivalent to declaring the empirical frequencies of the
-values $x$ to be sufficient statistics. The commas between statements
-denote logical conjunction (\enquote{$\land$}), so the order of the
-statements is immaterial.
+values $x$ to be sufficient statistics.
 
-In the following I let \enquote{$\set{1, 2, \dotsc, N}$} denote any subset
-of $\NN$, to avoid a proliferation of subscripts. They should be read as
-\enquote{$\set{i_{1}, i_{2}, \dotsc, i_{N}}$}.
+In the following, both a comma and \enquote{$\land$} will denote logical
+conjunction. The notation $\Land_{i}$ will express conjunction with the
+index $i$ running over a subset of $N$ elements from $\NN$.
 
 Denote by $\fx \defd (f_{x})$ a normalized distribution over the values
 $x \in \sX$. The set of all such distributions is a simplex of dimension
@@ -878,7 +877,7 @@ written as follows:
 \begin{equation}
   \label{eq:definetti_freq}
   \begin{split}
-  \p\bigl( \Land_{i=1}^{N}\X{i}\=\x{i} \|[\big] I\bigr) &=
+  \p\bigl( \Land_{i} \X{i}\=\x{i} \|[\big] I\bigr) &=
 %  \p( \X{1}\=\x{1},\; \dotsc, \; \X{N}\=\x{N} \| I) ={}\\
   \int \prod_{i} f_{\x{i}}\;  \pf(\fx \| I)\,\di\fx
 \\&\equiv  \int\prod_{x} {f_{x}}^{N F_{x}}\;   \pf(\fx \| I)\,\di\fx \;,
@@ -889,9 +888,15 @@ where the integral is over the simplex of distributions $\set{\fx}$.
 In the first integral form, the product is over the set of instances
 $1,\dotsc,N$. In the second, equivalent integral form, the product is over
 the set of values $x$. This form shows that the empirical frequency
-distribution $(F_{x})$ is a sufficient statistic; it also hint at the
+distribution $(F_{x})$ is a sufficient statistic. It also hint at the
 important role played in the theorem by the relative entropy of $(F_{x})$
 with respect to $(f_{x})$.
+
+The theorem establishes a one-one correspondence between the set of
+(nested) joint predictive distributions and the set of densities over the
+$(\abs{\sX}-1)$-dimensional simplex. Thus any special properties of a
+predictive distribution must be reflected in special properties of its
+corresponding density, and vice versa.
 
 For enough large $N$, the probability of observing an empirical frequency
 distribution $\Fx$ within a small volume $\vf$ centred around the
@@ -918,9 +923,9 @@ categories represented by subsets
 $\set{\Y{j}\=\y{j}}, \set{\Z{k}\=\z{k}}, \dotsc$. Partial exchangeability
 of the distribution for such statements means that permutations are allowed
 within each subset but not necessarily across subsets. The usual
-representation in this case, after a suitable re-indexing
-$\set{1,2,\dotsc} \mapsto \set{1', 2', \dotsc, 1'', 2'', \dotsc}$, has the
-form
+representation in this case % , after a suitable re-indexing
+% $\set{1,2,\dotsc} \mapsto \set{1', 2', \dotsc, 1'', 2'', \dotsc}$,
+has the form
 \begin{equation}
   \label{eq:partialdefinetti}
   \p\Bigl( \Land_{i'}\Y{i'}\=\y{i'},\;
@@ -940,8 +945,8 @@ form~\eqref{eq:definetti_freq} is recovered.
 
 
 A little reflection shows that if we know the quantities $\X{i}$ to belong
-to category $Y$ in instances $i=1',2',\dotsc$, and to category $Z$ in
-instances $i=1'',2'',\dotsc$, then
+to category $Y$ in instances $i'$, and to category $Z$ in instances $i''$,
+then
 \begin{enumerate*}[label=(\alph*)]
 \item there are some other quantities $\C{i}$ that allows us to distinguish
   the two categories, and \item the values %$\C{i}\=\cc{i}$
@@ -965,8 +970,8 @@ different form of its representation theorem.
 
 
 
-Besides the statements $\set{\X{i}\=\x{i}}$, we introduce an additional,
-set of atomic statements
+Besides the statements $\set{\X{i}\=\x{i}}$, we introduce an additional set
+of atomic statements
 \begin{equation}
   \label{eq:category_statements}
   \conds[\big]{\C{i}\=\cc{i}}{i \in \NN,\;
@@ -975,22 +980,22 @@ set of atomic statements
 For each $i$ the statements $\set{\C{i}\=c \| c \in \sC}$ are mutually
 exclusive on information $I$.
 
-These statements allow us to identify each instance $1,2,\dotsc$ as
-belonging to one or another category out of the finite set $\sC$.
+These statements allow us to identify each instance $i$ as belonging to one
+or another category out of the finite set $\sC$.
 
-A probability distribution over the $\X{i}\=\x{i}$ atomic statements
+A probability distribution over the $\set{\X{i}\=\x{i}}$ atomic statements
 %$\set{\X{i}\=\x{i}}$,
 is called partially exchangeable if
 \begin{multline}
   \label{eq:part_exchangeable}
-  \mathbox[0.99]{\small for every $N$, every set of indices $\set{1, \dotsc,
-      N}\subset \NN$, and every permutation $\pi$ thereof such that\quad
-    $\pi(i)=j \mathrel{\;\Rightarrow\;} \cc{i}=\cc{j}$,}
+  \mathbox[0.99]{\small for every $N$, every set of $N$ indices $\set{i}$, and every permutation $\pi$ thereof such that\quad
+    $\pi(j)=k \mathrel{\;\Rightarrow\;} \cc{j}=\cc{k}$,}
   \\
-\shoveleft{\p( \X{1}\=\x{1}, \dotsc, \X{N}\=\x{N}  \|
-  \C{1}\=\cc{1}, \dotsc,\C{N}\=\cc{N},\;    I) ={}}\\
-\p( \X{i_{1}}\=\x{\pi(1)}, \dotsc, \X{i_{N}}\=\x{\pi(N)}   \|
-    \C{1}\=\cc{1}, \dotsc,\C{N}\=\cc{N},\;    I) \;.
+  \p\Bigl( \Land_{i}\X{i}\=\x{i}  \|[\Big]
+    \Land_{i}\C{i}\=\cc{i},\;    I\Bigr) =
+  \p\Bigl( \Land_{i}\X{i}\=\x{\pi(i)}  \|[\Big]
+  \Land_{i}\C{i}\=\cc{i},\;    I\Bigr)
+  \;.
 \end{multline}
 that is, the only allowed permutations are those \emph{which exchange
   indices having the same $c$ value}, that is, belonging to the same
@@ -1028,8 +1033,8 @@ De Finetti’s theorem states that the partially exchangeable
 distribution~\eqref{eq:part_exchangeable} can be written as follows:
 \begin{equation}
   \label{eq:partial_definetti_freq}
-    \p\Bigl(\Land_{i=1}^{N} \X{i}\=\x{i} \|[\Big]
-    \Land_{i=1}^{N}\C{i}\=\cc{i},\;  I\Bigr) =
+    \p\Bigl(\Land_{i} \X{i}\=\x{i} \|[\Big]
+    \Land_{i}\C{i}\=\cc{i},\;  I\Bigr) =
     % \p( \X{1}\=\x{1}, \dotsc,  \X{N}\=\x{N} \|
     % \C{1}\=\cc{1}, \dotsc,\C{N}\=\cc{N},\;  I) ={}\\
 \int\prod_{c,x} {f_{x \bcond c}}^{N F_{x, c}}\;
@@ -1064,9 +1069,9 @@ distribution for $\set{\X{i}\=\x{i}}$?
 The joint probability distribution can be rewritten
 \begin{multline}
   \label{eq:joint_p_xc_decomposed}
-  \p\Bigl(\Land_{i=1}^{N} (\X{i}\=\x{i}, \C{i}\=\cc{i}) \|[\Big] I\Bigr) ={}\\
-  \p\Bigl(\Land_{i=1}^{N} \X{i}\=\x{i} \|[\Big] \Land_{i=1}^{N} \C{i}\=\cc{i},\; I\Bigr) \times
-  \p\Bigl(\Land_{i=1}^{N} \C{i}\=\cc{i} \|[\Big] I\Bigr)
+  \p\Bigl(\Land_{i} (\X{i}\=\x{i}, \C{i}\=\cc{i}) \|[\Big] I\Bigr) ={}\\
+  \p\Bigl(\Land_{i} \X{i}\=\x{i} \|[\Big] \Land_{i} \C{i}\=\cc{i},\; I\Bigr) \times
+  \p\Bigl(\Land_{i} \C{i}\=\cc{i} \|[\Big] I\Bigr)
 %   \p( \X{1}\=\x{1}, \C{1}\=\cc{1},\; \dotsc,\;  \X{N}\=\x{N},\C{N}\=\cc{N}
 %   \| I) ={}\\
 % \p( \X{1}\=\x{1}, \dotsc, \X{N}\=\x{N}  \|
@@ -1084,13 +1089,13 @@ probability distribution. An integral representation analogous
 to~\eqref{eq:definetti_freq} then holds:
 \begin{equation}
   \label{eq:definetti_freq_C}
-  \p\Bigl( \Land_{i=1}^{N}\C{i}\=\cc{i} \|[\Big] I\Bigr) =
+  \p\Bigl( \Land_{i}\C{i}\=\cc{i} \|[\Big] I\Bigr) =
 %  \p( \C{1}\=\cc{1},\; \dotsc, \; \C{N}\=\cc{N} \| I) =
 \int\prod_{c} {f_{,c}}^{N F_{,c}}\;   \pf(\fc \| I)\,\di\fc \;,
 \end{equation}
-where $\fc \defd \set{f_{,c}}$, and $F_{,c} \defd \sum_{x} F_{x,c}$ is the
-marginal empirical distribution for the $c$ values.
-
+where $\fc \defd \set{f_{,c}}$ (the reason of the subscript comma will be
+soon clear), and $F_{,c} \defd \sum_{x} F_{x,c}$ is the marginal empirical
+distribution for the $c$ values.
 
 We can now replace the integral
 representations~\eqref{eq:partial_definetti_freq} and
@@ -1106,7 +1111,8 @@ We obtain
 \begin{subequations}
   \label{eq:result}
   \begin{gather}
-     \p\Bigl(\Land_{i=1}^{N} (\X{i}\=\x{i}, \C{i}\=\cc{i}) \|[\Big] I\Bigr) =
+    \label{eq:integral_predictive_joint}
+     \p\Bigl(\Land_{i} (\X{i}\=\x{i}, \C{i}\=\cc{i}) \|[\Big] I\Bigr) =
 % \p( \X{1}\=\x{1}, \C{1}\=\cc{1},\; \dotsc,\;  \X{N}\=\x{N},\C{N}\=\cc{N}
 % \| I) ={}\\
 \int\prod_{c,x} {f_{x,c}}^{N F_{x, c}}\;  \pf(\fj\|I)\,\di\fj
@@ -1118,11 +1124,11 @@ We obtain
 \end{gather}
 \end{subequations}
 where we have defined $f_{x,c} = f_{x \bcond c}\, f_{,c}$ and
-$\fj \defd (f_{x,c})$. Note that $\fj$ does behave like a join
+$\fj \defd (f_{x,c})$. Note that $(f_{x,c})$ does indeed behave like a join
 distribution.
 
 The boxed equality above comes from the one-one correspondence between the
-variables $(\fxc,\fc)$ and $\fj$, so that the product of density functions
+variables $(\fxc \,,\fc)$ and $\fj$, so that the product of density functions
 for $\fxc$ and $\fc$ is just a specific case of a density function for
 $\fj$, apart from a Jacobian factor.
 
@@ -1137,32 +1143,41 @@ The noteworthy feature of the integral expression~\eqref{eq:result} for the
 fully exchangeable predictive distribution is that \emph{the density for
   the joint distribution $\fj$ is factorizable into the product of a
   density for the conditional distribution $\fxc$ and a density for the
-  marginal distribution $\fc$}. This factorization expresses the
-conditional (\ie, partial) exchangeability for the statements
-$\set{\X{i}\=\x{i}}$ given the $\set{\C{i}\=\cc{i}}$.
+  marginal distribution $\fc$}.
 
-It is easy to show that the reverse also holds: if the density of an
-integral representation is factorizable as in~\eqref{eq:factorizable}, then
-the corresponding probability distributions enjoy a symmetry of conditional
-exchangeability.
+This factorization is, on the one hand, trivial: it must be so because the
+integral itself must factorize, to yield the
+factorization~\eqref{eq:joint_p_xc_decomposed} of the predictive
+distributions.
 
-The factorization~\eqref{eq:factorizable} is not trivial. With a change of
-variables the following identities hold:
+But from the point of view of the joint predictive
+distribution~\eqref{eq:integral_predictive_joint}, on the other hand, this
+factorization is generally not valid and a priori not necessary. The
+following general identity holds instead:
 \begin{multline}
   \label{eq:identities_factor}
   \pf(\fj\|I)\;\di\fj \equiv
-  \pf[(\fxc,\fc) \| I] \;\di\fxc\,\di\fc
+  \pf[(\fxc \,,\fc) \| I] \;\di\fxc\,\di\fc
   \equiv{}\\
-  \pf(\fxc \| \fc,\, I)  \;
+  \pf(\fxc \| \fc\,,\, I)  \;
   \pf(\fc \| I) \;\di\fxc\,\di\fc \;.
 \end{multline}
-The factorization condition is thus equivalent to conditional independence:
-\begin{equation}
-  \label{eq:cond_indep_ff}
-  \pf(\fxc \| \fc,\, I) \;\di\fxc =
-\pf(\fxc \| I) \;\di\fxc \;.
-\end{equation}
+Which does not lead to any factorization of the integral.
+% The factorization condition is thus equivalent to conditional independence:
+% \begin{equation}
+%   \label{eq:cond_indep_ff}
+%   \pf(\fxc \| \fc,\, I) \;\di\fxc =
+% \pf(\fxc \| I) \;\di\fxc \;.
+% \end{equation}
+The factorization is thus a special property of the density, which reflects
+a special property of the joint predictive distribution: namely the
+conditional exchangeability for the statements $\set{\X{i}\=\x{i}}$ given
+the $\set{\C{i}\=\cc{i}}$.
 
+% It is easy to show that the reverse also holds: if the density of an
+% integral representation is factorizable as in~\eqref{eq:factorizable}, then
+% the corresponding probability distributions enjoy a symmetry of conditional
+% exchangeability.
 
 \section{Exchangeable Bayesian networks}
 \label{sec:exch_nets}
@@ -1170,33 +1185,33 @@ The factorization condition is thus equivalent to conditional independence:
 \subsection{Graphical representation of conditional exchangeability}
 \label{sec:graph_repr}
 
-The conditional (\ie, \enquote{partial}: see \sect~\ref{sec:partial_exch})
+The conditional (\ie, \enquote{partial})
 exchangeability~\eqref{eq:partial_definetti_freq} of the probabilities of
 the $X$-statements given the $C$-statements, the full
 exchangeability~\eqref{eq:definetti_freq_C} of the probabilities of the
 latter, and the final integral representation~\eqref{eq:result} for their
 join probability distribution, can be all together expressed in the guise
-of a Bayesian network:\\
-\begin{figure}[h!]
-\centering\includegraphics[scale=0.5]{bayesnet1.png}
-\caption{\label{fig:simplenet}}  
-\end{figure}% bayesnet.svg
+of a Bayesian network:
+\begin{center}%[!h]
+\includegraphics[scale=0.5]{bayesnet1.png}
+\figcaption{\label{fig:simplenet}}  
+\end{center}% bayesnet.svg
 The two nodes represent the two sets of statements. The arrow from the
 $C$-node to the $X$-node represents the conditional exchangeability of the
-probabilities for the latter set of statements conditional on the former
-set. The absence of incoming arrows to the $C$-node represents the full
-exchangeability for its probability distribution. The final integral
+probabilities for the latter set of statements conditional on the former.
+The absence of incoming arrows to the $C$-node represents the full
+exchangeability of its probability distribution. The final integral
 representation for the joint probability of the full network has a
 factorizable density, with one factor per node.
 
 Using the reasoning and integral representations of
-\sects~\ref{sec:partial_exch}--\ref{sec:result} it is indeed possible to
+\sects~\ref{sec:partial_exch}--\ref{sec:result} it is possible to
 generalize these rules to more complex networks of statements. It can be
-calculated that the following network, for example:\\
-\begin{figure}[h!]
-\centering\includegraphics[scale=0.5]{bayesnet3.png}
-\caption{\label{fig:dep3net}}  
-\end{figure}% bayesnet.svg
+calculated that the following network, for example:
+\begin{center}%[!h]
+\includegraphics[scale=0.5]{bayesnet3.png}
+\figcaption{\label{fig:dep3net}}  
+\end{center}% bayesnet.svg
 has the representation
 \begin{multline}
   \label{eq:example1}
@@ -1217,17 +1232,17 @@ with $\ff{,,b} \defd \sum_{x,a}\ff{x,a,b}$ and so on.
 \subsection{Representing additional independence assumptions}
 \label{sec:graph_repr_indep}
 
-In the last example the joint probability density for all the statements is
-decomposed in full accord with the product rule:
+In the last example the joint predictive distribution for all the
+statements is decomposed in full accord with the product rule:
 \begin{multline}
   \label{eq:example_usual_factorization}
-  \p\Bigl( \Land_{i=1}^{N}\X{i}\=\x{i},  \Land_{i=1}^{N}\A{i}\=\va{i},
-  \Land_{i=1}^{N}\B{i}\=\vb{i} \|[\Big] I\Bigr)  \equiv{}\\
-  \p\Bigl( \Land_{i=1}^{N}\X{i}\=\x{i} \|[\Big]  \Land_{i=1}^{N}\A{i}\=\va{i},
-  \Land_{i=1}^{N}\B{i}\=\vb{i},\;  I\Bigr) \times{}\\
-  \p\Bigl( \Land_{i=1}^{N}\A{i}\=\va{i} \|[\Big]
-  \Land_{i=1}^{N}\B{i}\=\vb{i},\; I\Bigr) \times
-  \p\Bigl( \Land_{i=1}^{N}\B{i}\=\vb{i} \|[\Big]  I\Bigr)
+  \p\Bigl( \Land_{i}\X{i}\=\x{i} \;  \Land_{i}\A{i}\=\va{i} \;
+  \Land_{i}\B{i}\=\vb{i} \|[\Big] I\Bigr)  \equiv{}\\
+  \p\Bigl( \Land_{i}\X{i}\=\x{i} \|[\Big]  \Land_{i}\A{i}\=\va{i} \;
+  \Land_{i}\B{i}\=\vb{i}\;,\,  I\Bigr) \times{}\\
+  \p\Bigl( \Land_{i}\A{i}\=\va{i} \|[\Big]
+  \Land_{i}\B{i}\=\vb{i}\;,\, I\Bigr) \times
+  \p\Bigl( \Land_{i}\B{i}\=\vb{i} \|[\Big]  I\Bigr)
   \;,
 %   \p( \set{\X{i}\=\x{i}}, \set{\A{i}\=\va{i}}, \set{\B{i}\=\vb{i}} \| I)
 %   \equiv{}\\
@@ -1236,15 +1251,16 @@ decomposed in full accord with the product rule:
 %   \p(\set{\A{i}\=\va{i}} \| \set{\B{i}\=\vb{i}},\, I)
 % \times \p(  \set{\B{i}\=\vb{i}}\| I) \;,
 \end{multline}
-which is an identity in the probability-calculus. In other words, no
-special properties of conditional independence hold.
+which is an identity in the probability-calculus. In other words, no other
+special properties hold, besides the conditional exchangeability of these
+predictive distributions.
 
 In this case the integral representation~\eqref{eq:example1} involves an
 integration over a set of conditional or marginal long-run frequencies
 which is equivalent to the set of joint frequencies. That is, the two sets
 \begin{equation}
   \label{eq:sets_corr}
-  \set{\ff{x \bcond a,b},\, \ff{,a \bcond b},\, \ff{,,b} \|
+  \set{\ff{x \bcond a,b} \,,\, \ff{,a \bcond b} \,,\, \ff{,,b} \|
  x \in \sX, a \in \sA, b \in \sB}
 \leftrightarrow
 \set{\ff{x,a,b} \| x \in \sX, a \in \sA, b \in \sB}
@@ -1259,12 +1275,13 @@ independences.
 Additional independence properties, such as
 \begin{multline}
   \label{eq:example_independence}
-  \p( \set{\X{i}\=\x{i}}, \set{\A{i}\=\va{i}}, \set{\B{i}\=\vb{i}} \| I)
-={}\\
-  \p( \set{\X{i}\=\x{i}} \| \set{\A{i}\=\va{i}}, \set{\B{i}\=\vb{i}},\, I)
-  \times{}\\
-  \p(\set{\A{i}\=\va{i}} \|  I)
-  \times \p(  \set{\B{i}\=\vb{i}}\| I) \;,
+  \p\Bigl( \Land_{i}\X{i}\=\x{i} \;  \Land_{i}\A{i}\=\va{i} \;
+  \Land_{i}\B{i}\=\vb{i} \|[\Big] I\Bigr)  \equiv{}\\
+  \p\Bigl( \Land_{i}\X{i}\=\x{i} \|[\Big]  \Land_{i}\A{i}\=\va{i} \;
+  \Land_{i}\B{i}\=\vb{i}\;,\,  I\Bigr) \times{}\\
+  \p\Bigl( \Land_{i}\A{i}\=\va{i} \|[\Big] I\Bigr) \times
+  \p\Bigl( \Land_{i}\B{i}\=\vb{i} \|[\Big]  I\Bigr)
+  \;,
 \end{multline}
 which is not an identity of the probability-calculus, are those typically
 expressed by Bayesian networks.
@@ -1279,19 +1296,22 @@ For example, if the independence~\eqref{eq:example_independence} hold, a
 little calculation shows that the representation~\eqref{eq:example1} becomes
 \begin{multline}
   \label{eq:example1sep}
-  \p( \X{1}\=\x{1}, \A{1}\=\va{1}, \B{1}\=\vb{1},\, \dotsc,\,
-   \X{N}\=\x{N}, \A{N}\=\va{N}, \B{N}\=\vb{N} \| I) ={}\\
+\p\Bigl( \Land_{i}\X{i}\=\x{i} \;  \Land_{i}\A{i}\=\va{i} \;
+\Land_{i}\B{i}\=\vb{i} \|[\Big] I\Bigr)
+% \p( \X{1}\=\x{1}, \A{1}\=\va{1}, \B{1}\=\vb{1},\, \dotsc,\,
+%    \X{N}\=\x{N}, \A{N}\=\va{N}, \B{N}\=\vb{N} \| I) 
+   ={}\\
    %\shoveleft{
      \int\!\prod_{x,a,b}
      (\ff{x \bcond a,b}\, \ff{,a}\, \ff{,,b})^{N \FF{x,a,b}}\;%\times{}%}\\[-\jot]
 \pf(\ffb{x \bcond ab}\|I)\,\pf(\ffb{a}\|I)\,\pf(\ffb{b}\|I)
 \;\di\ffb{x \bcond ab} \,\di\ffb{a} \,\di\ffb{b} \;.
 \end{multline}
-We see that the integration is now over the \emph{reduced} set of long-run
+We see that the integration is now over the \emph{reduced} set of
 distributions
 \begin{equation}
   \label{eq:subset_freqs}
-  \set{\ff{x \bcond a,b},\, \ff{,a},\, \ff{,,b} \|
+  \set{\ff{x \bcond a,b} \,,\, \ff{,a} \,,\, \ff{,,b} \|
     x \in \sX, a \in \sA, b \in \sB} \;.
 \end{equation}
 This is a reduced set in the sense that $\ff{,a \bcond b} = \ff{,a}$ for
@@ -1301,10 +1321,10 @@ density.
 The independence condition~\eqref{eq:example_independence}, the various
 conditional-exchangeability conditions, and the integral
 representation~\eqref{eq:example1sep} can be expressed by the network\\
-\begin{figure}[h!]
-\centering\includegraphics[scale=0.5]{bayesnet3s.png}
-\caption{\label{fig:indep_net}}
-\end{figure}% bayesnet.svg
+\begin{center}%[h!]
+\includegraphics[scale=0.5]{bayesnet3s.png}
+\figcaption{\label{fig:indep_net}}
+\end{center}% bayesnet.svg
 
 \subsection{Generalization and connection with Bayesian networks}
 \label{sec:graph_repr_gen}

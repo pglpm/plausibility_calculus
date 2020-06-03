@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2020-03-17T00:29:23+0100
-%% Last-Updated: 2020-06-03T15:53:41+0200
+%% Last-Updated: 2020-06-03T20:10:34+0200
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newif\ifarxiv
 \arxivfalse
@@ -1289,10 +1289,6 @@ expressed by Bayesian networks;
 % conditional-exchangeability conditions, and the integral
 % representation~\eqref{eq:example1sep}
 in this case by the network
-\begin{center}%[h!]
-\includegraphics[scale=0.5]{bayesnet3s.png}
-\figcaption{\label{fig:indep_net}}
-\end{center}% bayesnet.svg
 
 
 In the integral representation under discussion, these conditional
@@ -1395,40 +1391,72 @@ factors involved.
 
 A Bayesian network is a graphical representation of judgements about the
 informational relevance or irrelevance of some statements to other
-statements. Such relevance or irrelevance is expressed by equalities or
-inequalities between conditional probabilities involving those statements.
+statements. Such relevance or irrelevance is expressed by implicit
+equalities between conditional probabilities involving those statements.
+The network is accompanied by tables of conditional distributions.
+
+A simple non-trivial example is this network:
+\begin{center}
+\begin{minipage}[t]{0.75\linewidth}
+%\vspace{}%
+\parbox{0.3\linewidth}{\protect\includegraphics[scale=0.5]{bayesnet3s.png}}% bayesnet.svg
+\hfill%\vspace{0pt}
+$\ff{x \bcond a,b}
+\quad\begin{gathered}
+\ff{,a}\\ \ff{,,b}
+\end{gathered}
+$%
+%$\begin{gathered}
+%       (\ff{x \bcond a,b})\\
+%       (\ff{,a})\\
+%       (\ff{,,b})
+% \end{gathered}$%
+\hfill%
+$\begin{aligned}
+       x&\in \sX\\
+       a&\in \sA\\
+       b&\in \sB\\
+\end{aligned}$%
+\end{minipage}
+\\\figcaption{\label{fig:indep_net}}
+\end{center}
+which says that the joint distribution factorizes as
+$\ff{x,a,b} = \ff{x \bcond a,b} \times \ff{,a} \times \ff{,,b}$.
+
+
 
 Unfortunately the use of Bayesian networks is a little ambiguous in the
-literature. Sometimes their application seem to refer to an
-\emph{individual} instance, and therefore to degrees of belief. For example
-our degree of belief about the effect of a treatment upon a specific
-person, given the gender and health condition of that person. Sometimes
-their application seem to refer to a whole \emph{population} or even
-superpopulation, and therefore to \enquote{long-run}
-frequencies.\citep[\eg][]{pearl2000_r2009,wiegerincketal2013}[the
-discussion by][is more precise in this respect: they assume, for
-simplicity, a limit in which the two problems become numerically
-similar]{lindleyetal1981}
+literature. Sometimes their application seems to refer to an
+\emph{individual} instance, and therefore to involve degrees of belief. For
+example our degree of belief about the effect of a treatment upon a
+specific person, given the age, gender, health condition of that person,
+and other factors. Sometimes their application seems to refer to a whole
+\emph{population} or even superpopulation, and therefore to involve
+\enquote{long-run} frequencies. Sometimes the same application seems to
+shift between the two points of view.\citep[See
+\eg][]{pearl2000_r2009,wiegerincketal2013}[the discussion by][is more
+precise in this respect: they assume, for simplicity, a limit in which the
+two problems become numerically similar]{lindleyetal1981}
 
-These two applications are not equivalent, and the distributions they
-involve are \emph{not} numerically equivalent. In other words we cannot
-apply to a population the conditional-probability tables of a Bayesian
-network constructed for an individual, nor vice versa. De~finetti's theorem
-shows why: empirical frequencies (\cf\ $F_{x,a}$), superpopulation
-frequencies (\cf\ $f_{x,a}$), and probabilities for individual instances
-(\cf\ $\p(\X{1}\=\x{1} \| \dotso)$), are numerically different. They may
-tend to become approximately equal after updating on very large amounts of
-data. But in practical applications, especially in medicine and social
-sciences, we do \emph{not} have large amounts of data.
+The two applications are not equivalent. In particular, the distributions
+they involve are numerically different. In general we cannot apply to a
+population the conditional-probability tables of a Bayesian network
+constructed for an individual, nor vice versa. De~finetti's theorem shows
+why: empirical frequencies (\cf\ $F_{x,a}$), superpopulation frequencies
+(\cf\ $f_{x,a}$), and probabilities for individual instances (\cf\
+$\p(\X{1}\=\x{1} \| \dotso)$), are numerically different. They may tend to
+become approximately equal after updating on very large amounts of data.
+But in practical applications, especially in medicine and social sciences,
+we do \emph{not} have large amounts of data.
 
-So several questions arise. In the application to individuals, the question
-of how our (conditional or unconditional) degrees of belief about the
-specific instance relate to, or are updated by, knowledge about similar
-instances. In the application to populations, the question of our
-uncertainties about the usually unknowable superpopulation frequencies, and
-of our uncertainties about the empirical frequencies of future observations
-of small groups of individuals. These questions are really two sides of the
-same question.
+Several questions thus arise in applying a Bayesian network. In the
+application to individuals, how are our (conditional or unconditional)
+degrees of belief about the specific instance related to, or updated by,
+knowledge about similar instances? In the application to populations, what
+is our uncertainty about the (usually unknowable) superpopulation
+frequencies? and what is our uncertainty about the empirical frequencies of
+future observations of small groups of individuals? These questions are all
+facets of the same question.
 
 And these are precisely the questions addressed by exchangeability and its
 theorems. Exchangeability expresses judgements about \enquote{similarity};
@@ -1441,17 +1469,18 @@ formula that quantitatively relates empirical frequencies, superpopulation
 frequencies and their uncertainty, and degrees of beliefs about individual
 instances.
 
-One way to combine a Bayesian network and exchangeability is similar to the
-way a hypothesis about a superpopulation frequency (\enquote{parametric or
-  non-parametric model}) is assimilated by exchangeability: as a mixture of
-such frequencies, which yields our degrees of belief for a finite number of
-individual instances. This is equivalent to assuming full exchangeability
-of our degrees of beliefs about an infinite number of individuals.
+One way to combine a Bayesian network and exchangeability would be to mimic
+the way a hypothesis about a superpopulation frequency (\enquote{parametric
+  or non-parametric model}) is assimilated by exchangeability: into a
+mixture of such frequencies, which yields our degrees of belief for a
+finite number of individual instances. This is equivalent to assuming full
+exchangeability of our degrees of beliefs about an infinite number of
+individuals.
 
 For example, if
 $\set[\big]{\set{\ff{x \bcond a,b}},\, \set{\ff{,a}},\, \set{\ff{,,b}}}$
 are the conditional-probability tables of the Bayesian network of
-\fig~\ref{fig:indep_net}, the our beliefs about a single individual would
+\fig~\ref{fig:indep_net}, our beliefs about a single individual would
 be given by the mixture
 \begin{multline}
   \label{eq:example_mix_bayesnet1}

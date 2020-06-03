@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2020-03-17T00:29:23+0100
-%% Last-Updated: 2020-06-03T23:19:47+0200
+%% Last-Updated: 2020-06-03T23:28:47+0200
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newif\ifarxiv
 \arxivfalse
@@ -1189,19 +1189,19 @@ We obtain
 \int\prod_{c,x} {f_{x,c}}^{N F_{x, c}}\;  \pf(\fj\|I)\,\di\fj
 \\
   \label{eq:factorizable}
-\text{with}\qquad \boxed{\;\vphantom{\int}\pf(\fj\|I)\;\di\fj =
+\boxed{\;\text{with}\qquad \vphantom{\int}\pf(\fj\|I)\;\di\fj =
 \pf(\fxc \| I)  \;
-\pf(\fc \| I) \;\di\fxc\,\di\fc }
+\pf(\fc \| I) \;\di\fxc\,\di\fc \quad}
 \end{gather}
 \end{subequations}
 where we have defined $f_{x,c} = f_{x \bcond c}\, f_{,c}$ and
-$\fj \defd (f_{x,c})$. Note that $(f_{x,c})$ does indeed behave like a join
-distribution.
+$\fj \defd (f_{x,c})$. Note that $(f_{x,c})$ has indeed the properties of a
+joint distribution.
 
 The boxed equality above comes from the one-one correspondence between the
-variables $(\fxc \,,\fc)$ and $\fj$, so that the product of density functions
-for $\fxc$ and $\fc$ is just a specific case of a density function for
-$\fj$, apart from a Jacobian factor.
+variables $(\fxc \,,\fc)$ and $\fj$, so that the product of density
+functions for $\fxc$ and $\fc$ is just a specific case of a density
+function for $\fj$ (which includes a Jacobian determinant).
 
 
 
@@ -1210,11 +1210,10 @@ exchangeable predictive distribution. Thus the joint distribution for the
 set of \emph{pairs} of statements $\set{(\X{i}\=\x{i}, \C{i}\=\cc{i})}$ is
 fully exchangeable.
 
-The noteworthy feature of the integral expression~\eqref{eq:result} for the
-fully exchangeable predictive distribution is that \emph{the density for
-  the joint distribution $\fj$ is factorizable into the product of a
-  density for the conditional distribution $\fxc$ and a density for the
-  marginal distribution $\fc$}.
+The noteworthy feature of the integral expression~\eqref{eq:result} is that
+\emph{the density for the joint distribution $\fj$ is factorizable into the
+  product of a density for the conditional distribution $\fxc$ and a
+  density for the marginal distribution $\fc$}.
 
 This factorization is, on the one hand, trivial: it must be so because the
 integral itself must factorize, to yield the
@@ -1224,16 +1223,16 @@ distributions.
 But from the point of view of the joint predictive
 distribution~\eqref{eq:integral_predictive_joint}, on the other hand, this
 factorization is generally not valid and a priori not necessary. The
-following general identity holds instead:
+following general identity would hold instead:
 \begin{multline}
   \label{eq:identities_factor}
   \pf(\fj\|I)\;\di\fj \equiv
   \pf[(\fxc \,,\fc) \| I] \;\di\fxc\,\di\fc
   \equiv{}\\
   \pf(\fxc \| \fc\,,\, I)  \;
-  \pf(\fc \| I) \;\di\fxc\,\di\fc \;.
+  \pf(\fc \| I) \;\di\fxc\,\di\fc \;,
 \end{multline}
-Which does not lead to any factorization of the integral.
+which does not lead to a factorization of the integral.
 % The factorization condition is thus equivalent to conditional independence:
 % \begin{equation}
 %   \label{eq:cond_indep_ff}
@@ -1241,9 +1240,9 @@ Which does not lead to any factorization of the integral.
 % \pf(\fxc \| I) \;\di\fxc \;.
 % \end{equation}
 The factorization is thus a special property of the density, which reflects
-a special property of the joint predictive distribution: namely the
-conditional exchangeability for the statements $\set{\X{i}\=\x{i}}$ given
-the $\set{\C{i}\=\cc{i}}$.
+a special property of the joint predictive distribution: the conditional
+exchangeability for the statements $\set{\X{i}\=\x{i}}$ given the
+$\set{\C{i}\=\cc{i}}$.
 
 % It is easy to show that the reverse also holds: if the density of an
 % integral representation is factorizable as in~\eqref{eq:factorizable}, then

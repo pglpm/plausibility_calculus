@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2020-03-17T00:29:23+0100
-%% Last-Updated: 2020-06-03T20:10:34+0200
+%% Last-Updated: 2020-06-03T23:19:47+0200
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newif\ifarxiv
 \arxivfalse
@@ -764,40 +764,113 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 \section{Introduction and notation}
 \label{sec:inf_exch}
 
-De Finetti's theorem for the representation of infinitely exchangeable
-probability distributions yields some of the formulae, derivable from the
-probability calculus, with the richest practical and philosophical
-consequences.%  It belongs to family of theorems whose members are still
+De Finetti's theorem for exchangeable distributions yields some of the
+formulae, derivable from the probability calculus, with the richest
+practical and philosophical
+consequences.% It belongs to family of theorems whose members are still
 % under exploration. Its closest relative is the theorem for infinitely,
 % \emph{partially} exchangeable probability distributions.
+It mathematically connects, under specific assumptions,
+\begin{itemize}[nosep]
+\item what can be interpreted as the frequencies in a superpopulation,
+\item our uncertainty about those frequencies,
+\item the empirical frequencies in collected data,
+\item the probability for individual instances.
+\end{itemize}
 
-In this work I present three results; each may interest a different
-audience.
+In this study I present three results. Each result builds on the preceding
+one(s), and each may interest a different audience.
 
 The first result, derived in \sect~\ref{sec:partial_exch}, is a
 reformulation of partial exchangeability and of its representation theorem
 in a slightly unfamiliar form. Though not remarkable, this reformulation
 gives some insights into the connection between partial and conditional
-exchangeability, and their connection to regression.
+exchangeability.
 
 The second result, derived is \sect~\ref{sec:result}, is an integral
-representation for joint (predictive) probability distributions with
-particular symmetries: some of the conditional distributions obtained from
-them satisfy partial exchangeability. This integral representation has the
-usual de~Finetti form and, remarkably, its density must factorize in a
-specific way. This factorization is implied by, and implies, the
-conditional-exchangeability symmetries.
+representation for joint predictive distributions with particular
+symmetries: some of the conditional distributions obtained from them
+satisfy partial exchangeability. This integral representation has the usual
+de~Finetti form but its density must factorize in a specific way.
 
 The third result, \sect~\ref{sec:exch_nets}, brings together
-exchangeability and Bayesian networks. A Bayesian network expresses
-assumptions of conditional dependence and independence. Exchangeability
-expresses assumptions about the mutual informational relevance of a set of
-phenomena or experiments, deemed to be \enquote{similar}. When we combine
-these two kinds of assumptions we obtain (predictive) probability
-distributions with a particular integral representation: a mixture of
-copies of the same Bayesian network. This result has some analogies with
-de~Finetti's usual representation, which is a mixture of independent
-probability distributions (\enquote{i.i.d.}).
+exchangeability and Bayesian networks. As this is the main result, the rest
+of this introduction focuses on it.
+
+A Bayesian network is a graphical representation of judgements about the
+informational relevance or irrelevance of some statements to other
+statements. Such relevance or irrelevance is expressed by implicit
+equalities between conditional probabilities involving those statements.
+The graph of the network is accompanied by tables of conditional
+distributions.
+
+Unfortunately the use of Bayesian networks is a little ambiguous in the
+literature. Sometimes their application seems to refer to an
+\emph{individual} instance, and therefore to involve degrees of belief. For
+example our degree of belief about the effect of a treatment upon a
+specific person, given the person's age, gender, health condition, and
+other factors. Sometimes their application seems instead to refer to a
+whole \emph{population} or even superpopulation, and therefore to involve
+\enquote{long-run} frequencies. And sometimes their application seems to
+unsystematically shift between both points of view.\citep[See
+\eg][]{pearl2000_r2009,wiegerincketal2013}[the discussion by][is more
+precise in this respect: they assume, for simplicity, a limit in which the
+two problems become numerically similar]{lindleyetal1981}
+
+The individual and population applications are not equivalent. In
+particular, the distributions they involve are numerically different. In
+general we cannot apply to a population the conditional-probability tables
+of a Bayesian network constructed for an individual, nor vice versa.
+De~finetti's theorem shows why: empirical frequencies, %(\cf\ $F_{x,a}$),
+superpopulation frequencies, % (\cf\ $f_{x,a}$),
+and probabilities for individual instances
+% (\cf\ $\p(\X{1}\=\x{1} \| \dotso)$),
+are numerically different. They may become approximately equal after
+updating on very large amounts of data. But in practical applications,
+especially in medicine and social sciences, we do \emph{not} have large
+amounts of data. The distinction must be kept.
+
+Several questions thus arise in applying a Bayesian network. In the
+application to individuals, how are our %(conditional or unconditional)
+degrees of belief about a specific instance related to, or updated by,
+knowledge about similar instances? In the application to populations, what
+is our uncertainty about the (usually unknowable) superpopulation
+frequencies? and what is our uncertainty about the empirical frequencies of
+future observations of small groups of individuals? These questions are all
+facets of the same question.
+
+And these are precisely the questions addressed by exchangeability and its
+theorems. Exchangeability expresses judgements about \enquote{similarity};
+more precisely, about the relevance (or irrelevance) of statements
+concerning individual events (observations, experiments, and so on) to sets
+of statements concerning other individual events. Such relevance is
+expressed by symmetries of conditional and unconditional probabilities
+involving those statements. The result is a mathematical formula that, as
+already mentioned, quantitatively relates empirical frequencies,
+superpopulation frequencies and their uncertainty, and degrees of beliefs
+about individual instances.
+
+It seems therefore necessary to mathematically combine Bayesian networks
+and exchangeability. Such combination is explored in
+\sect~\ref{sec:exch_nets}. A formula is given that connects the individual
+and population applications of a Bayesian network. The formula has the
+typical structure of the de~Finetti integral representation: informally
+speaking, the conditional distributions of the Bayesian network for an
+individual instance appear as mixtures of the distributions for the
+superpopulation. The structure of the network is preserved, but its
+preservation depends on specific assumptions about conditional
+exchangeability.
+
+
+% A Bayesian network expresses
+% assumptions of conditional dependence and independence. Exchangeability
+% expresses assumptions about the mutual informational relevance of a set of
+% phenomena or experiments, deemed to be \enquote{similar}. When we combine
+% these two kinds of assumptions we obtain (predictive) probability
+% distributions with a particular integral representation: a mixture of
+% copies of the same Bayesian network. This result has some analogies with
+% de~Finetti's usual representation, which is a mixture of independent
+% probability distributions (\enquote{i.i.d.}).
 
 % The first is to show an alternative
 % representation of the theorem for partial exchangeability. This
@@ -811,12 +884,9 @@ probability distributions (\enquote{i.i.d.}).
 % combination of exchangeability condition as the \emph{factorization} of the
 % density that appears in de~Finetti's representation.
 
-Each of these three results builds on the preceding one(s). The final
-section discusses them further and hints at possible applications for them.
-
 The remainder of this section introduces some notation and summarizes
 de~Finetti's theorem for full exchangeability. It can be skimmed through by
-readers familiar with exchangeability theorems, just to grasp the notation
+readers familiar with exchangeability theorems, only to grasp the notation
 I use.
 
 \subsection{Notation and summary of representation for full exchangeability}
@@ -845,19 +915,20 @@ A probability distribution over these atomic statements
 is called fully (infinitely) exchangeable if
 \begin{multline}
   \label{eq:exchangeable}
-  \text{\small for every $N$, every set
+  \text{\small for every $N$, every subset
     $\set{i_{1},\dotsc,i_{N}}\subset \NN$, and every permutation $\pi$ thereof,}
   \\
   \shoveleft{\p( \X{i_{1}}\=\x{i_{1}}, \X{i_{2}}\=\x{i_{2}},\dotsc,\X{i_{N}}\=\x{i_{N}}
     \| I) ={}}\\
-  \p( \X{i_{1}}\=\x{\pi(i_{1})},
-  \X{i_{2}}\=\x{\pi(i_{2})},\dotsc,\X{i_{N}}\=\x{\pi(i_{N})}   \| I),
+  \shoveright{\p( \X{i_{1}}\=\x{\pi(i_{1})},
+    \X{i_{2}}\=\x{\pi(i_{2})},\dotsc,\X{i_{N}}\=\x{\pi(i_{N})}   \| I) \;,}
+  \\
+  \shoveleft{\text{\small and all such probabilities are consistently related by marginalization.}}
 \end{multline}
-and if all such probabilities are consistently related by marginalization.
 This property is equivalent to declaring the empirical frequencies of the
 values $x$ to be sufficient statistics.
 
-In the following, both a comma and \enquote{$\land$} will denote logical
+In the following, a comma and \enquote{$\land$} will both denote logical
 conjunction. The notation $\Land_{i}$ will express conjunction with the
 index $i$ running over a subset of $N$ elements from $\NN$.
 
@@ -866,7 +937,7 @@ $x \in \sX$. The set of all such distributions is a simplex of dimension
 $\abs{\sX}-1$.
 
 For each $x \in \sX$, denote by $F_{x}$ the empirical relative frequency of
-$x$ in the set $\set{x_{1}, \dotsc, x_{N}}$:
+$x$ in the set $\set{x_{i}}$:
 \begin{equation}
   \label{eq:rel_frequencies}
   N F_{x} \defd \tsum_{i}\delt(x, \x{i}), \quad x \in \sX \;.
@@ -883,14 +954,13 @@ written as follows:
 \\&\equiv  \int\prod_{x} {f_{x}}^{N F_{x}}\;   \pf(\fx \| I)\,\di\fx \;,
 \end{split}
 \end{equation}
-where the integral is over the simplex of distributions $\set{\fx}$.
-
-In the first integral form, the product is over the set of instances
-$1,\dotsc,N$. In the second, equivalent integral form, the product is over
-the set of values $x$. This form shows that the empirical frequency
-distribution $(F_{x})$ is a sufficient statistic. It also hint at the
-important role played in the theorem by the relative entropy of $(F_{x})$
-with respect to $(f_{x})$.
+where the integral is over the simplex of distributions $\set{\fx}$. In the
+first integral form, the product is over the set of instances $\set{i}$.
+In the second, equivalent integral form, the product is over the set of
+values $x$. This form shows that the empirical frequency distribution
+$(F_{x})$ is a sufficient statistic. It also hints at the important role
+played in the theorem by the relative entropy of $(F_{x})$ with respect to
+$(f_{x})$.
 
 The theorem establishes a one-one correspondence between the set of
 (nested) joint predictive distributions and the set of densities over the
@@ -910,22 +980,23 @@ $\pf(\fx \| I)\,\di\fx$:
 For this reason the parameter $\fx$ can be interpreted as a long-run
 frequency distribution\footnote{\enquote{But this \emph{long run} is a
     misleading guide to current affairs. \emph{In the long run} we are all
-    dead} \parencite[\sect~3.I p.~65]{keynes1923_r2013}.}. I will therefore call it so sometimes, but without
-the intention to force such interpretation on you.
+    dead} \parencite[\sect~3.I p.~65]{keynes1923_r2013}.}, or the frequency
+in a \enquote{superpopulation}. I will therefore call it so sometimes, but
+without the intention of forcing such interpretation on you.
 
 
 \section{Partial exchangeability: alternative form}
 \label{sec:partial_exch}
 
-In de~Finetti's theorem for partially exchangeable distributions, the set
-$\set{\X{i}\=\x{i}}$ of \sect~\ref{sec:setup} is divided into two or more
-categories represented by subsets
+In de~Finetti's theorem for \emph{partially} exchangeable distributions,
+the set $\set{\X{i}\=\x{i}}$ of \sect~\ref{sec:setup} is divided into two
+or more categories represented by subsets
 $\set{\Y{j}\=\y{j}}, \set{\Z{k}\=\z{k}}, \dotsc$. Partial exchangeability
 of the distribution for such statements means that permutations are allowed
-within each subset but not necessarily across subsets. The usual
+within each subset but not necessarily across subsets. The integral
 representation in this case % , after a suitable re-indexing
 % $\set{1,2,\dotsc} \mapsto \set{1', 2', \dotsc, 1'', 2'', \dotsc}$,
-has the form
+is usually given in the form
 \begin{equation}
   \label{eq:partialdefinetti}
   \p\Bigl( \Land_{i'}\Y{i'}\=\y{i'},\;
@@ -944,17 +1015,16 @@ form~\eqref{eq:definetti_freq} is recovered.
 
 
 
-A little reflection shows that if we know the quantities $\X{i}$ to belong
-to category $Y$ in instances $i'$, and to category $Z$ in instances $i''$,
-then
-\begin{enumerate*}[label=(\alph*)]
+A little reflection shows that if we know the $\X{i}$ to belong to category
+$Y$ in instances $i'$, and to category $Z$ in instances $i''$, then
+\begin{enumerate*}[label=(\roman*)]
 \item there are some other quantities $\C{i}$ that allows us to distinguish
   the two categories, and \item the values %$\C{i}\=\cc{i}$
   of these quantities \emph{are known} for all instances.
 \end{enumerate*}
 
-Let us say, for example, that the quantities $\X{i}$ are the results of
-animal treatments, with values \enquote{$\xs$}uccess and
+Let us say, for example, that the statements $\set{\X{i}\=\x{i}}$ refer to
+the results of animal treatments, with $x$-values \enquote{$\xs$}uccess and
 \enquote{$\xf$}ailure. $Y$ refers to the results for treatments on
 $\xY$aks, and $Z$ on $\xZ$ebras. If we write
 $$\p(\Y{3}\=\xs,\;\Z{5}\=\xf \| \zI)=0.2\;,$$
@@ -964,9 +1034,9 @@ notation, otherwise we would not have known whether to use the symbol $Y$
 or $Z$ for those instances. This information is evidently implicit in our
 background information $\zI$.
 
-We now make the category information more explicit. A slightly different
-definition of partial exchangeability is thus obtained, with a slightly
-different form of its representation theorem.
+We now make this categorical information more explicit. A slightly
+different definition of partial exchangeability is thus obtained, with a
+slightly different form of its representation theorem.
 
 
 
@@ -979,8 +1049,7 @@ of atomic statements
 \end{equation}
 For each $i$ the statements $\set{\C{i}\=c \| c \in \sC}$ are mutually
 exclusive on information $I$.
-
-These statements allow us to identify each instance $i$ as belonging to one
+These statements let us identify each instance $i$ as belonging to one
 or another category out of the finite set $\sC$.
 
 A probability distribution over the $\set{\X{i}\=\x{i}}$ atomic statements
@@ -988,16 +1057,17 @@ A probability distribution over the $\set{\X{i}\=\x{i}}$ atomic statements
 is called partially exchangeable if
 \begin{multline}
   \label{eq:part_exchangeable}
-  \mathbox[0.99]{\small for every $N$, every set of $N$ indices $\set{i}$, and every permutation $\pi$ thereof such that\quad
+  \mathbox[0.99]{\small for every $N$, every subset of $N$ indices $\set{i}
+    \subset \NN$, and every permutation $\pi$ thereof such that\quad
     $\pi(j)=k \mathrel{\;\Rightarrow\;} \cc{j}=\cc{k}$,}
   \\
   \p\Bigl( \Land_{i}\X{i}\=\x{i}  \|[\Big]
-    \Land_{i}\C{i}\=\cc{i},\;    I\Bigr) =
+  \Land_{i}\C{i}\=\cc{i}\,,\,    I\Bigr) =
   \p\Bigl( \Land_{i}\X{i}\=\x{\pi(i)}  \|[\Big]
-  \Land_{i}\C{i}\=\cc{i},\;    I\Bigr)
+  \Land_{i}\C{i}\=\cc{i}\,,\,    I\Bigr)
   \;.
 \end{multline}
-that is, the only allowed permutations are those \emph{which exchange
+In other words the only allowed permutations are those \emph{which exchange
   indices having the same $c$ value}, that is, belonging to the same
 category.
 
@@ -1020,7 +1090,7 @@ each of dimension $\abs{\sX}-1$.
 
 Denote by $F_{x,c}$ the empirical, joint relative frequency of the pair of
 values $(x,c)$ occurring in the set of pairs
-$\set{(\x{1}, \cc{1}), \dotsc, (\x{N}, \cc{N})}$:
+$\set{(\x{i}, \cc{i})}$:
 \begin{equation}
   \label{eq:rel_frequencies}
   N F_{x,c} \defd \tsum_{i}\delt(x, \x{i})\,\delt(c, \cc{i}),
@@ -1034,7 +1104,7 @@ distribution~\eqref{eq:part_exchangeable} can be written as follows:
 \begin{equation}
   \label{eq:partial_definetti_freq}
     \p\Bigl(\Land_{i} \X{i}\=\x{i} \|[\Big]
-    \Land_{i}\C{i}\=\cc{i},\;  I\Bigr) =
+    \Land_{i}\C{i}\=\cc{i}\,,\,  I\Bigr) =
     % \p( \X{1}\=\x{1}, \dotsc,  \X{N}\=\x{N} \|
     % \C{1}\=\cc{1}, \dotsc,\C{N}\=\cc{N},\;  I) ={}\\
 \int\prod_{c,x} {f_{x \bcond c}}^{N F_{x, c}}\;
@@ -1051,12 +1121,12 @@ This alternative formulation of partial exchangeability shows that this
 symmetry could also be called \emph{conditional} exchangeability instead.
 The role of conditional distributions is clear in the
 representation~\eqref{eq:partial_definetti_freq}. In the following I will
-use the term \enquote{conditional} instead of \enquote{partial} to
-emphasize this.
+use the term \enquote{conditional exchangeability} in place of
+\enquote{partial exchangeability} to emphasize this.
 
 
-\section{Representation for joint distributions with conditional
-exchangeability  symmetries}
+\section{Representation for joint distributions with
+  conditional-exchangeability symmetries}
 \label{sec:result}
 
 Suppose that we would assign a conditionally (\ie, \enquote{partially}: see
@@ -1067,10 +1137,11 @@ probability distribution of these statements have? And the marginal
 distribution for $\set{\X{i}\=\x{i}}$?
 
 The joint probability distribution can be rewritten
-\begin{multline}
+\begin{equation}
   \label{eq:joint_p_xc_decomposed}
-  \p\Bigl(\Land_{i} (\X{i}\=\x{i}, \C{i}\=\cc{i}) \|[\Big] I\Bigr) ={}\\
-  \p\Bigl(\Land_{i} \X{i}\=\x{i} \|[\Big] \Land_{i} \C{i}\=\cc{i},\; I\Bigr) \times
+  \p\Bigl(\Land_{i} (\X{i}\=\x{i}\,,\, \C{i}\=\cc{i}) \|[\Big] I\Bigr) =%{}\\
+  \p\Bigl(\Land_{i} \X{i}\=\x{i} \|[\Big] \Land_{i} \C{i}\=\cc{i}
+  \,,\, I\Bigr) \times
   \p\Bigl(\Land_{i} \C{i}\=\cc{i} \|[\Big] I\Bigr)
 %   \p( \X{1}\=\x{1}, \C{1}\=\cc{1},\; \dotsc,\;  \X{N}\=\x{N},\C{N}\=\cc{N}
 %   \| I) ={}\\
@@ -1079,12 +1150,12 @@ The joint probability distribution can be rewritten
 % \times{}\\
 % \p(\C{1}\=\cc{1}, \dotsc,\C{N}\=\cc{N}  \|    I)
   \;,
-\end{multline}
+\end{equation}
 where the first factor, conditionally exchangeable, can be represented by
 the integral of \eqn~\eqref{eq:partial_definetti_freq}.
 
-Let us suppose that our uncertainty about the statements
-$\set{\C{i}\=\cc{i}}$ is expressed by a fully exchangeable marginal
+Let us suppose that our degrees of belief about the statements
+$\set{\C{i}\=\cc{i}}$ are expressed by a fully exchangeable marginal
 probability distribution. An integral representation analogous
 to~\eqref{eq:definetti_freq} then holds:
 \begin{equation}
@@ -1389,11 +1460,7 @@ networks. I believe such a combination is needed in concrete inference
 problems, especially when data are few with respect to the number of
 factors involved.
 
-A Bayesian network is a graphical representation of judgements about the
-informational relevance or irrelevance of some statements to other
-statements. Such relevance or irrelevance is expressed by implicit
-equalities between conditional probabilities involving those statements.
-The network is accompanied by tables of conditional distributions.
+
 
 A simple non-trivial example is this network:
 \begin{center}
@@ -1423,51 +1490,6 @@ $\begin{aligned}
 which says that the joint distribution factorizes as
 $\ff{x,a,b} = \ff{x \bcond a,b} \times \ff{,a} \times \ff{,,b}$.
 
-
-
-Unfortunately the use of Bayesian networks is a little ambiguous in the
-literature. Sometimes their application seems to refer to an
-\emph{individual} instance, and therefore to involve degrees of belief. For
-example our degree of belief about the effect of a treatment upon a
-specific person, given the age, gender, health condition of that person,
-and other factors. Sometimes their application seems to refer to a whole
-\emph{population} or even superpopulation, and therefore to involve
-\enquote{long-run} frequencies. Sometimes the same application seems to
-shift between the two points of view.\citep[See
-\eg][]{pearl2000_r2009,wiegerincketal2013}[the discussion by][is more
-precise in this respect: they assume, for simplicity, a limit in which the
-two problems become numerically similar]{lindleyetal1981}
-
-The two applications are not equivalent. In particular, the distributions
-they involve are numerically different. In general we cannot apply to a
-population the conditional-probability tables of a Bayesian network
-constructed for an individual, nor vice versa. De~finetti's theorem shows
-why: empirical frequencies (\cf\ $F_{x,a}$), superpopulation frequencies
-(\cf\ $f_{x,a}$), and probabilities for individual instances (\cf\
-$\p(\X{1}\=\x{1} \| \dotso)$), are numerically different. They may tend to
-become approximately equal after updating on very large amounts of data.
-But in practical applications, especially in medicine and social sciences,
-we do \emph{not} have large amounts of data.
-
-Several questions thus arise in applying a Bayesian network. In the
-application to individuals, how are our (conditional or unconditional)
-degrees of belief about the specific instance related to, or updated by,
-knowledge about similar instances? In the application to populations, what
-is our uncertainty about the (usually unknowable) superpopulation
-frequencies? and what is our uncertainty about the empirical frequencies of
-future observations of small groups of individuals? These questions are all
-facets of the same question.
-
-And these are precisely the questions addressed by exchangeability and its
-theorems. Exchangeability expresses judgements about \enquote{similarity};
-more precisely, about the relevance or irrelevance of statements concerning
-individual events (observations, experiments, and so on) to sets of
-statements concerning other individual events. Such relevance or
-irrelevance is expressed by symmetries of conditional and unconditional
-probabilities involving those statements. The result is a mathematical
-formula that quantitatively relates empirical frequencies, superpopulation
-frequencies and their uncertainty, and degrees of beliefs about individual
-instances.
 
 One way to combine a Bayesian network and exchangeability would be to mimic
 the way a hypothesis about a superpopulation frequency (\enquote{parametric

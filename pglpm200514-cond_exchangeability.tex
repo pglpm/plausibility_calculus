@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2020-03-17T00:29:23+0100
-%% Last-Updated: 2020-06-03T23:28:47+0200
+%% Last-Updated: 2020-06-04T12:00:39+0200
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newif\ifarxiv
 \arxivfalse
@@ -669,20 +669,18 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 \renewcommand*{\=}{\TextOrMath\texteq\eq}
 \newcommand*{\X}[1]{X_{#1}}
 \newcommand*{\x}[1]{x_{#1}}
+\newcommand*{\A}[1]{A_{#1}}
+\newcommand*{\B}[1]{B_{#1}}
 \newcommand*{\Y}[1]{Y_{#1}}
 \newcommand*{\y}[1]{y_{#1}}
 \newcommand*{\Z}[1]{Z_{#1}}
 \newcommand*{\z}[1]{z_{#1}}
 \newcommand*{\C}[1]{C_{#1}}
 \newcommand*{\cc}[1]{c_{#1}}
-\newcommand*{\A}[1]{A_{#1}}
-\newcommand*{\va}[1]{a_{#1}}
-\newcommand*{\B}[1]{B_{#1}}
-\newcommand*{\vb}[1]{b_{#1}}
-\newcommand*{\sX}{\mathfrak{X}}
+\newcommand*{\sx}{\mathfrak{X}}
 \newcommand*{\sC}{\mathfrak{C}}
-\newcommand*{\sA}{\mathfrak{A}}
-\newcommand*{\sB}{\mathfrak{B}}
+\newcommand*{\sy}{\mathfrak{Y}}
+\newcommand*{\sz}{\mathfrak{Z}}
 \newcommand*{\vf}{v}
 \newcommand*{\ff}[1]{f_{#1}}
 \newcommand*{\ffb}[1]{\bm{f_{\!#1}}}
@@ -698,8 +696,8 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 \newcommand*{\xf}{\textsf{F}}
 %\newcommand*{\xj}{\textsf{J}}
 %\newcommand*{\xa}{\textsf{A}}
-\newcommand*{\xY}{\textsf{Y}}
-\newcommand*{\xZ}{\textsf{Z}}
+\newcommand*{\xA}{\textsf{A}}
+\newcommand*{\xB}{\textsf{B}}
 \newcommand*{\zI}{J}
 \newcommand*{\bcond}[1][]{\nonscript\,#1\bm{\vert}\nonscript\;\mathopen{}}
 
@@ -821,8 +819,8 @@ The individual and population applications are not equivalent. In
 particular, the distributions they involve are numerically different. In
 general we cannot apply to a population the conditional-probability tables
 of a Bayesian network constructed for an individual, nor vice versa.
-De~finetti's theorem shows why: empirical frequencies, %(\cf\ $F_{x,a}$),
-superpopulation frequencies, % (\cf\ $f_{x,a}$),
+De~finetti's theorem shows why: empirical frequencies, %(\cf\ $F_{x,y}$),
+superpopulation frequencies, % (\cf\ $f_{x,y}$),
 and probabilities for individual instances
 % (\cf\ $\p(\X{1}\=\x{1} \| \dotso)$),
 are numerically different. They may become approximately equal after
@@ -903,10 +901,10 @@ statements (in the logical sense)
  \begin{equation}
   \label{eq:statements}
   \conds[\big]{\X{i}\=\x{i}}{i \in \NN,\;
- \forall i\;\x{i} \in \sX}
+ \forall i\;\x{i} \in \sx}
 \end{equation}
-where $\sX$ is a finite set. For each $i$ the statements
-$\set{\X{i}\=x \| x \in \sX}$ are assumed mutually exclusive on information
+where $\sx$ is a finite set. For each $i$ the statements
+$\set{\X{i}\=x \| x \in \sx}$ are assumed mutually exclusive on information
 $I$. (The theorem holds for any set of statements with these properties,
 even if the statements are not of the form \enquote{$X\=x$}.)
 
@@ -933,14 +931,14 @@ conjunction. The notation $\Land_{i}$ will express conjunction with the
 index $i$ running over a subset of $N$ elements from $\NN$.
 
 Denote by $\fx \defd (f_{x})$ a normalized distribution over the values
-$x \in \sX$. The set of all such distributions is a simplex of dimension
-$\abs{\sX}-1$.
+$x \in \sx$. The set of all such distributions is a simplex of dimension
+$\abs{\sx}-1$.
 
-For each $x \in \sX$, denote by $F_{x}$ the empirical relative frequency of
+For each $x \in \sx$, denote by $F_{x}$ the empirical relative frequency of
 $x$ in the set $\set{x_{i}}$:
 \begin{equation}
   \label{eq:rel_frequencies}
-  N F_{x} \defd \tsum_{i}\delt(x, \x{i}), \quad x \in \sX \;.
+  N F_{x} \defd \tsum_{i}\delt(x, \x{i}), \quad x \in \sx \;.
 \end{equation}
 
 De~Finetti's theorem states that a fully exchangeable distribution can be
@@ -964,7 +962,7 @@ $(f_{x})$.
 
 The theorem establishes a one-one correspondence between the set of
 (nested) joint predictive distributions and the set of densities over the
-$(\abs{\sX}-1)$-dimensional simplex. Thus any special properties of a
+$(\abs{\sx}-1)$-dimensional simplex. Thus any special properties of a
 predictive distribution must be reflected in special properties of its
 corresponding density, and vice versa.
 
@@ -1025,13 +1023,13 @@ $Y$ in instances $i'$, and to category $Z$ in instances $i''$, then
 
 Let us say, for example, that the statements $\set{\X{i}\=\x{i}}$ refer to
 the results of animal treatments, with $x$-values \enquote{$\xs$}uccess and
-\enquote{$\xf$}ailure. $Y$ refers to the results for treatments on
-$\xY$aks, and $Z$ on $\xZ$ebras. If we write
-$$\p(\Y{3}\=\xs,\;\Z{5}\=\xf \| \zI)=0.2\;,$$
-then we must already know that animal number~$3$ is a yak: $\C{3}\=\xY$,
-and animal number~$5$ is a zebra: $\C{5}\=\xZ$. This is clear from our very
-notation, otherwise we would not have known whether to use the symbol $Y$
-or $Z$ for those instances. This information is evidently implicit in our
+\enquote{$\xf$}ailure. $A$ refers to the results for treatments on
+$\xA$aks, and $B$ on $\xB$ebras. If we write
+$$\p(\A{3}\=\xs,\;\B{5}\=\xf \| \zI)=0.2\;,$$
+then we must already know that animal number~$3$ is a yak: $\C{3}\=\xA$,
+and animal number~$5$ is a zebra: $\C{5}\=\xB$. This is clear from our very
+notation, otherwise we would not have known whether to use the symbol $A$
+or $B$ for those instances. This information is evidently implicit in our
 background information $\zI$.
 
 We now make this categorical information more explicit. A slightly
@@ -1081,12 +1079,12 @@ accordingly.
 
 
 For each category $c \in \sC$, introduce a normalized distribution
-$\set{f_{x \bcond c} \| x \in \sX}$ over the values $x$. As the notation
+$\set{f_{x \bcond c} \| x \in \sx}$ over the values $x$. As the notation
 suggests, it can be considered as a \emph{conditional} distribution over
 $x$ given $c$. Denote (with some abuse of the symbols) by
 $\fxc \defd (f_{x \bcond c})$ the set of all such conditional
 distributions. This set is the Cartesian product of $\abs{\sC}$ simplices,
-each of dimension $\abs{\sX}-1$.
+each of dimension $\abs{\sx}-1$.
 
 Denote by $F_{x,c}$ the empirical, joint relative frequency of the pair of
 values $(x,c)$ occurring in the set of pairs
@@ -1094,7 +1092,7 @@ $\set{(\x{i}, \cc{i})}$:
 \begin{equation}
   \label{eq:rel_frequencies}
   N F_{x,c} \defd \tsum_{i}\delt(x, \x{i})\,\delt(c, \cc{i}),
-  \quad x \in \sX,\; c \in \sC \;.
+  \quad x \in \sx,\; c \in \sC \;.
 \end{equation}
 Thus $N F_{x,c}$ is the total number of times value $x$ appears among the
 pairs with $\cc{i}=c$.
@@ -1249,7 +1247,7 @@ $\set{\C{i}\=\cc{i}}$.
 % the corresponding probability distributions enjoy a symmetry of conditional
 % exchangeability.
 
-\section{Exchangeable Bayesian networks}
+\section{Bayesian networks and exchangeability}
 \label{sec:exch_nets}
 
 \subsection{Graphical representation of conditional exchangeability}
@@ -1268,10 +1266,10 @@ of a Bayesian network:
 \end{center}% bayesnet.svg
 The two nodes represent the two sets of statements. The arrow from the
 $C$-node to the $X$-node represents the conditional exchangeability of the
-probabilities for the latter set of statements conditional on the former.
-The absence of incoming arrows to the $C$-node represents the full
-exchangeability of its probability distribution. The final integral
-representation for the joint probability of the full network has a
+probabilities for $X$-statements conditional on the $C$-statements. The
+absence of incoming arrows to the $C$-node represents the full
+exchangeability of the distribution for the $C$-statements. The final
+integral representation for the joint probability of the full network has a
 factorizable density, with one factor per node.
 
 Using the reasoning and integral representations of
@@ -1282,37 +1280,69 @@ calculated that the following network, for example:
 \includegraphics[scale=0.5]{bayesnet3.png}
 \figcaption{\label{fig:dep3net}}  
 \end{center}% bayesnet.svg
-has the representation
+represents (i) the conditional exchangeability of the probabilities for the
+$X$-statements given \emph{pairs} of $Y$- and $Z$-statements:
+\begin{multline}
+  \label{eq:part_exchangeableAB}
+  \mathbox[0.99]{\small for every $N$, every subset of $N$ indices $\set{i}
+    \subset \NN$, and every permutation $\pi$ thereof such that\quad
+    $\pi(j)=k \mathrel{\;\Rightarrow\;} \y{j}\eq\y{k}\land \z{j}\eq\z{k}$,}
+  \\
+  \p\Bigl( \Land_{i}\X{i}\=\x{i}  \|[\Big]
+  \Land_{i}(\Y{i}\=\y{i}\,,\,\Z{i}\=\z{i}) \,,\,    I\Bigr) =
+  \p\Bigl( \Land_{i}\X{i}\=\x{\pi(i)}  \|[\Big]
+  \Land_{i}(\Y{i}\=\y{i}\,,\,\Z{i}\=\z{i}) \,,\, I\Bigr)
+  \;,
+\end{multline}
+(ii) the conditional exchangeability of the probabilities for the
+$Y$-statements given the $Z$-statements, 
+% \begin{multline}
+%   \label{eq:part_exchangeableAB}
+%   \mathbox[0.99]{\small for every $N$, every subset of $N$ indices $\set{i}
+%     \subset \NN$, and every permutation $\pi$ thereof such that\quad
+%     $\pi(j)=k \mathrel{\;\Rightarrow\;} \z{j}\eq\z{k}$,}
+%   \\
+%   \p\Bigl( \Land_{i}\Y{i}\=\y{i}  \|[\Big]
+%   \Land_{i}(\,,\,\Z{i}\=\z{i}) \,,\,    I\Bigr) =
+%   \p\Bigl( \Land_{i}\X{i}\=\x{\pi(i)}  \|[\Big]
+%   \Land_{i}(\Y{i}\=\y{i}\,,\,\Z{i}\=\z{i}) \,,\, I\Bigr)
+%   \;,
+% \end{multline}
+and (iii) the full exchangeability of the probabilities of the
+$Z$-statements.
+
+The joint predictive distribution has the expected representation
 \begin{multline}
   \label{eq:example1}
-  \p( \X{1}\=\x{1}, \A{1}\=\va{1}, \B{1}\=\vb{1},\, \dotsc,\,
-   \X{N}\=\x{N}, \A{N}\=\va{N}, \B{N}\=\vb{N} \| I) ={}\\
-\int\!\prod_{x,a,b} {\underbracket[1pt][0pt]{\ff{x,a,b}}_{\mathclap{%
+  \p\Bigl( \Land_{i}\X{i}\=\x{i} \;
+  \Land_{i}\Y{i}\=\y{i} \;  \Land_{i}\Z{i}\=\z{i} \|[\Big] I\Bigr)
+  ={}\\
+\int\!\prod_{x,y,z} {\underbracket[1pt]{\ff{x,y,z}}_{\mathclap{%
 \begin{gathered}
 \scriptstyle\big\vert\\[-2\jot]     
-\scriptstyle{}=\ff{x \bcond a,b}\, \ff{,a \bcond b}\, \ff{,,b}
+\scriptstyle {}=\ff{x \bcond y,z}\, \ff{,y \bcond z}\, \ff{,,z}
 \end{gathered}%
-}}}^{N \FF{x,a,b}}\;
-\underbracket[1pt]{\pf(\ffb{x \bcond ab}\|I)\,\pf(\ffb{a \bcond b}\|I)\,\pf(\ffb{b}\|I)
-  \;\di\ffb{x \bcond ab} \,\di\ffb{a \bcond b} \,\di\ffb{b}}_{{}=
-\pf(\ffb{xab}\|I)\,\di\ffb{xab}} \;
+}}}^{N \FF{x,y,z}}\;
+\underbracket[1pt]{\pf(\ffb{x \bcond y z}\|I)\,\pf(\ffb{y \bcond z}\|I)\,\pf(\ffb{z}\|I)
+  \;\di\ffb{x \bcond y z} \,\di\ffb{y \bcond z} \,\di\ffb{z}}_{ {}=
+\pf(\ffb{x y z}\|I)\,\di\ffb{x y z}} \;
 \end{multline}
-with $\ff{,,b} \defd \sum_{x,a}\ff{x,a,b}$ and so on.
+with $\ff{,,z} \defd \sum_{x,y}\ff{x,y,z}$ and so on.
 
-\subsection{Representing additional independence assumptions}
+\subsection{Representing independence assumptions}
 \label{sec:graph_repr_indep}
 
 In the last example the joint predictive distribution for all the
 statements is decomposed in full accord with the product rule:
 \begin{multline}
   \label{eq:example_usual_factorization}
-  \p\Bigl( \Land_{i}\X{i}\=\x{i} \;  \Land_{i}\A{i}\=\va{i} \;
-  \Land_{i}\B{i}\=\vb{i} \|[\Big] I\Bigr)  \equiv{}\\
-  \p\Bigl( \Land_{i}\X{i}\=\x{i} \|[\Big]  \Land_{i}\A{i}\=\va{i} \;
-  \Land_{i}\B{i}\=\vb{i}\;,\,  I\Bigr) \times{}\\
-  \p\Bigl( \Land_{i}\A{i}\=\va{i} \|[\Big]
-  \Land_{i}\B{i}\=\vb{i}\;,\, I\Bigr) \times
-  \p\Bigl( \Land_{i}\B{i}\=\vb{i} \|[\Big]  I\Bigr)
+  \p\Bigl( \Land_{i}\X{i}\=\x{i} \;  \Land_{i}\Y{i}\=\y{i} \;
+  \Land_{i}\Z{i}\=\z{i} \|[\Big] I\Bigr)  \equiv{}\\
+  \p\Bigl( \Land_{i}\X{i}\=\x{i} \|[\Big]  \Land_{i}\Y{i}\=\y{i} \;
+  \Land_{i}\Z{i}\=\z{i}\;,\,  I\Bigr) \times{}\\
+  \p\Bigl( \Land_{i}\Y{i}\=\y{i} \|[\Big]
+  \Land_{i}\Z{i}\=\z{i}\;,\, I\Bigr) \times
+  \p\Bigl( \Land_{i}\Z{i}\=\z{i} \|[\Big]  I\Bigr)
   \;,
 %   \p( \set{\X{i}\=\x{i}}, \set{\A{i}\=\va{i}}, \set{\B{i}\=\vb{i}} \| I)
 %   \equiv{}\\
@@ -1322,35 +1352,65 @@ statements is decomposed in full accord with the product rule:
 % \times \p(  \set{\B{i}\=\vb{i}}\| I) \;,
 \end{multline}
 which is an identity in the probability-calculus. In other words, no other
-special properties hold, besides the conditional exchangeability of these
-predictive distributions.
+special properties hold, besides the conditional exchangeability of the
+separate predictive distributions.
 
 In this case the integral representation~\eqref{eq:example1} involves an
 integration over a set of conditional or marginal long-run frequencies
 which is equivalent to the set of joint frequencies. That is, the two sets
 \begin{equation}
   \label{eq:sets_corr}
-  \set{\ff{x \bcond a,b} \,,\, \ff{,a \bcond b} \,,\, \ff{,,b} \|
- x \in \sX, a \in \sA, b \in \sB}
+  \set{\ff{x \bcond y,z} \,,\, \ff{,y \bcond z} \,,\, \ff{,,z} \|
+ x \in \sx, y \in \sy, z \in \sz}
 \leftrightarrow
-\set{\ff{x,a,b} \| x \in \sX, a \in \sA, b \in \sB}
+\set{\ff{x,y,z} \| x \in \sx, y \in \sy, z \in \sz}
 \end{equation}
 are in one-one correspondence.
 
-The factorizability of the density $\pf(\ffb{xab}\|I)\,\di\ffb{xab}$
+The factorizability of the density $\pf(\ffb{x y z}\|I)\,\di\ffb{x y z}$
 therefore implies, and is implied by, the exchangeability symmetries of
 conditional probability distributions. But it does not imply additional
 independences.
 
+
+
+Now we want to consider independence assumptions characteristics of
+non-trivial Bayesian networks, and see how they can be combined with
+exchangeability assumptions.
+
+Take for example the non-trivial Bayesian network
+\begin{center}%[!h]
+\includegraphics[scale=0.5]{bayesnet3s.png}
+\figcaption{\label{fig:indep_net}}  
+\end{center}% bayesnet.svg
+Interpreted as an individual instance, this network expresses the
+factorization
+\begin{multline}
+  \label{eq:example_independence_individual}
+  \p( \X{1}\=x \,,\, \Y{1}\=y \,,\,
+  \Z{1}\=z \| I)  \equiv{}\\
+  \p( \X{1}\=x \|  \Y{1}\=y \,,\,
+  \Z{1}\=z\;,\,  I) \times %{}\\
+  \p( \Y{1}\=y \| I) \times
+  \p( \Z{1}\=z \|  I)
+\end{multline}
+for all $x, y, z$, which implies the conditional independence
+\begin{equation}
+  \label{eq:con_indep_yz}
+  \p( \Y{1}\=y \| \Z{1}\=z\;,\,  I) =
+  \p( \Y{1}\=y \|  I)
+\end{equation}
+or an equivalent one with $Y$ and $Z$ exchanged.
+
 Additional independence properties, such as
 \begin{multline}
   \label{eq:example_independence}
-  \p\Bigl( \Land_{i}\X{i}\=\x{i} \;  \Land_{i}\A{i}\=\va{i} \;
-  \Land_{i}\B{i}\=\vb{i} \|[\Big] I\Bigr)  \equiv{}\\
-  \p\Bigl( \Land_{i}\X{i}\=\x{i} \|[\Big]  \Land_{i}\A{i}\=\va{i} \;
-  \Land_{i}\B{i}\=\vb{i}\;,\,  I\Bigr) \times{}\\
-  \p\Bigl( \Land_{i}\A{i}\=\va{i} \|[\Big] I\Bigr) \times
-  \p\Bigl( \Land_{i}\B{i}\=\vb{i} \|[\Big]  I\Bigr)
+  \p\Bigl( \Land_{i}\X{i}\=\x{i} \;  \Land_{i}\Y{i}\=\y{i} \;
+  \Land_{i}\Z{i}\=\z{i} \|[\Big] I\Bigr)  \equiv{}\\
+  \p\Bigl( \Land_{i}\X{i}\=\x{i} \|[\Big]  \Land_{i}\Y{i}\=\y{i} \;
+  \Land_{i}\Z{i}\=\z{i}\;,\,  I\Bigr) \times{}\\
+  \p\Bigl( \Land_{i}\Y{i}\=\y{i} \|[\Big] I\Bigr) \times
+  \p\Bigl( \Land_{i}\Z{i}\=\z{i} \|[\Big]  I\Bigr)
   \;,
 \end{multline}
 which is not an identity of the probability-calculus, are those typically
@@ -1371,26 +1431,26 @@ For example, if the independence~\eqref{eq:example_independence} hold, a
 little calculation shows that the representation~\eqref{eq:example1} becomes
 \begin{multline}
   \label{eq:example1sep}
-\p\Bigl( \Land_{i}\X{i}\=\x{i} \;  \Land_{i}\A{i}\=\va{i} \;
-\Land_{i}\B{i}\=\vb{i} \|[\Big] I\Bigr)
+\p\Bigl( \Land_{i}\X{i}\=\x{i} \;  \Land_{i}\Y{i}\=\y{i} \;
+\Land_{i}\Z{i}\=\z{i} \|[\Big] I\Bigr)
 % \p( \X{1}\=\x{1}, \A{1}\=\va{1}, \B{1}\=\vb{1},\, \dotsc,\,
 %    \X{N}\=\x{N}, \A{N}\=\va{N}, \B{N}\=\vb{N} \| I) 
    ={}\\
    %\shoveleft{
-     \int\!\prod_{x,a,b}
-     (\ff{x \bcond a,b}\, \ff{,a}\, \ff{,,b})^{N \FF{x,a,b}}\;%\times{}%}\\[-\jot]
-\pf(\ffb{x \bcond ab}\|I)\,\pf(\ffb{a}\|I)\,\pf(\ffb{b}\|I)
-\;\di\ffb{x \bcond ab} \,\di\ffb{a} \,\di\ffb{b} \;.
+     \int\!\prod_{x,y,z}
+     (\ff{x \bcond y,z}\, \ff{,y}\, \ff{,,z})^{N \FF{x,y,z}}\;%\times{}%}\\[-\jot]
+\pf(\ffb{x \bcond y z}\|I)\,\pf(\ffb{y}\|I)\,\pf(\ffb{z}\|I)
+\;\di\ffb{x \bcond y z} \,\di\ffb{y} \,\di\ffb{z} \;.
 \end{multline}
 We see that the integration is now over the \emph{reduced} set of
 distributions
 \begin{equation}
   \label{eq:subset_freqs}
-  \set{\ff{x \bcond a,b} \,,\, \ff{,a} \,,\, \ff{,,b} \|
-    x \in \sX, a \in \sA, b \in \sB} \;.
+  \set{\ff{x \bcond y,z} \,,\, \ff{,y} \,,\, \ff{,,z} \|
+    x \in \sx, y \in \sy, z \in \sz} \;.
 \end{equation}
-This is a reduced set in the sense that $\ff{,a \bcond b} = \ff{,a}$ for
-all $b$, implying the presence of a delta term in the corresponding
+This is a reduced set in the sense that $\ff{,y \bcond z} = \ff{,y}$ for
+all $z$, implying the presence of a delta term in the corresponding
 density.
 
 
@@ -1400,9 +1460,9 @@ density.
 Let us summarize what we have found thus far. We have
 \begin{enumerate}[label=\roman*.]
 \item[0.] several sets of statements, $\set{\X{i}\=\x{i}}$,
-  $\set{\A{i}\=\va{i}},\dotsc$. Each set is countably infinite. For each
-  set we also have an associated set of values $x\in \sX,$
-  $a \in \sA, \dotsc$;
+  $\set{\Y{i}\=\y{i}},\dotsc$. Each set is countably infinite. For each
+  set we also have an associated set of values $x\in \sx,$
+  $y \in \sy, \dotsc$;
 \item\label{item:assu_bayesnet} several assumptions of conditional independence representable in the
   guise of a Bayesian network, such as in
   \eqn~\eqref{eq:example_independence} and \fig~\ref{fig:indep_net};
@@ -1420,33 +1480,33 @@ has an integral representation of the de~Finetti form:
 \begin{framed}
   \begin{equation}
     \label{eq:general_form}
-    \p\Bigl( \Land_{i}\X{i}\eq\x{i} \;  \Land_{i}\A{i}\eq\va{i} \; \dotsc
+    \p\Bigl( \Land_{i}\X{i}\eq\x{i} \;  \Land_{i}\Y{i}\eq\y{i} \; \dotsc
   \|[\Big] I\Bigr)
      = %{}\\
     % \shoveleft{
-    \int\!\prod_{x,a,\dotsc}
-    (\xi_{x,a,\dotsc})^{N \FF{x,a,\dotsc}}\;%\times{}%}\\[-\jot]
+    \int\!\prod_{x,y,\dotsc}
+    (\xi_{x,y,\dotsc})^{N \FF{x,y,\dotsc}}\;%\times{}%}\\[-\jot]
     \pf(\bm{\xi}\|I)\,\di\bm{\xi} 
     % \pf(\ffb{x \bcond ab}\|I)\,\pf(\ffb{a}\|I)\,\pf(\ffb{b}\|I)
     % \;\di\ffb{x \bcond ab} \,\di\ffb{a} \,\di\ffb{b} \;.
   \end{equation}
 %\end{framed}
-where $N\,\FF{x,a,\dotsc}$ are the joint empirical frequencies. This
+where $N\,\FF{x,y,\dotsc}$ are the joint empirical frequencies. This
 representation has these properties:
 %\begin{framed}
   \begin{enumerate}[label=\Roman*.]
-  \item the set of integration variables $\set{\xi_{x,a,\dotsc}}$ consists
+  \item the set of integration variables $\set{\xi_{x,y,\dotsc}}$ consists
     of subsets of marginal and conditional distributions: the same that
     would formally be associated with the Bayesian network of
     point~\ref{item:assu_bayesnet} For example
-    \[\set{\xi_{x,a,b}} = \set[\big]{\set{\ff{x \bcond a,b}},\,
-        \set{\ff{,a}},\, \set{\ff{,,b}}}\;.\]
+    \[\set{\xi_{x,y,z}} = \set[\big]{\set{\ff{x \bcond y,z}},\,
+        \set{\ff{,y}},\, \set{\ff{,,z}}}\;.\]
   \item the density $\pf(\bm{\xi}\|I)\,\di\bm{\xi}$ over the integration
     variables factorizes into a product of independent densities, one for
     each subset of the point above, for example
     \[\pf(\bm{\xi}\|I)\,\di\bm{\xi} =
-      \pf(\ffb{x \bcond ab}\|I)\,\di\ffb{x \bcond ab}\;\;
-      \pf(\ffb{a}\|I)\,\di\ffb{a}\;\; \pf(\ffb{b}\|I)\,\di\ffb{b} \;.
+      \pf(\ffb{x \bcond y z}\|I)\,\di\ffb{x \bcond y z}\;\;
+      \pf(\ffb{y}\|I)\,\di\ffb{y}\;\; \pf(\ffb{z}\|I)\,\di\ffb{z} \;.
     \]
   \end{enumerate}
 \end{framed}
@@ -1462,32 +1522,32 @@ factors involved.
 
 
 A simple non-trivial example is this network:
-\begin{center}
-\begin{minipage}[t]{0.75\linewidth}
-%\vspace{}%
-\parbox{0.3\linewidth}{\protect\includegraphics[scale=0.5]{bayesnet3s.png}}% bayesnet.svg
-\hfill%\vspace{0pt}
-$\ff{x \bcond a,b}
-\quad\begin{gathered}
-\ff{,a}\\ \ff{,,b}
-\end{gathered}
-$%
-%$\begin{gathered}
-%       (\ff{x \bcond a,b})\\
-%       (\ff{,a})\\
-%       (\ff{,,b})
-% \end{gathered}$%
-\hfill%
-$\begin{aligned}
-       x&\in \sX\\
-       a&\in \sA\\
-       b&\in \sB\\
-\end{aligned}$%
-\end{minipage}
-\\\figcaption{\label{fig:indep_net}}
-\end{center}
+% \begin{center}
+% \begin{minipage}[t]{0.75\linewidth}
+% %\vspace{}%
+% \parbox{0.3\linewidth}{\protect\includegraphics[scale=0.5]{bayesnet3s.png}}% bayesnet.svg
+% \hfill%\vspace{0pt}
+% $\ff{x \bcond y,z}
+% \quad\begin{gathered}
+% \ff{,y}\\ \ff{,,z}
+% \end{gathered}
+% $%
+% %$\begin{gathered}
+% %       (\ff{x \bcond y,z})\\
+% %       (\ff{,y})\\
+% %       (\ff{,,z})
+% % \end{gathered}$%
+% \hfill%
+% $\begin{aligned}
+%        x&\in \sx\\
+%        y&\in \sy\\
+%        z&\in \sz\\
+% \end{aligned}$%
+% \end{minipage}
+% \\\figcaption{\label{fig:indep_net}}
+% \end{center}
 which says that the joint distribution factorizes as
-$\ff{x,a,b} = \ff{x \bcond a,b} \times \ff{,a} \times \ff{,,b}$.
+$\ff{x,y,z} = \ff{x \bcond y,z} \times \ff{,y} \times \ff{,,z}$.
 
 
 One way to combine a Bayesian network and exchangeability would be to mimic
@@ -1499,21 +1559,21 @@ exchangeability of our degrees of beliefs about an infinite number of
 individuals.
 
 For example, if
-$\set[\big]{\set{\ff{x \bcond a,b}},\, \set{\ff{,a}},\, \set{\ff{,,b}}}$
+$\set[\big]{\set{\ff{x \bcond y,z}},\, \set{\ff{,y}},\, \set{\ff{,,z}}}$
 are the conditional-probability tables of the Bayesian network of
 \fig~\ref{fig:indep_net}, our beliefs about a single individual would
 be given by the mixture
 \begin{multline}
   \label{eq:example_mix_bayesnet1}
-\p( \X{1}\=\x{1} \,,\, \A{1}\=\va{1} \,,\, \B{1}\=\vb{1} \| I)
+\p( \X{1}\=\x{1} \,,\, \Y{1}\=\y{1} \,,\, \Z{1}\=\z{1} \| I)
 % \p( \X{1}\=\x{1}, \A{1}\=\va{1}, \B{1}\=\vb{1},\, \dotsc,\,
 %    \X{N}\=\x{N}, \A{N}\=\va{N}, \B{N}\=\vb{N} \| I) 
    ={}\\
    %\shoveleft{
      \int\!
-     \ff{x_{1} \bcond a_{1},b_{1}}\; \ff{,a_{1}}\; \ff{,,b_{1}} \;
-\pf(\ffb{x \bcond ab}\,,\, \ffb{a} \,,\, \ffb{b} \| I)
-\;\di\ffb{x \bcond ab} \,\di\ffb{a} \,\di\ffb{b} \;.
+     \ff{x_{1} \bcond y_{1},z_{1}}\; \ff{,y_{1}}\; \ff{,,z_{1}} \;
+\pf(\ffb{x \bcond y z}\,,\, \ffb{y} \,,\, \ffb{z} \| I)
+\;\di\ffb{x \bcond y z} \,\di\ffb{y} \,\di\ffb{z} \;.
 \end{multline}
 
 This probability distribution, however, in general \emph{does not
@@ -1752,16 +1812,16 @@ instances $1'',2'',\dotsc$, then
 Let us say, for example, that the quantities $\X{i}$ are the results of
 animal treatments, with values \enquote{$\xs$}uccess and
 \enquote{$\xf$}ailure. $Y$ refers to the results for treatments on
-$\xY$aks, and $Z$ on $\xZ$ebras. If we write
+$\xA$aks, and $Z$ on $\xB$ebras. If we write
 $$\p(\Y{3}\=\xs,\;\Z{5}\=\xf \| \zI)=0.2\;,$$
-then we must already know that animal number~$3$ is a yak, $\C{3}\=\xY$,
-and animal number~$5$ is a zebra, $\C{5}\=\xZ$. This is clear from our very
+then we must already know that animal number~$3$ is a yak, $\C{3}\=\xA$,
+and animal number~$5$ is a zebra, $\C{5}\=\xB$. This is clear from our very
 notation, otherwise we would not have known whether to use the symbol $Y$
 or $Z$ for those instances. This information is evidently implicit in our
 background information $\zI$.
 
 Let us make the information about the $\C{i}$ explicit. Their possible
-values are \enquote{$\xY$} and \enquote{$\xZ$}. We rewrite the probability
+values are \enquote{$\xA$} and \enquote{$\xB$}. We rewrite the probability
 in \eqn~\eqref{eq:partialdefinetti} as
 \begin{equation}
   \label{eq:infoCexplicit}
@@ -1775,9 +1835,9 @@ in \eqn~\eqref{eq:partialdefinetti} as
   \dotsc,\;
   \X{1''}\=\x{1''},\; %\X{2''}\=\x{2''},\;
   \dotsc \| %{}\\
-  \C{1'}\=\xY,\; %\C{2'}\=\cc{2'},\;
+  \C{1'}\=\xA,\; %\C{2'}\=\cc{2'},\;
   \dotsc,\;
-  \C{1''}\=\xZ,\; %\C{2''}\=\cc{2''},\;
+  \C{1''}\=\xB,\; %\C{2''}\=\cc{2''},\;
   \dotsc,\; I) \;.
   \end{aligned}
 \end{equation}

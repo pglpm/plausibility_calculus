@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2020-03-17T00:29:23+0100
-%% Last-Updated: 2020-06-05T17:45:31+0200
+%% Last-Updated: 2020-06-05T23:00:05+0200
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newif\ifarxiv
 \arxivfalse
@@ -1065,16 +1065,23 @@ is called partially exchangeable if
 \begin{equation}
   \label{eq:part_exchangeable}\left.
 \begin{multlined}%[0.5\linewidth]
-  \parbox{0.8\linewidth}{\small for every $N$, every subset of $N$ indices $\set{i}
-    \subset \NN$, every permutation $\pi$ thereof such that\;
-    $\pi(j)=k \mathrel{\;\Rightarrow\;} \cc{j}=\cc{k}$,\; and every sets of
+  \parbox{0.85\linewidth}{\small for every $N$,
+    every subset of $N$ indices $\set{i} \subset \NN$,\\
+    every permutation $\pi$ thereof,
+    every permutation $\sigma$ thereof such that\;
+    $\sigma(j)=k \mathrel{\;\Rightarrow\;} \cc{j}=\cc{k}$,\; and every sets of
     values $\x{i}\in \sx$, $\cc{i}\in \sC$:}
   \\[\jot]
   \shoveright{\p\Bigl( \Land_{i}\X{i}\=\x{i}  \|[\Big]
-  \Land_{i}\C{i}\=\cc{i}\,,\,    I\Bigr) =
-  \p\Bigl( \Land_{i}\X{i}\=\x{\pi(i)}  \|[\Big]
-  \Land_{i}\C{i}\=\cc{i}\,,\,    I\Bigr)}
-    \\[\jot]
+    \Land_{i}\C{i}\=\cc{i}\,,\,    I\Bigr) =
+    \p\Bigl( \Land_{i}\X{i}\=\x{\pi(i)}  \|[\Big]
+    \Land_{i}\C{i}\=\cc{\pi(i)}\,,\,    I\Bigr)}
+  \\[\jot]
+  \shoveright{\p\Bigl( \Land_{i}\X{i}\=\x{i}  \|[\Big]
+    \Land_{i}\C{i}\=\cc{i}\,,\,    I\Bigr) =
+    \p\Bigl( \Land_{i}\X{i}\=\x{\sigma(i)}  \|[\Big]
+    \Land_{i}\C{i}\=\cc{i}\,,\,    I\Bigr)}
+  \\[\jot]
   \shoveleft{\text{\small and all such probabilities are consistently related by marginalization.}}
 \end{multlined}\;\right\}
 \end{equation}

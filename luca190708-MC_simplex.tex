@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2015-05-01T20:53:34+0200
-%% Last-Updated: 2020-03-17T16:29:29+0100
+%% Last-Updated: 2020-06-04T22:19:00+0200
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newif\ifarxiv
 \arxivfalse
@@ -25,7 +25,7 @@ british%
 \newcommand*{\headtitle}{\propertitle}
 \newcommand*{\pdfauthor}{P.G.L.  Porta Mana}
 \newcommand*{\headauthor}{Porta Mana}
-\newcommand*{\reporthead}{Open Science Framework \href{https://doi.org/10.31219/osf.io/5zu6}{\textsc{doi}:10.31219/osf.io/5zu6}}% Report number
+\newcommand*{\reporthead}{Open Science Framework \href{https://doi.org/10.31219/osf.io/5zu6m}{\textsc{doi}:10.31219/osf.io/5zu6m}}% Report number
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% Calls to packages (uncomment as needed)
@@ -264,7 +264,7 @@ citestyle=authoryear-comp,bibstyle=pglpm-authoryear,autopunct=false,sorting=ny,s
 \defbibheading{bibliography}[\bibname]{\section*{#1}\addcontentsline{toc}{section}{#1}%\markboth{#1}{#1}
 }
 \newcommand*{\citep}{\footcites}
-\newcommand*{\citey}{\parencites*}
+\newcommand*{\citey}{\footcites}%{\parencites*}
 \newcommand*{\ibid}{\unspace\addtocounter{footnote}{-1}\footnotemark{}}
 %\renewcommand*{\cite}{\parencite}
 %\renewcommand*{\cites}{\parencites}
@@ -507,7 +507,7 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 % \hspace*{\stretch{1}}%
 \parbox{0.75\linewidth}%\makebox[0pt][c]%
 {\protect\centering P.G.L.  Porta Mana  \href{https://orcid.org/0000-0002-6070-0784}{\protect\includegraphics[scale=0.16]{orcid_32x32.png}}\\%
-\footnotesize Kavli Institute, Trondheim\quad\epost{\email{piero.mana}{ntnu.no}}}%
+\footnotesize Kavli Institute, Trondheim\quad\epost{\email{pgl}{portamana.org}}}%
 %% uncomment if additional authors present
 % \hspace*{\stretch{1}}%
 % \parbox{0.5\linewidth}%\makebox[0pt][c]%
@@ -1026,7 +1026,7 @@ you.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% Appendices
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
-\clearpage
+%\clearpage
 % %\renewcommand*{\appendixpagename}{Appendix}
 % %\renewcommand*{\appendixname}{Appendix}
 % %\appendixpage

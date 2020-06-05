@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2020-03-17T00:29:23+0100
-%% Last-Updated: 2020-06-04T19:03:03+0200
+%% Last-Updated: 2020-06-05T11:32:44+0200
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newif\ifarxiv
 \arxivfalse
@@ -630,7 +630,7 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 %\newcommand*{\bd}{\hspace{0pt}}%
 %\def\hy{-\penalty0\hskip0pt\relax}
 %\newcommand*{\labelbis}[1]{\tag*{(\ref{#1})$_\text{r}$}}
-\newcommand*{\mathbox}[2][.8]{\parbox[b]{#1\columnwidth}{#2}}
+\newcommand*{\mathbox}[2][.8\columnwidth]{\parbox[b]{#1}{#2}}
 %\newcommand*{\zerob}[1]{\makebox[0pt][l]{#1}}
 \newcommand*{\tprod}{\mathop{\textstyle\prod}\nolimits}
 \newcommand*{\tsum}{\mathop{\textstyle\sum}\nolimits}
@@ -911,18 +911,21 @@ even if the statements are not of the form \enquote{$X\=x$}.)
 A probability distribution over these atomic statements
 %$\set{\X{i}\=\x{i}}$,
 is called fully (infinitely) exchangeable if
-\begin{multline}
-  \label{eq:exchangeable}
-  \text{\small for every $N$, every subset
-    $\set{i_{1},\dotsc,i_{N}}\subset \NN$, and every permutation $\pi$ thereof,}
-  \\
+\begin{equation}
+  \label{eq:exchangeable}\left.
+\begin{multlined}
+  \parbox{0.85\linewidth}{\small for every $N$, every subset
+    $\set{i_{1},\dotsc,i_{N}}\subset \NN$, every permutation $\pi$ thereof,
+    and every set of values $\x{i_{1}},\dotsc,\x{i_{N}} \in \sx$:}
+  \\[\jot]
   \shoveleft{\p( \X{i_{1}}\=\x{i_{1}}, \X{i_{2}}\=\x{i_{2}},\dotsc,\X{i_{N}}\=\x{i_{N}}
     \| I) ={}}\\
   \shoveright{\p( \X{i_{1}}\=\x{\pi(i_{1})},
-    \X{i_{2}}\=\x{\pi(i_{2})},\dotsc,\X{i_{N}}\=\x{\pi(i_{N})}   \| I) \;,}
-  \\
+    \X{i_{2}}\=\x{\pi(i_{2})},\dotsc,\X{i_{N}}\=\x{\pi(i_{N})}   \| I)}
+  \\[\jot]
   \shoveleft{\text{\small and all such probabilities are consistently related by marginalization.}}
-\end{multline}
+\end{multlined}\;\right\}
+\end{equation}
 This property is equivalent to declaring the empirical frequencies of the
 values $x$ to be sufficient statistics.
 
@@ -1050,32 +1053,38 @@ exclusive on information $I$.
 These statements let us identify each instance $i$ as belonging to one
 or another category out of the finite set $\sC$.
 
-A probability distribution over the $\set{\X{i}\=\x{i}}$ atomic statements
+A probability distribution over the statements $\set{\X{i}\=\x{i}}$ given
+the statements $\set{\C{i}\=\cc{i}}$
 %$\set{\X{i}\=\x{i}}$,
 is called partially exchangeable if
-\begin{multline}
-  \label{eq:part_exchangeable}
-  \mathbox[0.99]{\small for every $N$, every subset of $N$ indices $\set{i}
-    \subset \NN$, and every permutation $\pi$ thereof such that\quad
-    $\pi(j)=k \mathrel{\;\Rightarrow\;} \cc{j}=\cc{k}$,}
-  \\
-  \p\Bigl( \Land_{i}\X{i}\=\x{i}  \|[\Big]
+\begin{equation}
+  \label{eq:part_exchangeable}\left.
+\begin{multlined}%[0.5\linewidth]
+  \parbox{0.8\linewidth}{\small for every $N$, every subset of $N$ indices $\set{i}
+    \subset \NN$, every permutation $\pi$ thereof such that\;
+    $\pi(j)=k \mathrel{\;\Rightarrow\;} \cc{j}=\cc{k}$,\; and every sets of
+    values $\x{i}\in \sx$, $\cc{i}\in \sC$:}
+  \\[\jot]
+  \shoveright{\p\Bigl( \Land_{i}\X{i}\=\x{i}  \|[\Big]
   \Land_{i}\C{i}\=\cc{i}\,,\,    I\Bigr) =
   \p\Bigl( \Land_{i}\X{i}\=\x{\pi(i)}  \|[\Big]
-  \Land_{i}\C{i}\=\cc{i}\,,\,    I\Bigr)
-  \;.
-\end{multline}
-In other words the only allowed permutations are those \emph{which exchange
-  indices having the same $c$ value}, that is, belonging to the same
-category.
+  \Land_{i}\C{i}\=\cc{i}\,,\,    I\Bigr)}
+    \\[\jot]
+  \shoveleft{\text{\small and all such probabilities are consistently related by marginalization.}}
+\end{multlined}\;\right\}
+\end{equation}
+Not the particular permutation restriction: the only allowed permutations
+are those \emph{which exchange indices having the same $c$ value}, that is,
+indices belonging to the same category.
 
+Some important remarks and features of this definition will be made
+shortly. For the moment
 % As remarked in \sect~\ref{sec:inf_exch}, partial exchangeability is usually
 % written by using different symbols for indices belonging to different
 % categories, and leaving the information implied by such notation implicit
 % in the context.
-
-Let us rewrite the representation formula~\eqref{eq:partialdefinetti}
-accordingly.
+let us rewrite the representation formula~\eqref{eq:partialdefinetti}
+according to the new definition.
 
 
 For each category $c \in \sC$, introduce a normalized distribution
@@ -1121,6 +1130,11 @@ The role of conditional distributions is clear in the
 representation~\eqref{eq:partial_definetti_freq}. In the following I will
 use the term \enquote{conditional exchangeability} in place of
 \enquote{partial exchangeability} to emphasize this.
+
+
+
+
+
 
 
 \section{Representation for joint distributions with
@@ -1284,7 +1298,7 @@ represents (i) the conditional exchangeability of the probabilities for the
 $X$-statements given \emph{pairs} of $Y$- and $Z$-statements:
 \begin{multline}
   \label{eq:part_exchangeableAB}
-  \mathbox[0.99]{\small for every $N$, every subset of $N$ indices $\set{i}
+  \mathbox[0.99\linewidth]{\small for every $N$, every subset of $N$ indices $\set{i}
     \subset \NN$, and every permutation $\pi$ thereof such that\quad
     $\pi(j)=k \mathrel{\;\Rightarrow\;} \y{j}\eq\y{k}\land \z{j}\eq\z{k}$,}
   \\

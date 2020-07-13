@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2020-03-17T00:29:23+0100
-%% Last-Updated: 2020-06-05T23:00:05+0200
+%% Last-Updated: 2020-06-06T10:56:11+0200
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newif\ifarxiv
 \arxivfalse
@@ -990,40 +990,65 @@ without the intention of forcing such interpretation on you.
 \label{sec:partial_exch}
 
 \mynote{ref to \emph{unrestricted exchangeability} of Bernardo \amp\ Smith
-  \citep{bernardoetal1994_r2000}}
+  \citep{bernardoetal1994_r2000,diaconis1988}}
 
+\enquote{Partial exchangeability} denotes not just one symmetry but a
+family of very different forms of symmetry.
 
-In de~Finetti's theorem for \emph{partially} exchangeable distributions,
-the set $\set{\X{i}\=\x{i}}$ of \sect~\ref{sec:setup} is divided into two
-or more categories represented by subsets
+Here we focus on one of the simplest forms, which after Bernardo \amp\
+Smith \citep[\sect~4.6.2 p.~211]{bernardoetal1994_r2000} and Diaconis
+\citep[\sect~3 p.~112]{diaconis1988} could be called \enquote{unrestricted
+  partial exchangeability with finitely many types}. In the following,
+\enquote{partial exchangeability} will stand for this specific form.
+
+In de~Finetti's theorem for partially exchangeable distributions, the set
+$\set{\X{i}\=\x{i}}$ of \sect~\ref{sec:setup} is divided into two or more
+categories represented by subsets
 $\set{\Y{j}\=\y{j}}, \set{\Z{k}\=\z{k}}, \dotsc$. Partial exchangeability
 of the distribution for such statements means that permutations are allowed
-within each subset but not necessarily across subsets. The integral
+within each subset but not necessarily across subsets:
+\begin{equation}
+  \label{eq:usual_part_exchangeable}\left.
+\begin{multlined}%[0.5\linewidth]
+  \parbox{0.85\linewidth}{\small for every $N',N''$,
+    every subset of $N'$ indices $\set{i'} \subset \NN$ and
+    every permutation $\pi'$ thereof,
+    every subset of $N''$ indices $\set{i''} \subset \NN$ and
+    every permutation $\pi''$ thereof, and all sets of
+    values $\y{i'},\z{i''}$:}
+  \\[\jot]
+  \p\Bigl( \Land_{i'}\Y{i'}\=\y{i'} \;
+  \Land_{i''}\Z{i''}\=\z{i''} \|[\Big] \zI\Bigr) =
+  \p\Bigl( \Land_{i'}\Y{i'}\=\y{\pi'(i')} \;
+  \Land_{i''}\Z{i''}\=\z{\pi''(i'')} \|[\Big] \zI\Bigr)
+  \\[\jot]
+  \shoveleft{\text{\small and all such probabilities are consistently related by marginalization.}}
+\end{multlined}\;\right\}
+\end{equation}
+The integral
 representation in this case % , after a suitable re-indexing
 % $\set{1,2,\dotsc} \mapsto \set{1', 2', \dotsc, 1'', 2'', \dotsc}$,
 is usually given in the form
 \begin{equation}
   \label{eq:partialdefinetti}
-  \p\Bigl( \Land_{i'}\Y{i'}\=\y{i'},\;
+  \p\Bigl( \Land_{i'}\Y{i'}\=\y{i'} \;
   \Land_{i''}\Z{i''}\=\z{i''} \|[\Big] \zI\Bigr) =
   % \p( \Y{1'}\=\y{1'},\; \Y{2'}\=\y{2'},\; \dotsc,\;
   % \Z{1''}\=\z{1''},\; \Z{2''}\=\z{2''},\; \dotsc \| \zI) ={}\\
   \iint
-  \prod_{j} g_{\y{j}}\;
-  \prod_{k} h_{\z{k}}\;
+  \prod_{i'} g_{\y{i'}}\;
+  \prod_{i''} h_{\z{i''}}\;
   \pf(\bg,\bh \| \zI)\,\di\bg\,\di\bh \;,
 \end{equation}
-with distinct normalized distributions $\bg$, $\bh$ for each category. If
-the density $\pf(\bg,\bh \| \zI)\,\di\bg\,\di\bh$ is diagonal, that is, if
-it contains a term $\delt(\bg-\bh)$, the fully exchangeable
+with distinct distributions $\bg$, $\bh$ for each category. If the density
+$\pf(\bg,\bh \| \zI)\,\di\bg\,\di\bh$ has support on the diagonal, that is,
+if it contains a term $\delt(\bg-\bh)$, the fully exchangeable
 form~\eqref{eq:definetti_freq} is recovered.
-
-
 
 A little reflection shows that if we know the $\X{i}$ to belong to category
 $A$ in instances $i'$, and to category $B$ in instances $i''$, then
 \begin{enumerate*}[label=(\roman*)]
-\item there are some other quantities $\C{i}$ that allows us to distinguish
+\item there are some other quantities $\C{i}$ that allow us to distinguish
   the two categories, and \item the values %$\C{i}\=\cc{i}$
   of these quantities \emph{are known} for all instances.
 \end{enumerate*}
@@ -1033,18 +1058,35 @@ the results of behavioural experiments with insects, with $x$-values
 \enquote{$\xs$}uccess and \enquote{$\xf$}ailure. $A$ refers to the results
 for experiments with \enquote{$\xA$}nts, and $B$ with
 \enquote{$\xB$}eetles. If we write
-$$\p(\A{3}\=\xs,\;\B{5}\=\xf \| \zI)=0.2\;,$$
+$$\p(\A{3}\=\xs \,,\, \B{5}\=\xf \| \zI)=0.2\;,$$
 then we must already know that insect number~$3$ is an ant: $\C{3}\=\xA$,
 and insect number~$5$ is a beetle: $\C{5}\=\xB$. This is clear from our
 very notation, otherwise we would not have known whether to use the symbol
 $A$ or $B$ for those instances. This information is evidently implicit in
-our background information $\zI$.
-
-We now make this categorical information more explicit. A slightly
-different definition of partial exchangeability is thus obtained, with a
-slightly different form of its representation theorem.
+our background information $\zI$. We can thus rewrite the probability above
+as
+$$\p(\X{3}\=\xs \,,\, \X{5}\=\xf \| \C{3}\=\xA \,,\, \C{5}\=\xB \,,\, I)=0.2\;.$$
 
 
+This point of view reveals other assumptions behind this form of partial
+exchangeability, not immediately evident from the
+definition~\eqref{eq:usual_part_exchangeable}. For example, knowledge of
+the category of a new instance  is irrelevant for the probability of
+previous instances:
+\begin{multline*}
+  \p(\X{3}\=\xs \,,\, \X{5}\=\xf \| \C{1}\=\cc{1} \,,\, \C{3}\=\xA \,,\,
+  \C{5}\=\xB \,,\, I)= {}\\
+  \p(\X{3}\=\xs \,,\, \X{5}\=\xf \| \C{3}\=\xA \,,\,
+  \C{5}\=\xB \,,\, I)
+  \;,
+\end{multline*}
+no matter what $\cc{1}$ is.
+
+
+We now make the categorical information and these additional assumptions
+more explicit. A slightly different definition of partial exchangeability
+is thus obtained, with a slightly different form of its representation
+theorem.
 
 Besides the statements $\set{\X{i}\=\x{i}}$, we introduce an additional set
 of atomic statements
@@ -1062,40 +1104,46 @@ A probability distribution over the statements $\set{\X{i}\=\x{i}}$ given
 the statements $\set{\C{i}\=\cc{i}}$
 %$\set{\X{i}\=\x{i}}$,
 is called partially exchangeable if
-\begin{equation}
-  \label{eq:part_exchangeable}\left.
-\begin{multlined}%[0.5\linewidth]
-  \parbox{0.85\linewidth}{\small for every $N$,
-    every subset of $N$ indices $\set{i} \subset \NN$,\\
-    every permutation $\pi$ thereof,
-    every permutation $\sigma$ thereof such that\;
-    $\sigma(j)=k \mathrel{\;\Rightarrow\;} \cc{j}=\cc{k}$,\; and every sets of
-    values $\x{i}\in \sx$, $\cc{i}\in \sC$:}
-  \\[\jot]
-  \shoveright{\p\Bigl( \Land_{i}\X{i}\=\x{i}  \|[\Big]
+\begin{subequations}
+  \label{eq:part_exchangeable}
+  \begin{align}
+    &\parbox{0.85\linewidth}{\small for 
+    every finite subsets of indices $\set{i} \subset \NN$, $\set{j} \subset \NN$,\\
+    every permutation $\pi$ of $\set{i}$,
+    every permutation $\sigma$ of $\set{i}$ such that\;
+    $\sigma(j)=k \mathrel{\;\Rightarrow\;} \cc{j}=\cc{k}$,\; and all sets of
+    values $\x{i},\cc{i},\cc{j}$\,:}\notag
+    \\[\jot]
+    &\p\Bigl( \Land_{i}\X{i}\=\x{i}  \|[\Big]
     \Land_{i}\C{i}\=\cc{i}\,,\,    I\Bigr) =
     \p\Bigl( \Land_{i}\X{i}\=\x{\pi(i)}  \|[\Big]
-    \Land_{i}\C{i}\=\cc{\pi(i)}\,,\,    I\Bigr)}
-  \\[\jot]
-  \shoveright{\p\Bigl( \Land_{i}\X{i}\=\x{i}  \|[\Big]
+    \Land_{i}\C{i}\=\cc{\pi(i)}\,,\,    I\Bigr)
+    \\[\jot]
+    &\p\Bigl( \Land_{i}\X{i}\=\x{i}  \|[\Big]
+    \Land_{i}\C{i}\=\cc{i} \; \Land_{j}\C{j}\=\cc{j}\,,\,    I\Bigr) =
+    \p\Bigl( \Land_{i}\X{i}\=\x{i}  \|[\Big]
+    \Land_{i}\C{i}\=\cc{i}\,,\,    I\Bigr)
+    \\[\jot]
+    &\p\Bigl( \Land_{i}\X{i}\=\x{i}  \|[\Big]
     \Land_{i}\C{i}\=\cc{i}\,,\,    I\Bigr) =
     \p\Bigl( \Land_{i}\X{i}\=\x{\sigma(i)}  \|[\Big]
-    \Land_{i}\C{i}\=\cc{i}\,,\,    I\Bigr)}
-  \\[\jot]
-  \shoveleft{\text{\small and all such probabilities are consistently related by marginalization.}}
-\end{multlined}\;\right\}
-\end{equation}
-Not the particular permutation restriction: the only allowed permutations
-are those \emph{which exchange indices having the same $c$ value}, that is,
+    \Land_{i}\C{i}\=\cc{i}\,,\,    I\Bigr)
+    \\[\jot]
+    &\text{\small and all such probabilities are consistently related by marginalization.}\notag
+  \end{align}
+\end{subequations}
+The first condition asserts that the labelling of the instances is
+irrelevant. The second asserts the irrelevance of the categories of
+instances outside those considered in our probability. The third asserts
+the partial-permutation restriction: the only allowed permutations are
+those \emph{which exchange indices having the same $c$ value}, that is,
 indices belonging to the same category.
 
-Some important features of this definition will be discussed shortly. For
-the moment
 % As remarked in \sect~\ref{sec:inf_exch}, partial exchangeability is usually
 % written by using different symbols for indices belonging to different
 % categories, and leaving the information implied by such notation implicit
 % in the context.
-let us rewrite the representation formula~\eqref{eq:partialdefinetti}
+Let us now rewrite the representation formula~\eqref{eq:partialdefinetti}
 according to the new definition.
 
 
@@ -1142,6 +1190,8 @@ representation~\eqref{eq:partial_definetti_freq}. In the following I will
 use the term \enquote{conditional exchangeability} in place of
 \enquote{partial exchangeability} to emphasize this.
 
+
+\mynote{example where first two conditions are dropped}
 
 
 

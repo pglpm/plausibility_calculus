@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
-%% Created: 2015-05-01T20:53:34+0200
-%% Last-Updated: 2020-07-14T09:04:38+0200
+%% Created: 2020-07-13T09:04:38+0200
+%% Last-Updated: 2020-07-14T13:03:46+0200
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newif\ifarxiv
 \arxivfalse
@@ -669,6 +669,10 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 %\DeclareMathOperator*{\argsup}{arg\,sup}
 \newcommand*{\dob}{degree of belief}
 \newcommand*{\dobs}{degrees of belief}
+\newcommand*{\yDa}{D_{\textrm{a}}}
+\newcommand*{\yDb}{D_{\textrm{b}}}
+\newcommand*{\yDc}{D_{\textrm{c}}}
+\newcommand*{\yDd}{D_{\textrm{d}}}
 %%% Custom macros end @@@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -777,7 +781,94 @@ discussed at length by Porta Mana \citey{portamana2003_r2004} through a
 step-by-step analysis and calculation. This work also showed, through
 simple examples \parencite[\sect~IV]{portamana2003_r2004}, that the same
 incorrect statements can be obtained \emph{with completely classical
-  systems}, such as drawing from an urn, if the setup is neglected.
+  systems}, such as drawing from an urn, if the setup is neglected. Here is
+a simple example.
+
+Consider an urn with one $B$lue and one $R$ed ball. There are two possible
+drawing setups:
+\begin{enumerate}[label=$D_{\textrm{\alph*}}$]
+\item\label{item:repB} With replacement for blue, without replacement for red. That is, if
+  blue is drawn, it is put back before the next draw (and the urn is
+  shaken); if red is drawn, it is thrown away before the next draw.
+\item \label{item:repR} With replacement for red, without replacement for blue.
+\end{enumerate}
+The two setups are obviously mutually exclusive.
+
+We can easily calculate what is the unconditional probability for blue at
+the second draw in the setup $\yDa$:
+\begin{equation}
+  \label{eq:A_red2}
+  \p(B_{2} \| \yDa) = \tfrac{3}{4} \;,
+\end{equation}
+and the conditional probabilities for blue at the second draw, conditional
+on the first draw, in the setup $\yDb$:
+\begin{equation}
+  \label{eq:A_red2}
+  \p(B_{2} \| B_{1} \land \yDb) = 0 \qquad
+  \p(B_{2} \| R_{1} \land \yDb) = \tfrac{1}{2} \;.
+\end{equation}
+We  find that
+\begin{equation}
+  \label{eq:cross_combine}
+  \p(B_{2} \| \yDa) \mathrel{\bm{\ne}}
+  \p(B_{2} \| B_{1} \land \yDb) \; \p( B_{1} \| \yDb) +
+  \p(B_{2} \| R_{1} \land \yDb)  \; \p( R_{1} \| \yDb) \;.
+\end{equation}
+This inequality is no surprising. And it does not contradict the rule of
+conditional probability, because that rule is supposed to be used within
+the same probability space. You can call the inequality above
+\enquote{interference} if you like; for further examples see Kirkpatrick
+\citey{kirkpatrick2001_r2003,kirkpatrick2002_r2003} and Porta Mana
+\citey[\sect~IV]{portamana2003_r2004}.
+
+Note that, had we considered a drawing setup $\yDc$ with replacement for both
+colours, and a setup $\yDd$ without replacement for either colour, we would
+have found
+\begin{equation}
+  \label{eq:cross_combine_same}
+  \p(B_{2} \| \yDc) \mathrel{\bm{=}}
+  \p(B_{2} \| B_{1} \land \yDd) \; \p( B_{1} \| \yDd) +
+  \p(B_{2} \| R_{1} \land \yDd)  \; \p( R_{1} \| \yDd) \;.
+\end{equation}
+The equality above, however, is \emph{not} and expression of the
+conditional-probability rule, because the probability spaces are different.
+It is simply a peculiar equality contingent on the two specific setups. The
+probability calculus handles correctly situations such
+as~\eqref{eq:cross_combine} or \eqref{eq:cross_combine_same}.
+
+In fact, strictly speaking it is wrong to use the expression
+\defquote{$B_{2}$} for all these setups, because \defquote{$B_{2}$} in the
+one setup denotes a different statement (or random variable) than in
+another. Just like \enquote{it rains (on 2020-07-14T09:00+0200 in
+  Trondheim)} is different from \enquote{it rains (on 2019-01-20T18:00+0200
+  in Rome)}. I should have used different symbols. The explicit presence of
+\defquote{$D_{\dotso}$}, which represents given information, luckily
+avoided any ambiguities. But if in our formulae we omit the notation of the
+setup \emph{and} we use the same notation for actually different statements
+or random variables, then we're in for trouble and for incorrect
+applications of the probability rules.
+
+\midskip
+
+The example above stresses the importance of the probability space -- even
+in \enquote{non-quantum} situations. But it is not meant as a parallel of
+Gelman \amp\ Yao's \citey[\sect~2]{gelmanetal2020} example. In fact their
+example has important differences and their analysis of it is incorrect
+from the point of view of quantum theory. Here are the main points:
+\begin{enumerate}[para,label=(\roman*)]
+\item It \emph{does} matter whether many photons are sent at once, or one
+  at a time, as well as their wavelength and temporal spread. These details
+  lead to different probabilities distributions of detection at the screen
+  depend on the spatio-temporal form of the electromagnetic field,
+\end{enumerate}
+
+First, in the experiments with only one slit open or both slits open, the outcome
+space is $\set{\textrm{\defquote{no event}}} \cup \RR$, because either an
+emulsion is produced at some point on the screen, or none is produced.
+
+
+
+
 
 After all, we do not expect that marginal probabilities from, say, a
 drawing-without-replacement urn setup should be obtainable from the joint

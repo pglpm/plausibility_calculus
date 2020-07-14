@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2020-07-13T09:04:38+0200
-%% Last-Updated: 2020-07-14T15:11:50+0200
+%% Last-Updated: 2020-07-14T16:29:23+0200
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newif\ifarxiv
 \arxivfalse
@@ -743,9 +743,9 @@ apparatus \parencite{leonhardt1997}.
 
 Similar incorrect claims with similar examples have appeared before in the
 quantum literature. Bernard O. Koopman \parencite[of the Pitman-Koopman
-theorem for sufficient statistics,]{koopman1936,pitman1936} discussed the
-falsity of such claims already in 1957. The introduction to his work
-\parencite{koopman1957} is very clear:
+theorem for sufficient statistics,][]{koopman1936} discussed the
+falsity of such claims already in \cite*{koopman1957}. The Introduction in
+his work is very clear:
 \begin{quotation}\footnotesize
   Ever since the advent of modern quantum mechanics in the late
   1920's, the idea has been prevalent that the classical laws of
@@ -856,7 +856,7 @@ Gelman \amp\ Yao's \citey[\sect~2]{gelmanetal2020} example. In fact their
 example has important differences and their analysis of it is incorrect
 from the point of view of quantum theory. Here are the main points:
 
-\begin{enumerate}[para,label=(\roman*)]
+\begin{enumerate}[label=(\roman*)]
 \item\label{item:q_details} It \emph{does} matter whether many photons are
   sent at once, or one at a time, as well as their wavelength, temporal
   spread, and so on. These details lead to different probabilities
@@ -865,7 +865,8 @@ from the point of view of quantum theory. Here are the main points:
   textbooks such
   as][]{loudon1973_r2000,mandeletal1995_r2008,scullyetal1997_r2001,bachoretal1998_r2004,wallsetal1994}.
   More precisely, the spatio-temporal dependence of the optic-field
-  operator (which define the photon state) must be specified.
+  operator \parencite[which defines the quantum system:][]{vanenk2003b}
+  must be specified.
 
   All these details are not \enquote{latent variables}: they are the
   initial and boundary conditions that define the physical system. They
@@ -878,25 +879,25 @@ from the point of view of quantum theory. Here are the main points:
   similar, in the urn example above, to not knowing whether $\yDa$ or
   $\yDb$ applies. In this case one can make inferences by giving the
   probability for each setup, \eg\ $\p(\yDa)$, and applying the
-  conditional-probability rule. The same rule can be applied in the
-  analogous quantum situation \parencite[see \eg][]{barnettetal2003}.
+  conditional-probability rule. The same rule is indeed applied in the
+  analogous quantum situation \parencite[\eg][]{zimanetal2004_r2006}.
   Again, no violations of the probability rules in the quantum realm.
 
 \item\label{item:q_prob_freq} Owing to the point above, it is important not
   to conflate the \emph{probability} for single-photon detections and the
   \emph{frequency} distribution of a long-run of such detections, as Gelman
-  \amp\ Yao instead do. For example, in some setups we can have a detection
-  probability density $\pf(y_{1})$ for the first photon, and a
-  \emph{different} density for the second photon $\pf(y_{2} \| y_{1})$,
-  conditional on the detection of the first -- both being different from
-  the long-run joint density of detections $f(y)$ \parentext{see \eg\ the
-    phenomena of higher-order coherence and bunching in the references
-    above}. The rules of the probability calculus also apply in such
-  situations. For example, we can guess the position of the first photon
-  detection given the second from
+  \amp\ Yao \citey[p.~1]{gelmanetal2020} instead do. For example, in some
+  setups we can have a detection probability density $\pf(y_{1})$ for the
+  first photon, and a \emph{different} density for the second photon
+  $\pf(y_{2} \| y_{1})$, conditional on the detection of the first -- both
+  being different from the long-run joint density of detections $f(y)$
+  \parentext{see \eg\ the phenomena of higher-order coherence and bunching
+    in the references above\ibid}. The rules of the probability calculus
+  also apply in such situations. We can infer, for example, the position of
+  the first photon detection given the second from
   $\pf(y_{1} \| y_{2}) \propto \pf(y_{2} \| y_{1})\;\pf(y_{1})$.
   
-\item\label{item:q_slitclosed_vs_detect} The long-run \emph{frequency}
+\item\label{item:q_slitclosed_vs_detect} The long-run frequency
   distribution for screen detection in the setup with one slit open
   (denoted \defquote{$p_1(y)$} by Gelman \amp\ Yao), and the one
   conditional on slit detection in the setup with detectors at the slits
@@ -904,7 +905,7 @@ from the point of view of quantum theory. Here are the main points:
   different setups. In some situations (but not always, see points
   \ref{item:q_details}, \ref{item:q_prob_freq} above) they experimentally
   turn out to be equal. But this was not required by the probability
-  calculus. This equality is similar to \eqn~\eqref{eq:cross_combine_same}
+  calculus. Such equality is similar to \eqn~\eqref{eq:cross_combine_same}
   between the with-replacement and without-replacement urn setups, which is
   not an a priori rule of the probability calculus, and in fact does not
   hold for the setups in \eqn~\eqref{eq:cross_combine}.
@@ -916,23 +917,53 @@ from the point of view of quantum theory. Here are the main points:
 
   Of course one is free to introduce such a quantity within some
   hidden-variable theory (which goes beyond the quantum realm), such as
-  Bohmian mechanics \citep{berndletal1995,duerretal2004,valentinietal2005}
-  (which includes as hidden variables the positions of the particles and
-  the spatial configuration of a so-called pilot wave). But then note that,
-  first, such theory gives experimental predictions in complete agreement
-  with standard quantum theory; and second, the rules of probability theory
-  are again used without violations in this theory (\eg\ the relation
-  between joint and conditional distributions of the particles' positions,
-  and so on).
+  Bohmian mechanics \parencite[\!; this theory includes as hidden variables
+  the positions of the particles and the spatial configuration of a
+  so-called pilot wave]{berndletal1995,duerretal2004,valentinietal2005}.
+  But then note, first, that such theory gives experimental predictions in
+  complete agreement with standard quantum theory; and second, that the
+  rules of probability theory are again used without violations in this
+  theory (\eg\ the relation between joint and conditional distributions of
+  the particles' positions, and so on).
+
+\item 
 \end{enumerate}
 
 I may add that the idea and parlance of \enquote{photons passing through
-  slits} are used today only out of tradition a bit poetically maybe. The
-technical parlance, as used routinely in quantum-optics labs for example
-\parencite{leonhardt1997,bachoretal1998_r2004} has a very different
+  slits} are used today only out of tradition and a bit poetically maybe.
+The technical parlance, as routinely used in quantum-optics labs for
+example \parencite{leonhardt1997,bachoretal1998_r2004}, has a different
 underlying picture. The basic \enquote{system} in a quantum-optics
-experiment is not the photon, but the modes of the field-configuration
-operator. \enquote{Photons} denote states of such field. 
+experiment are not photons, but the modes of the field-configuration
+operator (note that this is not yet Quantum ElectroDynamics).
+\enquote{Photon number} denotes the discrete outcomes of a specific
+measurement operator; \enquote{photon states} denote specific states of the
+field operators. For example, \enquote{entanglement} is strictly speaking
+not among photons, but among modes of the field operator
+\parencite{vanenk2003b}. Several quantum physicists indeed oppose the idea
+and parlance of \enquote{photons}. Lamb \parencite[of the Lamb
+shift,][]{lambetal1947} wrote in \cite*{lamb1995}:
+\begin{quote}
+  \footnotesize the author does not like the use of the word ``photon'',
+  which dates from 1926. In his view, there is no such thing as a photon.
+  Only a comedy of errors and historical accidents led to its popularity
+  among physicists and optical scientists.
+\end{quote}
+Wald \citey{wald1994} warns:
+\begin{quote}
+  \footnotesize standard treatments of quantum field theory in flat
+  spacetime rely heavily on Poincar\'e symmetry (usually entering the
+  analysis implicitly via plane-wave expansions) and interpret the theory
+  primarily in terms of a notion of ``particles''. Neither Poincar\'e (or
+  other) symmetry nor a useful notion of ``particles'' exists in a general,
+  curved spacetime, so a number of the familiar tools and concepts of field
+  theory must be ``unlearned'' in order to have a clear grasp of quantum
+  field theory in curved spacetime. [p.~ix] \textelp{} the notion of
+  ``particles'' plays no fundamental role either in the formulation or
+  interpretation of the theory. [p.~2]
+\end{quote}
+
+
 
 First, in the experiments with only one slit open or both slits open, the outcome
 space is $\set{\textrm{\defquote{no event}}} \cup \RR$, because either an

@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2020-07-13T09:04:38+0200
-%% Last-Updated: 2020-07-14T16:41:41+0200
+%% Last-Updated: 2020-07-14T17:36:43+0200
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newif\ifarxiv
 \arxivfalse
@@ -19,10 +19,10 @@ british%
 \newcommand*{\firstdraft}{13 July 2020}
 \newcommand*{\firstpublished}{13 July 2020}
 \newcommand*{\updated}{\ifarxiv***\else\today\fi}
-\newcommand*{\propertitle}{The rule of conditional probability is valid\\in quantum theory%\\{\large ***}%
+\newcommand*{\propertitle}{The rule of conditional probability\\ is valid in quantum theory%\\{\large ***}%
 }% title uses LARGE; set Large for smaller
 \newcommand*{\pdftitle}{The rule of conditional probability is valid in quantum theory}
-\newcommand*{\headtitle}{Conditional probability}
+\newcommand*{\headtitle}{Conditional probability is valid in quantum theory}
 \newcommand*{\pdfauthor}{P.G.L.  Porta Mana}
 \newcommand*{\headauthor}{Porta Mana}
 \newcommand*{\reporthead}{\ifarxiv\else Open Science Framework \href{https://doi.org/10.31219/osf.io/bsnh7}{\textsc{doi}:10.31219/osf.io/bsnh7}\fi}% Report number
@@ -200,7 +200,7 @@ british%
 \renewcommand\sfdefault{uop}
 \DeclareMathAlphabet{\mathsf}  {T1}{\sfdefault}{m}{sl}
 \SetMathAlphabet{\mathsf}{bold}{T1}{\sfdefault}{b}{sl}
-%\newcommand*{\mathte}[1]{\textbf{\textit{\textsf{#1}}}}
+\newcommand*{\mathte}[1]{\textbf{\textit{\textsf{#1}}}}
 % Upright sans-serif math alphabet
 % \DeclareMathAlphabet{\mathsu}  {T1}{\sfdefault}{m}{n}
 % \SetMathAlphabet{\mathsu}{bold}{T1}{\sfdefault}{b}{n}
@@ -553,7 +553,7 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 %\newcommand*{\CC}{\bm{\mathrm{C}}}
 %\newcommand*{\nabl}{\bm{\nabla}}%nabla
 %\DeclareMathOperator{\lb}{lb}%base 2 log
-%\DeclareMathOperator{\tr}{tr}%trace
+\DeclareMathOperator{\tr}{tr}%trace
 %\DeclareMathOperator{\card}{card}%cardinality
 %\DeclareMathOperator{\im}{Im}%im part
 %\DeclareMathOperator{\re}{Re}%re part
@@ -673,6 +673,8 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 \newcommand*{\yDb}{D_{\textrm{b}}}
 \newcommand*{\yDc}{D_{\textrm{c}}}
 \newcommand*{\yDd}{D_{\textrm{d}}}
+\newcommand*{\yr}{\bm{\rho}}
+\newcommand*{\yM}{\mathte{M}}
 %%% Custom macros end @@@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -734,8 +736,8 @@ it is false, and to sum up the fallacy underlying their example.
 
 Let me point out at the outset that the rule of conditional probability and
 the other two rules (sum and negation) are in fact routinely used in
-quantum theory, especially in problems of state \enquote{retrodiction} and
-measurement reconstruction
+quantum theory, with full validity, especially in problems of state
+\enquote{retrodiction} and measurement reconstruction
 \parencites{jones1991b,slater1995b}[\chaps~7,8]{demuynck2002b}{barnettetal2003,zimanetal2004_r2006,darianoetal2004}[see][\sect~1
 for many further references]{maanssonetal2006}, for example to infer the
 state of a quantum laser given its output through different optical
@@ -965,6 +967,54 @@ Wald \citey{wald1994} warns:
   ``particles'' plays no fundamental role either in the formulation or
   interpretation of the theory. [p.~2]
 \end{quote}
+
+\medskip
+
+It may be useful to give a summary of how modern quantum theory works. A
+quantum system is defined by its sets of possible states and possible
+measurements. A state $\rho$ is represented by an Hermitean, unit-trace
+matrix $\yr$ (which satisfies additional constraints), called
+\defquote{density matrix}. States traditionally represented by kets,
+$\lvert \psi \rangle$, are just special cases of density matrices. A
+measurement setup $M$ is represented by a set of Hermitean matrices
+$\set{\yM_{\bm{r}}}$ adding up to the identity matrix, of the same order as
+the density matrices, They are called \defquote{positive-operator-valued
+  measures}. Traditional von~Neumann projection operators
+$\set{\lvert \phi_{r} \rangle\langle \phi_{r}\rvert}$ are just special
+cases. Each matrix $\yM_{\bm{r}}$ is associated with an outcome $\bm{r}$ of
+the measurement. These outcomes are mutually exclusive. An outcome can
+actually represent a combination of simpler outcomes,
+$\bm{r}\equiv(x,y,z,\dotsc)$, such as two intensities at two detectors.
+
+The probability of observing outcome $\bm{r}\equiv (x, y, \dotsc)$ given
+the measurement setup $M$ and the state $S$ is encoded in the trace-product
+of the respective matrices:
+\begin{equation}
+  \label{eq:povm_trace}
+  \pf(x,y,\dotsc \| M \land S) \equiv \tr(\yM_{x,y,\dotsc}\;\yr) \;,
+\end{equation}
+forming a probability distribution. Such probabilities come from repeated
+measurement experiences in the same experimental conditions -- we could
+invoke de~Finetti's theorem here, and some quantum physicists indeed do
+\citep{cavesetal2002,vanenketal2002,fuchsetal2004b}.
+
+Once the probability distribution above is given, we can use the
+full-fledged probability calculus. We can for example sum (or integrate) over the
+detector outcomes $y,\dotsc$, obtaining the marginal probabilities for
+the detector outcomes $x$:
+\begin{equation}
+  \label{eq:povm_trace_marginal}
+  \pf(x\| M \land S) \equiv
+  \tr\bigl[(\tsum_{y,\dotsc}\yM_{x,y,\dotsc})\;\yr\bigr] \;,
+\end{equation}
+obviously represented by the matrices $\set{\tsum_{y,\dotsc}\yM_{x,y,\dotsc}}$.
+
+
+obviously encoded by the matrix
+
+
+Once the probabilities ab
+
 
 
 

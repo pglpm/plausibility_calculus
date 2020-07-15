@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2020-07-13T09:04:38+0200
-%% Last-Updated: 2020-07-15T08:28:09+0200
+%% Last-Updated: 2020-07-15T10:49:41+0200
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newif\ifarxiv
 \arxivfalse
@@ -267,7 +267,7 @@ citestyle=authoryear-ibid,bibstyle=pglpm-authoryear,autopunct=false,sorting=ny,s
 %\appto{\citesetup}{\footnotesize}% smaller font for citations
 \defbibheading{bibliography}[\bibname]{\section*{#1}\addcontentsline{toc}{section}{#1}%\markboth{#1}{#1}
 }
-\newcommand*{\citep}{\footcites}
+\newcommand*{\citep}{\parencites}%{\footcites}
 \newcommand*{\citey}{\parencites*}
 \newcommand*{\ibid}{\unspace\addtocounter{footnote}{-1}\footnotemark{}}
 %\renewcommand*{\cite}{\parencite}
@@ -582,7 +582,7 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 %\providecommand{\varparallel}{\ensuremath{\mathbin{/\mkern-7mu/}}}%parallel (tentative symbol)
 \renewcommand*{\le}{\leqslant}%less or equal
 \renewcommand*{\ge}{\geqslant}%greater or equal
-%\DeclarePairedDelimiter\clcl{[}{]}
+\DeclarePairedDelimiter\clcl{[}{]}
 %\DeclarePairedDelimiter\clop{[}{[}
 %\DeclarePairedDelimiter\opcl{]}{]}
 %\DeclarePairedDelimiter\opop{]}{[}
@@ -675,6 +675,10 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 \newcommand*{\yDd}{D_{\textrm{d}}}
 \newcommand*{\yr}{\bm{\rho}}
 \newcommand*{\yM}{\mathte{M}}
+\newcommand*{\yxa}{X_{1}}
+\newcommand*{\yxb}{X_{2}}
+\newcommand*{\yDq}{D_{q}}
+
 %%% Custom macros end @@@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -754,13 +758,13 @@ Also, let me point out at the outset that the rule of conditional
 probability (and the other two rules, sum and negation) are in fact
 routinely used in quantum theory, with full validity, especially in
 problems of state \enquote{retrodiction} and measurement reconstruction
-\parencites{jones1991b,slater1995b}[\chaps~7,8]{demuynck2002b}{barnettetal2003,zimanetal2004_r2006,darianoetal2004}[see][\sect~1
+\citep{jones1991b,slater1995b}[\chaps~7,8]{demuynck2002b}{barnettetal2003,zimanetal2004_r2006,darianoetal2004}[see][\sect~1
 for many further references]{maanssonetal2006}, for example to infer the
 state of a quantum laser given its output through different optical
-apparatus \parencite{leonhardt1997}.
+apparatus \citep{leonhardt1997}.
 
 Similar incorrect claims with similar examples have appeared before in the
-quantum literature. Bernard O. Koopman \parencite[of the Pitman-Koopman
+quantum literature. Bernard O. Koopman \citep[of the Pitman-Koopman
 theorem for sufficient statistics,][]{koopman1936} discussed the
 falsity of such claims already in \cite*{koopman1957}. The Introduction in
 his work is very clear:
@@ -798,7 +802,7 @@ claim that the probability calculus yields an equality, whereas it actually
 does not. The incorrect reasoning was discussed at length by Porta Mana
 \citey{portamana2003_r2004} through a step-by-step analysis and
 calculation. This work also showed, through simple examples
-\parencite[\sect~IV]{portamana2003_r2004}, that the same incorrect
+\citep[\sect~IV]{portamana2003_r2004}, that the same incorrect
 statements can be obtained \emph{with completely non-quantum systems}, such
 as drawing from an urn, if the setup is neglected. Let us start with such a
 counter-example.
@@ -909,7 +913,7 @@ rule. The last, however, is \emph{not}, despite being an equality. It is
 simply a peculiar equality contingent on the two specific setups.
 
 The probability calculus thus correctly handles situations such
-as~\eqref{eq:cross_combine} or \eqref{eq:cross_combine_same}.
+as~\eqref{eq:cross_combine} and~\eqref{eq:cross_combine_same}.
 
 \medskip
 
@@ -927,14 +931,15 @@ rules.
 
 \medskip
 
-The inequality~\eqref{eq:cross_combine} is what Gelman \amp\ Yao complain
-about, but in the context of a pair of quantum setups. I do not see how one
-can complain about it, or claim inconsistencies. It is obviously correct
-even from an intuitive analysis of the two setups, and the probability
-calculus, correctly, also leads to it. The probability calculus correctly
-leads also to the equality~\eqref{eq:cross_combine_same}. As already said,
-given two mutually exclusive setups, the probability calculus a priori
-neither commits to an equality nor to an inequality.
+The inequality~\eqref{eq:cross_combine} is what Gelman \amp\ Yao
+\citey[p.~2]{gelmanetal2020} complain about, but in the context of a pair
+of quantum setups. I do not see how one can complain about it, or claim
+inconsistencies. It is obviously correct even from an intuitive analysis of
+the two setups, and the probability calculus, correctly, also leads to it.
+The probability calculus correctly leads also to the
+equality~\eqref{eq:cross_combine_same}. As already said, given two mutually
+exclusive setups, the probability calculus a priori neither commits to an
+equality nor to an inequality.
 
 
 I will now show that the simple example above is conceptually actually
@@ -948,22 +953,124 @@ cited below shows.
 
 \paragraph{Quantum experiments}
 
-In fact their
-example has important differences and their analysis of it is incorrect
-from the point of view of quantum theory. Here are the main points:
+The basic argument of Gelman \amp\ Yao is that, in a given setup of the
+quantum two-slit experiment, we have a specific probability distribution
+for the appearance of an emulsion or excitation on some point of the
+screen. We can call this a \enquote{screen detection}, but please keep in
+mind that in so doing we are adding an extra interpretation that modern
+quantum theory does not actually commit to -- see references below. In a
+different experimental setup we have conditional probabilities for screen
+detection conditional on slit detection. Now, the probability in the first
+setup is not equal to the combination of the conditional probabilities of
+the second setup.
+
+But this is exactly what happens in the urn example above,
+\eqn~\eqref{eq:cross_combine}. Also in this quantum case it is \emph{not} a
+violation of the conditional probability rule -- if anything it is a
+confirmation. The matter should thus be settled. Gelman \amp\ Yao
+discussion the experiment further, also mentioning latent variables, but
+their discussion is misleading and incorrect from some points of view.
+Therefore I would like to remark on some very interesting facts and provide
+literature about this quantum experiment.
+
+\begin{enumerate}[label=(\textbf{\roman*})]
+\item\label{item:continnum_experiments} The experimental setup without
+  detectors at the slits, the two setups with one slit closed, and the
+  setup with slit detectors are actually limit cases of a continuum of
+  experimental setups \citep{woottersetal1979}[for a recent review and
+  further references see]{banaszeketal2013}. In the general case, such a
+  setup has \enquote{noisy} slit detectors, with a degree of noise
+  $q \in \clcl{1/2, 1}$ that can be chosen in the setup. These noise
+  degrees are of course mutually exclusive, so these setups are mutually
+  exclusive.
+
+  The slit detector is called \enquote{noisy} in the following sense. Let
+  us call $y$ the detection position on the screen, $\yxa$ the statement
+  that detection occurs at slit \#1, and $\yxb$ at slit \#2 (you can
+  translate to random-variable notation if you prefer). We can prepare the
+  electromagnetic field (quantum state $S_{1}$) in such a way that, in the
+  setup with non-noisy slit detectors, detector \#1 always fires; that is,
+  statement $\yxa$ has probability 1 and statement $\yxb$ has probability 0
+  in this setup. We can also prepare a state $S_{2}$ such that the opposite
+  holds: $\yxa$ has zero probability, and $\yxb$ unit probability.
+
+  If we prepare these states, but use the setup with noisy detectors of
+  degree $q$ -- denote this setup by $\yDq$ -- then we have probability $q$
+  that slit detector \#1 fires for state $S_{1}$, and that \#2 fires for
+  state $S_{2}$ (the probabilities of the other slit are $1-q$). That is,
+  the statements $\yxa$ and $\yxb$ have probabilities $q$ and $1-q$. (We
+  should actually not be using the same $X$ symbol for all such setups,
+  because the sample spaces are different; see the discussion for the urn
+  example). The setup with non-noisy detectors is the limit case $q=1$. In
+  the limit, fully noisy case $q=1/2$ there is basically no relation
+  between the light states and the firing of the slit detectors; that is,
+  we are always fully uncertain as to what detector would fire, no matter
+  how the light state is prepared.
+  
+  In each setup $\yDq$ (and given the light state $S$) we also have the
+  conditional probability distribution $\pf(y \| \yDq,S)$ for detection at
+  $y$ on the screen, and the conditional probability distributions
+  $\pf(y \| X,\yDq,S)$ for detection at $y$ on the screen, conditional on
+  detection $X$ at the slits. We have
+  \begin{multline}
+    \label{eq:conditional_q}
+    \pf(y \| \yDq, S) ={}\\
+    \pf(y \| \yxa, \yDq, S) \;\pf( \yxa \| \yDq, S) +
+    \pf(y \| \yxb, \yDq, S) \;\pf( \yxb \| \yDq, S) \;.
+  \end{multline}
+  This is an instance of the conditional-probability rule. This equality
+  also holds for long-run frequencies (see point \ref{item:q_prob_freq}
+  below). Note that such frequencies are experimentally observed. I would
+  like you to convince yourself, though, that the \emph{equality} above
+  (not the specific values of the frequencies) is not an experimental fact,
+  since it rests on the very definition of conditional frequency.
+
+  There are a couple of interesting experimental facts about these setups:
+
+  First, \emph{both the conditional and unconditional} probability (or
+  long-run frequency) distributions for the screen detection $y$ generally
+  have an oscillatory profile (depending on the specific light state, of
+  course, which we assume fixed), typical of interference
+  \citep{woottersetal1979,banaszeketal2013}[see also][for further
+  variations]{chiaoetal1995}. The oscillatory character is maximal for
+  $q=1/2$ and decreases as $q \to 1$; for $q=1$ it is gone completely.
+  
+  Second, the unconditional (frequency) distribution that we observe in the
+  setup without slit detectors is experimentally equal to that observed
+  in the setup with fully noisy slit detectors.
+
+  Third, the conditional distributions observed in the setup with one slit
+  closed are experimentally equal to those in the setup with perfect slit
+  detectors. Here we must be careful, because there is no slit detection in
+  the second setup; rather, we speak of appearance or non-appearance at the
+  screen, and in the latter case no conditional distribution is defined.
+
+  Note that the equalities in the last two cases should not be expected a
+  priori, because the setups are physically different. Of course one can
+  look for physical, \enquote{hidden variables} explanations of such
+  equalities. Experimental quantum optics simply acknowledges the fact that
+  the two setups are equivalent for such detection purposes.
+
+  \medskip
+
+  It should be noted how all the
 
 
+  
 
-\begin{enumerate}[label=(\roman*)]
+  
+
+
+  
 \item\label{item:q_details} It \emph{does} matter whether many photons are
   sent at once, or one at a time, as well as their wavelength, temporal
   spread, and so on. These details lead to different probabilities
   distributions of detection at the screen
-  \citep[\eg][]{mandeletal1965,morganetal1966,paul1982,jacobsonetal1995}[and
+  \footcites[\eg][]{mandeletal1965,morganetal1966,paul1982,jacobsonetal1995}[and
   textbooks such
   as][]{loudon1973_r2000,mandeletal1995_r2008,scullyetal1997_r2001,bachoretal1998_r2004,wallsetal1994}.
   More precisely, the spatio-temporal dependence of the optic-field
-  operator \parencite[which defines the quantum system:][]{vanenk2003b}
+  operator \citep[which defines the quantum system:][]{vanenk2003b}
   must be specified.
 
   All these details are not \enquote{latent variables}: they are the
@@ -978,7 +1085,7 @@ from the point of view of quantum theory. Here are the main points:
   $\yDb$ applies. In this case one can make inferences by giving the
   probability for each setup, \eg\ $\p(\yDa)$, and applying the
   conditional-probability rule. The same rule is indeed applied in the
-  analogous quantum situation \parencite[\eg][]{zimanetal2004_r2006}.
+  analogous quantum situation \citep[\eg][]{zimanetal2004_r2006}.
   Again, no violations of the probability rules in the quantum realm.
 
 \item\label{item:q_prob_freq} Owing to the point above, it is important not
@@ -1015,7 +1122,7 @@ from the point of view of quantum theory. Here are the main points:
 
   Of course one is free to introduce such a quantity within some
   hidden-variable theory (which goes beyond the quantum realm), such as
-  Bohmian mechanics \parencite[\!; this theory includes as hidden variables
+  Bohmian mechanics \citep[\!; this theory includes as hidden variables
   the positions of the particles and the spatial configuration of a
   so-called pilot wave]{berndletal1995,duerretal2004,valentinietal2005}.
   But then note, first, that such theory gives experimental predictions in
@@ -1033,7 +1140,7 @@ from the point of view of quantum theory. Here are the main points:
 I may add that the idea and parlance of \enquote{photons passing through
   slits} are used today only out of tradition; maybe a little poetically.
 The technical parlance, as routinely used in quantum-optics labs for
-example \parencite{leonhardt1997,bachoretal1998_r2004}, has a different
+example \citep{leonhardt1997,bachoretal1998_r2004}, has a different
 underlying picture. The basic \enquote{system} in a quantum-optics
 experiment are not photons, but the modes of the field-configuration
 operator (note that this is not yet Quantum ElectroDynamics).
@@ -1041,9 +1148,9 @@ operator (note that this is not yet Quantum ElectroDynamics).
 energy-measurement operator; \enquote{photon states} denote specific states
 of the field operators. As another example, \enquote{entanglement} is
 strictly speaking not among photons, but among modes of the field operator
-\parencite{vanenk2003b}. Several quantum physicists indeed oppose the idea
+\citep{vanenk2003b}. Several quantum physicists indeed oppose the idea
 and parlance of \enquote{photons}, owing to the confusion it leads to. Lamb
-\parencite[of the Lamb shift,][]{lambetal1947} wrote in \cite*{lamb1995}:
+\citep[of the Lamb shift,][]{lambetal1947} wrote in \cite*{lamb1995}:
 \begin{quote}
   \footnotesize the author does not like the use of the word ``photon'',
   which dates from 1926. In his view, there is no such thing as a photon.
@@ -1281,7 +1388,7 @@ of~\eqref{eq:compare_conditionals}. In a scheme of P\'olya draws for blue
 instead, we would obtain two inequalities in place
 of~\eqref{eq:compare_conditionals}.
 
-Something analogous \parencite[see][for an exact parallel
+Something analogous \citep[see][for an exact parallel
 see]{portamana2003_r2004} happens in inferences about quantum measurements.
 The conditional probability for the result of measurement $R$ made at time
 $t_{2}$, given the result of measurement $B$ made at time $t_{1}$, is not
@@ -1296,10 +1403,10 @@ probabilities. The times of the two measurements cannot be swapped.
 It should be noted that the conditional-probability
 rule~\eqref{eq:conditional_prob} is in fact routinely used in quantum
 theory in problems of state retrodiction and measurement reconstruction
-\parencites{jones1991b,slater1995b}[\chaps~7,8]{demuynck2002b}{zimanetal2004_r2006,darianoetal2004}[see][\sect~1
+\citep{jones1991b,slater1995b}[\chaps~7,8]{demuynck2002b}{zimanetal2004_r2006,darianoetal2004}[see][\sect~1
 for many further references]{maanssonetal2006},
 for example to infer the state of a quantum laser given its output through
-different optical apparatus \parencite{leonhardt1997}.
+different optical apparatus \citep{leonhardt1997}.
 
 \textcolor{white}{If you find this you can claim a postcard from me.}
 

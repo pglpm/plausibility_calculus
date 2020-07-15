@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2020-07-13T09:04:38+0200
-%% Last-Updated: 2020-07-15T11:35:26+0200
+%% Last-Updated: 2020-07-15T13:36:32+0200
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newif\ifarxiv
 \arxivfalse
@@ -1103,10 +1103,12 @@ Gelman \amp\ Yao in relation to the two-slit experiment.
   probability density $\pf(y_{1})$ for the first photon, and a
   \emph{different} density for the second photon $\pf(y_{2} \| y_{1})$,
   conditional on the detection of the first -- both being different from
-  the long-run joint density of detections $f(y)$. See \eg\ the 
-    phenomena of higher-order coherence, bunching, anti-bunching, and so on\footcites[\eg][]{mandeletal1965,morganetal1966,paul1982,jacobsonetal1995}[and
+  the long-run joint density of detections $f(y)$. See \eg\ the phenomena
+  of higher-order coherence, bunching, anti-bunching, and so
+  on\footcites[\eg][]{mandeletal1965,morganetal1966,paul1982,jacobsonetal1995}[and
   textbooks such
   as][]{loudon1973_r2000,mandeletal1995_r2008,scullyetal1997_r2001,bachoretal1998_r2004,wallsetal1994}.
+  Interference phenomena can also be observed in time, not only in space.
 
   The rules of the probability calculus also apply in such situations. We
   can infer, for example, the position of the first photon detection given
@@ -1117,7 +1119,7 @@ Gelman \amp\ Yao in relation to the two-slit experiment.
 \item\label{item:latent_vars} The details about the light source and the
   setup are not \enquote{latent variables}: they specify the quantum state
   of light and the measurement performed on it. They are like the initial
-  and boundary conditions necessary to the specification of the behaviour
+  and boundary conditions necessary for the specification of the behaviour
   of any physical system. % They correspond to the different drawing
   % setups in the urn example above -- we would not call the specification
   % \enquote{drawing with replacement} a latent variable. The rules of
@@ -1168,16 +1170,16 @@ I may add that the idea and parlance of \enquote{photons passing through
   slits} are used today only out of tradition; maybe a little poetically.
 The technical parlance, as routinely used in quantum-optics labs for
 example \citep{leonhardt1997,bachoretal1998_r2004}, has a different
-underlying picture. The basic \enquote{system} in a quantum-optics
-experiment are not photons, but the modes of the field-configuration
-operator (note that this is not yet Quantum ElectroDynamics).
-\enquote{Photon numbers} denote the discrete outcomes of a specific
-energy-measurement operator; \enquote{photon states} denote specific states
-of the field operators. As another example, \enquote{entanglement} is
-strictly speaking not among photons, but among modes of the field operator
-\citep{vanenk2003b}. Several quantum physicists indeed oppose the idea
-and parlance of \enquote{photons}, owing to the confusion it leads to. Lamb
-\citep[of the Lamb shift,][]{lambetal1947} wrote in \cite*{lamb1995}:
+underlying picture. The \defquote{system} in a quantum-optics experiment is
+not photons, but the modes of the field-configuration operator\ibid (note
+that this is not yet Quantum ElectroDynamics). \enquote{Photon numbers}
+denote the discrete outcomes of a specific energy-measurement operator;
+\enquote{photon states} denote specific states of the field operators. As
+another example, \enquote{entanglement} is strictly speaking not among
+photons, but among modes of the field operator \citep{vanenk2003b}. Several
+quantum physicists indeed oppose the idea and parlance of
+\enquote{photons}, owing to the confusion it leads to. Lamb \citep[of the
+Lamb shift,][]{lambetal1947} wrote in \cite*{lamb1995}:
 \begin{quote}
   \footnotesize the author does not like the use of the word ``photon'',
   which dates from 1926. In his view, there is no such thing as a photon.
@@ -1197,25 +1199,32 @@ Wald \citey{wald1994} warns:
   ``particles'' plays no fundamental role either in the formulation or
   interpretation of the theory. [p.~2]
 \end{quote}
+See also Davies's \emph{Particles do not exist} \citey{davies1984}.
 
 \bigskip
 
 \paragraph{A summary of the modern formalism of quantum theory}
 
-It may be useful to give a summary of how modern quantum theory works. A
-quantum system is defined by its sets of possible states and possible
+It may be useful to give a summary of how probability enters the modern
+formalism of quantum theory. See textbooks such as Holevo
+\citey{holevo1980_t2011}, Busch \etal\ \citey{buschetal1995b}, Peres
+\citey[especially \chap~12]{peres1995}, de Muynck \citey[especially
+\chap~3]{demuynck2002b}, and the excellent text by Bengtsson \amp\
+\.Zyczkowski \citey{bengtssonetal2006_r2017}.
+
+A quantum system is defined by its sets of possible states and possible
 measurements. A state $\rho$ is represented by an Hermitean, unit-trace
-matrix $\yr$ (which satisfies additional constraints), called
-\defquote{density matrix}. States traditionally represented by kets,
-$\lvert \psi \rangle$, are just special cases of density matrices. A
+matrix $\yr$ (which satisfies additional mathematical properties), called
+\defquote{density matrix}. States traditionally represented by kets
+$\lvert \psi \rangle$ are just special cases of density matrices. A
 measurement setup $M$ is represented by a set of Hermitean matrices
-$\set{\yM_{\bm{r}}}$ adding up to the identity matrix, of the same order as
-the density matrices, They are called \defquote{positive-operator-valued
-  measures}. Traditional von~Neumann projection operators
-$\set{\lvert \phi_{r} \rangle\langle \phi_{r}\rvert}$ are just special
-cases. Each matrix $\yM_{\bm{r}}$ is associated with an outcome $\bm{r}$ of
-the measurement. These outcomes are mutually exclusive. An outcome can
-actually represent a combination of simpler outcomes,
+$\set{\yM_{\bm{r}}}$ (of the same order as the density matrices) adding up
+to the identity matrix. They are called \defquote{positive-operator-valued
+  measures}, usually abbreviated \defquote{POVM}. Traditional von~Neumann
+projection operators $\set{\lvert \phi_{r} \rangle\langle \phi_{r}\rvert}$
+are just special cases. Each matrix $\yM_{\bm{r}}$ is associated with an
+outcome $\bm{r}$ of the measurement. These outcomes are mutually exclusive.
+An outcome can actually represent a combination of simpler outcomes,
 $\bm{r}\equiv(x,y,z,\dotsc)$, such as two intensities at two detectors.
 
 The probability of observing outcome $\bm{r}\equiv (x, y, \dotsc)$ given

@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2020-07-13T09:04:38+0200
-%% Last-Updated: 2020-07-14T17:36:43+0200
+%% Last-Updated: 2020-07-15T08:28:09+0200
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newif\ifarxiv
 \arxivfalse
@@ -730,14 +730,30 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 
 In a recent manuscript, Gelman \amp\ Yao \citey{gelmanetal2020} claim that
 \enquote{the usual rules of conditional probability fail in the quantum
-  realm} and purport to support such statement with an example. Such a
-statement is false. I would like to recall some literature that shows why
-it is false, and to sum up the fallacy underlying their example.
+  realm} and purport to support that statement with an Young-slit example.
+Such a statement is false. In the present note I recall some literature in
+quantum theory that shows why it is false, sum up the incorrect reasoning
+underlying their example, and also correct some wrong or imprecise
+statements about the quantum physics in that example.
 
-Let me point out at the outset that the rule of conditional probability and
-the other two rules (sum and negation) are in fact routinely used in
-quantum theory, with full validity, especially in problems of state
-\enquote{retrodiction} and measurement reconstruction
+In fact, an opposite statement can be made, from two different
+perspectives, which will be discussed in the rest of this note:
+\begin{itemize}
+\item The example given in that manuscript confirms, rather than
+  invalidate, the probability rules. The probability calculus shows that a
+  particular relation between probabilities \emph{cannot a priori} be
+  assumed to be an equality or an inequality. In the quantum example it
+  turns out to be an inequality, thus confirming what the probability
+  calculus says.
+\item But actually the same inequality can be shown to appear in very
+  non-quantum examples, such as drawing from an urn. Thus there is nothing
+  peculiar to quantum theory in this matter.
+\end{itemize}
+
+Also, let me point out at the outset that the rule of conditional
+probability (and the other two rules, sum and negation) are in fact
+routinely used in quantum theory, with full validity, especially in
+problems of state \enquote{retrodiction} and measurement reconstruction
 \parencites{jones1991b,slater1995b}[\chaps~7,8]{demuynck2002b}{barnettetal2003,zimanetal2004_r2006,darianoetal2004}[see][\sect~1
 for many further references]{maanssonetal2006}, for example to infer the
 state of a quantum laser given its output through different optical
@@ -770,93 +786,173 @@ his work is very clear:
   view of the laws of probability.
 \end{quotation}
 
-A claim similar to Gelman \amp\ Yao's, with a similar supporting example,
-was made in a work by Brukner \amp\ Zeilinger \citey{brukneretal2001},
-somewhat famous in the quantum community; although their focus was on an
-alleged inconsistency of some properties of the Shannon entropy in quantum
-theory.
+A claim somewhat similar to Gelman \amp\ Yao's, with a similar supporting
+example, was made in a work by Brukner \amp\ Zeilinger
+\citey{brukneretal2001}; although their focus was on an alleged
+inconsistency of some properties of the Shannon entropy in quantum theory.
 
-The fallacy in the reasoning of Brukner \amp\ Zeilinger and Gelman \amp\
-Yao rests in the neglect of the experimental setup, leading to an incorrect
-calculation of conditional probabilities. Such fallacy was exposed and
-discussed at length by Porta Mana \citey{portamana2003_r2004} through a
-step-by-step analysis and calculation. This work also showed, through
-simple examples \parencite[\sect~IV]{portamana2003_r2004}, that the same
-incorrect statements can be obtained \emph{with completely classical
-  systems}, such as drawing from an urn, if the setup is neglected. Here is
-a simple example.
+The fallacy in their reasoning, which is similar to Gelman \amp\ Yao's,
+rests in the neglect of the experimental setup, leading either to an
+incorrect calculation of conditional probabilities, or to the incorrect
+claim that the probability calculus yields an equality, whereas it actually
+does not. The incorrect reasoning was discussed at length by Porta Mana
+\citey{portamana2003_r2004} through a step-by-step analysis and
+calculation. This work also showed, through simple examples
+\parencite[\sect~IV]{portamana2003_r2004}, that the same incorrect
+statements can be obtained \emph{with completely non-quantum systems}, such
+as drawing from an urn, if the setup is neglected. Let us start with such a
+counter-example.
+
+\bigskip
+
+\paragraph{A non-quantum counter-example}
 
 Consider an urn with one $B$lue and one $R$ed ball. There are two possible
 drawing setups:
 \begin{enumerate}[label=$D_{\textrm{\alph*}}$]
-\item\label{item:repB} With replacement for blue, without replacement for red. That is, if
-  blue is drawn, it is put back before the next draw (and the urn is
-  shaken); if red is drawn, it is thrown away before the next draw.
+\item\label{item:repB} With replacement for blue, without replacement for
+  red. That is, if blue is drawn, it is put back before the next draw (and
+  the urn is shaken); if red is drawn, it is thrown away before the next
+  draw.
 \item \label{item:repR} With replacement for red, without replacement for blue.
 \end{enumerate}
-The two setups are obviously mutually exclusive.
+These two setups are obviously mutually exclusive.
 
-We can easily calculate what is the unconditional probability for blue at
-the second draw in the setup $\yDa$:
+We can easily find the unconditional probability for blue at the
+second draw in the setup $\yDa$:
 \begin{equation}
   \label{eq:A_red2}
-  \p(B_{2} \| \yDa) = \tfrac{3}{4} \;,
+  \p(B_{2} \| \yDa) = \tfrac{3}{4} \;.
 \end{equation}
-and the conditional probabilities for blue at the second draw, conditional
-on the first draw, in the setup $\yDb$:
+Note that these can be intuitively found by simple enumeration, \`a la
+Boole, with a \enquote{possible worlds} diagram. Out of four possible
+worlds, half of which has blue at the first draw, and the other half has
+red, we see that three worlds have blue at the second draw.
+
+The conditional probabilities for blue at the second draw,
+conditional on the first draw, are also easily found:
 \begin{equation}
-  \label{eq:A_red2}
+  \label{eq:A_red2cond}
+  \p(B_{2} \| B_{1} \land \yDa) = \tfrac{1}{2} \qquad
+  \p(B_{2} \| R_{1} \land \yDa) = 1 \;.
+\end{equation}
+We find that
+\begin{equation}
+  \label{eq:A_rule}
+  \p(B_{2} \| \yDa) =%\mathrel{\bm{\ne}}
+  \p(B_{2} \| B_{1} \land \yDa) \; \p( B_{1} \| \yDa) +
+  \p(B_{2} \| R_{1} \land \yDa)  \; \p( R_{1} \| \yDa) \;,
+\end{equation}
+which is just the rule of conditional probability. It is in fact just the
+systematization and generalization of the intuitive \enquote{possible
+  worlds} reasoning done above.
+
+Now consider the setup $\yDb$. We easily find
+\begin{gather}
+  \label{eq:B_red2}
+  \p(B_{2} \| \yDb) = \tfrac{1}{4} \;.
+  \\
+  \label{eq:B_red2cond}
   \p(B_{2} \| B_{1} \land \yDb) = 0 \qquad
-  \p(B_{2} \| R_{1} \land \yDb) = \tfrac{1}{2} \;.
-\end{equation}
-We  find that
+  \p(B_{2} \| R_{1} \land \yDb) = \tfrac{1}{2} \;,
+  \\
+  \label{eq:B_rule}
+  \p(B_{2} \| \yDb) =%\mathrel{\bm{\ne}}
+  \p(B_{2} \| B_{1} \land \yDb) \; \p( B_{1} \| \yDb) +
+  \p(B_{2} \| R_{1} \land \yDb)  \; \p( R_{1} \| \yDb) \;.
+\end{gather}
+
+
+\medskip
+
+Now compare the unconditional probability for blue at the second draw in
+the setup $\yDa$, with the  probabilities for blue at the second draw
+conditional on the first in the setup $\yDb$:
 \begin{equation}
   \label{eq:cross_combine}
   \p(B_{2} \| \yDa) \mathrel{\bm{\ne}}
   \p(B_{2} \| B_{1} \land \yDb) \; \p( B_{1} \| \yDb) +
   \p(B_{2} \| R_{1} \land \yDb)  \; \p( R_{1} \| \yDb) \;.
 \end{equation}
-This inequality is no surprising. And it does not contradict the rule of
-conditional probability, because that rule is supposed to be used within
-the same probability space. You can call the inequality above
-\enquote{interference} if you like; for further examples see Kirkpatrick
+This inequality is not surprising -- we are comparing different setugs. It
+is \emph{not} an instance of the conditional-probability rule. In fact the
+probability calculus has nothing to say about the relation between the left
+side and right side, which are conditional on different statements or, if
+you like, pertain to two different sample spaces.
+
+You can call the inequality above \enquote{interference} if you like; for
+further examples see Kirkpatrick
 \citey{kirkpatrick2001_r2003,kirkpatrick2002_r2003} and Porta Mana
 \citey[\sect~IV]{portamana2003_r2004}.
 
-Note that, had we considered a drawing setup $\yDc$ with replacement for both
-colours, and a setup $\yDd$ without replacement for either colour, we would
-have found
-\begin{equation}
+\medskip
+
+Now consider another pair of drawing setups: setup $\yDc$, with replacement
+for both colours; and setup $\yDd$, without replacement for either colour.
+You can easily find that
+\begin{gather}
+  \p(B_{2} \| \yDc) =%\mathrel{\bm{\ne}}
+  \p(B_{2} \| B_{1} \land \yDc) \; \p( B_{1} \| \yDc) +
+  \p(B_{2} \| R_{1} \land \yDc)  \; \p( R_{1} \| \yDc) \;,
+  \\
+  \p(B_{2} \| \yDd) =%\mathrel{\bm{\ne}}
+  \p(B_{2} \| B_{1} \land \yDd) \; \p( B_{1} \| \yDd) +
+  \p(B_{2} \| R_{1} \land \yDd)  \; \p( R_{1} \| \yDd) \;,
+  \\
   \label{eq:cross_combine_same}
   \p(B_{2} \| \yDc) \mathrel{\bm{=}}
   \p(B_{2} \| B_{1} \land \yDd) \; \p( B_{1} \| \yDd) +
   \p(B_{2} \| R_{1} \land \yDd)  \; \p( R_{1} \| \yDd) \;.
-\end{equation}
-The equality above, however, is \emph{not} and expression of the
-conditional-probability rule, because the probability spaces are different.
-It is simply a peculiar equality contingent on the two specific setups. The
-probability calculus handles correctly situations such
-as~\eqref{eq:cross_combine} or \eqref{eq:cross_combine_same}.
+\end{gather}
+The first two equalities are expressions of the conditional-probability
+rule. The last, however, is \emph{not}, despite being an equality. It is
+simply a peculiar equality contingent on the two specific setups.
 
-In fact, strictly speaking it is wrong to use the expression
-\defquote{$B_{2}$} for all these setups, because \defquote{$B_{2}$} in the
-one setup denotes a different statement (or random variable) than in
-another. Just like \enquote{it rains (on 2020-07-14T09:00+0200 in
-  Trondheim)} is different from \enquote{it rains (on 2019-01-20T18:00+0200
-  in Rome)}. I should have used different symbols. The explicit presence of
-\defquote{$D_{\dotso}$}, which represents given information, luckily
-avoided any ambiguities. But if in our formulae we omit the notation of the
-setup \emph{and} we use the same notation for actually different statements
-or random variables, then we're in for trouble and for incorrect
-applications of the probability rules.
+The probability calculus thus correctly handles situations such
+as~\eqref{eq:cross_combine} or \eqref{eq:cross_combine_same}.
 
 \medskip
 
-The example above stresses the importance of the probability space -- even
-in \enquote{non-quantum} situations. But it is not meant as a parallel of
-Gelman \amp\ Yao's \citey[\sect~2]{gelmanetal2020} example. In fact their
+Strictly speaking it is wrong to use the expression \defquote{$B_{2}$} for
+all these setups, because \defquote{$B_{2}$} in each setup denotes a
+different statement (or random variable) than in the others. Just like
+\enquote{it rains (on 2020-07-14T09:00+0200 in Trondheim)} is different
+from \enquote{it rains (on 2019-01-20T18:00+0200 in Rome)}. I should have
+used different symbols. The explicit presence of \defquote{$D_{\dotso}$},
+which represents given information, luckily avoided any ambiguities. But if
+in our formulae we omit the notation of the setup \emph{and} we use the
+same notation for actually different statements or random variables, then
+we're in for trouble and for incorrect applications of the probability
+rules.
+
+\medskip
+
+The inequality~\eqref{eq:cross_combine} is what Gelman \amp\ Yao complain
+about, but in the context of a pair of quantum setups. I do not see how one
+can complain about it, or claim inconsistencies. It is obviously correct
+even from an intuitive analysis of the two setups, and the probability
+calculus, correctly, also leads to it. The probability calculus correctly
+leads also to the equality~\eqref{eq:cross_combine_same}. As already said,
+given two mutually exclusive setups, the probability calculus a priori
+neither commits to an equality nor to an inequality.
+
+
+I will now show that the simple example above is conceptually actually
+quite close to the quantum experiment mentioned by Gelman \amp\ Yao -- and
+also correct some statements they make about that experiment. The closeness
+is especially clear from the experimental and mathematical developments of
+quantum theory of the past 40 years (at the very least), as the literature
+cited below shows.
+
+\bigskip
+
+\paragraph{Quantum experiments}
+
+In fact their
 example has important differences and their analysis of it is incorrect
 from the point of view of quantum theory. Here are the main points:
+
+
 
 \begin{enumerate}[label=(\roman*)]
 \item\label{item:q_details} It \emph{does} matter whether many photons are

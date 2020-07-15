@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2020-07-13T09:04:38+0200
-%% Last-Updated: 2020-07-15T16:45:26+0200
+%% Last-Updated: 2020-07-15T17:44:55+0200
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newif\ifarxiv
 \arxivfalse
@@ -18,7 +18,7 @@ british%
 ]{memoir}
 \newcommand*{\firstdraft}{13 July 2020}
 \newcommand*{\firstpublished}{13 July 2020}
-\newcommand*{\updated}{\ifarxiv***\else\today\fi}
+\newcommand*{\updated}{\ifarxiv 15 July 2020\else\today\fi}
 \newcommand*{\propertitle}{The rule of conditional probability\\ is valid in quantum theory%\\{\large ***}%
 }% title uses LARGE; set Large for smaller
 \newcommand*{\pdftitle}{The rule of conditional probability is valid in quantum theory}
@@ -193,7 +193,7 @@ british%
 \def\prod{\DOTSI\prodop\slimits@}
 \def\coprod{\DOTSI\coprodop\slimits@}
 \makeatother
-\input{definegreek.tex}% Greek letters not usually given in LaTeX.
+%\input{definegreek.tex}% Greek letters not usually given in LaTeX.
 
 %\usepackage%[scaled=0.9]%
 %{classico}%  Optima as sans-serif font
@@ -679,6 +679,7 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 \newcommand*{\yxb}{X_{2}}
 \newcommand*{\yDq}{D_{q}}
 \newcommand*{\povm}{\textsc{povm}}
+\newcommand*{\ybr}{\bm{r}}
 %%% Custom macros end @@@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -735,7 +736,7 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 In a recent manuscript, Gelman \amp\ Yao \citey{gelmanetal2020} claim that
 \enquote{the usual rules of conditional probability fail in the quantum
   realm}, and purport to support that statement with the example of a
-double-slit experiment. Their statement is
+quantum double-slit experiment. Their statement is
 false. % In the present note I recall some literature in
 % quantum theory that shows why it is false, sum up the incorrect reasoning
 % underlying their example, and also correct some wrong or imprecise
@@ -1106,13 +1107,15 @@ setups and the conditional-probability rule applies, yielding for example
 \end{equation}
 (here our knowledge of the state was assumed to be irrelevant to our
 inference about the setup). Then, given the measurement outcome, we can
-make inferences about the setup -- for example whether a slit detector was
-present or not -- again using the conditional-probability rule in the guise
-of Bayes's theorem. This kind of inference is especially important in
-quantum cryptography and key distribution \citep{nielsenetal2000_r2010},
-where we try to infer whether a third party was eavesdropping through
-covert measurements. Again no violations of the probability rules in the
-quantum realm; quite the opposite, those rules allow us to make important
+make inferences about the setup
+\citep{barnettetal2003,zimanetal2004_r2006,darianoetal2004}[see
+also][]{rigoetal1998} -- for example whether a slit detector was present or
+not -- again using the conditional-probability rule in the guise of Bayes's
+theorem. This kind of inference is especially important in quantum
+cryptography and key distribution \citep{nielsenetal2000_r2010}, where we
+try to infer whether a third party was eavesdropping through covert
+measurements. Again no violations of the probability rules in the quantum
+realm; quite the opposite, those rules allow us to make important
 inferences.
 
 
@@ -1252,64 +1255,69 @@ formalism of quantum theory. See textbooks such as Holevo
 \.Zyczkowski \citey{bengtssonetal2006_r2017}.
 
 A quantum system is defined by its sets of possible states and possible
-measurements. A state $\rho$ is represented by an Hermitean, unit-trace
-matrix $\yr$ (which satisfies additional mathematical properties), called
-\defquote{density matrix}. States traditionally represented by kets
+measurements. A state $\rho$ is represented by an Hermitean,
+positive-definite, unit-trace matrix $\yr$ \citep[which satisfies
+additional mathematical
+properties:][]{jakobczyketal2001,kimura2003,kimuraetal2004,bengtssonetal2006_r2017},
+called \defquote{density matrix}. States traditionally represented by kets
 $\lvert \psi \rangle$ are just special cases of density matrices. A
-measurement setup $M$ is represented by a set of Hermitean matrices
-$\set{\yM_{\bm{r}}}$ (of the same order as the density matrices) adding up
-to the identity matrix. They are called \defquote{positive-operator-valued
-  measures}, usually abbreviated \povm s. Traditional von~Neumann
-projection operators $\set{\lvert \phi_{r} \rangle\langle \phi_{r}\rvert}$
-are just special cases of \povm s. Each matrix $\yM_{\bm{r}}$ is associated
-with an outcome $\bm{r}$ of the measurement. These outcomes are mutually
-exclusive. An outcome can actually represent a combination of simpler
-outcomes, $\bm{r}\equiv(x,y,z,\dotsc)$, such as the intensities at two
-detectors.
+measurement setup $M$ is represented by a set of Hermitean,
+positive-definite matrices $\set{\yM_{\ybr}}$ (of the same order as the
+density matrices) adding up to the identity matrix. They are called
+\defquote{positive-operator-valued measures}, usually abbreviated \povm s.
+Traditional von~Neumann projection operators
+$\set{\lvert \phi_{r} \rangle\langle \phi_{r}\rvert}$ are just special
+cases of \povm s. Each matrix $\yM_{\ybr}$ is associated with an outcome
+$\ybr$ of the measurement. These outcomes are mutually exclusive. An
+outcome can actually represent a combination of simpler outcomes,
+$\ybr\equiv(x,y,z,\dotsc)$, such as the intensities or firings at two or
+more detectors.
 
-The probability of observing outcome $\bm{r}\equiv (x, y, \dotsc)$ given
+The probability of observing outcome $\ybr\equiv (x, y, \dotsc)$ given
 the measurement setup $M$ and the state $S$ is encoded in the trace-product
 of the respective matrices:
 \begin{equation}
   \label{eq:povm_trace}
   \pf(x,y,\dotsc \| M \land S) \equiv \tr(\yM_{x,y,\dotsc}\;\yr) \;,
 \end{equation}
-forming a probability distribution. The traditional expression
+These probabilities for all $\ybr$ form a probability distribution. The
+traditional Born-rule expression
 \defquote{$\abs{\langle \phi_{r} \vert \psi \rangle}^{2}$} is just a
 special case of the above formula. The probabilities in the formula come
 from repeated measurement experiences in the same experimental conditions
--- we can invoke de~Finetti's theorem, and some quantum physicists indeed
-do \citep{cavesetal2002,vanenketal2002,fuchsetal2004b}. The trace-product
-above is just a scalar product in a particular space. How a set of
-probability or frequency distributions can be encoded in scalar products is
-explained in a down-to-earth way in Porta Mana \citey{portamana2003b}.
+-- we can invoke de~Finetti's theorem here, and some quantum physicists
+indeed do \citep{cavesetal2002,vanenketal2002,fuchsetal2004b}. The
+trace-product above is just a scalar product in a particular space. How a
+set of probability or frequency distributions can be encoded in scalar
+products is explained in a down-to-earth way in Porta Mana
+\citey{portamana2003b}.
 
 Once the probability distribution above is given we can use the
-full-fledged probability calculus. We can for example sum (or integrate)
-over detector outcomes $y,\dotsc$, obtaining the marginal probabilities for
-detector outcomes $x$; or calculate the probability of outcome $y$
-conditional on $x$; or make inferences about the measurement setup or the
-state. (Again, there are no violations of the probability rules.) The
-formalism~\eqref{eq:povm_trace} is neat in this respect because it allows
-us to represent such situations through new \povm s or density matrices.
-You can easily check, for example, that the marginal probability for $x$
-from \eqn~\eqref{eq:povm_trace} can be encoded in the \povm\
+full-fledged probability calculus for our inferences. We can for example
+sum (or integrate) over detector outcomes $y,\dotsc{}$, obtaining the
+marginal probability for detector outcome $x$; or calculate the probability
+of outcome $y$ conditional on $x$; or make inferences about the measurement
+setup or the state. (Again, there are no violations of the probability
+rules.) The formalism~\eqref{eq:povm_trace} is neat in this respect because
+it allows us to represent such situations through new \povm s and density
+matrices. You can easily check, for example, that the marginal probability
+for $x$ from \eqn~\eqref{eq:povm_trace} can be encoded in the \povm\
 $\set{\yM'_{x}} \equiv \set{\tsum_{y,\dotsc}\yM_{x,y,\dotsc}}$. A situation
 of uncertainty between setups $M'$ and $M''$, as in
 \eqn~\eqref{eq:conditional_setups}, can be encoded in the \povm\
-$\pf(M')\;\yM'_{\bm{r}} + \pf(M'')\;\yM''_{\bm{r}}$. And so on, and
+$\set[\big]{\pf(M')\;\yM'_{\ybr} + \pf(M'')\;\yM''_{\ybr}}$. And so on, and
 similarly for states and their density operators.
 
 \medskip
 
 For systems with infinite degrees of freedom such as electromagnetic fields
 or electrons (Fermionic fields), the matrices above are actually operators
-defined in particular algebras; for example, a \povm\ element can be a
+defined in particular algebras. A \povm\ element can actually be a
 space-time-valued operator. The computational details can become quite
 complicated, but the same basic ideas apply.
 
 This formalism obviously also includes the specification of
-post-measurement states (if the system still exist afterwards),
+post-measurement states (if the system still exists afterwards),
 transformations, and so on. I shall not discuss these; see the textbooks
 cited above.
 

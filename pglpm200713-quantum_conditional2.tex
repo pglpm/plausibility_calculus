@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2020-07-13T09:04:38+0200
-%% Last-Updated: 2020-07-15T10:49:41+0200
+%% Last-Updated: 2020-07-15T11:35:26+0200
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newif\ifarxiv
 \arxivfalse
@@ -951,7 +951,7 @@ cited below shows.
 
 \bigskip
 
-\paragraph{Quantum experiments}
+\paragraph{The quantum two-slit experiments}
 
 The basic argument of Gelman \amp\ Yao is that, in a given setup of the
 quantum two-slit experiment, we have a specific probability distribution
@@ -967,117 +967,104 @@ the second setup.
 But this is exactly what happens in the urn example above,
 \eqn~\eqref{eq:cross_combine}. Also in this quantum case it is \emph{not} a
 violation of the conditional probability rule -- if anything it is a
-confirmation. The matter should thus be settled. Gelman \amp\ Yao
-discussion the experiment further, also mentioning latent variables, but
-their discussion is misleading and incorrect from some points of view.
-Therefore I would like to remark on some very interesting facts and provide
-literature about this quantum experiment.
+confirmation.
 
-\begin{enumerate}[label=(\textbf{\roman*})]
-\item\label{item:continnum_experiments} The experimental setup without
-  detectors at the slits, the two setups with one slit closed, and the
-  setup with slit detectors are actually limit cases of a continuum of
-  experimental setups \citep{woottersetal1979}[for a recent review and
-  further references see]{banaszeketal2013}. In the general case, such a
-  setup has \enquote{noisy} slit detectors, with a degree of noise
-  $q \in \clcl{1/2, 1}$ that can be chosen in the setup. These noise
-  degrees are of course mutually exclusive, so these setups are mutually
-  exclusive.
+To see the analogy more clearly, let me present some additional facts from
+quantum theory.
 
-  The slit detector is called \enquote{noisy} in the following sense. Let
-  us call $y$ the detection position on the screen, $\yxa$ the statement
-  that detection occurs at slit \#1, and $\yxb$ at slit \#2 (you can
-  translate to random-variable notation if you prefer). We can prepare the
-  electromagnetic field (quantum state $S_{1}$) in such a way that, in the
-  setup with non-noisy slit detectors, detector \#1 always fires; that is,
-  statement $\yxa$ has probability 1 and statement $\yxb$ has probability 0
-  in this setup. We can also prepare a state $S_{2}$ such that the opposite
-  holds: $\yxa$ has zero probability, and $\yxb$ unit probability.
+\medskip
 
-  If we prepare these states, but use the setup with noisy detectors of
-  degree $q$ -- denote this setup by $\yDq$ -- then we have probability $q$
-  that slit detector \#1 fires for state $S_{1}$, and that \#2 fires for
-  state $S_{2}$ (the probabilities of the other slit are $1-q$). That is,
-  the statements $\yxa$ and $\yxb$ have probabilities $q$ and $1-q$. (We
-  should actually not be using the same $X$ symbol for all such setups,
-  because the sample spaces are different; see the discussion for the urn
-  example). The setup with non-noisy detectors is the limit case $q=1$. In
-  the limit, fully noisy case $q=1/2$ there is basically no relation
-  between the light states and the firing of the slit detectors; that is,
-  we are always fully uncertain as to what detector would fire, no matter
-  how the light state is prepared.
+The experimental setup without detectors at the slits, the two setups with
+one slit closed, and the setup with slit detectors are actually limit cases
+of a continuum of experimental setups \citep{woottersetal1979}[for a recent
+review and further references see]{banaszeketal2013}. In the general case,
+such a setup has \enquote{noisy} slit detectors, with a degree of noise
+$q \in \clcl{1/2, 1}$ that can be chosen in the setup. These noise degrees
+are of course mutually exclusive, so these setups are mutually exclusive.
+
+The slit detector is called \enquote{noisy} in the following sense. Let us
+call $y$ the detection position on the screen, $\yxa$ the statement that
+detection occurs at slit \#1, and $\yxb$ at slit \#2 (you can translate to
+random-variable notation if you prefer). We can prepare the electromagnetic
+field (quantum state $S_{1}$) in such a way that, in the setup with
+non-noisy slit detectors, detector \#1 always fires; that is, statement
+$\yxa$ has probability 1 and statement $\yxb$ has probability 0 in this
+setup. We can also prepare a state $S_{2}$ such that the opposite holds:
+$\yxa$ has zero probability, and $\yxb$ unit probability.
+
+If we prepare these states, but use the setup with noisy detectors of
+degree $q$ -- denote this setup by $\yDq$ -- then we have probability $q$
+that slit detector \#1 fires for state $S_{1}$, and that \#2 fires for
+state $S_{2}$ (the probabilities of the other slit are $1-q$). That is, the
+statements $\yxa$ and $\yxb$ have probabilities $q$ and $1-q$. (We should
+actually not be using the same $X$ symbol for all such setups, because the
+sample spaces are different; see the discussion for the urn example). The
+setup with non-noisy detectors is the limit case $q=1$. In the limit, fully
+noisy case $q=1/2$ there is basically no relation between the light states
+and the firing of the slit detectors; that is, we are always fully
+uncertain as to what detector would fire, no matter how the light state is
+prepared.
   
-  In each setup $\yDq$ (and given the light state $S$) we also have the
-  conditional probability distribution $\pf(y \| \yDq,S)$ for detection at
-  $y$ on the screen, and the conditional probability distributions
-  $\pf(y \| X,\yDq,S)$ for detection at $y$ on the screen, conditional on
-  detection $X$ at the slits. We have
-  \begin{multline}
-    \label{eq:conditional_q}
-    \pf(y \| \yDq, S) ={}\\
-    \pf(y \| \yxa, \yDq, S) \;\pf( \yxa \| \yDq, S) +
-    \pf(y \| \yxb, \yDq, S) \;\pf( \yxb \| \yDq, S) \;.
-  \end{multline}
-  This is an instance of the conditional-probability rule. This equality
-  also holds for long-run frequencies (see point \ref{item:q_prob_freq}
-  below). Note that such frequencies are experimentally observed. I would
-  like you to convince yourself, though, that the \emph{equality} above
-  (not the specific values of the frequencies) is not an experimental fact,
-  since it rests on the very definition of conditional frequency.
+In each setup $\yDq$ (and given the light state $S$) we also have the
+conditional probability distribution $\pf(y \| \yDq,S)$ for detection at
+$y$ on the screen, and the conditional probability distributions
+$\pf(y \| X,\yDq,S)$ for detection at $y$ on the screen, conditional on
+detection $X$ at the slits. We have
+\begin{multline}
+  \label{eq:conditional_q}
+  \pf(y \| \yDq, S) ={}\\
+  \pf(y \| \yxa, \yDq, S) \;\pf( \yxa \| \yDq, S) +
+  \pf(y \| \yxb, \yDq, S) \;\pf( \yxb \| \yDq, S) \;.
+\end{multline}
+This is an instance of the conditional-probability rule. This equality also
+holds for long-run frequencies (see point \ref{item:q_prob_freq} below).
+Note that such frequencies are experimentally observed. I would like you to
+convince yourself, though, that the \emph{equality} above (not the specific
+values of the frequencies) is not an experimental fact, since it rests on
+the very definition of conditional frequency.
 
-  There are a couple of interesting experimental facts about these setups:
+The conditional and unconditional distributions above will of course be
+different depending on the setup $\yDq$ and the light state $S$.
 
-  First, \emph{both the conditional and unconditional} probability (or
-  long-run frequency) distributions for the screen detection $y$ generally
-  have an oscillatory profile (depending on the specific light state, of
-  course, which we assume fixed), typical of interference
-  \citep{woottersetal1979,banaszeketal2013}[see also][for further
-  variations]{chiaoetal1995}. The oscillatory character is maximal for
-  $q=1/2$ and decreases as $q \to 1$; for $q=1$ it is gone completely.
+There are a couple of interesting experimental facts about this collection
+of setups:
+
+First, \emph{both the conditional and unconditional} probability (or
+long-run frequency) distributions for the screen detection $y$ generally
+have an oscillatory profile (depending on the specific light state, of
+course, which we assume fixed), typical of interference
+\citep{woottersetal1979,banaszeketal2013}[see also][for further
+variations]{chiaoetal1995}. The oscillatory character is maximal for
+$q=1/2$ and decreases as $q \to 1$; for $q=1$ it is gone completely.
   
-  Second, the unconditional (frequency) distribution that we observe in the
-  setup without slit detectors is experimentally equal to that observed
-  in the setup with fully noisy slit detectors.
+Second, the unconditional (frequency) distribution that we observe in the
+setup without slit detectors is experimentally equal to that observed in
+the setup $D_{1/2}$ with fully noisy slit detectors.
 
-  Third, the conditional distributions observed in the setup with one slit
-  closed are experimentally equal to those in the setup with perfect slit
-  detectors. Here we must be careful, because there is no slit detection in
-  the second setup; rather, we speak of appearance or non-appearance at the
-  screen, and in the latter case no conditional distribution is defined.
+Third, one conditional distribution observed in the setup with one slit
+closed is experimentally equal to one in the setup $D_{1}$ with perfect
+slit detectors. Here we must be careful, because there is no slit detection
+in the second setup; rather, we speak of appearance or non-appearance at
+the screen, and in the latter case no conditional distribution is defined.
 
-  Note that the equalities in the last two cases should not be expected a
-  priori, because the setups are physically different. Of course one can
-  look for physical, \enquote{hidden variables} explanations of such
-  equalities. Experimental quantum optics simply acknowledges the fact that
-  the two setups are equivalent for such detection purposes.
+Note that the equalities in the last two cases should not be expected a
+priori, because the setups are physically different. Of course one can look
+for physical, \enquote{hidden variables} explanations of such equalities.
+Experimental quantum optics simply acknowledges the fact that two setups
+are equivalent for such detection purposes.
 
-  \medskip
+\medskip
 
-  It should be noted how all the
+It should be noted how this range of cases in statistically analogous to
+the urn examples and setups previously discussed. In each setup, the rule
+of conditional probability holds (and in the quantum case we can have
+distributions, conditional and unconditional, with oscillatory profiles).
+Across different setups probability theory says that such a rule cannot be
+applied; and indeed we find inequalities across some setups and equalities
+across others, both in the quantum and non-quantum case, see
+\eqns~\eqref{eq:cross_combine}, \eqref{eq:cross_combine_same}.
 
 
-  
-
-  
-
-
-  
-\item\label{item:q_details} It \emph{does} matter whether many photons are
-  sent at once, or one at a time, as well as their wavelength, temporal
-  spread, and so on. These details lead to different probabilities
-  distributions of detection at the screen
-  \footcites[\eg][]{mandeletal1965,morganetal1966,paul1982,jacobsonetal1995}[and
-  textbooks such
-  as][]{loudon1973_r2000,mandeletal1995_r2008,scullyetal1997_r2001,bachoretal1998_r2004,wallsetal1994}.
-  More precisely, the spatio-temporal dependence of the optic-field
-  operator \citep[which defines the quantum system:][]{vanenk2003b}
-  must be specified.
-
-  All these details are not \enquote{latent variables}: they are the
-  initial and boundary conditions that define the physical system. They
-  correspond to the different drawing setups in the urn example above -- we
-  would not call the specification \enquote{drawing with replacement} a
-  latent variable. The rules of probability apply seamlessly in each case.
 
   It is also possible to consider situations where part of the setup, such
   as slit width or presence or absence of detectors, is unknown. This is
@@ -1087,49 +1074,89 @@ literature about this quantum experiment.
   conditional-probability rule. The same rule is indeed applied in the
   analogous quantum situation \citep[\eg][]{zimanetal2004_r2006}.
   Again, no violations of the probability rules in the quantum realm.
+***
 
-\item\label{item:q_prob_freq} Owing to the point above, it is important not
-  to conflate the \emph{probability} for single-photon detections and the
-  \emph{frequency} distribution of a long-run of such detections, as Gelman
-  \amp\ Yao \citey[p.~1]{gelmanetal2020} instead do. For example, in some
-  setups we can have a detection probability density $\pf(y_{1})$ for the
-  first photon, and a \emph{different} density for the second photon
-  $\pf(y_{2} \| y_{1})$, conditional on the detection of the first -- both
-  being different from the long-run joint density of detections $f(y)$
-  \parentext{see \eg\ the phenomena of higher-order coherence and bunching
-    in the references above\ibid}. The rules of the probability calculus
-  also apply in such situations. We can infer, for example, the position of
-  the first photon detection given the second from
+
+\bigskip
+
+\paragraph{Further remarks and curiosities about quantum two-slits
+  experiments}
+
+I would like to mention a couple more experimental facts -- which are,
+besides, statistically very interesting -- to correct some statements by
+Gelman \amp\ Yao in relation to the two-slit experiment.
+% discussion the experiment further, also mentioning latent variables, but
+% their discussion is misleading and incorrect from some points of view.
+% Therefore I would like to remark on some very interesting facts and provide
+% literature about this quantum experiment.
+
+\begin{enumerate}[label=(\textbf{\roman*})]
+%\item\label{item:continnum_experiments} 
+\item\label{item:q_details} It \emph{does} matter whether many photons are
+  sent at once, or one at a time \citep[\cf][\sect~2
+  point~1]{gelmanetal2020}; as well as their wavelength, temporal spread,
+  and so on. These details are part of the specification of the light state
+  $S$ mentioned above, and lead to different probabilities distributions of
+  detection at the screen.
+
+  For example, in some setups and for some states we can have a detection
+  probability density $\pf(y_{1})$ for the first photon, and a
+  \emph{different} density for the second photon $\pf(y_{2} \| y_{1})$,
+  conditional on the detection of the first -- both being different from
+  the long-run joint density of detections $f(y)$. See \eg\ the 
+    phenomena of higher-order coherence, bunching, anti-bunching, and so on\footcites[\eg][]{mandeletal1965,morganetal1966,paul1982,jacobsonetal1995}[and
+  textbooks such
+  as][]{loudon1973_r2000,mandeletal1995_r2008,scullyetal1997_r2001,bachoretal1998_r2004,wallsetal1994}.
+
+  The rules of the probability calculus also apply in such situations. We
+  can infer, for example, the position of the first photon detection given
+  the second from
   $\pf(y_{1} \| y_{2}) \propto \pf(y_{2} \| y_{1})\;\pf(y_{1})$.
   
-\item\label{item:q_slitclosed_vs_detect} The long-run frequency
-  distribution for screen detection in the setup with one slit open
-  (denoted \defquote{$p_1(y)$} by Gelman \amp\ Yao), and the one
-  conditional on slit detection in the setup with detectors at the slits
-  (\defquote{$p_{4}(y \| x)$}) are a priori unrelated, since they belong to
-  different setups. In some situations (but not always, see points
-  \ref{item:q_details}, \ref{item:q_prob_freq} above) they experimentally
-  turn out to be equal. But this was not required by the probability
-  calculus. Such equality is similar to \eqn~\eqref{eq:cross_combine_same}
-  between the with-replacement and without-replacement urn setups, which is
-  not an a priori rule of the probability calculus, and in fact does not
-  hold for the setups in \eqn~\eqref{eq:cross_combine}.
 
-\item In the setup with one or both slits open, the quantity
-  \enquote{detection at slit $x$} \emph{does not exist}, because no such
-  measurement is included in the setup. So in these cases the idea of a
-  marginal probability does not even apply.
+\item\label{item:latent_vars} The details about the light source and the
+  setup are not \enquote{latent variables}: they specify the quantum state
+  of light and the measurement performed on it. They are like the initial
+  and boundary conditions necessary to the specification of the behaviour
+  of any physical system. % They correspond to the different drawing
+  % setups in the urn example above -- we would not call the specification
+  % \enquote{drawing with replacement} a latent variable. The rules of
+  % probability apply seamlessly in each case.
 
-  Of course one is free to introduce such a quantity within some
-  hidden-variable theory (which goes beyond the quantum realm), such as
-  Bohmian mechanics \citep[\!; this theory includes as hidden variables
-  the positions of the particles and the spatial configuration of a
-  so-called pilot wave]{berndletal1995,duerretal2004,valentinietal2005}.
-  But then note, first, that such theory gives experimental predictions in
-  complete agreement with standard quantum theory; and second, that the
-  rules of probability theory are again used without violations in this
-  theory (\eg\ the relation between joint and conditional distributions of
-  the particles' positions, and so on).
+\item\label{item:q_prob_freq} In view of point~\ref{item:q_details} above,
+  it is important not to conflate the \emph{probabilities} for
+  single-photon detections and the \emph{frequency} distribution of a
+  long-run of such detections \citep[\sect~2, seem to conflate the
+  two]{gelmanetal2020}.
+%  
+% \item\label{item:q_slitclosed_vs_detect} The long-run frequency
+%   distribution for screen detection in the setup with one slit open
+%   (denoted \defquote{$p_1(y)$} by Gelman \amp\ Yao), and the one
+%   conditional on slit detection in the setup with detectors at the slits
+%   (\defquote{$p_{4}(y \| x)$}) are a priori unrelated, since they belong to
+%   different setups. In some situations (but not always, see points
+%   \ref{item:q_details}, \ref{item:q_prob_freq} above) they experimentally
+%   turn out to be equal. But this was not required by the probability
+%   calculus. Such equality is similar to \eqn~\eqref{eq:cross_combine_same}
+%   between the with-replacement and without-replacement urn setups, which is
+%   not an a priori rule of the probability calculus, and in fact does not
+%   hold for the setups in \eqn~\eqref{eq:cross_combine}.
+
+% \item In the setup with one or both slits open, the quantity
+%   \enquote{detection at slit $x$} \emph{does not exist}, because no such
+%   measurement is included in the setup. So in these cases the idea of a
+%   marginal probability does not even apply.
+
+%   Of course one is free to introduce such a quantity within some
+%   hidden-variable theory (which goes beyond the quantum realm), such as
+%   Bohmian mechanics \citep[\!; this theory includes as hidden variables
+%   the positions of the particles and the spatial configuration of a
+%   so-called pilot wave]{berndletal1995,duerretal2004,valentinietal2005}.
+%   But then note, first, that such theory gives experimental predictions in
+%   complete agreement with standard quantum theory; and second, that the
+%   rules of probability theory are again used without violations in this
+%   theory (\eg\ the relation between joint and conditional distributions of
+%   the particles' positions, and so on).
 %
 % \item There is a continuum of possible experimental setups, which includes
 %   as special cases the setups without slit detectors, with only one slit
@@ -1171,7 +1198,9 @@ Wald \citey{wald1994} warns:
   interpretation of the theory. [p.~2]
 \end{quote}
 
-\medskip
+\bigskip
+
+\paragraph{A summary of the modern formalism of quantum theory}
 
 It may be useful to give a summary of how modern quantum theory works. A
 quantum system is defined by its sets of possible states and possible

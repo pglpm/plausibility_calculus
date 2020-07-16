@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2020-07-13T09:04:38+0200
-%% Last-Updated: 2020-07-15T17:44:55+0200
+%% Last-Updated: 2020-07-16T09:45:54+0200
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newif\ifarxiv
 \arxivfalse
@@ -771,7 +771,7 @@ a quantum laser given its output through different optical apparatus
 \citep{leonhardt1997}.
 
 Similar incorrect claims with similar examples have appeared before in the
-quantum literature. Bernard O. Koopman \citep[of the Pitman-Koopman
+quantum literature. Bernard O. Koopman \footcite[of the Pitman-Koopman
 theorem for sufficient statistics,][]{koopman1936} discussed the
 falsity of such claims already in \cite*{koopman1957}. The Introduction in
 his work is very clear:
@@ -928,16 +928,23 @@ as~\eqref{eq:cross_combine_same}.
 
 \medskip
 
-Strictly speaking it is wrong to use the expression \defquote{$B_{2}$} for
-all these setups, because \defquote{$B_{2}$} in each setup denotes a
-different statement (or random variable) than in the others. Just like
-\enquote{it rains (on 14 July 2020 in Trondheim)} is different from
-\enquote{it rains (on 20 November 2019 in Rome)}. I should have used
-different symbols. The explicit presence of \defquote{$D_{\dotso}$}, which
-represents given information, luckily avoided any ambiguities. But if in
-our formulae we omit the notation of the setup \emph{and} we use the same
-notation for actually different statements or random variables, then we're
-in for trouble and for incorrect applications of the probability rules.
+% Strictly speaking it is wrong to use the expression \defquote{$B_{2}$} for
+% all these setups, because \defquote{$B_{2}$} in each setup denotes a
+% different statement (or random variable) than in the others. Just like
+% \enquote{it rains (on 14 July 2020 in Trondheim)} is different from
+% \enquote{it rains (on 20 November 2019 in Rome)}. I should have used
+% different symbols.
+
+The explicit presence of \defquote{$D_{\dotso}$}, which represents given
+information, is necessary discussions involving different setups, such as
+the above. If I ask you \enquote{what's the probability of blue at the
+  second draw?}, you will ask me \enquote{in which drawing setup?}. The
+probability is conditional on the information about the drawing scheme.
+
+% luckily avoided any ambiguities. But if in our formulae we omit the
+% notation of the setup \emph{and} we use the same notation for actually
+% different statements or random variables, then we're in for trouble and for
+% incorrect applications of the probability rules.
 
 \medskip
 
@@ -986,44 +993,50 @@ quantum theory.
 The experimental setup without detectors at the slits and the setup with
 slit detectors are actually limit cases of a continuum of experimental
 setups \citep{woottersetal1979}[for a recent review and further references
-see][]{banaszeketal2013}. In the general case, such a setup has
-\enquote{noisy} slit detectors, with a degree of noise
-$q \in \clcl[\big]{\tfrac{1}{2}, 1}$ that can be chosen in the setup. The
-possible noise degrees are of course mutually exclusive, so these setups
-are mutually exclusive.
+see][]{banaszeketal2013}. In the general case, such a setup has slit
+detectors of varying efficiency, denoted by a parameter $q \in \clcl{0, 1}$
+that can be chosen in the setup. The possible degrees of efficiency are of
+course mutually exclusive, so these setups are mutually exclusive.
 
-The slit detector is called \enquote{noisy} in the following sense:
+The slit detector has a given efficiency in the following sense:
 
-Let us call $y$ the detection position on the screen; $\yxa$ is the
-statement that detection occurs at slit \#1, and $\yxb$ at slit \#2 (you
-can translate to random-variable jargon if you prefer). We can prepare the
-electromagnetic field (quantum state $S_{1}$) in such a way that, in the
-setup with non-noisy slit detectors, detector \#1 always fires; that is,
-statement $\yxa$ has probability 1 and statement $\yxb$ has probability 0
-in this setup. We can also prepare a state $S_{2}$ such that the opposite
-holds in the same non-noisy setup: $\yxa$ has zero probability, and $\yxb$
-unit probability.
+Let us call $y$ the detection position on the screen, and $\yxa$ is the
+statement that detection occurs at slit \#1 (you can translate to
+random-variable jargon if you prefer). When we prepare the electromagnetic
+field in a quantum state $S$, and use ideal detectors with perfect
+efficiency, the probability of detection at slit \#1 is, say $p_{S}$, and
+$1-p_{S}$ for slit \#2.
 
-If we use the setup with noisy detectors of degree $q$ -- denote this setup by
-$\yDq$ -- then we have probability $q$ that slit detector \#1 fires, when
-state $S_{1}$ is prepared; and probability $q$ that slit detector \#2
-fires, when state $S_{2}$ is prepared; the probabilities for the other slit
-are $1-q$. That is,
+% in such a way that, in the setup with
+% non-noisy slit detectors, detector \#1 always fires; that is, statement
+% $\yxa$ has probability 1 and statement $\yxb$ has probability 0 in this
+% setup. We can also prepare a state $S_{2}$ such that the opposite holds in
+% the same non-noisy setup: $\yxa$ has zero probability, and $\yxb$ unit
+% probability.
+
+If we use the setup with detectors having efficiency $q$ -- denote it by
+$\yDq$ -- then the probability of detection at slit \#1 is
+% n we have probability $q$ that slit detector \#1 fires, when
+% state $S_{1}$ is prepared; and probability $q$ that slit detector \#2
+% fires, when state $S_{2}$ is prepared; the probabilities for the other slit
+% are $1-q$. That is,
 \begin{equation}
   \label{eq:explain_noisy}
-  \pf(\yxa \| \yDq, S_{1}) = q \;,
-  \qquad
-  \pf(\yxb \| \yDq, S_{2}) = q \;.
+  \pf(\yxa \| \yDq, S) =  \tfrac{1}{2} (1-q) + q\,p_{S}\;,
 \end{equation}
+and $\tfrac{1}{2}(1+q) - q\,p_{S}$ for slit \#2.
 % (We should actually not be using the same $X$ symbol for all such setups,
 % because the sample spaces are different; see the discussion for the urn
 % example).
 
-The setup with non-noisy detectors is the limit case $q=1$. In the limit of
-the fully noisy case, $q=1/2$, there is basically no relation between the
-light states and the firing of the slit detectors; that is, we are always
-fully uncertain as to what detector would fire, no matter how the light
-state is prepared.
+The setup with perfect detectors is the limit case $q=1$. In the case of
+zero efficiency, $q=0$, there is no relation between the light states and
+the firing of the slit detectors; that is, we are always fully uncertain as
+to which detector would fire, no matter how the light state is prepared.
+These kinds of setup -- and many other interesting ones -- are quite easy
+to prepare with the statistically analogous quantum Mach-Zehnder
+interferometers (see the textbooks in footnote~\ref{fn:ref_interf} below;
+\cites[\sect~4.2]{leonhardt1997}{yuenetal1978}).
   
 In each setup $\yDq$ (and given the light state $S$) we also have the
 conditional probability distribution $\pf(y \| \yDq,S)$ for detection at
@@ -1058,16 +1071,16 @@ long-run frequency) distributions for the screen detection $y$ generally
 \emph{have an oscillatory profile, typical of interference}
 \citep{woottersetal1979,banaszeketal2013}[see also][for further
 variations]{chiaoetal1995}. The oscillatory character is maximal for the
-fully-noisy setup $q=1/2$ and decreases as $q \to 1$; for the non-noisy
-setup $q=1$ there is no interference. But we can have quite a lot of
-interference even when the detection noise is quite low, so that we are
-almost certain about slit detection; see references above. (The profile
-depends on the specific light state, of course, which we are assuming
-fixed.)
+zero-efficiency setup $q=0$ and decreases as $q$ increases. For the
+perfect-detector setup $q=1$ there is no interference. But we can have
+quite a lot of interference even when the detection efficiency is quite
+low, so that for some light states we are almost certain about slit
+detection; see references above. (The profile depends on the specific light
+state, of course, which we are assuming fixed.)
   
 Second, the unconditional (frequency) distribution that we observe in the
 setup without slit detectors is experimentally equal to that observed in
-the setup $D_{1/2}$ with fully noisy slit detectors.
+the setup $D_{0}$ with zero-efficiency slit detectors.
 
 Third, one conditional distribution observed in the setup with one slit
 closed is experimentally equal to one in the setup $D_{1}$ with perfect
@@ -1098,12 +1111,12 @@ across others, both in the quantum and non-quantum case,
 
 It is also possible to consider situations in which we are uncertain about
 which measurement setup applies. For example we may not know whether there
-were slit detectors, or the value $q$ of the detector noisiness. In such
+were slit detectors, or the value $q$ of the detector efficiency. In such
 situations we introduce probabilities $\pf(D_{\dotso})$ for the possible
 setups and the conditional-probability rule applies, yielding for example
 \begin{equation}
   \label{eq:conditional_setups}
-  \pf(y \| S) = \sum_{q} \pf(y \| \yDq, S)\;\pf(\yDq)
+  \pf(y \| S) = \tsum_{q} \pf(y \| \yDq, S)\;\pf(\yDq)
 \end{equation}
 (here our knowledge of the state was assumed to be irrelevant to our
 inference about the setup). Then, given the measurement outcome, we can
@@ -1111,12 +1124,11 @@ make inferences about the setup
 \citep{barnettetal2003,zimanetal2004_r2006,darianoetal2004}[see
 also][]{rigoetal1998} -- for example whether a slit detector was present or
 not -- again using the conditional-probability rule in the guise of Bayes's
-theorem. This kind of inference is especially important in quantum
-cryptography and key distribution \citep{nielsenetal2000_r2010}, where we
-try to infer whether a third party was eavesdropping through covert
-measurements. Again no violations of the probability rules in the quantum
-realm; quite the opposite, those rules allow us to make important
-inferences.
+theorem. This kind of inference is especially important in quantum key
+distribution \citep{nielsenetal2000_r2010}, where we try to infer whether a
+third party was eavesdropping, that is, performing a covert measurement.
+Again no violations of the probability rules in the quantum realm; quite
+the opposite, those rules allow us to make important inferences.
 
 
 \bigskip
@@ -1137,19 +1149,21 @@ Gelman \amp\ Yao in relation to the two-slit experiment.
 \item\label{item:q_details} It \emph{does} matter whether many photons are
   sent at once, or one at a time \citep[\cf][\sect~2
   point~1]{gelmanetal2020}; as well as their wavelength, temporal spread,
-  and so on. These details are part of the specification of the light state
-  $S$ mentioned above, and lead to different probabilities distributions of
+  and so on (strictly speaking, the spatio-temporal dependence of the field
+  mode). These details are part of the specification of the light state $S$
+  mentioned above, and lead to different probabilities distributions of
   screen detection.
 
   For example, in some setups and for some states we can have a detection
   probability density $\pf(y_{1})$ for the first photon, and a
   \emph{different} density for the second photon $\pf(y_{2} \| y_{1})$,
   conditional on the detection of the first -- both being different from
-  the long-run joint density of detections $f(y)$. See \eg\ the phenomena
-  of higher-order coherence, bunching, anti-bunching, and so
-  on\footcites[\eg][]{mandeletal1965,morganetal1966,paul1982,jacobsonetal1995}[and
-  textbooks such
-  as][]{loudon1973_r2000,mandeletal1995_r2008,scullyetal1997_r2001,bachoretal1998_r2004,wallsetal1994}.
+  the cumulative density of detections. See \eg\ the phenomena of
+  higher-order coherence, bunching, anti-bunching, and many other
+  interesting ones\footnote{\label{fn:ref_interf}\cites[for
+    example][]{mandeletal1965,morganetal1966,paul1982,jacobsonetal1995}[and
+    textbooks such
+    as][]{loudon1973_r2000,mandeletal1995_r2008,scullyetal1997_r2001,bachoretal1998_r2004,wallsetal1994}}.
   Interference phenomena can also be observed in time, not only in space.
   The rules of the probability calculus also apply in all such situations.
   We can infer, for example, the position of the first photon detection
@@ -1167,11 +1181,11 @@ Gelman \amp\ Yao in relation to the two-slit experiment.
   % probability apply seamlessly in each case.
 
 \item\label{item:q_prob_freq} In view of point~\ref{item:q_details} above,
-  it is important not to conflate the \emph{probabilities} for
-  single-photon detections and the \emph{frequency} distribution of a
-  long-run of such detections \citep[\sect~2, seem to conflate the
-  two]{gelmanetal2020}. Such distinction is always important from a
-  Bayesian point of view.
+  it is important not to conflate the probability distributions for
+  single-photon detections, those for cumulative photon detection, and the
+  \emph{frequency} distributions of a long-run of such detections
+  \citep[\sect~2, seem to conflate the two]{gelmanetal2020}. Such
+  distinction is always important from a Bayesian point of view.
 %  
 % \item\label{item:q_slitclosed_vs_detect} The long-run frequency
 %   distribution for screen detection in the setup with one slit open
@@ -1220,7 +1234,7 @@ denote the discrete outcomes of a specific energy-measurement operator;
 another example, \enquote{entanglement} is strictly speaking not among
 photons, but among modes of the field operator \citep{vanenk2003b}. Several
 quantum physicists indeed oppose the idea and parlance of
-\enquote{photons}, owing to the confusion it leads to. Lamb \citep[of the
+\enquote{photons}, owing to the confusion they lead to. Lamb \footcite[of the
 Lamb shift,][]{lambetal1947} wrote in \cite*{lamb1995}:
 \begin{quote}
   \footnotesize the author does not like the use of the word ``photon'',

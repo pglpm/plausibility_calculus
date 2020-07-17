@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2020-07-13T09:04:38+0200
-%% Last-Updated: 2020-07-16T09:45:54+0200
+%% Last-Updated: 2020-07-17T10:47:20+0200
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newif\ifarxiv
 \arxivfalse
@@ -18,7 +18,7 @@ british%
 ]{memoir}
 \newcommand*{\firstdraft}{13 July 2020}
 \newcommand*{\firstpublished}{13 July 2020}
-\newcommand*{\updated}{\ifarxiv 15 July 2020\else\today\fi}
+\newcommand*{\updated}{\ifarxiv 17 July 2020\else\today\fi}
 \newcommand*{\propertitle}{The rule of conditional probability\\ is valid in quantum theory%\\{\large ***}%
 }% title uses LARGE; set Large for smaller
 \newcommand*{\pdftitle}{The rule of conditional probability is valid in quantum theory}
@@ -669,15 +669,19 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 %\DeclareMathOperator*{\argsup}{arg\,sup}
 \newcommand*{\dob}{degree of belief}
 \newcommand*{\dobs}{degrees of belief}
-\newcommand*{\yDa}{D_{\textrm{a}}}
-\newcommand*{\yDb}{D_{\textrm{b}}}
-\newcommand*{\yDc}{D_{\textrm{c}}}
-\newcommand*{\yDd}{D_{\textrm{d}}}
+\newcommand*{\yDa}{\textcolor{mypurpleblue}{D_{\textrm{a}}}}
+\newcommand*{\yDb}{\textcolor{myredpurple}{D_{\textrm{b}}}}
+\newcommand*{\yDc}{\textcolor{mygreen}{D_{\textrm{c}}}}
+\newcommand*{\yDd}{\textcolor{myyellow}{D_{\textrm{d}}}}
 \newcommand*{\yr}{\bm{\rho}}
 \newcommand*{\yM}{\mathte{M}}
 \newcommand*{\yxa}{X_{1}}
 \newcommand*{\yxb}{X_{2}}
 \newcommand*{\yDq}{D_{q}}
+\newcommand*{\yDqa}{\textcolor{mypurpleblue}{D_{q'}}}
+\newcommand*{\yDqb}{\textcolor{myredpurple}{D_{q''}}}
+\newcommand*{\yqa}{\textcolor{mypurpleblue}{q'}}
+\newcommand*{\yqb}{\textcolor{myredpurple}{q''}}
 \newcommand*{\povm}{\textsc{povm}}
 \newcommand*{\ybr}{\bm{r}}
 %%% Custom macros end @@@
@@ -735,13 +739,14 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 
 In a recent manuscript, Gelman \amp\ Yao \citey{gelmanetal2020} claim that
 \enquote{the usual rules of conditional probability fail in the quantum
-  realm}, and purport to support that statement with the example of a
-quantum double-slit experiment. Their statement is
+  realm} and that \enquote{probability theory isn't true (quantum physics)}, and
+purport to support these statements with the example of a quantum
+double-slit experiment. Their statements are
 false. % In the present note I recall some literature in
 % quantum theory that shows why it is false, sum up the incorrect reasoning
 % underlying their example, and also correct some wrong or imprecise
 % statements about the quantum physics in that example.
-In fact, an opposite statement can be made, from two different
+In fact, opposite statements can be made, from two different
 perspectives: %, which will be discussed in the rest of this note:
 \begin{itemize}
 \item The example given in that manuscript confirms, rather than
@@ -760,10 +765,10 @@ relevant literature in quantum theory. I shall also correct a couple of
 wrong or imprecise statements that Gelman \amp\ Yao make about quantum
 physics in their example.
 
-Let me point out at the outset that the rule of conditional probability
-(and the other two rules, sum and negation) are in fact routinely used in
-quantum theory, with full validity, especially in problems of state
-\enquote{retrodiction} and measurement reconstruction
+Let me point out at the outset that the rules of probability theory
+(product or conditional or conjunction, sum or disjunction, negation) are
+in fact routinely used in quantum theory with full validity, especially in
+problems of state \enquote{retrodiction} and measurement reconstruction
 \citep{jones1991b,slater1995b}[\chaps~7,8]{demuynck2002b}{barnettetal2003,zimanetal2004_r2006,darianoetal2004}[see][\sect~1
 and the rest of the present note for many further
 references]{maanssonetal2006}. An example is the inference of the state of
@@ -820,12 +825,12 @@ Let us start with such a non-quantum counter-example.
 
 Consider an urn with one $B$lue and one $R$ed ball. Two possible
 drawing setups are given:
-\begin{enumerate}[label=$D_{\textrm{\alph*}}$:,ref=$D_{\textrm{\alph*}}$]
-\item\label{item:repB} With replacement for blue, without replacement for
+\begin{enumerate}%[label=$D_{\textrm{\alph*}}$:,ref=$D_{\textrm{\alph*}}$]
+\item[$\yDa$]\label{item:repB} With replacement for blue, without replacement for
   red. That is, if blue is drawn, it is put back before the next draw (and
   the urn is shaken); if red is drawn, it is thrown away before the next
   draw.
-\item\label{item:repR} With replacement for red, without replacement for
+\item[$\yDb$]\label{item:repR} With replacement for red, without replacement for
   blue.
 \end{enumerate}
 These two setups are obviously mutually exclusive.
@@ -837,12 +842,13 @@ second draw in the setup $\yDa$:
   \p(B_{2} \| \yDa) = \tfrac{3}{4} \;.
 \end{equation}
 Note that this probability can be intuitively found by simple enumeration,
-\`a la Boole, with a \enquote{possible worlds} diagram. Out of four
-possible worlds, half of which has blue at the first draw, and the other
-half has red, we can count that three worlds have blue at the second draw.
+\`a la Boole, considering \enquote{possible worlds} if you like. Out of
+four possible worlds, half of which has blue at the first draw, and the
+other half has red, we can count that three worlds have blue at the second
+draw.
 
 The conditional probabilities for blue at the second draw,
-conditional on the first draw, are also easily found:
+given the first draw, are also easily found:
 \begin{equation}
   \label{eq:A_red2cond}
   \p(B_{2} \| B_{1} \land \yDa) = \tfrac{1}{2} \qquad
@@ -861,7 +867,7 @@ systematization and generalization of the intuitive \enquote{possible
 
 \medskip
 
-Now consider the setup $\yDb$. We easily find
+Next consider the setup $\yDb$. We easily find
 \begin{gather}
   \label{eq:B_red2}
   \p(B_{2} \| \yDb) = \tfrac{1}{4} \;,
@@ -895,9 +901,9 @@ between the left side and right side, which are conditional on different
 statements or, if you like, pertain to two different sample spaces.
 
 You can call the inequality above \enquote{interference} if you want; for
-further examples see Kirkpatrick
-\citey{kirkpatrick2001_r2003,kirkpatrick2002_r2003} and Porta Mana
-\citey[\sect~IV]{portamana2003_r2004}.
+further and more involved examples with urns and decks of cards see
+Kirkpatrick \citey{kirkpatrick2001_r2003,kirkpatrick2002_r2003} and Porta
+Mana \citey[\sect~IV]{portamana2003_r2004}.
 
 \medskip
 
@@ -1054,33 +1060,62 @@ valid. This equality also holds for long-run frequencies (see point
 \ref{item:q_prob_freq} below). Note that such conditional and unconditional
 frequencies are experimentally observed. I would like you to convince
 yourself, though, that the \emph{equality} above (not the specific values
-of the frequencies) is not an experimental fact, since it rests on the very
-definition of conditional frequency.
+of the frequencies) is not really an experimental fact, since it rests on
+the very way we measure conditional frequencies.
 
 The conditional and unconditional distributions above will of course be
 different depending on the setup $\yDq$ and the light state $S$. But in
-each instance the rule of conditional probability holds.
+each instance the rule of conditional probability holds. For example, if
+$\yqa \ne \yqb$,
+\begin{gather}
+  \begin{multlined}[][\linewidth]
+    \pf(y \| \yDqa, S) ={}\\
+  \pf(y \| \yxa, \yDqa, S) \;\pf( \yxa \| \yDqa, S) +
+  \pf(y \| \yxb, \yDqa, S) \;\pf( \yxb \| \yDqa, S) \;,
+\end{multlined}
+\\
+  \begin{multlined}[][\linewidth]
+    \pf(y \| \yDqb, S) ={}\\
+  \pf(y \| \yxa, \yDqb, S) \;\pf( \yxa \| \yDqb, S) +
+  \pf(y \| \yxb, \yDqb, S) \;\pf( \yxb \| \yDqb, S) \;,
+\end{multlined}
+\\
+  \begin{multlined}[][\linewidth]
+    \pf(y \| \yDqa, S) \mathrel{\bm{\ne}} {}\\
+  \pf(y \| \yxa, \yDqb, S) \;\pf( \yxa \| \yDqb, S) +
+  \pf(y \| \yxb, \yDqb, S) \;\pf( \yxb \| \yDqb, S) \;.
+\end{multlined}
+\end{gather}
+The last inequality, analogous to \eqn~\eqref{eq:cross_combine}, comes from
+experimental observations (see the brief discussion below about the
+relation with de~Finetti's theorem), and was not in fact not ruled out a
+priori by the probability calculus.
+
+
+
 
 \medskip
 
 Now let me discuss a couple of very interesting experimental facts about
 this collection of setups:
 
-First, \emph{both the conditional and unconditional} probability (or
-long-run frequency) distributions for the screen detection $y$ generally
-\emph{have an oscillatory profile, typical of interference}
-\citep{woottersetal1979,banaszeketal2013}[see also][for further
+First, \emph{both the conditional $y\vert X$ and unconditional} probability
+distributions for the screen detection $y$ generally \emph{have an
+  oscillatory profile, typical of interference}
+\citep{woottersetal1979,banaszeketal2013}[see also][for other experimental
 variations]{chiaoetal1995}. The oscillatory character is maximal for the
 zero-efficiency setup $q=0$ and decreases as $q$ increases. For the
 perfect-detector setup $q=1$ there is no interference. But we can have
 quite a lot of interference even when the detection efficiency is quite
-low, so that for some light states we are almost certain about slit
+high, so that for some light states we are almost certain about slit
 detection; see references above. (The profile depends on the specific light
 state, of course, which we are assuming fixed.)
   
-Second, the unconditional (frequency) distribution that we observe in the
-setup without slit detectors is experimentally equal to that observed in
-the setup $D_{0}$ with zero-efficiency slit detectors.
+Second, the unconditional (frequency) distribution observed in the setup
+$D_{0}$ with zero-efficiency slit detectors is experimentally equal to the
+distribution for screen detection observed in the setup without slit
+detectors (note that in the latter setup we cannot speak of conditional or
+unconditional probability, since slit detection does not exist).
 
 Third, one conditional distribution observed in the setup with one slit
 closed is experimentally equal to one in the setup $D_{1}$ with perfect
@@ -1094,7 +1129,8 @@ because the setups are physically different. Of course one can look for
 physical, \enquote{hidden variables} explanations of such equalities.
 Experimental quantum optics simply acknowledges the fact that two setups
 are equivalent for such detection purposes, and incorporates this
-information into its mathematical formalism (see below).
+information into its mathematical formalism, by means of appropriately
+defined \defquote{\povm s}, discussed below.
 
 \medskip
 
@@ -1105,7 +1141,10 @@ distributions, conditional and unconditional, with oscillatory profiles).
 Across different setups, probability theory says that such a rule cannot be
 applied; and indeed we find inequalities across some setups and equalities
 across others, both in the quantum and non-quantum case,
-\eqns~\eqref{eq:cross_combine}, \eqref{eq:cross_combine_same}.
+\eqns~\eqref{eq:cross_combine}, \eqref{eq:cross_combine_same}. Even more
+striking statistical analogies appear in the already cited non-quantum
+counter-examples
+\citep{kirkpatrick2001_r2003,kirkpatrick2002_r2003}[\sect~IV]{portamana2003_r2004}.
 
 \medskip
 
@@ -1127,7 +1166,7 @@ not -- again using the conditional-probability rule in the guise of Bayes's
 theorem. This kind of inference is especially important in quantum key
 distribution \citep{nielsenetal2000_r2010}, where we try to infer whether a
 third party was eavesdropping, that is, performing a covert measurement.
-Again no violations of the probability rules in the quantum realm; quite
+Again no violations of the probability rules in the quantum realm: quite
 the opposite, those rules allow us to make important inferences.
 
 
@@ -1298,21 +1337,22 @@ These probabilities for all $\ybr$ form a probability distribution. The
 traditional Born-rule expression
 \defquote{$\abs{\langle \phi_{r} \vert \psi \rangle}^{2}$} is just a
 special case of the above formula. The probabilities in the formula come
-from repeated measurement experiences in the same experimental conditions
--- we can invoke de~Finetti's theorem here, and some quantum physicists
+from repeated measurement observations in the same experimental conditions:
+we can invoke de~Finetti's \citey{definetti1937,definetti1938} theorem here
+-- the partial-exchangeability variant -- and some quantum physicists
 indeed do \citep{cavesetal2002,vanenketal2002,fuchsetal2004b}. The
 trace-product above is just a scalar product in a particular space. How a
 set of probability or frequency distributions can be encoded in scalar
 products is explained in a down-to-earth way in Porta Mana
-\citey{portamana2003b}.
+\citey{portamana2003b,portamana2004b}.
 
 Once the probability distribution above is given we can use the
 full-fledged probability calculus for our inferences. We can for example
 sum (or integrate) over detector outcomes $y,\dotsc{}$, obtaining the
 marginal probability for detector outcome $x$; or calculate the probability
 of outcome $y$ conditional on $x$; or make inferences about the measurement
-setup or the state. (Again, there are no violations of the probability
-rules.) The formalism~\eqref{eq:povm_trace} is neat in this respect because
+setup or the state. Again, there are no violations of the probability
+rules. The formalism~\eqref{eq:povm_trace} is neat in this respect because
 it allows us to represent such situations through new \povm s and density
 matrices. You can easily check, for example, that the marginal probability
 for $x$ from \eqn~\eqref{eq:povm_trace} can be encoded in the \povm\
@@ -1322,17 +1362,15 @@ of uncertainty between setups $M'$ and $M''$, as in
 $\set[\big]{\pf(M')\;\yM'_{\ybr} + \pf(M'')\;\yM''_{\ybr}}$. And so on, and
 similarly for states and their density operators.
 
-\medskip
-
 For systems with infinite degrees of freedom such as electromagnetic fields
-or electrons (Fermionic fields), the matrices above are actually operators
-defined in particular algebras. A \povm\ element can actually be a
-space-time-valued operator. The computational details can become quite
+or electrons (Fermionic fields), the matrices above are replaced by
+operators defined in particular algebras. A \povm\ element can actually be
+a space-time-indexed operator. The computational details can become quite
 complicated, but the same basic ideas apply.
 
 This formalism obviously also includes the specification of
 post-measurement states (if the system still exists afterwards),
-transformations, and so on. I shall not discuss these; see the textbooks
+transformations, evolutions. I shall not discuss these; see the textbooks
 cited above.
 
 \bigskip
@@ -1342,18 +1380,19 @@ cited above.
 I hope that the above discussion and bibliography clearly show that:
 \begin{itemize}
 \item the rules of probability theory, including the
-  conditional-probability one, are fully valid in quantum theory;
+  conditional-probability rule, are fully valid in quantum theory and
+  essential in its modern applications;
 \item some peculiar equalities or inequalities across different
   experimental conditions do not contradict the conditional-probability
-  rule, and they appear just as well in quantum as in non-quantum systems,
-  such as drawing from an urn.
+  rule, and they appear just as well in quantum as in non-quantum
+  situations, such as drawing from an urn.
 \end{itemize}
 
-Quantum theory already has its physically conceptual difficulties and in
-some cases computational difficulties, as should be clear from the portrait
-given in the present note. I do not see the point in making it seem even
-more difficult with false claims of non-validity of probability theory or
-with distorted pictures of its experimental content.
+Quantum theory already has its physically conceptual difficulties and
+computational difficulties, as should be clear from the portrait sketched
+in the present note. I do not see the point in making it seem even more
+difficult with false claims of non-validity of probability theory or with
+distorted pictures of its experimental content.
 
 
 

@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2020-08-24T14:49:16+0200
-%% Last-Updated: 2020-08-31T15:32:03+0200
+%% Last-Updated: 2020-08-31T17:05:21+0200
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newif\ifarxiv
 \arxivfalse
@@ -690,6 +690,7 @@ Open Science Framework \texttt{DOI:\urlalt{https://doi.org/10.17605/osf.io/#1}{1
 \newcommand*{\yH}{\mathsf{H}}
 \newcommand*{\yA}{\mathsf{A}}
 \newcommand*{\yI}{\mathsf{I}}
+\newcommand*{\yL}{\mathsf{L}}
 \newcommand*{\true}{\textsf{true}}
 \newcommand*{\rin}{\mathrel{\!\in\!}}
 
@@ -821,16 +822,19 @@ other's negation.
 The Jeffreys-Lindley paradox is usually presented with this set-up:
 \begin{itemize}[wide]
 \item a quantity $x$ with unknown value in $\RR$;
-\item a statement $\yI$ such that the probability of $x \in S$, for every
-  (Borel) set $S$ in $\RR$, has the functional form
+\item a statement $\yI$ to the effect that the probability of $x \in S$,
+  for every (Borel) set $S$ in $\RR$, has the functional form
   \begin{equation}
     \label{eq:functional_form_N}
     \int_{S}\frac{1}{\sqrt{2 \pu}}
     \exp\bigl[-\tfrac{1}{2}(x-\mu)^{2}\bigl]\,\di x
   \end{equation}
-  for some specific $\mu$;
+  for some specific $\mu \in \RR$;
 \item a statement $\yH$, equivalent to $\mu = 0$;
-\item the negation $\lnot \yH$, equivalent to $\mu \ne 0$.
+\item the negation $\lnot \yH$, equivalent to $\mu \ne 0$;
+\item a statement $\yL$ to the effect that the probability of $\yH$ is,
+  say, 1/2 (and such a statement does not alter the effect of statement
+  $\yI$).
 \end{itemize}
 
 It is clear that the statement $\yI$, which is analogous to the context in
@@ -843,19 +847,37 @@ every set $S$; for example
   \label{eq:example_determined_prob}
   \p\cond[\big]{x \rin \clcl{1,2}}{\yI \land \yH} =
   \int_{1}^{2}\frac{1}{\sqrt{2 \pu}}
-    \exp\bigl(-\tfrac{1}{2}x^{2}\bigl)\,\di x \approx 0.136 \ .
+    \exp\bigl(-\tfrac{1}{2}x^{2}\bigl)\,\di x \approx 0.14 \ .
 \end{equation}
-% lindley_paradox.nb
+% 0.135905  lindley_paradox.nb
 We can thus call $\yH$, that is, $\mu = 0$, a hypothesis in the context
 $\yI$, since it allows us to determine probability-values for the ranges of
-the quantity $x$.
+the  $x$.
 
 \smallskip
 
 The statement $\lnot\yH$ or $\mu \ne 0$, however, does not allow us to
-determine any definite probability-values for $x$. So the likelihood of
-this statement is undefined.
+determine any definite probability-values for $x$, as is clear by the
+assumptions listed above. Therefore, according to our terminology, \emph{in
+  the context $\yI$ or $\yI \land \yL$ the statement $\mu = 0$ is a
+  hypothesis, but its negation $\mu \ne 0$ is not a hypothesis}. This is
+analogous to the situation in sentential logic examined in the previous
+section; it is not surprising nor a sign of inconsistency.
 
+Please note that my point is not about the word \defquote{hypothesis}. If
+you want to call both statements \defquote{hypotheses}, fine. What matters
+here is that \emph{we cannot \enquote{test} the statement $\mu = 0$ versus
+  the statement $\mu \ne 0$}, or more precisely we cannot determine their
+posterior probabilities in the context $\yI \land \yL$, because the
+likelihood of the second statement is undefined.
+
+Similarly to the sentential-logic example, ***
+
+This point is neglected or glossed over by many authors discussing the
+paradox. The hypotheses are usually presented as \defquote{$\mu = 0$} vs
+\defquote{$\mu \ne 0$}, and for the second the author later adds
+\enquote{it is necessary to introduce a prior distribution for $\mu$}. But
+it is an important point, because it completely changes our inference.
 
 
 \textcolor{white}{If you find this you can claim a postcard from me.}

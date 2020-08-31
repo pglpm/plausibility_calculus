@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2020-08-24T14:49:16+0200
-%% Last-Updated: 2020-08-31T11:21:57+0200
+%% Last-Updated: 2020-08-31T15:32:03+0200
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newif\ifarxiv
 \arxivfalse
@@ -101,7 +101,8 @@ british%
 
 \usepackage[autostyle=false,autopunct=false,english=british]{csquotes}
 \setquotestyle{american}
-\newcommand*{\defquote}[1]{`\,#1\,'}
+\newcommand*{\defquote}[1]{`#1'}
+%\newcommand*{\mathquote}[1]{`\,#1\,'}
 
 % \makeatletter
 % \renewenvironment{quotation}%
@@ -146,13 +147,14 @@ british%
 
 \usepackage[babel,theoremfont,largesc]{newpxtext}
 
-\usepackage[bigdelims,nosymbolsc%,smallerops % probably arXiv doesn't have it
+\usepackage[bigdelims,nosymbolsc,smallerops% probably arXiv doesn't have it
 ]{newpxmath}
 %\useosf
 %\linespread{1.083}%
 %\linespread{1.05}% widely used
 \linespread{1.1}% best for text with maths
 %% smaller operators for old version of newpxmath
+\iffalse
 \makeatletter
 \def\re@DeclareMathSymbol#1#2#3#4{%
     \let#1=\undefined
@@ -177,7 +179,8 @@ british%
 %\re@DeclareMathSymbol{\coprodop}{\mathop}{largesymbols}{"60}
 %\re@DeclareMathSymbol{\varprod}{\mathop}{largesymbolsPXA}{16}
 \makeatother
-%%
+\fi
+%% 
 %% With euler font cursive for Greek letters - the [1] means 100% scaling
 \DeclareFontFamily{U}{egreek}{\skewchar\font'177}%
 \DeclareFontShape{U}{egreek}{m}{n}{<-6>s*[1]eurm5 <6-8>s*[1]eurm7 <8->s*[1]eurm10}{}%
@@ -583,7 +586,7 @@ Open Science Framework \texttt{DOI:\urlalt{https://doi.org/10.17605/osf.io/#1}{1
 %\newcommand*{\Lor}{\bigvee}
 %\newcommand*{\lland}{\DOTSB\;\land\;}
 %\newcommand*{\llor}{\DOTSB\;\lor\;}
-%\newcommand*{\limplies}{\mathbin{\Rightarrow}}%implies
+\newcommand*{\limplies}{\mathbin{\Rightarrow}}%implies
 %\newcommand*{\suchthat}{\mid}%{\mathpunct{|}}%such that (eg in sets)
 %\newcommand*{\with}{\colon}%with (list of indices)
 %\newcommand*{\mul}{\times}%multiplication
@@ -597,7 +600,7 @@ Open Science Framework \texttt{DOI:\urlalt{https://doi.org/10.17605/osf.io/#1}{1
 %\providecommand{\varparallel}{\ensuremath{\mathbin{/\mkern-7mu/}}}%parallel (tentative symbol)
 \renewcommand*{\le}{\leqslant}%less or equal
 \renewcommand*{\ge}{\geqslant}%greater or equal
-%\DeclarePairedDelimiter\clcl{[}{]}
+\DeclarePairedDelimiter\clcl{[}{]}
 %\DeclarePairedDelimiter\clop{[}{[}
 %\DeclarePairedDelimiter\opcl{]}{]}
 %\DeclarePairedDelimiter\opop{]}{[}
@@ -610,7 +613,7 @@ Open Science Framework \texttt{DOI:\urlalt{https://doi.org/10.17605/osf.io/#1}{1
 %\newcommand*{\E}{\mathrm{E}}
 %\renewcommand*{\|}{\nonscript\,\vert\nonscript\;\mathopen{}}
 \renewcommand*{\|}[1][]{\nonscript\,#1\vert\nonscript\;\mathopen{}}
-%\DeclarePairedDelimiterX{\cond}[2]{(}{)}{#1\nonscript\,\delimsize\vert\nonscript\;\mathopen{}#2}
+\DeclarePairedDelimiterX{\cond}[2]{(}{)}{#1\nonscript\,\delimsize\vert\nonscript\;\mathopen{}#2}
 %\DeclarePairedDelimiterX{\condt}[2]{[}{]}{#1\nonscript\,\delimsize\vert\nonscript\;\mathopen{}#2}
 %\DeclarePairedDelimiterX{\conds}[2]{\{}{\}}{#1\nonscript\,\delimsize\vert\nonscript\;\mathopen{}#2}
 %\newcommand*{\+}{\lor}
@@ -663,7 +666,7 @@ Open Science Framework \texttt{DOI:\urlalt{https://doi.org/10.17605/osf.io/#1}{1
 %\newcommand*{\sint}{\begingroup\textstyle\int\endgroup}
 %\newcommand*{\sland}{\mathop{\textstyle\bigwedge}}
 %\newcommand*{\slor}{\mathop{\textstyle\bigvee}}
-%\newcommand*{\T}{^\intercal}%transpose
+%\newcommand*{\T}{^\transp}%transpose
 %%\newcommand*{\QEM}%{\textnormal{$\Box$}}%{\ding{167}}
 %\newcommand*{\qem}{\leavevmode\unskip\penalty9999 \hbox{}\nobreak\hfill
 %\quad\hbox{\QEM}}
@@ -684,6 +687,12 @@ Open Science Framework \texttt{DOI:\urlalt{https://doi.org/10.17605/osf.io/#1}{1
 %\DeclareMathOperator*{\argsup}{arg\,sup}
 \newcommand*{\dob}{degree of belief}
 \newcommand*{\dobs}{degrees of belief}
+\newcommand*{\yH}{\mathsf{H}}
+\newcommand*{\yA}{\mathsf{A}}
+\newcommand*{\yI}{\mathsf{I}}
+\newcommand*{\true}{\textsf{true}}
+\newcommand*{\rin}{\mathrel{\!\in\!}}
+
 %%% Custom macros end @@@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -741,22 +750,111 @@ Open Science Framework \texttt{DOI:\urlalt{https://doi.org/10.17605/osf.io/#1}{1
 \label{sec:apology}
 
 So much has been written on the Jeffreys-Lindley \enquote{paradox}, that
-maybe an apology is in order for writing even more about it. I only want to
-point out some logical inconsistencies that seem to recur in the literature
-about the paradox. My purpose is not to tell you to avoid or use
-point-hypotheses, or to avoid or use improper priors, nor to draw
-comparisons between Bayesian probability theory and frequency statistics
-(it's difficult to compare a theory and a trade). Our discussion is fully
-within the Bayesian probability-calculus.
+maybe an apology is in order for writing even more about it. My purpose
+here is not to tell you to avoid or use point-hypotheses, or to avoid or
+use improper priors, nor to draw comparisons between Bayesian probability
+theory and frequency statistics (it's difficult to compare a theory and a
+trade). Our discussion is fully within the Bayesian probability-calculus. I
+only want to point out some logical inconsistencies that recur in the
+literature about the paradox.
 
 The \enquote{paradox} is that some derivations with the
 probability-calculus lead to particular results which are different from
-what some people expected to find with those derivations. The problem in
-fact is that many derivations presented in the literature are logically
-hazy, despite their abundance of technical terms and mathematical formulae.
+what some people expect to find with those derivations. But the very set-up
+of such derivations, as presented in the literature, is often vague and
+logically inconsistent, even before unexpected results are obtained. For
+example, usually two hypotheses are presented: say \defquote{$\mu = 0$}
+versus \defquote{$\mu \ne 0$}. But an unhurried analysis shows that
+\defquote{$\mu \ne 0$} is not a hypothesis, or at most it is an
+ill-defined one. Some expressions are used, such as \enquote{negligible
+  effect}; but what does \emph{negligible} mean?%\footnote{Some authors
+  % would probably reply \enquote{In Statistics we know perfectly well what
+  %   we mean}, which explains why statistics is still a trade rather than a
+  % science.}
+
+I shall now discuss some of these inconsistencies. To understand some of
+them better, it is useful to discuss a simple problem in formal
+propositional logic first.
+
 
 \section{Formal logic and well-defined hypotheses}
 \label{sec:logic_welldefined}
+
+Consider an atomic statement $\yA$. We want to find its truth-value. This
+is possible only if we have a sufficient set of sentences whose
+truth-values are given: the premisses or axioms. This set must be
+sufficient in the sense that the truth-values of its sentences determine
+the truth-value of $\yA$ according to rules of the truth calculus.
+
+Take $\yH \limplies \yA$ as a premiss; that is, this composite statement
+has value \true. We shall keep this premiss fixed; for this reason I call
+it our \defquote{context}. The context $\yH \limplies \yA$ is not
+sufficient to determine the truth-value of $\yA$. We consider other
+possible additional premisses besides our context. I shall call an
+additional premiss a \defquote{hypothesis} only if together with the
+context it determines the truth-value of $\yA$.
+
+The statement $\yH$ is a valid hypothesis within our context: its truth
+determines the truth-value of $\yA$ as \true, as can be seen by a simple
+application of the truth calculus. On the other hand the premiss
+$\lnot\yH$, the negation of $\yH$, does \emph{not} determine the
+truth-value of $\yA$. It is therefore not a hypothesis, according to our
+terminology.
+
+\smallskip
+
+We thus see that even if a statement is a hypothesis, its negation may not
+be a hypothesis -- with respect to a specific context and a definite set of
+statements whose truth-values we want to determine.
+
+The premiss $\lnot\yH$ must be conjoined with some additional premiss, for
+instance $\lnot\yH \limplies \lnot\yA$, in order to form a hypothesis. So
+the sentence $\yH$ and the sentence
+$\lnot\yH \land (\lnot\yH \limplies \lnot\yA)$ are two alternative and
+mutually exclusive hypotheses within our context, but they are not each
+other's negation.
+
+
+\section{What are the hypotheses in the paradox?}
+\label{sec:hypotheses_paradox}
+
+The Jeffreys-Lindley paradox is usually presented with this set-up:
+\begin{itemize}[wide]
+\item a quantity $x$ with unknown value in $\RR$;
+\item a statement $\yI$ such that the probability of $x \in S$, for every
+  (Borel) set $S$ in $\RR$, has the functional form
+  \begin{equation}
+    \label{eq:functional_form_N}
+    \int_{S}\frac{1}{\sqrt{2 \pu}}
+    \exp\bigl[-\tfrac{1}{2}(x-\mu)^{2}\bigl]\,\di x
+  \end{equation}
+  for some specific $\mu$;
+\item a statement $\yH$, equivalent to $\mu = 0$;
+\item the negation $\lnot \yH$, equivalent to $\mu \ne 0$.
+\end{itemize}
+
+It is clear that the statement $\yI$, which is analogous to the context in
+the discussion of the previous section, does not determine the
+probability-value of any set $S$, except the whole real line.
+
+The statements $\yI$ and $\yH$ together do determine the probabilities of
+every set $S$; for example
+\begin{equation}
+  \label{eq:example_determined_prob}
+  \p\cond[\big]{x \rin \clcl{1,2}}{\yI \land \yH} =
+  \int_{1}^{2}\frac{1}{\sqrt{2 \pu}}
+    \exp\bigl(-\tfrac{1}{2}x^{2}\bigl)\,\di x \approx 0.136 \ .
+\end{equation}
+% lindley_paradox.nb
+We can thus call $\yH$, that is, $\mu = 0$, a hypothesis in the context
+$\yI$, since it allows us to determine probability-values for the ranges of
+the quantity $x$.
+
+\smallskip
+
+The statement $\lnot\yH$ or $\mu \ne 0$, however, does not allow us to
+determine any definite probability-values for $x$. So the likelihood of
+this statement is undefined.
 
 
 

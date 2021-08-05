@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2015-05-01T20:53:34+0200
-%% Last-Updated: 2021-06-17T19:13:05+0200
+%% Last-Updated: 2021-06-17T19:15:19+0200
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newif\ifarxiv
 \arxivfalse
@@ -785,9 +785,9 @@ prior probability density on the manifold of frequency densities.
 A generic density $\yf$ is expressed as
 \begin{equation}
   \label{eq:represent_f}
-    \yf(\yx) = \sum_{k} q_{k}\ \yN(\yx \| \ymu_{k}, \ysi_{k}) \ ,
+    \yf(\yx) = \sum_{k} q_{k}\ \yN(\yx \| \theta_{k}) \ ,
 \end{equation}
-where $(q_{k})$ is a countable distribution and $\yN(\yx \| \theta)$ is a
+where $(q_{k})$ is a countable distribution and $\yN(\yx \| \theta)$ is
 some density depending on parameters $\theta$; for example it could be a
 normal density with mean and variance matrix $(\ymu, \ysi)\defs \theta$.
 The sum is in principle infinite. The density $\yf$ is thus represented by

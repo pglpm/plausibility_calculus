@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2015-05-01T20:53:34+0200
-%% Last-Updated: 2021-06-17T19:15:19+0200
+%% Last-Updated: 2021-09-08T19:14:10+0200
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newif\ifarxiv
 \arxivfalse
@@ -605,7 +605,7 @@ Bergen\quad\epost{\email{pgl}{portamana.org}}}%
 %\DeclarePairedDelimiter\opop{]}{[}
 \DeclarePairedDelimiter\abs{\lvert}{\rvert}
 %\DeclarePairedDelimiter\norm{\lVert}{\rVert}
-\DeclarePairedDelimiter\set{\{}{\}}
+\DeclarePairedDelimiter\set{\{}{\}} %}
 %\DeclareMathOperator{\pr}{P}%probability
 \newcommand*{\pf}{\mathrm{p}}%probability
 \newcommand*{\p}{\mathrm{P}}%probability
@@ -619,9 +619,9 @@ Bergen\quad\epost{\email{pgl}{portamana.org}}}%
 %\renewcommand{\*}{\land}
 %% symbol = for equality statements within probabilities
 %% from https://tex.stackexchange.com/a/484142/97039
-%\newcommand*{\eq}{\mathrel{\!=\!}}
-%\let\texteq\=
-%\renewcommand*{\=}{\TextOrMath\texteq\eq}
+\newcommand*{\eq}{\mathrel{\!=\!}}
+\let\texteq\=
+\renewcommand*{\=}{\TextOrMath\texteq\eq}
 %%
 \newcommand*{\sect}{\S}% Sect.~
 \newcommand*{\sects}{\S\S}% Sect.~
@@ -688,11 +688,14 @@ Bergen\quad\epost{\email{pgl}{portamana.org}}}%
 \newcommand*{\dobs}{degrees of belief}
 %\newcommand*{\yff}{f}
 \newcommand*{\yf}{f}
-\newcommand*{\yx}{\bm{x}}
-\newcommand*{\yN}{\mathrm{N}}
+\newcommand*{\yx}{x}
+\newcommand*{\yN}{K}
 \newcommand*{\ymu}{\bm{m}}
 \newcommand*{\ysi}{\mathte{S}}
+\newcommand*{\yq}{\bm{q}}
+\newcommand*{\ytheta}{\bm{\theta}}
 \newcommand*{\yQ}{Q}
+\newcommand*{\yD}{\mathrm{Dir}}
 %%% Custom macros end @@@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -785,22 +788,98 @@ prior probability density on the manifold of frequency densities.
 A generic density $\yf$ is expressed as
 \begin{equation}
   \label{eq:represent_f}
-    \yf(\yx) = \sum_{k} q_{k}\ \yN(\yx \| \theta_{k}) \ ,
+    \yf(\yx) = \sum_{c} q_{c}\ \yN(\yx \| \theta_{c}) \ ,
 \end{equation}
-where $(q_{k})$ is a countable distribution and $\yN(\yx \| \theta)$ is
+where $(q_{c})$ is a countable distribution and $\yN(\yx \| \theta)$ is
 some density depending on parameters $\theta$; for example it could be a
 normal density with mean and variance matrix $(\ymu, \ysi)\defs \theta$.
 The sum is in principle infinite. The density $\yf$ is thus represented by
-the coordinates $(q_{k},\theta_{k})$.
+the coordinates $(\yq, \ytheta)\defd (q_{c},\theta_{c})$.
 
-These coordinates can in turn be interpreted as an atomic probability
-density $\yQ(\theta)$:
+The probability density for $f$ is in turn re-expressed as a density for
+$(\yq, \ytheta)$ having this form:
+\begin{equation}
+  \label{eq:density_f_dirichlet}
+  \pf(\yf \| I)\ \di\yf =
+  \yD(\yq \| \alpha)\ \prod_{c} G(\theta_{c} \| I)\ \di\yq\ \di\ytheta \ ,
+\end{equation}
+where $\yD$ is a Dirichlet distribution with parameter $\alpha$ and $G$ is
+some density function. If the sum over $c$ is infinite then the expression
+above tends to a Dirichlet process.
+
+
+In terms of these coordinates, de~Finetti's formula~\eqref{eq:definetti} becomes
+\begin{multline}
+  \label{eq:definetti_coords}
+  \pf(\yx_{1},\yx_{2},\dotsc \| I) =
+  \int \prod_{i} \bigl[ \pf(\yx_{i} \| \yq, \ytheta, I)\bigr] \
+  \pf(\yq, \ytheta \| I)\ \di\yq\ \di\ytheta
+\\
+{}\equiv \int \prod_{i} \biggl[
+\sum_{c} q_{c}\ \yN(\yx_{i} \| \theta_{c})
+\biggr] \
+ \yD(\yq \| \alpha)\ \prod_{c} G(\theta_{c} \| I)
+ \ \di\yq\ \di\ytheta \ .
+\end{multline}
+
+If we consider $(\yq, \ytheta)$ as quantities with unknown values, the
+their joint probability density function with the outcomes $(x_{i})$ is
+\begin{multline}
+  \label{eq:definetti_joint}
+  \pf(\yx_{1},\yx_{2},\dotsc,\ \yq, \ytheta \| I) =
+  \prod_{i} \bigl[ \pf(\yx_{i} \| \yq, \ytheta, I)\bigr] \
+  \pf(\yq, \ytheta \| I)
+  \\
+{}\equiv \prod_{i} \biggl[
+\sum_{c} q_{c}\ \yN(\yx_{i} \| \theta_{c})
+\biggr] \
+ \yD(\yq \| \alpha)\ \prod_{c} G(\theta_{c} \| I) \ .
+\end{multline}
+
+We can imagine the existence of a discrete quantity $C$ associated with
+$\yx$, such that the quantities $(\yx_{1}, C_{1}), (\yx_{2}, C_{2}), \dotsc$ have
+an exchangeable joint probability, and such that
+\begin{equation}
+  \label{eq:prob_given_occupation}
+  \p(\yx \| C, \yq, \ytheta, I) = \yN(\yx \| \theta_{C})
+  \qquad\text{and}\qquad
+  \p(C \| \yq, \ytheta, I) = q_{C} \ .
+\end{equation}
+However, $C$ remains unobserved when $\yx$ is observed. Then, rewriting the
+product of sums as sums over a product, $\prod_{i} \sum_{c} =
+\sum_{c_{1}}\sum_{c_{2}}\dotso \prod_{i}$, we find
+\begin{multline}
+  \label{eq:definetti_joint_occupation}
+  \pf(\yx_{1},\yx_{2},\dotsc, C_{1}, C_{2}, \dotsc\ \yq, \ytheta \| I) ={}\\
+ \prod_{i} \bigl[
+q_{C_{i}}\ \yN(\yx_{i} \| \theta_{C_{i}})
+\bigr] \
+\yD(\yq \| \alpha)\ \prod_{c} G(\theta_{c} \| I) ={}\\
+\yD(\yq \| \alpha)\ 
+\biggl[\prod_{c} \prod_{i}^{C_{i} = c} q_{c} \biggr]
+\times
+\prod_{c}
+\biggl[
+ G(\theta_{c} \| I)\ 
+\prod_{i}^{C_{i} = c}
+\yN(\yx_{i} \| \theta_{c})
+\biggr] \ .
+\end{multline}
+%with $n_{c} \defd \sum_{i}\delt(C_{i} \eq c)$.
+
+
+
+
+\bigskip
+
+The coordinates $(\yq, \ytheta)$ can in turn be interpreted as an atomic
+probability density $\yQ(\theta)$:
 \begin{equation}
   \label{eq:coords_as_distribution}
   %\pf(\ymu,\ysi \| Q)
   \yQ(\theta)
   \ \di\theta \defd
-  \sum_{k} q_{k}\ \delt(\theta-\theta_{k})
+  \sum_{c} q_{c}\ \delt(\theta-\theta_{c})
   \ \di\theta\ .
 \end{equation}
 We have effectively established a transformation from atomic densities on a
@@ -865,7 +944,7 @@ Dirichlet process.
 %%%%
 % \begin{empheq}[box=\widefbox]{equation}
 %   \label{eq:maxent_question}
-%   \p\bigl[\yE{N+1}{k} \bigcond \tsum\yo\yf{N}\in\yA, \yM\bigr] = \mathord{?}
+%   \p\bigl[\yE{N+1}{c} \bigcond \tsum\yo\yf{N}\in\yA, \yM\bigr] = \mathord{?}
 % \end{empheq}
 
 

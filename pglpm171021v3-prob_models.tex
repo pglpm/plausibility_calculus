@@ -1,0 +1,1272 @@
+\pdfoutput=1
+%% Author: PGL  Porta Mana
+%% Created: 2017-10-21T20:53:34+0200
+%% Last-Updated: 2021-09-28T09:52:34+0200
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newif\ifarxiv
+\arxivfalse
+\ifarxiv\pdfmapfile{+classico.map}\fi
+\newif\ifafour
+\afourfalse% true = A4, false = A5
+\newif\iftypodisclaim % typographical disclaim on the side
+\typodisclaimtrue
+\newcommand*{\memfontfamily}{zplx}
+\newcommand*{\memfontpack}{newpxtext}
+\documentclass[\ifafour a4paper,12pt,\else a5paper,10pt,\fi%extrafontsizes,%
+onecolumn,oneside,article,%french,italian,german,swedish,latin,
+british%
+]{memoir}
+\newcommand*{\firstdraft}{22 May 2020}
+\newcommand*{\firstpublished}{\firstdraft}
+\newcommand*{\updated}{\ifarxiv***\else\today\fi}
+\newcommand*{\propertitle}{What is a probability model? [draft]%\\{\large ***}%
+}% title uses LARGE; set Large for smaller
+\newcommand*{\pdftitle}{\propertitle}
+\newcommand*{\headtitle}{Probability models}
+\newcommand*{\pdfauthor}{P.G.L.  Porta Mana}
+\newcommand*{\headauthor}{Porta Mana}
+\newcommand*{\reporthead}{\ifarxiv\else Open Science Framework \href{https://doi.org/10.31219/osf.io/***}{\textsc{doi}:10.31219/osf.io/***}\fi}% Report number
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Calls to packages (uncomment as needed)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%\usepackage{pifont}
+
+%\usepackage{fontawesome}
+
+\usepackage[T1]{fontenc} 
+\input{glyphtounicode} \pdfgentounicode=1
+
+\usepackage[utf8]{inputenx}
+
+%\usepackage{newunicodechar}
+% \newunicodechar{Ĕ}{\u{E}}
+% \newunicodechar{ĕ}{\u{e}}
+% \newunicodechar{Ĭ}{\u{I}}
+% \newunicodechar{ĭ}{\u{\i}}
+% \newunicodechar{Ŏ}{\u{O}}
+% \newunicodechar{ŏ}{\u{o}}
+% \newunicodechar{Ŭ}{\u{U}}
+% \newunicodechar{ŭ}{\u{u}}
+% \newunicodechar{Ā}{\=A}
+% \newunicodechar{ā}{\=a}
+% \newunicodechar{Ē}{\=E}
+% \newunicodechar{ē}{\=e}
+% \newunicodechar{Ī}{\=I}
+% \newunicodechar{ī}{\={\i}}
+% \newunicodechar{Ō}{\=O}
+% \newunicodechar{ō}{\=o}
+% \newunicodechar{Ū}{\=U}
+% \newunicodechar{ū}{\=u}
+% \newunicodechar{Ȳ}{\=Y}
+% \newunicodechar{ȳ}{\=y}
+
+\newcommand*{\bmmax}{0} % reduce number of bold fonts, before font packages
+\newcommand*{\hmmax}{0} % reduce number of heavy fonts, before font packages
+
+\usepackage{textcomp}
+
+%\usepackage[normalem]{ulem}% package for underlining
+% \makeatletter
+% \def\ssout{\bgroup \ULdepth=-.35ex%\UL@setULdepth
+%  \markoverwith{\lower\ULdepth\hbox
+%    {\kern-.03em\vbox{\hrule width.2em\kern1.2\p@\hrule}\kern-.03em}}%
+%  \ULon}
+% \makeatother
+
+\usepackage{amsmath}
+
+\usepackage{mathtools}
+%\addtolength{\jot}{\jot} % increase spacing in multiline formulae
+\setlength{\multlinegap}{0pt}
+
+%\usepackage{empheq}% automatically calls amsmath and mathtools
+%\newcommand*{\widefbox}[1]{\fbox{\hspace{1em}#1\hspace{1em}}}
+
+%%%% empheq above seems more versatile than these:
+%\usepackage{fancybox}
+%\usepackage{framed}
+
+% \usepackage[misc]{ifsym} % for dice
+% \newcommand*{\diceone}{{\scriptsize\Cube{1}}}
+
+\usepackage{amssymb}
+
+\usepackage{amsxtra}
+
+\usepackage[main=british]{babel}\selectlanguage{british}
+%\newcommand*{\langnohyph}{\foreignlanguage{nohyphenation}}
+\newcommand{\langnohyph}[1]{\begin{hyphenrules}{nohyphenation}#1\end{hyphenrules}}
+
+\usepackage[autostyle=false,autopunct=false,english=british]{csquotes}
+\setquotestyle{american}
+\newcommand*{\defquote}[1]{`\,#1\,'}
+
+% \makeatletter
+% \renewenvironment{quotation}%
+%                {\list{}{\listparindent 1.5em%
+%                         \itemindent    \listparindent
+%                         \rightmargin=1em   \leftmargin=1em
+%                         \parsep        \z@ \@plus\p@}%
+%                 \item[]\footnotesize}%
+%                 {\endlist}
+% \makeatother                
+
+
+\usepackage{amsthm}
+%% from https://tex.stackexchange.com/a/404680/97039
+\makeatletter
+\def\@endtheorem{\endtrivlist}
+\makeatother
+
+\newcommand*{\QED}{\textsc{q.e.d.}}
+\renewcommand*{\qedsymbol}{\QED}
+\theoremstyle{remark}
+\newtheorem{note}{Note}
+\newtheorem*{remark}{Note}
+\newtheoremstyle{innote}{\parsep}{\parsep}{\footnotesize}{}{}{}{0pt}{}
+\theoremstyle{innote}
+\newtheorem*{innote}{}
+
+\usepackage[shortlabels,inline]{enumitem}
+\SetEnumitemKey{para}{itemindent=\parindent,leftmargin=0pt,listparindent=\parindent,parsep=0pt,itemsep=\topsep}
+% \begin{asparaenum} = \begin{enumerate}[para]
+% \begin{inparaenum} = \begin{enumerate*}
+\setlist{itemsep=0pt,topsep=\parsep}
+\setlist[enumerate,2]{label=\alph*.}
+\setlist[enumerate]{label=\arabic*.,leftmargin=1.5\parindent}
+\setlist[itemize]{leftmargin=1.5\parindent}
+\setlist[description]{leftmargin=1.5\parindent}
+% old alternative:
+% \setlist[enumerate,2]{label=\alph*.}
+% \setlist[enumerate]{leftmargin=\parindent}
+% \setlist[itemize]{leftmargin=\parindent}
+% \setlist[description]{leftmargin=\parindent}
+
+\usepackage[babel,theoremfont,largesc]{newpxtext}
+
+\usepackage[bigdelims,nosymbolsc%,smallerops % probably arXiv doesn't have it
+]{newpxmath}
+%\useosf
+%\linespread{1.083}%
+%\linespread{1.05}% widely used
+\linespread{1.1}% best for text with maths
+%% smaller operators for old version of newpxmath
+\makeatletter
+\def\re@DeclareMathSymbol#1#2#3#4{%
+    \let#1=\undefined
+    \DeclareMathSymbol{#1}{#2}{#3}{#4}}
+%\re@DeclareMathSymbol{\bigsqcupop}{\mathop}{largesymbols}{"46}
+%\re@DeclareMathSymbol{\bigodotop}{\mathop}{largesymbols}{"4A}
+\re@DeclareMathSymbol{\bigoplusop}{\mathop}{largesymbols}{"4C}
+\re@DeclareMathSymbol{\bigotimesop}{\mathop}{largesymbols}{"4E}
+\re@DeclareMathSymbol{\sumop}{\mathop}{largesymbols}{"50}
+\re@DeclareMathSymbol{\prodop}{\mathop}{largesymbols}{"51}
+\re@DeclareMathSymbol{\bigcupop}{\mathop}{largesymbols}{"53}
+\re@DeclareMathSymbol{\bigcapop}{\mathop}{largesymbols}{"54}
+%\re@DeclareMathSymbol{\biguplusop}{\mathop}{largesymbols}{"55}
+\re@DeclareMathSymbol{\bigwedgeop}{\mathop}{largesymbols}{"56}
+\re@DeclareMathSymbol{\bigveeop}{\mathop}{largesymbols}{"57}
+%\re@DeclareMathSymbol{\bigcupdotop}{\mathop}{largesymbols}{"DF}
+%\re@DeclareMathSymbol{\bigcapplusop}{\mathop}{largesymbolsPXA}{"00}
+%\re@DeclareMathSymbol{\bigsqcupplusop}{\mathop}{largesymbolsPXA}{"02}
+%\re@DeclareMathSymbol{\bigsqcapplusop}{\mathop}{largesymbolsPXA}{"04}
+%\re@DeclareMathSymbol{\bigsqcapop}{\mathop}{largesymbolsPXA}{"06}
+\re@DeclareMathSymbol{\bigtimesop}{\mathop}{largesymbolsPXA}{"10}
+%\re@DeclareMathSymbol{\coprodop}{\mathop}{largesymbols}{"60}
+%\re@DeclareMathSymbol{\varprod}{\mathop}{largesymbolsPXA}{16}
+\makeatother
+%%
+%% With euler font cursive for Greek letters - the [1] means 100% scaling
+\DeclareFontFamily{U}{egreek}{\skewchar\font'177}%
+\DeclareFontShape{U}{egreek}{m}{n}{<-6>s*[1]eurm5 <6-8>s*[1]eurm7 <8->s*[1]eurm10}{}%
+\DeclareFontShape{U}{egreek}{m}{it}{<->s*[1]eurmo10}{}%
+\DeclareFontShape{U}{egreek}{b}{n}{<-6>s*[1]eurb5 <6-8>s*[1]eurb7 <8->s*[1]eurb10}{}%
+\DeclareFontShape{U}{egreek}{b}{it}{<->s*[1]eurbo10}{}%
+\DeclareSymbolFont{egreeki}{U}{egreek}{m}{it}%
+\SetSymbolFont{egreeki}{bold}{U}{egreek}{b}{it}% from the amsfonts package
+\DeclareSymbolFont{egreekr}{U}{egreek}{m}{n}%
+\SetSymbolFont{egreekr}{bold}{U}{egreek}{b}{n}% from the amsfonts package
+% Take also \sum, \prod, \coprod symbols from Euler fonts
+\DeclareFontFamily{U}{egreekx}{\skewchar\font'177}
+\DeclareFontShape{U}{egreekx}{m}{n}{%
+       <-7.5>s*[0.9]euex7%
+    <7.5-8.5>s*[0.9]euex8%
+    <8.5-9.5>s*[0.9]euex9%
+    <9.5->s*[0.9]euex10%
+}{}
+\DeclareSymbolFont{egreekx}{U}{egreekx}{m}{n}
+\DeclareMathSymbol{\sumop}{\mathop}{egreekx}{"50}
+\DeclareMathSymbol{\prodop}{\mathop}{egreekx}{"51}
+\DeclareMathSymbol{\coprodop}{\mathop}{egreekx}{"60}
+\makeatletter
+\def\sum{\DOTSI\sumop\slimits@}
+\def\prod{\DOTSI\prodop\slimits@}
+\def\coprod{\DOTSI\coprodop\slimits@}
+\makeatother
+\input{definegreek.tex}% Greek letters not usually given in LaTeX.
+
+%\usepackage%[scaled=0.9]%
+%{classico}%  Optima as sans-serif font
+\renewcommand\sfdefault{uop}
+\DeclareMathAlphabet{\mathsf}  {T1}{\sfdefault}{m}{sl}
+\SetMathAlphabet{\mathsf}{bold}{T1}{\sfdefault}{b}{sl}
+%\newcommand*{\mathte}[1]{\textbf{\textit{\textsf{#1}}}}
+% Upright sans-serif math alphabet
+% \DeclareMathAlphabet{\mathsu}  {T1}{\sfdefault}{m}{n}
+% \SetMathAlphabet{\mathsu}{bold}{T1}{\sfdefault}{b}{n}
+
+% DejaVu Mono as typewriter text
+\usepackage[scaled=0.84]{DejaVuSansMono}
+
+\usepackage{mathdots}
+
+\usepackage[usenames]{xcolor}
+% Tol (2012) colour-blind-, print-, screen-friendly colours, alternative scheme; Munsell terminology
+\definecolor{mypurpleblue}{RGB}{68,119,170}
+\definecolor{myblue}{RGB}{102,204,238}
+\definecolor{mygreen}{RGB}{34,136,51}
+\definecolor{myyellow}{RGB}{204,187,68}
+\definecolor{myred}{RGB}{238,102,119}
+\definecolor{myredpurple}{RGB}{170,51,119}
+\definecolor{mygrey}{RGB}{187,187,187}
+% Tol (2012) colour-blind-, print-, screen-friendly colours; Munsell terminology
+% \definecolor{lbpurple}{RGB}{51,34,136}
+% \definecolor{lblue}{RGB}{136,204,238}
+% \definecolor{lbgreen}{RGB}{68,170,153}
+% \definecolor{lgreen}{RGB}{17,119,51}
+% \definecolor{lgyellow}{RGB}{153,153,51}
+% \definecolor{lyellow}{RGB}{221,204,119}
+% \definecolor{lred}{RGB}{204,102,119}
+% \definecolor{lpred}{RGB}{136,34,85}
+% \definecolor{lrpurple}{RGB}{170,68,153}
+\definecolor{lgrey}{RGB}{221,221,221}
+%\newcommand*\mycolourbox[1]{%
+%\colorbox{mygrey}{\hspace{1em}#1\hspace{1em}}}
+\colorlet{shadecolor}{lgrey}
+
+\usepackage{bm}
+
+\usepackage{microtype}
+
+\usepackage[backend=biber,mcite,%subentry,
+citestyle=authoryear-comp,bibstyle=pglpm-authoryear,autopunct=false,sorting=ny,sortcites=false,natbib=false,maxcitenames=2,maxbibnames=8,minbibnames=8,giveninits=true,uniquename=false,uniquelist=false,maxalphanames=1,block=space,hyperref=true,defernumbers=false,useprefix=true,sortupper=false,language=british,parentracker=false]{biblatex}
+\DeclareSortingTemplate{ny}{\sort{\field{sortname}\field{author}\field{editor}}\sort{\field{year}}}
+\iffalse\makeatletter%%% replace parenthesis with brackets
+\newrobustcmd*{\parentexttrack}[1]{%
+  \begingroup
+  \blx@blxinit
+  \blx@setsfcodes
+  \blx@bibopenparen#1\blx@bibcloseparen
+  \endgroup}
+\AtEveryCite{%
+  \let\parentext=\parentexttrack%
+  \let\bibopenparen=\bibopenbracket%
+  \let\bibcloseparen=\bibclosebracket}
+\makeatother\fi
+\DefineBibliographyExtras{british}{\def\finalandcomma{\addcomma}}
+\renewcommand*{\finalnamedelim}{\addspace\amp\space}
+% \renewcommand*{\finalnamedelim}{\addcomma\space}
+\renewcommand*{\textcitedelim}{\addcomma\space}
+\setcounter{biburlnumpenalty}{1}
+\setcounter{biburlucpenalty}{0}
+\setcounter{biburllcpenalty}{1}
+\DeclareDelimFormat{multicitedelim}{\addsemicolon\addspace\space}
+\DeclareDelimFormat{compcitedelim}{\addsemicolon\addspace\space}
+\DeclareDelimFormat{postnotedelim}{\addspace}
+\ifarxiv\else\addbibresource{portamanabib.bib}\fi
+\renewcommand{\bibfont}{\footnotesize}
+%\appto{\citesetup}{\footnotesize}% smaller font for citations
+\defbibheading{bibliography}[\bibname]{\section*{#1}\addcontentsline{toc}{section}{#1}%\markboth{#1}{#1}
+}
+\newcommand*{\citep}{\footcites}
+\newcommand*{\citey}{\footcites}%{\parencites*}
+\newcommand*{\ibid}{\unspace\addtocounter{footnote}{-1}\footnotemark{}}
+%\renewcommand*{\cite}{\parencite}
+%\renewcommand*{\cites}{\parencites}
+\providecommand{\href}[2]{#2}
+\providecommand{\eprint}[2]{\texttt{\href{#1}{#2}}}
+\newcommand*{\amp}{\&}
+% \newcommand*{\citein}[2][]{\textnormal{\textcite[#1]{#2}}%\addtocategory{extras}{#2}
+% }
+\newcommand*{\citein}[2][]{\textnormal{\textcite[#1]{#2}}%\addtocategory{extras}{#2}
+}
+\newcommand*{\citebi}[2][]{\textcite[#1]{#2}%\addtocategory{extras}{#2}
+}
+\newcommand*{\subtitleproc}[1]{}
+\newcommand*{\chapb}{ch.}
+%
+\newcommand*{\arxiveprint}[1]{%
+\texttt{arXiv:\urlalt{https://arxiv.org/abs/#1}{#1}}%
+}
+\newcommand*{\mparceprint}[1]{%
+\texttt{mp\_arc:\urlalt{http://www.ma.utexas.edu/mp_arc-bin/mpa?yn=#1}{#1}}%
+}
+\newcommand*{\haleprint}[1]{%
+\texttt{HAL:\urlalt{https://hal.archives-ouvertes.fr/#1}{#1}}%
+}
+\newcommand*{\philscieprint}[1]{%
+\texttt{PhilSci:\urlalt{http://philsci-archive.pitt.edu/archive/#1}{#1}}%
+}
+\newcommand*{\doi}[1]{%
+\href{https://doi.org/#1}{\textsc{doi}:\texttt{#1}}%
+}
+\newcommand*{\biorxiveprint}[1]{%
+bioRxiv \doi{10.1101/#1}%
+}
+\newcommand*{\osfeprint}[1]{%
+Open Science Framework \doi{10.31219/osf.io/#1}%
+}
+
+\usepackage{graphicx}
+
+%\usepackage{wrapfig}
+
+%\usepackage{tikz-cd}
+
+\PassOptionsToPackage{hyphens}{url}\usepackage[hypertexnames=false,pdfencoding=unicode,psdextra]{hyperref}
+
+\usepackage[depth=4]{bookmark}
+\hypersetup{colorlinks=true,bookmarksnumbered,pdfborder={0 0 0.25},citebordercolor={0.2667 0.4667 0.6667},citecolor=mypurpleblue,linkbordercolor={0.6667 0.2 0.4667},linkcolor=myredpurple,urlbordercolor={0.1333 0.5333 0.2},urlcolor=mygreen,breaklinks=true,pdftitle={\pdftitle},pdfauthor={\pdfauthor}}
+% \usepackage[vertfit=local]{breakurl}% only for arXiv
+\providecommand*{\urlalt}{\href}
+
+\usepackage[british]{datetime2}
+\DTMnewdatestyle{mydate}%
+{% definitions
+\renewcommand*{\DTMdisplaydate}[4]{%
+\number##3\ \DTMenglishmonthname{##2} ##1}%
+\renewcommand*{\DTMDisplaydate}{\DTMdisplaydate}%
+}
+\DTMsetdatestyle{mydate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Layout. I do not know on which kind of paper the reader will print the
+%%% paper on (A4? letter? one-sided? double-sided?). So I choose A5, which
+%%% provides a good layout for reading on screen and save paper if printed
+%%% two pages per sheet. Average length line is 66 characters and page
+%%% numbers are centred.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\ifafour\setstocksize{297mm}{210mm}%{*}% A4
+\else\setstocksize{210mm}{5.5in}%{*}% 210x139.7
+\fi
+\settrimmedsize{\stockheight}{\stockwidth}{*}
+\setlxvchars[\normalfont] %313.3632pt for a 66-characters line
+\setxlvchars[\normalfont]
+% \setlength{\trimtop}{0pt}
+% \setlength{\trimedge}{\stockwidth}
+% \addtolength{\trimedge}{-\paperwidth}
+%\settrims{0pt}{0pt}
+% The length of the normalsize alphabet is 133.05988pt - 10 pt = 26.1408pc
+% The length of the normalsize alphabet is 159.6719pt - 12pt = 30.3586pc
+% Bringhurst gives 32pc as boundary optimal with 69 ch per line
+% The length of the normalsize alphabet is 191.60612pt - 14pt = 35.8634pc
+\ifafour\settypeblocksize{*}{32pc}{1.618} % A4
+%\setulmargins{*}{*}{1.667}%gives 5/3 margins % 2 or 1.667
+\else\settypeblocksize{*}{26pc}{1.618}% nearer to a 66-line newpx and preserves GR
+\fi
+\setulmargins{*}{*}{1}%gives equal margins
+\setlrmargins{*}{*}{*}
+\setheadfoot{\onelineskip}{2.5\onelineskip}
+\setheaderspaces{*}{2\onelineskip}{*}
+\setmarginnotes{2ex}{10mm}{0pt}
+\checkandfixthelayout[nearest]
+%%% End layout
+%% this fixes missing white spaces
+%\pdfmapline{+dummy-space <dummy-space.pfb}
+%\pdfinterwordspaceon% seems to add a white margin to Sumatrapdf
+
+%%% Sectioning
+\newcommand*{\asudedication}[1]{%
+{\par\centering\textit{#1}\par}}
+\newenvironment{acknowledgements}{\section*{Thanks}\addcontentsline{toc}{section}{Thanks}}{\par}
+\makeatletter\renewcommand{\appendix}{\par
+  \bigskip{\centering
+   \interlinepenalty \@M
+   \normalfont
+   \printchaptertitle{\sffamily\appendixpagename}\par}
+  \setcounter{section}{0}%
+  \gdef\@chapapp{\appendixname}%
+  \gdef\thesection{\@Alph\c@section}%
+  \anappendixtrue}\makeatother
+\counterwithout{section}{chapter}
+\setsecnumformat{\upshape\csname the#1\endcsname\quad}
+\setsecheadstyle{\large\bfseries\sffamily%
+\centering}
+\setsubsecheadstyle{\bfseries\sffamily%
+\raggedright}
+%\setbeforesecskip{-1.5ex plus 1ex minus .2ex}% plus 1ex minus .2ex}
+%\setaftersecskip{1.3ex plus .2ex }% plus 1ex minus .2ex}
+%\setsubsubsecheadstyle{\bfseries\sffamily\slshape\raggedright}
+%\setbeforesubsecskip{1.25ex plus 1ex minus .2ex }% plus 1ex minus .2ex}
+%\setaftersubsecskip{-1em}%{-0.5ex plus .2ex}% plus 1ex minus .2ex}
+\setsubsecindent{0pt}%0ex plus 1ex minus .2ex}
+\setparaheadstyle{\bfseries\sffamily%
+\raggedright}
+\setcounter{secnumdepth}{2}
+\setlength{\headwidth}{\textwidth}
+\newcommand{\addchap}[1]{\chapter*[#1]{#1}\addcontentsline{toc}{chapter}{#1}}
+\newcommand{\addsec}[1]{\section*{#1}\addcontentsline{toc}{section}{#1}}
+\newcommand{\addsubsec}[1]{\subsection*{#1}\addcontentsline{toc}{subsection}{#1}}
+\newcommand{\addpara}[1]{\paragraph*{#1.}\addcontentsline{toc}{subsubsection}{#1}}
+\newcommand{\addparap}[1]{\paragraph*{#1}\addcontentsline{toc}{subsubsection}{#1}}
+
+%%% Headers, footers, pagestyle
+\copypagestyle{manaart}{plain}
+\makeheadrule{manaart}{\headwidth}{0.5\normalrulethickness}
+\makeoddhead{manaart}{%
+{\footnotesize%\sffamily%
+\scshape\headauthor}}{}{{\footnotesize\sffamily%
+\headtitle}}
+\makeoddfoot{manaart}{}{\thepage}{}
+\newcommand*\autanet{\includegraphics[height=\heightof{M}]{autanet.pdf}}
+\definecolor{mygray}{gray}{0.333}
+\iftypodisclaim%
+\ifafour\newcommand\addprintnote{\begin{picture}(0,0)%
+\put(245,149){\makebox(0,0){\rotatebox{90}{\tiny\color{mygray}\textsf{This
+            document is designed for screen reading and
+            two-up printing on A4 or Letter paper}}}}%
+\end{picture}}% A4
+\else\newcommand\addprintnote{\begin{picture}(0,0)%
+\put(176,112){\makebox(0,0){\rotatebox{90}{\tiny\color{mygray}\textsf{This
+            document is designed for screen reading and
+            two-up printing on A4 or Letter paper}}}}%
+\end{picture}}\fi%afourtrue
+\makeoddfoot{plain}{}{\makebox[0pt]{\thepage}\addprintnote}{}
+\else
+\makeoddfoot{plain}{}{\makebox[0pt]{\thepage}}{}
+\fi%typodisclaimtrue
+\makeoddhead{plain}{\scriptsize\reporthead}{}{}
+% \copypagestyle{manainitial}{plain}
+% \makeheadrule{manainitial}{\headwidth}{0.5\normalrulethickness}
+% \makeoddhead{manainitial}{%
+% \footnotesize\sffamily%
+% \scshape\headauthor}{}{\footnotesize\sffamily%
+% \headtitle}
+% \makeoddfoot{manaart}{}{\thepage}{}
+
+\pagestyle{manaart}
+
+\setlength{\droptitle}{-3.9\onelineskip}
+\pretitle{\begin{center}\LARGE\sffamily%
+\bfseries}
+\posttitle{\bigskip\end{center}}
+
+\makeatletter\newcommand*{\atf}{\includegraphics[totalheight=\heightof{@}]{atblack.png}}\makeatother
+\providecommand{\affiliation}[1]{\textsl{\textsf{\footnotesize #1}}}
+\providecommand{\epost}[1]{\texttt{\footnotesize\textless#1\textgreater}}
+\providecommand{\email}[2]{\href{mailto:#1ZZ@#2 ((remove ZZ))}{#1\protect\atf#2}}
+%\providecommand{\email}[2]{\href{mailto:#1@#2}{#1@#2}}
+
+\preauthor{\vspace{-0.5\baselineskip}\begin{center}
+\normalsize\sffamily%
+\lineskip  0.5em}
+\postauthor{\par\end{center}}
+\predate{\DTMsetdatestyle{mydate}\begin{center}\footnotesize}
+\postdate{\end{center}\vspace{-\medskipamount}}
+
+\setfloatadjustment{figure}{\footnotesize}
+\captiondelim{\quad}
+\captionnamefont{\footnotesize\sffamily%
+}
+\captiontitlefont{\footnotesize}
+%\firmlists*
+\midsloppy
+% handling orphan/widow lines, memman.pdf
+% \clubpenalty=10000
+% \widowpenalty=10000
+% \raggedbottom
+% Downes, memman.pdf
+\clubpenalty=9996
+\widowpenalty=9999
+\brokenpenalty=4991
+\predisplaypenalty=10000
+\postdisplaypenalty=1549
+\displaywidowpenalty=1602
+\raggedbottom
+
+\paragraphfootnotes
+\setlength{\footmarkwidth}{2ex}
+% \threecolumnfootnotes
+%\setlength{\footmarksep}{0em}
+\footmarkstyle{\textsuperscript{%\color{myred}
+\scriptsize\bfseries#1}~}
+%\footmarkstyle{\textsuperscript{\color{myred}\scriptsize\bfseries#1}~}
+%\footmarkstyle{\textsuperscript{[#1]}~}
+
+\selectlanguage{british}\frenchspacing
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Paper's details
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\title{\propertitle}
+\author{%
+\hspace*{\stretch{1}}%
+%% uncomment if additional authors present
+% \parbox{0.5\linewidth}%\makebox[0pt][c]%
+% {\protect\centering ***\\%
+% \footnotesize\epost{\email{***}{***}}}%
+% \hspace*{\stretch{1}}%
+\parbox{1\linewidth}%\makebox[0pt][c]%
+{\protect\centering P.G.L.  Porta Mana  \href{https://orcid.org/0000-0002-6070-0784}{\protect\includegraphics[scale=0.16]{orcid_32x32.png}}\\%
+\footnotesize Western Norway University of Applied Sciences\quad\epost{\email{pgl}{portamana.org}}}%
+% Mohn Medical Imaging and Visualization Centre, Dept of Computer science, Electrical Engineering and Mathematical Sciences, Western Norway University of Applied Sciences, Bergen, Norway
+%% uncomment if additional authors present
+% \hspace*{\stretch{1}}%
+% \parbox{0.5\linewidth}%\makebox[0pt][c]%
+% {\protect\centering ***\\%
+% \footnotesize\epost{\email{***}{***}}}%
+\hspace*{\stretch{1}}%
+}
+
+%\date{Draft of \today\ (first drafted \firstdraft)}
+\date{\firstpublished; updated \updated}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Macros @@@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Common ones - uncomment as needed
+%\providecommand{\nequiv}{\not\equiv}
+%\providecommand{\coloneqq}{\mathrel{\mathop:}=}
+%\providecommand{\eqqcolon}{=\mathrel{\mathop:}}
+%\providecommand{\varprod}{\prod}
+\newcommand*{\de}{\partialup}%partial diff
+\newcommand*{\pu}{\piup}%constant pi
+\newcommand*{\delt}{\deltaup}%Kronecker, Dirac
+%\newcommand*{\eps}{\varepsilonup}%Levi-Civita, Heaviside
+%\newcommand*{\riem}{\zetaup}%Riemann zeta
+%\providecommand{\degree}{\textdegree}% degree
+%\newcommand*{\celsius}{\textcelsius}% degree Celsius
+%\newcommand*{\micro}{\textmu}% degree Celsius
+\newcommand*{\I}{\mathrm{i}}%imaginary unit
+\newcommand*{\e}{\mathrm{e}}%Neper
+\newcommand*{\di}{\mathrm{d}}%differential
+%\newcommand*{\Di}{\mathrm{D}}%capital differential
+%\newcommand*{\planckc}{\hslash}
+%\newcommand*{\avogn}{N_{\textrm{A}}}
+%\newcommand*{\NN}{\bm{\mathrm{N}}}
+%\newcommand*{\ZZ}{\bm{\mathrm{Z}}}
+%\newcommand*{\QQ}{\bm{\mathrm{Q}}}
+\newcommand*{\RR}{\bm{\mathrm{R}}}
+%\newcommand*{\CC}{\bm{\mathrm{C}}}
+%\newcommand*{\nabl}{\bm{\nabla}}%nabla
+%\DeclareMathOperator{\lb}{lb}%base 2 log
+%\DeclareMathOperator{\tr}{tr}%trace
+%\DeclareMathOperator{\card}{card}%cardinality
+%\DeclareMathOperator{\im}{Im}%im part
+%\DeclareMathOperator{\re}{Re}%re part
+%\DeclareMathOperator{\sgn}{sgn}%signum
+%\DeclareMathOperator{\ent}{ent}%integer less or equal to
+%\DeclareMathOperator{\Ord}{O}%same order as
+%\DeclareMathOperator{\ord}{o}%lower order than
+%\newcommand*{\incr}{\triangle}%finite increment
+\newcommand*{\defd}{\coloneqq}
+\newcommand*{\defs}{\eqqcolon}
+%\newcommand*{\Land}{\bigwedge}
+%\newcommand*{\Lor}{\bigvee}
+%\newcommand*{\lland}{\DOTSB\;\land\;}
+%\newcommand*{\llor}{\DOTSB\;\lor\;}
+\newcommand*{\limplies}{\mathbin{\Rightarrow}}%implies
+%\newcommand*{\suchthat}{\mid}%{\mathpunct{|}}%such that (eg in sets)
+%\newcommand*{\with}{\colon}%with (list of indices)
+%\newcommand*{\mul}{\times}%multiplication
+%\newcommand*{\inn}{\cdot}%inner product
+%\newcommand*{\dotv}{\mathord{\,\cdot\,}}%variable place
+%\newcommand*{\comp}{\circ}%composition of functions
+%\newcommand*{\con}{\mathbin{:}}%scal prod of tensors
+%\newcommand*{\equi}{\sim}%equivalent to 
+\renewcommand*{\asymp}{\simeq}%equivalent to 
+%\newcommand*{\corr}{\mathrel{\hat{=}}}%corresponds to
+%\providecommand{\varparallel}{\ensuremath{\mathbin{/\mkern-7mu/}}}%parallel (tentative symbol)
+\renewcommand*{\le}{\leqslant}%less or equal
+\renewcommand*{\ge}{\geqslant}%greater or equal
+%\DeclarePairedDelimiter\clcl{[}{]}
+%\DeclarePairedDelimiter\clop{[}{[}
+%\DeclarePairedDelimiter\opcl{]}{]}
+%\DeclarePairedDelimiter\opop{]}{[}
+\DeclarePairedDelimiter\abs{\lvert}{\rvert}
+%\DeclarePairedDelimiter\norm{\lVert}{\rVert}
+\DeclarePairedDelimiter\set{\{}{\}} %}
+%\DeclareMathOperator{\pr}{P}%probability
+\newcommand*{\p}{\mathrm{p}}%probability
+\renewcommand*{\P}{\mathrm{P}}%probability
+%\newcommand*{\E}{\mathrm{E}}
+%% The "\:" space is chosen to correctly separate inner binary and external rels
+\renewcommand*{\|}[1][]{\nonscript\:#1\vert\nonscript\:\mathopen{}}
+%\DeclarePairedDelimiterX{\cp}[2]{(}{)}{#1\nonscript\:\delimsize\vert\nonscript\:\mathopen{}#2}
+%\DeclarePairedDelimiterX{\ct}[2]{[}{]}{#1\nonscript\;\delimsize\vert\nonscript\:\mathopen{}#2}
+%\DeclarePairedDelimiterX{\cs}[2]{\{}{\}}{#1\nonscript\:\delimsize\vert\nonscript\:\mathopen{}#2}
+%\newcommand*{\+}{\lor}
+%\renewcommand{\*}{\land}
+%% symbol = for equality statements within probabilities
+%% from https://tex.stackexchange.com/a/484142/97039
+\newcommand*{\eq}{\mathrel{\!=\!}}
+\let\texteq\=
+\renewcommand*{\=}{\TextOrMath\texteq\eq}
+%%
+\newcommand*{\sect}{\S}% Sect.~
+\newcommand*{\sects}{\S\S}% Sect.~
+\newcommand*{\chap}{ch.}%
+\newcommand*{\chaps}{chs}%
+\newcommand*{\bref}{ref.}%
+\newcommand*{\brefs}{refs}%
+%\newcommand*{\fn}{fn}%
+\newcommand*{\eqn}{eq.}%
+\newcommand*{\eqns}{eqs}%
+\newcommand*{\fig}{fig.}%
+\newcommand*{\figs}{figs}%
+\newcommand*{\vs}{{vs}}
+\newcommand*{\eg}{{e.g.}}
+\newcommand*{\etc}{{etc.}}
+\newcommand*{\ie}{{i.e.}}
+%\newcommand*{\ca}{{c.}}
+\newcommand*{\foll}{{ff.}}
+%\newcommand*{\viz}{{viz}}
+\newcommand*{\cf}{{cf.}}
+%\newcommand*{\Cf}{{Cf.}}
+%\newcommand*{\vd}{{v.}}
+\newcommand*{\etal}{{et al.}}
+%\newcommand*{\etsim}{{et sim.}}
+%\newcommand*{\ibid}{{ibid.}}
+%\newcommand*{\sic}{{sic}}
+%\newcommand*{\id}{\mathte{I}}%id matrix
+%\newcommand*{\nbd}{\nobreakdash}%
+%\newcommand*{\bd}{\hspace{0pt}}%
+%\def\hy{-\penalty0\hskip0pt\relax}
+%\newcommand*{\labelbis}[1]{\tag*{(\ref{#1})$_\text{r}$}}
+%\newcommand*{\mathbox}[2][.8]{\parbox[t]{#1\columnwidth}{#2}}
+%\newcommand*{\zerob}[1]{\makebox[0pt][l]{#1}}
+\newcommand*{\tprod}{\mathop{\textstyle\prod}\nolimits}
+\newcommand*{\tsum}{\mathop{\textstyle\sum}\nolimits}
+%\newcommand*{\tint}{\begingroup\textstyle\int\endgroup\nolimits}
+%\newcommand*{\tland}{\mathop{\textstyle\bigwedge}\nolimits}
+%\newcommand*{\tlor}{\mathop{\textstyle\bigvee}\nolimits}
+%\newcommand*{\sprod}{\mathop{\textstyle\prod}}
+%\newcommand*{\ssum}{\mathop{\textstyle\sum}}
+%\newcommand*{\sint}{\begingroup\textstyle\int\endgroup}
+%\newcommand*{\sland}{\mathop{\textstyle\bigwedge}}
+%\newcommand*{\slor}{\mathop{\textstyle\bigvee}}
+%\newcommand*{\T}{^\transp}%transpose
+%%\newcommand*{\QEM}%{\textnormal{$\Box$}}%{\ding{167}}
+%\newcommand*{\qem}{\leavevmode\unskip\penalty9999 \hbox{}\nobreak\hfill
+%\quad\hbox{\QEM}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Custom macros for this file @@@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\definecolor{notecolour}{RGB}{68,170,153}
+%\newcommand*{\puzzle}{\maltese}
+\newcommand*{\puzzle}{{\fontencoding{U}\fontfamily{fontawesometwo}\selectfont\symbol{225}}}
+\newcommand*{\wrench}{{\fontencoding{U}\fontfamily{fontawesomethree}\selectfont\symbol{114}}}
+\newcommand*{\pencil}{{\fontencoding{U}\fontfamily{fontawesometwo}\selectfont\symbol{210}}}
+\newcommand{\mynote}[1]{ {\color{notecolour}\puzzle\ #1}}
+
+\newcommand*{\widebar}[1]{{\mkern1.5mu\skew{2}\overline{\mkern-1.5mu#1\mkern-1.5mu}\mkern 1.5mu}}
+
+% \newcommand{\explanation}[4][t]{%\setlength{\tabcolsep}{-1ex}
+% %\smash{
+% \begin{tabular}[#1]{c}#2\\[0.5\jot]\rule{1pt}{#3}\\#4\end{tabular}}%}
+% \newcommand*{\ptext}[1]{\text{\small #1}}
+%\DeclareMathOperator*{\argsup}{arg\,sup}
+\newcommand*{\dob}{degree of belief}
+\newcommand*{\dobs}{degrees of belief}
+%%% Custom macros end @@@
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Beginning of document
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\firmlists
+\begin{document}
+\captiondelim{\quad}\captionnamefont{\footnotesize}\captiontitlefont{\footnotesize}
+\selectlanguage{british}\frenchspacing
+\maketitle
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Abstract
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\abstractrunin
+\abslabeldelim{}
+\renewcommand*{\abstractname}{}
+\setlength{\absleftindent}{0pt}
+\setlength{\absrightindent}{0pt}
+\setlength{\abstitleskip}{-\absparindent}
+\begin{abstract}\labelsep 0pt%
+  \noindent An operational*** definition of probability model is given, and
+  some of its consequences discussed. Some definitions of statistical model
+  used in the literature turn out not to be models according to the present
+  definition; in particular, their probability conditional on data cannot
+  be calculated.
+% \\\noindent\emph{\footnotesize Note: Dear Reader
+%     \amp\ Peer, this manuscript is being peer-reviewed by you. Thank you.}
+% \par%\\[\jot]
+% \noindent
+% {\footnotesize PACS: ***}\qquad%
+% {\footnotesize MSC: ***}%
+%\qquad{\footnotesize Keywords: ***}
+\end{abstract}
+\selectlanguage{british}\frenchspacing
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Epigraph
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \asudedication{\small ***}
+% \vspace{\bigskipamount}
+% \setlength{\epigraphwidth}{.7\columnwidth}
+% %\epigraphposition{flushright}
+% \epigraphtextposition{flushright}
+% %\epigraphsourceposition{flushright}
+% \epigraphfontsize{\footnotesize}
+% \setlength{\epigraphrule}{0pt}
+% %\setlength{\beforeepigraphskip}{0pt}
+% %\setlength{\afterepigraphskip}{0pt}
+% \epigraph{\emph{text}}{source}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% BEGINNING OF MAIN TEXT
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{***}
+\label{sec:***}
+
+
+
+**********************************************************************
+
+OLD SNIPPETS
+
+**********************************************************************
+
+\section{Would you like to know which one is true, eventually?}
+\label{sec:which}
+
+The word \emph{model} seems to have been taking the place of
+\emph{hypothesis} since around the 1960s. This replacement does not seem to
+be connected with the shift from frequentist to Bayesian methods.
+
+Does the replacement of \enquote{hypothesis} by \enquote{model} indicate a
+shift in concepts in all probability theory and statistics? Or are these
+two words simply equivalent?
+
+Many hodiernal authors indeed seem to use them interchangeably. An example
+is Kass \amp\ Raftery's famous review \citep{kassetal1995}. Initially they
+define a statistical model as something that represents the probability of
+the data according to a hypothesis (p.~773). Eventually they use the two
+terms interchangeably, for example saying at times \enquote{the hypothesis
+  $H_{k}$}, at times \enquote{the model $H_{k}$}. ***
+
+
+\enquote{It's just a matter of terminology}, some may say. But I want to
+argue that that there are three deeper important problems, and they need to
+be solved.
+
+The first problem is pedagogical. Many students of probability and statistics
+have uncertainties and misconceptions about what a model is. Model of what?
+
+The second problem is an \emph{inadvertent} mismatch between hypotheses
+declared to be under analysis, and hypotheses that are actually analysed.
+That is, some authors state that they will compare a particular set of
+hypotheses, but an analysis of their mathematics reveals that they are
+unintentionally comparing a different set.
+
+
+The third problem is the \emph{verifiability} of a hypothesis or model. I
+mean the following.
+
+
+There's a box with three balls, which can be blue or red. You have four
+hypotheses about their colours:
+\begin{enumerate*}[label=$H_{\arabic*}$,start=0]
+\item: no blue balls,
+\item: one blue ball, two red balls,
+\item: two blue balls, one red,
+\item: all blue balls.
+\end{enumerate*}
+Each of these hypotheses, granted additional assumptions about the drawing
+procedure, leads to a probability for the colour in the first draw and in
+all four draws.
+
+You can assign a probability to each hypothesis. As draws are made, your
+probability for each hypothesis changes, and so does the probability for
+each colour in the next draw.
+
+Once all three balls are drawn you see which hypothesis is true (some were
+proven false along the way). This is reflected in their probabilities
+conditional on all data: one hypothesis gets unit probability the rest
+zero.
+
+*** example with composite hypotheses
+
+*** example with models. ... Something peculiar happens: we have collected
+\emph{all possible} data, but none of the models has reached unit
+probability. You are still uncertain about the models. This leads to some
+questions:
+\begin{itemize}
+\item What are your models about? they cannot be about the colour
+  composition, because now you know that perfectly and yet the truth of the
+  models is still unsettled.
+\item What kind of data would you need to settle their truth?
+\item Are your models really relevant for this urn problem?
+\end{itemize}
+
+
+
+
+
+
+
+
+
+
+There's a closed box. You have three hypotheses: the box contains one, two,
+or three balls. By shaking the box a little and listening to the rattle you
+get the impression that there should be three balls. Maybe two. Unlikely to
+be just one. You may express your beliefs with a probability distribution.
+
+But how do you \emph{verify} how many balls there are? If possible you
+could open and look; or X-ray the box; or weigh it (assuming you knew the
+separate weights of box and balls). The electromagnetic or weigh data would
+tell you which hypothesis is true. You verify that there are two balls.
+
+The verification of other hypotheses, often entertained in science, is not
+so straightforward. It would require an infinite amount of data or time.
+
+Someone states that, during the whole history of a specific coin, it will
+come up heads 51\% of the times it will be tossed, and tails 49\% of the
+times. Another person says 50\%/50\%. How do you verify these hypotheses?
+You would need to monitor the coin, probably bequeathing this scientific
+task to several future generations (the oldest coin existing today is about
+2\,600 years
+old\footnote{\url{https://rg.ancients.info/lion/article.html}}), amassing a
+very long sequence of data. Or imagine ancient Greeks making hypotheses
+about the Earth's precise distance from the Sun. The data necessary to
+verify their hypotheses could not be gathered then, owing to lack of
+technology. But they were some centuries later \citep{goldstein1985}. In
+cases like these we say that the hypotheses are verifiable \emph{in
+  principle}. Scientific hypotheses are often of this kind.
+
+There are hypotheses that cannot be verified even with infinite data or
+futuristic technologies. Their verification hinges on dubious notions, such
+as multiple copies of this universe with slightly different initial
+conditions. It is debatable whether we can speak of \enquote{hypotheses}
+and \enquote{verification} in this case.
+
+The three cases above are not sharply distinct. There is an increasing
+difficulty with the kind or quantity of data necessary to verify a set of
+hypotheses.
+
+I believe that whenever we propose a set of hypotheses or models we should
+always point out what kind of data would be necessary for their
+verifiability. Such a requirement is in line with today's emphasis on
+reproducibility and the abandonment of \enquote{significance} in favour of
+statistical thinking \citep[\sect~1]{asa2019}
+
+
+\mynote{\enquote{the null must be nested within the alternative} (end of p.~776)}
+
+% hypo:
+% Jeffreys TP48 300
+% Fisher SM54 60
+% Mosteller+ PS61 80
+% Cox RT62 0
+% Lindley IP65 45+217
+% Feller IP68 34+24
+% Mosteller-Tukey DA77 9
+% Tukey 0
+% Tanur+ S89 10
+% Mosteller+ BS83 56
+% BernardoSm BT84 148
+
+% model:
+% Jeffreys TP48 7
+% Fisher SM 0
+% Mosteller+ PS61 62
+% Cox RT62 47
+% Lindley IP65 8+20
+% Feller IP68 169+65
+% Mosteller-Tukey DA77 39
+% Tukey 0
+% Tanur+ S89 53
+% Mosteller+ BS83 121
+% BernardoSm BT84 899
+
+
+
+% \enquote{Model} is a very hyped word in today's literature on probability
+% and statistics. Statistical and probability models are compared and
+% selected; sometimes even formulated. Countless papers debate how model
+% comparison and selection should be made.
+
+I have never seen a paper in which a probability model is \emph{refuted}.
+Sure, there was \enquote{hypothesis rejection at some significance level}
+
+
+
+***comparing two frequency-priors using exch. data is like using one data
+point only.
+
+
+*** \citep{rafteryetal1989} Raftery: non-testable models
+*** \citep{kassetal1995} is the \enquote{hot hand} example really testable?
+
+\section{Discussion}
+\label{sec:discussion}
+
+The shift from \enquote{hypothesis} to \enquote{model} seems to reflect the
+gradual abandonment of trying to understanding a phenomenon to simply
+trying to fit to it some equation pulled out of a hat. This is also
+reflected in the defacing of the verb \emph{explain}: many authors say
+\enquote{this distribution explains the data} (or the variance of the data,
+or similar) when in reality it just \emph{fits} the data -- it does not explain
+them.
+
+**************************************************************
+
+
+\section{What is a model?}
+\label{sec:what_model}
+
+*** model must be about decidable statement. Composite models are not
+
+
+\citep[\sect~1.2]{hailperin2011}
+
+\begin{equation}
+  \parbox{0.9\linewidth}{\emph{A \textbf{probability model} is a combination of knowledge and hypotheses that allows You to assign numerical probabilities to a specific set of statements and to all their logical combinations}}
+\label{eq:def_model}
+\end{equation}
+Such assignment is usually done by specifying the joint probability
+distribution over the \emph{constituents} (or \emph{basic conjunctions}, or
+\emph{fundamental products}) of the set of statements, that is, conjunction
+of all of these in which some, none, or all are negated
+\citep[\chap~0]{hailperin1996,hailperin2011}. In scientific inferences such
+constituents statements are typically of the form \enquote{$X=x$} where $X$
+is a measurable quantity.
+
+It is implicit in this definition that the set of statements includes
+\emph{all} statements involved in Your inference. If Your inference is
+about $\sS$ given data $\sD$, then the model $\sM$ must have assigned the
+probability $\p(\sS \land \sD \| \sM)$.
+
+This definition also contains an implicit distinction between \emph{model}
+and \emph{hypothesis}. A scientific hypothesis by itself is often not
+sufficient to assign probabilities for statements about the quantities it
+involves. Measurements of such quantities, for example, often require
+additional knowledge or hypotheses about the measurement process.
+
+For the moment let us neglect this distinction between \emph{model} and
+\emph{hypothesis} and use the two words interchangeably, as often done in
+the statistics literature; replace \enquote{hypotheses} with
+\enquote{conjectures} in the definition above. In view of that definition,
+some problems discussed in the statistics literature appear in a new light,
+and some disappear altogether.
+
+Let consider the following specific, common situation: our statements are
+$\sD_{1} \defd \enquote{X_{1}\eq x_{1}}$,
+$\sD_{2} \defd \enquote{X_{2}\eq x_{2}}$, and so on. They concern a set of
+one, two, or more similar measurements.
+
+\subsection{Parametric models and model comparison}
+\label{sec:param_mods}
+
+
+
+
+\subsection{Composite hypotheses}
+\label{sec:comp_hyp}
+
+
+\subsection{Nested models}
+\label{sec:nested_mods}
+
+
+
+\section{***}
+\label{sec:***}
+
+
+
+\begin{innote}\label{note:syntax}
+  The probability calculus, just like the truth calculus, proceeds purely
+  syntactically rather than semantically. That is, if I tell you that $H$
+  and $H \limplies D$ are true, you can conclude that $D$ is true;
+  similarly, if I tell you that $\p(H \| \yK) = p$ and
+  $\p(H \limplies D \| \yK) = q$, you can conclude (try it as an exercise)
+  that $\p(H\;D \| \yK) = p + q -1$. And in either case you don't need to
+  know what $H$ and $D$ are about -- they could be about Donald Duck or
+  parallel universes. Don't we too often abuse of this syntactical
+  property? We often say \enquote{under model $H$ our belief about the
+    value of quantity $x$ is expressed by such and such distribution
+    $\pf(x \| H)=f(x)$}, without explaining what $\theta$ really is
+  and why it leads to $f$. Aren't terms such as \enquote{model} and
+  \enquote{hypothesis}, as often used in probability and statistics,
+  convenient and respectable-looking carpets under which we can sweep the
+  fact that we don't quite know what we're speaking about? The need to look
+  under the carpet arises, though, the moment we have to specify our
+  pre-data belief, the prior, about the mysterious $H$.
+  
+  And yet again, semantics can very well be a by-product of syntax, or the
+  distinction between the two be a chimera
+  \citep{wittgenstein1945_t1999,girard2001,girard2003}. Such important
+  matters are unfortunately rarely discussed in probability and statistics.
+\end{innote}
+
+
+
+***
+
+Only in extremely rare cases does the set of hypotheses $\set{H_{h}}$
+encompass and reflect the extremely complex and fuzzy hypotheses lying
+in the backs of our minds. The background knowledge $\yK$ is therefore only
+a simplified picture of our actual knowledge. That's why $\yK$ or the
+hypotheses $\set{H_{h}}$ are often called \emph{models}.\; \enquote{A
+  theory cannot duplicate nature, for if it did so in all respects, it
+  would be isomorphic to nature itself and hence useless, a mere repetition
+  of all the complexity which nature presents to us, that very complexity
+  we frame theories to penetrate and set aside. If a theory were not
+  simpler than the phenomena it was designed to model, it would serve no
+  purpose. Like a portrait, it can represent only a part of the subject it
+  pictures. This part it exaggerates, if only because it leaves out the
+  rest. Its simplicity is its virtue, provided the aspect it portrays be
+  that which we wish to study} (Truesdell \citep[Prologue p.~xvi]{truesdelletal1980}).
+
+***
+
+A good
+portion of recent literature seems to focus on the relation between a
+hypothesis and \emph{future} data rather than the collected data; but I
+think it's equally important to see how it relates to the data we already
+have. This tension between future and past data stems, in my opinion, from
+a misunderstanding about which model or hypothesis we're actually
+interested in. I hope to discuss this topic more at length in another work;
+but let me give a brief sketch of this misunderstanding.
+
+As mentioned in the introduction, $H$ sometimes denotes some unspecified
+knowledge that leads to a specific probabilistic model
+$\p(\dotso \| H \, \yK)$ (see the remark about syntax and semantics on
+p.~\pageref{note:syntax}). We must remember that the conjunction of $H$ and
+some data $D$  defines a new and \emph{different} probabilistic model
+$H' \defd D \, H$. In the context of exchangeable models
+\citep[\sect~4.2]{bernardoetal1994_r2000}{dawid2013,definetti1937,kingman1978,kochetal1982}[see
+also][]{diaconisetal1980} there's an important distinction between two
+kinds of models:
+\begin{enumerate}[label=(\alph*)]
+\item models that lead to the \emph{same} belief about new data,
+  independently of the data already observed:
+  \begin{equation}
+  \label{eq:irrelevance_data}
+  \p(D' \| D \, H \, \yK) = \p(D' \| H \, \yK)
+  \qquad\text{(if $D \nRightarrow D'$)};
+\end{equation}
+these are usually called \enquote{simple} hypotheses or models
+\citep[\sect~6.1.4]{bernardoetal1994_r2000}, but I prefer to call them
+\emph{non-learning} models, because when we assume such a model, observed
+data become irrelevant for our beliefs about unobserved data (although
+observed data are of course relevant for our belief about the model);
+\item models that lead to different beliefs about new data, depending on
+  the data already observed:
+  \begin{equation}
+  \label{eq:irrelevance_data}
+  \p(D' \| D \, H \, \yK) \ne \p(D' \| H \, \yK)
+  \qquad\text{(if $D \nRightarrow D'$)};
+\end{equation}
+these are usually called \enquote{composite} hypotheses or models,\addtocounter{footnote}{-1}\footnotemark{}% \citep[\sect~6.1.4]{bernardoetal1994_r2000},
+but I prefer to call them \emph{learning} models, for reasons analogous to
+the ones in the previous point.
+\end{enumerate}
+Geometrically, learning models constitute a convex set, of which the
+non-learning models are the extreme points.
+\footcites{lauritzen1974,lauritzen1982_r1988,lauritzen1984,barndorffnielsen1978_r2014,dynkin1978}[gives
+a terse summary]{dawid2013} In fact, a learning model can be considered as
+a state of uncertainty about which specific non-learning model holds,
+within a certain set of non-learning models. Our belief about new data is
+therefore give, by the theorem of total probability, by a mixture of our
+beliefs conditional on the contemplated non-learning models entertained;
+the weights of this mixture being our distribution of belief among these
+models themselves. 
+
+From this point of view the question \enquote{how well does the
+  \emph{learning} model forecast new data?} appears somewhat strange.
+Because it's the \emph{non-learning} models that, so to speak, forecast new
+data, while the learning model only expresses our beliefs in those models.
+And it's the \emph{observed} data that help us sharpen such beliefs (future
+data can't help us: we don't have them) -- precisely by quantifying how
+much the competing individual non-learning models have been able to
+forecast the observed data so far. And this is exactly what the likelihood or
+log-likelihood~\eqref{eq:log-likelihood} does, whereas the
+log-score~\eqref{eq:log-score} only does so incompletely.
+
+
+
+Learning models have the important, factual
+property that \emph{their conjunction with observed data tends to a
+  non-learning model} as the number of observed data increases.
+Geometrically, as data accumulate, our model moves in the convex set
+mentioned above, approaching an extreme point.\citep[compare Hjort
+in][p.~50]{barronetal1986}[\chap~3]{hjort1986} I say \enquote{factual}
+because this is not a mathematical theorem: we may imagine and do encounter
+sequences of data for which no convergence occurs;\citep[see
+\eg][]{bruno1964,berk1966,berk1970}[also][\sect~3]{diaconis1988} but in
+practice this usually makes us replace our simplified set of hypotheses
+with a less simplified one and start anew. There's a sort of Bayes theorem
+operating on a large hypothesis space which we keep on the back of our
+minds, of which the space represented on paper is just a necessarily
+simplified portrait or caricature (see Truesdell's quote in
+\sect~\ref{sec:intro}). Compare
+Jaynes's\citep[\sect~4.4.1]{jaynes1994_r2003} discussion about the
+\enquote{resurrection of dead hypotheses}.
+
+The hypotheses typically investigated in the sciences are non-learning models.
+
+
+the \dobs\ about data given some
+hypothesis only \emph{after} some data have been collected, but I think
+it's equally important to see how it relates to the data we already have.
+(compare for example \citep{ohagan1995,bergeretal1996,bergeretal1998},
+although their motivation stems from o
+
+If we see the symbol $H$ as just a placeholder for a probabilistic model,
+rather than an empirical hypothesis (see the remark about syntax and
+semantics on p.~\pageref{note:syntax}), we must remember that the
+conjunction of $H$ and some data $D$ simply defines a new probabilistic
+model $H' \defd H \, D$.
+
+***
+
+This approximation is reasonable if the amount of data is large with
+respect to the dimension of the space of a single datum, because *** (ref
+to geisser, stone, gelfandetal)
+
+***
+
+*** remark that $D\,H$ is a \emph{new} probability model: which of the two
+are we assessing? Connection with learning vs non-learning models which I
+hope to take up in another work.
+
+***  \citep[\sect~6.1.6]{bernardoetal1994} show the approximation only
+valid if number of data large enough -- not very interesting situation in
+today's problems.
+
+
+*** problems calculation with time-relevant hypotheses
+
+
+\enquote{we cannot give a universal rule for them beyond the common-sense one, that if anybody does not know what his suggested value is, or whether there is one, he does not know what question he is asking and consequently does not know what his answer means} \citep[\sect~3.1 p.~124 ]{jeffreys1939_r1983}.
+
+
+
+
+% \[ \color{mypurpleblue}\bm{a} \color{myredpurple}\mathbin{\bm{\land}}\color{mypurpleblue} \bm{b} \]
+
+
+%%%% examples use empheq
+%   \begin{empheq}[left={\mathllap{\begin{aligned}    \de\yF_{\yc}/\de\yp&=0\text{:} \\
+%         \de\yF_{\yc}/\de\ym&=0\text{:}\\ \de\yF_{\yc}/\de\yl&=0\text{:}\end{aligned}}\qquad}\empheqlbrace]{align}
+%     \label{eq:con_p}
+% %    \de\yF_{\yc}/\de\yp &\equiv
+%     -\ln\yp + \ln\yq + \yl\yM + \ym\yu &=0,\\
+%     \label{eq:con_u}
+% %    \de\yF_{\yc}/\de\ym &\equiv
+%     \yu\yp-1 &=0,\\
+%     \label{eq:con_l}
+%     %\de\yF_{\yc}/\de\yl &\equiv
+%     \yM\yp-\yc &=0.
+%   \end{empheq}
+%%%%
+% \begin{empheq}[box=\widefbox]{equation}
+%   \label{eq:maxent_question}
+%   \p\bigl[\yE{N+1}{k} \bigcond \tsum\yo\yf{N}\in\yA, \yM\bigr] = \mathord{?}
+% \end{empheq}
+
+
+
+% \[
+%   \begin{tikzcd}
+%       M_{n,n}(\CC) \arrow{r}{R'_{a}(\Hat{U})} & M_{n,n}(\CC)
+%     \\
+%     L(\mathcal{H}) \arrow{r}{\Hat{U}} \arrow[swap]{d}{R_*}\arrow[swap]{u}{R'_*} & L(\mathcal{H}) \arrow{d}{R_*}\arrow{u}{R'_*} \\
+%       M_{n,n}(\CC) \arrow{r}{R_{a}(\Hat{U})} & M_{n,n}(\CC)
+%   \end{tikzcd}
+% \]
+
+% \[
+%   \begin{tikzcd}
+%       \CC^n \arrow{r}{R'_*(A)} & \CC^n
+%     \\
+%     \mathcal{H} \arrow{r}{A} \arrow[swap]{d}{R}\arrow[swap]{u}{R'} & \mathcal{H} \arrow{d}{R}\arrow{u}{R'} \\
+%       \CC^n \arrow{r}{R_*(A)} & \CC^n
+%   \end{tikzcd}
+% \]
+
+
+% \[
+%   \begin{tikzcd}
+%     \mathcal{H} \arrow{r}{A} \arrow[swap]{d}{R} & \mathcal{H} \arrow{d}{R} \\
+%       \CC^n \arrow{r}{R_*(A)} & \CC^n
+%   \end{tikzcd}
+% \]
+
+%%\setlength{\intextsep}{0ex}% with wrapfigure
+%%\setlength{\columnsep}{0ex}% with wrapfigure
+%\begin{figure}[p!]% with figure
+%\begin{wrapfigure}{r}{0.4\linewidth} % with wrapfigure
+%  \centering\includegraphics[trim={12ex 0 18ex 0},clip,width=\linewidth]{maxent_saddle.png}\\
+%\caption{caption}\label{fig:comparison_a5}
+%\end{figure}% exp_family_maxent.nb
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Acknowledgements
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+\iffalse
+\begin{acknowledgements}
+  \ldots to Mari \amp\ Miri for continuous encouragement and affection, and
+  to Buster Keaton and Saitama for filling life with awe and inspiration.
+  To the developers and maintainers of \LaTeX, Emacs, AUC\TeX, Open Science
+  Framework, R, Python, Inkscape, Sci-Hub for making a free and impartial
+  scientific exchange possible.
+  % Our work was supported by the Trond Mohn Research Foundation, grant number BFS2018TMT07
+%\rotatebox{15}{P}\rotatebox{5}{I}\rotatebox{-10}{P}\rotatebox{10}{\reflectbox{P}}\rotatebox{-5}{O}.
+%\sourceatright{\autanet}
+\mbox{}\hfill\autanet
+\end{acknowledgements}
+\fi
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Appendices
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+%\clearpage
+\bigskip
+% %\renewcommand*{\appendixpagename}{Appendix}
+% %\renewcommand*{\appendixname}{Appendix}
+% %\appendixpage
+% \appendix
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Bibliography
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+\renewcommand*{\finalnamedelim}{\addcomma\space}
+\defbibnote{prenote}{{\footnotesize (\enquote{de $X$} is listed under D,
+    \enquote{van $X$} under V, and so on, regardless of national
+    conventions.)\par}}
+% \defbibnote{postnote}{\par\medskip\noindent{\footnotesize% Note:
+%     \arxivp \mparcp \philscip \biorxivp}}
+
+\printbibliography[prenote=prenote%,postnote=postnote
+]
+
+\end{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Cut text (won't be compiled)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+
+
+%%% Local Variables: 
+%%% mode: LaTeX
+%%% TeX-PDF-mode: t
+%%% TeX-master: t
+%%% End: 

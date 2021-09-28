@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2017-10-21T20:53:34+0200
-%% Last-Updated: 2020-05-20T10:34:22+0200
+%% Last-Updated: 2021-09-28T08:20:48+0200
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newif\ifarxiv
 \arxivfalse
@@ -16,7 +16,6 @@
 onecolumn,oneside,article,%french,italian,german,swedish,latin,
 british%
 ]{memoir}
-\newcommand*{\updated}{\today}
 \newcommand*{\firstdraft}{***}
 \newcommand*{\firstpublished}{***}
 \newcommand*{\updated}{\ifarxiv***\else\today\fi}
@@ -262,8 +261,8 @@ citestyle=authoryear-comp,bibstyle=pglpm-authoryear,autopunct=false,sorting=ny,s
 %\appto{\citesetup}{\footnotesize}% smaller font for citations
 \defbibheading{bibliography}[\bibname]{\section*{#1}\addcontentsline{toc}{section}{#1}%\markboth{#1}{#1}
 }
-\newcommand*{\citep}{\footnotecites}
-\newcommand*{\citey}{\footnotecites}
+\newcommand*{\citep}{\footcites}
+\newcommand*{\citey}{\footcites}
 %\renewcommand*{\cite}{\parencite}
 %\renewcommand*{\cites}{\parencites}
 \providecommand{\href}[2]{#2}

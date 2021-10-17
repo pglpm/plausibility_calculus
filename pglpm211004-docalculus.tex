@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2021-09-06T12:28:59+0200
-%% Last-Updated: 2021-10-04T11:22:27+0200
+%% Last-Updated: 2021-10-07T18:10:41+0200
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newif\ifarxiv
 \arxivfalse
@@ -672,6 +672,12 @@ Open Science Framework \doi{10.31219/osf.io/#1}%
 %\DeclareMathOperator*{\argsup}{arg\,sup}
 \newcommand*{\dob}{degree of belief}
 \newcommand*{\dobs}{degrees of belief}
+\newcommand*{\yV}{\mathsf{V}}
+\newcommand*{\yU}{\mathsf{U}}
+\newcommand*{\yC}{\mathsf{C}}
+\newcommand*{\yN}{\mathsf{N}}
+\newcommand*{\yI}{\mathsf{I}}
+\newcommand*{\stat}[1]{`#1'}
 %%% Custom macros end @@@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -729,8 +735,150 @@ Open Science Framework \doi{10.31219/osf.io/#1}%
 \section{***}
 \label{sec:***}
 
+Pearl's \enquote{do-calculus} is a very useful and elegant method for
+specifying statements about causal relationships between physical
+quantities. Such statements can then be used to draw inferences, from them
+or about them, given observed data. The do-calculus has been increasingly
+developed and used in the past three or so decades. Together with its use,
+however, there has been an increasing misunderstanding about its relation
+with probability theory, and one frequently reads the claim that \emph{the
+  do-calculus needs, or is, some kind of extension of probability theory}.
+Statements that point in such a direction appear indeed in Pearl:
+\enquote{The need to adopt a new notation, foreign to the province of
+  probability theory} \citep[\sect~2.2 p.~23]{pearl2001};
+\enquote{probabilities capture normal relationships in the world, whereas
+  actions represent interventions that perturb those relationships. It is
+  no wonder, then, that actions are treated as foreign entities throughout
+  the literature on probability and statistics; they serve neither as
+  arguments of probability expressions nor as events for conditioning such
+  expressions.} \citep[\sect~4.1 p.~109]{pearl2000_r2009}.
+
+In the present comment I would like to show that such claims are false, and
+that probability theory does not require any extensions to accommodate the
+do-calculus. I believe this clarification is important because it concerns
+the very understanding of what probability theory is about, which is in
+turn very important for pedagogical reasons.
+
+I believe that this kind of misunderstandings appear because we end up
+working mechanically with mathematical symbols and objects, forgetting what
+they mean, \enquote{letting our equations lead us by the nose}, as Morro
+wrote to Maxwell \citep[\chap~XII, p.~378]{campbelletal1882}.
 
 
+\section{The do-calculus within the probability calculus}
+\label{sec:docalculus_in_probcalculus}
+
+Imagine that we want to infer the number of cases of a particular disease
+among individuals belonging to a particular geographic district, at a
+particular moment in time. Assume that the number of individuals is known,
+say 1\,000, and that the presence or absence of the disease can be assessed
+with perfect certainty. Our inference is about specific statements, for
+example \stat{The number of cases is 500}, denoted by $\yN_{500}$, and
+similarly for other numbers.
+
+A clerk gives us the following (reliable) sample values: \stat{10
+  individuals belonging to the district have the disease, and 10 do not};
+denote this statement by $\yV$. We ask the clerk how such data were
+gathered. Now consider two cases:
+\begin{enumerate}[label=(\roman*)]
+\item\label{item:case_unsys} The clerk tells us \stat{20 individuals were
+    selected, without replacement, from the full register of inhabitants by
+    using a pseudo-random number generator, and then checked for the
+    disease}. Denote this statement by $\yU$ (for $\yU$nsystematic
+  selection).
+\item\label{item:case_choice} The clerk says \stat{My plan was to
+    \emph{select} 10 individuals with the disease, and 10 without}. Denote
+  this statement by $\yC$ (for $\yC$hosen individuals).
+\end{enumerate}
+
+The inferences we can make about the incidence of the disease in the
+district are obviously very different in the two cases. The data we have in
+the second case are almost uninformative -- almost but not completely: we
+can still deduce that the number of cases is strictly between 10 and 990,
+rather than between 0 and 1\,000. The difference between the two cases is a
+matter of \emph{intervention}: in the second case the values of the
+quantities in our data were effectively selected by the clerk.
+
+Probability theory can be used in either case, and it generally leads to
+different probabilities in the two cases. For example, assuming uniform
+prior beliefs in the number of cases, and assuming the clerk had
+inexpensive resources to choose individuals -- denote these assumptions by
+$\yI$, we find
+\begin{align}
+  \label{eq:prob_case_i}
+&\text{case~\ref{item:case_unsys}:}&&  \P(\yN_{500} \| \yV \land \yU \land \yI) = 0.373\%
+\\
+  \label{eq:prob_case_ii}
+&\text{case~\ref{item:case_choice}:}&&  \P(\yN_{500} \| \yV \land \yC \land \yI) = 0.102\%
+\end{align}
+That the probabilities must generally be different is clear from the fact
+that the conditionals in the two cases are different: $\yV \land \yU \land
+\yI$ vs $\yV \land \yC \land \yI$. The difference in the statements $\yU$
+and $\yC$ is very important, and leads also to different probabilities for
+the sample values given the hypothesis, for example
+\begin{align}
+  \label{eq:ll_case_i}
+&\text{case~\ref{item:case_unsys}:}&&  \P(\yV \| \yN_{500} \land \yU \land \yI) = 17.8\%
+\\
+  \label{eq:ll_case_ii}
+&\text{case~\ref{item:case_choice}:}&&  \P(\yV \| \yN_{500} \land \yC \land \yI) = 100\%
+\end{align}
+The second probability expresses the fact that, if there are 500 cases in
+the population, then the clerk's plan in case~\ref{item:case_choice} was
+sure to succeed. A full analysis of this inference problem is given in appendix***
+
+\bigskip
+
+In cases like the second, probability theory loses much of its
+expressiveness if we use the dialect of random-variable theory. In such a dialect
+
+
+
+\bigskip
+
+
+
+
+
+
+
+
+
+\mynote{
+  Laplace? t\'emoignage (testimony, record), jugement (judgement, sentence)
+  
+Bernoulli, probability of assertion \chap~II p.~318
+
+Boole \sects~I.7, I.12
+
+Johnson,
+
+Keynes \enquote{With the term ``event,'' which bas taken hitherto so important a place in the phraseology of the subject, I shall dispense altogether. Writers on Probability have generally dealt with what they term the ``happening'' of ``events.'' In problems which they first studied this did not involve much departure from common usage. But these expressions are now used in a way which is vague and ambiguous; and if will be more than a verbal improvement to discuss the truth and the probability of \emph{propositions} instead of the occurrence and the probabihty of \emph{events}.} \sect~I.4 p.~5
+
+Jeffreys,
+
+Cox, Paris, Van Horn
+
+Gaifman,
+
+Scott \amp\ Kraus,
+
+P\'olya, \sect~IV.5
+
+Good \sects~1.1--1.2
+
+Jaynes,
+
+Tribus,
+
+Hailperin,
+
+Maxwell,
+
+Adams,
+
+Howson
+}
 
 % \[ \color{mypurpleblue}\bm{a} \color{myredpurple}\mathbin{\bm{\land}}\color{mypurpleblue} \bm{b} \]
 

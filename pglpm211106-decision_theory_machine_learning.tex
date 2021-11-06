@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2015-05-01T20:53:34+0200
-%% Last-Updated: 2021-11-06T16:48:32+0100
+%% Last-Updated: 2021-11-06T17:06:41+0100
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newif\ifarxiv
 \arxivfalse
@@ -862,9 +862,30 @@ $\bzz \defd (\bxx, \byy) \defd \bigl((\yxx{1}, \yyy{1}), (\yxx{2},
 \begin{equation}
   \label{eq:prob_distr_conditional}
   \p(\bz \| \bzz, H)\,\di\bz \equiv
-  \p(\bx, \by \| \bzz, H)\,\di\bx\,\di\by \ .
+  \p(\bx, \by \| \bzz, H)\ \di\bx\,\di\by \ .
 \end{equation}
-We will shortly further specify its form.
+
+This distribution is typically assumed to be exchangeable in the whole
+sequence of data (known and unknown) and therefore by de Finetti's theorem
+\citep{definetti1930,definetti1937,hewittetal1955}[\chap~4]{bernardoetal1994_r2000}[for
+an insightful summary see]{dawid2013} and Bayes's theorem its density must
+have the form
+\begin{subequations} \label{eq:exchangeable_prob}
+  \begin{gather}
+    \p(\bz \| \bzz, H) =
+    \int \Bigl[\prod_{n} F(\yx{n}, \yy{n})\Bigr] \ \p(F \| \bzz, H)\ \di F
+    \\\shortintertext{with}
+    \p(F \| \bzz, H) =
+    \frac{
+      \bigl[\prod_{\nu} F(\yxx{\nu}, \yyy{\nu}) \bigr]\ \p(F \| H)
+    }{
+      \int \bigl[\prod_{\nu} F(\yxx{\nu}, \yyy{\nu}) \bigr]\ \p(F \| H)\ \di F
+    } \ .
+  \end{gather}
+\end{subequations}
+
+
+
 
 \subsection{Expected utilities and final choice}
 \label{sec:expect_utilities}
@@ -875,7 +896,7 @@ expected utility
   \label{eq:exp_utility_theta}
   \begin{split}
   E(\theta \| \bz, H) 
-&\defd \iint U(\theta \| \bx, \by) \ \p(\bx, \by \| \bzz, H)\,\di\bx\,\di\by
+&\defd \iint U(\theta \| \bx, \by) \ \p(\bx, \by \| \bzz, H)\ \di\bx\,\di\by
 \\
 &=\iint \sum_{n} u(\theta \| \yx{n}, \yy{n}) \
 \p(\bx, \by \| \bzz, H)\,\di\bx\,\di\by
@@ -888,7 +909,6 @@ and we must choose the algorithm and internal parameters $\ctheta$ given by
   \iint \sum_{n} u(\theta \| \yx{n}, \yy{n}) \
   \p(\bx, \by \| \bzz, H)\,\di\bx\,\di\by \ .
 \end{equation}
-Let us discu
 
 % \[ \color{mypurpleblue}\bm{a} \color{myredpurple}\mathbin{\bm{\land}}\color{mypurpleblue} \bm{b} \]
 

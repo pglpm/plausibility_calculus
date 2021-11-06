@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2015-05-01T20:53:34+0200
-%% Last-Updated: 2021-11-06T21:59:00+0100
+%% Last-Updated: 2021-11-06T22:19:21+0100
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newif\ifarxiv
 \arxivfalse
@@ -990,18 +990,25 @@ approximations.
 \section{Observations on the decision-theoretic solution}
 \label{sec:observations_solution}
 
-*** cost part and inferential part may involve completely different
-algorithms. Possibly suggests inconsistency in letting each competing
-algorithm to do its own inference.
+\begin{enumerate}[label=(\alph*), wide]
+\item cost part and inferential part may involve completely different
+  algorithms.
 
-*** optimization crucially depends on probabilities for $\bx$. This is
-understandable and similar to what happens in communication theory. It is
-implicitly present in the usual considerations of \enquote{equilibrating}
-inputs in \ml\ training.
+  \item Inferential part is common, while $\theta$ runs over algorithms and
+  their parameter spaces. Possibly suggests inconsistency in letting each
+  competing algorithm do its own inference.
 
-*** $\argsup$ may be separated into optimization of parameter for each
-algorithm and then optimization among algorithms.
+  \item Allows possibility that an algorithm may be most appropriate for the
+  inferential part, and another for the utility part.
 
+  \item optimization crucially depends on probabilities for $\bx$. This is
+  understandable and similar to what happens in communication theory. It is
+  implicitly present in the usual considerations of \enquote{equilibrating}
+  inputs in \ml\ training.
+
+  \item $\argsup$ may be separated into optimization of parameter for each
+  algorithm and then optimization among algorithms.
+\end{enumerate}
 
 % \[ \color{mypurpleblue}\bm{a} \color{myredpurple}\mathbin{\bm{\land}}\color{mypurpleblue} \bm{b} \]
 

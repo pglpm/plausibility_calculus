@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2015-05-01T20:53:34+0200
-%% Last-Updated: 2021-11-06T21:42:50+0100
+%% Last-Updated: 2021-11-06T21:59:00+0100
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newif\ifarxiv
 \arxivfalse
@@ -978,7 +978,7 @@ The formal solution to our decision problem finally is this: choose the
 algorithm and internal parameters $\ctheta$ given by
 \begin{empheq}[box=\widefbox]{equation}
   \label{eq:argsup_choice}
-  \ctheta \defd \argsup_{\theta}
+  \ctheta \defd \argsup_{\theta}\!\!
   \iiint  u[y \| \theta(x)] \ F(xy) \
   \Bigl[\prod_{\nu}F(\yxx{\nu}\yyy{\nu})\Bigr] \
   \p(F \| H)\ \di x\,\di y\,\di F \ .
@@ -990,6 +990,17 @@ approximations.
 \section{Observations on the decision-theoretic solution}
 \label{sec:observations_solution}
 
+*** cost part and inferential part may involve completely different
+algorithms. Possibly suggests inconsistency in letting each competing
+algorithm to do its own inference.
+
+*** optimization crucially depends on probabilities for $\bx$. This is
+understandable and similar to what happens in communication theory. It is
+implicitly present in the usual considerations of \enquote{equilibrating}
+inputs in \ml\ training.
+
+*** $\argsup$ may be separated into optimization of parameter for each
+algorithm and then optimization among algorithms.
 
 
 % \[ \color{mypurpleblue}\bm{a} \color{myredpurple}\mathbin{\bm{\land}}\color{mypurpleblue} \bm{b} \]

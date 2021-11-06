@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2015-05-01T20:53:34+0200
-%% Last-Updated: 2021-11-06T17:06:41+0100
+%% Last-Updated: 2021-11-06T20:22:45+0100
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newif\ifarxiv
 \arxivfalse
@@ -677,13 +677,13 @@ Open Science Framework \doi{10.31219/osf.io/#1}%
 \newcommand*{\yy}[1]{y_{#1}}
 \newcommand*{\bx}{\widebar{x}}
 \newcommand*{\by}{\widebar{y}}
-\newcommand*{\bz}{\widebar{z}}
+\newcommand*{\bz}{\widebar{xy}}
 \newcommand*{\ml}{machine-learning}
 \newcommand*{\yxx}[1]{\xi_{#1}}
 \newcommand*{\yyy}[1]{\upsilon_{#1}}
 \newcommand*{\bxx}{\widebar{\xi}}
 \newcommand*{\byy}{\widebar{\upsilon}}
-\newcommand*{\bzz}{\widebar{\zeta}}
+\newcommand*{\bzz}{\widebar{\xi\upsilon}}
 \newcommand*{\ctheta}{\theta^{*}}
 %%% Custom macros end @@@
 
@@ -780,32 +780,32 @@ brief summary of decision theory is given in the next section.
   decision problem}
 \label{sec:training_as_decision}
 
-From a decision-theoretic perspective our problem is as follows.
+Let us now examine our problem from a decision-theoretic perspective.
 
 \subsection{Decisions}
 \label{sec:decisions}
 
-We must choose one among several \ml\ algorithms, and for each of them, one
-among several internal parameter values. Note that this nested choice can
-actually be combined into a single choice. Label the candidates algorithms
-with 1, 2, \etc, and denote their parameter spaces by $\varTheta_{1}$,
-$\varTheta_{2}$, \etc. The choice of algorithm and internal parameter can
-then be seen as the choice of a parameter value $\theta$ in the union space
-$\varTheta_{1} \cup \varTheta_{2} \cup\dotsb$, denoted $\varTheta$. A \ml\
-algorithm with internal parameter $\theta$ typically outputs a value that
-is a function $t(x \| \theta)$ of the input $x$ and of the (fixed)
-parameter $\theta$. From our general point of view it is implicitly
-understood that \enquote{$t$} can actually have different functional forms
-depending on whether $\theta \in \varTheta_{1}$ or
+Our goal is to choose one among several \ml\ algorithms, and a set of
+internal-parameter values for that algorithm.
+
+This nested choice can actually be combined into a single choice. Label the
+candidates algorithms with 1, 2, \etc, and denote their parameter spaces by
+$\varTheta_{1}$, $\varTheta_{2}$, \etc. The choice of algorithm and
+internal parameter can then be seen as the choice of a parameter value
+$\theta$ in the union space $\varTheta_{1} \cup \varTheta_{2} \cup\dotsb$,
+denoted $\varTheta$. A \ml\ algorithm with internal parameter $\theta$
+typically outputs a value that is a function $t(x \| \theta)$ of the input
+$x$ and of the (fixed) parameter $\theta$. From our general point of view
+it is implicitly understood that \enquote{$t$} can actually have different
+functional forms depending on whether $\theta \in \varTheta_{1}$ or
 $\theta \in \varTheta_{2}$ and so on (for example, $t$ can be a composition
 of nonlinear functions of $x$ if $\theta$ belongs to the space of weights
 of a neural net, or it can be a linear function of $x$ if $\theta$ belongs
 to the space of coefficients of a linear-regression algorithm).
 
-For the moment we work with this general point of view, and later explore
-how the separation into two different kinds of choices is made. Our
-possible choices or decisions therefore consist of the possible values
-$\theta \in \varTheta$.
+We adopt this general point of view, and later explore how the separation
+into two different kinds of choices is made. Our possible choices or
+decisions therefore consist of the possible values $\theta \in \varTheta$.
 
 \subsection{Scenarios}
 \label{sec:scenarios}
@@ -816,53 +816,56 @@ consist of all possible sequences of pairs
 $\bigl((\yx{1}, \yy{1}), (\yx{2}, \yy{2}), \dotsc \bigr)$ that our
 algorithm will encounter in its lifetime: the $\yx{n}$ will be the known
 inputs fed to the algorithm, and the $\yy{n}$ the unknown values that the
-algorithm will try to predict. Let us assume that this sequence is finite,
+algorithm will try to predict. Let us assume that this sequence is finite
 although very large.
 % We use superscripts as indices (not as powers) without ambiguity
-Denote $\bx \defd (\yx{1}, \yx{2}, \dotsc)$, analogously for $\by$, and
-$\bz \defd (\bx, \by) \defd \bigl((\yx{1}, \yy{1}), (\yx{2}, \yy{2}), \dotsc \bigr)$.
-If the quantity $x$ takes values in the manifold $X$ and $y$ in $Y$, 
-our possible scenarios live in the space $\prod\limits_{n}(X\times Y)$.
+
+For typographical convenience any pair $(\yx{n}, \yy{n})$ is briefly
+denoted $\yx{n}\yy{n}$; this juxtaposition does not represent any
+mathematical operation. Denote $\bx \defd (\yx{1}, \yx{2}, \dotsc)$,
+analogously for $\by$, and
+$\bz \defd (\yx{1}\yy{1}, \yx{2}\yy{2}, \dotsc)$. If the quantity $x$
+takes values in the manifold $X$ and $y$ in $Y$, our possible scenarios
+live in the space $\prod\limits_{n}(X\times Y)$.
 
 \subsection{Utilities}
 \label{sec:utilities}
 
 For each combination of decision (algorithm \amp\ internal parameter)
-$\theta$ and scenario (future data) $(\bx, \by)$ we must now specify the
-utility $U(\theta \| \bz)$.
+$\theta$ and scenario (future data) $\bz$ we must now specify the utility
+$U(\theta \| \bz)$.
 
 We make the realistic assumptions that this utility is the sum of utilities
-$u[\theta \| (\yx{n}, \yy{n})]$ from each single application $n$ of the
-algorithm to the sequence of data, and that such individual utilities have
-identical functional forms:
+$u(\theta \| \yx{n}\yy{n})$ for each single application $n$ of the
+algorithm to the sequence of data $\bz$, and that such individual utilities
+have identical functional forms:
 \begin{equation}
   \label{eq:total_utility}
-  U(\theta \| \bz) = \sum_{n} u(\theta \| \yx{n}, \yy{n}) \ .
+  U(\theta \| \bz) = \sum_{n} u(\theta \| \yx{n}\yy{n}) \ .
 \end{equation}
 This assumption simplifies the calculations to follow. A more general
 approach, where the utilities change with time, is also possible and may be
 realistic in particular situation.
 
 The functional form of the single-instance utility
-$u(\theta \| \yx{n}, \yy{n})$ depends on the specific problem -- in fact
-it is no less problem-specific than the choice of \ml\ algorithm -- so we
-do not make any assumptions about it for the moment.
+$u(\theta \| \yx{n}\yy{n})$ depends on the specific problem -- it is in
+fact no less problem-specific than the choice of \ml\ algorithm -- so we do
+not make any assumptions about it for the moment.
 
 \subsection{Probabilities for the scenarios and exchangeability}
 \label{sec:scenario_probabilities}
 
-Lastly we need to assess the distribution of probability $\p(\bz)\,\di\bz$
-over the possible scenarios $\bz$. This probability distribution is
-conditional on some hypotheses or background knowledge $H$, and on a
-sequence of known inputs $(\yxx{\nu})$ and corresponding \emph{known}
-outputs $(\yyy{\nu})$. Analogously to the scenarios we denote
+Lastly we need to assess the distribution of probability over the possible
+scenarios $\bz$. This probability distribution is conditional on some
+hypotheses or background knowledge $H$, and on a sequence of known inputs
+$(\yxx{\nu})$ and corresponding \emph{known} outputs $(\yyy{\nu})$.
+Analogously to the scenarios we denote
 $\bxx \defd (\yxx{1}, \yxx{2}, \dotsc)$, analogously for $\byy$, and
-$\bzz \defd (\bxx, \byy) \defd \bigl((\yxx{1}, \yyy{1}), (\yxx{2},
-\yyy{2}), \dotsc \bigr)$. So our probability distribution is
+$\bzz \defd (\yxx{1}\yyy{1}, \yxx{2}\yyy{2}, \dotsc)$. Our probability
+distribution can therefore be written as
 \begin{equation}
   \label{eq:prob_distr_conditional}
-  \p(\bz \| \bzz, H)\,\di\bz \equiv
-  \p(\bx, \by \| \bzz, H)\ \di\bx\,\di\by \ .
+  \p(\bz \| \bzz, H)\,\di\bz \ .
 \end{equation}
 
 This distribution is typically assumed to be exchangeable in the whole
@@ -873,7 +876,7 @@ have the form
 \begin{subequations} \label{eq:exchangeable_prob}
   \begin{gather}
     \p(\bz \| \bzz, H) =
-    \int \Bigl[\prod_{n} F(\yx{n}, \yy{n})\Bigr] \ \p(F \| \bzz, H)\ \di F
+    \int \Bigl[\prod_{n} F(\yx{n}\yy{n})\Bigr] \ \p(F \| \bzz, H)\ \di F
     \\\shortintertext{with}
     \p(F \| \bzz, H) =
     \frac{

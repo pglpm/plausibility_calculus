@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2015-05-01T20:53:34+0200
-%% Last-Updated: 2021-11-06T20:59:53+0100
+%% Last-Updated: 2021-11-06T21:42:50+0100
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newif\ifarxiv
 \arxivfalse
@@ -574,7 +574,7 @@ Open Science Framework \doi{10.31219/osf.io/#1}%
 %\newcommand*{\with}{\colon}%with (list of indices)
 %\newcommand*{\mul}{\times}%multiplication
 %\newcommand*{\inn}{\cdot}%inner product
-%\newcommand*{\dotv}{\mathord{\,\cdot\,}}%variable place
+\newcommand*{\dotv}{\mathord{\,\cdot\,}}%variable place
 %\newcommand*{\comp}{\circ}%composition of functions
 %\newcommand*{\con}{\mathbin{:}}%scal prod of tensors
 %\newcommand*{\equi}{\sim}%equivalent to 
@@ -801,11 +801,18 @@ functional forms depending on whether $\theta \in \varTheta_{1}$ or
 $\theta \in \varTheta_{2}$ and so on (for example, $t$ can be a composition
 of nonlinear functions of $x$ if $\theta$ belongs to the space of weights
 of a neural net, or it can be a linear function of $x$ if $\theta$ belongs
-to the space of coefficients of a linear-regression algorithm).
+to the space of coefficients of a linear-regression algorithm). With some
+abuse of notation we shall get rid of \enquote{$t$} and denote the output
+produced by the \ml\ algorithm \amp\ parameter $\theta$ operating on the
+input $x$ simply as $\theta(x)$.
 
-We adopt this general point of view, and later explore how the separation
-into two different kinds of choices is made. Our possible choices or
-decisions therefore consist of the possible values $\theta \in \varTheta$.
+We adopt this general point of view that combines algorithm and parameter
+choice,and later explore how the separation into two different kinds of
+choices is made. Our possible choices or decisions therefore consist of the
+possible values $\theta \in \varTheta$.
+
+Further comments on the meaning of these \enquote{decisions} are given in
+\sect~\ref{sec:utilities} below.
 
 \subsection{Scenarios}
 \label{sec:scenarios}
@@ -844,13 +851,32 @@ have identical functional forms:
   U(\theta \| \bz) = \sum_{n} u(\theta \| \yx{n}\yy{n}) \ .
 \end{equation}
 This assumption simplifies the calculations to follow. A more general
-approach, where the utilities change with time, is also possible and may be
-realistic in particular situation.
+approach, where the functional form of the utility changes with each
+instance (even if $\yx{n}$ and $\yy{n}$ assume the same pair of values), is
+also possible and may be realistic in particular situation.
 
-The functional form of the single-instance utility
-$u(\theta \| \yx{n}\yy{n})$ depends on the specific problem -- it is in
-fact no less problem-specific than the choice of \ml\ algorithm -- so we do
-not make any assumptions about it for the moment.
+Further, in each single instance what we are actually choosing is an output
+value $\theta(x)$, determined by the input $x$ and by the algorithm and
+its parameter $\theta$. The single-instance unknown \enquote{scenario} is
+the true value $y$. So the single-instance utility $u(\theta \|
+\yx{n}\yy{n})$ can actually be rewritten as
+\begin{equation}
+  \label{eq:utility_singleinstance}
+  u[\yy{n} \| \theta(\yx{n})] \ ,
+\end{equation}
+so that
+\begin{equation}
+  \label{eq:total_utility_final}
+  U(\theta \| \bz) = \sum_{n} u[\yy{n} \| \theta(\yx{n})] \ .
+\end{equation}
+This equation express the fact that the choice of parameter $\theta$ is
+indeed equivalent to a choice \emph{en masse} of future outputs $(\yy{n})$,
+since the latter are determined by the former.
+
+The functional form of the single-instance utility $u(\dotv\|\dotv)$
+depends on the specific problem -- it is in fact no less problem-specific
+than the choice of \ml\ algorithm -- so we do not make any more specific
+assumptions about it.
 
 \subsection{Probabilities for the scenarios and exchangeability}
 \label{sec:scenario_probabilities}
@@ -912,12 +938,12 @@ expected utility
   E(\theta \| \bz, H) 
 \defd \iint U(\theta \| \bz) \ \p(\bz \| \bzz, H)\ \di\bz
 \end{equation}
-which, using \eqns~\eqref{eq:total_utility} and
+which, using \eqns~\eqref{eq:total_utility_final} and
 \eqref{eq:exchangeable_prob}, becomes
 \begin{equation}
   \label{eq:exp_utility_replace}
   E(\theta \| \bz, H) 
-=\iiint \sum_{n} u(\theta \| \yx{n}\yy{n}) \
+=\iiint \sum_{n} u[\yy{n} \| \theta(\yx{n})]\
     \Bigl[\prod_{m} F(\yx{m}\yy{m})\Bigr] \ \p(F \| \bzz, H)\ \di\bz\,\di F
     \ .
 \end{equation}
@@ -928,9 +954,9 @@ integrals give unity since each $F$ is normalized. We obtain
   \label{eq:exp_utility_simple}
   \begin{split}
   E(\theta \| \bz, H) 
-&= \sum_{n} \iiint u(\theta \| \yx{n}\yy{n}) \
+&= \sum_{n} \iiint u[\yy{n} \| \theta(\yx{n})] \
     F(\yx{n}\yy{n}) \ \p(F \| \bzz, H)\ \di\bz\,\di F
-\\&\propto \iiint u(\theta \| xy) \
+\\&\propto \iiint u[y \| \theta(x)] \
     F(xy) \ \p(F \| \bzz, H)\ \di x\,\di y\,\di F \ .
   \end{split}
 \end{equation}
@@ -943,7 +969,7 @@ expected utility of $\theta$ is thus, besides a constant term,
 \begin{equation}
   \label{eq:utility_final}
   E(\theta \| \bz, H) 
-  = \iiint u(\theta \| xy) \ F(xy) \
+  = \iiint  u[y \| \theta(x)] \ F(xy) \
   \Bigl[\prod_{\nu}F(\yxx{\nu}\yyy{\nu})\Bigr] \
   \p(F \| H)\ \di x\,\di y\,\di F \ .
 \end{equation}
@@ -953,7 +979,7 @@ algorithm and internal parameters $\ctheta$ given by
 \begin{empheq}[box=\widefbox]{equation}
   \label{eq:argsup_choice}
   \ctheta \defd \argsup_{\theta}
-  \iiint u(\theta \| xy) \ F(xy) \
+  \iiint  u[y \| \theta(x)] \ F(xy) \
   \Bigl[\prod_{\nu}F(\yxx{\nu}\yyy{\nu})\Bigr] \
   \p(F \| H)\ \di x\,\di y\,\di F \ .
 \end{empheq}

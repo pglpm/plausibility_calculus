@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2015-05-01T20:53:34+0200
-%% Last-Updated: 2021-11-06T20:22:45+0100
+%% Last-Updated: 2021-11-06T20:59:53+0100
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newif\ifarxiv
 \arxivfalse
@@ -81,8 +81,8 @@ british%
 %\addtolength{\jot}{\jot} % increase spacing in multiline formulae
 \setlength{\multlinegap}{0pt}
 
-%\usepackage{empheq}% automatically calls amsmath and mathtools
-%\newcommand*{\widefbox}[1]{\fbox{\hspace{1em}#1\hspace{1em}}}
+\usepackage{empheq}% automatically calls amsmath and mathtools
+\newcommand*{\widefbox}[1]{\fbox{\hspace{1em}#1\hspace{1em}}}
 
 %%%% empheq above seems more versatile than these:
 %\usepackage{fancybox}
@@ -858,8 +858,8 @@ not make any assumptions about it for the moment.
 Lastly we need to assess the distribution of probability over the possible
 scenarios $\bz$. This probability distribution is conditional on some
 hypotheses or background knowledge $H$, and on a sequence of known inputs
-$(\yxx{\nu})$ and corresponding \emph{known} outputs $(\yyy{\nu})$.
-Analogously to the scenarios we denote
+$(\yxx{\nu})$ and corresponding \emph{known} outputs $(\yyy{\nu})$, with
+$\yxx{n} \in X$ and $\yyy{n} \in Y$. Analogously to the scenarios we denote
 $\bxx \defd (\yxx{1}, \yxx{2}, \dotsc)$, analogously for $\byy$, and
 $\bzz \defd (\yxx{1}\yyy{1}, \yxx{2}\yyy{2}, \dotsc)$. Our probability
 distribution can therefore be written as
@@ -875,18 +875,30 @@ an insightful summary see]{dawid2013} and Bayes's theorem its density must
 have the form
 \begin{subequations} \label{eq:exchangeable_prob}
   \begin{gather}
+    \label{eq:marginalize_F}
     \p(\bz \| \bzz, H) =
     \int \Bigl[\prod_{n} F(\yx{n}\yy{n})\Bigr] \ \p(F \| \bzz, H)\ \di F
     \\\shortintertext{with}
+    \label{eq:update_F}
     \p(F \| \bzz, H) =
     \frac{
-      \bigl[\prod_{\nu} F(\yxx{\nu}, \yyy{\nu}) \bigr]\ \p(F \| H)
+      \bigl[\prod_{\nu} F(\yxx{\nu}\yyy{\nu}) \bigr]\ \p(F \| H)
     }{
-      \int \bigl[\prod_{\nu} F(\yxx{\nu}, \yyy{\nu}) \bigr]\ \p(F \| H)\ \di F
+      \int \bigl[\prod_{\nu} F(\yxx{\nu}\yyy{\nu}) \bigr]\ \p(F \| H)\ \di F
     } \ .
   \end{gather}
 \end{subequations}
-
+These expressions can be intuitively interpreted as follows
+\citep[\cf][]{lindleyetal1981}. The known and unknown sequences of data
+together constitute a \enquote{population} where the different values in
+$X$ and $Y$ appear with joint frequency density $F(xy)\,\di xy$. If we knew
+such density, then our probability assessment for any new pair of values
+would simply be $F(xy)$ owing to symmetry reasons. But since we do not know
+the density $F$, we must marginalize over all possible such densities, each
+given a probability, as in \eqn~\eqref{eq:marginalize_F}. The prior
+probability density at frequency $F$ is $\p(F \| H)\,\di F$, which is
+updated to $\p(F \| \bzz, H)$, \eqn~\eqref{eq:update_F}, when the training
+data $\bzz$ are known.
 
 
 
@@ -897,21 +909,62 @@ According to decision theory every action $\theta$ has an associated
 expected utility
 \begin{equation}
   \label{eq:exp_utility_theta}
+  E(\theta \| \bz, H) 
+\defd \iint U(\theta \| \bz) \ \p(\bz \| \bzz, H)\ \di\bz
+\end{equation}
+which, using \eqns~\eqref{eq:total_utility} and
+\eqref{eq:exchangeable_prob}, becomes
+\begin{equation}
+  \label{eq:exp_utility_replace}
+  E(\theta \| \bz, H) 
+=\iiint \sum_{n} u(\theta \| \yx{n}\yy{n}) \
+    \Bigl[\prod_{m} F(\yx{m}\yy{m})\Bigr] \ \p(F \| \bzz, H)\ \di\bz\,\di F
+    \ .
+\end{equation}
+This expression can be simplified exchanging the sum in $n$ and the integrals and
+integrating over the pairs $\yx{m}\yy{m}$ for which $m \ne n$; such
+integrals give unity since each $F$ is normalized. We obtain
+\begin{equation}
+  \label{eq:exp_utility_simple}
   \begin{split}
   E(\theta \| \bz, H) 
-&\defd \iint U(\theta \| \bx, \by) \ \p(\bx, \by \| \bzz, H)\ \di\bx\,\di\by
-\\
-&=\iint \sum_{n} u(\theta \| \yx{n}, \yy{n}) \
-\p(\bx, \by \| \bzz, H)\,\di\bx\,\di\by
-\end{split}
+&= \sum_{n} \iiint u(\theta \| \yx{n}\yy{n}) \
+    F(\yx{n}\yy{n}) \ \p(F \| \bzz, H)\ \di\bz\,\di F
+\\&\propto \iiint u(\theta \| xy) \
+    F(xy) \ \p(F \| \bzz, H)\ \di x\,\di y\,\di F \ .
+  \end{split}
 \end{equation}
-and we must choose the algorithm and internal parameters $\ctheta$ given by
+In the last expression we have renamed the dummy integration
+variables $\yx{n}\yy{n}$ with $xy$; the terms of the sum in $n$ are
+therefore all equal, so that the utility is a simple multiple of any such
+term. As a last step we replace the posterior density~\eqref{eq:update_F},
+omitting the denominator, which is only a renormalizing constant. The final
+expected utility of $\theta$ is thus, besides a constant term,
 \begin{equation}
+  \label{eq:utility_final}
+  E(\theta \| \bz, H) 
+  = \iiint u(\theta \| xy) \ F(xy) \
+  \Bigl[\prod_{\nu}F(\yxx{\nu}\yyy{\nu})\Bigr] \
+  \p(F \| H)\ \di x\,\di y\,\di F \ .
+\end{equation}
+
+The formal solution to our decision problem finally is this: choose the
+algorithm and internal parameters $\ctheta$ given by
+\begin{empheq}[box=\widefbox]{equation}
   \label{eq:argsup_choice}
   \ctheta \defd \argsup_{\theta}
-  \iint \sum_{n} u(\theta \| \yx{n}, \yy{n}) \
-  \p(\bx, \by \| \bzz, H)\,\di\bx\,\di\by \ .
-\end{equation}
+  \iiint u(\theta \| xy) \ F(xy) \
+  \Bigl[\prod_{\nu}F(\yxx{\nu}\yyy{\nu})\Bigr] \
+  \p(F \| H)\ \di x\,\di y\,\di F \ .
+\end{empheq}
+
+In the next section we analyse and discuss this formula, and study possible
+approximations.
+
+\section{Observations on the decision-theoretic solution}
+\label{sec:observations_solution}
+
+
 
 % \[ \color{mypurpleblue}\bm{a} \color{myredpurple}\mathbin{\bm{\land}}\color{mypurpleblue} \bm{b} \]
 

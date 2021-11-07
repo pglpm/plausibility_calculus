@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2015-05-01T20:53:34+0200
-%% Last-Updated: 2021-11-07T13:56:44+0100
+%% Last-Updated: 2021-11-07T14:03:50+0100
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newif\ifarxiv
 \arxivfalse
@@ -968,16 +968,17 @@ Assumption~\ref{item:full_exchangeability} applies to cases where our
 training data come from the same source (or, again, \enquote{population} if
 you like) as the future data.
 Assumption~\ref{item:conditional_exchangeability} applies to cases where
-our training data come from a somewhat different source, possibly because
-of constraints in the choice of predictors -- for example, the algorithm
-will be applied to predictor values expensive to realize artificially, and
-the training is based on predictor values cheaper to realize artificially.
+our training data come from a somewhat different source of predictor
+values, possibly because of constraints in their choice -- for example, the
+algorithm will be applied to predictor values expensive to realize
+artificially, and the training is based on predictor values cheaper to
+realize artificially.
 
 It is important to note that joint exchangeability
 \ref{item:full_exchangeability} implies conditional
 exchangeability~\ref{item:conditional_exchangeability}, but not vice versa.
 So the conditional exchangeability of \enquote{predictand${}\|{}$predictor}
-is assumed in any case. It is indeed is a necessary assumptions for our
+is assumed in any case. It is indeed a necessary assumptions for our
 regression problem to make sense at all.
 
 This distribution is typically assumed to be exchangeable in the whole

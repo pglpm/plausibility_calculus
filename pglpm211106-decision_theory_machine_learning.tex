@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2015-05-01T20:53:34+0200
-%% Last-Updated: 2021-11-07T10:51:26+0100
+%% Last-Updated: 2021-11-07T13:56:44+0100
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newif\ifarxiv
 \arxivfalse
@@ -787,7 +787,14 @@ Let us now examine our problem from a decision-theoretic perspective.
 \subsection{Decisions}
 \label{sec:decisions}
 
-Our goal is to choose one among several \ml\ algorithms, and a set of
+A \ml\ algorithm with internal parameters $\theta$ typically yields an
+output that is a function $t(x \| \theta)$ of the input $x$ and of the
+(fixed) parameter $\theta$. For example, for a neural net $t$ is a
+composition of nonlinear functions of $x$, and $\theta$ is a set of
+connection weights; in the case of a linear-regression algorithm, $t$ is a
+linear function of $x$ and $\theta$ its coefficients.
+
+Our goal is to choose one among several \ml\ algorithms, and specific
 internal-parameter values for that algorithm.
 
 This nested choice can actually be combined into a single choice. Label the
@@ -795,25 +802,21 @@ candidates algorithms with 1, 2, \etc, and denote their parameter spaces by
 $\varTheta_{1}$, $\varTheta_{2}$, \etc. The choice of algorithm and
 internal parameter can then be seen as the choice of a parameter value
 $\theta$ in the union space $\varTheta_{1} \cup \varTheta_{2} \cup\dotsb$,
-denoted $\varTheta$. A \ml\ algorithm with internal parameter $\theta$
-typically outputs a value that is a function $t(x \| \theta)$ of the input
-$x$ and of the (fixed) parameter $\theta$. From our general point of view
-it is implicitly understood that \enquote{$t$} can actually have different
-functional forms depending on whether $\theta \in \varTheta_{1}$ or
-$\theta \in \varTheta_{2}$ and so on (for example, $t$ can be a composition
-of nonlinear functions of $x$ if $\theta$ belongs to the space of weights
-of a neural net, or it can be a linear function of $x$ if $\theta$ belongs
-to the space of coefficients of a linear-regression algorithm). We can get
-rid of \enquote{$t$} and denote the output produced by the \ml\ algorithm
-\amp\ parameter $\theta$ operating on the input $x$ simply as $\theta(x)$.
+denoted $\varTheta$. We shall denote the output produced by the \ml\
+algorithm \amp\ parameter $\theta$ operating on the input $x$ simply as
+$\theta(x)$, getting rid of the symbol \enquote{$t$}. Later we shall
+explore how the separation into two different kinds of choices, algorithm
+and parameters separately is made.
 
-We adopt this general point of view combining algorithm and parameter
-choice, and later explore how the separation into two different kinds of
-choices is made. Our possible choices or decisions therefore consist of the
-possible values $\theta \in \varTheta$.
+Our possible choices or decisions therefore consist of the possible values
+$\theta \in \varTheta$.
 
-Further comments on the meaning of these \enquote{decisions} are given in
-\sect~\ref{sec:utilities} below.
+We can alternatively see our set of choices as the set of possible
+sequences of future outputs in response to future predictor values.
+Since a specific output sequence is determined by a specific value of
+$\theta$, the two points of view are equivalent. In
+\sect~\ref{sec:utilities} this equivalence will be apparent in the
+mathematical expression for the utility.
 
 \subsection{Scenarios}
 \label{sec:scenarios}
@@ -848,6 +851,10 @@ also consider this alternative point of view. Let us denote
 $\bxx \defd (\yxx{1}, \yxx{2}, \dotsc)$, analogously for $\byy$, and
 $\bzz \defd (\yxx{1}\yyy{1}, \yxx{2}\yyy{2}, \dotsc)$.
 
+\mynote{\puzzle\ It's maybe less confusing to proceed here and in the next
+  sections without considering the possibility of including training data
+  in the scenarios. Then in a later section the results are adapted to this
+  assumptions. Will try this change later.}
 
 
 \subsection{Utilities}
@@ -884,9 +891,10 @@ so that
   \label{eq:total_utility_final}
   U(\theta \| \bz) = \sum_{n} u[\yy{n} \| \theta(\yx{n})] \ .
 \end{equation}
-This equation expresses the fact that the choice of parameter $\theta$ is
-indeed equivalent to a choice \emph{en masse} of future outputs $(\yy{n})$,
-since the latter are determined by the former.
+This equation expresses the fact, remarked in \sect~\ref{sec:decisions},
+that the choice of parameter $\theta$ is equivalent to a choice \emph{en
+  masse} of future outputs $(\yy{n})$, since the latter are determined by
+the former.
 
 If we also want to include the training data in the set of possible
 scenarios, as discussed in \sect~\ref{sec:scenarios}, then the total
@@ -917,18 +925,60 @@ $(\yxx{\nu}\yyy{\nu})$ of known predictors and predictands discussed in
   \p(\by\| \bx, \bzz, H)\ \p(\bx \| \bzz, H)\ \di\bz \ .
 \end{equation}
 
-Two main assumptions can be made about this distribution.
+Two alternative assumptions can be made about this distribution.
 \begin{enumerate}[label=(\Roman*),para]
-\item That the prior distribution is jointly exchangeable in predictors and
-  predictands. That is, the probability is the same for any sequence
-  obtained from $\bz\bzz$ by simultaneously exchanging predictor-predictand
-  pairs between different points in the sequence (even across future and
-  training subsequences).
-\item That the prior distribution is conditionally exchangeable in the
-  predictands given the predictors, but not in the predictors across future
-  and training subsequences.
+\item\label{item:full_exchangeability} \emph{Joint exchangeability.} The
+  prior distribution is jointly exchangeable in predictors and predictands.
+  That is, the probability is the same for any sequence obtained from
+  $\bz\bzz$ by simultaneously exchanging predictor-predictand pairs between
+  different instances in the sequence, even across future and training
+  subsequences.
+\item\label{item:conditional_exchangeability} \emph{Conditional
+    exchangeability.} The prior distribution is conditionally exchangeable
+  in the predictands given the predictors, but not in the predictors across
+  future and training subsequences. That is, the probability is the same
+  for any sequence obtained from $\bz\bzz$ by exchanging predictand values
+  between different instances in the sequence \emph{that have the same
+    predictor values}; however, the probability is generally not the same
+  if we exchange predictor values, especially if across future data and
+  training data.
 \end{enumerate}
 
+These two assumptions can also be understood in terms of
+\enquote{populations}\citep[see the extremely insightful discussion
+in][]{lindleyetal1981} and their frequency distributions.
+\ref{item:full_exchangeability} says that future and training
+predictor-predictand pairs all come from the same population. In other
+words, the \emph{joint} frequency distribution observed in the training
+data should be similar to the joint frequency distribution of future data
+our \ml\ algorithm will be applied to.
+\ref{item:conditional_exchangeability} says that future and training
+predictands come from the same subpopulations conditional on the same
+predictor values. The predictor values in future and training data,
+however. potentially come from different populations. In other words, every
+frequency distribution, observed in the training data, of the predictand
+\emph{conditional} on each predictor value should be similar to every
+frequency distribution of future predictands, \emph{conditional} on the
+same predictor vaule; the (marginal) frequency distribution of predictor
+values in the training data, however, may differ from that of predictor
+values in future data. This difference is related to the distinction
+between \enquote{generative} and \enquote{discriminative} approaches.
+
+Assumption~\ref{item:full_exchangeability} applies to cases where our
+training data come from the same source (or, again, \enquote{population} if
+you like) as the future data.
+Assumption~\ref{item:conditional_exchangeability} applies to cases where
+our training data come from a somewhat different source, possibly because
+of constraints in the choice of predictors -- for example, the algorithm
+will be applied to predictor values expensive to realize artificially, and
+the training is based on predictor values cheaper to realize artificially.
+
+It is important to note that joint exchangeability
+\ref{item:full_exchangeability} implies conditional
+exchangeability~\ref{item:conditional_exchangeability}, but not vice versa.
+So the conditional exchangeability of \enquote{predictand${}\|{}$predictor}
+is assumed in any case. It is indeed is a necessary assumptions for our
+regression problem to make sense at all.
 
 This distribution is typically assumed to be exchangeable in the whole
 sequence of data (known and unknown) and therefore by de~Finetti's theorem

@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2015-05-01T20:53:34+0200
-%% Last-Updated: 2021-11-06T22:19:21+0100
+%% Last-Updated: 2021-11-07T10:51:26+0100
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newif\ifarxiv
 \arxivfalse
@@ -673,17 +673,18 @@ Open Science Framework \doi{10.31219/osf.io/#1}%
 \DeclareMathOperator*{\argsup}{arg\,sup}
 \newcommand*{\dob}{degree of belief}
 \newcommand*{\dobs}{degrees of belief}
+\newcommand*{\ml}{machine-learning}
 \newcommand*{\yx}[1]{x_{#1}}
 \newcommand*{\yy}[1]{y_{#1}}
-\newcommand*{\bx}{\widebar{x}}
-\newcommand*{\by}{\widebar{y}}
-\newcommand*{\bz}{\widebar{xy}}
-\newcommand*{\ml}{machine-learning}
+\newcommand*{\bx}{\bm{x}}
+\newcommand*{\by}{\bm{y}}
+\newcommand*{\bz}{\bm{xy}}
 \newcommand*{\yxx}[1]{\xi_{#1}}
 \newcommand*{\yyy}[1]{\upsilon_{#1}}
-\newcommand*{\bxx}{\widebar{\xi}}
-\newcommand*{\byy}{\widebar{\upsilon}}
-\newcommand*{\bzz}{\widebar{\xi\upsilon}}
+\newcommand*{\bxx}{\bm{\xi}}
+\newcommand*{\byy}{\bm{\upsilon}}
+\newcommand*{\bzz}{\bm{\xi\upsilon}}
+\newcommand*{\bzzi}{\bm{\xi}'\bm{\upsilon}'}
 \newcommand*{\ctheta}{\theta^{*}}
 %%% Custom macros end @@@
 
@@ -750,14 +751,14 @@ exchangeable probability models \citep[\chap~4]{bernardoetal1994_r2000}. By
 for some quantity or scenario of interest, \emph{without commitment} to any
 specific value of such quantity.
 
-The output of a trained \ml\ algorithm, however, is often a
-specific value taken at face value; that is, treated as \enquote{the
+The output of a trained \ml\ algorithm, however, is often a specific value
+taken at face value; that is, treated as \enquote{the
   truth}\citep[\cf][\sect~3]{mackay1992b}. From this point of view the
 algorithm is making a \emph{decision}: choosing a specific value to be used
 in the problem at hand. Moreover, once the algorithm has been trained it is
 often used for future decisions without any further training; that is, its
 internal parameters (the weights of a neural net, for example) remain fixed
-at some specific value. This also represents a choice made on our part.
+at some specific value. This also represents a choice from our part.
 
 When we not only assess the probabilities for the values of a quantity, but
 also choose a specific value or other course of action based on such
@@ -765,11 +766,12 @@ assessment, we enter the domain of decision theory
 \citep{savage1954_r1972,raiffaetal1961_r2000,berger1980_r1985}[\chap~2]{bernardoetal1994_r2000}{prattetal1995_r1996}[\chaps~13--14]{jaynes1994_r2003}[for
 a charming introduction see][]{raiffa1968_r1970}. We shall consider this
 theory as normative and use its principles to approach the problem of
-training and choosing the internal parameters of a \ml\
-algorithm that performs regression or classification, that is, that outputs
-a specific value $y$ (continuous or categorical) given an input $x$ (which
-can be real, categorical, or belong to some general manifold). A
-brief summary of decision theory is given in the next section.
+training and choosing the internal parameters of a \ml\ algorithm that
+performs regression or classification, that is, that yields an output which
+should ideally be equal to a true value $y$, called the predictand, given
+an input $x$, called the predictor. Predictor and predictand quantities can
+be real-valued, categorical, or belong to some general manifold. A brief
+summary of decision theory is given in the next section.
 
 \section{A simplified overview of decision theory}
 \label{sec:dec_theory_overview}
@@ -801,13 +803,12 @@ functional forms depending on whether $\theta \in \varTheta_{1}$ or
 $\theta \in \varTheta_{2}$ and so on (for example, $t$ can be a composition
 of nonlinear functions of $x$ if $\theta$ belongs to the space of weights
 of a neural net, or it can be a linear function of $x$ if $\theta$ belongs
-to the space of coefficients of a linear-regression algorithm). With some
-abuse of notation we shall get rid of \enquote{$t$} and denote the output
-produced by the \ml\ algorithm \amp\ parameter $\theta$ operating on the
-input $x$ simply as $\theta(x)$.
+to the space of coefficients of a linear-regression algorithm). We can get
+rid of \enquote{$t$} and denote the output produced by the \ml\ algorithm
+\amp\ parameter $\theta$ operating on the input $x$ simply as $\theta(x)$.
 
-We adopt this general point of view that combines algorithm and parameter
-choice,and later explore how the separation into two different kinds of
+We adopt this general point of view combining algorithm and parameter
+choice, and later explore how the separation into two different kinds of
 choices is made. Our possible choices or decisions therefore consist of the
 possible values $\theta \in \varTheta$.
 
@@ -819,10 +820,10 @@ Further comments on the meaning of these \enquote{decisions} are given in
 
 Besides the space of choices we must specify the space of possible
 scenarios, of which only one will turn out to be true. Our scenarios
-consist of all possible sequences of pairs
+consist of all possible sequences of predictor-predictand pairs
 $\bigl((\yx{1}, \yy{1}), (\yx{2}, \yy{2}), \dotsc \bigr)$ that our
-algorithm will encounter in its lifetime: the $\yx{n}$ will be the known
-inputs fed to the algorithm, and the $\yy{n}$ the unknown values that the
+algorithm will encounter in its lifetime: $(\yx{n})$ will be the known
+inputs fed to the algorithm, and $(\yy{n})$ the unknown values that the
 algorithm will try to predict. Let us assume that this sequence is finite
 although very large.
 % We use superscripts as indices (not as powers) without ambiguity
@@ -835,11 +836,25 @@ $\bz \defd (\yx{1}\yy{1}, \yx{2}\yy{2}, \dotsc)$. If the quantity $x$
 takes values in the manifold $X$ and $y$ in $Y$, our possible scenarios
 live in the space $\prod\limits_{n}(X\times Y)$.
 
+Besides the sequence $(\yx{n}\yy{n})$ we also have a sequence
+$(\yxx{\nu}\yyy{\nu})$ of predictors $(\yxx{\nu})$ and corresponding
+\emph{known} predictands $(\yyy{\nu})$: our training data. One may adopt
+the point of view that our set of scenarios should consist of all possible
+sequences $(\yx{n}\yy{n}, \yxx{\nu}\yyy{\nu})$ (the subsequence
+$(\yxx{\nu}\yyy{\nu})$ being common to all of them), on the grounds that
+one wants the choice of algorithm and parameters to be optimal not only for
+future predictions, but also for past ones. In the following steps we shall
+also consider this alternative point of view. Let us denote
+$\bxx \defd (\yxx{1}, \yxx{2}, \dotsc)$, analogously for $\byy$, and
+$\bzz \defd (\yxx{1}\yyy{1}, \yxx{2}\yyy{2}, \dotsc)$.
+
+
+
 \subsection{Utilities}
 \label{sec:utilities}
 
 For each combination of decision (algorithm \amp\ internal parameter)
-$\theta$ and scenario (future data) $\bz$ we must now specify the utility
+$\theta$ and scenario $\bz$ we must now specify the utility
 $U(\theta \| \bz)$.
 
 We make the realistic assumptions that this utility is the sum of utilities
@@ -850,16 +865,16 @@ have identical functional forms:
   \label{eq:total_utility}
   U(\theta \| \bz) = \sum_{n} u(\theta \| \yx{n}\yy{n}) \ .
 \end{equation}
-This assumption simplifies the calculations to follow. A more general
-approach, where the functional form of the utility changes with each
-instance (even if $\yx{n}$ and $\yy{n}$ assume the same pair of values), is
-also possible and may be realistic in particular situation.
+A more general approach, where the functional form of the utility changes
+with each instance (even if $\yx{n}$ and $\yy{n}$ assume the same pair of
+values), is also possible and may be more appropriate in particular
+situations.
 
-Further, in each single instance what we are actually choosing is an output
-value $\theta(x)$, determined by the input $x$ and by the algorithm and
-its parameter $\theta$. The single-instance unknown \enquote{scenario} is
-the true value $y$. So the single-instance utility $u(\theta \|
-\yx{n}\yy{n})$ can actually be rewritten as
+In each single instance what we are actually choosing is an output value
+$\theta(x)$, determined by the input $x$ and by the algorithm and its
+parameter $\theta$. The single-instance unknown is the true value $y$. So
+the single-instance utility $u(\theta \| \yx{n}\yy{n})$ can actually be
+rewritten as
 \begin{equation}
   \label{eq:utility_singleinstance}
   u[\yy{n} \| \theta(\yx{n})] \ ,
@@ -869,9 +884,18 @@ so that
   \label{eq:total_utility_final}
   U(\theta \| \bz) = \sum_{n} u[\yy{n} \| \theta(\yx{n})] \ .
 \end{equation}
-This equation express the fact that the choice of parameter $\theta$ is
+This equation expresses the fact that the choice of parameter $\theta$ is
 indeed equivalent to a choice \emph{en masse} of future outputs $(\yy{n})$,
 since the latter are determined by the former.
+
+If we also want to include the training data in the set of possible
+scenarios, as discussed in \sect~\ref{sec:scenarios}, then the total
+utility is
+\begin{equation}
+  \label{eq:total_utility_final_withtraining}
+  U(\theta \| \bz\bzz) = \sum_{n} u[\yy{n} \| \theta(\yx{n})]
+ +  \sum_{\nu} u[\yyy{\nu} \| \theta(\yxx{\nu})] \ .
+\end{equation}
 
 The functional form of the single-instance utility $u(\dotv\|\dotv)$
 depends on the specific problem -- it is in fact no less problem-specific
@@ -883,19 +907,31 @@ assumptions about it.
 
 Lastly we need to assess the distribution of probability over the possible
 scenarios $\bz$. This probability distribution is conditional on some
-hypotheses or background knowledge $H$, and on a sequence of known inputs
-$(\yxx{\nu})$ and corresponding \emph{known} outputs $(\yyy{\nu})$, with
-$\yxx{n} \in X$ and $\yyy{n} \in Y$. Analogously to the scenarios we denote
-$\bxx \defd (\yxx{1}, \yxx{2}, \dotsc)$, analogously for $\byy$, and
-$\bzz \defd (\yxx{1}\yyy{1}, \yxx{2}\yyy{2}, \dotsc)$. Our probability
-distribution can therefore be written as
+hypotheses, assumptions, or background knowledge $H$, and on the sequence
+$(\yxx{\nu}\yyy{\nu})$ of known predictors and predictands discussed in
+\sect~\ref{sec:scenarios}. It can be written in two equivalent ways:
 \begin{equation}
   \label{eq:prob_distr_conditional}
-  \p(\bz \| \bzz, H)\,\di\bz \ .
+  \p(\bz \| \bzz, H)\,\di\bz
+  \equiv
+  \p(\by\| \bx, \bzz, H)\ \p(\bx \| \bzz, H)\ \di\bz \ .
 \end{equation}
 
+Two main assumptions can be made about this distribution.
+\begin{enumerate}[label=(\Roman*),para]
+\item That the prior distribution is jointly exchangeable in predictors and
+  predictands. That is, the probability is the same for any sequence
+  obtained from $\bz\bzz$ by simultaneously exchanging predictor-predictand
+  pairs between different points in the sequence (even across future and
+  training subsequences).
+\item That the prior distribution is conditionally exchangeable in the
+  predictands given the predictors, but not in the predictors across future
+  and training subsequences.
+\end{enumerate}
+
+
 This distribution is typically assumed to be exchangeable in the whole
-sequence of data (known and unknown) and therefore by de Finetti's theorem
+sequence of data (known and unknown) and therefore by de~Finetti's theorem
 \citep{definetti1930,definetti1937,hewittetal1955}[\chap~4]{bernardoetal1994_r2000}[for
 an insightful summary see]{dawid2013} and Bayes's theorem its density must
 have the form
@@ -925,6 +961,16 @@ given a probability, as in \eqn~\eqref{eq:marginalize_F}. The prior
 probability density at frequency $F$ is $\p(F \| H)\,\di F$, which is
 updated to $\p(F \| \bzz, H)$, \eqn~\eqref{eq:update_F}, when the training
 data $\bzz$ are known.
+
+If the training data are considered part of the scenarios, then our
+probability distribution is
+\begin{equation}
+  \label{eq:prob_distr_conditional_withtraining}
+  \p(\bz \| \bzz, H)\ \delt(\bzzi-\bzz)\ \di\bz\,\di\bzzi
+\end{equation}
+since the training data are known and their probability is one; the term
+$\p(\bz \| \bzz, H)$ is still given by \eqns~\eqref{eq:exchangeable_prob}.
+
 
 
 

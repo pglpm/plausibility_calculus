@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2015-05-01T20:53:34+0200
-%% Last-Updated: 2021-11-07T14:03:50+0100
+%% Last-Updated: 2021-11-07T14:34:09+0100
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newif\ifarxiv
 \arxivfalse
@@ -934,14 +934,15 @@ Two alternative assumptions can be made about this distribution.
   different instances in the sequence, even across future and training
   subsequences.
 \item\label{item:conditional_exchangeability} \emph{Conditional
-    exchangeability.} The prior distribution is conditionally exchangeable
-  in the predictands given the predictors, but not in the predictors across
-  future and training subsequences. That is, the probability is the same
-  for any sequence obtained from $\bz\bzz$ by exchanging predictand values
-  between different instances in the sequence \emph{that have the same
-    predictor values}; however, the probability is generally not the same
-  if we exchange predictor values, especially if across future data and
-  training data.
+    exchangeability.}\citep[\sect~4.6.2]{bernardoetal1994_r2000}[\sect~3]{diaconis1988}[\sect~3,
+  Appendix~2]{lindleyetal1981} The prior distribution is conditionally
+  exchangeable in the predictands given the predictors, but not in the
+  predictors across future and training subsequences. That is, the
+  probability is the same for any sequence obtained from $\bz\bzz$ by
+  exchanging predictand values between different instances in the sequence
+  \emph{that have the same predictor values}; however, the probability is
+  generally not the same if we exchange predictor values, especially if
+  across future data and training data.
 \end{enumerate}
 
 These two assumptions can also be understood in terms of
@@ -980,6 +981,12 @@ exchangeability~\ref{item:conditional_exchangeability}, but not vice versa.
 So the conditional exchangeability of \enquote{predictand${}\|{}$predictor}
 is assumed in any case. It is indeed a necessary assumptions for our
 regression problem to make sense at all.
+
+
+
+
+
+
 
 This distribution is typically assumed to be exchangeable in the whole
 sequence of data (known and unknown) and therefore by de~Finetti's theorem

@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2015-05-01T20:53:34+0200
-%% Last-Updated: 2021-11-09T09:56:11+0100
+%% Last-Updated: 2021-11-13T11:25:48+0100
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newif\ifarxiv
 \arxivfalse
@@ -741,6 +741,64 @@ Open Science Framework \doi{10.31219/osf.io/#1}%
 
 \section{Inferential vs decision algorithms}
 \label{sec:inf_vs_dec}
+
+A predictive, non-probabilistic \ml\ algorithm is typically designed to be
+used multiple times to output a quantity $y$, which we call
+\enquote*{predictand}, given some input quantity $x$, called the
+\enquote*{predictor}. At bottom, such an algorithm is the implementation of
+a function $x \to y$.
+
+In training and selecting such an algorithm we are making an inference and
+a decision. An inference because we consider several possible algorithms,
+architectures, and internal-parameter values; and we must forecast which of
+them will most probably yield optimal outputs in their forthcoming use. A
+decision because we must finally choose one such algorithm (which can be a
+combination of different kinds of algorithms, but such combination is
+itself an algorithm), with definite internal-parameter values, to be
+shipped and employed by the final user.
+
+The process of training and selecting a \ml\ algorithm is thus an inference
+\amp\ decision problem. It should therefore abide by the rules of
+probability theory and decision theory. If it did not, it would be marred
+by intrinsic logical inconsistencies or have a mathematically guaranteed
+suboptimal long-run performance
+\citep{prattetal1995_r1996,berger1980_r1985,raiffaetal1961_r2000,bernardoetal1994_r2000}[esp.\
+\chaps~13--14]{jaynes1994_r2003}{degroot1970_r2004}[for early works
+see][]{wald1950_r1964,savage1954_r1972,neumannetal1944_r1955,bernoulli1738}[for
+introductions and summaries:][]{good1952,prattetal1964,north1968}[and the
+brilliant][]{raiffa1968_r1970}[it is known that human beings often do not
+follow rational decision theory (nor logic for that matter); this is why
+probability theory and decision theory are \emph{normative}, not
+descriptive, theories; see \eg][]{tversky1975,tverskyetal1981}.
+
+
+
+forecast how
+several possible algorithms, and several possible internal-parameters
+values for each, will perform in the forthcoming application. A decision
+because we finally choose one such algorithm, with a definite set of
+internal-parameter values, for actual use.
+
+
+
+
+
+The internal
+parameters of the algorithm are usually decided at the training phase and
+their values kept constant thereafter. (We do make any assumptions
+regarding $x$ and $y$: either could be discrete, continuous, and belong to
+some multidimensional manifold. Thus the \ml\ algorithm could be doing
+classification or regression.)
+
+At each use, the algorithm is making both an inference and a decision under
+the hood. An inference because it must consider probable predictand values
+related to the predictor. A decision because it chooses as its output only
+one among such values.
+
+
+
+
+
 
 Machine-learning algorithms can be insightfully interpreted as inferential
 algorithms

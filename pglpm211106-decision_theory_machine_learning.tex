@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2015-05-01T20:53:34+0200
-%% Last-Updated: 2021-11-16T11:47:17+0100
+%% Last-Updated: 2021-11-16T14:01:48+0100
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newif\ifarxiv
 \arxivfalse
@@ -604,9 +604,10 @@ Open Science Framework \doi{10.31219/osf.io/#1}%
 %\renewcommand{\*}{\land}
 %% symbol = for equality statements within probabilities
 %% from https://tex.stackexchange.com/a/484142/97039
-\newcommand*{\eq}{\mathrel{\!=\!}}
-\let\texteq\=
-\renewcommand*{\=}{\TextOrMath\texteq\eq}
+% \newcommand*{\eq}{\mathrel{\!=\!}}
+% \let\texteq\=
+% \renewcommand*{\=}{\TextOrMath\texteq\eq}
+\newcommand*{\eq}[1][=]{\mathrel{\!#1\!}}
 %%
 \newcommand*{\sect}{\S}% Sect.~
 \newcommand*{\sects}{\S\S}% Sect.~
@@ -1195,8 +1196,8 @@ The formal solution to our decision problem is finally this: choose the
 algorithm and internal parameters $\ctheta$ given by
 \begin{empheq}[box=\widefbox]{equation}
   \label{eq:argsup_choice}
-  \begin{multlined}[][0.75\linewidth]
-  \ctheta \defd \argsup_{\theta} \iiint u[y \| \theta(x)] \
+  \begin{multlined}[][0.8\linewidth]
+  \ctheta \defd \argsup_{\theta} \iiint u[y \| \theta(x)] \times{}\\
       F(y\|x)\ 
       \Bigl[\prod_{\nu} F(\yyy{\nu}\|\xxx{\nu})\Bigr]\ 
       \p(F \| H)\times{}\\
@@ -1212,62 +1213,72 @@ approximations to it.
 \section{Observations on the decision-theoretic solution}
 \label{sec:observations_solution}
 
-Formula~\eqref{eq:argsup_choice} shows several noteworthy features:
-\begin{enumerate}[label=(\alph*), wide]
+Formula~\eqref{eq:argsup_choice} presents several noteworthy points:
+\begin{enumerate}[label=\textbf{(\Alph*)}, wide]
 \item\label{item:nested_optim} The optimization can be separated into an
   optimization of internal parameters for each algorithm $i$, and then an
   optimization among algorithms, because we can first take
   $\theta^{*}_{i} \defd \argsup_{\theta \in \varTheta_{i}}$ for each $i$
   and then $\theta^{*} \defd \argsup_{\theta \in \set{\theta^{*}_{i}}}$.
   
-\item\label{item:utility_vs_inference} There is an utility part
-  $u[y \| \theta(x)]$, clearly distinguished from the inferential part
-  involving the conditional distributions $F$ and the probability
-  distribution for $x$. The variable $\theta$, which runs over the
-  candidate \ml\ algorithms and their internal-parameter values, appears
-  only in the utility part, not in the inferential part; the latter is the
-  same for all candidate algorithms. This fact has several important
-  implications.
+\item\label{item:utility_vs_inference} There is a utility part
+  $u[y \| \theta(x)]$, and a clearly distinguished inferential part
+  $\p(\bz\|\bzz,H)$ rewritten in terms involving the conditional
+  distributions $F$ and the probability distribution for $x$. The variable
+  $\theta$, which runs over the candidate \ml\ algorithms and their
+  internal-parameter values, appears only in the utility part, not in the
+  inferential part. The latter is the same for all candidate algorithms.
+  This fact has several important implications.
 
-  First, it may happen that a probabilistic variant of a candidate
-  algorithm be most appropriate for the inferential part (for example
-  because it is a non-parametric algorithm), and yet the final optimization
-  select a different candidate algorithm. \mynote{\wrench\ This must be
-    explained much better.}
-  
-  Second, it is inconsistent to use different algorithms to compute the
-  inferential part, depending on the value of $\theta$. This fact conflicts
-  somewhat with previous analyses, for example MacKay's
-  \parencite*{mackay1992}, focused on an inferential interpretation.
-  
+  First, it is inconsistent to use different algorithms, depending on the
+  value of $\theta$, to compute the inferential part $\p(\bz\|\bzz,H)$. For
+  example, it would be inconsistent to use a deep network $H_{\text{dn}}$
+  to compute $\p(\bz\|\bzz,H_{\text{dn}})$, multiplying this probability by
+  the deep network's utility $u[y \| \theta_{\text{dn}}(x)]$; and then use
+  a probabilistic random forest $H_{\text{rf}}$ to compute
+  $\p(\bz\|\bzz,H_{\text{rf}})$, multiplying this probability by the random
+  forest's utility $u[y \| \theta_{\text{rf}}(x)]$; and so on. Only one
+  algorithm should be used to compute $\p(\bz\|\bzz,H)$; this could be
+  either an average over all candidate algorithms (with appropriate
+  weights, as given by the probability calculus; see \cite[\sect~28.1
+  p.~347]{mackay1995_r2005}), or the most probable among them (which would
+  be equivalent to a maximum a-posteriori approximation).
 
+  This fact may appear to conflict with analyses, for example MacKay's
+  \parencite*[esp.\ \sect~5]{mackay1992}, focused on an inferential
+  interpretation. That kind of analysis involves a comparison among
+  different models, based on the probabilities that they give to the data.
+  However, such comparison is not meant as
+  \emph{choice}\citep[\enquote{When we discuss model comparison, this
+    should not be construed as implying model \emph{choice}}][\sect~28.1
+  p.~347]{mackay1995_r2005}, so there is no real conflict.
+
+
+  Second, a probabilistic variant of a candidate algorithm might be most
+  appropriate for the inferential part (for example because it is a
+  non-parametric algorithm), and yet the final optimization might select a
+  different candidate algorithm. \mynote{\wrench\ This must be explained
+    much better.}
   
 \item\label{item:px_needed} The optimization crucially depends on the
   distribution of probability over the future predictors: $\p(x\|\bzz,H)$.
+  This fact makes sense. One algorithm might give correct predictions for a
+  very wide range $\mathcal{W}$ of predictor values $x$, and poor
+  predictions in the complementary, very narrow range $\mathcal{N}$;
+  another algorithm might give poor predictions in $\mathcal{N}$ and
+  correct predictions in $\mathcal{W}$. If future predictor values are much
+  more probable to fall in $\mathcal{N}$ than $\mathcal{W}$,
+  $\p(x \eq[\in] \mathcal{N}) \gg \p(x \eq[\in] \mathcal{R})$, then the
+  second algorithm will be more useful in the long run.
+
+  The optimal choice of algorithm and internal parameters therefore
+  requires an inference of probable future predictor values. Current
+  practice in machine learning often neglects such inference. Indeed, the
+  importance of such inference should be contrasted with the common routine
+  of balancing the amount of training data among predictor domains.
+  Balancing could actually be counter-productive.
 \end{enumerate}
 
-
-Point~\ref{item:utility_vs_inference} has several important implications:
-\begin{enumerate}[label=(b\arabic*),wide]
-\item The inferential part is the same for all candidate algorithms. In principle it
-  should 
-\end{enumerate}
-
-
-***  cost part and inferential part may involve completely different
-  algorithms.
-
-*** Inferential part is common, while $\theta$ runs over algorithms and
-  their parameter spaces. Possibly suggests inconsistency in letting each
-  competing algorithm do its own inference.
-
-*** Allows possibility that an algorithm may be most appropriate for the
-  inferential part, and another for the utility part.
-
-*** optimization crucially depends on probabilities for $\bx$. This is
-  understandable and similar to what happens in communication theory. It is
-  implicitly present in the usual considerations of \enquote{equilibrating}
-  inputs in \ml\ training.
 
 
 % \[ \color{mypurpleblue}\bm{a} \color{myredpurple}\mathbin{\bm{\land}}\color{mypurpleblue} \bm{b} \]

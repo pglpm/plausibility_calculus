@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2015-05-01T20:53:34+0200
-%% Last-Updated: 2021-11-16T14:16:59+0100
+%% Last-Updated: 2021-11-16T15:16:28+0100
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newif\ifarxiv
 \arxivfalse
@@ -1218,8 +1218,8 @@ Formula~\eqref{eq:argsup_choice} presents three noteworthy points:
 \item\label{item:nested_optim} The optimization can be separated into an
   optimization of internal parameters for each algorithm $i$, and then an
   optimization among algorithms, because we can first take
-  $\theta^{*}_{i} \defd \argsup_{\theta \in \varTheta_{i}}$ for each $i$
-  and then $\theta^{*} \defd \argsup_{\theta \in \set{\theta^{*}_{i}}}$.
+  $\ctheta_{i} \defd \argsup_{\theta \in \varTheta_{i}}$ for each $i$
+  and then $\ctheta \defd \argsup_{\theta \in \set{\ctheta_{i}}}$.
   
 \item\label{item:utility_vs_inference} There is a utility part
   $u[y \| \theta(x)]$, and a clearly distinguished inferential part
@@ -1272,7 +1272,7 @@ Formula~\eqref{eq:argsup_choice} presents three noteworthy points:
   correct predictions in $\mathcal{W}$. If future predictor values are much
   more probable to fall in $\mathcal{N}$ than $\mathcal{W}$,
   $\p(x \eq[\in] \mathcal{N}) \gg \p(x \eq[\in] \mathcal{R})$, then the
-  second algorithm will be more useful in the long run.
+  second algorithm will yield a higher utility in the long run.
 
   The optimal choice of algorithm and internal parameters therefore
   requires an inference of probable future predictor values. Current
@@ -1282,6 +1282,77 @@ Formula~\eqref{eq:argsup_choice} presents three noteworthy points:
   Balancing could actually be counter-productive.
 \end{enumerate}
 
+
+\section{Approximations and interpretations}
+\label{sec:approx_interpr}
+
+\subsection{Many-data approximation}
+\label{sec:manydata_approx}
+
+If we have many training data, with frequencies $\phi$, the predictive
+conditional probabilities will be roughly equal to these frequencies:
+\begin{multline}
+  \begin{multlined}[][0.8\linewidth]
+  \argsup_{\theta} \iiint u[y \| \theta(x)] \ 
+      F(y\|x)\ 
+      \Bigl[\prod_{\nu} F(\yyy{\nu}\|\xxx{\nu})\Bigr]\ 
+      \p(F \| H)\times{}\\
+      \p(x \| \bzz, H)\
+      \di y\,\di x\,\di F
+    \end{multlined}
+    \\
+{}\approx \argsup_{\theta} \iint u[y \| \theta(x)] \ 
+      \phi(y\|x)\ 
+      \p(x \| \bzz, H)\
+      \di y\,\di x
+    \\
+{}\approx \argsup_{\theta} \sum_{\nu} u[\yyy{\nu} \| \theta(\xxx{\nu})] 
+\end{multline}
+
+According to this interpretation the loss function used in machine learning
+does not represent the logarithm of our uncertainty or of the distribution
+of noise, but the utility.
+
+
+\subsection{Single algorithm and approximate inference}
+\label{sec:single_alg_approx}
+
+\begin{multline}
+  \begin{multlined}[][0.8\linewidth]
+  \argsup_{\theta} \iiint u[y \| \theta(x)] \ 
+      F(y\|x)\ 
+      \Bigl[\prod_{\nu} F(\yyy{\nu}\|\xxx{\nu})\Bigr]\ 
+      \p(F \| H)\times{}\\
+      \p(x \| \bzz, H)\
+      \di y\,\di x\,\di F
+    \end{multlined}
+    \\
+  \begin{multlined}[][0.8\linewidth]
+{}= \argsup_{\theta} \iiint u[y \| \theta(x)] \ 
+      f(y\|x, w)\ 
+      \Bigl[\prod_{\nu} f(\yyy{\nu}\|\xxx{\nu}, w)\Bigr]\ 
+      \p(w \| H)\times{}\\
+      \p(x \| \bzz, H)\
+      \di y\,\di x\,\di w
+\end{multlined}
+    \\
+  \begin{multlined}[][0.8\linewidth]
+{}\approx \argsup_{\theta} \iiint u[y \| \theta(x)] \ 
+      f(y\|x, w^{*})\times{}\\
+      \p(x \| \bzz, H)\
+      \di y\,\di x\,\di w
+\ .
+\end{multlined}
+\end{multline}
+
+\section{Discussion}
+\label{sec:discussion}
+
+
+*** Utility becomes unimportant when the inference is almost deterministic.
+In modern \ml\ applications in particular field such as medicine this
+assumption may not be valid, owing either to the intrinsic, noisy
+complexity of the phenomena involved, or to the scarcity of training data.
 
 
 % \[ \color{mypurpleblue}\bm{a} \color{myredpurple}\mathbin{\bm{\land}}\color{mypurpleblue} \bm{b} \]

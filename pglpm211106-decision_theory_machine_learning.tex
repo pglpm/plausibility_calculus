@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2015-05-01T20:53:34+0200
-%% Last-Updated: 2021-11-16T06:47:33+0100
+%% Last-Updated: 2021-11-16T07:07:19+0100
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newif\ifarxiv
 \arxivfalse
@@ -1044,6 +1044,27 @@ exchangeability~\ref{item:conditional_exchangeability}, but not vice versa.
 So the conditional exchangeability of \enquote{predictand${}\|{}$predictor}
 is assumed in any case. It is indeed a necessary assumptions for our
 regression problem to make sense at all.
+
+We shall use a notation that allows us to consider
+assumptions~\ref{item:full_exchangeability} and
+\ref{item:conditional_exchangeability} at the same time.
+
+\begin{subequations} \label{eq:exchangeable_conditional}
+  \begin{gather}
+    \label{eq:marginalize_conditional}
+    \p(\by \| \bx, \bzz, H) =
+    \int \Bigl[\prod_{n} F(\yy{n}\|\yx{n})\Bigr] \ \p(F \| \bzz, H)\ \di F
+    \\\shortintertext{with}
+    \label{eq:update_conditional}
+    \p(F \| \bzz, H) =
+    \frac{
+      \bigl[\prod_{\nu} F(\yyy{\nu}\|\yxx{\nu}) \bigr]\ \p(F \| H)
+    }{
+      \int \bigl[\prod_{\nu} F(\yyy{\nu}\|\yxx{\nu}) \bigr]\ \p(F \| H)\ \di F
+    } \ .
+  \end{gather}
+\end{subequations}
+
 
 
 

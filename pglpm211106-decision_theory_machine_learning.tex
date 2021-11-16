@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2015-05-01T20:53:34+0200
-%% Last-Updated: 2021-11-16T14:01:48+0100
+%% Last-Updated: 2021-11-16T14:16:59+0100
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newif\ifarxiv
 \arxivfalse
@@ -1213,7 +1213,7 @@ approximations to it.
 \section{Observations on the decision-theoretic solution}
 \label{sec:observations_solution}
 
-Formula~\eqref{eq:argsup_choice} presents several noteworthy points:
+Formula~\eqref{eq:argsup_choice} presents three noteworthy points:
 \begin{enumerate}[label=\textbf{(\Alph*)}, wide]
 \item\label{item:nested_optim} The optimization can be separated into an
   optimization of internal parameters for each algorithm $i$, and then an
@@ -1249,9 +1249,12 @@ Formula~\eqref{eq:argsup_choice} presents several noteworthy points:
   interpretation. That kind of analysis involves a comparison among
   different models, based on the probabilities that they give to the data.
   However, such comparison is not meant as
-  \emph{choice}\citep[\enquote{When we discuss model comparison, this
-    should not be construed as implying model \emph{choice}}][\sect~28.1
-  p.~347]{mackay1995_r2005}, so there is no real conflict.
+  \emph{choice}\citep[\enquote{This paper concerns inference alone and no
+    loss functions or utilities are
+    involved}][footnote~1]{mackay1992}[\enquote{When we discuss model
+    comparison, this should not be construed as implying model
+    \emph{choice}}][\sect~28.1 p.~347]{mackay1995_r2005}, so there is no
+  real conflict.
 
 
   Second, a probabilistic variant of a candidate algorithm might be most

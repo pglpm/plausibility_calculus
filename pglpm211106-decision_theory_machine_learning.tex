@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2015-05-01T20:53:34+0200
-%% Last-Updated: 2021-11-16T07:07:19+0100
+%% Last-Updated: 2021-11-16T08:46:28+0100
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newif\ifarxiv
 \arxivfalse
@@ -1123,57 +1123,88 @@ According to decision theory every action $\theta$ has an associated
 expected utility
 \begin{equation}
   \label{eq:exp_utility_theta}
-  E(\theta \| \bz, H) 
+  E(\theta \| \bzz, H) 
 \defd \iint U(\theta \| \bz) \ \p(\bz \| \bzz, H)\ \di\bz
 \end{equation}
 which, using \eqns~\eqref{eq:total_utility_final} and
 \eqref{eq:exchangeable_prob}, becomes
-\begin{equation}
-  \label{eq:exp_utility_replace}
-  E(\theta \| \bz, H) 
-=\iiint \sum_{n} u[\yy{n} \| \theta(\yx{n})]\
-    \Bigl[\prod_{m} F(\yx{m}\yy{m})\Bigr] \ \p(F \| \bzz, H)\ \di\bz\,\di F
-    \ .
-\end{equation}
-This expression can be simplified exchanging the sum in $n$ and the integrals and
-integrating over the pairs $\yx{m}\yy{m}$ for which $m \ne n$; such
-integrals give unity since each $F$ is normalized. We obtain
+\begin{subequations}    \label{eq:exp_utility_replace}
+  \begin{gather}
+    E(\theta \| \bzz, H) 
+    =
+    \!\begin{multlined}[t][0.7\linewidth]
+      \frac{1}{Z(\bzz)}\iiiint \sum_{n} u[\yy{n} \| \theta(\yx{n})]\times{}\\ 
+      \Bigl[\prod_{m} F(\yy{m}\|\yx{m})\ G(\yx{m})\Bigr]\
+      \Bigl[\prod_{\nu} F(\yyy{\nu}\|\yxx{\nu})\Bigr]\times{}\\
+      \p(F \| H)\
+      \p(G \| \bzz, H)\ 
+      \di\bz\,\di F\,\di G
+    \end{multlined}
+    \\\shortintertext{with}
+    Z(\bzz) \defd
+    \int \Bigl[\prod_{\nu} F(\yyy{\nu}\|\yxx{\nu})\Bigr]\ \p(F \| H)\ \di F \ .
+  \end{gather}
+\end{subequations}
+This expression can be simplified exchanging the sum in $n$ and the
+integrals, and then integrating over $\yy{m}\yx{m}$ for which $m \ne n$;
+such integrals give unity since $G$ and each $F$ are normalized. We obtain
 \begin{equation}
   \label{eq:exp_utility_simple}
   \begin{split}
-  E(\theta \| \bz, H) 
-&= \sum_{n} \iiint u[\yy{n} \| \theta(\yx{n})] \
-    F(\yx{n}\yy{n}) \ \p(F \| \bzz, H)\ \di\bz\,\di F
-\\&\propto \iiint u[y \| \theta(x)] \
-    F(xy) \ \p(F \| \bzz, H)\ \di x\,\di y\,\di F \ .
+    E(\theta \| \bzz, H) 
+    &=
+    \!\begin{multlined}[t][0.65\linewidth]
+      \frac{1}{Z(\bzz)}\sum_{n} \iiiint u[\yy{n} \| \theta(\yx{n})] \
+      F(\yx{n}\|\yy{n})\ G(\yx{n}) \times{}\\
+      \Bigl[\prod_{\nu} F(\yyy{\nu}\|\yxx{\nu})\Bigr]\ 
+      \p(F \| H)\ \p(G \| \bzz, H)\
+      \di\yy{n}\,\di\yx{n}\,\di F\,\di G
+\end{multlined}
+\\[3\jot]&\propto
+    \!\begin{multlined}[t][0.65\linewidth]
+      \iiint u[y \| \theta(x)] \
+      F(y\|x)\ 
+      \Bigl[\prod_{\nu} F(\yyy{\nu}\|\yxx{\nu})\Bigr]\times{}\\
+      \p(F \| H)\ \p(x \| \bzz, H)\
+      \di y\,\di x\,\di F
+       \ .
+\end{multlined}
   \end{split}
 \end{equation}
-In the last expression we have renamed the dummy integration
-variables $\yx{n}\yy{n}$ with $xy$; the terms of the sum in $n$ are
-therefore all equal, so that the utility is a simple multiple of any such
-term. As a last step we replace the posterior density~\eqref{eq:update_F},
-omitting the denominator, which is only a renormalizing constant. The final
-expected utility of $\theta$ is thus, besides a constant term,
-\begin{equation}
+In the last expression we have renamed the dummy integration variables
+$\yx{n}\yy{n}$ to $xy$, and performed a formal integration over $\di G$.
+The terms of the sum in $n$ are therefore all equal, and the utility is a
+simple multiple of any such term. We also omit the $\theta$-independent
+factor $Z(\bzz)$ and simplify the integral notation. Thus the final
+expected utility of $\theta$, besides a constant factor, is
+\begin{multline}
   \label{eq:utility_final}
-  E(\theta \| \bz, H) 
-  = \iiint  u[y \| \theta(x)] \ F(xy) \
-  \Bigl[\prod_{\nu}F(\yxx{\nu}\yyy{\nu})\Bigr] \
-  \p(F \| H)\ \di x\,\di y\,\di F \ .
-\end{equation}
+  E(\theta \| \bzz, H) 
+= \int u[y \| \theta(x)] \
+      F(y\|x)\ 
+      \Bigl[\prod_{\nu} F(\yyy{\nu}\|\yxx{\nu})\Bigr]\
+      \p(F \| H)\times{}\\
+      \p(x \| \bzz, H)\
+      \di y\,\di x\,\di F\ .
+\end{multline}
 
-The formal solution to our decision problem finally is this: choose the
+\bigskip
+
+The formal solution to our decision problem is finally this: choose the
 algorithm and internal parameters $\ctheta$ given by
-\begin{empheq}[box=\widefbox]{equation}
+\begin{empheq}[box=\widefbox]{multline}
   \label{eq:argsup_choice}
-  \ctheta \defd \argsup_{\theta}\!\!
-  \iiint  u[y \| \theta(x)] \ F(xy) \
-  \Bigl[\prod_{\nu}F(\yxx{\nu}\yyy{\nu})\Bigr] \
-  \p(F \| H)\ \di x\,\di y\,\di F \ .
-\end{empheq}
+  \ctheta \defd \argsup_{\theta} \int u[y \| \theta(x)] \
+      F(y\|x)\ 
+      \Bigl[\prod_{\nu} F(\yyy{\nu}\|\yxx{\nu})\Bigr]\ 
+      \p(F \| H)\times{}\\
+      \p(x \| \bzz, H)\
+      \di y\,\di x\,\di F\,\di G
+\ .
+    \end{empheq}
 
 In the next section we analyse and discuss this formula, and study possible
-approximations.
+approximations to it.
 
 \section{Observations on the decision-theoretic solution}
 \label{sec:observations_solution}

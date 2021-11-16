@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2015-05-01T20:53:34+0200
-%% Last-Updated: 2021-11-16T08:57:18+0100
+%% Last-Updated: 2021-11-16T11:47:17+0100
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newif\ifarxiv
 \arxivfalse
@@ -269,9 +269,9 @@ citestyle=authoryear-comp,bibstyle=pglpm-authoryear,autopunct=false,sorting=ny,s
 \renewcommand*{\finalnamedelim}{\addspace\amp\space}
 % \renewcommand*{\finalnamedelim}{\addcomma\space}
 \renewcommand*{\textcitedelim}{\addcomma\space}
-\setcounter{biburlnumpenalty}{1}
-\setcounter{biburlucpenalty}{0}
-\setcounter{biburllcpenalty}{1}
+% \setcounter{biburlnumpenalty}{1}
+% \setcounter{biburlucpenalty}{0}
+% \setcounter{biburllcpenalty}{1}
 \DeclareDelimFormat{multicitedelim}{\addsemicolon\addspace\space}
 \DeclareDelimFormat{compcitedelim}{\addsemicolon\addspace\space}
 \DeclareDelimFormat{postnotedelim}{\addspace}
@@ -297,20 +297,21 @@ citestyle=authoryear-comp,bibstyle=pglpm-authoryear,autopunct=false,sorting=ny,s
 \newcommand*{\subtitleproc}[1]{}
 \newcommand*{\chapb}{ch.}
 %
+\DeclareUrlCommand\doiurl{\urlstyle{rm}}
 \newcommand*{\arxiveprint}[1]{%
-\texttt{arXiv:\urlalt{https://arxiv.org/abs/#1}{#1}}%
+\texttt{arXiv:\urlalt{https://arxiv.org/abs/#1}{\doiurl{#1}}}%
 }
 \newcommand*{\mparceprint}[1]{%
-\texttt{mp\_arc:\urlalt{http://www.ma.utexas.edu/mp_arc-bin/mpa?yn=#1}{#1}}%
+\texttt{mp\_arc:\urlalt{http://www.ma.utexas.edu/mp_arc-bin/mpa?yn=#1}{\doiurl{#1}}}%
 }
 \newcommand*{\haleprint}[1]{%
-\texttt{HAL:\urlalt{https://hal.archives-ouvertes.fr/#1}{#1}}%
+\texttt{HAL:\urlalt{https://hal.archives-ouvertes.fr/#1}{\doiurrl{#1}}}%
 }
 \newcommand*{\philscieprint}[1]{%
-\texttt{PhilSci:\urlalt{http://philsci-archive.pitt.edu/archive/#1}{#1}}%
+\texttt{PhilSci:\urlalt{http://philsci-archive.pitt.edu/archive/#1}{\doiurl{#1}}}%
 }
 \newcommand*{\doi}[1]{%
-\href{https://doi.org/#1}{\textsc{doi}:\texttt{#1}}%
+\href{https://doi.org/#1}{\textsc{doi}:\allowbreak\texttt{\doiurl{#1}}}%
 }
 \newcommand*{\biorxiveprint}[1]{%
 bioRxiv \doi{10.1101/#1}%
@@ -674,12 +675,12 @@ Open Science Framework \doi{10.31219/osf.io/#1}%
 \newcommand*{\dob}{degree of belief}
 \newcommand*{\dobs}{degrees of belief}
 \newcommand*{\ml}{machine-learning}
-\newcommand*{\yx}[1]{x_{#1}}
+\newcommand*{\xx}[1]{x_{#1}}
 \newcommand*{\yy}[1]{y_{#1}}
 \newcommand*{\bx}{\bm{x}}
 \newcommand*{\by}{\bm{y}}
 \newcommand*{\bz}{\bm{xy}}
-\newcommand*{\yxx}[1]{\xi_{#1}}
+\newcommand*{\xxx}[1]{\xi_{#1}}
 \newcommand*{\yyy}[1]{\upsilon_{#1}}
 \newcommand*{\bxx}{\bm{\xi}}
 \newcommand*{\byy}{\bm{\upsilon}}
@@ -887,32 +888,32 @@ mathematical expression for the utility.
 Besides the space of choices we must specify the space of possible
 scenarios, of which only one will turn out to be true. Our scenarios
 consist of all possible sequences of predictor-predictand pairs
-$\bigl((\yx{1}, \yy{1}), (\yx{2}, \yy{2}), \dotsc \bigr)$ that our
-algorithm will encounter in its lifetime: $(\yx{n})$ will be the known
+$\bigl((\xx{1}, \yy{1}), (\xx{2}, \yy{2}), \dotsc \bigr)$ that our
+algorithm will encounter in its lifetime: $(\xx{n})$ will be the known
 inputs fed to the algorithm, and $(\yy{n})$ the unknown values that the
 algorithm will try to predict. Let us assume that this sequence is finite
 although very large.
 % We use superscripts as indices (not as powers) without ambiguity
 
-For typographical convenience any pair $(\yx{n}, \yy{n})$ is briefly
-denoted $\yx{n}\yy{n}$; this juxtaposition does not represent any
-mathematical operation. Denote $\bx \defd (\yx{1}, \yx{2}, \dotsc)$,
+For typographical convenience any pair $(\xx{n}, \yy{n})$ is briefly
+denoted $\xx{n}\yy{n}$; this juxtaposition does not represent any
+mathematical operation. Denote $\bx \defd (\xx{1}, \xx{2}, \dotsc)$,
 analogously for $\by$, and
-$\bz \defd (\yx{1}\yy{1}, \yx{2}\yy{2}, \dotsc)$. If the quantity $x$
+$\bz \defd (\xx{1}\yy{1}, \xx{2}\yy{2}, \dotsc)$. If the quantity $x$
 takes values in the manifold $X$ and $y$ in $Y$, our possible scenarios
 live in the space $\prod\limits_{n}(X\times Y)$.
 
-Besides the sequence $(\yx{n}\yy{n})$ we also have a sequence
-$(\yxx{\nu}\yyy{\nu})$ of predictors $(\yxx{\nu})$ and corresponding
+Besides the sequence $(\xx{n}\yy{n})$ we also have a sequence
+$(\xxx{\nu}\yyy{\nu})$ of predictors $(\xxx{\nu})$ and corresponding
 \emph{known} predictands $(\yyy{\nu})$: our training data. One may adopt
 the point of view that our set of scenarios should consist of all possible
-sequences $(\yx{n}\yy{n}, \yxx{\nu}\yyy{\nu})$ (the subsequence
-$(\yxx{\nu}\yyy{\nu})$ being common to all of them), on the grounds that
+sequences $(\xx{n}\yy{n}, \xxx{\nu}\yyy{\nu})$ (the subsequence
+$(\xxx{\nu}\yyy{\nu})$ being common to all of them), on the grounds that
 one wants the choice of algorithm and parameters to be optimal not only for
 future predictions, but also for past ones. In the following steps we shall
 also consider this alternative point of view. Let us denote
-$\bxx \defd (\yxx{1}, \yxx{2}, \dotsc)$, analogously for $\byy$, and
-$\bzz \defd (\yxx{1}\yyy{1}, \yxx{2}\yyy{2}, \dotsc)$.
+$\bxx \defd (\xxx{1}, \xxx{2}, \dotsc)$, analogously for $\byy$, and
+$\bzz \defd (\xxx{1}\yyy{1}, \xxx{2}\yyy{2}, \dotsc)$.
 
 \mynote{\puzzle\ It's maybe less confusing to proceed here and in the next
   sections without considering the possibility of including training data
@@ -928,31 +929,31 @@ $\theta$ and scenario $\bz$ we must now specify the utility
 $U(\theta \| \bz)$.
 
 We make the realistic assumptions that this utility is the sum of utilities
-$u(\theta \| \yx{n}\yy{n})$ for each single application $n$ of the
+$u(\theta \| \xx{n}\yy{n})$ for each single application $n$ of the
 algorithm to the sequence of data $\bz$, and that such individual utilities
 have identical functional forms:
 \begin{equation}
   \label{eq:total_utility}
-  U(\theta \| \bz) = \sum_{n} u(\theta \| \yx{n}\yy{n}) \ .
+  U(\theta \| \bz) = \sum_{n} u(\theta \| \xx{n}\yy{n}) \ .
 \end{equation}
 A more general approach, where the functional form of the utility changes
-with each instance (even if $\yx{n}$ and $\yy{n}$ assume the same pair of
+with each instance (even if $\xx{n}$ and $\yy{n}$ assume the same pair of
 values), is also possible and may be more appropriate in particular
 situations.
 
 In each single instance what we are actually choosing is an output value
 $\theta(x)$, determined by the input $x$ and by the algorithm and its
 parameter $\theta$. The single-instance unknown is the true value $y$. So
-the single-instance utility $u(\theta \| \yx{n}\yy{n})$ can actually be
+the single-instance utility $u(\theta \| \xx{n}\yy{n})$ can actually be
 rewritten as
 \begin{equation}
   \label{eq:utility_singleinstance}
-  u[\yy{n} \| \theta(\yx{n})] \ ,
+  u[\yy{n} \| \theta(\xx{n})] \ ,
 \end{equation}
 so that
 \begin{equation}
   \label{eq:total_utility_final}
-  U(\theta \| \bz) = \sum_{n} u[\yy{n} \| \theta(\yx{n})] \ .
+  U(\theta \| \bz) = \sum_{n} u[\yy{n} \| \theta(\xx{n})] \ .
 \end{equation}
 This equation expresses the fact, remarked in \sect~\ref{sec:decisions},
 that the choice of parameter $\theta$ is equivalent to a choice \emph{en
@@ -964,8 +965,8 @@ scenarios, as discussed in \sect~\ref{sec:scenarios}, then the total
 utility is
 \begin{equation}
   \label{eq:total_utility_final_withtraining}
-  U(\theta \| \bz\bzz) = \sum_{n} u[\yy{n} \| \theta(\yx{n})]
- +  \sum_{\nu} u[\yyy{\nu} \| \theta(\yxx{\nu})] \ .
+  U(\theta \| \bz\bzz) = \sum_{n} u[\yy{n} \| \theta(\xx{n})]
+ +  \sum_{\nu} u[\yyy{\nu} \| \theta(\xxx{\nu})] \ .
 \end{equation}
 
 The functional form of the single-instance utility $u(\dotv\|\dotv)$
@@ -979,7 +980,7 @@ assumptions about it.
 Lastly we need to assess the distribution of probability over the possible
 scenarios $\bz$. This probability distribution is conditional on some
 hypotheses, assumptions, or background knowledge $H$, and on the sequence
-$(\yxx{\nu}\yyy{\nu})$ of known predictors and predictands discussed in
+$(\xxx{\nu}\yyy{\nu})$ of known predictors and predictands discussed in
 \sect~\ref{sec:scenarios}. It can be written in two equivalent ways:
 \begin{equation}
   \label{eq:prob_distr_conditional}
@@ -1053,14 +1054,14 @@ assumptions~\ref{item:full_exchangeability} and
   \begin{gather}
     \label{eq:marginalize_conditional}
     \p(\by \| \bx, \bzz, H) =
-    \int \Bigl[\prod_{n} F(\yy{n}\|\yx{n})\Bigr] \ \p(F \| \bzz, H)\ \di F
+    \int \Bigl[\prod_{n} F(\yy{n}\|\xx{n})\Bigr] \ \p(F \| \bzz, H)\ \di F
     \\\shortintertext{with}
     \label{eq:update_conditional}
     \p(F \| \bzz, H) =
     \frac{
-      \bigl[\prod_{\nu} F(\yyy{\nu}\|\yxx{\nu}) \bigr]\ \p(F \| H)
+      \bigl[\prod_{\nu} F(\yyy{\nu}\|\xxx{\nu}) \bigr]\ \p(F \| H)
     }{
-      \int \bigl[\prod_{\nu} F(\yyy{\nu}\|\yxx{\nu}) \bigr]\ \p(F \| H)\ \di F
+      \int \bigl[\prod_{\nu} F(\yyy{\nu}\|\xxx{\nu}) \bigr]\ \p(F \| H)\ \di F
     } \ .
   \end{gather}
 \end{subequations}
@@ -1081,14 +1082,14 @@ have the form
   \begin{gather}
     \label{eq:marginalize_F}
     \p(\bz \| \bzz, H) =
-    \int \Bigl[\prod_{n} F(\yx{n}\yy{n})\Bigr] \ \p(F \| \bzz, H)\ \di F
+    \int \Bigl[\prod_{n} F(\xx{n}\yy{n})\Bigr] \ \p(F \| \bzz, H)\ \di F
     \\\shortintertext{with}
     \label{eq:update_F}
     \p(F \| \bzz, H) =
     \frac{
-      \bigl[\prod_{\nu} F(\yxx{\nu}\yyy{\nu}) \bigr]\ \p(F \| H)
+      \bigl[\prod_{\nu} F(\xxx{\nu}\yyy{\nu}) \bigr]\ \p(F \| H)
     }{
-      \int \bigl[\prod_{\nu} F(\yxx{\nu}\yyy{\nu}) \bigr]\ \p(F \| H)\ \di F
+      \int \bigl[\prod_{\nu} F(\xxx{\nu}\yyy{\nu}) \bigr]\ \p(F \| H)\ \di F
     } \ .
   \end{gather}
 \end{subequations}
@@ -1124,47 +1125,47 @@ expected utility
 \begin{equation}
   \label{eq:exp_utility_theta}
   E(\theta \| \bzz, H) 
-\defd \iint U(\theta \| \bz) \ \p(\bz \| \bzz, H)\ \di\bz
+\defd \iint U(\theta \| \bz) \ \p(\bz \| \bzz, H)\ \di\by\,\di\bx
 \end{equation}
 which, using \eqns~\eqref{eq:total_utility_final} and
 \eqref{eq:exchangeable_prob}, becomes
 \begin{subequations}    \label{eq:exp_utility_replace}
   \begin{gather}
-    E(\theta \| \bzz, H) 
-    =
-    \!\begin{multlined}[t][0.7\linewidth]
-      \frac{1}{Z(\bzz)}\iiiint \sum_{n} u[\yy{n} \| \theta(\yx{n})]\times{}\\ 
-      \Bigl[\prod_{m} F(\yy{m}\|\yx{m})\ G(\yx{m})\Bigr]\
-      \Bigl[\prod_{\nu} F(\yyy{\nu}\|\yxx{\nu})\Bigr]\times{}\\
+\begin{multlined}[b][0.85\linewidth]
+    E(\theta \| \bzz, H) =
+      \frac{1}{Z(\bzz)}\iiiint \sum_{n} u[\yy{n} \| \theta(\xx{n})]\times{}\\ 
+      \shoveright{\Bigl[\prod_{m} F(\yy{m}\|\xx{m})\ G(\xx{m})\Bigr]\
+      \Bigl[\prod_{\nu} F(\yyy{\nu}\|\xxx{\nu})\Bigr]\times{}}\\
       \p(F \| H)\
       \p(G \| \bzz, H)\ 
-      \di\bz\,\di F\,\di G
+      \di\by\,\di\bx\,\di F\,\di G
     \end{multlined}
     \\\shortintertext{with}
     Z(\bzz) \defd
-    \int \Bigl[\prod_{\nu} F(\yyy{\nu}\|\yxx{\nu})\Bigr]\ \p(F \| H)\ \di F \ .
+    \int \Bigl[\prod_{\nu} F(\yyy{\nu}\|\xxx{\nu})\Bigr]\ \p(F \| H)\ \di F \ .
   \end{gather}
 \end{subequations}
-This expression can be simplified exchanging the sum in $n$ and the
-integrals, and then integrating over $\yy{m}\yx{m}$ for which $m \ne n$;
-such integrals give unity since $G$ and each $F$ are normalized. We obtain
+This expression can be simplified exchanging integrals and the sum in $n$,
+and then integrating over the pairs $\di\yy{m}\,\di\xx{m}$ for which
+$m \ne n$; such integrals give unity since $G$ and each $F$ are normalized.
+We obtain
 \begin{equation}
   \label{eq:exp_utility_simple}
   \begin{split}
     E(\theta \| \bzz, H) 
     &=
     \!\begin{multlined}[t][0.65\linewidth]
-      \frac{1}{Z(\bzz)}\sum_{n} \iiiint u[\yy{n} \| \theta(\yx{n})] \
-      F(\yx{n}\|\yy{n})\ G(\yx{n}) \times{}\\
-      \Bigl[\prod_{\nu} F(\yyy{\nu}\|\yxx{\nu})\Bigr]\ 
+      \frac{1}{Z(\bzz)}\sum_{n} \iiiint u[\yy{n} \| \theta(\xx{n})] \
+      F(\xx{n}\|\yy{n})\ G(\xx{n}) \times{}\\
+      \Bigl[\prod_{\nu} F(\yyy{\nu}\|\xxx{\nu})\Bigr]\ 
       \p(F \| H)\ \p(G \| \bzz, H)\
-      \di\yy{n}\,\di\yx{n}\,\di F\,\di G
+      \di\yy{n}\,\di\xx{n}\,\di F\,\di G
 \end{multlined}
 \\[3\jot]&\propto
     \!\begin{multlined}[t][0.65\linewidth]
       \iiint u[y \| \theta(x)] \
       F(y\|x)\ 
-      \Bigl[\prod_{\nu} F(\yyy{\nu}\|\yxx{\nu})\Bigr]\times{}\\
+      \Bigl[\prod_{\nu} F(\yyy{\nu}\|\xxx{\nu})\Bigr]\times{}\\
       \p(F \| H)\ \p(x \| \bzz, H)\
       \di y\,\di x\,\di F
        \ .
@@ -1172,17 +1173,17 @@ such integrals give unity since $G$ and each $F$ are normalized. We obtain
   \end{split}
 \end{equation}
 In the last expression we have renamed the dummy integration variables
-$\yx{n}\yy{n}$ to $xy$, and performed a formal integration over $\di G$.
+$\xx{n}\yy{n}$ to $xy$, and performed a formal integration over $\di G$.
 The terms of the sum in $n$ are therefore all equal, and the utility is a
-simple multiple of any such term. We also omit the $\theta$-independent
-factor $Z(\bzz)$. Thus the final expected utility of $\theta$, besides a
-constant factor, is
+multiple of any such term. We also omit the $\theta$-independent factor
+$Z(\bzz)$. Thus the final expected utility of $\theta$, besides a constant
+factor, is
 \begin{multline}
   \label{eq:utility_final}
   E(\theta \| \bzz, H) 
 = \iiint u[y \| \theta(x)] \
       F(y\|x)\ 
-      \Bigl[\prod_{\nu} F(\yyy{\nu}\|\yxx{\nu})\Bigr]\
+      \Bigl[\prod_{\nu} F(\yyy{\nu}\|\xxx{\nu})\Bigr]\
       \p(F \| H)\times{}\\
       \p(x \| \bzz, H)\
       \di y\,\di x\,\di F\ .
@@ -1197,7 +1198,7 @@ algorithm and internal parameters $\ctheta$ given by
   \begin{multlined}[][0.75\linewidth]
   \ctheta \defd \argsup_{\theta} \iiint u[y \| \theta(x)] \
       F(y\|x)\ 
-      \Bigl[\prod_{\nu} F(\yyy{\nu}\|\yxx{\nu})\Bigr]\ 
+      \Bigl[\prod_{\nu} F(\yyy{\nu}\|\xxx{\nu})\Bigr]\ 
       \p(F \| H)\times{}\\
       \p(x \| \bzz, H)\
       \di y\,\di x\,\di F
@@ -1211,25 +1212,63 @@ approximations to it.
 \section{Observations on the decision-theoretic solution}
 \label{sec:observations_solution}
 
+Formula~\eqref{eq:argsup_choice} shows several noteworthy features:
 \begin{enumerate}[label=(\alph*), wide]
-\item cost part and inferential part may involve completely different
+\item\label{item:nested_optim} The optimization can be separated into an
+  optimization of internal parameters for each algorithm $i$, and then an
+  optimization among algorithms, because we can first take
+  $\theta^{*}_{i} \defd \argsup_{\theta \in \varTheta_{i}}$ for each $i$
+  and then $\theta^{*} \defd \argsup_{\theta \in \set{\theta^{*}_{i}}}$.
+  
+\item\label{item:utility_vs_inference} There is an utility part
+  $u[y \| \theta(x)]$, clearly distinguished from the inferential part
+  involving the conditional distributions $F$ and the probability
+  distribution for $x$. The variable $\theta$, which runs over the
+  candidate \ml\ algorithms and their internal-parameter values, appears
+  only in the utility part, not in the inferential part; the latter is the
+  same for all candidate algorithms. This fact has several important
+  implications.
+
+  First, it may happen that a probabilistic variant of a candidate
+  algorithm be most appropriate for the inferential part (for example
+  because it is a non-parametric algorithm), and yet the final optimization
+  select a different candidate algorithm. \mynote{\wrench\ This must be
+    explained much better.}
+  
+  Second, it is inconsistent to use different algorithms to compute the
+  inferential part, depending on the value of $\theta$. This fact conflicts
+  somewhat with previous analyses, for example MacKay's
+  \parencite*{mackay1992}, focused on an inferential interpretation.
+  
+
+  
+\item\label{item:px_needed} The optimization crucially depends on the
+  distribution of probability over the future predictors: $\p(x\|\bzz,H)$.
+\end{enumerate}
+
+
+Point~\ref{item:utility_vs_inference} has several important implications:
+\begin{enumerate}[label=(b\arabic*),wide]
+\item The inferential part is the same for all candidate algorithms. In principle it
+  should 
+\end{enumerate}
+
+
+***  cost part and inferential part may involve completely different
   algorithms.
 
-  \item Inferential part is common, while $\theta$ runs over algorithms and
+*** Inferential part is common, while $\theta$ runs over algorithms and
   their parameter spaces. Possibly suggests inconsistency in letting each
   competing algorithm do its own inference.
 
-  \item Allows possibility that an algorithm may be most appropriate for the
+*** Allows possibility that an algorithm may be most appropriate for the
   inferential part, and another for the utility part.
 
-  \item optimization crucially depends on probabilities for $\bx$. This is
+*** optimization crucially depends on probabilities for $\bx$. This is
   understandable and similar to what happens in communication theory. It is
   implicitly present in the usual considerations of \enquote{equilibrating}
   inputs in \ml\ training.
 
-  \item $\argsup$ may be separated into optimization of parameter for each
-  algorithm and then optimization among algorithms.
-\end{enumerate}
 
 % \[ \color{mypurpleblue}\bm{a} \color{myredpurple}\mathbin{\bm{\land}}\color{mypurpleblue} \bm{b} \]
 

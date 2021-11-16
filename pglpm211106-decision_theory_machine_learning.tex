@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2015-05-01T20:53:34+0200
-%% Last-Updated: 2021-11-16T08:46:28+0100
+%% Last-Updated: 2021-11-16T08:57:18+0100
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newif\ifarxiv
 \arxivfalse
@@ -1175,12 +1175,12 @@ In the last expression we have renamed the dummy integration variables
 $\yx{n}\yy{n}$ to $xy$, and performed a formal integration over $\di G$.
 The terms of the sum in $n$ are therefore all equal, and the utility is a
 simple multiple of any such term. We also omit the $\theta$-independent
-factor $Z(\bzz)$ and simplify the integral notation. Thus the final
-expected utility of $\theta$, besides a constant factor, is
+factor $Z(\bzz)$. Thus the final expected utility of $\theta$, besides a
+constant factor, is
 \begin{multline}
   \label{eq:utility_final}
   E(\theta \| \bzz, H) 
-= \int u[y \| \theta(x)] \
+= \iiint u[y \| \theta(x)] \
       F(y\|x)\ 
       \Bigl[\prod_{\nu} F(\yyy{\nu}\|\yxx{\nu})\Bigr]\
       \p(F \| H)\times{}\\
@@ -1192,16 +1192,18 @@ expected utility of $\theta$, besides a constant factor, is
 
 The formal solution to our decision problem is finally this: choose the
 algorithm and internal parameters $\ctheta$ given by
-\begin{empheq}[box=\widefbox]{multline}
+\begin{empheq}[box=\widefbox]{equation}
   \label{eq:argsup_choice}
-  \ctheta \defd \argsup_{\theta} \int u[y \| \theta(x)] \
+  \begin{multlined}[][0.75\linewidth]
+  \ctheta \defd \argsup_{\theta} \iiint u[y \| \theta(x)] \
       F(y\|x)\ 
       \Bigl[\prod_{\nu} F(\yyy{\nu}\|\yxx{\nu})\Bigr]\ 
       \p(F \| H)\times{}\\
       \p(x \| \bzz, H)\
-      \di y\,\di x\,\di F\,\di G
+      \di y\,\di x\,\di F
 \ .
-    \end{empheq}
+\end{multlined}
+\end{empheq}
 
 In the next section we analyse and discuss this formula, and study possible
 approximations to it.

@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2015-05-01T20:53:34+0200
-%% Last-Updated: 2021-11-16T15:16:28+0100
+%% Last-Updated: 2021-12-16T14:46:53+0100
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newif\ifarxiv
 \arxivfalse
@@ -19,13 +19,14 @@ british%
 \newcommand*{\firstdraft}{6 November 2021}
 \newcommand*{\firstpublished}{\firstdraft}
 \newcommand*{\updated}{\ifarxiv***\else\today\fi}
-\newcommand*{\propertitle}{Notes on decision theory\\for machine-learning algorithms%\\{\large ***}%
+\newcommand*{\propertitle}{The foundations of machine learning\\on
+  probability theory and decision theory%\\{\large ***}%
 }% title uses LARGE; set Large for smaller
 \newcommand*{\pdftitle}{\propertitle}
-\newcommand*{\headtitle}{Decision theory for machine learning}
-\newcommand*{\pdfauthor}{P.G.L.  Porta Mana}
-\newcommand*{\headauthor}{Luca}
-\newcommand*{\reporthead}{\iftrue\else Open Science Framework \href{https://doi.org/10.31219/osf.io/***}{\textsc{doi}:10.31219/osf.io/***}\fi}% Report number
+\newcommand*{\headtitle}{Machine learning, probability theory, decision theory}
+\newcommand*{\pdfauthor}{P.G.L.  Porta Mana, A. S. Lundervold}
+\newcommand*{\headauthor}{Luca \amp\ Alexander}
+\newcommand*{\reporthead}{\ifarxiv\else Open Science Framework \href{https://doi.org/10.31219/osf.io/***}{\textsc{doi}:10.31219/osf.io/***}\fi}% Report number
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% Calls to packages (uncomment as needed)
@@ -509,18 +510,18 @@ Open Science Framework \doi{10.31219/osf.io/#1}%
 % {\protect\centering ***\\%
 % \footnotesize\epost{\email{***}{***}}}%
 % \hspace*{\stretch{1}}%
-\parbox{1\linewidth}%\makebox[0pt][c]%
-{\protect\centering Luca \href{https://orcid.org/0000-0002-6070-0784}{\protect\includegraphics[scale=0.16]{orcid_32x32.png}}\footnotesize 
+\parbox{0.25\linewidth}%\makebox[0pt][c]%
+{\protect\centering Luca \href{https://orcid.org/0000-0002-6070-0784}{\protect\includegraphics[scale=0.16]{orcid_32x32.png}}\\\footnotesize%
 %Western Norway University of Applied Sciences%
-\quad\epost{\email{pgl}{portamana.org}}}%
+\epost{\email{pgl}{portamana.org}}}%
 % Mohn Medical Imaging and Visualization Centre, Dept of Computer science, Electrical Engineering and Mathematical Sciences, Western Norway University of Applied Sciences, Bergen, Norway
 %% uncomment if additional authors present
-% \hspace*{\stretch{1}}%
-% \parbox{0.5\linewidth}%\makebox[0pt][c]%
-% {\protect\centering ***\\%
-% \footnotesize\epost{\email{***}{***}}}%
-\hspace*{\stretch{1}}%
-}
+\hspace*{\stretch{0.5}}%
+\parbox{0.25\linewidth}%\makebox[0pt][c]%
+{\protect\centering Alexander\\%
+\footnotesize\epost{\email{***}{***}}}%
+\hspace*{\stretch{1}}\mbox{}%
+\\\tiny(or any permutation thereof)}
 
 %\date{Draft of \today\ (first drafted \firstdraft)}
 \date{\firstpublished; updated \updated}
@@ -607,7 +608,8 @@ Open Science Framework \doi{10.31219/osf.io/#1}%
 % \newcommand*{\eq}{\mathrel{\!=\!}}
 % \let\texteq\=
 % \renewcommand*{\=}{\TextOrMath\texteq\eq}
-\newcommand*{\eq}[1][=]{\mathrel{\!#1\!}}
+% \newcommand*{\eq}[1][=]{\mathrel{\!#1\!}}
+\newcommand*{\mo}[1][=]{\mathord{\,#1\,}}
 %%
 \newcommand*{\sect}{\S}% Sect.~
 \newcommand*{\sects}{\S\S}% Sect.~
@@ -681,12 +683,12 @@ Open Science Framework \doi{10.31219/osf.io/#1}%
 \newcommand*{\bx}{\bm{x}}
 \newcommand*{\by}{\bm{y}}
 \newcommand*{\bz}{\bm{xy}}
-\newcommand*{\xxx}[1]{\xi_{#1}}
-\newcommand*{\yyy}[1]{\upsilon_{#1}}
-\newcommand*{\bxx}{\bm{\xi}}
-\newcommand*{\byy}{\bm{\upsilon}}
-\newcommand*{\bzz}{\bm{\xi\upsilon}}
-\newcommand*{\bzzi}{\bm{\xi}'\bm{\upsilon}'}
+\newcommand*{\xxx}[1]{\tilde{x}_{#1}}
+\newcommand*{\yyy}[1]{\tilde{y}_{#1}}
+\newcommand*{\bxx}{\tilde{\bm{x}}}
+\newcommand*{\byy}{\tilde{\bm{y}}}
+\newcommand*{\bzz}{\tilde{\bm{x}}\tilde{\bm{y}}}
+\newcommand*{\bzzi}{\tilde{\bm{x}}'\tilde{\bm{y}}'}
 \newcommand*{\ctheta}{\theta^{*}}
 %%% Custom macros end @@@
 
@@ -735,8 +737,6 @@ Open Science Framework \doi{10.31219/osf.io/#1}%
 % %\setlength{\afterepigraphskip}{0pt}
 % \epigraph{\emph{text}}{source}
 
-
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% BEGINNING OF MAIN TEXT
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -748,22 +748,34 @@ A predictive, non-probabilistic \ml\ algorithm is typically designed to be
 used multiple times to output a quantity $y$, which we call
 \enquote*{predictand}, given some input quantity $x$, called the
 \enquote*{predictor}. At bottom, such an algorithm is the implementation of
-a function $x \to y$.
+a function $x \mapsto y$. (We do not make any assumptions regarding $x$ and
+$y$: either could be discrete, continuous, or belong to some complicated
+multidimensional manifold; thus the \ml\ algorithm could be doing
+classification or regression.)
 
-In training and selecting such an algorithm we are making an inference and
-a decision. An inference because we consider several possible algorithms,
-architectures, and internal-parameter values; and we must forecast which of
+The internal parameters of the algorithm are usually explored at the
+training phase and finally kept fixed at values to be used thereafter.
+
+At each use, the algorithm is making both a forecast and a decision under
+the hood. A forecast because it must consider probable predictand values
+related to the predictor. A decision because it chooses as its output only
+one among such values.
+
+
+In training and selecting such an algorithm we are also making a forecast
+and a decision. A forecast because we consider several possible algorithms,
+architectures, and internal-parameter values, and we must evaluate which of
 them will most probably yield optimal outputs in their forthcoming use. A
 decision because we must finally choose one such algorithm (which can be a
 combination of different kinds of algorithms, but such combination is
 itself an algorithm), with definite internal-parameter values, to be
 shipped and employed by the final user.
 
-The process of training and selecting a \ml\ algorithm is thus an inference
-\amp\ decision problem. This process should therefore follow the rules of
-probability theory and decision theory. If it did not, it would be marred
-by intrinsic logical inconsistencies or have a mathematically guaranteed
-suboptimal long-run performance
+The processes of training and selecting a \ml\ algorithm are thus a
+forecast \amp\ decision problem. These processes should therefore follow
+the rules of probability theory and decision theory. If they did not, they
+would be marred by intrinsic logical inconsistencies or have a
+mathematically guaranteed suboptimal long-run performance
 \citep{prattetal1995_r1996,berger1980_r1985,raiffaetal1961_r2000,bernardoetal1994_r2000}[esp.\
 \chaps~13--14]{jaynes1994_r2003}{degroot1970_r2004}[for early works
 see][]{wald1950_r1964,savage1954_r1972,neumannetal1944_r1955,bernoulli1738}[for
@@ -771,59 +783,41 @@ introductions and summaries:][]{good1952,prattetal1964,north1968}[and the
 brilliant][]{raiffa1968_r1970}[it is known that human beings often do not
 follow rational decision theory (nor logic for that matter); this is why
 logic, probability theory, decision theory are \emph{normative}, not
-descriptive, theories; see \eg][]{tversky1975,tverskyetal1981}.
+descriptive, theories; see \eg][]{tversky1975,tverskyetal1981}. We shall
+interchangeably speak of forecast or \enquote*{inference}, meaning the
+assessment of a probability distribution for some quantity or scenario of
+interest, \emph{without commitment} to any specific value of such quantity.
+
 
 The purpose of the present note is to make a step-by-step derivation of a
 general \ml\ training and selection process, according to probability
-theory and decision theory,
+theory and decision theory, and to interpret some common \ml\ algorithms
+and practices from this point of view.
 
-***current methods must be at least an approximation of decision-theoretic derivation
-
-
-forecast how
-several possible algorithms, and several possible internal-parameters
-values for each, will perform in the forthcoming application. A decision
-because we finally choose one such algorithm, with a definite set of
-internal-parameter values, for actual use.
+% ***current methods must be at least an approximation of decision-theoretic derivation
 
 
+% forecast how
+% several possible algorithms, and several possible internal-parameters
+% values for each, will perform in the forthcoming application. A decision
+% because we finally choose one such algorithm, with a definite set of
+% internal-parameter values, for actual use.
 
 
-
-The internal
-parameters of the algorithm are usually decided at the training phase and
-their values kept constant thereafter. (We do make any assumptions
-regarding $x$ and $y$: either could be discrete, continuous, and belong to
-some multidimensional manifold. Thus the \ml\ algorithm could be doing
-classification or regression.)
-
-At each use, the algorithm is making both an inference and a decision under
-the hood. An inference because it must consider probable predictand values
-related to the predictor. A decision because it chooses as its output only
-one among such values.
-
-
-
-
-
-
-Machine-learning algorithms can be insightfully interpreted as inferential
-algorithms
+The foundations of \ml\ algorithms on probability theory have been explored
+at the very least since the 1980s
 \citep{tishbyetal1989,levinetal1990,mackay1992,mackay1992b,mackay1992c,mackay1992d}[esp.
-Part~V]{mackay1995_r2005}{neal1996}, which in turn can be seen as
-exchangeable probability models \citep[\chap~4]{bernardoetal1994_r2000}. By
-\enquote*{inference} we mean the assessment of a probability distribution
-for some quantity or scenario of interest, \emph{without commitment} to any
-specific value of such quantity.
-
-The output of a trained \ml\ algorithm, however, is often a specific value
-taken at face value; that is, treated as \enquote{the
-  truth}\citep[\cf][\sect~3]{mackay1992b}. From this point of view the
-algorithm is making a \emph{decision}: choosing a specific value to be used
-in the problem at hand. Moreover, once the algorithm has been trained it is
-often used for future decisions without any further training; that is, its
-internal parameters (the weights of a neural net, for example) remain fixed
-at some specific value. This also represents a choice from our part.
+Part~V]{mackay1995_r2005}{neal1996}: these algorithms can generally be seen
+as probability calculations based on exchangeability assumptions
+\citep[\chap~4]{bernardoetal1994_r2000}. The output of a trained \ml\
+algorithm, however, is often a specific value taken at face value; that is,
+treated as \enquote{the truth}\citep[\cf][\sect~3]{mackay1992b}. From this
+point of view the algorithm is making a \emph{decision}: choosing a
+specific value to be used in the problem at hand. Moreover, once the
+algorithm has been trained it is often used for future decisions without
+any further training; that is, its internal parameters (the weights of a
+neural net, for example) remain fixed at some specific value. This also
+represents a choice from our part.
 
 When we not only assess the probabilities for the values of a quantity, but
 also choose a specific value or other course of action based on such
@@ -902,14 +896,14 @@ mathematical operation. Denote $\bx \defd (\xx{1}, \xx{2}, \dotsc)$,
 analogously for $\by$, and
 $\bz \defd (\xx{1}\yy{1}, \xx{2}\yy{2}, \dotsc)$. If the quantity $x$
 takes values in the manifold $X$ and $y$ in $Y$, our possible scenarios
-live in the space $\prod\limits_{n}(X\times Y)$.
+live in the space $\prod_{n}(X\times Y)$.
 
 Besides the sequence $(\xx{n}\yy{n})$ we also have a sequence
-$(\xxx{\nu}\yyy{\nu})$ of predictors $(\xxx{\nu})$ and corresponding
-\emph{known} predictands $(\yyy{\nu})$: our training data. One may adopt
+$(\xxx{m}\yyy{m})$ of predictors $(\xxx{m})$ and corresponding
+\emph{known} predictands $(\yyy{m})$: our training data. One may adopt
 the point of view that our set of scenarios should consist of all possible
-sequences $(\xx{n}\yy{n}, \xxx{\nu}\yyy{\nu})$ (the subsequence
-$(\xxx{\nu}\yyy{\nu})$ being common to all of them), on the grounds that
+sequences $(\xx{n}\yy{n}, \xxx{m}\yyy{m})$ (the subsequence
+$(\xxx{m}\yyy{m})$ being common to all of them), on the grounds that
 one wants the choice of algorithm and parameters to be optimal not only for
 future predictions, but also for past ones. In the following steps we shall
 also consider this alternative point of view. Let us denote
@@ -967,7 +961,7 @@ utility is
 \begin{equation}
   \label{eq:total_utility_final_withtraining}
   U(\theta \| \bz\bzz) = \sum_{n} u[\yy{n} \| \theta(\xx{n})]
- +  \sum_{\nu} u[\yyy{\nu} \| \theta(\xxx{\nu})] \ .
+ +  \sum_{m} u[\yyy{m} \| \theta(\xxx{m})] \ .
 \end{equation}
 
 The functional form of the single-instance utility $u(\dotv\|\dotv)$
@@ -981,7 +975,7 @@ assumptions about it.
 Lastly we need to assess the distribution of probability over the possible
 scenarios $\bz$. This probability distribution is conditional on some
 hypotheses, assumptions, or background knowledge $H$, and on the sequence
-$(\xxx{\nu}\yyy{\nu})$ of known predictors and predictands discussed in
+$(\xxx{m}\yyy{m})$ of known predictors and predictands discussed in
 \sect~\ref{sec:scenarios}. It can be written in two equivalent ways:
 \begin{equation}
   \label{eq:prob_distr_conditional}
@@ -1060,9 +1054,9 @@ assumptions~\ref{item:full_exchangeability} and
     \label{eq:update_conditional}
     \p(F \| \bzz, H) =
     \frac{
-      \bigl[\prod_{\nu} F(\yyy{\nu}\|\xxx{\nu}) \bigr]\ \p(F \| H)
+      \bigl[\prod_{m} F(\yyy{m}\|\xxx{m}) \bigr]\ \p(F \| H)
     }{
-      \int \bigl[\prod_{\nu} F(\yyy{\nu}\|\xxx{\nu}) \bigr]\ \p(F \| H)\ \di F
+      \int \bigl[\prod_{m} F(\yyy{m}\|\xxx{m}) \bigr]\ \p(F \| H)\ \di F
     } \ .
   \end{gather}
 \end{subequations}
@@ -1088,9 +1082,9 @@ have the form
     \label{eq:update_F}
     \p(F \| \bzz, H) =
     \frac{
-      \bigl[\prod_{\nu} F(\xxx{\nu}\yyy{\nu}) \bigr]\ \p(F \| H)
+      \bigl[\prod_{m} F(\xxx{m}\yyy{m}) \bigr]\ \p(F \| H)
     }{
-      \int \bigl[\prod_{\nu} F(\xxx{\nu}\yyy{\nu}) \bigr]\ \p(F \| H)\ \di F
+      \int \bigl[\prod_{m} F(\xxx{m}\yyy{m}) \bigr]\ \p(F \| H)\ \di F
     } \ .
   \end{gather}
 \end{subequations}
@@ -1136,14 +1130,14 @@ which, using \eqns~\eqref{eq:total_utility_final} and
     E(\theta \| \bzz, H) =
       \frac{1}{Z(\bzz)}\iiiint \sum_{n} u[\yy{n} \| \theta(\xx{n})]\times{}\\ 
       \shoveright{\Bigl[\prod_{m} F(\yy{m}\|\xx{m})\ G(\xx{m})\Bigr]\
-      \Bigl[\prod_{\nu} F(\yyy{\nu}\|\xxx{\nu})\Bigr]\times{}}\\
+      \Bigl[\prod_{m} F(\yyy{m}\|\xxx{m})\Bigr]\times{}}\\
       \p(F \| H)\
       \p(G \| \bzz, H)\ 
       \di\by\,\di\bx\,\di F\,\di G
     \end{multlined}
     \\\shortintertext{with}
     Z(\bzz) \defd
-    \int \Bigl[\prod_{\nu} F(\yyy{\nu}\|\xxx{\nu})\Bigr]\ \p(F \| H)\ \di F \ .
+    \int \Bigl[\prod_{m} F(\yyy{m}\|\xxx{m})\Bigr]\ \p(F \| H)\ \di F \ .
   \end{gather}
 \end{subequations}
 This expression can be simplified exchanging integrals and the sum in $n$,
@@ -1158,7 +1152,7 @@ We obtain
     \!\begin{multlined}[t][0.65\linewidth]
       \frac{1}{Z(\bzz)}\sum_{n} \iiiint u[\yy{n} \| \theta(\xx{n})] \
       F(\xx{n}\|\yy{n})\ G(\xx{n}) \times{}\\
-      \Bigl[\prod_{\nu} F(\yyy{\nu}\|\xxx{\nu})\Bigr]\ 
+      \Bigl[\prod_{m} F(\yyy{m}\|\xxx{m})\Bigr]\ 
       \p(F \| H)\ \p(G \| \bzz, H)\
       \di\yy{n}\,\di\xx{n}\,\di F\,\di G
 \end{multlined}
@@ -1166,7 +1160,7 @@ We obtain
     \!\begin{multlined}[t][0.65\linewidth]
       \iiint u[y \| \theta(x)] \
       F(y\|x)\ 
-      \Bigl[\prod_{\nu} F(\yyy{\nu}\|\xxx{\nu})\Bigr]\times{}\\
+      \Bigl[\prod_{m} F(\yyy{m}\|\xxx{m})\Bigr]\times{}\\
       \p(F \| H)\ \p(x \| \bzz, H)\
       \di y\,\di x\,\di F
        \ .
@@ -1184,7 +1178,7 @@ factor, is
   E(\theta \| \bzz, H) 
 = \iiint u[y \| \theta(x)] \
       F(y\|x)\ 
-      \Bigl[\prod_{\nu} F(\yyy{\nu}\|\xxx{\nu})\Bigr]\
+      \Bigl[\prod_{m} F(\yyy{m}\|\xxx{m})\Bigr]\
       \p(F \| H)\times{}\\
       \p(x \| \bzz, H)\
       \di y\,\di x\,\di F\ .
@@ -1199,9 +1193,9 @@ algorithm and internal parameters $\ctheta$ given by
   \begin{multlined}[][0.8\linewidth]
   \ctheta \defd \argsup_{\theta} \iiint u[y \| \theta(x)] \times{}\\
       F(y\|x)\ 
-      \Bigl[\prod_{\nu} F(\yyy{\nu}\|\xxx{\nu})\Bigr]\ 
+      \Bigl[\prod_{m} F(\yyy{m}\|\xxx{m})\Bigr]\ 
       \p(F \| H)\times{}\\
-      \p(x \| \bzz, H)\
+      \p(x \| \bzz\ H)\
       \di y\,\di x\,\di F
 \ .
 \end{multlined}
@@ -1244,11 +1238,11 @@ Formula~\eqref{eq:argsup_choice} presents three noteworthy points:
   p.~347]{mackay1995_r2005}), or the most probable among them (which would
   be equivalent to a maximum a-posteriori approximation).
 
-  This fact may appear to conflict with analyses, for example MacKay's
-  \parencite*[esp.\ \sect~5]{mackay1992}, focused on an inferential
-  interpretation. That kind of analysis involves a comparison among
-  different models, based on the probabilities that they give to the data.
-  However, such comparison is not meant as
+  This fact may appear to conflict with analyses \citep[for
+  example][\sect~5]{mackay1992}[\sect~2.2]{mackay1992b}[\sect~1.3]{bishop2006}[\chap~12]{barber2007_r2020}[\sect~1.4.8]{murphy2012}
+  focused on an inferential-only interpretation. That kind of analysis
+  involves a comparison among different models, based on the probabilities
+  that they give to the data. However, such comparison is not meant as
   \emph{choice}\citep[\enquote{This paper concerns inference alone and no
     loss functions or utilities are
     involved}][footnote~1]{mackay1992}[\enquote{When we discuss model
@@ -1271,7 +1265,7 @@ Formula~\eqref{eq:argsup_choice} presents three noteworthy points:
   another algorithm might give poor predictions in $\mathcal{N}$ and
   correct predictions in $\mathcal{W}$. If future predictor values are much
   more probable to fall in $\mathcal{N}$ than $\mathcal{W}$,
-  $\p(x \eq[\in] \mathcal{N}) \gg \p(x \eq[\in] \mathcal{R})$, then the
+    $\p(x \mo[\in] \mathcal{N}) \gg \p(x \mo[\in] \mathcal{R})$, then the
   second algorithm will yield a higher utility in the long run.
 
   The optimal choice of algorithm and internal parameters therefore
@@ -1295,7 +1289,7 @@ conditional probabilities will be roughly equal to these frequencies:
   \begin{multlined}[][0.8\linewidth]
   \argsup_{\theta} \iiint u[y \| \theta(x)] \ 
       F(y\|x)\ 
-      \Bigl[\prod_{\nu} F(\yyy{\nu}\|\xxx{\nu})\Bigr]\ 
+      \Bigl[\prod_{m} F(\yyy{m}\|\xxx{m})\Bigr]\ 
       \p(F \| H)\times{}\\
       \p(x \| \bzz, H)\
       \di y\,\di x\,\di F
@@ -1306,22 +1300,24 @@ conditional probabilities will be roughly equal to these frequencies:
       \p(x \| \bzz, H)\
       \di y\,\di x
     \\
-{}\approx \argsup_{\theta} \sum_{\nu} u[\yyy{\nu} \| \theta(\xxx{\nu})] 
+{}\approx \argsup_{\theta} \sum_{m} u[\yyy{m} \| \theta(\xxx{m})] 
 \end{multline}
 
-According to this interpretation the loss function used in machine learning
+According to this interpretation \emph{the loss function used in machine learning
 does not represent the logarithm of our uncertainty or of the distribution
-of noise, but the utility.
+of noise}: it represents the utility.
 
 
 \subsection{Single algorithm and approximate inference}
 \label{sec:single_alg_approx}
 
+\mynote{\wrench\ Work in progress}
+
 \begin{multline}
   \begin{multlined}[][0.8\linewidth]
   \argsup_{\theta} \iiint u[y \| \theta(x)] \ 
       F(y\|x)\ 
-      \Bigl[\prod_{\nu} F(\yyy{\nu}\|\xxx{\nu})\Bigr]\ 
+      \Bigl[\prod_{m} F(\yyy{m}\|\xxx{m})\Bigr]\ 
       \p(F \| H)\times{}\\
       \p(x \| \bzz, H)\
       \di y\,\di x\,\di F
@@ -1330,7 +1326,7 @@ of noise, but the utility.
   \begin{multlined}[][0.8\linewidth]
 {}= \argsup_{\theta} \iiint u[y \| \theta(x)] \ 
       f(y\|x, w)\ 
-      \Bigl[\prod_{\nu} f(\yyy{\nu}\|\xxx{\nu}, w)\Bigr]\ 
+      \Bigl[\prod_{m} f(\yyy{m}\|\xxx{m}, w)\Bigr]\ 
       \p(w \| H)\times{}\\
       \p(x \| \bzz, H)\
       \di y\,\di x\,\di w
@@ -1349,10 +1345,12 @@ of noise, but the utility.
 \label{sec:discussion}
 
 
-*** Utility becomes unimportant when the inference is almost deterministic.
-In modern \ml\ applications in particular field such as medicine this
+\mynote{\wrench\ To be written.
+
+  Utility becomes unimportant when the inference is almost deterministic.
+In modern \ml\ applications in particular fields such as medicine this
 assumption may not be valid, owing either to the intrinsic, noisy
-complexity of the phenomena involved, or to the scarcity of training data.
+complexity of the phenomena involved, or to the scarcity of training data.}
 
 
 % \[ \color{mypurpleblue}\bm{a} \color{myredpurple}\mathbin{\bm{\land}}\color{mypurpleblue} \bm{b} \]

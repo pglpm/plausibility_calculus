@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2015-05-01T20:53:34+0200
-%% Last-Updated: 2025-07-05T21:29:23+0200
+%% Last-Updated: 2025-09-06T11:23:25+0200
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newif\ifarxiv
 \arxivfalse
@@ -13,14 +13,25 @@
 \newcommand*{\memfontfamily}{zpl}
 %\newcommand*{\memfontenc}{T1}
 \newcommand*{\memfontpack}{newpx}
-\documentclass[\ifafour a4paper,12pt,\else a5paper,10pt,\fi%extrafontsizes,%
+\ifafour
+\documentclass[a4paper,12pt,%extrafontsizes,%
 onecolumn,oneside,article,%french,italian,german,swedish,latin,
 british%
 ]{memoir}
+\else
+\documentclass[a5paper,10pt,%extrafontsizes,%
+onecolumn,oneside,article,%french,italian,german,swedish,latin,
+british%
+]{memoir}
+\fi
+% \documentclass[\ifafour a4paper,12pt\else a5paper,10pt\fi,%extrafontsizes,%
+% onecolumn,oneside,article,%french,italian,german,swedish,latin,
+% british%
+% ]{memoir}
 \newcommand*{\firstdraft}{***}
 \newcommand*{\firstpublished}{\firstdraft}
 \newcommand*{\updated}{\ifarxiv***\else\today\ [draft]\fi}
-\newcommand*{\propertitle}{The half uncertainty of 89\% credibility intervals%\\{\large ***}%
+\newcommand*{\propertitle}{What's special about 89\% credibility intervals%\\{\large ***}%
 }% title uses LARGE; set Large for smaller
 \newcommand*{\pdftitle}{\propertitle}
 \newcommand*{\headtitle}{89\% credibility intervals}
@@ -28,9 +39,9 @@ british%
 \newcommand*{\headauthor}{Porta Mana}
 \newcommand*{\reporthead}{\ifarxiv\else Open Science Framework \href{https://doi.org/10.31219/osf.io/***}{\textsc{doi}:10.31219/osf.io/***}\fi}% Report number
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% Calls to packages (uncomment as needed)
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %\usepackage{pifont}
 
@@ -336,9 +347,9 @@ british%
 % \DeclareMathSymbol{\varphiup}{\mathalpha}{egreekr}{"27}
 
 
-% \usepackage%[scaled=0.9]%
-% {classico}%  Optima as sans-serif font
-\usepackage{classico} % \renewcommand\sfdefault{URWClassico-TLF}
+\usepackage[scaled=0.841473]%
+{DejaVuSansCondensed}% sans-serif font
+% \renewcommand\sfdefault{URWClassico-TLF}
 \DeclareMathAlphabet{\mathsf}  {T1}{\sfdefault}{m}{sl}
 \SetMathAlphabet{\mathsf}{bold}{T1}{\sfdefault}{b}{sl}
 %\newcommand*{\mathte}[1]{\textbf{\textit{\textsf{#1}}}}
@@ -346,8 +357,26 @@ british%
 % \DeclareMathAlphabet{\mathsu}  {T1}{\sfdefault}{m}{n}
 % \SetMathAlphabet{\mathsu}{bold}{T1}{\sfdefault}{b}{n}
 
-% DejaVu Mono as typewriter text
-\usepackage[scaled=0.83]{DejaVuSansMono}% was 0.84
+\usepackage[scaled=0.841473]{DejaVuSansMono}% typewriter text
+
+%
+% \newlength{\hxn}
+% \newlength{\hxs}
+% \newlength{\hxt}
+% \setlength{\hxn}{\heightof{x}}
+% \setlength{\hxs}{\heightof{\textsf{x}}}
+% \setlength{\hxt}{\heightof{\texttt{x}}}
+% \typeout{normal is \the\hxn}
+% \typeout{sf is \the\hxs}
+% \typeout{tt is \the\hxt}
+% normal x is 5.616pt
+% sf x is 6.64198pt
+% tt x is 6.70619pt
+%
+% geom. mean scale: 0.841473
+% arith. mean scale: 0.841464
+% ind. scales: 0.845531 0.837435
+
 
 \usepackage{mathdots}
 
@@ -491,13 +520,13 @@ citebordercolor=blue,citecolor=blue,linkbordercolor=blue,linkcolor=blue,urlborde
 }
 \DTMsetdatestyle{mydate}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% Layout. I do not know on which kind of paper the reader will print the
 %%% paper on (A4? letter? one-sided? double-sided?). So I choose A5, which
 %%% provides a good layout for reading on screen and save paper if printed
 %%% two pages per sheet. Average length line is 66 characters and page
 %%% numbers are centred.
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \ifafour\setstocksize{297mm}{210mm}%{*}% A4
 \else\setstocksize{210mm}{5.5in}%{*}% 210x139.7
 \fi
@@ -656,9 +685,9 @@ citebordercolor=blue,citecolor=blue,linkbordercolor=blue,linkcolor=blue,urlborde
 \newcommand{\mynotep}[1]{{\footnotesize\color{notecolour}\pencil\ #1}}
 \newcommand{\mynotez}[1]{{\footnotesize\color{notecolour}\puzzle\ #1}}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% Paper's details
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \title{\propertitle}
 \author{%
 \hspace*{\stretch{1}}%
@@ -684,9 +713,9 @@ Western Norway University of Applied Sciences%
 %\date{Draft of \today\ (first drafted \firstdraft)}
 \date{\firstpublished; updated \updated}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% Macros @@@
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % Common ones - uncomment as needed
 %\providecommand{\nequiv}{\not\equiv}
@@ -776,10 +805,10 @@ Western Norway University of Applied Sciences%
 %\providecommand{\varparallel}{\ensuremath{\mathbin{/\mkern-7mu/}}}%parallel (tentative symbol)
 % \renewcommand*{\le}{\leqslant}%less or equal
 % \renewcommand*{\ge}{\geqslant}%greater or equal
-%\DeclarePairedDelimiter\clcl{[}{]}
-%\DeclarePairedDelimiter\clop{[}{[}
-%\DeclarePairedDelimiter\opcl{]}{]}
-%\DeclarePairedDelimiter\opop{]}{[}%}
+\DeclarePairedDelimiter\clcl{[}{]}
+\DeclarePairedDelimiter\clop{[}{[}
+\DeclarePairedDelimiter\opcl{]}{]}
+\DeclarePairedDelimiter\opop{]}{[}%}
 \DeclarePairedDelimiter\abs{\lvert}{\rvert}
 %\DeclarePairedDelimiter\norm{\lVert}{\rVert}
 \DeclarePairedDelimiter\set{\{}{\}} %}
@@ -851,9 +880,9 @@ Western Norway University of Applied Sciences%
 %% from TUGboat 18 (1997) 1:
 %\providecommand*{\unit}[1]{\ensuremath{\mathrm{\,#1}}}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% Custom macros for this file @@@
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \newcommand*{\widebar}[1]{{\mkern1.5mu\skew{2}\overline{\mkern-1.5mu#1\mkern-1.5mu}\mkern 1.5mu}}
 
@@ -870,18 +899,18 @@ Western Norway University of Applied Sciences%
 %\sisetup{input-digits = 0123456789\piup}
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% Beginning of document
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %\firmlists
 \begin{document}
 \captiondelim{\quad}\captionnamefont{\footnotesize}\captiontitlefont{\footnotesize}
 \selectlanguage{british}\frenchspacing
 \maketitle
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% Abstract
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \abstractrunin
 \abslabeldelim{}
 \renewcommand*{\abstractname}{}
@@ -889,7 +918,7 @@ Western Norway University of Applied Sciences%
 \setlength{\absrightindent}{0pt}
 \setlength{\abstitleskip}{-\absparindent}
 \begin{abstract}\labelsep 0pt%
-  \noindent ***
+  \noindent A curious property of 89\% credibility intervals is discussed.
 % \\\noindent\emph{\footnotesize Note: Dear Reader
 %     \amp\ Peer, this manuscript is being peer-reviewed by you. Thank you.}
 % \par%\\[\jot]
@@ -900,9 +929,9 @@ Western Norway University of Applied Sciences%
 \end{abstract}
 \selectlanguage{british}\frenchspacing
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% Epigraph
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % \asudedication{\small ***}
 % \vspace{\bigskipamount}
 % \setlength{\epigraphwidth}{.7\columnwidth}
@@ -917,9 +946,24 @@ Western Norway University of Applied Sciences%
 
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% BEGINNING OF MAIN TEXT
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+A Bayesian \emph{credibility interval} (also called \enquote{credible interval} and other names) is a range where the true value of some real quantity lies, with a given probability. For instance, if $\clcl{1.2, 7.0}$ is a 60\% credibility interval for the quantity $Q$, then there is a 60\% probability that the true value of $Q$ is between $1.2$ and $7.4$ (note the difference in meaning from a \emph{confidence} interval, whose definition is much more involved and less direct).
+
+It is of course always best to report the full posterior probability distribution of a quantity of interest, so that the reader can derive from it the probabilities of any desired range as well as other properties. But a credibility interval often provides a useful summary of the full probability distribution.
+
+Credibility intervals of 50\%, 75\%, 90\%, 95\%, or even 99\% probability are more or less commonly reported in the Bayesian literature. Since at least 2016 also \textbf{89\%} credibility intervals have become quite fashionable. They seem to originate in McElreath's \emph{Statistical Rethinking} \parencites*{mcelreath2016_r2020}, first published in that year. McElreath rightly points out that any specific probability value is arbitrary; a value should be chosen depending on the context. To emphasize and remind us of this fact, he uses 89\%, which is an arbitrary value.
+
+Or so he thought.
+
+It turns out that 89\% credibility intervals possess a special property.
+
+
+
+
+
 
 % \setcounter{section}{-1} % to start numbering at 0
 
@@ -929,141 +973,38 @@ But it is often useful to pro
 
 \autocites[\sect~3.2.2 p.~56]{mcelreath2016_r2020}
 
-\section{***classifier}
-\label{sec:***}
 
-\noindent
-\clap{AAAAA}\clap{\color{purple}\texttt{AAAAA}}
-\\
-\clap{OOOOO}\clap{\color{purple}\texttt{OOOOO}}
-\\
-\clap{TTTTT}\clap{\color{purple}\texttt{TTTTT}}
-\\
-\clap{aaaaa}\clap{\color{purple}\texttt{aaaaa}}
-\\
-\clap{\color{purple}\texttt{aaaaa}}\clap{aaaaa}
-\\
-\clap{ooooo}\clap{\color{purple}\texttt{ooooo}}
-\\
-\clap{\color{purple}\texttt{ooooo}}\clap{ooooo}
-\\
-\clap{ttttt}\clap{\color{purple}\texttt{ttttt}}
-\\
-\clap{ggggg}\clap{\color{purple}\texttt{ggggg}}
-\\
-\clap{00000}\clap{\color{purple}\texttt{00000}}
-\\
-\clap{88888}\clap{\color{purple}\texttt{88888}}
-\\
-\clap{11111}\clap{\color{purple}\texttt{11111}}
-\\
-\clap{22222}\clap{\color{purple}\texttt{22222}}
-
-
-
-
-
-test  classifier
-
-\S § \sect~6.
-
-\begin{equation}
-  \sum_{i} a_{i}
-\end{equation}
- \autocites{riccietal1901,truesdell1963b_r1968,zahn1979_r2003,aizenmanetal1987,bossavit1999,coombsetal1954}
-
-% \url{http://www.pdmi.ras.ru/%7Evershik/papers.html}
-
-%  \autocites{opperetal2009,vershik2013}
-
-
-${}^{4}\textrm{He}$
-
-$\vphantom{\textrm{H}}^{4}\mkern-1mu\textrm{He}$
-
-$\tensor*[^{4}]{\textrm{He}}{}$
-
-$\textrm{He}^{4}$
-
-\newpage\thispagestyle{empty}
-
-
-\newpage
-
-% \[ \color{bluepurple}\bm{a} \color{redpurple}\mathbin{\bm{\land}}\color{bluepurple} \bm{b} \]
-
-
-%%%% examples use empheq
-%   \begin{empheq}[left={\mathllap{\begin{aligned}    \de\yF_{\yc}/\de\yp&=0\text{:} \\
-%         \de\yF_{\yc}/\de\ym&=0\text{:}\\ \de\yF_{\yc}/\de\yl&=0\text{:}\end{aligned}}\qquad}\empheqlbrace]{align}
-%     \label{eq:con_p}
-% %    \de\yF_{\yc}/\de\yp &\equiv
-%     -\ln\yp + \ln\yq + \yl\yM + \ym\yu &=0,\\
-%     \label{eq:con_u}
-% %    \de\yF_{\yc}/\de\ym &\equiv
-%     \yu\yp-1 &=0,\\
-%     \label{eq:con_l}
-%     %\de\yF_{\yc}/\de\yl &\equiv
-%     \yM\yp-\yc &=0.
-%   \end{empheq}
-%%%%
-% \begin{empheq}[box=\widefbox]{equation}
-%   \label{eq:maxent_question}
-%   \p\bigl[\yE{N+1}{k} \bigcond \tsum\yo\yf{N}\in\yA, \yM\bigr] = \mathord{?}
-% \end{empheq}
-
-
-
-% \[
-%   \begin{tikzcd}
-%       M_{n,n}(\CC) \arrow{r}{R'_{a}(\Hat{U})} & M_{n,n}(\CC)
-%     \\
-%     L(\mathcal{H}) \arrow{r}{\Hat{U}} \arrow[swap]{d}{R_*}\arrow[swap]{u}{R'_*} & L(\mathcal{H}) \arrow{d}{R_*}\arrow{u}{R'_*} \\
-%       M_{n,n}(\CC) \arrow{r}{R_{a}(\Hat{U})} & M_{n,n}(\CC)
-%   \end{tikzcd}
-% \]
-
-% \[
-%   \begin{tikzcd}
-%       \CC^n \arrow{r}{R'_*(A)} & \CC^n
-%     \\
-%     \mathcal{H} \arrow{r}{A} \arrow[swap]{d}{R}\arrow[swap]{u}{R'} & \mathcal{H} \arrow{d}{R}\arrow{u}{R'} \\
-%       \CC^n \arrow{r}{R_*(A)} & \CC^n
-%   \end{tikzcd}
-% \]
-
-
-% \[
-%   \begin{tikzcd}
-%     \mathcal{H} \arrow{r}{A} \arrow[swap]{d}{R} & \mathcal{H} \arrow{d}{R} \\
-%       \CC^n \arrow{r}{R_*(A)} & \CC^n
-%   \end{tikzcd}
-% \]
-
-%%\setlength{\intextsep}{0ex}% with wrapfigure
-%%\setlength{\columnsep}{0ex}% with wrapfigure
-%\begin{figure}[p!]% with figure
-%\begin{wrapfigure}{r}{0.4\linewidth} % with wrapfigure
-%  \centering\includegraphics[trim={12ex 0 18ex 0},clip,width=\linewidth]{maxent_saddle.png}\\
-%\caption{caption}\label{fig:comparison_a5}
-%\end{figure}% exp_family_maxent.nb
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% Acknowledgements
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \iffalse
 \begin{acknowledgements}
-  \ldots to Mari \amp\ Miri for continuous encouragement and affection, and to Buster Keaton and Saitama for filling life with awe and inspiration. To the developers and maintainers of \LaTeX, Emacs, AUC\TeX, Open Science Framework, R, Octave, Python, Inkscape, LibreOffice, Sci-Hub, Libgen for making a free and impartial scientific exchange possible.
+  \ldots to Mari \amp\ Miri for continuous encouragement and affection, and to Buster Keaton and Saitama for filling life with awe and inspiration. To the developers and maintainers of
+  \LaTeX,
+  Emacs,
+  AUC\TeX,
+  Inkscape,
+  Libgen
+  LibreOffice,
+  Octave,
+  Open Science Framework,
+  % Python,
+  R,
+  Sci-Hub,
+  % Zenodo
+  for making a free and impartial scientific exchange possible.
+
+  No large language models were used in the production of this work.
+
 %\rotatebox{15}{P}\rotatebox{5}{I}\rotatebox{-10}{P}\rotatebox{10}{\reflectbox{P}}\rotatebox{-5}{O}.
 %\sourceatright{\autanet}
-\mbox{}\hfill\autanet
+%\mbox{}\hfill\autanet
 \end{acknowledgements}
 \fi
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% Appendices
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %\clearpage
 \bigskip
 % %\renewcommand*{\appendixpagename}{Appendix}
@@ -1071,9 +1012,9 @@ $\textrm{He}^{4}$
 % %\appendixpage
 % \appendix
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% Bibliography
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \renewcommand*{\finalnamedelim}{\addcomma\space}
 \defbibnote{prenote}{{\footnotesize (\enquote{de $X$} is listed under D,
     \enquote{van $X$} under V, and so on, regardless of national
@@ -1086,9 +1027,9 @@ $\textrm{He}^{4}$
 
 \end{document}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% Cut text (won't be compiled)
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
 % \begin{figure}
@@ -1096,8 +1037,8 @@ $\textrm{He}^{4}$
 % \hspace*{\fill}{ILLUSTRATION 1} \hfill {ILLUSTRATION 2}\hspace*{\fill}
 % \end{figure}
 
-%%% Local Variables: 
+%%% Local Variables:
 %%% mode: LaTeX
 %%% TeX-PDF-mode: t
 %%% TeX-master: t
-%%% End: 
+%%% End:

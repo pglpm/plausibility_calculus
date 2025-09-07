@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2025-07-01T20:53:34+0200
-%% Last-Updated: 2025-09-07T10:57:52+0200
+%% Last-Updated: 2025-09-07T14:18:00+0200
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newif\ifarxiv
 \arxivfalse
@@ -30,14 +30,14 @@ british%
 % ]{memoir}
 \newcommand*{\firstdraft}{7 July 2025}
 \newcommand*{\firstpublished}{\firstdraft}
-\newcommand*{\updated}{\ifarxiv***\else\today\fi}
+\newcommand*{\updated}{\ifarxiv 7 September 2025\else\today\fi}
 \newcommand*{\propertitle}{What's special about 89\% credibility intervals?%\\{\large ***}%
 }% title uses LARGE; set Large for smaller
 \newcommand*{\pdftitle}{\propertitle}
 \newcommand*{\headtitle}{What's special about 89\% credibility intervals}
 \newcommand*{\pdfauthor}{P.G.L.  Porta Mana}
 \newcommand*{\headauthor}{Porta Mana}
-\newcommand*{\reporthead}{\ifarxiv\else Open Science Framework \href{https://doi.org/10.31219/osf.io/***}{\textsc{doi}:10.31219/osf.io/***}\fi}% Report number
+\newcommand*{\reporthead}{\ifarxiv\else\href{https://doi.org/10.5281/zenodo.17072200}{\textsc{doi}:10.5281/zenodo.17072200}\fi}% Report number
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% Calls to packages (uncomment as needed)
@@ -443,9 +443,9 @@ citestyle=authoryear-comp,bibstyle=pglpm_latex/pglpm-authoryear,autopunct=false,
 \newcommand*{\amp}{\&}
 % \newcommand*{\citein}[2][]{\textnormal{\textcite[#1]{#2}}%\addtocategory{extras}{#2}
 % }
-\newcommand*{\citein}[2][]{\textnormal{\textcite[#1]{#2}}%\addtocategory{extras}{#2}
+\newcommand*{\citein}[2][]{\textnormal{\cite[#1]{#2}}%\addtocategory{extras}{#2}
 }
-\newcommand*{\citebi}[2][]{\textcite[#1]{#2}%\addtocategory{extras}{#2}
+\newcommand*{\citebi}[2][]{\cite[#1]{#2}%\addtocategory{extras}{#2}
 }
 \newcommand*{\subtitleproc}[1]{}
 \newcommand*{\chapb}{ch.}
@@ -599,7 +599,7 @@ citebordercolor=blue,citecolor=blue,linkbordercolor=blue,linkcolor=blue,urlborde
 \scshape\headauthor}}{}{{\footnotesize\sffamily%
 \headtitle}}
 \makeoddfoot{manaart}{}{\thepage}{}
-\newcommand*\autanet{\includegraphics[height=\heightof{M}]{autanet.pdf}}
+%\newcommand*\autanet{\includegraphics[height=\heightof{M}]{autanet.pdf}}
 \definecolor{mygray}{gray}{0.333}
 \iftypodisclaim%
 \ifafour\newcommand\addprintnote{\begin{picture}(0,0)%
@@ -926,7 +926,7 @@ Western Norway University of Applied Sciences%
 % {\footnotesize PACS: ***}\qquad%
 % {\footnotesize MSC: ***}%
 % \qquad{\footnotesize Keywords: ***}
-  \bigskip
+  \medskip
 \end{abstract}
 \selectlanguage{british}\frenchspacing
 
@@ -951,26 +951,26 @@ Western Norway University of Applied Sciences%
 %%% BEGINNING OF MAIN TEXT
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-A Bayesian \emph{credibility interval} (or \enquote{credible} or \enquote{compatibility} interval) is a range where the true value of some real quantity lies with a given probability. For instance, if $\clcl{1.2, 7.0}$ is a 60\% credibility interval for the quantity $Q$, then there is a 60\% probability that the true value of $Q$ is between $1.2$ and $7.0$ (note the difference in meaning from a \emph{confidence} interval, whose definition is much more involved and less direct).
+A \emph{credibility interval} (or \enquote{credible}, \enquote{Bayesian}, \enquote{posterior}, \enquote{compatibility} interval or region) is a range where the true value of some real quantity lies with a given probability \autocites[\sect~5.1.5 pp.~259ff]{bernardoetal1994_r2000}. For instance, if $\clcl{1.2, 7.0}$ is a 60\% credibility interval for the quantity $Q$, then there is a 60\% probability that the true value of $Q$ is between $1.2$ and $7.0$ (note the difference in meaning from a \emph{confidence} interval, whose definition is much more involved and less direct \autocites[\sect~37.3]{mackay1995_r2005}{jaynes1976}).
 
-It is always best to report the full posterior probability distribution of a quantity of interest, so that the reader can calculate from it the probabilities of any desired ranges as well as other properties. But credibility intervals often provide useful summaries of the full probability distribution.
+It is always best to report the full posterior probability distribution of a quantity of interest, so that the reader can calculate from it the probabilities of any desired ranges and other properties. But credibility intervals often provide useful summaries of the full distribution.
 
-Credibility intervals of 50\%, 75\%, 90\%, 95\%, or even 99\% probability are more or less commonly used in the Bayesian literature. Also \emph{89\%} credibility intervals have become quite fashionable since around 2016. They seemingly originate in McElreath's \emph{Statistical Rethinking} \parencites*{mcelreath2016_r2020}, first published in that year. McElreath justly points out\autocites[\eg \sect~3.2.2 p.~56, \sect~4.3.5 p.~88]{mcelreath2016_r2020} that the specific probability value of a credibility interval should be chosen depending on the context; there is nothing special about values like 90\% or 95\%. To emphasize and remind us of this fact, he uses 89\%, which is an arbitrary value.
+Credibility intervals of 50\%, 75\%, 90\%, 95\%, or even 99\% probability are more or less commonly used in the Bayesian literature. Also \emph{89\%} ones have become quite fashionable since around 2016. They seemingly originate in McElreath's \emph{Statistical Rethinking} \autocites{mcelreath2016_r2020}, first published in that year. McElreath justly points out\autocites[\eg \sect~3.2.2 p.~56, \sect~4.3.5 p.~88]{mcelreath2016_r2020} that the specific probability value of a credibility interval should be chosen depending on the context; there is nothing special about values like 90\% or 95\%. To emphasize and remind us of this fact, he uses 89\%, which is an arbitrary value.
 
-Or so he thought. It turns out that 89\% credibility intervals do possess a peculiar property.
+Or is it? It turns out that 89\% credibility intervals do possess a curious information-theoretic property.
 
-With a $p$ credibility interval, the true value lies inside the interval with probability $p$, and outside with probability $1-p$. We can quantify our uncertainty about the two possibilities by means of the Shannon entropy: \autocites[Items 13-24, 13-25]{iso2008d}
+The true value of a quantity lies inside a $p$ credibility interval with probability $p$, and outside with probability $1-p$. Our uncertainty about these two possibilities can be quantified by the Shannon entropy: \autocites[Items 13-24, 13-25]{iso2008d}
 \begin{equation}
   \label{eq:shannon_def}
   H(p) \defd -[ p \log_{2} p + (1-p) \log_{2}(1-p) ]\:\unit{Sh} \,.
 \end{equation}
 The value of \qty{1}{Sh} (one shannon\footnote{\url{https://electropedia.org/iev/iev.nsf/display?openform&ievref=171-07-11}}) represents an equal uncertainty between two alternatives.
 
-Thus for a 50\% credibility interval we have an uncertainty of \qty{1}{Sh} on whether the true value lies inside or outside. This is the highest level of uncertainty for this dichotomous alternative. It is useful to also provide an interval with an uncertainty smaller than \qty{1}{Sh}, so that we are somewhat more certain that the true value lies inside than outside.
+Thus for a 50\% credibility interval we have an uncertainty of \qty{1}{Sh} on whether the true value lies inside or outside it. This is the highest level of uncertainty for such dichotomous alternative. It is useful to also provide an interval with an uncertainty smaller than \qty{1}{Sh}, so that we are somewhat more certain that the true value lies inside than outside.
 
-For example, with which interval is our maximal uncertainty \emph{halved} to \qty{0.5}{Sh}? The answer is: with \emph{an $89.00\%$ credibility interval}. This result is easily calculated solving $H(p) = \qty{0.5}{Sh}$ numerically. A more precise solution is $88.9972\%$; vice versa the entropy corresponding to the exact probability $89\%$ is approximately \qty{0.499916}{Sh}.
+For example, for which interval is our maximal uncertainty \emph{halved} to \qty{0.5}{Sh}? The answer is: for \emph{an $89.00\%$ credibility interval}. This result is easily calculated solving $H(p) = \qty{0.5}{Sh}$ numerically. A more precise solution is $88.9972\%$. Vice versa the entropy corresponding to the exact probability $89\%$ is approximately \qty{0.499916}{Sh}.
 
-When we report a 50\% and an 89\% credibility interval we are therefore reporting intervals with uncertainties of one shannon and of half a shannon.
+When we report a 50\% and an 89\% credibility interval we are therefore reporting intervals having uncertainties of one shannon and of half a shannon.
 
 Of course the arbitrariness remains. We could also report intervals with uncertainties \qty{1}{Sh}, $\frac23\:\unit{Sh}$, $\frac13\:\unit{Sh}$; their credibilities would be $50\%$, $82.6\%$, $93.9\%$. Or with uncertainties \qty{1}{Sh}, \qty{0.5}{Sh}, \qty{0.25}{Sh}, corresponding to $50\%$, $89.0\%$, $95.8\%$.
 

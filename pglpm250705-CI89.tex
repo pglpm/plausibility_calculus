@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2025-07-01T20:53:34+0200
-%% Last-Updated: 2025-09-08T10:27:56+0200
+%% Last-Updated: 2025-09-09T22:08:31+0200
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newif\ifarxiv
 \arxivfalse
@@ -37,7 +37,7 @@ british%
 \newcommand*{\headtitle}{What's special about 89\% credibility intervals}
 \newcommand*{\pdfauthor}{P.G.L.  Porta Mana}
 \newcommand*{\headauthor}{Porta Mana}
-\newcommand*{\reporthead}{\ifarxiv\else\href{https://doi.org/10.5281/zenodo.17072200}{\textsc{doi}:10.5281/zenodo.17072200}\fi}% Report number
+\newcommand*{\reporthead}{\ifarxiv\else\zenododoi{10.5281/zenodo.17072200}\fi}% Report number
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% Calls to packages (uncomment as needed)
@@ -401,7 +401,7 @@ british%
 \usepackage{microtype}
 
 \usepackage[backend=biber,mcite,%subentry,
-citestyle=authoryear-comp,bibstyle=pglpm_latex/pglpm-authoryear,autopunct=false,sorting=ny,sortcites=false,natbib=false,maxcitenames=2,maxbibnames=8,minbibnames=8,giveninits=true,uniquename=false,uniquelist=false,maxalphanames=1,block=space,hyperref=true,defernumbers=false,useprefix=true,sortupper=false,language=british,parentracker=false,autocite=footnote,dashed=false]{biblatex}
+citestyle=authoryear-comp,bibstyle=pglpm_latex/pglpm-authoryear,autopunct=false,sorting=ny,sortcites=false,natbib=false,maxcitenames=2,mincitenames=2,maxbibnames=8,minbibnames=8,giveninits=true,uniquename=false,uniquelist=false,maxalphanames=1,block=space,hyperref=true,defernumbers=false,useprefix=true,sortupper=false,language=british,parentracker=false,autocite=footnote,dashed=false]{biblatex}
 \DeclareSortingTemplate{ny}{\sort{\field{sortname}\field{author}\field{editor}}\sort{\field{year}}}
 \DeclareFieldFormat{postnote}{#1}
 \iffalse\makeatletter%%% replace parenthesis with brackets
@@ -443,10 +443,12 @@ citestyle=authoryear-comp,bibstyle=pglpm_latex/pglpm-authoryear,autopunct=false,
 \newcommand*{\amp}{\&}
 % \newcommand*{\citein}[2][]{\textnormal{\textcite[#1]{#2}}%\addtocategory{extras}{#2}
 % }
-\newcommand*{\citein}[2][]{\textnormal{\cite[#1]{#2}}%\addtocategory{extras}{#2}
+\makeatletter
+\newcommand*{\citein}[2][]{\textnormal{\togglefalse{blx@bibliography}\blx@initunit\cite[#1]{#2}}%\addtocategory{extras}{#2}
 }
-\newcommand*{\citebi}[2][]{\cite[#1]{#2}%\addtocategory{extras}{#2}
+\newcommand*{\citebi}[2][]{\togglefalse{blx@bibliography}\blx@initunit\cite[#1]{#2}%\addtocategory{extras}{#2}
 }
+\makeatother
 \newcommand*{\subtitleproc}[1]{}
 \newcommand*{\chapb}{ch.}
 
@@ -468,6 +470,9 @@ citestyle=authoryear-comp,bibstyle=pglpm_latex/pglpm-authoryear,autopunct=false,
 
 \newcommand*{\doi}[1]{%
 \href{https://doi.org/#1}{doi:\allowbreak\nolinkurl{#1}}%
+}
+\newcommand*{\zenododoi}[1]{%
+Zenodo \doi{#1}% 10.31219/osf.io/
 }
 \newcommand*{\osfdoi}[1]{%
 OSF \doi{#1}% 10.31219/osf.io/
@@ -919,7 +924,7 @@ Western Norway University of Applied Sciences%
 \setlength{\absrightindent}{0pt}
 \setlength{\abstitleskip}{-\absparindent}
 \begin{abstract}\labelsep 0pt%
-  \noindent Abstract:\quad A curious property of 89\% credibility intervals is discussed.
+  \noindent A curious information-theoretic property of 89\% credibility intervals is discussed.
 % \\\noindent\emph{\footnotesize Note: Dear Reader
 %     \amp\ Peer, this manuscript is being peer-reviewed by you. Thank you.}
 % \par%\\[\jot]
@@ -927,7 +932,7 @@ Western Norway University of Applied Sciences%
 % {\footnotesize PACS: ***}\qquad%
 % {\footnotesize MSC: ***}%
 % \qquad{\footnotesize Keywords: ***}
-  \medskip
+  \smallskip
 \end{abstract}
 \selectlanguage{british}\frenchspacing
 
@@ -952,13 +957,13 @@ Western Norway University of Applied Sciences%
 %%% BEGINNING OF MAIN TEXT
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-A \emph{credibility interval} (or \enquote{credible}, \enquote{Bayesian}, \enquote{posterior}, \enquote{compatibility} interval or region) is a range where the true value of some real quantity lies with a given probability \autocites[\sect~5.1.5 pp.~259ff]{bernardoetal1994_r2000}. For instance, if $\clcl{1.2, 7.0}$ is a 60\% credibility interval for the quantity $Q$, then there is a 60\% probability that the true value of $Q$ is between $1.2$ and $7.0$ (note the difference in meaning from a \emph{confidence} interval, whose definition is much more involved and less direct \autocites[\sect~37.3]{mackay1995_r2005}{jaynes1976}).
+A \emph{credibility interval} (or \enquote{credible}, \enquote{Bayesian}, \enquote{posterior}, \enquote{compatibility} interval or region) is a range where the true value of some real quantity lies with a given probability \autocites[\sect~5.1.5 pp.~259ff]{bernardoetal1994_r2000}. For instance, if $\clcl{1.2, 7.0}$ is a 60\% credibility interval for the quantity $Q$, then there is a 60\% probability that the true value of $Q$ is between $1.2$ and $7.0$ (note the difference in meaning from a \emph{confidence} interval, whose definition is much more involved and less direct \autocites[\sect~37.3]{mackay1995_r2005}{jaynes1976}). It is always best to report the full posterior probability distribution of a quantity of interest, so that the reader can calculate from it the probabilities of any desired ranges and make decisions \autocites{raiffa1968_r1970}. But credibility intervals often provide useful summaries of the full distribution.
 
-It is always best to report the full posterior probability distribution of a quantity of interest, so that the reader can calculate from it the probabilities of any desired ranges and other properties. But credibility intervals often provide useful summaries of the full distribution.
+Credibility intervals of 50\%, 75\%, 90\%, 95\%, or even 99\% probability are more or less commonly used in the Bayesian literature and given as defaults in software packages for Bayesian analysis. Also \emph{89\%} ones have become quite fashionable since around 2016; they seemingly originate in McElreath's \emph{Statistical Rethinking} \autocites{mcelreath2016_r2020}, first published in that year. They are used, for example, in the software package \emph{bayestestR} \autocites{makowskietal2019}. McElreath justly points out\autocites[\eg\ \sect~3.2.2 p.~56, \sect~4.3.5 p.~88]{mcelreath2016_r2020} that the specific probability value of a credibility interval should be chosen depending on the context; there is nothing special about values like 90\% or 95\%. To emphasize and remind us of this fact (and also to avoid confusion with confidence intervals, whose meaning is different) he uses 89\%, which is an arbitrary value.
 
-Credibility intervals of 50\%, 75\%, 90\%, 95\%, or even 99\% probability are more or less commonly used in the Bayesian literature. Also \emph{89\%} ones have become quite fashionable since around 2016. They seemingly originate in McElreath's \emph{Statistical Rethinking} \autocites{mcelreath2016_r2020}, first published in that year. McElreath justly points out\autocites[\eg \sect~3.2.2 p.~56, \sect~4.3.5 p.~88]{mcelreath2016_r2020} that the specific probability value of a credibility interval should be chosen depending on the context; there is nothing special about values like 90\% or 95\%. To emphasize and remind us of this fact, he uses 89\%, which is an arbitrary value.
+Or is it?
 
-Or is it? It turns out that 89\% credibility intervals do possess a curious information-theoretic property.
+It turns out that 89\% credibility intervals do possess a curious information-theoretic property, which may also motivate the use of 50\% and 89\% as defaults.
 
 The true value of a quantity lies inside a $p$ credibility interval with probability $p$, and outside with probability $1-p$. Our uncertainty about these two possibilities can be quantified by the Shannon entropy: \autocites[Items 13-24, 13-25]{iso2008d}
 \begin{equation}
@@ -971,9 +976,8 @@ Thus for a 50\% credibility interval we have an uncertainty of \qty{1}{Sh} on wh
 
 For example, for which interval is our maximal uncertainty \emph{halved} to \qty{0.5}{Sh}? The answer is: for \emph{an $89.00\%$ credibility interval}. This result is easily calculated solving $H(p) = \qty{0.5}{Sh}$ numerically. A more precise solution is $88.9972\%$. Vice versa the entropy corresponding to the exact probability $89\%$ is approximately \qty{0.499916}{Sh}.
 
-When we report a 50\% and an 89\% credibility interval we are therefore reporting intervals having uncertainties of one shannon and of half a shannon.
-
-Of course the arbitrariness remains. We could also report intervals with uncertainties \qty{1}{Sh}, $\frac23\:\unit{Sh}$, $\frac13\:\unit{Sh}$; their credibilities would be $50\%$, $82.6\%$, $93.9\%$. Or with uncertainties \qty{1}{Sh}, \qty{0.5}{Sh}, \qty{0.25}{Sh}, corresponding to $50\%$, $89.0\%$, $95.8\%$.
+When we report a 50\% and an 89\% credibility interval we are therefore reporting intervals having uncertainties of one shannon and of half a shannon. Of course the arbitrariness remains.
+% We could also report intervals with uncertainties \qty{1}{Sh}, $\frac23\:\unit{Sh}$, $\frac13\:\unit{Sh}$; their credibilities would be $50\%$, $82.6\%$, $93.9\%$. Or with uncertainties \qty{1}{Sh}, \qty{0.5}{Sh}, \qty{0.25}{Sh}, corresponding to $50\%$, $89.0\%$, $95.8\%$.
 
 For your amusement, some corresponding values of entropies and probabilities are reported in table~\ref{tab:entr_prob}.
 
@@ -984,7 +988,7 @@ For your amusement, some corresponding values of entropies and probabilities are
     \begin{tabular}{cc}
       entropy/\unit{Sh} & probability/\%
       \\[1ex]
-1.00 &  50.00 \\
+\bfseries 1.00 &\bfseries 50.00 \\
 0.95 &  63.09 \\
 0.90 &  68.40 \\
 0.85 &  72.40 \\
@@ -994,8 +998,14 @@ For your amusement, some corresponding values of entropies and probabilities are
  2/3 &  82.60 \\
 0.65 &  83.33 \\
 0.60 &  85.39 \\
-0.55 &  87.27 \\
-0.50 &  89.00 \\
+0.55 &  87.27
+    \end{tabular}
+  \end{minipage}
+  \begin{minipage}{0.49\linewidth}
+    \begin{tabular}{cc}
+      entropy/\unit{Sh} & probability/\%
+      \\[1ex]
+\bfseries 0.50 &\bfseries 89.00 \\
 0.45 &  90.59 \\
 0.40 &  92.06 \\
 0.35 &  93.42 \\
@@ -1016,7 +1026,7 @@ For your amusement, some corresponding values of entropies and probabilities are
     \begin{tabular}{cc}
       probability/\% & entropy/\unit{Sh}
       \\[1ex]
-      50 & 1.0000 \\
+      \bfseries 50 &\bfseries  1.0000 \\
       51 & 1.0000 \\
       52 & 0.9990 \\
       53 & 0.9970 \\
@@ -1061,7 +1071,7 @@ For your amusement, some corresponding values of entropies and probabilities are
       86 & 0.5840 \\
       87 & 0.5570 \\
       88 & 0.5290 \\
-      89 & 0.5000 \\
+      \bfseries 89 &\bfseries  0.5000 \\
       90 & 0.4690 \\
       91 & 0.4360 \\
       92 & 0.4020 \\

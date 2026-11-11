@@ -6,7 +6,7 @@
 %% Home page: http://magnaspesmeretrix.org
 %% Email (remove ZZ): pglZZ[at]portamana.org
 %% Created: 2000-08-23T16:53:30+0200
-%% Last-Updated: 2026-11-04T18:51:49+0100
+%% Last-Updated: 2026-11-11T09:15:56+0100
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 % NB: This database contains also items whose content's validity I
@@ -77,6 +77,7 @@
 @String{aamath = {Acta Appl.\ Math.}}
 @String{aan = {Acta Anal.}}
 @String{aap = {Ann.\ Appl.\ Probab.}}
+@String{aappsb = {AAPPS Bull.}}
 @String{aaps = {Astron.\ Astrophys.\ Suppl.}}
 @String{aaqr = {Aerosol Air Qual.\ Res.}}
 @String{aas = {Ann.\ Appl.\ Stat.}}
@@ -338,6 +339,7 @@
 @String{chinp = {Chin.\ Phys.}}
 @String{chp = {Chem.\ Phys.}}
 @String{ci = {Comput.\ Intell.}}
+@String{circul = {Circulation}}
 @String{cj = {Class.\ J.}}
 @String{cjc = {Can.\ J. Chem.}}
 @String{cjm = {Can.\ J. Math.}}
@@ -497,7 +499,7 @@
 @String{fgcs = {Future Gener.\ Comput.\ Syst.}}
 @String{fhns = {Front.\ Hum.\ Neurosci.}}
 @String{fluids = {Fluids}}
-@String{fni = {Front.\ Neuroinform.}}
+@String{fni = {Front.\ Neuroinformatics}}
 @String{fnl = {Fluct.\ Noise Lett.}}
 @String{fns = {Front.\ Neurosci.}}
 @String{fortp = {Fortschr.\ Phys.}}
@@ -651,7 +653,7 @@
 @String{imajna = {IMA J. Num.\ Anal.}}
 @String{imsc = {IMS Coll.}}
 @String{imslnms = {IMS Lecture Notes Monogr.\ Ser.}}
-@String{imu = {Inform. Med.\ Unlocked}}
+@String{imu = {Inform.\ Med.\ Unlocked}}
 @String{int = {Intelligence}}
 @String{intmath = {Internet Math.}}
 @String{ip = {Inverse Probl.}}
@@ -677,6 +679,7 @@
 @String{jaigbi = {J. Anthropol.\ Inst.\ Great Br.\ Ireland}}
 @String{jair = {J. Artif.\ Intell.\ Res.}}
 @String{jal = {J. Appl.\ Log.}}
+@String{jalgo = {J. Algorithms}}
 @String{jam = {J. Appl.\ Mech.}}
 @String{jama = {J. Am.\ Med.\ Assoc.}}
 @String{jamet = {J. Appl.\ Meteorol.}}
@@ -4020,6 +4023,18 @@ year =         {2020},
 address =      {Berlin},
 note =         {\doi{10.1007/978-3-662-55771-6}},
 keywords =     {non-equilibrium thermodynamics, reaction rate}
+}
+
+@Article{altenkampetal1980,
+author =       {Doris Altenkamp and Kurt Mehlhorn},
+title =        {Codes: Unequal Probabilities, Unequal Letter Cost},
+journal =      jacm,
+year =         {1980},
+volume =       {27},
+number =       {3},
+pages =        {412--427},
+note =         {\doi{10.1145/322203.32220}},
+keywords =     {information theory, probability theory, decision theory, utility theory}
 }
 
 @InCollection{altetal2000,
@@ -19526,6 +19541,18 @@ year =         {1938},
 volume =       {50},
 number =       {1},
 pages =        {30--62}
+}
+
+@Article{bradfordetal2002,
+author =       {Phil Bradford and Mordecai J. Golin and Lawrence L. Larmore and Wojciech Rytter},
+title =        {Optimal Prefix-Free Codes for Unequal Letter Costs: Dynamic Programming with the {Monge} Property},
+journal =      jalgo,
+year =         {2002},
+volume =       {42},
+number =       {2},
+pages =        {277--303},
+note =         {\doi{10.1006/jagm.2002.1213}},
+keywords =     {information theory, probability theory, decision theory, utility theory}
 }
 
 @Book{bradingetal2003,
@@ -49383,18 +49410,6 @@ year =         {2012},
 note =         {\url{https://math.berkeley.edu/~evans/evans_pcam.pdf}}
 }
 
-@Article{evansetal1947,
-author =       {Robert D. Evans and Harold R. Mighton and Paul J. Flory},
-title =        {Thermodynamics of Crystallization in High Polymers. {III}.~{Dependence} of Melting Points of Polyesters on Molecular Weight and Composition},
-journal =      jcp,
-year =         {1947},
-volume =       {15},
-number =       {9},
-pages =        {685},
-note =         {See also \citebi{flory1947,flory1947b}},
-keywords =     {continuum thermomechanics}
-}
-
 @Article{evansetal1986,
 author =       {Denis J. Evans and William G. Hoover},
 title =        {Flows Far From Equilibrium Via Molecular Dynamics},
@@ -52416,28 +52431,38 @@ note =         {\doi{10.1007/s13347-023-00621-y}},
 keywords =     {machine learning, LLM}
 }
 
-@Article{flory1947,
-author =       {Paul J. Flory},
-title =        {Thermodynamics of Crystallization in High Polymers. {I}.~{Crystallization} Induced by Stretching},
+@Article{floryetal1947,
+author =       {Paul J. Flory and Robert D. Evans and Harold R. Mighton and Paul J. Flory},
+title =        {Thermodynamics of Crystallization in High Polymers. {I}.~{Crystallization} Induced by Stretching. {II}.~{Simplified} Derivation of Melting-Point Relationships. {III}.~{Dependence} of Melting Points of Polyesters on Molecular Weight and Composition},
 journal =      jcp,
 year =         {1947},
 volume =       {15},
-number =       {6},
-pages =        {397--408},
-note =         {See also \citebi{flory1947b,evansetal1947}},
+number =       {6, 9, 9},
+pages =        {397--408, 684, 685},
+note =         {\doi{10.1063/1.1746537}, \doi{10.1063/1.1746627}, \doi{10.1063/1.1746629}},
 keywords =     {continuum thermomechanics, rubber}
 }
 
-@Article{flory1947b,
-author =       {Paul J. Flory},
-title =        {Thermodynamics of Crystallization in High Polymers. {II}.~{Simplified} Derivation of Melting-Point Relationships},
-journal =      jcp,
-year =         {1947},
-volume =       {15},
-number =       {9},
-pages =        {684},
-note =         {See also \citebi{flory1947,evansetal1947}},
-keywords =     {continuum thermomechanics}
+@Article{floyd2001,
+author =       {Juliet Floyd},
+title =        {Prose versus Proof: {Wittgenstein} on {G{\"o}del}, {Tarski} and Truth},
+journal =      philmath,
+year =         {2001},
+volume =       {9},
+number =       {3},
+pages =        {280--307},
+note =         {\doi{10.1093/philmat/9.3.280}}
+}
+
+@Article{floydetal2000,
+author =       {Juliet Floyd and Hilary Putnam},
+title =        {A Note on {Wittgenstein's} ``Notorious Paragraph'' about the {G{\"o}del} Theorem},
+journal =      jphil,
+year =         {2000},
+volume =       {97},
+number =       {11},
+pages =        {624--632},
+note =         {\doi{10.2307/2678455}}
 }
 
 @Book{fluegge1955,
@@ -60012,6 +60037,18 @@ volume =       {15},
 number =       {3},
 pages =        {220--232},
 keywords =     {probability theory, logic}
+}
+
+@Article{golinetal1998,
+author =       {Mordecai J. Golin and G{\"u}nter Rote},
+title =        {A dynamic programming algorithm for constructing optimal prefix-free codes with unequal letter costs},
+journal =      ieeetit,
+year =         {1998},
+volume =       {44},
+number =       {5},
+pages =        {1770--1781},
+note =         {\doi{10.1109/18.705558}},
+keywords =     {information theory, probability theory, decision theory, utility theory}
 }
 
 @Article{golomb1959,
@@ -68042,7 +68079,7 @@ volume =       {13},
 number =       {13},
 pages =        {1613--1633},
 note =         {\doi{10.1080/03610928408828781}},
-keywords =     {quantiles}
+keywords =     {quantiles, probability theory}
 }
 
 @Article{hartetal2020,
@@ -68064,7 +68101,8 @@ journal =      ams,
 year =         {1964},
 volume =       {35},
 number =       {2},
-pages =        {836--845}
+pages =        {836--845},
+note =         {\doi{10.1214/aoms/1177703583}}
 }
 
 @Book{hartkaemperetal1974,
@@ -81971,6 +82009,18 @@ note =         {\doi{10.1016/S0022-0531(05)80043-2}},
 keywords =     {descriptive utility theory, descriptive decision theory, independence axiom, probability theory}
 }
 
+@Article{karp1961,
+author =       {Richard M. Karp},
+title =        {Minimum-redundancy coding for the discrete noiseless channel},
+journal =      iretit,
+year =         {1961},
+volume =       {7},
+number =       {1},
+pages =        {27--38},
+note =         {\doi{10.1109/TIT.1961.1057615}},
+keywords =     {information theory, probability theory, decision theory, utility theory}
+}
+
 @Misc{karpenkov2006,
 author =       {Oleg Karpenkov},
 title =        {Classification of lattice-regular lattice convex polytopes},
@@ -83438,6 +83488,18 @@ note =         {\doi{10.1103/PhysRevE.76.026209}},
 keywords =     {Shannon entropy, mutual information, probability theory}
 }
 
+@Article{khanetal2026,
+author =       {Sadiya S. Khan and Philip Greenland and Laura L. Hayman and Rohan Khera and Ann Marie Navar and Michael J. Pencina and Nosheen Reza and Svati H. Shah and Sujata Shanbhag and Brittany Weber and Sally Wong and Amit Khera},
+title =        {Criteria to Assess the Predictive and Clinical Utility of Novel Models, Biomarkers, and Tools for Risk of Cardiovascular Disease: A Scientific Statement From the {American Heart Association}},
+journal =      circul,
+year =         {2026},
+volume =       {153},
+number =       {11},
+pages =        {e953--e970},
+note =         {\doi{10.1161/CIR.0000000000001401}},
+keywords =     {probability theory, utility theory, decision theory, clinical decision-making}
+}
+
 @Article{kheilova1999,
 author =       {Milena Kheilov{\'a}},
 title =        {The entropy flux and the evolution equations for the fluxes including nonlocal terms from the point of view of extended irreversible thermodynamics},
@@ -83445,7 +83507,8 @@ journal =      czjp,
 year =         {1999},
 volume =       {49},
 number =       {2},
-pages =        {167--176}
+pages =        {167--176},
+note =         {\doi{10.1023/A:1022893710057}}
 }
 
 @Article{khemmanietal2005,
@@ -83455,7 +83518,9 @@ journal =      pla,
 year =         {2005},
 volume =       {341},
 number =       {1--4},
-pages =        {87--93}
+pages =        {87--93},
+note =         {\doi{10.1016/j.physleta.2005.04.079}},
+keywords =     {electromagnetics}
 }
 
 @Article{kheyfetsetal1986,
@@ -83466,6 +83531,7 @@ year =         {1986},
 volume =       {25},
 number =       {6},
 pages =        {573--580},
+note =         {\doi{10.1007/BF00670471}},
 keywords =     {gravitation, general relativity, electrodynamics, differential forms}
 }
 
@@ -83477,6 +83543,7 @@ year =         {1991},
 volume =       {32},
 number =       {11},
 pages =        {3168--3175},
+note =         {\doi{10.1063/1.529519}},
 keywords =     {relativity theory, electromagnetics, differential forms}
 }
 
@@ -83488,17 +83555,19 @@ year =         {1992},
 volume =       {33},
 number =       {6},
 pages =        {2242--2248},
+note =         {\doi{10.1063/1.529645}},
 keywords =     {relativity theory, differential forms}
 }
 
 @Article{khinchin1933,
 author =       {Aleksandr {\^A}kovlevi{\v{c}} {Khinchin (Hin{\v{c}}in)}},
 title =        {The Method of Spectral Reduction in Classical Dynamics},
-journal =      tams,
+journal =      pnasusa,
 year =         {1933},
 volume =       {19},
 number =       {5},
 pages =        {567--573},
+note =         {\doi{10.1073/pnas.19.5.567}},
 shortauthor =  {Aleksandr {\^A}kovlevi{\v{c}} Khinchin},
 keywords =     {stochastic processes}
 }
@@ -83509,7 +83578,7 @@ title =        {Mathematical Foundations of Statistical Mechanics},
 publisher =    {Dover},
 year =         {1949},
 address =      {New York},
-note =         {Transl. from the Russian by G. Gamow},
+note =         {\url{https://archive.org/details/khinchin-mathematical-foundations-of-statistical-mechanics}. Transl. from the Russian by G. Gamow},
 shortauthor =  {Aleksandr {\^A}kovlevi{\v{c}} Khinchin},
 keywords =     {probability theory}
 }
@@ -83530,15 +83599,20 @@ title =        {One century later: Remarks on the {Barnett} experiment},
 journal =      ajp,
 year =         {2003},
 volume =       {71},
-number =       {6},
-pages =        {558--561}
+number =       {6, 10},
+pages =        {558--561, 1084},
+note =         {\doi{10.1119/1.1557300}, \doi{10.1119/1.1604388}}
 }
 
-@Misc{kholmetskii2005,
+@Article{kholmetskii2006,
 author =       {Alexander L. Kholmetskii},
-title =        {On momentum and energy of a non-radiating electromagnetic field},
-year =         {2005},
-note =         {\arxivdoi{10.48550/arXiv.physics/0501148}}
+title =        {Momentum--energy of the non-radiating electromagnetic field: open problems?},
+journal =      ps,
+year =         {2006},
+volume =       {73},
+number =       {6},
+pages =        {620},
+note =         {\doi{10.1088/0031-8949/73/6/015}}
 }
 
 @Article{khorunzhiyetal2011,
@@ -83560,7 +83634,9 @@ journal =      pnasusa,
 year =         {2003},
 volume =       {100},
 number =       {21},
-pages =        {11941--11946}
+pages =        {11941--11946},
+note =         {\doi{10.1073/pnas.1634951100}},
+keywords =     {ocean modelling, fluid dynamics, statistical mechanics}
 }
 
 @Misc{khoury2018,
@@ -87967,6 +88043,18 @@ volume =       {190},
 series =       {Lecture notes in physics},
 address =      {Berlin},
 note =         {\doi{10.1007/3-540-12732-1}}
+}
+
+@Article{krause1962,
+author =       {Ralph M. Krause},
+title =        {Channels which transmit letters of unequal duration*},
+journal =      icont,
+year =         {1962},
+volume =       {5},
+number =       {1},
+pages =        {13--24},
+note =         {\doi{10.1016/S0019-9958(62)90183-3}},
+keywords =     {information theory, probability theory, decision theory, utility theory}
 }
 
 @Article{krauseetal1985,
@@ -100415,14 +100503,20 @@ journal =      jcp,
 year =         {1964},
 volume =       {41},
 number =       {5},
-pages =        {1450--1453}
+pages =        {1450--1453},
+note =         {\doi{10.1063/1.1726088}}
 }
 
-@Misc{marcovitchetal2006,
-author =       {Samuel Marcovitch and B. Reznik and L. Vaidman},
-title =        {Quantum Mechanical Realization of a ``{PR}-Box''},
-year =         {2006},
-note =         {\arxivdoi{10.48550/arXiv.quant-ph/0601122}}
+@Article{marcovitchetal2007,
+author =       {Samuel Marcovitch and Benni Reznik and Lev Vaidman},
+title =        {Quantum-mechanical realization of a {Popescu-Rohrlich} box},
+journal =      pra,
+year =         {2007},
+volume =       {75},
+number =       {2},
+pages =        {022102},
+note =         {\doi{10.1103/PhysRevA.75.022102}},
+keywords =     {quantum theory, hidden variables}
 }
 
 @Article{marcus1941,
@@ -100709,7 +100803,8 @@ journal =      aop,
 year =         {2005},
 volume =       {321},
 number =       {5},
-pages =        {1103--1125}
+pages =        {1103--1125},
+note =         {\doi{10.1016/j.aop.2005.09.006}}
 }
 
 @Article{marlow2006,
@@ -100733,14 +100828,8 @@ year =         {1990},
 volume =       {7},
 number =       {11},
 pages =        {2155},
+note =         {\doi{10.1088/0264-9381/7/11/023}},
 keywords =     {general relativity}
-}
-
-@Misc{marolfetal2003,
-author =       {Donald Marolf and Djordje Minic and Simon F. Ross},
-title =        {Notes on spacetime thermodynamics and the observer-dependence of entropy},
-year =         {2003},
-note =         {\arxivdoi{10.48550/arXiv.hep-th/0310022}}
 }
 
 @Article{marolfetal2004,
@@ -100750,7 +100839,9 @@ journal =      prd,
 year =         {2004},
 volume =       {69},
 number =       {6},
-pages =        {064006}
+pages =        {064006},
+note =         {\doi{10.1103/PhysRevD.69.064006}},
+keywords =     {general relativity, second law}
 }
 
 @Article{maroney2004,
@@ -100760,7 +100851,9 @@ journal =      shpmp,
 year =         {2005},
 volume =       {36},
 number =       {2},
-pages =        {355--374}
+pages =        {355--374},
+note =         {\doi{10.1016/j.shpsb.2004.11.006}},
+keywords =     {statistical mechanics, second law}
 }
 
 @Article{maroney2009,
@@ -100771,6 +100864,7 @@ year =         {2009},
 volume =       {80},
 number =       {6},
 pages =        {061141},
+note =         {\doi{10.1103/PhysRevE.80.061141}},
 keywords =     {statistical thermodynamics, statistical mechanics, second law, probability theory, Szilard}
 }
 
@@ -100782,6 +100876,7 @@ year =         {2010},
 volume =       {40},
 number =       {2},
 pages =        {205--238},
+note =         {\doi{10.1007/s10701-009-9386-6}},
 keywords =     {statistical mechanics, second law, entropy, irreversibility, probability theory}
 }
 
@@ -100792,7 +100887,8 @@ publisher =    {Springer},
 year =         {2006},
 volume =       {706},
 series =       {Lecture notes in physics},
-address =      {Berlin}
+address =      {Berlin},
+note =         {\doi{10.1007/b11767107}}
 }
 
 @Article{marreetal2009,
@@ -100803,6 +100899,7 @@ year =         {2009},
 volume =       {102},
 number =       {13},
 pages =        {138101},
+note =         {\doi{10.1103/PhysRevLett.102.138101}},
 keywords =     {maximum-entropy, maximum-calibre, statistical mechanics, Markov chains}
 }
 
@@ -103242,6 +103339,7 @@ year =         {2010},
 volume =       {81},
 number =       {6},
 pages =        {061102},
+note =         {\doi{10.1103/PhysRevE.81.061102}},
 keywords =     {functional formalism, statistical mechanics}
 }
 
@@ -103253,6 +103351,7 @@ year =         {2015},
 volume =       {VIII},
 number =       {2},
 pages =        {86--105},
+note =         {\doi{10.46298/jpe.10676}},
 keywords =     {Grangier causality, association, correlation, independence}
 }
 
@@ -103264,6 +103363,7 @@ year =         {2009},
 volume =       {77},
 number =       {5},
 pages =        {458--467},
+note =         {\doi{10.1119/1.3081423}},
 keywords =     {statistical mechanics}
 }
 
@@ -103275,7 +103375,31 @@ year =         {2009},
 volume =       {80},
 number =       {6},
 pages =        {061109},
+note =         {\doi{10.1103/PhysRevE.80.061109}},
 keywords =     {statistical mechanics}
+}
+
+@Article{mazin2025,
+author =       {Igor I. Mazin},
+title =        {Notes on altermagnetism and superconductivity},
+journal =      aappsb,
+year =         {2025},
+volume =       {35},
+pages =        {18},
+note =         {\doi{10.1007/s43673-025-00158-6}},
+keywords =     {electromagnetics}
+}
+
+@Article{mazinetal2021,
+author =       {Igor I. Mazin and Klaus Koepernik and Michelle D. Johannes and Libor {\v{S}}mejkal},
+title =        {Prediction of unconventional magnetism in doped {$\mathrm{FeSb}_2$}},
+journal =      pnasusa,
+year =         {2021},
+volume =       {118},
+number =       {42},
+pages =        {e2108924118},
+note =         {\doi{10.1073/pnas.2108924118}},
+keywords =     {electromagnetics}
 }
 
 @Misc{mazonkaetal1999,
@@ -103941,6 +104065,18 @@ year =         {1973},
 volume =       {41},
 number =       {2},
 pages =        {230--234}
+}
+
+@Article{mcgeechanetal2014,
+author =       {Kevin McGeechan and Petra Macaskill and Les Irwig and Patrick M. M. Bossuyt},
+title =        {An assessment of the relationship between clinical utility and predictive ability measures and the impact of mean risk in the population},
+journal =      bmcmrm,
+year =         {2014},
+volume =       {14},
+number =       {1},
+pages =        {86},
+note =         {\doi{10.1186/1471-2288-14-86}},
+keywords =     {probability theory, utility theory, decision theory, clinical decision-making}
 }
 
 @Article{mcgiffinetal2021,
@@ -109943,15 +110079,39 @@ mynote =       {PDUG, Das `Prinzip des unzureichenden Grundes', sect~35},
 origdate =     {1930}
 }
 
-@Book{musil1930_t1979,
+@Book{musil1930_t1955,
 author =       {Robert Musil},
-title =        {The Man Without Qualities},
-publisher =    {Picador},
+title =        {The Man Without Qualities. Vol~I\subtitleproc{: A Sort of Introduction. The Like of It Now Happens (I)}},
+publisher =    {Secker \amp\ Warburg},
+year =         {1955},
+address =      {London},
+edition =      {repr.},
+note =         {Transl.\ by Eithne Wilkins and Ernst Kaiser. First publ.\ in German 1930},
+mynote =       {\url{https://archive.org/details/manwithoutqualit0001robe_q4h9}. \enquote{The two people who were walking up a wide, busy thorough fare in the midst of it all were, of course, far from having such an impression. They obviously belonged to a privileged section of society, their good breeding being apparent in their clothes, their bearing and their manner of conversing. They had their initials significantly embroidered on their underclothing. And likewise -- that is to say, not outwardly displayed, but, as it were, in the exquisite underlinen of their minds -- they knew who they were and that they were in their proper place in a capital city that was also an imperial residence.} \sect1. \enquote{Clarisse, however, rubbed her nose very vigorously. ``But I think it's very important,'' she said, ``that there's something impossible in all of us. It explains so much. While I was listening I got this feeling: if someone could cut us open, our whole life might look like a ring, just something round about something.'' She had already a moment earlier pulled off her wedding-ring and now peeped through it at the lamp-lit wall. ``I mean, after all there's nothing in the middle of it, and yet it looks as if that were the very thing that was important to it.''}},
+origdate =     {1930}
+}
+
+@Book{musil1932_t1979,
+author =       {Robert Musil},
+title =        {The Man Without Qualities. Vol~II\subtitleproc{: The Like of It Now Happens (II)}},
+publisher =    {Secker \amp\ Warburg},
 year =         {1979},
 address =      {London},
-note =         {Transl.\ by E. Wilkins and E. Kaiser. First publ.\ in German 1930 as \citebi{musil1930_r2000}},
-mynote =       {\enquote{The two people who were walking up a wide, busy thorough fare in the midst of it all were, of course, far from having such an impression. They obviously belonged to a privileged section of society, their good breeding being apparent in their clothes, their bearing and their manner of conversing. They had their initials significantly embroidered on their underclothing. And likewise -- that is to say, not outwardly displayed, but, as it were, in the exquisite underlinen of their minds -- they knew who they were and that they were in their proper place in a capital city that was also an imperial residence.} \sect1. \enquote{Clarisse, however, rubbed her nose very vigorously. ``But I think it's very important,'' she said, ``that there's something impossible in all of us. It explains so much. While I was listening I got this feeling: if someone could cut us open, our whole life might look like a ring, just something round about something.'' She had already a moment earlier pulled off her wedding-ring and now peeped through it at the lamp-lit wall. ``I mean, after all there's nothing in the middle of it, and yet it looks as if that were the very thing that was important to it.''}},
-origdate =     {1930}
+edition =      {repr.},
+note =         {Transl.\ by Eithne Wilkins and Ernst Kaiser. First publ.\ in German 1932},
+mynote =       {\url{https://archive.org/details/manwithoutqualit0002musi_z1j0}},
+origdate =     {1932}
+}
+
+@Book{musil1932b_t1979,
+author =       {Robert Musil},
+title =        {The Man Without Qualities. Vol~III\subtitleproc{: Into the Millennium (The Criminals)}},
+publisher =    {Secker \amp\ Warburg},
+year =         {1979},
+address =      {London},
+edition =      {repr.},
+note =         {\url{https://archive.org/details/bwb_P8-AMV-528}. Transl.\ by Eithne Wilkins and Ernst Kaiser. First publ.\ in German 1932},
+origdate =     {1932}
 }
 
 @Book{musil1937_r2001,
@@ -138622,6 +138782,41 @@ note =         {\doi{10.1016/B978-0-12-691380-4.50017-4}},
 keywords =     {general relativity, continuum mechanics, Cauchy problem, frame, 3+1 decomposition, lapse, shift}
 }
 
+@Article{smejkaletal2020,
+author =       {Libor {\v{S}}mejkal and Rafael Gonz{\'a}lez-Hern{\'a}ndez and T. Jungwirth and J. Sinova},
+title =        {Crystal time-reversal symmetry breaking and spontaneous {Hall} effect in collinear antiferromagnets},
+journal =      sciadv,
+year =         {2020},
+volume =       {6},
+number =       {23},
+pages =        {eaaz8809},
+note =         {\doi{10.1126/sciadv.aaz8809}},
+keywords =     {electromagnetics}
+}
+
+@Article{smejkaletal2022,
+author =       {Libor {\v{S}}mejkal and Jairo Sinova and Tomas Jungwirth},
+title =        {Beyond Conventional Ferromagnetism and Antiferromagnetism: A Phase with Nonrelativistic Spin and Crystal Rotation Symmetry},
+journal =      prx,
+year =         {2022},
+volume =       {12},
+number =       {3},
+pages =        {031042},
+note =         {\doi{10.1103/PhysRevX.12.031042}},
+keywords =     {electromagnetics}
+}
+
+@Article{smejkaletal2022b,
+author =       {Libor {\v{S}}mejkal and Jairo Sinova and Tomas Jungwirth},
+title =        {Emerging Research Landscape of Altermagnetism},
+journal =      prx,
+year =         {2022},
+volume =       {12},
+number =       {040501},
+note =         {\doi{10.1103/PhysRevX.12.040501}},
+keywords =     {electromagnetics}
+}
+
 @Misc{smelyanskiyetal2006,
 author =       {V. N. Smelyanskiy and D. G. Luchinsky and M. Millons},
 title =        {Identification of nonlinear noisy dynamics of an ecosystem from observations of one of its trajectory components},
@@ -159659,6 +159854,18 @@ volume =       {72},
 number =       {1},
 pages =        {1--23},
 keywords =     {general relativity, differential geometry, connection}
+}
+
+@Article{yuanetal2020,
+author =       {Lin-Ding Yuan and Zhi Wang and Jun-Wei Luo and Emmanuel I. Rashba and Alex Zunger},
+title =        {Giant momentum-dependent spin splitting in centrosymmetric low-{$Z$} antiferromagnets},
+journal =      prb,
+year =         {2020},
+volume =       {102},
+number =       {1},
+pages =        {014422},
+note =         {\doi{10.1103/PhysRevB.102.014422}},
+keywords =     {electromagnetics}
 }
 
 @Article{yuanetal2023,
